@@ -19,6 +19,7 @@
 #include "buscalocal.h"
 #include "fitness.h"
 #include "sa.h"
+#include "grasp.h"
 
 /*Leandro fim*/
 
@@ -115,6 +116,8 @@ int main(int argc, char** argv) {
     //exit(0);
 
     srand(time(0));
+
+    ordenaDisiciplinas(0);
 
     t1 = clock();
 

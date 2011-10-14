@@ -117,11 +117,18 @@ int main(int argc, char** argv) {
 
     srand(time(0));
 
-    ordenaDisiciplinas(0);
+    
 
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
+    
+    /*for(i=0;i<p->nDisciplinas;i++){
+        printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
+    }*/
+    ind = geraSolucaoInicialGrasp(p);
+    //printf("%f", funcaoObjetivo(p, ind));
+    exit(0);
 
 
     //p->tPopulacao = atoi(argv[2]);

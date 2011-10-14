@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="62">
-  <logicalFolder name="root" displayName="root" projectFiles="true">
+<configurationDescriptor version="79">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de cabeçalho"
                    projectFiles="true">
@@ -18,6 +18,8 @@
       <itemPath>fitness.h</itemPath>
       <itemPath>genetico.c</itemPath>
       <itemPath>genetico.h</itemPath>
+      <itemPath>grasp.c</itemPath>
+      <itemPath>grasp.h</itemPath>
       <itemPath>individuo.c</itemPath>
       <itemPath>individuo.h</itemPath>
       <itemPath>io.c</itemPath>
@@ -46,22 +48,16 @@
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <developmentServer>localhost</developmentServer>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>Cygwin|Cygwin</compilerSet>
-        <platform>3</platform>
       </toolsSet>
       <compileType>
-        <linkerTool>
-          <linkerLibItems>
-          </linkerLibItems>
-        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
-        <developmentServer>localhost</developmentServer>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>Cygwin|Cygwin</compilerSet>
-        <platform>3</platform>
       </toolsSet>
       <compileType>
         <cTool>
@@ -73,10 +69,6 @@
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
         </fortranCompilerTool>
-        <linkerTool>
-          <linkerLibItems>
-          </linkerLibItems>
-        </linkerTool>
       </compileType>
     </conf>
   </confs>

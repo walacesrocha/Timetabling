@@ -10,6 +10,8 @@
 # Environment
 MKDIR=mkdir
 CP=cp
+GREP=grep
+NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
 CC=gcc
@@ -22,27 +24,30 @@ AS=as
 CND_PLATFORM=Cygwin-Windows
 CND_CONF=Release
 CND_DISTDIR=dist
+CND_BUILDDIR=build
 
 # Include project Makefile
 include Makefile
 
 # Object Directory
-OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
+OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/io.o \
+	${OBJECTDIR}/individuo.o \
 	${OBJECTDIR}/fitness.o \
-	${OBJECTDIR}/populacao.o \
-	${OBJECTDIR}/sa.o \
-	${OBJECTDIR}/agenda.o \
-	${OBJECTDIR}/problema.o \
-	${OBJECTDIR}/buscalocal.o \
-	${OBJECTDIR}/auxiliar.o \
-	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/util.o \
+	${OBJECTDIR}/auxiliar.o \
 	${OBJECTDIR}/genetico.o \
-	${OBJECTDIR}/individuo.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/sa.o \
+	${OBJECTDIR}/buscalocal.o \
+	${OBJECTDIR}/problema.o \
+	${OBJECTDIR}/populacao.o \
+	${OBJECTDIR}/agenda.o \
+	${OBJECTDIR}/grasp.o
+
 
 # C Compiler Flags
 CFLAGS=
@@ -62,79 +67,84 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-Release.mk dist/Release/Cygwin-Windows/alggenetico.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe
 
-dist/Release/Cygwin-Windows/alggenetico.exe: ${OBJECTFILES}
-	${MKDIR} -p dist/Release/Cygwin-Windows
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/alggenetico ${OBJECTFILES} ${LDLIBSOPTIONS} 
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe: ${OBJECTFILES}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/io.o: nbproject/Makefile-${CND_CONF}.mk io.c 
+${OBJECTDIR}/io.o: io.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/io.o io.c
 
-${OBJECTDIR}/fitness.o: nbproject/Makefile-${CND_CONF}.mk fitness.c 
+${OBJECTDIR}/individuo.o: individuo.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/individuo.o individuo.c
+
+${OBJECTDIR}/fitness.o: fitness.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/fitness.o fitness.c
 
-${OBJECTDIR}/populacao.o: nbproject/Makefile-${CND_CONF}.mk populacao.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/populacao.o populacao.c
-
-${OBJECTDIR}/sa.o: nbproject/Makefile-${CND_CONF}.mk sa.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/sa.o sa.c
-
-${OBJECTDIR}/agenda.o: nbproject/Makefile-${CND_CONF}.mk agenda.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/agenda.o agenda.c
-
-${OBJECTDIR}/problema.o: nbproject/Makefile-${CND_CONF}.mk problema.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/problema.o problema.c
-
-${OBJECTDIR}/buscalocal.o: nbproject/Makefile-${CND_CONF}.mk buscalocal.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/buscalocal.o buscalocal.c
-
-${OBJECTDIR}/auxiliar.o: nbproject/Makefile-${CND_CONF}.mk auxiliar.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/auxiliar.o auxiliar.c
-
-${OBJECTDIR}/main.o: nbproject/Makefile-${CND_CONF}.mk main.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
-
-${OBJECTDIR}/util.o: nbproject/Makefile-${CND_CONF}.mk util.c 
+${OBJECTDIR}/util.o: util.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/util.o util.c
 
-${OBJECTDIR}/genetico.o: nbproject/Makefile-${CND_CONF}.mk genetico.c 
+${OBJECTDIR}/auxiliar.o: auxiliar.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/auxiliar.o auxiliar.c
+
+${OBJECTDIR}/genetico.o: genetico.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/genetico.o genetico.c
 
-${OBJECTDIR}/individuo.o: nbproject/Makefile-${CND_CONF}.mk individuo.c 
+${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/individuo.o individuo.c
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
+
+${OBJECTDIR}/sa.o: sa.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/sa.o sa.c
+
+${OBJECTDIR}/buscalocal.o: buscalocal.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/buscalocal.o buscalocal.c
+
+${OBJECTDIR}/problema.o: problema.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/problema.o problema.c
+
+${OBJECTDIR}/populacao.o: populacao.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/populacao.o populacao.c
+
+${OBJECTDIR}/agenda.o: agenda.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/agenda.o agenda.c
+
+${OBJECTDIR}/grasp.o: grasp.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/grasp.o grasp.c
 
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
-	${RM} -r build/Release
-	${RM} dist/Release/Cygwin-Windows/alggenetico.exe
+	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe
 
 # Subprojects
 .clean-subprojects:

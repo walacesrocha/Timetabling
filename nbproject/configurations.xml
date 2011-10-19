@@ -49,7 +49,7 @@
     <conf name="Debug" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>Cygwin|Cygwin</compilerSet>
+        <compilerSet>default</compilerSet>
       </toolsSet>
       <compileType>
       </compileType>

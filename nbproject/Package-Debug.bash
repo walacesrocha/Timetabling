@@ -6,14 +6,15 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=Cygwin-Windows
+CND_PLATFORM=GNU-Linux-x86
 CND_CONF=Debug
 CND_DISTDIR=dist
-TMPDIR=build/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
+CND_BUILDDIR=build
+NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/alggenetico
-OUTPUT_BASENAME=alggenetico
-PACKAGE_TOP_DIR=alggenetico/
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling
+OUTPUT_BASENAME=timetabling
+PACKAGE_TOP_DIR=timetabling/
 
 # Functions
 function checkReturnCode
@@ -53,22 +54,22 @@ function copyFileToTmpDir
 # Setup
 cd "${TOP}"
 mkdir -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package
-rm -rf ${TMPDIR}
-mkdir -p ${TMPDIR}
+rm -rf ${NBTMPDIR}
+mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/alggenetico/bin
-copyFileToTmpDir "${OUTPUT_PATH}.exe" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
+makeDirectory "${NBTMPDIR}/timetabling/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/alggenetico.tar
-cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/alggenetico.tar *
+rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/timetabling.tar
+cd ${NBTMPDIR}
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/timetabling.tar *
 checkReturnCode
 
 # Cleanup
 cd "${TOP}"
-rm -rf ${TMPDIR}
+rm -rf ${NBTMPDIR}

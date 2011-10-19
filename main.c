@@ -128,6 +128,8 @@ int main(int argc, char** argv) {
     }*/
     ind = geraSolucaoInicialGrasp(p);
     //printf("%f", funcaoObjetivo(p, ind));
+    
+    
     exit(0);
 
 

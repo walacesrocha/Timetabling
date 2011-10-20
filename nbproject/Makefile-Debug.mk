@@ -17,11 +17,11 @@ RANLIB=ranlib
 CC=gcc
 CCC=g++
 CXX=g++
-FC=g77
+FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=Cygwin-Windows
+CND_PLATFORM=GNU-Linux-x86
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -67,9 +67,9 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
@@ -144,7 +144,7 @@ ${OBJECTDIR}/grasp.o: grasp.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/timetabling
 
 # Subprojects
 .clean-subprojects:

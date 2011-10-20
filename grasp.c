@@ -17,6 +17,7 @@
 int comparaAulas(Problema *p, AuxGrasp *auxGrasp, int a1, int a2) {
 
     Disciplina *d1, *d2;
+    int horariosDisp1,horariosDisp2;
 
     d1 = acessaDisciplina(p, a1);
     d2 = acessaDisciplina(p, a2);
@@ -25,10 +26,14 @@ int comparaAulas(Problema *p, AuxGrasp *auxGrasp, int a1, int a2) {
         //printf("Disciplinas iguais: %d %d\n", a1, a2);
         return 0;
     }
+    
+    // calcula os horarios disponiveis para cada aula
+    horariosDisp1 = getTotalHorariosViaveis(p,auxGrasp,a1);
+    horariosDisp2 = getTotalHorariosViaveis(p,auxGrasp,a2);
 
-    if (d1->nIndisponibilidades < d2->nIndisponibilidades) {
+    if (horariosDisp1 > horariosDisp2) {
         return -1;
-    } else if (d1->nIndisponibilidades > d2->nIndisponibilidades) {
+    } else if (horariosDisp1 < horariosDisp2) {
         return 1;
     } else {
         if (d1->nCurriculos < d2->nCurriculos) {
@@ -116,20 +121,20 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
         horariosViaveis[i] = 1;
     }
 
-    for (i = 0; i < qtHorarios; i++) {
+    /*for (i = 0; i < qtHorarios; i++) {
         printf("%d ", horariosViaveis[i]);
     }
-    printf("\n");
+    printf("\n");*/
     // tira os horarios restritos
     disc = acessaDisciplina(p, aula);
     for (i = 0; i < disc->nIndisponibilidades; i++) {
         horariosViaveis[disc->indisponibilidades[i]] = 0;
     }
 
-    for (i = 0; i < qtHorarios; i++) {
+    /*/for (i = 0; i < qtHorarios; i++) {
         printf("%d ", horariosViaveis[i]);
     }
-    printf("\n");
+    printf("\n");*/
 
     // verifica os conflitos curriculo/professor
     for (i = 0; i < qtHorarios; i++) {
@@ -167,6 +172,21 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
     }
 
     return horariosViaveis;
+}
+
+int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula) {
+    int total, i, qtHorarios;
+    int *horariosViaveis = getHorariosViaveis(p, auxGrasp, aula);
+
+    total = 0;
+    qtHorarios = p->nDias * p->nPerDias;
+
+    for (i = 0; i < qtHorarios; i++) {
+        if (horariosViaveis[i] == 1) {
+            total++;
+        }
+    }
+    return total;
 }
 
 void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
@@ -214,21 +234,22 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
 
         // aula "mais dificil"
         aula = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
-        aula=12;
+        aula = 12;
         printf("Escolheu aula %d\n", aula);
 
-        auxGrasp->ind->aula[0] = 1;
-        auxGrasp->ind->aula[20] = 2;
-        //auxGrasp->ind->aula[40] = 3;
+        //auxGrasp->ind->aula[0] = 1;
+        //auxGrasp->ind->aula[1] = 2;
+        //auxGrasp->ind->aula[2] = 3;
         alocaAula(p, auxGrasp, aula);
 
         break;
     }
 
-    printf("Indisp.[%s]:\n", p->disciplinas[1].nomeDisciplina);
-    for (i = 0; i < p->disciplinas[1].nIndisponibilidades; i++) {
-        printf("%d\n", p->disciplinas[1].indisponibilidades[i]);
+
+    for (i = 1; i <= p->nAulas; i++) {
+        printf("%s: %d\n", acessaDisciplina(p,i)->nomeDisciplina, getTotalHorariosViaveis(p, auxGrasp, i));
     }
 
     return auxGrasp->ind;
 }
+// 1 2 3 12 13 14 15 16 4 5 6 7 8 9 10 11 

@@ -1,0 +1,47 @@
+#!/bin/sh
+# Este script roda um unico job em SGE
+# Ele pode ser executado pelo comando SGE abaixo:
+# qsub um_job.sh
+
+# A linha abaixo nao e' um comentario. Ela especifica que o que vem
+# apos ela sera invocado com o /bin/sh shell
+#$ -S /bin/sh
+
+# Coloca os arquivos de saida e de erro do seu job no diretorio .
+#$ -cwd
+
+#./dtsvliw -config mem.cfg vortex.trc >> vortex.res
+#for instancia in toy.ctt
+#do
+    #../main.exe ../instancias/$instancia >> testes.txt
+	#echo 0$instancia
+#done
+
+
+t0[1]=10
+t0[2]=20
+t0[3]=30
+
+rho[1]=100
+rho[2]=200
+rho[3]=300
+
+candidatos=1
+for ((instancia=1;instancia<=21;instancia++))
+do
+    
+    if [ $instancia -lt 10 ]
+	then
+	    nomeInstancia=0$instancia
+	else
+        nomeInstancia=$instancia
+	fi
+    
+	for ((c=1;c<=$candidatos;c++))
+    do
+        ../main ../instancias/comp$nomeInstancia.ctt ${t0[$c]} ${rho[$c]} > stat_comp$nomeInstancia.txt
+    done
+done
+
+
+# Fim do script

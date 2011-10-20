@@ -15,13 +15,13 @@ CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Debug=timetabling.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/timetabling.tar
 # Release configuration
-CND_PLATFORM_Release=Cygwin-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
+CND_PLATFORM_Release=
+CND_ARTIFACT_DIR_Release=dist/Release/
 CND_ARTIFACT_NAME_Release=timetabling
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/timetabling
-CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
+CND_ARTIFACT_PATH_Release=dist/Release//timetabling
+CND_PACKAGE_DIR_Release=dist/Release//package
 CND_PACKAGE_NAME_Release=timetabling.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/timetabling.tar
+CND_PACKAGE_PATH_Release=dist/Release//package/timetabling.tar
 #
 # include compiler specific variables
 #

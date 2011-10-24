@@ -18,16 +18,78 @@
 #done
 
 
-t0[1]=10
-t0[2]=20
-t0[3]=30
+t0[1]=100
+t0[2]=90.7
+t0[3]=87.6
+t0[4]=56.7
+t0[5]=93.8
+t0[6]=96.9
+t0[7]=69.1
+t0[8]=53.6
+t0[9]=66
+t0[10]=75.3
+t0[11]=72.2
+t0[12]=78.3
+t0[13]=59.8
+t0[14]=84.5
+t0[15]=62.9
+t0[16]=81.4
+t0[17]=50.5
+t0[18]=1
+t0[19]=10.3
+t0[20]=13.4
+t0[21]=44.3
+t0[22]=7.2
+t0[23]=4.1
+t0[24]=31.9
+t0[25]=47.4
+t0[26]=35
+t0[27]=25.8
+t0[28]=28.8
+t0[29]=22.7
+t0[30]=41.2
+t0[31]=16.5
+t0[32]=38.1
+t0[33]=19.6
 
-rho[1]=100
-rho[2]=200
-rho[3]=300
 
-candidatos=1
-for ((instancia=1;instancia<=21;instancia++))
+
+rho[1]=103
+rho[2]=1000
+rho[3]=443
+rho[4]=876
+rho[5]=41
+rho[6]=938
+rho[7]=474
+rho[8]=691
+rho[9]=258
+rho[10]=660
+rho[11]=227
+rho[12]=722
+rho[13]=165
+rho[14]=598
+rho[15]=196
+rho[16]=629
+rho[17]=505
+rho[18]=907
+rho[19]=10
+rho[20]=567
+rho[21]=134
+rho[22]=969
+rho[23]=72
+rho[24]=536
+rho[25]=319
+rho[26]=753
+rho[27]=350
+rho[28]=783
+rho[29]=288
+rho[30]=845
+rho[31]=412
+rho[32]=814
+rho[33]=381
+
+candidatos=33
+for ((instancia=1;instancia<=1;instancia++))
 do
     for ((fase=1;fase<=15;fase++))
     do
@@ -40,7 +102,7 @@ do
     
 	for ((c=1;c<=$candidatos;c++))
         do
-           ./teste_sa.sh comp$nomeInstancia ${t0[$c]} ${rho[$c]} $c $fase
+           qsub ./teste_sa.sh comp$nomeInstancia ${t0[$c]} ${rho[$c]} $c $fase
         done
     done
 done

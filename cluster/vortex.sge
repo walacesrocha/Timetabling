@@ -29,17 +29,19 @@ rho[3]=300
 candidatos=1
 for ((instancia=1;instancia<=21;instancia++))
 do
-    
-    if [ $instancia -lt 10 ]
-	then
-	    nomeInstancia=0$instancia
-	else
-        nomeInstancia=$instancia
+    for ((fase=1;fase<=15;fase++))
+    do
+        if [ $instancia -lt 10 ]
+	    then
+	        nomeInstancia=0$instancia
+	    else
+                nomeInstancia=$instancia
 	fi
     
 	for ((c=1;c<=$candidatos;c++))
-    do
-        ../main ../instancias/comp$nomeInstancia.ctt ${t0[$c]} ${rho[$c]} > stat_comp$nomeInstancia.txt
+        do
+           ./teste_sa.sh comp$nomeInstancia ${t0[$c]} ${rho[$c]} $c $fase
+        done
     done
 done
 

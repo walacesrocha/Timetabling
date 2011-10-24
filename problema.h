@@ -71,6 +71,10 @@ typedef struct problema {
     float tempoLimite;
     float tempoMelhorResposta;
     
+    float t0; //SA
+    float rho; // rho = t0/tmin;
+    float beta; // resfriamento
+    
     /*Leandro inicio*/
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)
     char **matrizAulaAula; //matriz conflito aula-aula (aulas do mesmo currículo ou com mesmo professor)

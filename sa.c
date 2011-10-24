@@ -114,9 +114,9 @@ Individuo *simulatedAnnealing(Problema*p) {
 
     float t0, tMin, beta;
 
-    t0 = 6.8;
-    tMin = 0.1;
-    beta = 0.9;
+    t0 = p->t0;
+    tMin = t0 / p->rho;
+    beta = p->beta;
 
     N = -(I / (log10(t0 / tMin) / log10(beta)));
 

@@ -89,7 +89,7 @@ rho[32]=814
 rho[33]=381
 
 candidatos=33
-for ((instancia=1;instancia<=1;instancia++))
+for ((instancia=1;instancia<=5;instancia++))
 do
     for ((fase=1;fase<=15;fase++))
     do

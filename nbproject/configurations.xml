@@ -25,6 +25,8 @@
       <itemPath>io.c</itemPath>
       <itemPath>io.h</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>main_grasp.c</itemPath>
+      <itemPath>main_sa.c</itemPath>
       <itemPath>populacao.c</itemPath>
       <itemPath>populacao.h</itemPath>
       <itemPath>problema.c</itemPath>

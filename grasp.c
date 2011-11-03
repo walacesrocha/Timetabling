@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "grasp.h"
 #include "problema.h"
+#include "util.h"
 
 /**
  * Compara duas aulas em relação a dificuldade. 
@@ -105,7 +106,11 @@ AuxGrasp *geraAuxGrasp(Problema *p) {
     auxGrasp->ind = geraTimetableVazio(p);
 
     // cria vetor auxiliar para guardar as possibilidades de alocacao 
-    auxGrasp->vetorPossibilidades = (AlocacaoAula*) malloc(p->nDias * p->nPerDias * p->nSalas * sizeof (AlocacaoAula));
+    auxGrasp->vetorPossibilidades = (AlocacaoAula**) malloc(p->dimensao * sizeof (AlocacaoAula*));
+    for (i = 0; i < p->dimensao; i++) {
+        auxGrasp->vetorPossibilidades[i] = (AlocacaoAula*) malloc(sizeof (AlocacaoAula));
+        auxGrasp->vetorPossibilidades[i]->id = i + 1;
+    }
     auxGrasp->nrPossibilidades = 0;
 
     return auxGrasp;
@@ -193,14 +198,127 @@ int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula) {
     return total;
 }
 
-void criaPossibilidadesAlocacao(Problema *p, AuxGrasp*auxGras, int aula) {
+void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
 
+    AlocacaoAula *alocacao;
+    Disciplina *disc;
+    Sala *sala;
+    int *diasOcupados, totalDiasOcupados;
+    int *salasOcupadas, totalSalasOcupadas;
+    int i, qtHorarios;
+
+    //printf("avaliando\n");
+
+    qtHorarios = p->nDias * p->nPerDias;
+
+    // disciplina que esta sendo alocada
+    disc = acessaDisciplina(p, aula);
+    //printf("Disc: %s (%d)\n", disc->nomeDisciplina, disc->nAlunos);
+
+    // acessa a possibilidade
+    alocacao = auxGrasp->vetorPossibilidades[nrP];
+    alocacao->custo = 0;
+
+    sala = p->salas + alocacao->sala;
+
+    // ROOM_CAPACITY
+    if (disc->nAlunos > sala->capacidade) {
+        // custo = quantidade de alunos excedentes
+        alocacao->custo += (disc->nAlunos - sala->capacidade);
+    }
+
+    // vetor auxiliar para guardar os dias ocupados pela disciplina
+    diasOcupados = (int*) malloc(p->nDias * sizeof (int));
+    for (i = 0; i < p->nDias; i++) {
+        diasOcupados[i] = 0;
+    }
+
+    // vetor auxiliar para guardar as salas ocupadas pela disciplina
+    salasOcupadas = (int*) malloc(p->nSalas * sizeof (int));
+    for (i = 0; i < p->nSalas; i++) {
+        salasOcupadas[i] = 0;
+    }
+
+
+    for (i = 0; i < p->dimensao; i++) {
+        if (ehAula(p, auxGrasp->ind->aula[i])) {
+            if (aulasMesmaDisciplina(p, aula, auxGrasp->ind->aula[i])) {
+                // marca o dia como tendo aula
+                diasOcupados[getDia(p, i)] = 1;
+
+                // marca a sala como ocupada
+                salasOcupadas[getRoomFromPos(i, p)] = 1;
+            }
+        }
+    }
+
+    // marca o dia em que sera alocado
+    diasOcupados[getDia(p, alocacao->horario + qtHorarios * alocacao->sala)] = 1;
+
+    // marca a sala em que sera ocupada
+    salasOcupadas[alocacao->sala] = 1;
+
+    // conta o total de dias ocupados
+    totalDiasOcupados = 0;
+    for (i = 0; i < p->nDias; i++) {
+        if (diasOcupados[i]) {
+            totalDiasOcupados++;
+        }
+    }
+
+    // conta o total de salas ocupadas
+    totalSalasOcupadas = 0;
+    for (i = 0; i < p->nSalas; i++) {
+        if (salasOcupadas[i]) {
+            totalSalasOcupadas++;
+        }
+    }
+
+    // MIN_WORKING_DAYS
+    if (totalDiasOcupados < disc->minDiasAula) {
+        // penalizacao MIN_WORKING_DAYS
+        alocacao->custo += (disc->minDiasAula - totalDiasOcupados)* 5; // peso = 5
+    }
+
+    // ROOM_STABILITY
+    alocacao->custo += (totalSalasOcupadas - 1);
+
+
+
+    //printf("MIN=%d, ocupados: %d\n", disc->minDiasAula, totalDiasOcupados);
+
+
+}
+
+int minimo(int n, int m) {
+    return (n < m) ? n : m;
+}
+
+/**
+ * Ordena as possibilidades de alocacao para montar a LRC
+ * @param auxGrasp
+ */
+void ordenaPossibilidades(AuxGrasp *auxGrasp) {
+    int i, j;
+    AlocacaoAula *chave;
+
+    for (j = 1; j < auxGrasp->nrPossibilidades; j++) {
+        chave = auxGrasp->vetorPossibilidades[j];
+        i = j - 1;
+        while (i >= 0 && auxGrasp->vetorPossibilidades[i]->custo > chave->custo) {
+            //printf("custo=%d,%d\n", auxGrasp->vetorPossibilidades[i]->custo, chave->custo);
+            auxGrasp->vetorPossibilidades[i + 1] = auxGrasp->vetorPossibilidades[i];
+            i--;
+        }
+        auxGrasp->vetorPossibilidades[i + 1] = chave;
+    }
 }
 
 void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     int *horariosViaveis;
-    int i, j, pos, qtHorarios; // quantidade de horarios: dias x periodos
+    int i, j, nrP, pos, qtHorarios; // quantidade de horarios: dias x periodos
     AlocacaoAula *alocacao;
+    int tLRC = 3; // tamanho da lista restrita de candidatos
 
     qtHorarios = p->nDias * p->nPerDias;
 
@@ -208,6 +326,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
     auxGrasp->nrPossibilidades = 0;
 
+    // cria "AlocacaoAula" marcando (horario,sala) que estao disponiveis
     for (i = 0; i < qtHorarios; i++) {
 
         if (horariosViaveis[i]) {
@@ -216,7 +335,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
                 if (!ehAula(p, auxGrasp->ind->aula[pos])) {
                     // posicao nao está ocupada
-                    alocacao = auxGrasp->vetorPossibilidades+auxGrasp->nrPossibilidades;
+                    alocacao = auxGrasp->vetorPossibilidades[auxGrasp->nrPossibilidades];
 
                     alocacao->horario = i;
                     alocacao->sala = j;
@@ -228,14 +347,46 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
             }
         }
     }
+
+    // avalia todas as possibilidades
+    for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
+        avaliaCustoAlocacao(p, auxGrasp, aula, nrP);
+        // TODO: falta a restricao ISOLATED_LECTURES
+    }
+
+    /*for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
+        alocacao = auxGrasp->vetorPossibilidades[nrP];
+        printf("[%d] H=%d, S=%d, C=%d\n", alocacao->id, alocacao->horario, alocacao->sala, alocacao->custo);
+    }*/
+
+    // ordena as possibilidades
+    ordenaPossibilidades(auxGrasp);
+
+    // escohe uma possibilidade e aloca a aula
+    int escolha = rand() % (minimo(tLRC, auxGrasp->nrPossibilidades));
+    printf("Escolha: %d\n", escolha);
     
+    alocacao = auxGrasp->vetorPossibilidades[escolha];
+    
+    // posicao a inserir
+    pos = alocacao->horario + qtHorarios*alocacao->sala;
+    
+    // insere no timetabling
+    auxGrasp->ind->aula[pos] = aula;
+    auxGrasp->nCandidatos--;
+
     printf("Nr.Possibilidades: %d\n", auxGrasp->nrPossibilidades);
-    printf("\n");
+    /*for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
+        alocacao = auxGrasp->vetorPossibilidades[nrP];
+        printf("[%d] H=%d, S=%d, C=%d\n", alocacao->id, alocacao->horario, alocacao->sala, alocacao->custo);
+    }
+    printf("\n");*/
 
 }
 
 Individuo *geraSolucaoInicialGrasp(Problema *p) {
     int i, j, k;
+    int aula;
     AuxGrasp *auxGrasp;
 
     auxGrasp = geraAuxGrasp(p);
@@ -258,28 +409,28 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
 
 
     while (auxGrasp->nCandidatos > 0) {// enquanto ha candidatos a alocar
-        int aula;
+        
+        printf("Candidatos restantes: %d\n",auxGrasp->nCandidatos);
 
         ordenaDisiciplinasPorDificuldade(p, auxGrasp);
 
         // aula "mais dificil"
         aula = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
-        aula = 11;
+        //aula = 11;
         printf("Escolheu aula %d\n", aula);
 
-        auxGrasp->ind->aula[0] = 11;
-        auxGrasp->ind->aula[1] = 12;
-        auxGrasp->ind->aula[2] = 13;
+        //auxGrasp->ind->aula[0] = 7;
+        //auxGrasp->ind->aula[1] = 10;
+        //auxGrasp->ind->aula[2] = 9;
         alocaAula(p, auxGrasp, aula);
-        
-        
 
-        break;
+        //getchar();
+        //break;
     }
 
 
     for (i = 1; i <= p->nAulas; i++) {
-        printf("%s: %d\n", acessaDisciplina(p, i)->nomeDisciplina, getTotalHorariosViaveis(p, auxGrasp, i));
+        //printf("%s: %d\n", acessaDisciplina(p, i)->nomeDisciplina, getTotalHorariosViaveis(p, auxGrasp, i));
     }
 
     return auxGrasp->ind;

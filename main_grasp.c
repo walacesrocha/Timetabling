@@ -31,8 +31,6 @@ void imprimeVetor(int *v, int n) {
     printf("\n");
 }
 
-
-
 /*
  * ./main instancia populacao txCrossover txMutacao maxTrocasMutacao
  */
@@ -48,14 +46,19 @@ int main(int argc, char** argv) {
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
-    
+
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
     ind = geraSolucaoInicialGrasp(p);
-    //printf("%f", funcaoObjetivo(p, ind));
+    printf("%f\n", funcaoObjetivo(p, ind));
     
-    
+
+    imprimeResposta(p, ind);
+
+
+    //ind = geraIndividuoAleatorio(p, 100);
+    //printf("%f\n", funcaoObjetivo(p, ind));
     exit(0);
 
 

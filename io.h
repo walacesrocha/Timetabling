@@ -7,6 +7,6 @@
 
 Problema *lerInstancia(char *nomeArquivo);
 void imprimeInstancia(Problema *p);
-void imprimeResposta(Problema *p, Populacao *populacao);
+void imprimeResposta(Problema *p, Individuo *ind);
 
 #endif

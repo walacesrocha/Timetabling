@@ -154,7 +154,7 @@ int main(int argc, char** argv) {
 
     Populacao *populacao = solve(p);
 
-    imprimeResposta(p, populacao);
+    imprimeResposta(p, populacao->ind[0]);
 
     printf("%s\n", argv[1]);
     printf("Fitness Hard: %f\n", fitnessHard(p, populacao->ind[0]));
@@ -270,7 +270,7 @@ int main(int argc, char** argv) {
         printf("%d\t%d\t%d\t%d\n", i, getDiaFromPos(i, p), getPeriodoFromPos(i, p), getRoomFromPos(i, p));
     }
 
-    imprimeResposta(p, populacao1);
+    imprimeResposta(p, populacao1->ind[0]);
 
     imprimeInstancia(p);
 

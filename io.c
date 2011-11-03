@@ -158,12 +158,12 @@ void imprimeInstancia(Problema *p) {
 
 }
 
-void imprimeResposta(Problema *p, Populacao *populacao) {
+void imprimeResposta(Problema *p, Individuo *ind) {
     int *t;
     int i, dia, periodo, sala;
 
     // melhor timetabling
-    t = populacao->ind[0]->aula;
+    t = ind->aula;
 
     for (i = 0; i < p->dimensao; i++) {
 

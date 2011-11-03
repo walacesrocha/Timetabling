@@ -7,6 +7,7 @@ typedef struct alocacaoAula {
     int horario;
     int sala;
     int custo;
+    int id;
 } AlocacaoAula;
 
 typedef struct auxGrasp {
@@ -14,7 +15,7 @@ typedef struct auxGrasp {
     int *candidatos;
     int nCandidatos;
     int *explosao;
-    AlocacaoAula *vetorPossibilidades;
+    AlocacaoAula **vetorPossibilidades;
     int nrPossibilidades;
 } AuxGrasp;
 

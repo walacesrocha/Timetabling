@@ -205,7 +205,7 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
     Sala *sala;
     int *diasOcupados, totalDiasOcupados;
     int *salasOcupadas, totalSalasOcupadas;
-    int i, qtHorarios;
+    int i, qtHorarios, pos;
 
     //printf("avaliando\n");
 
@@ -284,6 +284,45 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
     alocacao->custo += (totalSalasOcupadas - 1);
 
 
+    int periodo = getPeriodo(p, alocacao->horario);
+    int temAdjacente = 0;
+
+    if (periodo > 0) {// caso nao seja o primeiro periodo...
+        // ... verifica se tem aula do mesmo curriculo no periodo anterior
+
+        for (i = 0; i < p->nSalas; i++) {
+            pos = alocacao->horario - 1 + qtHorarios * i;
+
+            if (ehAula(p, auxGrasp->ind->aula[pos])) {
+                if (aulasMesmoCurriculo(p, aula, auxGrasp->ind->aula[pos])) {
+                    temAdjacente = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!temAdjacente && periodo < p->nPerDias - 1) {// caso nao tenha aula antes, 
+        // e nao e o ultimo periodo do dia
+        // ... verifica se tem aula do mesmo curriculo no periodo posterior
+
+        for (i = 0; i < p->nSalas; i++) {
+            pos = alocacao->horario + 1 + qtHorarios * i;
+
+            if (ehAula(p, auxGrasp->ind->aula[pos])) {
+                if (aulasMesmoCurriculo(p, aula, auxGrasp->ind->aula[pos])) {
+                    temAdjacente = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    // ISOLATED_LECTURE
+    //alocacao->custo = 0;
+    if (!temAdjacente) {
+        alocacao->custo += 2; // penalidade peso 2
+    }
 
     //printf("MIN=%d, ocupados: %d\n", disc->minDiasAula, totalDiasOcupados);
 
@@ -318,7 +357,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     int *horariosViaveis;
     int i, j, nrP, pos, qtHorarios; // quantidade de horarios: dias x periodos
     AlocacaoAula *alocacao;
-    int tLRC = 3; // tamanho da lista restrita de candidatos
+    int tLRC = 5; // tamanho da lista restrita de candidatos
 
     qtHorarios = p->nDias * p->nPerDias;
 
@@ -364,18 +403,18 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
     // escohe uma possibilidade e aloca a aula
     int escolha = rand() % (minimo(tLRC, auxGrasp->nrPossibilidades));
-    printf("Escolha: %d\n", escolha);
-    
+    //printf("Escolha: %d\n", escolha);
+
     alocacao = auxGrasp->vetorPossibilidades[escolha];
-    
+
     // posicao a inserir
-    pos = alocacao->horario + qtHorarios*alocacao->sala;
-    
+    pos = alocacao->horario + qtHorarios * alocacao->sala;
+
     // insere no timetabling
     auxGrasp->ind->aula[pos] = aula;
     auxGrasp->nCandidatos--;
 
-    printf("Nr.Possibilidades: %d\n", auxGrasp->nrPossibilidades);
+    //printf("Nr.Possibilidades: %d\n", auxGrasp->nrPossibilidades);
     /*for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
         alocacao = auxGrasp->vetorPossibilidades[nrP];
         printf("[%d] H=%d, S=%d, C=%d\n", alocacao->id, alocacao->horario, alocacao->sala, alocacao->custo);
@@ -409,17 +448,17 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
 
 
     while (auxGrasp->nCandidatos > 0) {// enquanto ha candidatos a alocar
-        
-        printf("Candidatos restantes: %d\n",auxGrasp->nCandidatos);
+
+        printf("Candidatos restantes: %d\n", auxGrasp->nCandidatos);
 
         ordenaDisiciplinasPorDificuldade(p, auxGrasp);
 
         // aula "mais dificil"
         aula = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
         //aula = 11;
-        printf("Escolheu aula %d\n", aula);
+        //printf("Escolheu aula %d\n", aula);
 
-        //auxGrasp->ind->aula[0] = 7;
+        //auxGrasp->ind->aula[4] = 7;
         //auxGrasp->ind->aula[1] = 10;
         //auxGrasp->ind->aula[2] = 9;
         alocaAula(p, auxGrasp, aula);
@@ -429,8 +468,8 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
     }
 
 
-    for (i = 1; i <= p->nAulas; i++) {
-        //printf("%s: %d\n", acessaDisciplina(p, i)->nomeDisciplina, getTotalHorariosViaveis(p, auxGrasp, i));
+    for (i = 0; i < p->nDias * p->nPerDias; i++) {
+        //printf("%d: %d/%d\n", i, getPeriodo(p, i), p->nPerDias);
     }
 
     return auxGrasp->ind;

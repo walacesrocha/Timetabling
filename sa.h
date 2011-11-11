@@ -13,7 +13,7 @@
 
 
 
-Individuo *simulatedAnnealing(Problema*p);
+Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial);
 float funcaoObjetivo(Problema *p, Individuo *ind);
 
 

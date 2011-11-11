@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
     printf("%f\n", funcaoObjetivo(p, ind));
     
 
-    imprimeResposta(p, ind);
+    //imprimeResposta(p, ind);
 
 
     //ind = geraIndividuoAleatorio(p, 100);

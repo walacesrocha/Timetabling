@@ -81,14 +81,17 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
     return novoInd;
 }
 
-Individuo *simulatedAnnealing(Problema*p) {
-    Individuo *indInicial = geraIndividuoAleatorio(p, 5);
+Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
     float foAtual = 999999999;
     float deltaF;
     float I = 114000000;
     long N;
+
+    if (indInicial == NULL) {
+        indInicial = geraIndividuoAleatorio(p, 5);
+    }
 
     //printf("Implementando\n");
     //printf("%s\n", p->nome);
@@ -170,7 +173,7 @@ Individuo *simulatedAnnealing(Problema*p) {
         } while (iteracoes < N);
 
         //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
-                //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+        //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
         t0 *= beta;
     } while (t0 > tMin);
 

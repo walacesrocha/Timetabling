@@ -17,7 +17,7 @@ typedef struct curriculo {
  * Estrutura que define uma disciplina
  */
 typedef struct disciplina {
-    char nomeDisciplina[20];
+    char nomeDisciplina[30];
     char professor[20];
     Curriculo **curriculos; //Leandro
     int nCurriculos; //Leandro
@@ -43,7 +43,7 @@ typedef struct sala {
  * Estrutura que define uma restricao de indisponibilidade de horário
  */
 typedef struct restricao {
-    char nomeDisciplina[20];
+    char nomeDisciplina[30];
     int dia;
     int periodo;
 } Restricao;

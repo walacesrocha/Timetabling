@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
     p->beta = atof(argv[4]);
     
     
-    ind = simulatedAnnealing(p);
+    ind = simulatedAnnealing(p, NULL);
     printf("%f", funcaoObjetivo(p, ind));
     //printf("Violações Hard: %f\n", somaViolacoesHard(p, ind));
     //printf("Violações Soft: %f\n", somaViolacoesSoft(p, ind));

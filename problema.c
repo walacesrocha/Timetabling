@@ -48,7 +48,7 @@ char **alocaVetorDisciplinas(int nDisciplinas) {
     vetDisc = (char**) malloc(nDisciplinas * sizeof (char*));
 
     for (i = 0; i < nDisciplinas; i++) {
-        vetDisc[i] = (char*) malloc(20 * sizeof (char));
+        vetDisc[i] = (char*) malloc(30 * sizeof (char));
     }
 
     return vetDisc;

@@ -60,6 +60,7 @@ char **alocaVetorDisciplinas(int nDisciplinas) {
 Problema *alocaProblema() {
     Problema *p = (Problema*) malloc(sizeof (Problema));
     p->nAulas = 0;
+    p->aceitaPioraSA = 1;
 
     return p;
 }
@@ -70,7 +71,7 @@ Problema *alocaProblema() {
 int aulasMesmaDisciplina(Problema *p, int a1, int a2) {
     int i;
 
-    
+
     for (i = 0; i < p->nDisciplinas; i++) {
         if ((p->disciplinas + i)->aulaInicial <= a1
                 && a1 < (p->disciplinas + i)->aulaInicial + (p->disciplinas + i)->nAulas) {
@@ -380,7 +381,7 @@ void imprimeTodasDisciplinas(Problema *p) {
 int disciplinasMesmoCurriculo2(Problema *p, Disciplina *d1, Disciplina *d2) {
     int i1, i2;
     Curriculo *c1;
-    
+
     for (i1 = 0; i1 < d1->nCurriculos; i1++) {
         c1 = d1->curriculos[i1];
         for (i2 = 0; i2 < d2->nCurriculos; i2++) {
@@ -398,7 +399,7 @@ int aulasMesmoCurriculo2(Problema *p, int a1, int a2) {
     int i;
     Disciplina *pd1, *pd2;
 
-    
+
     //if (a1 > (p->nAulas) || a2 > (p->nAulas) )printf ("aula vazia 222222222222222\n");//////////
     // recupera as disciplinas das aulas     
     pd1 = acessaDisciplina(p, a1);

@@ -152,7 +152,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
                 // calcula probabilidade de aceitação
                 float prob = pow(M_E, -deltaF / t0);
 
-                if ((float) rand() / RAND_MAX <= prob) {
+                if (p->aceitaPioraSA && (float) rand() / RAND_MAX <= prob) {
+                    printf("aceitou piora\n");
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
                     //printf("aceitou piora\n");

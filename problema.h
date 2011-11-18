@@ -74,6 +74,7 @@ typedef struct problema {
     float t0; //SA
     float rho; // rho = t0/tmin;
     float beta; // resfriamento
+    int aceitaPioraSA;
     
     /*Leandro inicio*/
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)

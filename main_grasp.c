@@ -52,7 +52,15 @@ int main(int argc, char** argv) {
     }*/
     ind = geraSolucaoInicialGrasp(p);
     printf("%f\n", funcaoObjetivo(p, ind));
-    
+
+    p->t0 = atof(argv[2]);
+    p->rho = atof(argv[3]);
+    p->beta = atof(argv[4]);
+    p->aceitaPioraSA = 0;
+
+    ind = simulatedAnnealing(p, ind);
+    printf("%f\n", funcaoObjetivo(p, ind));
+
 
     //imprimeResposta(p, ind);
 

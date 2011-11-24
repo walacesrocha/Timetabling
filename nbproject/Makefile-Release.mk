@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/io.o \
 	${OBJECTDIR}/individuo.o \
+	${OBJECTDIR}/main_sa.o \
 	${OBJECTDIR}/fitness.o \
 	${OBJECTDIR}/util.o \
 	${OBJECTDIR}/auxiliar.o \
@@ -45,6 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/buscalocal.o \
 	${OBJECTDIR}/problema.o \
 	${OBJECTDIR}/populacao.o \
+	${OBJECTDIR}/main_grasp.o \
 	${OBJECTDIR}/agenda.o \
 	${OBJECTDIR}/grasp.o
 
@@ -82,6 +84,11 @@ ${OBJECTDIR}/individuo.o: individuo.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/individuo.o individuo.c
+
+${OBJECTDIR}/main_sa.o: main_sa.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main_sa.o main_sa.c
 
 ${OBJECTDIR}/fitness.o: fitness.c 
 	${MKDIR} -p ${OBJECTDIR}
@@ -127,6 +134,11 @@ ${OBJECTDIR}/populacao.o: populacao.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/populacao.o populacao.c
+
+${OBJECTDIR}/main_grasp.o: main_grasp.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main_grasp.o main_grasp.c
 
 ${OBJECTDIR}/agenda.o: agenda.c 
 	${MKDIR} -p ${OBJECTDIR}

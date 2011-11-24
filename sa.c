@@ -84,14 +84,17 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
-    float foAtual = 999999999;
+    float foAtual;
     float deltaF;
     float I = 114000000;
     long N;
 
     if (indInicial == NULL) {
         indInicial = geraIndividuoAleatorio(p, 5);
+        //printf("gerando sol. inicial\n");
     }
+    
+    foAtual = funcaoObjetivo(p,indInicial);
 
     //printf("Implementando\n");
     //printf("%s\n", p->nome);
@@ -153,7 +156,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
                 float prob = pow(M_E, -deltaF / t0);
 
                 if (p->aceitaPioraSA && (float) rand() / RAND_MAX <= prob) {
-                    printf("aceitou piora\n");
+                    //printf("aceitou piora\n");
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
                     //printf("aceitou piora\n");

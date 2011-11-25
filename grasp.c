@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "grasp.h"
+#include "sa.h"
 #include "problema.h"
 #include "util.h"
 #include "auxiliar.h"
@@ -540,6 +541,54 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
 }
 
+Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
+    Individuo *solucaoAtual, *aDesalocar;
+    Individuo *vizinho;
+    float foAtual;
+    float deltaF;
+    long N;
+
+    foAtual = funcaoObjetivo(p, indInicial);
+
+    N = 1000;
+    solucaoAtual = indInicial;
+    int iteracoes = 0;
+    float fo;
+    do {
+        vizinho = geraVizinho(p, solucaoAtual);
+
+        fo = funcaoObjetivo(p, vizinho);
+        deltaF = fo - foAtual;
+
+        //printf("Df=%f\n", deltaF);
+
+        aDesalocar = 0;
+        if (deltaF < 0) {// função objetivo decresceu
+            foAtual = fo;
+            //printf("Melhorou... %f\n", foAtual);
+            aDesalocar = solucaoAtual;
+            solucaoAtual = vizinho;
+            //melhorInd = solucaoAtual;
+            iteracoes = 0; // continua buscando
+        } else {
+            aDesalocar = vizinho;
+        }
+
+        //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
+        liberaIndividuo(aDesalocar);
+
+        iteracoes++;
+
+        //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
+    } while (iteracoes < N);
+
+    //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
+    //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+
+
+    return solucaoAtual;
+}
+
 Individuo *geraSolucaoInicialGrasp(Problema *p) {
     int i, j, k;
     int aula;
@@ -591,4 +640,28 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
 
     return auxGrasp->ind;
 }
-// 1 2 3 12 13 14 15 16 4 5 6 7 8 9 10 11 
+
+Individuo *grasp(Problema *p) {
+    int maxIter = 300;
+    int i, iter;
+    float fo,melhor = 9999999;
+    Individuo *ind,*bestInd;
+
+    for (i = 0; i < maxIter; i++) {
+        Individuo *ind = geraSolucaoInicialGrasp(p);
+        printf("F1: %f\n", funcaoObjetivo(p, ind));
+        ind = buscaLocalGrasp(p, ind);
+        fo = funcaoObjetivo(p, ind);
+        printf("F2: %f\n", fo);
+        
+        if (fo<melhor){
+            melhor = fo;
+            bestInd = ind;
+        }
+
+    }
+
+
+    return bestInd;
+
+}

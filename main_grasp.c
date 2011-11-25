@@ -50,15 +50,14 @@ int main(int argc, char** argv) {
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
-    ind = geraSolucaoInicialGrasp(p);
-    printf("%f\n", funcaoObjetivo(p, ind));
+    ind = grasp(p);
 
-    p->t0 = atof(argv[2]);
+    /*p->t0 = atof(argv[2]);
     p->rho = atof(argv[3]);
     p->beta = atof(argv[4]);
-    p->aceitaPioraSA = atoi(argv[5]);
+    p->aceitaPioraSA = atoi(argv[5]);*/
 
-    ind = simulatedAnnealing(p, ind);
+    ind = buscaLocalGrasp(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));

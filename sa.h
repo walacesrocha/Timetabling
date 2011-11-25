@@ -12,7 +12,7 @@
 
 
 
-
+Individuo *geraVizinho(Problema *p, Individuo *ind);
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial);
 float funcaoObjetivo(Problema *p, Individuo *ind);
 

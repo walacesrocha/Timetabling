@@ -1,7 +1,6 @@
 #include "individuo.h"
 #include "problema.h"
 
-
 typedef struct alocacaoAula {
     int nrAula;
     int horario;
@@ -25,3 +24,7 @@ void ordenaDisiciplinasPorDificuldade(Problema *p, AuxGrasp *auxGrasp);
 Individuo *geraSolucaoInicialGrasp(Problema *p);
 
 int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula);
+
+Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial);
+
+Individuo *grasp(Problema*p);

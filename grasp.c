@@ -589,7 +589,7 @@ Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
     return solucaoAtual;
 }
 
-Individuo *geraSolucaoInicialGrasp(Problema *p) {
+AuxGrasp *geraSolucaoInicialGrasp(Problema *p) {
     int i, j, k;
     int aula;
     AuxGrasp *auxGrasp;
@@ -638,23 +638,25 @@ Individuo *geraSolucaoInicialGrasp(Problema *p) {
         //printf("%d: %d/%d\n", i, getPeriodo(p, i), p->nPerDias);
     }
 
-    return auxGrasp->ind;
+    return auxGrasp;
 }
 
 Individuo *grasp(Problema *p) {
-    int maxIter = 300;
-    int i, iter;
-    float fo,melhor = 9999999;
-    Individuo *ind,*bestInd;
+    int maxIter = 30;
+    int i;
+    float fo, melhor = 9999999;
+    Individuo *ind, *bestInd;
+    AuxGrasp *auxGrasp;
 
     for (i = 0; i < maxIter; i++) {
-        Individuo *ind = geraSolucaoInicialGrasp(p);
+        auxGrasp = geraSolucaoInicialGrasp(p);
+        ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
-        ind = buscaLocalGrasp(p, ind);
+        //ind = buscaLocalGrasp(p, ind);
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
-        
-        if (fo<melhor){
+
+        if (fo < melhor) {
             melhor = fo;
             bestInd = ind;
         }

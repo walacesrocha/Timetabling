@@ -21,7 +21,7 @@ typedef struct auxGrasp {
 
 void ordenaDisiciplinasPorDificuldade(Problema *p, AuxGrasp *auxGrasp);
 
-AuxGrasp *geraSolucaoInicialGrasp(Problema *p);
+void geraSolucaoInicialGrasp(Problema *p,AuxGrasp*auxGrasp);
 
 int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula);
 

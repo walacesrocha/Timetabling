@@ -80,6 +80,38 @@ Individuo *geraTimetableVazio(Problema *p) {
     return ind;
 }
 
+void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
+    int i, j, k;
+
+
+    auxGrasp->nCandidatos = p->nAulas;
+
+    for (i = 0; i < p->nAulas; i++) {
+        auxGrasp->explosao[i] = 0;
+    }
+
+    i = 0;
+    for (j = 0; j < p->nDisciplinas; j++) {
+        int nDisc = p->disciplinas[j].aulaInicial;
+        for (k = 0; k < p->disciplinas[j].nAulas; k++) {
+            auxGrasp->candidatos[i] = nDisc;
+            nDisc++;
+            i++;
+        }
+    }
+
+    // cria a tabela-horario vazia 
+    auxGrasp->ind = geraTimetableVazio(p);
+
+    // cria vetor auxiliar para guardar as possibilidades de alocacao 
+    for (i = 0; i < p->dimensao; i++) {
+        auxGrasp->vetorPossibilidades[i]->id = i + 1;
+    }
+    auxGrasp->nrPossibilidades = 0;
+
+    //return auxGrasp;
+}
+
 AuxGrasp *geraAuxGrasp(Problema *p) {
     int i, j, k;
     AuxGrasp *auxGrasp;
@@ -589,12 +621,11 @@ Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
     return solucaoAtual;
 }
 
-AuxGrasp *geraSolucaoInicialGrasp(Problema *p) {
+void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
     int i, j, k;
     int aula;
-    AuxGrasp *auxGrasp;
 
-    auxGrasp = geraAuxGrasp(p);
+    resetAuxGrasp(p, auxGrasp);
 
     for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
@@ -638,7 +669,7 @@ AuxGrasp *geraSolucaoInicialGrasp(Problema *p) {
         //printf("%d: %d/%d\n", i, getPeriodo(p, i), p->nPerDias);
     }
 
-    return auxGrasp;
+    //return auxGrasp;
 }
 
 Individuo *grasp(Problema *p) {
@@ -648,8 +679,10 @@ Individuo *grasp(Problema *p) {
     Individuo *ind, *bestInd;
     AuxGrasp *auxGrasp;
 
+    auxGrasp = geraAuxGrasp(p);
+
     for (i = 0; i < maxIter; i++) {
-        auxGrasp = geraSolucaoInicialGrasp(p);
+        geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
         //ind = buscaLocalGrasp(p, ind);

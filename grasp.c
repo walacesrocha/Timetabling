@@ -237,8 +237,14 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
 }
 
 int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula) {
+    int cont;
     int *horariosViaveis = getHorariosViaveis(p, auxGrasp, aula);
-    return contaHorariosViaveis(p, horariosViaveis);
+
+    cont = contaHorariosViaveis(p, horariosViaveis);
+
+    free(horariosViaveis);
+
+    return cont;
 }
 
 void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
@@ -370,6 +376,8 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
     //printf("MIN=%d, ocupados: %d\n", disc->minDiasAula, totalDiasOcupados);
 
 
+    free(diasOcupados);
+    free(salasOcupadas);
 }
 
 int minimo(int n, int m) {
@@ -571,6 +579,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     }
     printf("\n");*/
 
+    free(horariosViaveis);
 }
 
 Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
@@ -582,7 +591,7 @@ Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
 
     foAtual = funcaoObjetivo(p, indInicial);
 
-    N = 1000;
+    N = 10000;
     solucaoAtual = indInicial;
     int iteracoes = 0;
     float fo;
@@ -672,6 +681,26 @@ void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
     //return auxGrasp;
 }
 
+void desalocaAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
+    int i;
+    free(auxGrasp->candidatos);
+    free(auxGrasp->explosao);
+
+    for (i = 0; i < p->dimensao; i++) {
+        free(auxGrasp->vetorPossibilidades[i]);
+    }
+
+    free(auxGrasp->vetorPossibilidades);
+}
+
+void copiaIndividuo(Individuo* indFonte, Individuo* indDestino) {
+    int i;
+
+    for (i = 0; i < indFonte->n; i++) {
+        indDestino->aula[i] = indFonte->aula[i];
+    }
+}
+
 Individuo *grasp(Problema *p) {
     int maxIter = 30;
     int i;
@@ -681,21 +710,27 @@ Individuo *grasp(Problema *p) {
 
     auxGrasp = geraAuxGrasp(p);
 
+    bestInd = alocaIndividuo();
+    criaIndividuo(bestInd, p);
+
     for (i = 0; i < maxIter; i++) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
-        //ind = buscaLocalGrasp(p, ind);
+        ind = buscaLocalGrasp(p, ind);
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
 
         if (fo < melhor) {
             melhor = fo;
-            bestInd = ind;
+            copiaIndividuo(ind, bestInd);
+
         }
+        liberaIndividuo(ind);
 
     }
 
+    desalocaAuxGrasp(p, auxGrasp);
 
     return bestInd;
 

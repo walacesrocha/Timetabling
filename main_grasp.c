@@ -68,7 +68,10 @@ int main(int argc, char** argv) {
 
     //ind = geraIndividuoAleatorio(p, 100);
     //printf("%f\n", funcaoObjetivo(p, ind));
-    exit(0);
+   
+    liberaIndividuo(ind);
+    
+    desalocaProblema(p);
 
 
     return (EXIT_SUCCESS);

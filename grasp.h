@@ -25,6 +25,6 @@ void geraSolucaoInicialGrasp(Problema *p,AuxGrasp*auxGrasp);
 
 int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula);
 
-Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial);
+Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial);
 
 Individuo *grasp(Problema*p);

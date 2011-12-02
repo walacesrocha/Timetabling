@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     p->beta = atof(argv[4]);
     p->aceitaPioraSA = atoi(argv[5]);*/
 
-    ind = buscaLocalGrasp(p, ind);
+    ind = buscaLocalGraspProfundidade(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));

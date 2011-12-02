@@ -455,11 +455,11 @@ void explodeTimetable(Problema *p, AuxGrasp *auxGrasp, int aula) {
     }
     //printf("\n");
 
-    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+    /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
-    //printf("\n");
+    //printf("\n");*/
     for (j = 0; j < p->nSalas; j++) {
         int pos = posMin + qtHorarios*j;
 
@@ -475,11 +475,11 @@ void explodeTimetable(Problema *p, AuxGrasp *auxGrasp, int aula) {
 
         }
     }
-    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+    /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
-    //printf("\n");
+    //printf("\n");**/
 
 
 }
@@ -488,7 +488,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     int *horariosViaveis;
     int i, j, nrP, pos, qtHorarios; // quantidade de horarios: dias x periodos
     AlocacaoAula *alocacao;
-    int tLRC = 5; // tamanho da lista restrita de candidatos
+    int tLRC = 2; // tamanho da lista restrita de candidatos
 
     qtHorarios = p->nDias * p->nPerDias;
 
@@ -582,7 +582,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     free(horariosViaveis);
 }
 
-Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
+Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
     float foAtual;
@@ -591,7 +591,7 @@ Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
 
     foAtual = funcaoObjetivo(p, indInicial);
 
-    N = 10000;
+    N = 1000;
     solucaoAtual = indInicial;
     int iteracoes = 0;
     float fo;
@@ -630,27 +630,103 @@ Individuo *buscaLocalGrasp(Problema*p, Individuo *indInicial) {
     return solucaoAtual;
 }
 
+Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
+    Individuo *solucaoAtual, *aDesalocar;
+    Individuo **vizinhos;
+    float foAtual;
+    float deltaF;
+    float *foVizinhos;
+    long N;
+    int i, nVizinhos = 5;
+    int melhorVizinho;
+
+    vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
+    foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
+
+    foAtual = funcaoObjetivo(p, indInicial);
+
+    N = 1000;
+    solucaoAtual = indInicial;
+    int iteracoes = 0;
+
+    do {
+
+        //printf("FO Atual: %f\n", foAtual);
+        for (i = 0; i < nVizinhos; i++) {
+            vizinhos[i] = geraVizinho(p, solucaoAtual);
+            foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
+            if (i == 0) {
+                melhorVizinho = 0;
+            } else {
+                if (foVizinhos[i] < foVizinhos[melhorVizinho]) {
+                    melhorVizinho = i;
+                }
+            }
+
+            //printf("%f ", foVizinhos[i]);
+        }
+
+        //printf(": Melhor: %d\n", melhorVizinho);
+
+
+
+        deltaF = foVizinhos[melhorVizinho] - foAtual;
+
+        //printf("Df=%f\n", deltaF);
+
+        aDesalocar = 0;
+        if (deltaF < 0) {// função objetivo decresceu
+            //scanf("%d\n", &i);
+            foAtual = foVizinhos[melhorVizinho];
+            //printf("Melhorou... %f\n", foAtual);
+            aDesalocar = solucaoAtual;
+            solucaoAtual = vizinhos[melhorVizinho];
+            vizinhos[melhorVizinho] = aDesalocar;
+            //melhorInd = solucaoAtual;
+            iteracoes = 0; // continua buscando
+        } else {
+            /////////////////aDesalocar = vizinho;
+        }
+
+        //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
+        for (i = 0; i < nVizinhos; i++) {
+            liberaIndividuo(vizinhos[i]);
+        }
+
+        iteracoes++;
+
+        //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
+    } while (iteracoes < N);
+
+    //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
+    //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+
+    free(vizinhos);
+    free(foVizinhos);
+
+    return solucaoAtual;
+}
+
 void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
-    int i, j, k;
     int aula;
 
     resetAuxGrasp(p, auxGrasp);
 
-    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+    /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
-    //printf("\n");
+    //printf("\n");*/
 
     ordenaDisiciplinasPorDificuldade(p, auxGrasp);
 
     //printf("==============================================================================\n");
 
-    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+    /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
-    //printf("\n");
+    //printf("\n");*/
 
 
     while (auxGrasp->nCandidatos > 0) {// enquanto ha candidatos a alocar
@@ -674,9 +750,9 @@ void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
     }
 
 
-    for (i = 0; i < p->nDias * p->nPerDias; i++) {
+    /*for (i = 0; i < p->nDias * p->nPerDias; i++) {
         //printf("%d: %d/%d\n", i, getPeriodo(p, i), p->nPerDias);
-    }
+    }*/
 
     //return auxGrasp;
 }
@@ -717,7 +793,7 @@ Individuo *grasp(Problema *p) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
-        ind = buscaLocalGrasp(p, ind);
+        ind = buscaLocalGraspHibrida(p, ind);
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
 

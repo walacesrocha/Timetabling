@@ -47,6 +47,12 @@ int main(int argc, char** argv) {
 
     Problema *p = lerInstancia(argv[1]);
 
+
+    p->maxIterGrasp = atoi(argv[2]);
+    p->buscaLocalGrasp = atoi(argv[3]);
+    p->txSwap = atof(argv[4]);
+    p->nIterSemMelhoras = atoi(argv[5]);
+
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
@@ -57,10 +63,14 @@ int main(int argc, char** argv) {
     p->beta = atof(argv[4]);
     p->aceitaPioraSA = atoi(argv[5]);*/
 
-    ind = buscaLocalGraspProfundidade(p, ind);
+    //ind = buscaLocalGraspProfundidade(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
+
+    t2 = clock();
+
+    printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 
 
     //imprimeResposta(p, ind);
@@ -68,9 +78,9 @@ int main(int argc, char** argv) {
 
     //ind = geraIndividuoAleatorio(p, 100);
     //printf("%f\n", funcaoObjetivo(p, ind));
-   
+
     liberaIndividuo(ind);
-    
+
     desalocaProblema(p);
 
 

@@ -50,7 +50,7 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
     /*** SWAP EVENT ***/
     float prob = ((float) rand()) / RAND_MAX;
     //printf("Prob: %f\n", prob);
-    if (prob <= 1.0) {
+    if (prob <= p->txSwap) {
 
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
         p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula

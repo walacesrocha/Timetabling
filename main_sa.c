@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     p->t0 = atof(argv[2]);
     p->rho = atof(argv[3]);
     p->beta = atof(argv[4]);
-    
+    p->txSwap = 0.5;
     
     ind = simulatedAnnealing(p, NULL);
     printf("FO: %f\n", funcaoObjetivo(p, ind));

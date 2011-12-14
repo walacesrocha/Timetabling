@@ -76,6 +76,12 @@ typedef struct problema {
     float beta; // resfriamento
     int aceitaPioraSA;
     
+    /* Parametros Grasp*/
+    float txSwap;
+    int buscaLocalGrasp;
+    int maxIterGrasp;
+    int nIterSemMelhoras;
+    
     /*Leandro inicio*/
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)
     char **matrizAulaAula; //matriz conflito aula-aula (aulas do mesmo currículo ou com mesmo professor)

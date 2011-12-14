@@ -587,11 +587,9 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     Individuo *vizinho;
     float foAtual;
     float deltaF;
-    long N;
 
     foAtual = funcaoObjetivo(p, indInicial);
 
-    N = 1000;
     solucaoAtual = indInicial;
     int iteracoes = 0;
     float fo;
@@ -621,7 +619,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
         iteracoes++;
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
-    } while (iteracoes < N);
+    } while (iteracoes < p->nIterSemMelhoras);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
@@ -636,8 +634,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     float foAtual;
     float deltaF;
     float *foVizinhos;
-    long N;
-    int i, nVizinhos = 5;
+    int i, nVizinhos = 10;
     int melhorVizinho;
 
     vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
@@ -645,7 +642,6 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
     foAtual = funcaoObjetivo(p, indInicial);
 
-    N = 1000;
     solucaoAtual = indInicial;
     int iteracoes = 0;
 
@@ -696,7 +692,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         iteracoes++;
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
-    } while (iteracoes < N);
+    } while (iteracoes < p->nIterSemMelhoras);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
@@ -778,7 +774,6 @@ void copiaIndividuo(Individuo* indFonte, Individuo* indDestino) {
 }
 
 Individuo *grasp(Problema *p) {
-    int maxIter = 30;
     int i;
     float fo, melhor = 9999999;
     Individuo *ind, *bestInd;
@@ -789,11 +784,20 @@ Individuo *grasp(Problema *p) {
     bestInd = alocaIndividuo();
     criaIndividuo(bestInd, p);
 
-    for (i = 0; i < maxIter; i++) {
+    for (i = 0; i < p->maxIterGrasp; i++) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
-        ind = buscaLocalGraspHibrida(p, ind);
+
+        if (p->buscaLocalGrasp == 1) {
+            ind = buscaLocalGraspProfundidade(p, ind);
+        } else if (p->buscaLocalGrasp == 2) {
+            ind = buscaLocalGraspHibrida(p, ind);
+        } else {
+            printf("Tipo de busca local nao foi informada!\n");
+            exit(1);
+        }
+
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
 

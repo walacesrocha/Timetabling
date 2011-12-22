@@ -315,6 +315,7 @@ Individuo *buscaLocal2Etapas(Problema *p, Individuo *ind, int fase) {
     }
 
     semMelhorias = 0;
+    nTentativas = 5000;
     do {
 
         int timeslot = rand() % (p->nDias * p->nPerDias);

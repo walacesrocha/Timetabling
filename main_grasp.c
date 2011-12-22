@@ -52,6 +52,7 @@ int main(int argc, char** argv) {
     p->buscaLocalGrasp = atoi(argv[3]);
     p->txSwap = atof(argv[4]);
     p->nIterSemMelhoras = atoi(argv[5]);
+    p->threshold = atof(argv[6]);
 
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);

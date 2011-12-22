@@ -5,6 +5,7 @@
 #include "problema.h"
 #include "util.h"
 #include "auxiliar.h"
+#include "buscalocal.h"
 
 /**
  * Compara duas aulas em relação a dificuldade. 
@@ -402,6 +403,7 @@ void ordenaPossibilidades(AuxGrasp *auxGrasp) {
         }
         auxGrasp->vetorPossibilidades[i + 1] = chave;
     }
+
 }
 
 /**
@@ -559,8 +561,28 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     // ordena as possibilidades
     ordenaPossibilidades(auxGrasp);
 
+    for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
+        //printf("%d ", auxGrasp->vetorPossibilidades[nrP]->custo);
+    }
+    //printf("\n");
+
+    int cMin = auxGrasp->vetorPossibilidades[0]->custo;
+    int cMax = auxGrasp->vetorPossibilidades[auxGrasp->nrPossibilidades - 1]->custo;
+    float maxC = cMin + p->threshold * (cMax - cMin);
+
+    //printf("%d <-> %d\n", cMin, cMax);
+    //printf("Escolha: %d a %f\n", cMin, maxC);
+
+    i = 0;
+    while (auxGrasp->vetorPossibilidades[i]->custo <= maxC) {
+        i++;
+    }
+
+    //printf("NP=%d, I=%d\n", auxGrasp->nrPossibilidades, i);
+
     // escohe uma possibilidade e aloca a aula
-    int escolha = rand() % (minimo(tLRC, auxGrasp->nrPossibilidades));
+    //int escolha = rand() % (minimo(tLRC, auxGrasp->nrPossibilidades));
+    int escolha = rand() % i;
     //printf("Escolha: %d\n", escolha);
 
     alocacao = auxGrasp->vetorPossibilidades[escolha];
@@ -602,7 +624,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
         //printf("Df=%f\n", deltaF);
 
         aDesalocar = 0;
-        if (deltaF < 0) {// função objetivo decresceu
+        if (deltaF <= 0) {// função objetivo decresceu
             foAtual = fo;
             //printf("Melhorou... %f\n", foAtual);
             aDesalocar = solucaoAtual;
@@ -793,9 +815,11 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalGraspProfundidade(p, ind);
         } else if (p->buscaLocalGrasp == 2) {
             ind = buscaLocalGraspHibrida(p, ind);
+        } else if (p->buscaLocalGrasp == 3) {
+            ind = buscaLocal2Etapas(p, ind, 2);
         } else {
-            printf("Tipo de busca local nao foi informada!\n");
-            exit(1);
+            //printf("Tipo de busca local nao foi informada!\n");
+            //exit(1);
         }
 
         fo = funcaoObjetivo(p, ind);

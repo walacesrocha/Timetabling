@@ -81,6 +81,7 @@ typedef struct problema {
     int buscaLocalGrasp;
     int maxIterGrasp;
     int nIterSemMelhoras;
+    float threshold;
     
     /*Leandro inicio*/
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)

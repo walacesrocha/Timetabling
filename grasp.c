@@ -665,7 +665,8 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     foAtual = funcaoObjetivo(p, indInicial);
 
     solucaoAtual = indInicial;
-    int iteracoes = 0;
+    int iteracoesSemMelhora = 0;
+    int iteracoesComMesmoFo = 0;
 
     do {
 
@@ -693,7 +694,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //printf("Df=%f\n", deltaF);
 
         aDesalocar = 0;
-        if (deltaF < 0) {// função objetivo decresceu
+        if (deltaF <= 0) {// função objetivo decresceu
             //scanf("%d\n", &i);
             foAtual = foVizinhos[melhorVizinho];
             //printf("Melhorou... %f\n", foAtual);
@@ -701,20 +702,28 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             solucaoAtual = vizinhos[melhorVizinho];
             vizinhos[melhorVizinho] = aDesalocar;
             //melhorInd = solucaoAtual;
-            iteracoes = 0; // continua buscando
+            if (deltaF < 0) {
+                iteracoesSemMelhora = 0; // continua buscando
+                iteracoesComMesmoFo = 0;
+            } else {
+                iteracoesComMesmoFo++;
+            }
+
         } else {
             /////////////////aDesalocar = vizinho;
         }
+
+        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
             liberaIndividuo(vizinhos[i]);
         }
 
-        iteracoes++;
+        iteracoesSemMelhora++;
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
-    } while (iteracoes < p->nIterSemMelhoras);
+    } while (iteracoesSemMelhora < p->nIterSemMelhoras || iteracoesComMesmoFo < 200);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));

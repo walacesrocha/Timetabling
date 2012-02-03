@@ -83,6 +83,8 @@ typedef struct problema {
     int nIterSemMelhoras;
     float threshold;
     
+    float mediaSolucoes;
+    
     /*Leandro inicio*/
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)
     char **matrizAulaAula; //matriz conflito aula-aula (aulas do mesmo currículo ou com mesmo professor)

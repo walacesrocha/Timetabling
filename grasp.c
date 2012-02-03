@@ -815,6 +815,8 @@ Individuo *grasp(Problema *p) {
     bestInd = alocaIndividuo();
     criaIndividuo(bestInd, p);
 
+    p->mediaSolucoes = 0;
+
     for (i = 0; i < p->maxIterGrasp; i++) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
@@ -834,6 +836,8 @@ Individuo *grasp(Problema *p) {
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
 
+        p->mediaSolucoes += fo;
+
         if (fo < melhor) {
             melhor = fo;
             copiaIndividuo(ind, bestInd);
@@ -844,6 +848,8 @@ Individuo *grasp(Problema *p) {
     }
 
     desalocaAuxGrasp(p, auxGrasp);
+
+    p->mediaSolucoes /= p->maxIterGrasp;
 
     return bestInd;
 

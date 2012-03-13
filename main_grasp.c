@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     Individuo *ind;
 
 
-    srand(time(0));
+    //srand(time(0));
 
     t1 = clock();
 
@@ -68,6 +68,7 @@ int main(int argc, char** argv) {
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
+    printf("MEDIA: %f\n",p->mediaSolucoes);
 
     t2 = clock();
 

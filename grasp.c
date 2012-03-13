@@ -26,6 +26,11 @@ int comparaAulas(Problema *p, AuxGrasp *auxGrasp, int a1, int a2) {
     d1 = acessaDisciplina(p, a1);
     d2 = acessaDisciplina(p, a2);
 
+    if (d1 == 0 || d2 == 0) {
+        printf("ERRO: NULL, %d %d %d\n", a1, a2, p->nAulas);
+        exit(1);
+    }
+
     if (strcmp(d1->nomeDisciplina, d2->nomeDisciplina) == 0) {
         //printf("Disciplinas iguais: %d %d\n", a1, a2);
         return 0;
@@ -174,16 +179,21 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
     int *horariosViaveis;
     int i, j, qtHorarios;
     Disciplina *disc;
-
+    //printf("começou\n");
     qtHorarios = p->nDias * p->nPerDias;
 
+    //printf("a\n");
     horariosViaveis = (int*) malloc(qtHorarios * sizeof (int));
-
+    if (horariosViaveis == 0) {
+        printf("ERRO\n");
+        exit(1);
+    }
+    //printf("b\n");
     // marca todos horarios inicialmente como viaveis
     for (i = 0; i < qtHorarios; i++) {
         horariosViaveis[i] = 1;
     }
-
+    //printf("c\n");
     /*for (i = 0; i < qtHorarios; i++) {
         printf("%d ", horariosViaveis[i]);
     }
@@ -193,7 +203,7 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
     for (i = 0; i < disc->nIndisponibilidades; i++) {
         horariosViaveis[disc->indisponibilidades[i]] = 0;
     }
-
+    //printf("d\n");
     /*/for (i = 0; i < qtHorarios; i++) {
         printf("%d ", horariosViaveis[i]);
     }
@@ -233,6 +243,8 @@ int *getHorariosViaveis(Problema*p, AuxGrasp*auxGrasp, int aula) {
             horariosViaveis[i] = 0;
         }
     }
+    //printf("e\n");
+    //printf("terminou\n");
 
     return horariosViaveis;
 }
@@ -406,6 +418,14 @@ void ordenaPossibilidades(AuxGrasp *auxGrasp) {
 
 }
 
+/*int limiteExplosoes(Problema *p, AuxGrasp *auxGrasp){
+    
+    int i;
+    
+    for (i=0;i<auxGrasp->)
+    
+}*/
+
 /**
  * Expolode uma aula para abrir espaço no timetable
  * @param p
@@ -415,58 +435,99 @@ void ordenaPossibilidades(AuxGrasp *auxGrasp) {
 void explodeTimetable(Problema *p, AuxGrasp *auxGrasp, int aula) {
     Disciplina *disc;
     int *nrIndisp;
-    int qtHorarios, i, j;
+    int qtHorarios, i, j, pos;
     int minConflitos, posMin;
 
+    printf("PM0 = %d\n", posMin);
+    printf("C1: ");
+    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+        printf("% d", auxGrasp->candidatos[i]);
+    }
+    printf("\n");
+
+    //printf("a\n");
     qtHorarios = p->nDias * p->nPerDias;
 
     // numero de indisponibilidades em cada horario
     nrIndisp = (int*) malloc(qtHorarios * sizeof (int));
-
+    //printf("b\n");
     // marca todos horarios com zero indisponibilidades
     for (i = 0; i < qtHorarios; i++) {
         nrIndisp[i] = 0;
 
         for (j = 0; j < p->nSalas; j++) {
-            int pos = i + qtHorarios*j;
+            pos = i + qtHorarios*j;
+
+            if (!ehAula(p, auxGrasp->ind->aula[pos])) {
+                // horario vazio na coluna
+                continue;
+            }
 
             if (aulasConflitantes(p, aula, auxGrasp->ind->aula[pos])) {
                 nrIndisp[i]++;
             }
 
-            if (auxGrasp->explosao[auxGrasp->ind->aula[pos] - 1] > 5) {
+            if (auxGrasp->explosao[auxGrasp->ind->aula[pos] - 1] > 2500) {
                 nrIndisp[i] = p->nAulas + 2;
             }
         }
     }
-
+    //printf("c\n");
     disc = acessaDisciplina(p, aula);
     for (i = 0; i < disc->nIndisponibilidades; i++) {
         nrIndisp[disc->indisponibilidades[i]] = p->nSalas + 2;
     }
+    //printf("d\n");
 
     minConflitos = p->nSalas + 1;
+    //posMin = -1;
+
+    printf("QC: ");
+    for (i = 0; i < qtHorarios; i++) {
+        printf("%d ", nrIndisp[i]);
+    }
+    printf("\n");
 
     //printf("Conflitos: ");
     for (i = 0; i < qtHorarios; i++) {
         if (nrIndisp[i] > 0 && nrIndisp[i] < minConflitos) {
             posMin = i;
             minConflitos = nrIndisp[i];
+            printf("passei aqui\n");
         }
         //printf("%d ", nrIndisp[i]);
     }
-    //printf("\n");
 
+    printf("PosMin=%d\n", posMin);
+
+    if (posMin == -1) {
+        printf("Nao achei posiccao de explosao\n*\n*\n*\n");
+    }
+    //printf("\n");
+    //printf("e\n");
     /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
     //printf("\n");*/
+    int explodiuPorConflito = 0;
     for (j = 0; j < p->nSalas; j++) {
         int pos = posMin + qtHorarios*j;
 
+        if (!ehAula(p, auxGrasp->ind->aula[pos])) {
+            // horario vazio na coluna
+            continue;
+        }
+
         if (aulasConflitantes(p, aula, auxGrasp->ind->aula[pos])) {
             int aulaConflitante = auxGrasp->ind->aula[pos];
+
+            if (aulaConflitante == 0 || aulaConflitante > p->nAulas) {
+                printf("ERRO AQUI\n");
+                exit(1);
+            }
+
+            printf("explodiu %d\n", aulaConflitante);
 
             auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
             auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
@@ -475,13 +536,155 @@ void explodeTimetable(Problema *p, AuxGrasp *auxGrasp, int aula) {
 
             //printf("Explosoes[%d]: %d\n", aulaConflitante, auxGrasp->explosao[aulaConflitante - 1]);
 
+            explodiuPorConflito = 1;
+
+        } else {
+            printf("nao conflitante\n");
         }
+    }
+
+    if (!explodiuPorConflito) {
+        for (j = 0; j < p->nSalas; j++) {
+            int pos, aulaConflitante;
+            do {
+                j = rand() % p->nSalas;
+                pos = posMin + qtHorarios*j;
+                printf("j=%d\n", j);
+            } while (!ehAula(p, auxGrasp->ind->aula[pos]));
+
+            aulaConflitante = auxGrasp->ind->aula[pos];
+
+            printf("explodiu %d\n", aulaConflitante);
+
+            auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
+            auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
+            auxGrasp->candidatos[auxGrasp->nCandidatos] = aulaConflitante; // aula volta a ser candidato
+            auxGrasp->nCandidatos++; // conflitante voltou a ser um candidato
+
+            //printf("Explosoes[%d]: %d\n", aulaConflitante, auxGrasp->explosao[aulaConflitante - 1]);
+
+            explodiuPorConflito = 1;
+
+            break;
+
+
+        }
+
     }
     /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
     //printf("\n");**/
+    //printf("f\n");
+
+    printf("C2: ");
+    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+        printf("% d", auxGrasp->candidatos[i]);
+    }
+    printf("\n");
+}
+
+/*
+ * Verifica se um horario (dia,hora) é inviavel para a disciplina
+ */
+int horarioInviavel(Problema *p, Disciplina *disc, int posMin) {
+    int i;
+
+    for (i = 0; i < disc->nIndisponibilidades; i++) {
+        if (disc->indisponibilidades[i] == posMin) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void explodeTimetable2(Problema *p, AuxGrasp *auxGrasp, int aula) {
+    Disciplina *disc;
+    int *nrIndisp;
+    int qtHorarios, i, j, pos;
+    int minConflitos, posMin;
+
+
+
+    //printf("a\n");
+    qtHorarios = p->nDias * p->nPerDias;
+
+    posMin = rand() % qtHorarios;
+
+    disc = acessaDisciplina(p, aula);
+    while (horarioInviavel(p, disc, posMin)) {
+
+        posMin++;
+
+        if (posMin == qtHorarios) {
+            // volta ao primeiro horario
+            posMin = 0;
+        }
+    }
+
+    int explodiuPorConflito = 0;
+    int nConflitantes = 0;
+    int nAulas = p->nSalas;
+    for (j = 0; j < p->nSalas; j++) {
+        pos = posMin + qtHorarios*j;
+
+        if (ehAula(p, auxGrasp->ind->aula[pos])) {
+
+            if (aulasConflitantes(p, aula, auxGrasp->ind->aula[pos])) {
+                int aulaConflitante = auxGrasp->ind->aula[pos];
+
+                printf("explodiu %d\n", aulaConflitante);
+
+                auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
+                auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
+                auxGrasp->candidatos[auxGrasp->nCandidatos] = aulaConflitante; // aula volta a ser candidato
+                auxGrasp->nCandidatos++; // conflitante voltou a ser um candidato
+
+                //printf("Explosoes[%d]: %d\n", aulaConflitante, auxGrasp->explosao[aulaConflitante - 1]);
+
+                explodiuPorConflito++;
+
+            } else {
+                nConflitantes++;
+                printf("nao conflitante\n");
+            }
+        } else {
+            nAulas--;
+        }
+    }
+
+    if (!explodiuPorConflito) {
+        // ninguem saiu ainda
+        // escolhe uma aleatorio para sair
+        j = rand() % p->nSalas;
+        pos = posMin + qtHorarios*j;
+        while (!ehAula(p, auxGrasp->ind->aula[pos])) {
+            j++;
+            if (j == p->nSalas) {
+                j = 0;
+            }
+            pos = posMin + qtHorarios*j;
+        }
+
+        int aulaConflitante = auxGrasp->ind->aula[pos];
+
+        printf("explodiu %d\n", aulaConflitante);
+
+        auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
+        auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
+        auxGrasp->candidatos[auxGrasp->nCandidatos] = aulaConflitante; // aula volta a ser candidato
+        auxGrasp->nCandidatos++; // conflitante voltou a ser um candidato
+
+        //printf("Explosoes[%d]: %d\n", aulaConflitante, auxGrasp->explosao[aulaConflitante - 1]);
+    } else {
+        printf("Explosoes: %d\n", explodiuPorConflito);
+        if (explodiuPorConflito > 1) {
+            printf("Problem\n");
+            //exit(1);
+        }
+    }
 
 
 }
@@ -490,28 +693,59 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     int *horariosViaveis;
     int i, j, nrP, pos, qtHorarios; // quantidade de horarios: dias x periodos
     AlocacaoAula *alocacao;
-    int tLRC = 2; // tamanho da lista restrita de candidatos
+
+    //printf("1\n");
 
     qtHorarios = p->nDias * p->nPerDias;
+    //printf("1.1\n");
 
     horariosViaveis = getHorariosViaveis(p, auxGrasp, aula);
-
+    //printf("2\n");
     //printf("HV: %d\n", contaHorariosViaveis(p, horariosViaveis));
 
     if (contaHorariosViaveis(p, horariosViaveis) == 0) {
         int aux;
-        explodeTimetable(p, auxGrasp, aula);
-
-        aux = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
-        auxGrasp->candidatos[auxGrasp->nCandidatos - 1] = auxGrasp->candidatos[auxGrasp->nCandidatos - 2];
-        auxGrasp->candidatos[auxGrasp->nCandidatos - 2] = aux;
-
+        int n1, n2, step;
+        printf("Quero alocar %d\n", aula);
+        printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
         for (i = 0; i < auxGrasp->nCandidatos; i++) {
-            //printf("%d ", auxGrasp->candidatos[i]);
+            printf("%d ", auxGrasp->candidatos[i]);
             //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
         }
+        printf("\n");
+
+        n1 = auxGrasp->nCandidatos;
+        explodeTimetable2(p, auxGrasp, aula);
+        n2 = auxGrasp->nCandidatos;
+
+        step = n2 - n1 - 1;
+
+        printf("Explosoes contadas: %d\n", n2 - n1);
+
+
+        aux = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
+        auxGrasp->candidatos[auxGrasp->nCandidatos - 1] = auxGrasp->candidatos[auxGrasp->nCandidatos - 2 - step];
+        auxGrasp->candidatos[auxGrasp->nCandidatos - 2 - step] = aux;
+
+        printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
+        for (i = 0; i < auxGrasp->nCandidatos; i++) {
+            printf("%d ", auxGrasp->candidatos[i]);
+            //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
+        }
+        printf("\n");
+
+        if (n2 - n1 > 1) {
+            //exit(1);
+        }
+
+        /*printf("T=%d ", p->nAulas);
+        for (i = 0; i < p->nAulas; i++) {
+            printf("%d, ", auxGrasp->explosao[i]);
+        }
+        printf("\n");*/
         //printf("\n");
         //exit(1);
+
 
         //printf("Explodiu...\n");
         return alocaAula(p, auxGrasp, aula);
@@ -522,6 +756,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
         //printf("XXX -> HV: %d\n", contaHorariosViaveis(p, horariosViaveis));
     }
+    //printf("3\n");
 
     auxGrasp->nrPossibilidades = 0;
 
@@ -546,12 +781,13 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
             }
         }
     }
-
+    //printf("4\n");
     // avalia todas as possibilidades
     for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
         avaliaCustoAlocacao(p, auxGrasp, aula, nrP);
         // TODO: falta a restricao ISOLATED_LECTURES
     }
+    //printf("5\n");
 
     /*for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
         alocacao = auxGrasp->vetorPossibilidades[nrP];
@@ -560,7 +796,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
     // ordena as possibilidades
     ordenaPossibilidades(auxGrasp);
-
+    //printf("6\n");
     for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
         //printf("%d ", auxGrasp->vetorPossibilidades[nrP]->custo);
     }
@@ -569,14 +805,19 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     int cMin = auxGrasp->vetorPossibilidades[0]->custo;
     int cMax = auxGrasp->vetorPossibilidades[auxGrasp->nrPossibilidades - 1]->custo;
     float maxC = cMin + p->threshold * (cMax - cMin);
-
+    //printf("7\n");
     //printf("%d <-> %d\n", cMin, cMax);
     //printf("Escolha: %d a %f\n", cMin, maxC);
 
+    //printf("contagem\n");
+    //printf("np=%d\n", auxGrasp->nrPossibilidades);
+    //printf("min=%d, max=%d\n", cMin, cMax);
     i = 0;
-    while (auxGrasp->vetorPossibilidades[i]->custo <= maxC) {
+    while (auxGrasp->vetorPossibilidades[i]->custo <= maxC && i < auxGrasp->nrPossibilidades) {
         i++;
     }
+    //printf("8\n");
+    //printf("calculado: %d/%d\n", i,auxGrasp->nrPossibilidades);
 
     //printf("NP=%d, I=%d\n", auxGrasp->nrPossibilidades, i);
 
@@ -586,13 +827,14 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     //printf("Escolha: %d\n", escolha);
 
     alocacao = auxGrasp->vetorPossibilidades[escolha];
-
+    //printf("9\n");
     // posicao a inserir
     pos = alocacao->horario + qtHorarios * alocacao->sala;
 
     // insere no timetabling
     auxGrasp->ind->aula[pos] = aula;
     auxGrasp->nCandidatos--;
+    //printf("10\n");
 
     //printf("Nr.Possibilidades: %d\n", auxGrasp->nrPossibilidades);
     /*for (nrP = 0; nrP < auxGrasp->nrPossibilidades; nrP++) {
@@ -746,6 +988,7 @@ void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
     //printf("\n");*/
 
     ordenaDisiciplinasPorDificuldade(p, auxGrasp);
+    //TODO: talvez pode sair. Tem no WHILE
 
     //printf("==============================================================================\n");
 
@@ -815,6 +1058,8 @@ Individuo *grasp(Problema *p) {
     bestInd = alocaIndividuo();
     criaIndividuo(bestInd, p);
 
+    p->mediaSolucoes = 0;
+
     for (i = 0; i < p->maxIterGrasp; i++) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
@@ -834,6 +1079,8 @@ Individuo *grasp(Problema *p) {
         fo = funcaoObjetivo(p, ind);
         printf("F2: %f\n", fo);
 
+        p->mediaSolucoes += fo;
+
         if (fo < melhor) {
             melhor = fo;
             copiaIndividuo(ind, bestInd);
@@ -844,6 +1091,8 @@ Individuo *grasp(Problema *p) {
     }
 
     desalocaAuxGrasp(p, auxGrasp);
+
+    p->mediaSolucoes /= p->maxIterGrasp;
 
     return bestInd;
 

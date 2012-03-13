@@ -370,6 +370,9 @@ void imprimeIndividuo2(Problema *p, Individuo *a) {
 //verifica se valor eh uma aula
 
 int ehAula(Problema *p, int valor) {
+    if (valor==0){
+        printf("AULA 0\n");
+    }
     return (valor <= (p->nAulas));
 }
 

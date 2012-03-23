@@ -16,12 +16,18 @@ typedef struct auxGrasp {
     int *explosao;
     AlocacaoAula **vetorPossibilidades;
     int nrPossibilidades;
+
+    Individuo **poolElite; // pool de solucoes elite
+    int tPool; // tamanho do pool
+    int nElites; // quantidade de solucoes elite no pool
+    float piorSolucao;
+    int posicaoPior;
 } AuxGrasp;
 
 
 void ordenaDisiciplinasPorDificuldade(Problema *p, AuxGrasp *auxGrasp);
 
-void geraSolucaoInicialGrasp(Problema *p,AuxGrasp*auxGrasp);
+void geraSolucaoInicialGrasp(Problema *p, AuxGrasp*auxGrasp);
 
 int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula);
 

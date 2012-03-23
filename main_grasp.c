@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     Individuo *ind;
 
 
-    //srand(time(0));
+    srand(time(0));
 
     t1 = clock();
 

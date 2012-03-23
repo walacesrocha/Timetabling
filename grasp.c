@@ -153,6 +153,17 @@ AuxGrasp *geraAuxGrasp(Problema *p) {
     }
     auxGrasp->nrPossibilidades = 0;
 
+    // alocacao do pool
+
+    auxGrasp->tPool = 5;
+    auxGrasp->nElites = 0; // pool vazio
+
+    auxGrasp->poolElite = (Individuo**) malloc(auxGrasp->tPool * sizeof (Individuo*));
+    for (i = 0; i < auxGrasp->tPool; i++) {
+        auxGrasp->poolElite[i] = alocaIndividuo();
+        criaIndividuo(auxGrasp->poolElite[i], p);
+    }
+
     return auxGrasp;
 }
 
@@ -868,11 +879,13 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
         aDesalocar = 0;
         if (deltaF <= 0) {// função objetivo decresceu
             foAtual = fo;
-            //printf("Melhorou... %f\n", foAtual);
+            printf("Melhorou... %f [%d]\n", foAtual, iteracoes);
             aDesalocar = solucaoAtual;
             solucaoAtual = vizinho;
             //melhorInd = solucaoAtual;
-            iteracoes = 0; // continua buscando
+            if (deltaF < 0) {
+                iteracoes = 0; // continua buscando
+            }
         } else {
             aDesalocar = vizinho;
         }
@@ -881,6 +894,10 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
         liberaIndividuo(aDesalocar);
 
         iteracoes++;
+
+        if (iteracoes % 100 == 0) {
+            printf("[%d]\n", iteracoes);
+        }
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
     } while (iteracoes < p->nIterSemMelhoras);
@@ -1037,6 +1054,12 @@ void desalocaAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
     }
 
     free(auxGrasp->vetorPossibilidades);
+
+    for (i = 0; i < auxGrasp->tPool; i++) {
+        liberaIndividuo(auxGrasp->poolElite[i]);
+    }
+
+    free(auxGrasp->poolElite);
 }
 
 void copiaIndividuo(Individuo* indFonte, Individuo* indDestino) {
@@ -1045,10 +1068,126 @@ void copiaIndividuo(Individuo* indFonte, Individuo* indDestino) {
     for (i = 0; i < indFonte->n; i++) {
         indDestino->aula[i] = indFonte->aula[i];
     }
+    indDestino->fitness = indFonte->fitness;
+}
+
+Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGrasp) {
+
+    int i, pos;
+    Individuo *target, *inter;
+    int *posicoesTarget;
+    float melhorFoGlobal = 999999;
+    Individuo *bestGlobal;
+
+    bestGlobal = alocaIndividuo();
+    criaIndividuo(bestGlobal, p);
+
+    // inividuo intermediario, usado para percorrer o caminho (link)
+    inter = alocaIndividuo();
+    criaIndividuo(inter, p);
+    copiaIndividuo(solucaoAtual, inter);
+
+    // escolhe uma solucao elite
+    pos = rand() % auxGrasp->nElites;
+    target = auxGrasp->poolElite[pos];
+
+    posicoesTarget = (int*) malloc(p->nAulas * sizeof (int));
+
+    // marca a posicao de cada aula
+    for (i = 0; i < target->n; i++) {
+        if (ehAula(p, target->aula[i])) {
+            posicoesTarget[target->aula[i] - 1] = i;
+        }
+    }
+
+    imprimeIndividuo(target);
+    printf("Posicoes: ");
+    for (i = 0; i < p->nAulas; i++) {
+        printf("%d ", posicoesTarget[i]);
+    }
+    printf("\n");
+    imprimeIndividuo(solucaoAtual);
+
+    float fo = funcaoObjetivo(p, inter);
+    int move;
+
+    do {
+        move = 0; // indica se houve movimento
+        float melhorFo = 999999, foAux;
+        int t1, t2; // posicoes da melhor troca
+        // verifica as aulas que estao em posicoes diferentes
+        for (i = 0; i < inter->n; i++) {
+            if (ehAula(p, inter->aula[i])) {
+                int aula = inter->aula[i];
+                pos = posicoesTarget[aula - 1];
+
+                if (i != pos) {
+                    printf("Aula %d != (%d,%d)", aula, i, pos);
+                    troca_par(inter, pos, i);
+                    foAux = funcaoObjetivo(p, inter);
+
+                    if (foAux < melhorFo) {
+                        melhorFo = foAux;
+                        t1 = i;
+                        t2 = pos;
+                    }
+                    printf(", FO= %f => %f\n", fo, foAux);
+                    troca_par(inter, pos, i);
+
+                    move = 1;
+                } else {
+                    printf("Aula %d == (%d,%d)\n", aula, i, pos);
+                }
+            }
+        }
+
+        // realiza a melhor troca
+        if (move) {
+            printf("%d <=> %d, fo=%f\n", t1, t2, melhorFo);
+            troca_par(inter, t1, t2);
+            fo = melhorFo;
+
+            if (melhorFo < melhorFoGlobal) {
+                copiaIndividuo(inter, bestGlobal);
+                melhorFoGlobal = melhorFo;
+            }
+        }
+
+        //scanf("%d", &i);
+    } while (move);
+
+    printf("Source: %f\n", funcaoObjetivo(p, solucaoAtual));
+    printf("Path-Relinking: %f\n", funcaoObjetivo(p, bestGlobal));
+    printf("Target: %f\n", funcaoObjetivo(p, target));
+
+    free(posicoesTarget);
+    return bestGlobal;
+
+}
+
+/**
+ * Atualiza informações do pool de solucoes elite
+ * @param 
+ * @return 
+ */
+void atualizaInfoPool(AuxGrasp *auxGrasp) {
+    int i;
+
+    // marca o primeiro como sendo o pior do pool
+    auxGrasp->piorSolucao = auxGrasp->poolElite[0]->fitness;
+    auxGrasp->posicaoPior = 0;
+
+    // verifica no restante do pool se tem algum pior
+    for (i = 1; i < auxGrasp->nElites; i++) {
+        if (auxGrasp->poolElite[i]->fitness > auxGrasp->piorSolucao) {
+            auxGrasp->piorSolucao = auxGrasp->poolElite[i]->fitness;
+            auxGrasp->posicaoPior = i;
+        }
+    }
 }
 
 Individuo *grasp(Problema *p) {
-    int i;
+    int i, j;
     float fo, melhor = 9999999;
     Individuo *ind, *bestInd;
     AuxGrasp *auxGrasp;
@@ -1077,7 +1216,37 @@ Individuo *grasp(Problema *p) {
         }
 
         fo = funcaoObjetivo(p, ind);
+        ind->fitness = fo;
         printf("F2: %f\n", fo);
+
+        printf("POOL(1): [");
+        for (j = 0; j < auxGrasp->nElites; j++) {
+            printf("%.0f ", auxGrasp->poolElite[j]->fitness);
+        }
+        printf("]\n");
+
+        if (auxGrasp->nElites < auxGrasp->tPool) {
+            // ha espaco no pool
+            copiaIndividuo(ind, auxGrasp->poolElite[auxGrasp->nElites]);
+            auxGrasp->nElites++;
+            atualizaInfoPool(auxGrasp);
+        } else {
+            // pool cheio: verifica se nova solucao pode entrar
+
+            if (fo < auxGrasp->piorSolucao) {
+                copiaIndividuo(ind, auxGrasp->poolElite[auxGrasp->posicaoPior]);
+                atualizaInfoPool(auxGrasp);
+            }
+        }
+
+
+        printf("POOL(2): [");
+        for (j = 0; j < auxGrasp->nElites; j++) {
+            printf("%.0f ", auxGrasp->poolElite[j]->fitness);
+        }
+        printf("]\n");
+
+        //scanf("%d", &j);
 
         p->mediaSolucoes += fo;
 
@@ -1089,6 +1258,8 @@ Individuo *grasp(Problema *p) {
         liberaIndividuo(ind);
 
     }
+
+    pathRelinking(p, bestInd, auxGrasp);
 
     desalocaAuxGrasp(p, auxGrasp);
 

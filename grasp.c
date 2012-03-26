@@ -1081,6 +1081,7 @@ Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGras
 
     bestGlobal = alocaIndividuo();
     criaIndividuo(bestGlobal, p);
+    copiaIndividuo(solucaoAtual, bestGlobal);
 
     // inividuo intermediario, usado para percorrer o caminho (link)
     inter = alocaIndividuo();

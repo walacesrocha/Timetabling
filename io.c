@@ -107,6 +107,9 @@ Problema *lerInstancia(char *nomeArquivo) {
     ordenaDisciplinasPorRestricoes(p);
     preencheMatrizAulaSala(p);
     preencheMatrizAulaAula(p);
+    
+    preencheMatrizAulaIndisponibilidades (p);    
+    preencheSlotsDisponiveisTodasDisciplinas (p);
 
     return p;
 }

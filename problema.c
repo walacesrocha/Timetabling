@@ -180,16 +180,13 @@ void desalocaProblema(Problema *p) {
     }
     free(p->restricoes);
 
-    // desaloca matrizes auxiliares aula X aula; aula X sala
-    for (i = 0; i <= p->nAulas; i++) {
-        free(p->matrizAulaSala[i]);
-    }
-    free(p->matrizAulaSala);
-
-    for (i = 0; i <= p->nAulas; i++) {
-        free(p->matrizAulaAula[i]);
-    }
-    free(p->matrizAulaAula);
+    
+    /*Leandro inicio*/
+    liberaMatrizAulaSala (p);
+    liberaMatrizAulaAula (p);
+    liberaMatrizAulaIndisponibilidades (p);
+    liberaSlotsDisponiveisTodasDisciplinas (p);
+    /*Leandro fim*/
 
     //printf("desalocando problema...\n");
 

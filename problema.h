@@ -8,7 +8,7 @@
  * Estrutura que define um curriculo
  */
 typedef struct curriculo {
-    char nomeCurriculo[20];
+    char nomeCurriculo[30];
     int nDisciplinas;
     char **disciplinas;
 } Curriculo;
@@ -18,13 +18,17 @@ typedef struct curriculo {
  */
 typedef struct disciplina {
     char nomeDisciplina[30];
-    char professor[20];
+    char professor[30];
     Curriculo **curriculos; //Leandro
     int nCurriculos; //Leandro
     
     /*cada indisponibilidade eh um timeslot da aula, ou seja coluna da aula*/
     int *indisponibilidades; //Leandro
     int nIndisponibilidades; //Leandro
+    
+    int *slotsDisponiveis; //Leandro
+    int nSlotsDisponiveis; //Leandro
+    
     int nAulas;
     int aulaInicial;
     int minDiasAula;
@@ -35,7 +39,7 @@ typedef struct disciplina {
  * Estrutura que define uma sala
  */
 typedef struct sala {
-    char idSala[20];
+    char idSala[30];
     int capacidade;
 } Sala;
 
@@ -52,6 +56,7 @@ typedef struct restricao {
  * Estrutura que define uma instância de problema
  */
 typedef struct problema {
+    char instancia[40]; //Leandro
     char nome[40];
     int nDisciplinas;
     int nSalas;
@@ -68,8 +73,8 @@ typedef struct problema {
     float txMutacao, txCrossover; // taxa percentual de mutação e crossover
     int maxTrocasMutacao;
     int tPopulacao; // tamanho da população
-    float tempoLimite;
-    float tempoMelhorResposta;
+    long int tempoLimite;
+    long int tempoMelhorResposta;
     
     float t0; //SA
     float rho; // rho = t0/tmin;
@@ -86,8 +91,13 @@ typedef struct problema {
     float mediaSolucoes;
     
     /*Leandro inicio*/
+    int nDiasEperiodos; //dias * períodos
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)
     char **matrizAulaAula; //matriz conflito aula-aula (aulas do mesmo currículo ou com mesmo professor)
+    char **matrizAulaIndisponibilidades; //matriz com os dias e horarios disponiveis para cada aula
+    
+    int trocavazios; //testes remover  //////////////
+    int trocaefetiva; //testes remover ///////////////
     /*Leandro fim*/
     
 } Problema;

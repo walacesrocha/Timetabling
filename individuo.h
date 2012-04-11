@@ -8,6 +8,7 @@
 
 #define MAXRAND 101
 #define MAXTENTATIVAS 50
+#define MAXTENTATIVASSOLUCAOINICIAL 250
 
 typedef struct individuo{
 	int *aula;	//vetor de aulas
@@ -25,6 +26,8 @@ Individuo *alocaIndividuo (void);
 
 ////////
 void criaIndividuo (Individuo *a, Problema *p);
+
+Individuo *copiaIndividuo (Problema *p, Individuo *origem);
 
 /* cria um Individuo inicialmente ordenado e em seguida realizando trocas entre 2 posicoes do mesmo nTrocas vezes*/
 Individuo *geraIndividuoAleatorio2 (Problema *p, int nTrocas);
@@ -72,5 +75,19 @@ int getDia (Problema *p, int pos);
 
 int salaDiaHorarioParaPos (Problema *p, int sala, int dia, int horario);
 
+Individuo *leIndividuo (Problema *p);
+
+void realocaAulasMultiplas (Problema *p, Individuo *ind);
+
+/*imprime com espacos separando dias e salta linha a cada sala*/
+void imprimePosicoesTabela(Problema *p, Individuo *a);
+
+float somaTodasViolacoesHardLocal (Problema *p, Individuo *ind);
+
+float somaTodosConflitosLocaisTeste (Problema *p, Individuo *ind);
+
+float somaTodasIndisponibilidadesLocaisTeste (Problema *p, Individuo *ind);
+
+float somaTodasHardLocalTeste (Problema *p, Individuo *ind, float *h1total, float *h3total, float *h4total, float *somaHardLocal);
 
 #endif

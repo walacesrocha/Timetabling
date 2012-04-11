@@ -1062,7 +1062,7 @@ void desalocaAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
     free(auxGrasp->poolElite);
 }
 
-void copiaIndividuo(Individuo* indFonte, Individuo* indDestino) {
+void copiaIndividuo2(Individuo* indFonte, Individuo* indDestino) {
     int i;
 
     for (i = 0; i < indFonte->n; i++) {
@@ -1081,12 +1081,12 @@ Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGras
 
     bestGlobal = alocaIndividuo();
     criaIndividuo(bestGlobal, p);
-    copiaIndividuo(solucaoAtual, bestGlobal);
+    copiaIndividuo2(solucaoAtual, bestGlobal);
 
     // inividuo intermediario, usado para percorrer o caminho (link)
     inter = alocaIndividuo();
     criaIndividuo(inter, p);
-    copiaIndividuo(solucaoAtual, inter);
+    copiaIndividuo2(solucaoAtual, inter);
 
     // escolhe uma solucao elite
     pos = rand() % auxGrasp->nElites;
@@ -1149,7 +1149,7 @@ Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGras
             fo = melhorFo;
 
             if (melhorFo < melhorFoGlobal) {
-                copiaIndividuo(inter, bestGlobal);
+                copiaIndividuo2(inter, bestGlobal);
                 melhorFoGlobal = melhorFo;
             }
         }
@@ -1176,7 +1176,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
 
     bestGlobal = alocaIndividuo();
     criaIndividuo(bestGlobal, p);
-    copiaIndividuo(solucaoAtual, bestGlobal);
+    copiaIndividuo2(solucaoAtual, bestGlobal);
 
     
 
@@ -1187,7 +1187,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     // inividuo intermediario, usado para percorrer o caminho (link)
     inter = alocaIndividuo();
     criaIndividuo(inter, p);
-    copiaIndividuo(initial, inter);
+    copiaIndividuo2(initial, inter);
 
     target = solucaoAtual;
     posicoesTarget = (int*) malloc(p->nAulas * sizeof (int));
@@ -1247,7 +1247,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
             fo = melhorFo;
 
             if (melhorFo < melhorFoGlobal) {
-                copiaIndividuo(inter, bestGlobal);
+                copiaIndividuo2(inter, bestGlobal);
                 melhorFoGlobal = melhorFo;
             }
         }
@@ -1321,7 +1321,7 @@ Individuo *grasp(Problema *p) {
         printf("F2: %f\n", fo);
 
         if (i > auxGrasp->tPool) {// se pool de elites ja esta cheio
-            indPr = pathRelinking(p, ind, auxGrasp);
+            indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
             fezPR = 1; // fez Path-Relinking
@@ -1348,14 +1348,14 @@ Individuo *grasp(Problema *p) {
 
         if (auxGrasp->nElites < auxGrasp->tPool) {
             // ha espaco no pool
-            copiaIndividuo(bestIter, auxGrasp->poolElite[auxGrasp->nElites]);
+            copiaIndividuo2(bestIter, auxGrasp->poolElite[auxGrasp->nElites]);
             auxGrasp->nElites++;
             atualizaInfoPool(auxGrasp);
         } else {
             // pool cheio: verifica se nova solucao pode entrar
 
             if (fo < auxGrasp->piorSolucao) {
-                copiaIndividuo(bestIter, auxGrasp->poolElite[auxGrasp->posicaoPior]);
+                copiaIndividuo2(bestIter, auxGrasp->poolElite[auxGrasp->posicaoPior]);
                 atualizaInfoPool(auxGrasp);
             }
         }
@@ -1373,7 +1373,7 @@ Individuo *grasp(Problema *p) {
 
         if (fo < melhor) {
             melhor = fo;
-            copiaIndividuo(bestIter, bestInd);
+            copiaIndividuo2(bestIter, bestInd);
 
         }
         liberaIndividuo(ind);
@@ -1390,3 +1390,5 @@ Individuo *grasp(Problema *p) {
     return bestInd;
 
 }
+
+

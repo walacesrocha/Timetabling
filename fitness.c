@@ -6,6 +6,178 @@
 
 //periodo aqui significa horario (ex: 14-15 horas)
 
+//pos nao pode pertencer a ultima sala
+//posicoes da tabela onde ocorre repeticao ficam temporariamente com valor igual ao da aula + dimensao+10
+// o valor 10 foi adicionado para tambem funcionar com encoding de aulas comecando em 0 em vez de 1
+//deve-se restaurar as aulas apos as verificacoes 
+//nColunas eh na realidade um incremento para saltar para a posicao abaixo da posicao atual
+int  eliminaAulasRepetidasAbaixo (Problema *p, Individuo *ind, int a1, int pos){
+    int i, a2, nColunas, nEliminacoes;
+    
+    nEliminacoes = 0;
+    nColunas = ((p->nPerDias) * (p->nDias));
+    
+    for (i= pos + nColunas; i < (p->dimensao); i = i + nColunas){
+	//printf ("eliminando aulas abaixo -------- pos: %d, pos2: %d\n", pos, i); imprimePosicoesTabela(p, ind); ///////////////
+	a2 = ind->aula[i];
+	
+	//a1 eh verificado se eh aula antes de chamar esta funcao (eliminaAulasRepetidasAbaixo)
+	if (ehAula (p, a2)){
+	    if (aulasMesmaDisciplina(p, a1, a2)){
+		ind->aula[i] = (p->dimensao) + a2 + 10;
+		nEliminacoes = nEliminacoes + 1;
+	    }
+	}
+	
+    }
+    
+    return nEliminacoes;
+}
+
+void restauraAulasMultiplas (Problema *p, Individuo *ind){
+    int i;
+    for (i=0; i< (p->dimensao);i++){
+	if ((ind->aula[i]) > (p->dimensao)){
+	    ind->aula[i] = (ind->aula[i]) - (p->dimensao) - 10;	    
+	}
+    }
+}
+
+int eliminaAulasMultiplas (Problema *p, Individuo *ind) {
+    int i, posf, a1, nEliminacoes;
+    
+    nEliminacoes = 0;
+    posf = (p->dimensao) - ( (p->nDias) * (p->nPerDias) );
+    //printf ("dimensao: %d, posf: %d\n", p->dimensao, posf); imprimePosicoesTabela(p, ind); exit(1);///////////////
+    for (i=0; i < posf; i++){
+	a1 = ind->aula[i];
+	if (	ehAula(p, a1)	){
+	    nEliminacoes = nEliminacoes + eliminaAulasRepetidasAbaixo(p, ind, a1, i);
+	}
+    }
+    
+    //printf ("eliminacoes (violacoes hard1: %d\n",nEliminacoes );/////////
+    return nEliminacoes;
+}
+
+
+int eliminaAulasMultiplasColuna (Problema *p, Individuo *ind, int ini) {
+    int i, posf, a1, nEliminacoes;
+    int incremento = p->nPerDias * p->nDias;
+            
+    nEliminacoes = 0;
+    posf = (p->dimensao) - ( (p->nDias) * (p->nPerDias) );
+      
+    
+    for (i= ini; i< posf; i+= incremento){
+        a1 = ind->aula[i];
+	if (	ehAula(p, a1)	){
+	    nEliminacoes = nEliminacoes + eliminaAulasRepetidasAbaixo(p, ind, a1, i);
+	}
+    }    
+    
+    //printf ("eliminacoes (violacoes hard1: %d\n",nEliminacoes );/////////
+    //printf("Depois eliminaAulasMultiplasLocal\n");imprimeIndividuo3 (p, ind);   printf("\n");imprimeIndividuo2 (p, ind);
+    return nEliminacoes;
+}
+
+
+//soh conta eliminacoes da aula local
+int  eliminaAulasRepetidasAbaixoLocal (Problema *p, Individuo *ind, int aula, int a1, int pos){
+    int i, a2, nColunas, nEliminacoes;
+    
+    nEliminacoes = 0;
+    nColunas = ((p->nPerDias) * (p->nDias));
+    
+    for (i= pos + nColunas; i < (p->dimensao); i = i + nColunas){
+	//printf ("eliminando aulas abaixo -------- pos: %d, pos2: %d\n", pos, i); imprimePosicoesTabela(p, ind); ///////////////
+	a2 = ind->aula[i];
+	
+	//a1 eh verificado se eh aula antes de chamar esta funcao (eliminaAulasRepetidasAbaixo)
+	if (ehAula (p, a2)){
+	    if (aulasMesmaDisciplina(p, a1, a2)){
+		ind->aula[i] = (p->dimensao) + a2 + 10;
+		if (aulasMesmaDisciplina(p, aula, a2)){
+		    //soh conta eliminacoes da aula local
+		    //soh conta 1 eliminacao
+		    //nEliminacoes = nEliminacoes + 1;
+		    nEliminacoes = 1;
+		}
+	    }
+	}
+	
+    }
+    
+    return nEliminacoes;
+}
+
+int eliminaAulasMultiplasLocal (Problema *p, Individuo *ind, int ini, int aula) {        
+    int i, a1, nEliminacoes;
+    int incremento = p->nPerDias * p->nDias;
+        
+    nEliminacoes = 0;              
+    for (i= ini; i< (p->dimensao); i+= incremento){
+        a1 = ind->aula[i];
+	
+	if (	ehAula(p, a1)	){	    
+	    nEliminacoes = nEliminacoes + eliminaAulasRepetidasAbaixoLocal(p, ind, aula, a1, i);
+	}
+    }    
+    
+    //printf ("eliminacoes (violacoes hard1: %d\n",nEliminacoes );/////////
+    //printf("Depois eliminaAulasMultiplasLocal\n");imprimeIndividuo3 (p, ind);   printf("\n");imprimeIndividuo2 (p, ind);    
+    return nEliminacoes;  
+    
+}
+
+/*
+int eliminaAulasMultiplasLocalbkp (Problema *p, Individuo *ind, int ini, int aula) {        
+    int i, a1, nEliminacoes;
+    int incremento = p->nPerDias * p->nDias;
+    int primeiraAula;        
+    
+    
+    nEliminacoes = 0;          
+    primeiraAula = 1;
+    for (i= ini; i< (p->dimensao); i+= incremento){
+        a1 = ind->aula[i];
+	
+	if (	ehAula(p, a1)	){	    
+		if (aulasMesmaDisciplina(p, a1, aula)){
+		    if  (primeiraAula){
+			//nao elimina a primeira da coluna, somente as de baixo inclusive a propria aula inserida
+			primeiraAula = 0;
+		    }else{
+			ind->aula[i] = (p->dimensao) + a1 + 10;
+			nEliminacoes = nEliminacoes + 1;
+		    }
+		}
+	    
+	    
+	}
+    }    
+    
+    //printf ("eliminacoes (violacoes hard1: %d\n",nEliminacoes );/////////
+    //printf("Depois eliminaAulasMultiplasLocal\n");imprimeIndividuo3 (p, ind);   printf("\n");imprimeIndividuo2 (p, ind);    
+    return nEliminacoes;  
+    
+}
+//*/
+
+
+void restauraAulasMultiplasLocal (Problema *p, Individuo *ind, int ini){
+    int i;
+    int incremento = p->nPerDias * p->nDias;
+        
+    for (i= ini; i< (p->dimensao); i+= incremento){
+	if ((ind->aula[i]) > (p->dimensao)){
+	    ind->aula[i] = (ind->aula[i]) - (p->dimensao) - 10;	    
+	}
+    }
+}
+
+
+
 
 
 float somaViolacoesHardTroca (Problema *p, Individuo *a, int pos1, int pos2){        
@@ -13,11 +185,14 @@ float somaViolacoesHardTroca (Problema *p, Individuo *a, int pos1, int pos2){
 }
 
 
-//Otimizar: forma de varrer a violacao hard 1
-float somaViolacoesHard(Problema *p, Individuo *a) {
+
+float somaConflitosTeste(Problema *p, Individuo *a) {
     int i;
     float violacoes1,  violacoes3, violacoes4, result;
-    violacoes1 = 0.0;
+    
+       
+    violacoes1 = (float)eliminaAulasMultiplas (p,a);
+    
     violacoes3 = 0.0;
     violacoes4 = 0.0;
     //printf("v1: %f, v3: %f, v4: %f\n", violacoes1, violacoes3, violacoes4);/////
@@ -25,7 +200,7 @@ float somaViolacoesHard(Problema *p, Individuo *a) {
     for (i = 0; i < ((p->nDias) * (p->nPerDias)); i++) {
         violacoes4 += violacoesHard4(p, a, i);
         violacoes3 += violacoesHard3(p, a, i);
-	violacoes1 += violacoesHard1(p, a, i);
+	//violacoes1 += violacoesHard1(p, a, i);
     }
     
      //while (i < (a->n - (p->nDias * p->nPerDias)) ) {
@@ -35,20 +210,98 @@ float somaViolacoesHard(Problema *p, Individuo *a) {
     
     //percorre restante da tabela verificando restricoes hard 4
     while (i < a->n) {
-        violacoes1+= violacoesHard1(p, a, i);
+        //violacoes1+= violacoesHard1(p, a, i);
         violacoes4 += violacoesHard4(p, a, i);
         i++;
     }
-    //printf ("Violations of lectures: %d\n", violacoes1);
-    //printf ("Violations of conflicts: %d\n", violacoes3);
-    //printf ("Violations of availability: %d\n", violacoes4);
+    
+    //printf ("Violations of lectures: %f\n", violacoes1); printf ("Violations of conflicts: %f\n", violacoes3); printf ("Violations of availability: %f\n", violacoes4);  //////
+       
+    restauraAulasMultiplas(p,a);
+    
+    return (violacoes3);  
+    
+}
 
-    //printf ("soma violacoes hard: %d\n", violacoes1+ violacoes3+ violacoes4);//////
-           
+float somaIndisponibilidadesTeste(Problema *p, Individuo *a) {
+    int i;
+    float violacoes1,  violacoes3, violacoes4, result;
+    
+       
+    violacoes1 = (float)eliminaAulasMultiplas (p,a);
+    
+    violacoes3 = 0.0;
+    violacoes4 = 0.0;
+    //printf("v1: %f, v3: %f, v4: %f\n", violacoes1, violacoes3, violacoes4);/////
+    //percorre primeira sala para verificar restricoes hard 1 e 3
+    for (i = 0; i < ((p->nDias) * (p->nPerDias)); i++) {
+        violacoes4 += violacoesHard4(p, a, i);
+        violacoes3 += violacoesHard3(p, a, i);
+	//violacoes1 += violacoesHard1(p, a, i);
+    }
+    
+     //while (i < (a->n - (p->nDias * p->nPerDias)) ) {
+       // violacoes4 += violacoesHard4(p, a, i);
+       // i++;
+    //}
+    
+    //percorre restante da tabela verificando restricoes hard 4
+    while (i < a->n) {
+        //violacoes1+= violacoesHard1(p, a, i);
+        violacoes4 += violacoesHard4(p, a, i);
+        i++;
+    }
+    
+    //printf ("Violations of lectures: %f\n", violacoes1); printf ("Violations of conflicts: %f\n", violacoes3); printf ("Violations of availability: %f\n", violacoes4);  //////
+       
+    restauraAulasMultiplas(p,a);
+    
+    return (violacoes4);  
+    
+}
+
+//Funcao oficial
+//Otimizar: forma de varrer a violacao hard 1
+float somaViolacoesHard(Problema *p, Individuo *a) {
+    int i;
+    float violacoes1,  violacoes3, violacoes4, result;
+    
+       
+    violacoes1 = (float)eliminaAulasMultiplas (p,a);
+    
+    violacoes3 = 0.0;
+    violacoes4 = 0.0;
+    //printf("v1: %f, v3: %f, v4: %f\n", violacoes1, violacoes3, violacoes4);/////
+    //percorre primeira sala para verificar restricoes hard 1 e 3
+    for (i = 0; i < ((p->nDias) * (p->nPerDias)); i++) {
+        violacoes4 += violacoesHard4(p, a, i);
+        violacoes3 += violacoesHard3(p, a, i);
+	//violacoes1 += violacoesHard1(p, a, i);
+    }
+    
+     //while (i < (a->n - (p->nDias * p->nPerDias)) ) {
+       // violacoes4 += violacoesHard4(p, a, i);
+       // i++;
+    //}
+    
+    //percorre restante da tabela verificando restricoes hard 4
+    while (i < a->n) {
+        //violacoes1+= violacoesHard1(p, a, i);
+        violacoes4 += violacoesHard4(p, a, i);
+        i++;
+    }
+    
+    //printf ("Violations of lectures: %f\n", violacoes1); printf ("Violations of conflicts: %f\n", violacoes3); printf ("Violations of availability: %f\n", violacoes4);  //////
+       
+    restauraAulasMultiplas(p,a);
+    
     return (violacoes1 + violacoes3 + violacoes4);
     
     
 }
+
+
+
 
 int estudantesExcedentesAula(Problema *p, int aula, int vagasSala) {
     int n;
@@ -170,12 +423,13 @@ int aulaIsolada (Problema *p, Individuo *a, int pos, int dia, int horario){
 
 }
 
-
+//Funcao oficial
 float somaViolacoesSoft(Problema *p, Individuo *a) {
-    int sala, dia, horario, i, nAulasSala, aula, pos;
+    int sala, dia, horario, i, nAulasSala, aula, pos, lixo;
     int soma1, soma2, soma3, soma4;
     Agenda **vetAgenda;
 
+    lixo = eliminaAulasMultiplas (p,a);
     vetAgenda = preparaVetorAgendas(p);
 
     i = 0;
@@ -198,14 +452,15 @@ float somaViolacoesSoft(Problema *p, Individuo *a) {
     }
 
     soma2 += somaViolacoesMinDias(p, vetAgenda); //restricoes soft 2
-    //printf ("Cost of RoomCapacity (soft) : %d\n", soma1);
-    //printf ("Cost of MinWorkingDays (soft) : %d\n", soma2);
-    //printf ("Cost of Isolated Lectures (soft) : %d\n", soma3);
-    //printf ("Cost of Room Stability(soft) : %d\n", soma4);
+    //printf ("Cost of RoomCapacity (soft) : %d\n", soma1); printf ("Cost of MinWorkingDays (soft) : %d\n", soma2); printf ("Cost of Isolated Lectures (soft) : %d\n", soma3); printf ("Cost of Room Stability(soft) : %d\n", soma4);/////
+    
+    
     liberaVetorAgendas (p, vetAgenda);
-
+    
+    restauraAulasMultiplas(p,a);
     return (float)(soma1 + soma2 + soma3 + soma4);
 }
+
 
 
 
@@ -222,8 +477,14 @@ float fitnessHard(Problema *p, Individuo *i) {
     return 1000 / (1.0*somaViolacoesHard(p, i) + 1);
 }
 
+
+
 float fitness(Problema *p, Individuo *i) {
     //printf ("func fitness : %f\n", 1000 / (0.999*somaViolacoesHard(p, i) + 0.001*somaViolacoesSoft(p, i) + 1));///////
     return 1000 / (0.999*somaViolacoesHard(p, i) + 0.001*somaViolacoesSoft(p, i) + 1);
 }
 
+float fitnessSoft(Problema *p, Individuo *i) {
+    //printf ("func fitness : %f\n", 1000 / (0.999*somaViolacoesHard(p, i) + 0.001*somaViolacoesSoft(p, i) + 1));///////
+    return 1000 / (0.001*somaViolacoesSoft(p, i) + 1);
+}

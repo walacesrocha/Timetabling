@@ -646,7 +646,7 @@ void explodeTimetable2(Problema *p, AuxGrasp *auxGrasp, int aula) {
             if (aulasConflitantes(p, aula, auxGrasp->ind->aula[pos])) {
                 int aulaConflitante = auxGrasp->ind->aula[pos];
 
-                printf("explodiu %d\n", aulaConflitante);
+                //printf("explodiu %d\n", aulaConflitante);
 
                 auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
                 auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
@@ -659,7 +659,7 @@ void explodeTimetable2(Problema *p, AuxGrasp *auxGrasp, int aula) {
 
             } else {
                 nConflitantes++;
-                printf("nao conflitante\n");
+                //printf("nao conflitante\n");
             }
         } else {
             nAulas--;
@@ -681,7 +681,7 @@ void explodeTimetable2(Problema *p, AuxGrasp *auxGrasp, int aula) {
 
         int aulaConflitante = auxGrasp->ind->aula[pos];
 
-        printf("explodiu %d\n", aulaConflitante);
+        //printf("explodiu %d\n", aulaConflitante);
 
         auxGrasp->explosao[aulaConflitante - 1]++; // conta a explosao
         auxGrasp->ind->aula[pos] = p->nAulas + 1; // coloca horario vago na posicao
@@ -690,9 +690,9 @@ void explodeTimetable2(Problema *p, AuxGrasp *auxGrasp, int aula) {
 
         //printf("Explosoes[%d]: %d\n", aulaConflitante, auxGrasp->explosao[aulaConflitante - 1]);
     } else {
-        printf("Explosoes: %d\n", explodiuPorConflito);
+        //printf("Explosoes: %d\n", explodiuPorConflito);
         if (explodiuPorConflito > 1) {
-            printf("Problem\n");
+            //printf("Problem\n");
             //exit(1);
         }
     }
@@ -717,13 +717,13 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
     if (contaHorariosViaveis(p, horariosViaveis) == 0) {
         int aux;
         int n1, n2, step;
-        printf("Quero alocar %d\n", aula);
-        printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
+        //printf("Quero alocar %d\n", aula);
+        //printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
         for (i = 0; i < auxGrasp->nCandidatos; i++) {
-            printf("%d ", auxGrasp->candidatos[i]);
+            //printf("%d ", auxGrasp->candidatos[i]);
             //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
         }
-        printf("\n");
+        //printf("\n");
 
         n1 = auxGrasp->nCandidatos;
         explodeTimetable2(p, auxGrasp, aula);
@@ -731,19 +731,19 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula) {
 
         step = n2 - n1 - 1;
 
-        printf("Explosoes contadas: %d\n", n2 - n1);
+        //printf("Explosoes contadas: %d\n", n2 - n1);
 
 
         aux = auxGrasp->candidatos[auxGrasp->nCandidatos - 1];
         auxGrasp->candidatos[auxGrasp->nCandidatos - 1] = auxGrasp->candidatos[auxGrasp->nCandidatos - 2 - step];
         auxGrasp->candidatos[auxGrasp->nCandidatos - 2 - step] = aux;
 
-        printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
+        //printf("Candidatos[%d]: ", auxGrasp->nCandidatos);
         for (i = 0; i < auxGrasp->nCandidatos; i++) {
-            printf("%d ", auxGrasp->candidatos[i]);
+            //printf("%d ", auxGrasp->candidatos[i]);
             //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
         }
-        printf("\n");
+        //printf("\n");
 
         if (n2 - n1 > 1) {
             //exit(1);
@@ -899,7 +899,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
             //printf("[%d]\n", iteracoes);
         }
 
-        //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
+        printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
     } while (iteracoes < p->nIterSemMelhoras);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,

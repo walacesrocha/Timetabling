@@ -972,7 +972,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -982,7 +982,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         iteracoesSemMelhora++;
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
-    } while (iteracoesSemMelhora < p->nIterSemMelhoras || iteracoesComMesmoFo < 200);
+    } while (iteracoesSemMelhora < p->nIterSemMelhoras);// || iteracoesComMesmoFo < 200);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));

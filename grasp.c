@@ -982,7 +982,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         iteracoesSemMelhora++;
 
         //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
-    } while (iteracoesSemMelhora < p->nIterSemMelhoras);// || iteracoesComMesmoFo < 200);
+    } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
@@ -1074,7 +1074,7 @@ void copiaIndividuo2(Individuo* indFonte, Individuo* indDestino) {
 Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGrasp) {
 
     int i, pos;
-    Individuo *target, *inter,*initial;
+    Individuo *target, *inter, *initial;
     int *posicoesTarget;
     float melhorFoGlobal = 999999;
     Individuo *bestGlobal;
@@ -1169,7 +1169,7 @@ Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGras
 Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGrasp) {
 
     int i, pos;
-    Individuo *target, *inter,*initial;
+    Individuo *target, *inter, *initial;
     int *posicoesTarget;
     float melhorFoGlobal = 999999;
     Individuo *bestGlobal;
@@ -1178,12 +1178,12 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     criaIndividuo(bestGlobal, p);
     copiaIndividuo2(solucaoAtual, bestGlobal);
 
-    
+
 
     // escolhe uma solucao elite
     pos = rand() % auxGrasp->nElites;
     initial = auxGrasp->poolElite[pos];
-    
+
     // inividuo intermediario, usado para percorrer o caminho (link)
     inter = alocaIndividuo();
     criaIndividuo(inter, p);
@@ -1320,7 +1320,7 @@ Individuo *grasp(Problema *p) {
         ind->fitness = fo;
         printf("F2: %f\n", fo);
 
-        if (i > auxGrasp->tPool) {// se pool de elites ja esta cheio
+        if (i > auxGrasp->tPool && p->buscaLocalGrasp <= 3) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
@@ -1337,8 +1337,8 @@ Individuo *grasp(Problema *p) {
         } else {
             bestIter = ind;
         }
-        
-        printf("Fo=%.0f\n",fo);
+
+        printf("Fo=%.0f\n", fo);
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {

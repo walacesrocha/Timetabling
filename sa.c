@@ -21,6 +21,7 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
     }
 
     /*** MOVE EVENT ***/
+move:
 
     p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
     p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
@@ -46,11 +47,19 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
     novoInd->aula[p1] = novoInd->aula[p2];
     novoInd->aula[p2] = aux;
 
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto move;
+    }
+
 
     /*** SWAP EVENT ***/
     float prob = ((float) rand()) / RAND_MAX;
     //printf("Prob: %f\n", prob);
     if (prob <= p->txSwap) {
+
+swap:
 
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
         p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
@@ -75,6 +84,12 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
         aux = novoInd->aula[p1];
         novoInd->aula[p1] = novoInd->aula[p2];
         novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando swap\n");
+            goto swap;
+        }
     }
 
 
@@ -93,8 +108,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
         indInicial = geraIndividuoAleatorio(p, 5);
         //printf("gerando sol. inicial\n");
     }
-    
-    foAtual = funcaoObjetivo(p,indInicial);
+
+    foAtual = funcaoObjetivo(p, indInicial);
 
     //printf("Implementando\n");
     //printf("%s\n", p->nome);

@@ -871,7 +871,8 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     do {
         vizinho = geraVizinho(p, solucaoAtual);
 
-        fo = funcaoObjetivo(p, vizinho);
+        //fo = funcaoObjetivo(p, vizinho);
+        fo = somaViolacoesSoft(p, vizinho);
         deltaF = fo - foAtual;
 
         //printf("Df=%f\n", deltaF);
@@ -899,7 +900,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
             //printf("[%d]\n", iteracoes);
         }
 
-        printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
+        //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
     } while (iteracoes < p->nIterSemMelhoras);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
@@ -932,7 +933,8 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
             vizinhos[i] = geraVizinho(p, solucaoAtual);
-            foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
+            //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
+            foVizinhos[i] = somaViolacoesSoft(p, vizinhos[i]);
             if (i == 0) {
                 melhorVizinho = 0;
             } else {
@@ -972,7 +974,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1157,9 +1159,9 @@ Individuo *pathRelinking(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGras
         //scanf("%d", &i);
     } while (move);
 
-    printf("Source: %f\n", funcaoObjetivo(p, solucaoAtual));
-    printf("Path-Relinking: %f\n", funcaoObjetivo(p, bestGlobal));
-    printf("Target: %f\n", funcaoObjetivo(p, target));
+    //printf("Source: %f\n", funcaoObjetivo(p, solucaoAtual));
+    //printf("Path-Relinking: %f\n", funcaoObjetivo(p, bestGlobal));
+    //printf("Target: %f\n", funcaoObjetivo(p, target));
 
     free(posicoesTarget);
     return bestGlobal;
@@ -1255,9 +1257,9 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
         //scanf("%d", &i);
     } while (move);
 
-    printf("Source: %f\n", funcaoObjetivo(p, initial));
-    printf("Path-Relinking: %f\n", funcaoObjetivo(p, bestGlobal));
-    printf("Target: %f\n", funcaoObjetivo(p, target));
+    //printf("Source: %f\n", funcaoObjetivo(p, initial));
+    //printf("Path-Relinking: %f\n", funcaoObjetivo(p, bestGlobal));
+    //printf("Target: %f\n", funcaoObjetivo(p, target));
 
     free(posicoesTarget);
     return bestGlobal;
@@ -1338,13 +1340,13 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }
         
-        printf("Fo=%.0f\n",fo);
+        /*printf("Fo=%.0f\n",fo);
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");
+        printf("]\n");*/
 
         if (auxGrasp->nElites < auxGrasp->tPool) {
             // ha espaco no pool
@@ -1361,11 +1363,11 @@ Individuo *grasp(Problema *p) {
         }
 
 
-        printf("POOL(2): [");
+        /*printf("POOL(2): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");
+        printf("]\n");**/
 
         //scanf("%d", &j);
 

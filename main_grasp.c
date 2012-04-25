@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     Individuo *ind;
 
 
-    //srand(time(0));
+    srand(time(0));
 
     t1 = clock();
 
@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
     t2 = clock();
 
-    printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
+    //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 
 
     //imprimeResposta(p, ind);

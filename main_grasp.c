@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
     int i, j;
     clock_t t1, t2;
     Individuo *ind;
+    FILE *fp;
 
 
     srand(time(0));
@@ -53,6 +54,7 @@ int main(int argc, char** argv) {
     p->txSwap = atof(argv[4]);
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
+    
 
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
@@ -69,13 +71,20 @@ int main(int argc, char** argv) {
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     printf("MEDIA: %f\n",p->mediaSolucoes);
+    printf("RoomCapacity: %d\n",ind->soft1);
+    printf("MinWorkDays: %d\n",ind->soft2);
+    printf("CurrCompactness: %d\n",ind->soft3);
+    printf("RoomStability: %d\n",ind->soft4);
+    printf("MOVES: %d\n",p->nMoves);
+    printf("SWAPS: %d\n",p->nSwaps);
 
     t2 = clock();
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 
-
-    //imprimeResposta(p, ind);
+    fp = fopen("sol.txt","w");
+    imprimeResposta(p, ind, fp);
+    fclose(fp);
 
 
     //ind = geraIndividuoAleatorio(p, 100);

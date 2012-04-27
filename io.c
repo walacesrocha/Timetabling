@@ -107,9 +107,11 @@ Problema *lerInstancia(char *nomeArquivo) {
     ordenaDisciplinasPorRestricoes(p);
     preencheMatrizAulaSala(p);
     preencheMatrizAulaAula(p);
+
+    preencheMatrizAulaIndisponibilidades(p);
+    preencheSlotsDisponiveisTodasDisciplinas(p);
     
-    preencheMatrizAulaIndisponibilidades (p);    
-    preencheSlotsDisponiveisTodasDisciplinas (p);
+    p->nMoves = p->nSwaps = 0;
 
     return p;
 }
@@ -161,7 +163,7 @@ void imprimeInstancia(Problema *p) {
 
 }
 
-void imprimeResposta(Problema *p, Individuo *ind) {
+void imprimeResposta(Problema *p, Individuo *ind, FILE *fp) {
     int *t;
     int i, dia, periodo, sala;
 
@@ -175,7 +177,7 @@ void imprimeResposta(Problema *p, Individuo *ind) {
             periodo = getPeriodoFromPos(i, p);
             sala = getRoomFromPos(i, p);
 
-            printf("%s %s %d %d\n", getDisciplina(p, t[i]), (p->salas + sala)->idSala, dia, periodo);
+            fprintf(fp, "%s %s %d %d\n", getDisciplina(p, t[i]), (p->salas + sala)->idSala, dia, periodo);
         }
     }
 }

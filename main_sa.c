@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 
     Populacao *populacao = solve(p);
 
-    imprimeResposta(p, populacao->ind[0]);
+    imprimeResposta(p, populacao->ind[0],stdout);
 
     printf("%s\n", argv[1]);
     printf("Fitness Hard: %f\n", fitnessHard(p, populacao->ind[0]));

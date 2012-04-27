@@ -14,6 +14,7 @@ typedef struct individuo{
 	int *aula;	//vetor de aulas
 	float fitness;
 	int n;	//tamanho do individuo
+        int soft1,soft2,soft3,soft4;
 }Individuo;
 
 

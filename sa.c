@@ -96,6 +96,89 @@ swap:
     return novoInd;
 }
 
+Individuo *geraVizinho2(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+    /*** MOVE EVENT ***/
+    if (((float) rand()) / RAND_MAX < 0.5) {
+        p->nMoves++;
+move:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+        //printf("posicoes sorteadas\n");
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando move\n");
+            goto move;
+        }
+    } else {
+        p->nSwaps++;
+        /*** SWAP EVENT ***/
+swap:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+        //printf("posicoes sorteadas\n");
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (!ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando swap\n");
+            goto swap;
+        }
+    }
+
+
+    return novoInd;
+}
+
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;

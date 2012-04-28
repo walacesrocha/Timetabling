@@ -458,6 +458,10 @@ float somaViolacoesSoft(Problema *p, Individuo *a) {
     liberaVetorAgendas (p, vetAgenda);
     
     restauraAulasMultiplas(p,a);
+    a->soft1 = soma1;
+    a->soft2 = soma2;
+    a->soft3 = soma3;
+    a->soft4 = soma4;
     return (float)(soma1 + soma2 + soma3 + soma4);
 }
 

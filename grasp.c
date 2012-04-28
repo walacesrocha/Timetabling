@@ -869,7 +869,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     int iteracoes = 0;
     float fo;
     do {
-        vizinho = geraVizinho(p, solucaoAtual);
+        vizinho = geraVizinho2(p, solucaoAtual);
 
         //fo = funcaoObjetivo(p, vizinho);
         fo = somaViolacoesSoft(p, vizinho);
@@ -900,7 +900,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
             //printf("[%d]\n", iteracoes);
         }
 
-        //printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
+        printf("Iter: %d / FO: %f\n", iteracoes, foAtual);
     } while (iteracoes < p->nIterSemMelhoras);
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
@@ -932,7 +932,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            vizinhos[i] = geraVizinho(p, solucaoAtual);
+            vizinhos[i] = geraVizinho2(p, solucaoAtual);
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
             foVizinhos[i] = somaViolacoesSoft(p, vizinhos[i]);
             if (i == 0) {
@@ -974,7 +974,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {

@@ -259,7 +259,7 @@ Individuo *buscaLocal2Etapas(Problema *p, Individuo *ind, int fase) {
     // numero de iterações sem melhoria
     semMelhorias = 0;
 
-    nTentativas = 50;
+    nTentativas = 0;
     //printf("nTentativas: %d\n\n\n", nTentativas);
 
     do {

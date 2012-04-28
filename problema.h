@@ -87,6 +87,7 @@ typedef struct problema {
     int maxIterGrasp;
     int nIterSemMelhoras;
     float threshold;
+    int k; // tamanho da lista de vizinhos
     long nMoves,nSwaps;
     
     float mediaSolucoes;

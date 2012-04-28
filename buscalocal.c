@@ -400,9 +400,9 @@ Individuo *buscaLocal(Problema *p, Individuo *ind, int fase) {
 
         printf("tentativa...");
         t1 = rand() % dimensao;
-        
+
         if (!ehAula(p, novoInd->aula[t1])) {
-             do {
+            do {
                 t2 = rand() % dimensao;
             } while ((!ehAula(p, novoInd->aula[t2])));
         }
@@ -432,4 +432,109 @@ Individuo *buscaLocal(Problema *p, Individuo *ind, int fase) {
     } while (semMelhorias < nTentativas);
 
     return novoInd;
+}
+
+ListaVizinhos *alocaListaVizinhos(int k) {
+    ListaVizinhos *listaVizinhos;
+
+    listaVizinhos = (ListaVizinhos*) malloc(sizeof (ListaVizinhos));
+
+    listaVizinhos->pos1 = (int*) malloc(k * sizeof (int));
+    listaVizinhos->pos2 = (int*) malloc(k * sizeof (int));
+
+    return listaVizinhos;
+}
+
+void desalocaListaVizinhos(ListaVizinhos *listaVizinhos) {
+    free(listaVizinhos->pos1);
+    free(listaVizinhos->pos2);
+    free(listaVizinhos);
+}
+
+void geraListaVizinhos(Problema *p, Individuo*ind, ListaVizinhos *listaVizinhos) {
+    int i, p1, p2, aux;
+
+    for (i = 0; i < p->k; i++) {
+
+        /*** MOVE EVENT ***/
+        if (((float) rand()) / RAND_MAX < 0.5) {
+            p->nMoves++;
+move:
+
+            p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+            p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+            //printf("posicoes sorteadas\n");
+
+            while (!ehAula(p, ind->aula[p1])) {
+                p1++;
+                if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                    p1 = 0;
+                }
+            }
+
+            while (ehAula(p, ind->aula[p2])) {
+                p2++;
+                if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                    p2 = 0;
+                }
+            }
+
+            // faz a troca das posicoes
+            troca_par(ind, p1, p2);
+            //aux = ind->aula[p1];
+            //ind->aula[p1] = novoInd->aula[p2];
+            //novoInd->aula[p2] = aux;
+
+            if (somaViolacoesHardTroca(p, ind, p1, p2) > 0) {
+                troca_par(ind, p1, p2);
+                //printf("voltando move\n");
+                goto move;
+            }
+            
+        } else {
+            p->nSwaps++;
+            /*** SWAP EVENT ***/
+swap:
+
+            p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+            p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+            //printf("posicoes sorteadas\n");
+
+            while (!ehAula(p, ind->aula[p1])) {
+                p1++;
+                if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                    p1 = 0;
+                }
+            }
+
+            while (!ehAula(p, ind->aula[p2])) {
+                p2++;
+                if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                    p2 = 0;
+                }
+            }
+
+            // faz a troca das posicoes
+            troca_par(ind,p1,p2);
+            //aux = novoInd->aula[p1];
+            //novoInd->aula[p1] = novoInd->aula[p2];
+            //novoInd->aula[p2] = aux;
+
+            if (somaViolacoesHardTroca(p, ind, p1, p2) > 0) {
+                troca_par(ind, p1, p2);
+                //printf("voltando swap\n");
+                goto swap;
+            }
+        }
+        
+        troca_par(ind,p1,p2);
+        listaVizinhos->pos1[i] = p1;
+        listaVizinhos->pos2[i] = p2;
+
+
+    }
+
+
 }

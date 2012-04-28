@@ -1,0 +1,20 @@
+sbpo-latex
+======================================================================
+
+This project holds Latex styles for the Brazilian Symposium of Operational
+Research papers. It was firstly provided by Jomi Hubner and Rafael Bordini
+at 2001. It had some adaptations on the meantime by other contributors.
+
+Besides the Latex and Bibtex styles, it is included a template named
+"sbpo-sample.tex" which can be used as a working example of functionalities.
+
+If you have some useful comment, contribution or found a bug on the styles,
+please, let me or the current maintainer know. This way we can provide an up
+to date style and so you don't need to worry about formatting but keep
+focused on your research.
+
+Enjoy! Sincerely,
+
+Bruno Menegola
+menegola@gmail.com
+

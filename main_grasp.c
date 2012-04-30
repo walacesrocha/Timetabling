@@ -31,6 +31,21 @@ void imprimeVetor(int *v, int n) {
     printf("\n");
 }
 
+char *getNomeInstancia(char *nomeArquivo) {
+    char *nome = nomeArquivo;
+    int i;
+
+    for (i = 0; i < strlen(nomeArquivo); i++, nome++) {
+        printf("%s\n", nome);
+        if (strncmp("comp", nome, 4) == 0) {
+            break;
+        }
+    }
+    printf("Nome: %s\n", nome);
+
+    return nome;
+}
+
 /*
  * ./main instancia populacao txCrossover txMutacao maxTrocasMutacao
  */
@@ -39,6 +54,7 @@ int main(int argc, char** argv) {
     int i, j;
     clock_t t1, t2;
     Individuo *ind;
+    char arquivoResposta[30];
     FILE *fp;
 
 
@@ -55,7 +71,7 @@ int main(int argc, char** argv) {
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
     p->k = 10;
-    
+
 
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
@@ -71,19 +87,20 @@ int main(int argc, char** argv) {
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
-    printf("MEDIA: %f\n",p->mediaSolucoes);
-    printf("RoomCapacity: %d\n",ind->soft1);
-    printf("MinWorkDays: %d\n",ind->soft2);
-    printf("CurrCompactness: %d\n",ind->soft3);
-    printf("RoomStability: %d\n",ind->soft4);
-    printf("MOVES: %d\n",p->nMoves);
-    printf("SWAPS: %d\n",p->nSwaps);
+    printf("MEDIA: %f\n", p->mediaSolucoes);
+    printf("RoomCapacity: %d\n", ind->soft1);
+    printf("MinWorkDays: %d\n", ind->soft2);
+    printf("CurrCompactness: %d\n", ind->soft3);
+    printf("RoomStability: %d\n", ind->soft4);
+    printf("MOVES: %d\n", p->nMoves);
+    printf("SWAPS: %d\n", p->nSwaps);
 
     t2 = clock();
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 
-    fp = fopen("sol.txt","w");
+    strcpy(arquivoResposta,"sol_");
+    fp = fopen(strcat(arquivoResposta,getNomeInstancia(argv[1])), "w");
     imprimeResposta(p, ind, fp);
     fclose(fp);
 

@@ -1,20 +1,120 @@
 \begin{thebibliography}{}
 
+\bibitem[Al-Betar  (2012)]{albetar_harmony}
+Al-Betar, M. and Khader, A. (2012).
+\newblock A harmony search algorithm for university course timetabling.
+\newblock {\em Annals of Operations Research}, 194:3--31.
+\newblock 10.1007/s10479-010-0769-z.
+
+\bibitem[Asín~Achá  (2010)]{springerlink:10.1007/s10479-012-1081-x}
+Asín~Achá, R. and Nieuwenhuis, R. (2010).
+\newblock Curriculum-based course timetabling with sat and maxsat.
+\newblock {\em Annals of Operations Research}, pages 1--21.
+\newblock 10.1007/s10479-012-1081-x.
+
+\bibitem[Bai  (2012)]{sa_hyper_heuristica}
+Bai, R., Blazewicz, J., Burke, E., Kendall, G., and McCollum, B. (2012).
+\newblock A simulated annealing hyper-heuristic methodology for flexible
+  decision support.
+\newblock {\em 4OR: A Quarterly Journal of Operations Research}, 10:43--66.
+\newblock 10.1007/s10288-011-0182-8.
+
 \bibitem[Boulic  (1991)]{boulic:91}
 Boulic, R. and Renault, O. (1991).
 \newblock 3d hierarchies for animation.
 \newblock In Magnenat-Thalmann, N. and Thalmann, D., editors, {\em New Trends
   in Animation and Visualization}. John Wiley {\&} Sons ltd.
 
+\bibitem[Burke  (2008)]{Burke_abranch-andcut}
+Burke, E.~K., Mareček, J., Parkes, A.~J., and Rudová, H. (2008).
+\newblock A branch-andcut procedure for the udine course timetabling.
+\newblock In {\em Problem, Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[Elloumi  (2008)]{elloumi2008}
+Elloumi, A., Kamoun, H., Ferland, J., and Dammak, A. (2008).
+\newblock A tabu search procedure for course timetabling at a tunisian
+  university.
+\newblock In {\em Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[Elmohamed  (1998)]{Elmohamed98acomparison}
+Elmohamed, M. A.~S., Coddington, P., and Fox, G. (1998).
+\newblock A comparison of annealing techniques for academic course scheduling.
+\newblock In {\em Lecture Notes in Computer Science}.
+
+\bibitem[Erben  (1995)]{Erben95agenetic}
+Erben, W. and Keppler, J. (1995).
+\newblock A genetic algorithm solving a weekly course-timetabling problem.
+
+\bibitem[Goltz  (1999)]{Goltz99universitytimetabling}
+Goltz, H.-J. and Matzke, D. (1999).
+\newblock University timetabling using constraint logic programming.
+\newblock In {\em PRACTICAL ASPECTS OF DECLARATIVE LANGUAGES}, pages 320--334.
+  Springer-Verlag.
+
+\bibitem[Gueret  (1995)]{Gueret95buildinguniversity}
+Gueret, C., Jussien, N., Boizumault, P., and Prins, C. (1995).
+\newblock Building university timetables using constraint logic programming.
+
+\bibitem[Kanoh  (2008)]{Kanoh:2008:KGA:1460198.1460201}
+Kanoh, H. and Sakamoto, Y. (2008).
+\newblock Knowledge-based genetic algorithm for university course timetabling
+  problems.
+\newblock {\em Int. J. Know.-Based Intell. Eng. Syst.}, 12(4):283--294.
+
 \bibitem[Knuth (1984)]{knuth:84}
 Knuth, D.~E. (1984).
 \newblock {\em The {\TeX} Book}.
 \newblock Addison-Wesley, 15th edition.
+
+\bibitem[Kostuch (2006)]{3-phaseSA}
+Kostuch, P. (2006).
+\newblock The university course timetabling problem with a 3-phase approach.
+
+\bibitem[Lach  (2010)]{lach_lubbecke}
+Lach, G. and Lubbecke, M.~E. (2010).
+\newblock Curriculum based course timetabling: new solutions to udine benchmark
+  instances.
+\newblock {\em Annals of Operations Research}.
+
+\bibitem[Massoodian  (2008)]{massoodian2008}
+Massoodian, S. and Esteki, A. (2008).
+\newblock A hybrid genetic algorithm for curriculum based course timetabling.
+\newblock In {\em Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[Schaerf (1995)]{Schaerf95asurvey}
+Schaerf, A. (1995).
+\newblock A survey of automated timetabling.
+\newblock {\em ARTIFICIAL INTELLIGENCE REVIEW}, 13:87--127.
 
 \bibitem[Smith  (1999)]{smith:99}
 Smith, A. and Jones, B. (1999).
 \newblock On the complexity of computing.
 \newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
   pages 555--566. Publishing Press.
+
+\bibitem[Souza  (2004)]{Souza:2004}
+Souza, M. J.~F., Maculan, N., and Ochi, L.~S. (2004).
+\newblock Metaheuristics.
+\newblock chapter A GRASP-tabu search algorithm for solving school timetabling
+  problems, pages 659--672. Kluwer Academic Publishers, Norwell, MA, USA.
+
+\bibitem[Suyanto (2010)]{suyanto}
+Suyanto (2010).
+\newblock An informed genetic algorithm for university course and student
+  timetabling problems.
+\newblock In Rutkowski, L., Scherer, R., Tadeusiewicz, R., Zadeh, L., and
+  Zurada, J., editors, {\em Artifical Intelligence and Soft Computing}, volume
+  6114 of {\em Lecture Notes in Computer Science}, pages 229--236. Springer
+  Berlin / Heidelberg.
+
+\bibitem[van~den Broek  (2010)]{broek_hurkens}
+van~den Broek, J. and Hurkens, C. (2010).
+\newblock An ip-based heuristic for the post enrolment course timetabling
+  problem of the itc2007.
+\newblock {\em Annals of Operations Research}.
+
+\bibitem[Vieira  (2010)]{Vieira_agrasp}
+Vieira, A., Rafael, M., and Scaraficci, A. (2010).
+\newblock A grasp strategy for a more constrained school timetabling problem.
 
 \end{thebibliography}

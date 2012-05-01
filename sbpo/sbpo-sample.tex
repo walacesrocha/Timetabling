@@ -54,12 +54,92 @@
  
 \section{Introdução}
 
+Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições. Essas restrições surgem das particularidades de cada instituição. Elas poder ser fortes ou fracas. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007.
+
+A meta-heurística GRASP (Greedy Randomized Adaptive Search Procedure) é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos, árvore geradora, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas, mas nada para a de universidades.
+Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final.
+Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema.
+
 \section{O Problema de Tabela-horário para Universidades (THU)}
+
+Apesar das formulações encontradas na literatura para o problema de tabela-horário (THU) serem bastante variadas, elas podem ser agrupadas em três grupos: tabela-horário de escolas, tabela-horário de universidades e tabela-horário para aplicação de exames. Neste trabalho é desenvolvido um algoritmo para tratar a alocação de tabela-horário de universidades. A formulação do problema é a mesma adotada na competição ITC-2007. A principal vantagem em se adotar esta formulação é que muitos autores convergiram para ela, o que contribuiu grandemente para comparação de resultados de diversos pesquisadores.
+
+O problema de tabela-horário nesta formulação consiste das seguintes entidades:
+
+\begin{itemize}
+
+\item Dias, Horários e Períodos: É dado o número de dias na semana em que há aula (geralmente 5 ou 6). Cada dia é dividido em um número fixo de horários que é igual para todos os dias. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
+
+\item Disciplinas e Professores: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionado por um professor e assistida por um dado número de alunos. Cada disciplina deve ser dada em um número mínimo de dias, ou seja, não podem ser lecionadas em poucos dias. Cada disciplina pode ser indisponíveis em alguns períodos.
+
+\item Salas: Cada sala possui uma capacidade diferente de assentos.
+
+\item Currículo: Um currículo é um grupo de disciplinas que possuem alunos em comum.
+
+\end{itemize}
+
+A solução do problema é alocação das aulas das diciplinas a um período e uma sala. A solução deve atender a algumas restrições separadas em dois grupos: fortes e fracas.
+
+\subsection{Restrições Fortes}
+
+As restrições fortes são as seguintes:
+
+\begin{itemize}
+
+\item Aulas das Disciplinas: Todas as aulas das disciplinas deve ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas são alocadas no mesmo período.
+
+\item Conflitos: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. 
+
+\item Ocupação de Sala: Duas aulas não podem ser dadas na mesma sala e no mesmo período.
+
+\item Disponibilidade de Professor: Se um professor é indisponível em um horário, nenhuma disciplina que ele leciona deve ser alocada naquele horário.
+
+\end{itemize}
+
+\subsection{Restrições Fracas}
+
+As restrições fracas são as seguintes:
+
+\begin{itemize}
+
+\item Capacidade da Sala: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for dada. Cada aluno excedente contabiliza uma violação.
+
+\item Dias Mínimos de Trabalho: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação.
+
+\item Aulas Isoladas: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isola é contada como uma violação.
+
+\item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala usada para aula que é diferente da primeira é contada como uma violação.
+
+Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas peso dois e as demais peso um.
+
+\end{itemize}
+
+
 \section{Trabalhos Relacionados}
+
+As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas. Como pode ser visto em \cite{Schaerf95asurvey}, este problema é NP-completo, portanto não existe um algoritmo de comlexidade polinomial para encontrar a solução ótima.
+
+Na área de programação matemática, bons resultados têm sido obtidos com programação inteira \cite{lach_lubbecke}, \cite{broek_hurkens} e \cite{Burke_abranch-andcut}.
+
+Algumas formulações do problema THU usando programação em lógica podem ser vistas em \cite{Gueret95buildinguniversity}, \cite{Goltz99universitytimetabling} e \cite{springerlink:10.1007/s10479-012-1081-x}.
+
+A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes e que produzem bons resultados têm sido encontrados usando Simulated Annealing \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
+
+Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou elas são aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constói a tebela-horário em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
+
+Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
+
+
+
 \section{Algoritmos para o THU}
+
 \subsection{Algoritmo Genético}
+
 \subsection{Simulated Annealing}
+
 \subsection{GRASP - com a primeira busca local}
+
+As disciplinas são ordenadas por ordem de dificuldade. Da mais difícil para a mais fácil elas são selecionadas uma a uma para entrar na tabela. Para escolher o horário e a sala da disciplina são avaliadas todas as opções viáveis e é feita uma contagem para verificar quantas violações fracas haverá com cada escolha. A partir desta avaliação é montada a lista restrita de candidatos, de onde será escolhida a posição de inserir a disciplina. Se ao tentar inserir uma disciplina na tabela não houver uma posição viável, ocorre uma “explosão” da tabela. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a disciplina que não está sendo possível alocar. Com essa estratégia garante-se que ao final da primeira fase uma tabela-horário viável será encontrada. 
 \section{Resultados Computacionais}
 \section{Conclusões e Trabalhos Futuros}
 

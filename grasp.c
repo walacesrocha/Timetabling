@@ -1074,7 +1074,7 @@ Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         /*for (i = 0; i < nVizinhos; i++) {
@@ -1425,7 +1425,7 @@ Individuo *grasp(Problema *p) {
         ind->fitness = fo;
         printf("F2: %f\n", fo);
 
-        if (i > auxGrasp->tPool && p->buscaLocalGrasp <= 3) {// se pool de elites ja esta cheio
+        if (i > auxGrasp->tPool && p->buscaLocalGrasp <= 4) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
@@ -1433,6 +1433,7 @@ Individuo *grasp(Problema *p) {
         }
 
         if (fezPR) {// se fez Path-Relinking
+            printf("F3: %f\n", foPR);
             if (foPR < fo) {
                 bestIter = indPr;
                 fo = foPR;

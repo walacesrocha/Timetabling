@@ -139,6 +139,16 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 
 \subsection{GRASP - com a primeira busca local}
 
+A meta-heurística GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de algum algoritmo de busca local. Essas duas etapas se repetem de forma independente por um número máximo de iterações. A melhor solução encontrada em uma destas etapas é a solução final.
+
+\subsection{Geração da Solução Inicial}
+
+A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas). Em cada etapa de escolha é construída a lista restrita de candidatos (LRC). Uma disciplina é escolhida aleatoriamente da LRC e acrescentada à solução.
+
+O algoritmo faz as alocações 
+
+Para construir a LRC, cada disciplina que ainda não foi alocada na tabela deve ser avaliada para verificar qual o custo de adicioná-la. Para isso são geradas todas as combinações possíveis de aulas não alocadas com os horários e salas disponíveis. As combinações que geram inviabilidade são descartadas. 
+
 As disciplinas são ordenadas por ordem de dificuldade. Da mais difícil para a mais fácil elas são selecionadas uma a uma para entrar na tabela. Para escolher o horário e a sala da disciplina são avaliadas todas as opções viáveis e é feita uma contagem para verificar quantas violações fracas haverá com cada escolha. A partir desta avaliação é montada a lista restrita de candidatos, de onde será escolhida a posição de inserir a disciplina. Se ao tentar inserir uma disciplina na tabela não houver uma posição viável, ocorre uma “explosão” da tabela. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a disciplina que não está sendo possível alocar. Com essa estratégia garante-se que ao final da primeira fase uma tabela-horário viável será encontrada. 
 \section{Resultados Computacionais}
 \section{Conclusões e Trabalhos Futuros}

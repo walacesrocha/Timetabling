@@ -143,7 +143,15 @@ A meta-heurística GRASP \cite{grasp_resende_ribeiro} possui basicamente duas et
 
 \subsection{Geração da Solução Inicial}
 
-A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas). Em cada etapa de escolha é construída a lista restrita de candidatos (LRC). Uma disciplina é escolhida aleatoriamente da LRC e acrescentada à solução.
+A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
+
+O principal objetivo deste procedimento é produzir uma solução viável, ou seja, sem violações fortes. Com intuito de alcançar este objetivo, é adotada uma estratégia de alocar as aulas mas conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia.
+
+As aulas que ainda estão desalocadas são mantidas numa lista ordenada pela "dificuldade". Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
+
+Em cada etapa a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para fazer a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujo custo estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é alaeatória.
+
+Uma disciplina é escolhida aleatoriamente da LRC e acrescentada à solução.
 
 O algoritmo faz as alocações 
 

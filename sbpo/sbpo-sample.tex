@@ -54,13 +54,16 @@
  
 \section{Introdução}
 
-Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições. Essas restrições surgem das particularidades de cada instituição. Elas poder ser fortes ou fracas. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007.
+Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições dividadas em fortes e fracas. Essas restrições surgem das particularidades de cada instituição. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007.
 
-A meta-heurística GRASP (Greedy Randomized Adaptive Search Procedure) é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos, árvore geradora, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas, mas nada para a de universidades.
+A meta-heurística GRASP (Greedy Randomized Adaptive Search Procedure) é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos \cite{Res98}, satisfabilidade \cite{FesParPitRes06a}, árvore geradora mínima \cite{Souza02agrasp}, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
+
 Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final.
-Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema.
+
+Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema. Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, simulated annealing e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
 
 \section{O Problema de Tabela-horário para Universidades (THU)}
+\label{sec:problema}
 
 Apesar das formulações encontradas na literatura para o problema de tabela-horário (THU) serem bastante variadas, elas podem ser agrupadas em três grupos: tabela-horário de escolas, tabela-horário de universidades e tabela-horário para aplicação de exames. Neste trabalho é desenvolvido um algoritmo para tratar a alocação de tabela-horário de universidades. A formulação do problema é a mesma adotada na competição ITC-2007. A principal vantagem em se adotar esta formulação é que muitos autores convergiram para ela, o que contribuiu grandemente para comparação de resultados de diversos pesquisadores.
 
@@ -116,6 +119,7 @@ Na contagem total das violações fracas são considerados pesos diferentes para
 
 
 \section{Trabalhos Relacionados}
+\label{sec:trabalhos_relacionados}
 
 As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas. Como pode ser visto em \cite{Schaerf95asurvey}, este problema é NP-completo, portanto não existe um algoritmo de comlexidade polinomial para encontrar a solução ótima.
 
@@ -123,15 +127,16 @@ Na área de programação matemática, bons resultados têm sido obtidos com pro
 
 Algumas formulações do problema THU usando programação em lógica podem ser vistas em \cite{Gueret95buildinguniversity}, \cite{Goltz99universitytimetabling} e \cite{springerlink:10.1007/s10479-012-1081-x}.
 
-A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes e que produzem bons resultados têm sido encontrados usando Simulated Annealing \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
+A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes que produzem bons resultados têm sido encontrados usando Simulated Annealing \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
 
-Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou elas são aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constói a tebela-horário em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
+Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou elas são aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tebela-horário em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
 
 Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
 
 
 
 \section{Algoritmos para o THU}
+\label{sec:algoritmos}
 
 \subsection{Algoritmo Genético}
 
@@ -141,7 +146,7 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 
 A meta-heurística GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de algum algoritmo de busca local. Essas duas etapas se repetem de forma independente por um número máximo de iterações. A melhor solução encontrada em uma destas etapas é a solução final.
 
-\subsection{Geração da Solução Inicial}
+\subsubsection{Geração da Solução Inicial}
 
 A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
 
@@ -149,39 +154,94 @@ O principal objetivo deste procedimento é produzir uma solução viável, ou se
 
 As aulas que ainda estão desalocadas são mantidas numa lista ordenada pela "dificuldade". Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
 
-Em cada etapa a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para fazer a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujo custo estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é alaeatória.
+Em cada etapa a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para fazer a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujo custo estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é alaeatória. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução.
 
-Uma disciplina é escolhida aleatoriamente da LRC e acrescentada à solução.
+Em alguns casos ocorre que ao tentar inserir uma aula na tabela não há uma posição viável. Para contornar esta situação foi implementado um procedimento denominado “explosão”. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. Essa estratégia mostrou-se bastante eficaz, tornando possível gerar uma tabela viável para todas as instâncias testadas.
 
-O algoritmo faz as alocações 
+\subsubsection{Busca Local}
 
-Para construir a LRC, cada disciplina que ainda não foi alocada na tabela deve ser avaliada para verificar qual o custo de adicioná-la. Para isso são geradas todas as combinações possíveis de aulas não alocadas com os horários e salas disponíveis. As combinações que geram inviabilidade são descartadas. 
+As soluções geradas pela fase inicial não são necessariamente ótimas. Uma busca local é usada para explorar a vizinhança e encontrar soluções melhores. O fator determinante nesta etapa é como a vizinhança será explorada, ou que movimentos serão aplicados para se encontrar um vizinho.
 
-As disciplinas são ordenadas por ordem de dificuldade. Da mais difícil para a mais fácil elas são selecionadas uma a uma para entrar na tabela. Para escolher o horário e a sala da disciplina são avaliadas todas as opções viáveis e é feita uma contagem para verificar quantas violações fracas haverá com cada escolha. A partir desta avaliação é montada a lista restrita de candidatos, de onde será escolhida a posição de inserir a disciplina. Se ao tentar inserir uma disciplina na tabela não houver uma posição viável, ocorre uma “explosão” da tabela. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a disciplina que não está sendo possível alocar. Com essa estratégia garante-se que ao final da primeira fase uma tabela-horário viável será encontrada. 
+Neste trabalho um vizinho é gerado aplicando dois movimentos sucessivos:
+
+\begin{itemize}
+\item \textbf{MOVE}: Uma aula é movida para uma posição vazia da tabela.
+\item \textbf{SWAP}: Duas aulas são trocadas de posição na tabela.
+\end{itemize}
+
+O segundo movimento (\textit{SWAP}) é aplicado com uma certa probabilidade, portanto alguns vizinhos são gerados apenas com \textit{MOVE}, outros com \textit{MOVE} seguido de \textit{SWAP}. A taxa de \textit{SWAP} é parametrizada. As escolhas de aulas e posições vazias para aplicação dos movimentos são todas aleatórias.
+
+A busca local parte da solução inicial e em cada iteração gera um vizinho da solução atual. É contado quantas iterações já passaram sem melhora. Sempre que um vizinho com melhor função objetivo é encontrado ele passa a ser a solução atual e a contagem de iterações sem melhora é zerada. O teste de parada da busca local é o número de iterações sem melhora. A quantidade máxima é parametrizada. 
+
+
 \section{Resultados Computacionais}
+\label{sec:resultados}
+
+Os resultados...
+
+\begin{table}
+
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|} 
+\hline
+
+Instância & AG & SA & GRASP & CTT & UD5 \\ \hline
+
+comp01 & 15 & 6 & & 5 & \\
+comp02 & 234 & 116 & & 24 & \\
+comp03 & 233 & 116 &  & 66 & \\
+comp04 & 137 & 76 & & 35 & \\
+comp05 & 818 & 429 & & 290 & \\
+comp06 & 215 & 132 & & 27 & \\
+comp07 & 205 & 99 & & 6 & \\
+comp08 & 169 & 84 & & 37 & \\
+comp09 & 229 & 137 & & 96 & \\
+comp10 & 183 & 67 & & 4 & \\
+comp11 & 13 & 0 & & 0 & \\
+comp12 & 544 & 407 & & 300 & \\
+comp13 & 206 & 106 & & 59 & \\
+comp14 & 173 & 90 & & 51 & \\
+comp15 & 225 & 120 & & 66 & \\
+comp16 & 198 & 91 & & 18 & \\
+comp17 & 206 & 122 & & 56 & \\
+comp18 & 153 & 133 & & 62 & \\
+comp19 & 207 & 111 & & 57 & \\
+comp20 & 257 & 130 & & 4 & \\
+comp21 & 276 & 151 & & 76 & \\
+
+\hline
+\end{tabular}
+\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), simulated annealing (SA), Grasp e as melhores soluções disponíveis no site CTT}
+\label{tabResultados}
+\end{table} 
+
+
 \section{Conclusões e Trabalhos Futuros}
+\label{sec:conclusao}
+
+As conclusões ....
 
 
-O SBPO utilizará este ano, novamente, o sistema JEMS para a submissão de trabalhos. A primeira página dos trabalhos publicados será constituída com as informações fornecidas no formulário de submissão de trabalho do JEMS. Por isto, os nomes de \textbf{todos} os autores devem ser cadastrados nesse formulário. Os nomes  não incluídos nesse formulário não aparecerão entre os autores na programação do Simpósio nem nos Anais.
-No campo \textit{Paper Title }deve ser informado apenas o título do trabalho, \textbf{sem qualquer identificação dos autores ou suas instituições}. 
-O campo \textit{Paper Abstract} deverá ser preenchido com o Resumo, de \textbf{no máximo 150 palavras}, seguido por 3 palavras-chave e pelo nome da área de classificação principal do trabalho, escolhida entre aquelas assinaladas no campo \textit{Paper Topics}. A seguir, no caso de resumos escritos em português ou espanhol, deverá vir o \textit{Abstract} em inglês e as \textit{keywords}, traduzindo fielmente o Resumo e as palavras-chave. 
+%O SBPO utilizará este ano, novamente, o sistema JEMS para a submissão de trabalhos. A primeira página dos trabalhos publicados será constituída com as informações fornecidas no formulário de submissão de trabalho do JEMS. Por isto, os nomes de \textbf{todos} os autores devem ser cadastrados nesse formulário. Os nomes  não incluídos nesse formulário não aparecerão entre os autores na programação do Simpósio nem nos Anais.
+%No campo \textit{Paper Title }deve ser informado apenas o título do trabalho, \textbf{sem qualquer identificação dos autores ou suas instituições}. 
+%O campo \textit{Paper Abstract} deverá ser preenchido com o Resumo, de \textbf{no máximo 150 palavras}, seguido por 3 palavras-chave e pelo nome da área de classificação principal do trabalho, escolhida entre aquelas assinaladas no campo \textit{Paper Topics}. A seguir, no caso de resumos escritos em português ou espanhol, deverá vir o \textit{Abstract} em inglês e as \textit{keywords}, traduzindo fielmente o Resumo e as palavras-chave. 
 
 
-\section{Submissão do Texto Completo}
+%\  \section{Submissão do Texto Completo}
 
-Após cadastrar o artigo, o autor é convidado a carregar para o sistema JEMS arquivo de terminação DOC ou PDF, com o texto completo. A primeira página desse manuscrito deve conter apenas o título do artigo coincidindo exatamente com o informado quando do cadastramento. Pode, também, incluir novamente os resumos e palavras-chave em português ou espanhol e inglês, mas, \textbf{não pode incluir nomes, filiação e endereços de autores}.
-Este manuscrito será disponibilizado para o exame pelos revisores, que terão também acesso às informações do cadastro, exceto as referentes aos nomes e instituições dos autores. Uma vez aceito o artigo, os autores serão chamados a encaminhar \textbf{versão final} com a página inicial completa, isto é, com autores, instituições, resumo de no máximo 150 palavras, 3 palavras-chave, \textit{abstract} e \textit{keywords}.
-As páginas deste texto não devem vir numeradas, tanto no caso de arquivo enviado quando da submissão quanto no caso do arquivo com a versão final do artigo aceito. A numeração será feita posteriormente para o conjunto de todos os artigos. \textbf{Cabeçalhos e rodapés devem ser deixados em branco}.
+%Após cadastrar o artigo, o autor é convidado a carregar para o sistema JEMS arquivo de terminação DOC ou PDF, com o texto completo. A primeira página desse manuscrito deve conter apenas o título do artigo coincidindo exatamente com o informado quando do cadastramento. Pode, também, incluir novamente os resumos e palavras-chave em português ou espanhol e inglês, mas, \textbf{não pode incluir nomes, filiação e endereços de autores}.
+%Este manuscrito será disponibilizado para o exame pelos revisores, que terão também acesso às informações do cadastro, exceto as referentes aos nomes e instituições dos autores. Uma vez aceito o artigo, os autores serão chamados a encaminhar \textbf{versão final} com a página inicial completa, isto é, com autores, instituições, resumo de no máximo 150 palavras, 3 palavras-chave, \textit{abstract} e \textit{keywords}.
+%As páginas deste texto não devem vir numeradas, tanto no caso de arquivo enviado quando da submissão quanto no caso do arquivo com a versão final do artigo aceito. A numeração será feita posteriormente para o conjunto de todos os artigos. \textbf{Cabeçalhos e rodapés devem ser deixados em branco}.
 
 
-\section{Instruções de Formatação}
+%\section{Instruções de Formatação}
 
-Os trabalhos completos devem ter, \textbf{no máximo 12 páginas}, tudo incluído neste limite, inclusive tabelas, gráficos, agradecimentos e referências.
-Os textos devem utilizar páginas de tamanho \textbf{A4} (29,7 x 21,0 cm) \textbf{com margem superior de 3,3 cm, inferior de 2,5 cm e laterais de 2,9 cm}. Devem ser escritos em coluna única, com fonte \textbf{Times 11}.
+%Os trabalhos completos devem ter, \textbf{no máximo 12 páginas}, tudo incluído neste limite, inclusive tabelas, gráficos, agradecimentos e referências.
+%Os textos devem utilizar páginas de tamanho \textbf{A4} (29,7 x 21,0 cm) \textbf{com margem superior de 3,3 cm, inferior de 2,5 cm e laterais de 2,9 cm}. Devem ser escritos em coluna única, com fonte \textbf{Times 11}.
 
-\section{Estilo das Citações}
+%\section{Estilo das Citações}
 
-As citações no texto devem conter o último sobrenome do autor, seguido, entre parêntesis, do \textbf{ano da publicação}, como por exemplo \cite{knuth:84}, \cite{boulic:91}, e \cite{smith:99}. As referências no final do texto devem estar em ordem alfabética do último sobrenome do primeiro autor.
+%As citações no texto devem conter o último sobrenome do autor, seguido, entre parêntesis, do \textbf{ano da publicação}, como por exemplo \cite{knuth:84}, \cite{boulic:91}, e \cite{smith:99}. As referências no final do texto devem estar em ordem alfabética do último sobrenome do primeiro autor.
 
 \bibliographystyle{sbpo}
 \bibliography{sbpo-sample}

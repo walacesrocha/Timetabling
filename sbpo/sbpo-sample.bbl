@@ -30,6 +30,11 @@ Burke, E.~K., Mareček, J., Parkes, A.~J., and Rudová, H. (2008).
 \newblock A branch-andcut procedure for the udine course timetabling.
 \newblock In {\em Problem, Proceedings of the 7th PATAT Conference, 2008}.
 
+\bibitem[de~Souza  (2002)]{Souza02agrasp}
+de~Souza, M.~C., Duhamel, C., and Ribeiro, C.~C. (2002).
+\newblock A grasp heuristic for the capacitated minimum spanning tree problem
+  using a memory-based local search strategy.
+
 \bibitem[Elloumi  (2008)]{elloumi2008}
 Elloumi, A., Kamoun, H., Ferland, J., and Dammak, A. (2008).
 \newblock A tabu search procedure for course timetabling at a tunisian
@@ -44,6 +49,12 @@ Elmohamed, M. A.~S., Coddington, P., and Fox, G. (1998).
 \bibitem[Erben  (1995)]{Erben95agenetic}
 Erben, W. and Keppler, J. (1995).
 \newblock A genetic algorithm solving a weekly course-timetabling problem.
+
+\bibitem[Festa  (2006)]{FesParPitRes06a}
+Festa, P., Pardalos, P., Pitsoulis, L., and Resende, M. (2006).
+\newblock {GRASP with path-relinking for the weighted MAXSAT problem}.
+\newblock {\em ACM J. of Experimental Algorithmics}, 11.
+\newblock article 2.4: 1-16.
 
 \bibitem[Goltz  (1999)]{Goltz99universitytimetabling}
 Goltz, H.-J. and Matzke, D. (1999).
@@ -85,6 +96,12 @@ Massoodian, S. and Esteki, A. (2008).
 Resende, M. and Ribeiro, C. (2012).
 \newblock {\em GRASP: Greedy Randomized Adaptive Search Procedures}.
 \newblock Springer, 2nd edition.
+
+\bibitem[Resende (1998)]{Res98}
+Resende, M. G.~C. (1998).
+\newblock {Computing approximate solutions of the maximum covering problem
+  using GRASP}.
+\newblock {\em J. of Heuristics}, 4:161--171.
 
 \bibitem[Schaerf (1995)]{Schaerf95asurvey}
 Schaerf, A. (1995).

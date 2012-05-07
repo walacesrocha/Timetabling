@@ -507,15 +507,24 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 55.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 55.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 71.
+ [2]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 74.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 71.
- [2] [3] [4] [5]
-(./sbpo-sample.bbl [6]) [7] (./sbpo-sample.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
+ [3] [4]
+LaTeX Font Info:    Try loading font information for T1+phv on input line 214.
+
+(/usr/share/texmf/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 214.
+ (./sbpo-sample.bbl [5] [6]
+[7]) [8] (./sbpo-sample.aux) ) 
 Here is how much of TeX's memory you used:
  3349 strings out of 493629
  43367 string characters out of 3148772

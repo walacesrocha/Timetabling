@@ -138,6 +138,8 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 \section{Algoritmos para o THU}
 \label{sec:algoritmos}
 
+
+
 \subsection{Algoritmo Genético}
 
 \subsection{Simulated Annealing}
@@ -172,6 +174,16 @@ Neste trabalho um vizinho é gerado aplicando dois movimentos sucessivos:
 O segundo movimento (\textit{SWAP}) é aplicado com uma certa probabilidade, portanto alguns vizinhos são gerados apenas com \textit{MOVE}, outros com \textit{MOVE} seguido de \textit{SWAP}. A taxa de \textit{SWAP} é parametrizada. As escolhas de aulas e posições vazias para aplicação dos movimentos são todas aleatórias.
 
 A busca local parte da solução inicial e em cada iteração gera um vizinho da solução atual. É contado quantas iterações já passaram sem melhora. Sempre que um vizinho com melhor função objetivo é encontrado ele passa a ser a solução atual e a contagem de iterações sem melhora é zerada. O teste de parada da busca local é o número de iterações sem melhora. A quantidade máxima é parametrizada. 
+
+\subsection{Path-Relinking}
+
+A proposta original do GRASP é considerada sem memória, pelo fato das soluções obtidas nas iterações não serem compartilhadas entre si para produzir melhores soluções. O Path-Relinking trabalha com duas soluções: uma ótima local e outra elite. Ele tenta melhorar a solução ótima local usando a estrutura da solução elite. Para aplicar o Path-Relinking, o GRASP precisa manter um conjunto de soluções elite.
+
+Este procedimento constrói um caminho conectando uma solução inicial e uma solução alvo. Esse caminho é feito aplicando movimentos que façam com que a solução inicial fique igual à solução alvo. Durante o percurso melhores soluções podem ser encontradas. No sentido \textit{para frente} a solução inicial é a ótima local e a alvo uma solução elite. No sentido \textit{para trás}, o caminho é percorrido da solução elite para a ótima local.
+
+Testes mostraram que o sentido \textit{para trás} produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
+
+
 
 
 \section{Resultados Computacionais}

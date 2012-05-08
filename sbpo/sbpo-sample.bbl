@@ -19,16 +19,16 @@ Bai, R., Blazewicz, J., Burke, E., Kendall, G., and McCollum, B. (2012).
 \newblock {\em 4OR: A Quarterly Journal of Operations Research}, 10:43--66.
 \newblock 10.1007/s10288-011-0182-8.
 
-\bibitem[Boulic  (1991)]{boulic:91}
-Boulic, R. and Renault, O. (1991).
-\newblock 3d hierarchies for animation.
-\newblock In Magnenat-Thalmann, N. and Thalmann, D., editors, {\em New Trends
-  in Animation and Visualization}. John Wiley {\&} Sons ltd.
-
 \bibitem[Burke  (2008)]{Burke_abranch-andcut}
 Burke, E.~K., Mareček, J., Parkes, A.~J., and Rudová, H. (2008).
 \newblock A branch-andcut procedure for the udine course timetabling.
 \newblock In {\em Problem, Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[Ceschia  (2011)]{CDGS11b}
+Ceschia, S., Di~Gaspero, L., and Schaerf, A. (2011).
+\newblock Design, engineering, and experimental analysis of a simulated
+  annealing approach to the post-enrolment course timetabling problem.
+\newblock {\em Computers \& Operations Research}, 39(7):1615--1624.
 
 \bibitem[de~Souza  (2002)]{Souza02agrasp}
 de~Souza, M.~C., Duhamel, C., and Ribeiro, C.~C. (2002).
@@ -56,6 +56,11 @@ Festa, P., Pardalos, P., Pitsoulis, L., and Resende, M. (2006).
 \newblock {\em ACM J. of Experimental Algorithmics}, 11.
 \newblock article 2.4: 1-16.
 
+\bibitem[Gaspero  (2012)]{ctt}
+Gaspero, L.~D. and Schaerf, A. (2012).
+\newblock Curriculum-based course timetabling.
+\newblock \url{http://tabu.diegm.uniud.it/ctt/}.
+
 \bibitem[Goltz  (1999)]{Goltz99universitytimetabling}
 Goltz, H.-J. and Matzke, D. (1999).
 \newblock University timetabling using constraint logic programming.
@@ -71,11 +76,6 @@ Kanoh, H. and Sakamoto, Y. (2008).
 \newblock Knowledge-based genetic algorithm for university course timetabling
   problems.
 \newblock {\em Int. J. Know.-Based Intell. Eng. Syst.}, 12(4):283--294.
-
-\bibitem[Knuth (1984)]{knuth:84}
-Knuth, D.~E. (1984).
-\newblock {\em The {\TeX} Book}.
-\newblock Addison-Wesley, 15th edition.
 
 \bibitem[Kostuch (2006)]{3-phaseSA}
 Kostuch, P. (2006).
@@ -107,12 +107,6 @@ Resende, M. G.~C. (1998).
 Schaerf, A. (1995).
 \newblock A survey of automated timetabling.
 \newblock {\em ARTIFICIAL INTELLIGENCE REVIEW}, 13:87--127.
-
-\bibitem[Smith  (1999)]{smith:99}
-Smith, A. and Jones, B. (1999).
-\newblock On the complexity of computing.
-\newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
-  pages 555--566. Publishing Press.
 
 \bibitem[Souza  (2004)]{Souza:2004}
 Souza, M. J.~F., Maculan, N., and Ochi, L.~S. (2004).

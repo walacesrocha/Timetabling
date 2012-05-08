@@ -54,11 +54,11 @@
  
 \section{Introdução}
 
-Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições dividadas em fortes e fracas. Essas restrições surgem das particularidades de cada instituição. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007.
+Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições dividadas em fortes e fracas. Essas restrições surgem das particularidades de cada instituição. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007. É importante ressaltar que o ITC-2007 usou três formulações independentes de problema de tabela-horário. A primeira formulação é voltada para tabela-horário de exames. A segunda e a terceira são voltadas para a tabela-horário semestral de universidades. A diferença é que a segunda tem foco nas informações de matrícula de alunos enquanto a terceira é baseada nos currículos da universidade. Esse trabalho é direcionado à resolução da formulação três.
 
 A meta-heurística GRASP (Greedy Randomized Adaptive Search Procedure) é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos \cite{Res98}, satisfabilidade \cite{FesParPitRes06a}, árvore geradora mínima \cite{Souza02agrasp}, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
 
-Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final.
+Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação três do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final.
 
 Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema. Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, simulated annealing e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
 
@@ -140,7 +140,7 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 
 Como foi apresentado na seção anterior, muitas meta-heurísticas têm sido usadas para resolver o problema de THU. Dentre elas, Algoritmo Genético e Simulated Annealing têm se destacado pela quantidade de propostas que implementam essas técnicas. Dentre estas propostas, foram escolhidas duas consideradas promissoras, com o intuito de estudá-las mais profundamente e implementar melhorias para produzir soluções melhores.
 
-Os algoritmos escolhidos e as melhorias implementadas são apresentados nas próximas seções.
+Os algoritmos escolhidos e as melhorias implementadas são apresentados nas próximas subseções. Por fim, um novo algoritmo para o problema de THU é apresentado usando a meta-heurística GRASP.
 
 \subsection{Algoritmo Genético}
 
@@ -153,6 +153,14 @@ Uma falha identificada no procedimento de cruzamento original é que, em geral, 
 O procedimento de mutação também foi modificado para não permitir uma alteração no indivíduo que produza novas inviabilidades. Esta alteração fez com que o algoritmo genético encontrasse uma solução viável com menos iterações.
 
 \subsection{Simulated Annealing}
+
+O algoritmo Simulated Annealing escolhido para estudo foi o proposto por \cite{CDGS11b}. Apesar do algoritmo proposto resolver a formulação dois do ITC-2007, suas idéias principais foram aproveitadas para resolver a formulação três que é o objetivo deste trabalho.
+
+O algoritmo original segue a idéia básica do Simulated Annealing. Uma solução inicial é gerada procurando respeitar ao máximo as violações fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. O processo de resfriamento é o geométrico.
+
+A mudança implementada foi na forma como é calculada a vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia. O segundo passo troca duas aulas de posição na tabela. No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um movimento ou uma troca, com igual probabilidade.
+
+Testes computacionais mostraram que esta pequena modificação produziu resultados cerca de $60\%$ melhores que o algoritmo original.
 
 \subsection{GRASP - com a primeira busca local}
 
@@ -194,12 +202,12 @@ Este procedimento constrói um caminho conectando uma solução inicial e uma so
 Testes mostraram que o sentido \textit{para trás} produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
 
 
-
-
 \section{Resultados Computacionais}
 \label{sec:resultados}
 
-Os resultados...
+Os algoritmos modificados e o GRASP proposto foram testados usando as mesmas 21 instâncias que foram usadas na competição ITC-2007. Após a competição foi criado um web site para reunir algumas informações relacionadas ao problema. Neste site \cite{ctt}, podem ser baixadas as instâncias usadas na competição, verificar limites inferiores para cada uma delas, gerar novas instâncias além de verificar as melhores soluções encontradas por diferentes pesquisadores para cada instância.
+
+A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada algoritmo. A coluna CTT se refere a melhor solução encontrada na internet \cite{ctt}.
 
 \begin{table}
 

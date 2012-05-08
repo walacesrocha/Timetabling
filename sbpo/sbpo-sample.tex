@@ -138,9 +138,19 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 \section{Algoritmos para o THU}
 \label{sec:algoritmos}
 
+Como foi apresentado na seção anterior, muitas meta-heurísticas têm sido usadas para resolver o problema de THU. Dentre elas, Algoritmo Genético e Simulated Annealing têm se destacado pela quantidade de propostas que implementam essas técnicas. Dentre estas propostas, foram escolhidas duas consideradas promissoras, com o intuito de estudá-las mais profundamente e implementar melhorias para produzir soluções melhores.
 
+Os algoritmos escolhidos e as melhorias implementadas são apresentados nas próximas seções.
 
 \subsection{Algoritmo Genético}
+
+O algoritmo genético escolhido para estudo é o proposto em \cite{massoodian2008}. Após a geração de uma população inicial, são realizadas as iterações (gerações) onde são aplicados os procedimentos de seleção, cruzamento e mutação. Ao final de cada geração, uma busca local é feita no melhor indivíduo da população.
+
+A primeira melhoria foi na geração da população inicial. Na versão original, somente uma restrição forte era levada em conta. No algoritmo modificado tenta-se respeitar todas as restrções fortes. Devido à complexidade das instâncias nem sempre é possível respeitar todas elas, mas esta modificação produziu soluções mais próximas da viabilidade do que o original.
+
+Uma falha identificada no procedimento de cruzamento original é que, em geral, ele produz filhos com muitas violações das restrições fortes. Para sanar este problema foi implementado um procedimento de reparação do filho gerado. Ele verifica as aulas que estão em horários inviáveis e procura um novo horário em que ela pode ser inserida.
+
+O procedimento de mutação também foi modificado para não permitir uma alteração no indivíduo que produza novas inviabilidades. Esta alteração fez com que o algoritmo genético encontrasse uma solução viável com menos iterações.
 
 \subsection{Simulated Annealing}
 
@@ -197,7 +207,7 @@ Os resultados...
 \begin{tabular}{|l|c|c|c|c|c|c|} 
 \hline
 
-Instância & AG & SA & GRASP & CTT & UD5 \\ \hline
+Instância & AG & SA & GRASP & CTT &  \\ \hline
 
 comp01 & 15 & 6 & & 5 & \\
 comp02 & 234 & 116 & & 24 & \\

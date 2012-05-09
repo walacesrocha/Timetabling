@@ -61,6 +61,20 @@ Gaspero, L.~D. and Schaerf, A. (2012).
 \newblock Curriculum-based course timetabling.
 \newblock \url{http://tabu.diegm.uniud.it/ctt/}.
 
+\bibitem[Glover (1996)]{Glover96tabusearch}
+Glover, F. (1996).
+\newblock Tabu search and adaptive memory programing – advances, applications
+  and challenges.
+\newblock In {\em Interfaces in Computer Science and Operations Research},
+  pages 1--75. Kluwer.
+
+\bibitem[Goldberg (1989)]{Goldberg:1989}
+Goldberg, D.~E. (1989).
+\newblock {\em Genetic Algorithms in Search, Optimization and Machine
+  Learning}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1st
+  edition.
+
 \bibitem[Goltz  (1999)]{Goltz99universitytimetabling}
 Goltz, H.-J. and Matzke, D. (1999).
 \newblock University timetabling using constraint logic programming.
@@ -77,6 +91,11 @@ Kanoh, H. and Sakamoto, Y. (2008).
   problems.
 \newblock {\em Int. J. Know.-Based Intell. Eng. Syst.}, 12(4):283--294.
 
+\bibitem[Kirkpatrick  (1983)]{Kirkpatrick13051983}
+Kirkpatrick, S., Gelatt, C.~D., and Vecchi, M.~P. (1983).
+\newblock Optimization by simulated annealing.
+\newblock {\em Science}, 220(4598):671--680.
+
 \bibitem[Kostuch (2006)]{3-phaseSA}
 Kostuch, P. (2006).
 \newblock The university course timetabling problem with a 3-phase approach.
@@ -87,10 +106,21 @@ Lach, G. and Lubbecke, M.~E. (2010).
   instances.
 \newblock {\em Annals of Operations Research}.
 
+\bibitem[Lewis (2007)]{Lewis2007:survey}
+Lewis, R. (2007).
+\newblock A survey of metaheuristic-based techniques for university timetabling
+  problems.
+\newblock {\em OR Spectrum}, 30(1):167--190.
+
 \bibitem[Massoodian  (2008)]{massoodian2008}
 Massoodian, S. and Esteki, A. (2008).
 \newblock A hybrid genetic algorithm for curriculum based course timetabling.
 \newblock In {\em Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[PATAT (2008)]{itc2007}
+PATAT (2008).
+\newblock International timetabling competition.
+\newblock \url{http://www.cs.qub.ac.uk/itc2007/}.
 
 \bibitem[Resende  (2012)]{grasp_resende_ribeiro}
 Resende, M. and Ribeiro, C. (2012).
@@ -102,6 +132,13 @@ Resende, M. G.~C. (1998).
 \newblock {Computing approximate solutions of the maximum covering problem
   using GRASP}.
 \newblock {\em J. of Heuristics}, 4:161--171.
+
+\bibitem[Ribeiro  (2012)]{pathRelinking}
+Ribeiro, C. and Resende, M. (2012).
+\newblock Path-relinking intensification methods for stochastic local search
+  algorithms.
+\newblock {\em Journal of Heuristics}, 18:193--214.
+\newblock 10.1007/s10732-011-9167-1.
 
 \bibitem[Schaerf (1995)]{Schaerf95asurvey}
 Schaerf, A. (1995).

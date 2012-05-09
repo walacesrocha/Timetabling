@@ -16,7 +16,7 @@
 %\hideauthors
 
 \author{\sbpoauthor{Walace S. Rocha}
-                   {Universidade Federal do Espírito Santo}
+                   {Núcleo de Processamento de Dados - Universidade Federal do Espírito Santo}
                    {Vitóra -- ES -- Brasil}
                    {\email{walacesrocha@yahoo.com.br}}
         \sbpoauthor{Maria C. S. Boeres}
@@ -26,13 +26,17 @@
         \sbpoauthor{Maria C. Rangel}
                    {Departamento de Informática -- Universidade Federal do Espírito Santo}
                    {Vitória -- ES -- Brasil}
-                   {\email{crangel@inf.ufes.br}}}
+                   {\email{crangel@inf.ufes.br}}
+        \sbpoauthor{Leandro B. Ferreira}
+                   {Curso de Ciência da Computação -- Universidade Federal do Espírito Santo}
+                   {Vitória -- ES -- Brasil}
+                   {\email{leandrobfe@gmail.com}}}
 
 \begin{document} 
 
 \maketitle
 
-\palavrachave{Tabela-horário}
+\palavrachave{Tabela-horário de Universidade}
 \palavrachave{Meta-heurística}
 \palavrachave{Grasp}
 \areaprincipal{Área de classificação principal (escolher uma na janela de áreas)}
@@ -41,7 +45,7 @@
   Este modelo resume as normas de formatação para os trabalhos completos a serem publicados nos Anais do XLI SBPO. O Resumo deve ter no máximo 150 palavras. Título, nomes dos autores, sua filiação e endereços, resumo e palavras-chave devem repetir fielmente o que foi informado quando o artigo foi cadastrado através do sistema JEMS. No primeiro upload, por ocasião da submissão do trabalho, exclua desta primeira página os nomes, instituições e endereços dos autores.
 \end{resumo}
 
-\keyword{Timetabling}
+\keyword{University Timetabling}
 \keyword{Metaheuristic}
 \keyword{Grasp}
 \mainarea{Main area (choose between those in the areas window)}
@@ -54,26 +58,26 @@
  
 \section{Introdução}
 
-Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar algumas restrições dividadas em fortes e fracas. Essas restrições surgem das particularidades de cada instituição. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não pode assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, penalizando uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usado neste trabalho é a adotada pela competição ITC-2007. É importante ressaltar que o ITC-2007 usou três formulações independentes de problema de tabela-horário. A primeira formulação é voltada para tabela-horário de exames. A segunda e a terceira são voltadas para a tabela-horário semestral de universidades. A diferença é que a segunda tem foco nas informações de matrícula de alunos enquanto a terceira é baseada nos currículos da universidade. Esse trabalho é direcionado à resolução da formulação três.
+Um dos problemas de grande interesse na área de otimização combinatória é o problema de tabela-horário \cite{Schaerf95asurvey}, \cite{Lewis2007:survey}. Dado um conjunto de disciplinas, alunos, professores e espaço físico, o problema consiste basicamente em alocar os horários das disciplinas levando-se em conta o espaço e horários disponíveis, além de respeitar um conjunto de restrições fortes e fracas. Essas restrições surgem das particularidades de cada instituição. As fortes são aquelas que sempre devem ser satisfeitas, como por exemplo, exigir que um aluno não possa assistir mais de uma aula no mesmo horário. Uma tabela-horário é dita viável quando não viola nenhuma restrição forte. As fracas são restrições que não geram inviabilidade, mas refletem algumas preferências dos professores, alunos ou até mesmo da escola, por exemplo, a penalização de uma tabela-horário que tenha aulas isoladas. Quanto mais restrições fracas forem satisfeitas, melhor será a tabela-horário. A formulação usada neste trabalho é a adotada pela competição ITC-2007 \cite{itc2007}. É importante ressaltar que o ITC-2007 usou três formulações independentes de problema de tabela-horário. A primeira formulação é voltada para tabela-horário de exames. A segunda e a terceira são voltadas para a tabela-horário semestral de universidades. A diferença é que a segunda tem foco nas informações de matrícula de alunos enquanto a terceira é baseada nos currículos da universidade. Esse trabalho é direcionado à resolução da formulação três.
 
-A meta-heurística GRASP (Greedy Randomized Adaptive Search Procedure) é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos \cite{Res98}, satisfabilidade \cite{FesParPitRes06a}, árvore geradora mínima \cite{Souza02agrasp}, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
+A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedure}) \cite{grasp_resende_ribeiro} é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos \cite{Res98}, satisfabilidade \cite{FesParPitRes06a}, árvore geradora mínima \cite{Souza02agrasp}, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
 
-Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação três do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final.
+Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a formulação três do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final. Além do GRASP, são implementados um algoritmo genético \cite{Goldberg:1989} e um \textit{Simulated Annealing} \cite{Kirkpatrick13051983}, com proposta de melhorias. Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema.
 
-Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema. Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, simulated annealing e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
+Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, simulated annealing e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
 
 \section{O Problema de Tabela-horário para Universidades (THU)}
 \label{sec:problema}
 
-Apesar das formulações encontradas na literatura para o problema de tabela-horário (THU) serem bastante variadas, elas podem ser agrupadas em três grupos: tabela-horário de escolas, tabela-horário de universidades e tabela-horário para aplicação de exames. Neste trabalho é desenvolvido um algoritmo para tratar a alocação de tabela-horário de universidades. A formulação do problema é a mesma adotada na competição ITC-2007. A principal vantagem em se adotar esta formulação é que muitos autores convergiram para ela, o que contribuiu grandemente para comparação de resultados de diversos pesquisadores.
+Apesar das formulações encontradas na literatura para o problema de tabela-horário serem bastante variadas, elas podem ser agrupadas em três grupos: tabela-horário de escolas, tabela-horário de universidades e tabela-horário para aplicação de exames. Neste trabalho é desenvolvido um algoritmo para tratar a alocação de tabela-horário de universidades (THU). A formulação do problema é a mesma adotada na competição ITC-2007. A principal vantagem em se adotar esta formulação é que muitos autores a utilizam, contribuindo para comparação de resultados com diversos trabalhos de grande relevância na literatura.
 
-O problema de tabela-horário nesta formulação consiste das seguintes entidades:
+O problema de tabela-horário na formulação ITC-2007 utiliza os seguintes parâmetros:
 
 \begin{itemize}
 
-\item Dias, Horários e Períodos: É dado o número de dias na semana em que há aula (geralmente 5 ou 6). Cada dia é dividido em um número fixo de horários que é igual para todos os dias. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
+\item Dias, Horários e Períodos: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de horários de aula, igual para todos os dias, é estabelecido. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
 
-\item Disciplinas e Professores: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionado por um professor e assistida por um dado número de alunos. Cada disciplina deve ser dada em um número mínimo de dias, ou seja, não podem ser lecionadas em poucos dias. Cada disciplina pode ser indisponíveis em alguns períodos.
+\item Disciplinas e Professores: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionada por um professor e assistida por um dado número de alunos. Um número mínimo de dias é determinado para a distribuição de suas aulas na semana, além de ser possível a existência de períodos indisponíveis para sua atribuição.
 
 \item Salas: Cada sala possui uma capacidade diferente de assentos.
 
@@ -81,19 +85,17 @@ O problema de tabela-horário nesta formulação consiste das seguintes entidade
 
 \end{itemize}
 
-A solução do problema é alocação das aulas das diciplinas a um período e uma sala. A solução deve atender a algumas restrições separadas em dois grupos: fortes e fracas.
+Uma solução do THU consiste na alocação das aulas das diciplinas a um conjunto de períodos e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir:
 
 \subsection{Restrições Fortes}
 
-As restrições fortes são as seguintes:
-
 \begin{itemize}
 
-\item Aulas das Disciplinas: Todas as aulas das disciplinas deve ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas são alocadas no mesmo período.
+\item Aulas: Todas as aulas das disciplinas deve ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas aulas distintas são alocadas no mesmo período.
 
 \item Conflitos: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. 
 
-\item Ocupação de Sala: Duas aulas não podem ser dadas na mesma sala e no mesmo período.
+\item Ocupação de Sala: Duas aulas não podem acontecer na mesma sala e no mesmo período.
 
 \item Disponibilidade de Professor: Se um professor é indisponível em um horário, nenhuma disciplina que ele leciona deve ser alocada naquele horário.
 
@@ -101,27 +103,31 @@ As restrições fortes são as seguintes:
 
 \subsection{Restrições Fracas}
 
-As restrições fracas são as seguintes:
-
 \begin{itemize}
 
 \item Capacidade da Sala: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for dada. Cada aluno excedente contabiliza uma violação.
 
 \item Dias Mínimos de Trabalho: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação.
 
-\item Aulas Isoladas: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isola é contada como uma violação.
+\item Aulas Isoladas: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação.
 
-\item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala usada para aula que é diferente da primeira é contada como uma violação.
+\item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala distinta é contada como uma violação.
 
-Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas peso dois e as demais peso um.
+Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas, peso dois e as demais, peso um.
 
 \end{itemize}
 
+Uma solução viável do THU deve atender a todas as restrições fortes. Uma solução ótima do THU é viável e minimiza o número de violações das restrições fracas.
+
+\section{Formulação Matemática}
+\label{sec:formulacao_matematica}
+
+A formulação adotada para o THU é aquela proposta em \cite{ref}, que será reproduzida a seguir:
 
 \section{Trabalhos Relacionados}
 \label{sec:trabalhos_relacionados}
 
-As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas. Como pode ser visto em \cite{Schaerf95asurvey}, este problema é NP-completo, portanto não existe um algoritmo de comlexidade polinomial para encontrar a solução ótima.
+As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas. Esse problema é classificado como NP-completo \cite{Schaerf95asurvey}.
 
 Na área de programação matemática, bons resultados têm sido obtidos com programação inteira \cite{lach_lubbecke}, \cite{broek_hurkens} e \cite{Burke_abranch-andcut}.
 
@@ -129,7 +135,7 @@ Algumas formulações do problema THU usando programação em lógica podem ser 
 
 A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes que produzem bons resultados têm sido encontrados usando Simulated Annealing \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
 
-Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou elas são aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tebela-horário em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
+Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tebela-horário em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
 
 Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004}, \cite{Vieira_agrasp}.
 
@@ -162,45 +168,42 @@ A mudança implementada foi na forma como é calculada a vizinhança da soluçã
 
 Testes computacionais mostraram que esta pequena modificação produziu resultados cerca de $60\%$ melhores que o algoritmo original.
 
-\subsection{GRASP - com a primeira busca local}
+\subsection{GRASP para o THU}
 
-A meta-heurística GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de algum algoritmo de busca local. Essas duas etapas se repetem de forma independente por um número máximo de iterações. A melhor solução encontrada em uma destas etapas é a solução final.
+Cada iteração GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de algum algoritmo de busca local. Um número máximo de iterações é estabelecido. A melhor solução encontrada em uma destas iterações é a solução final.
 
 \subsubsection{Geração da Solução Inicial}
 
 A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
 
-O principal objetivo deste procedimento é produzir uma solução viável, ou seja, sem violações fortes. Com intuito de alcançar este objetivo, é adotada uma estratégia de alocar as aulas mas conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia.
+O principal objetivo deste procedimento é produzir uma solução viável, ou seja, sem violações fortes. Com intuito de alcançar este objetivo, é adotada uma estratégia de alocar as aulas mas conflitantes inicialmente. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia.
 
-As aulas que ainda estão desalocadas são mantidas numa lista ordenada pela "dificuldade". Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
+As aulas que ainda estão desalocadas são mantidas numa lista organizada por ordem de dificuldade. Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
 
-Em cada etapa a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para fazer a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujo custo estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é alaeatória. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução.
+Em cada iteração, uma aula desalocada é inserida na tabela. A aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição de um elemento à solução ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujo custo estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é alaeatória. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução. Em alguns casos, no entanto, não há uma posição viável na solução para inserção. 
 
-Em alguns casos ocorre que ao tentar inserir uma aula na tabela não há uma posição viável. Para contornar esta situação foi implementado um procedimento denominado “explosão”. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. Essa estratégia mostrou-se bastante eficaz, tornando possível gerar uma tabela viável para todas as instâncias testadas.
+Para contornar esta situação foi implementado um procedimento denominado “explosão”. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. Essa estratégia mostrou-se bastante eficaz, tornando possível gerar uma tabela viável para todas as instâncias testadas.
 
 \subsubsection{Busca Local}
 
-As soluções geradas pela fase inicial não são necessariamente ótimas. Uma busca local é usada para explorar a vizinhança e encontrar soluções melhores. O fator determinante nesta etapa é como a vizinhança será explorada, ou que movimentos serão aplicados para se encontrar um vizinho.
+As soluções geradas pela fase inicial são viáveis, porém não são necessariamente ótimas. Uma busca local é usada para explorar a vizinhança e encontrar soluções melhores. O fator determinante nesta etapa é como a vizinhança será explorada, ou que movimentos serão aplicados para se encontrar um vizinho.
 
 Neste trabalho um vizinho é gerado aplicando dois movimentos sucessivos:
 
 \begin{itemize}
-\item \textbf{MOVE}: Uma aula é movida para uma posição vazia da tabela.
-\item \textbf{SWAP}: Duas aulas são trocadas de posição na tabela.
+\item \textit{\textbf{MOVE}}: Uma aula é movida para uma posição vazia da tabela.
+\item \textit{\textbf{SWAP}}: Duas aulas são trocadas de posição na tabela.
 \end{itemize}
 
 O segundo movimento (\textit{SWAP}) é aplicado com uma certa probabilidade, portanto alguns vizinhos são gerados apenas com \textit{MOVE}, outros com \textit{MOVE} seguido de \textit{SWAP}. A taxa de \textit{SWAP} é parametrizada. As escolhas de aulas e posições vazias para aplicação dos movimentos são todas aleatórias.
 
-A busca local parte da solução inicial e em cada iteração gera um vizinho da solução atual. É contado quantas iterações já passaram sem melhora. Sempre que um vizinho com melhor função objetivo é encontrado ele passa a ser a solução atual e a contagem de iterações sem melhora é zerada. O teste de parada da busca local é o número de iterações sem melhora. A quantidade máxima é parametrizada. 
+A busca local parte da solução inicial e em cada iteração gera um vizinho da solução atual. É contado quantas iterações já passaram sem melhora. Sempre que um vizinho com melhor valor de função objetivo é encontrado, é atualizado como solução atual e a contagem de iterações sem melhora é zerada. O teste de parada da busca local consiste no número de iterações sem melhora, que é um parâmetro do algoritmo. 
 
 \subsection{Path-Relinking}
 
-A proposta original do GRASP é considerada sem memória, pelo fato das soluções obtidas nas iterações não serem compartilhadas entre si para produzir melhores soluções. O Path-Relinking trabalha com duas soluções: uma ótima local e outra elite. Ele tenta melhorar a solução ótima local usando a estrutura da solução elite. Para aplicar o Path-Relinking, o GRASP precisa manter um conjunto de soluções elite.
+A proposta original do GRASP é considerada sem memória, pelo fato das soluções obtidas nas iterações não serem compartilhadas entre si para produzir melhores soluções. O algoritmo Path-Relinking \cite{Glover96tabusearch}, \cite{pathRelinking} trabalha com duas soluções: uma ótima local e outra elite. Ele tenta melhorar a solução ótima local usando a estrutura da solução elite. Para aplicar o Path-Relinking, o GRASP mantém um conjunto de soluções elite. Esse conjunto é limitado e contém as soluções que foram encontradas com menor valor de função objetivo.
 
-Este procedimento constrói um caminho conectando uma solução inicial e uma solução alvo. Esse caminho é feito aplicando movimentos que façam com que a solução inicial fique igual à solução alvo. Durante o percurso melhores soluções podem ser encontradas. No sentido \textit{para frente} a solução inicial é a ótima local e a alvo uma solução elite. No sentido \textit{para trás}, o caminho é percorrido da solução elite para a ótima local.
-
-Testes mostraram que o sentido \textit{para trás} produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
-
+Este procedimento constrói um caminho conectando uma solução inicial e uma solução alvo. Esse caminho é feito aplicando movimentos que façam com que a solução inicial fique igual à solução alvo. Durante o percurso melhores soluções podem ser encontradas. No sentido direto a solução inicial é a ótima local e a alvo uma solução elite. No sentido inverso, o caminho é percorrido da solução elite para a ótima local.
 
 \section{Resultados Computacionais}
 \label{sec:resultados}
@@ -208,6 +211,9 @@ Testes mostraram que o sentido \textit{para trás} produzem melhores resultados 
 Os algoritmos modificados e o GRASP proposto foram testados usando as mesmas 21 instâncias que foram usadas na competição ITC-2007. Após a competição foi criado um web site para reunir algumas informações relacionadas ao problema. Neste site \cite{ctt}, podem ser baixadas as instâncias usadas na competição, verificar limites inferiores para cada uma delas, gerar novas instâncias além de verificar as melhores soluções encontradas por diferentes pesquisadores para cada instância.
 
 A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada algoritmo. A coluna CTT se refere a melhor solução encontrada na internet \cite{ctt}.
+
+.... Com relação ao procedimento Path-Relinking, testes mostraram que o sentido inverso produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
+
 
 \begin{table}
 

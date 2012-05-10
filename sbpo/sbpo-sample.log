@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2012.2.17)  10 MAY 2012 20:38
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2012.2.17)  10 MAY 2012 20:43
 entering extended mode
 **sbpo-sample.tex
 (./sbpo-sample.tex
@@ -512,7 +512,7 @@ Package natbib Warning: There were undefined citations.
 [10] (./sbpo-sample.aux) ) 
 Here is how much of TeX's memory you used:
  2932 strings out of 94500
- 35006 string characters out of 1176766
+ 35007 string characters out of 1176766
  96310 words of memory out of 1000000
  6055 multiletter control sequences out of 10000+50000
  29856 words of font info for 42 fonts, out of 500000 for 2000
@@ -531,4 +531,4 @@ ky/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share
 s/utmri8a.pfb></usr/share/texmf/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/
 texmf/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/times/
 utmb8a.pfb>
-Output written on sbpo-sample.pdf (10 pages, 130342 bytes).
+Output written on sbpo-sample.pdf (10 pages, 130340 bytes).

@@ -236,7 +236,7 @@ FUNCTION {format.names}
 FUNCTION {format.authors}
 { author empty$
     { "" }
-    { author format.names }
+    { "\textbf{" * author format.names * "}" }
   if$
 }
 
@@ -841,12 +841,15 @@ FUNCTION {format.lab.names}
   s #1 "{vv~}{ll}" format.name$
   s num.names$ duplicate$
   #2 >
-    { pop$ " " * }	% { pop$ " et~al." * }
+    % { pop$ "" * }
+    { pop$ " et~al." * }
     { #2 <
 	'skip$
 	{ s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
-	    { " " * }	% { " et~al." * }
-	    { " " * }	% { " and " * s #2 "{vv~}{ll}" format.name$ * }
+	    % { "" * }
+	    { " et~al." * }
+	    % { "" * }
+	    { " and " * s #2 "{vv~}{ll}" format.name$ * }
 	  if$
 	}
       if$
@@ -902,7 +905,7 @@ FUNCTION {calc.label}
       if$
     }
   if$
-  " "							% these three lines are
+  ""							% these three lines are
   *							% for apalike, which
   "(" *
   year field.or.null purify$ #-1 #4 substring$		% uses all four digits

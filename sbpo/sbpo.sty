@@ -11,12 +11,12 @@
 %==============================================================================
 % Main definitions
 %==============================================================================
+\RequirePackage[english,brazil]{babel}
 \RequirePackage{indentfirst}
 \RequirePackage[a4paper,top=3.3cm,left=2.9cm,right=2.9cm,bottom=2.5cm]{geometry}
-%\RequirePackage[active]{srcltx }
+%\RequirePackage[active]{srcltx } foi comentada
 \parindent 1.27cm
 \parskip   6pt
-\flushbottom
 
 %==============================================================================
 % Captions
@@ -117,6 +117,9 @@
      {\def\@noitemerr
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist}
+\RequirePackage{natbib}
+\renewcommand\cite{\citep}
+\setlength{\bibsep}{0.0pt}
 
 %==============================================================================
 % Itens
@@ -161,12 +164,15 @@
                        {\normalfont\normalsize\bfseries\boldmath
                         \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
 
-\renewcommand{\thesection}{\arabic{section}.}
-\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
-\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
-
 \RequirePackage{titlesec}
 \titlelabel{\thetitle\hspace{1ex}}
+\renewcommand\@seccntformat[1]{%
+    \@ifundefined{#1@cntformat}%
+    {\csname the#1\endcsname}%
+    {\csname #1@cntformat\endcsname}}
+\newcommand{\section@cntformat}{\thesection.\hspace{1ex}}
+\newcommand{\subsection@cntformat}{\thesubsection.\hspace{1ex}}
+\newcommand{\subsubsection@cntformat}{\thesubsubsection.\hspace{1ex}}
 
 %==============================================================================
 % First page
@@ -190,9 +196,11 @@
 \renewcommand{\maketitle}{\maketitleOLD\thispagestyle{empty}}
 
 \newenvironment{resumo}{%
-      \begin{center}\bfseries RESUMO\end{center}\par}%
-      {\\~\\{\bfseries PALAVRAS CHAVE. \@resumopc%
-        \@ifundefined{resumoarea}{}{, \resumoarea}.}\par\vspace{0.5cm}}
+    \begin{otherlanguage}{brazil}
+        \begin{center}\bfseries RESUMO\end{center}\par}%
+        {\\~\\{\bfseries PALAVRAS CHAVE. \@resumopc%
+         \@ifundefined{resumoarea}{}{, \resumoarea}.}\par\vspace{0.5cm}
+    \end{otherlanguage}}
 
 \renewenvironment{abstract}{%
       \begin{center}\bfseries ABSTRACT\end{center}\par}%

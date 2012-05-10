@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  9 MAY 2012 16:42
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  10 MAY 2012 14:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -367,19 +367,19 @@ Now handling font encoding U ...
 )) (./sbpo-sample.aux)
 \openout1 = `sbpo-sample.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 36.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -475,29 +475,29 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 37.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 37.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 38.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 38.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 45--46
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
 
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 45--46
+Underfull \hbox (badness 1400) in paragraph at lines 46--47
 \T1/ptm/b/n/12 PALAVRAS CHAVE. Tabela-horário de Uni-ver-si-dade, Meta-heurísti
 ca, Grasp,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--56
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
 
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 54--56
+Underfull \hbox (badness 1400) in paragraph at lines 55--57
 \T1/ptm/b/n/12 KEYWORDS. Uni-ver-sity Ti-me-ta-bling, Me-taheu-ris-tic, Grasp, 
 Main area (cho-
  []
@@ -506,68 +506,84 @@ Main area (cho-
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <13> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 59.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 59.
+(Font)              <12> on input line 60.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 59.
+(Font)              <8> on input line 60.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 59.
+(Font)              <6> on input line 60.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 78.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 79.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 79.
  [3]
 
-LaTeX Warning: Citation `ref' on page 4 undefined on input line 125.
+LaTeX Warning: Citation `ref' on page 4 undefined on input line 126.
 
-[4] [5]
-Underfull \vbox (badness 2401) has occurred while \output is active []
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
+[]\T1/ptm/m/n/12 O al-go-ritmo ge-né-tico es-co-lhido para es-tudo é o pro-post
+o em
+ []
 
- [6]
+[5] [6]
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 194.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 249.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 195.
 
-(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd
+Underfull \hbox (badness 2435) in paragraph at lines 216--217
+[]\T1/ptm/m/n/12 .... Com re-la-ção ao pro-ce-di-mento Path-Relinking, tes-tes 
+mos-tra-ram que
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 216--217
+\T1/ptm/m/n/12 o sen-tido in-verso pro-du-zem me-lho-res re-sul-ta-dos para o p
+ro-blema em ques-tão.
+ []
+
+[7]
+LaTeX Font Info:    Try loading font information for T1+phv on input line 250.
+ (/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 249.
- [7] (./sbpo-sample.bbl
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 250.
+ (./sbpo-sample.bbl
 [8] [9]) [10] (./sbpo-sample.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3423 strings out of 493629
- 44379 string characters out of 3148772
- 118949 words of memory out of 3000000
- 6649 multiletter control sequences out of 15000+200000
+ 3422 strings out of 493629
+ 44364 string characters out of 3148772
+ 117077 words of memory out of 3000000
+ 6648 multiletter control sequences out of 15000+200000
  29856 words of font info for 42 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,7n,28p,1632b,261s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,7n,28p,1632b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
-/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fon
-ts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/u
-tmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/
-urw/times/utmri8a.pfb>
-Output written on sbpo-sample.pdf (10 pages, 135298 bytes).
+mr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dis
+t/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/hel
+vetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/
+share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts
+/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on sbpo-sample.pdf (10 pages, 145408 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

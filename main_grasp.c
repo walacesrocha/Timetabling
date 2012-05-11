@@ -99,10 +99,12 @@ int main(int argc, char** argv) {
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 
+    /* resposta em arquivo
+     * 
     strcpy(arquivoResposta,"sol_");
     fp = fopen(strcat(arquivoResposta,getNomeInstancia(argv[1])), "w");
     imprimeResposta(p, ind, fp);
-    fclose(fp);
+    fclose(fp);*/
 
 
     //ind = geraIndividuoAleatorio(p, 100);

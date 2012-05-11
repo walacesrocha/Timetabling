@@ -916,8 +916,10 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     float foAtual;
     float deltaF;
     float *foVizinhos;
-    int i, nVizinhos = 10;
+    int i, nVizinhos;
     int melhorVizinho;
+
+    nVizinhos = p->k;
 
     vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
     foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
@@ -932,7 +934,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            vizinhos[i] = geraVizinho2(p, solucaoAtual);
+            vizinhos[i] = geraVizinho(p, solucaoAtual);
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
             foVizinhos[i] = somaViolacoesSoft(p, vizinhos[i]);
             if (i == 0) {
@@ -974,7 +976,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1074,7 +1076,7 @@ Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         /*for (i = 0; i < nVizinhos; i++) {
@@ -1404,7 +1406,7 @@ Individuo *grasp(Problema *p) {
     for (i = 0; i < p->maxIterGrasp; i++) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
-        printf("F1: %f\n", funcaoObjetivo(p, ind));
+        //printf("F1: %f\n", funcaoObjetivo(p, ind));
 
         fezPR = 0; // flag: fez Path-Relinking
 
@@ -1423,7 +1425,7 @@ Individuo *grasp(Problema *p) {
 
         fo = funcaoObjetivo(p, ind);
         ind->fitness = fo;
-        printf("F2: %f\n", fo);
+        //printf("F2: %f\n", fo);
 
         if (i > auxGrasp->tPool && p->buscaLocalGrasp <= 4) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
@@ -1433,7 +1435,7 @@ Individuo *grasp(Problema *p) {
         }
 
         if (fezPR) {// se fez Path-Relinking
-            printf("F3: %f\n", foPR);
+            //printf("F3: %f\n", foPR);
             if (foPR < fo) {
                 bestIter = indPr;
                 fo = foPR;
@@ -1486,6 +1488,9 @@ Individuo *grasp(Problema *p) {
         if (fezPR) {// libera individuo do Path-Relinking
             liberaIndividuo(indPr);
         }
+        
+        printf("Iter:%d,FO=%f\n",i+1,funcaoObjetivo(p, bestInd));
+        fflush(stdout);
 
     }
 

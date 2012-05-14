@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99c (Web2C 7.5.4)
+This is BibTeX, Version 0.99d (TeX Live 2011/Cygwin)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: sbpo-sample.aux
 The style file: sbpo.bst
 Database file #1: sbpo-sample.bib
-Warning--I didn't find a database entry for "ref"
 Warning--empty booktitle in Souza:2004
-You've used 29 entries,
+You've used 30 entries,
             1943 wiz_defined-function locations,
-            658 strings with 8977 characters,
-and the built_in function-call counts, 11072 in all, are:
-= -- 1077
-> -- 431
-< -- 25
-+ -- 165
-- -- 139
-* -- 978
-:= -- 1910
-add.period$ -- 91
-call.type$ -- 29
-change.case$ -- 212
-chr.to.int$ -- 29
-cite$ -- 30
-duplicate$ -- 446
-empty$ -- 768
-format.name$ -- 188
-if$ -- 2170
+            664 strings with 9144 characters,
+and the built_in function-call counts, 11580 in all, are:
+= -- 1130
+> -- 444
+< -- 27
++ -- 169
+- -- 143
+* -- 1016
+:= -- 1984
+add.period$ -- 94
+call.type$ -- 30
+change.case$ -- 218
+chr.to.int$ -- 30
+cite$ -- 31
+duplicate$ -- 470
+empty$ -- 807
+format.name$ -- 195
+if$ -- 2282
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 148
-num.names$ -- 89
-pop$ -- 194
+missing$ -- 26
+newline$ -- 153
+num.names$ -- 92
+pop$ -- 205
 preamble$ -- 1
-purify$ -- 212
+purify$ -- 219
 quote$ -- 0
-skip$ -- 330
+skip$ -- 351
 stack$ -- 0
-substring$ -- 689
-swap$ -- 61
-text.length$ -- 7
+substring$ -- 733
+swap$ -- 71
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 170
+type$ -- 174
 warning$ -- 1
-while$ -- 84
+while$ -- 89
 width$ -- 0
-write$ -- 373
-(There were 2 warnings)
+write$ -- 386
+(There was 1 warning)

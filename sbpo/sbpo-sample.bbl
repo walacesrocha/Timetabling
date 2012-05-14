@@ -129,6 +129,12 @@
 \newblock {\em GRASP: Greedy Randomized Adaptive Search Procedures}.
 \newblock Springer, 2nd edition.
 
+\bibitem[Resende and Ribeiro(2005)]{grasp_paralelo}
+\textbf{Resende, M.~G. and Ribeiro, C.~C.} (2005).
+\newblock {\em Parallel Greedy Randomized Adaptive Search Procedures}, pages
+  315--346.
+\newblock John Wiley \& Sons, Inc.
+
 \bibitem[Resende(1998)]{Res98}
 \textbf{Resende, M. G.~C.} (1998).
 \newblock {Computing approximate solutions of the maximum covering problem

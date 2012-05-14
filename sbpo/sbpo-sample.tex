@@ -3,6 +3,7 @@
 \usepackage{sbpo}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{amssymb,amsmath}
 
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}   
@@ -116,16 +117,25 @@ Uma solução do THU consiste na alocação das aulas das diciplinas a um conjun
 
 \item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala distinta é contada como uma violação.
 
-Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas, peso dois e as demais, peso um.
-
 \end{itemize}
 
-Uma solução viável do THU deve atender a todas as restrições fortes. Uma solução ótima do THU é viável e minimiza o número de violações das restrições fracas.
+Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas, peso dois e as demais, peso um.
 
-\section{Formulação Matemática}
-\label{sec:formulacao_matematica}
+Uma solução viável do THU deve atender a todas as restrições fortes. Uma solução ótima do THU é viável e minimiza a seguinte função objetivo:
 
-A formulação adotada para o THU é proposta em \cite{ref}, que será reproduzida a seguir:
+\begin{equation}\label{somaiai}
+\begin{split}
+f &= 5 \sum \text{Violações de Dias Mínimos de Trabalho} \\
+ & + 2 \sum \text{Violações de Aulas Isoladas} \\
+ & + \sum \text{Violações de Capacidade de Sala} \\
+ & + \sum \text{Violações de Estabilidade de Sala} 
+\end{split}
+\end{equation}
+
+%\section{Formulação Matemática}
+%\label{sec:formulacao_matematica}
+
+%A formulação adotada para o THU é proposta em \cite{ref}, que será reproduzida a seguir:
 
 \section{Trabalhos Relacionados}
 \label{sec:trabalhos_relacionados}
@@ -165,7 +175,7 @@ O procedimento de mutação também foi modificado para não permitir uma altera
 
 O algoritmo \textit{Simulated Annealing} escolhido para estudo foi o proposto por \cite{CDGS11b}. Apesar do algoritmo proposto resolver a segunda formulação do ITC-2007, suas idéias principais foram aproveitadas para resolver a terceira formulação, que é o objetivo deste trabalho.
 
-O algoritmo original segue a idéia básica do \textit{Simulated Annealing}. Uma solução inicial é gerada procurando violar o menos possível as restrições fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. Os valores das temperaturas inicial e final são definidos na entrada. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta * T_i, 0 < \beta < 1$ (resfriamento geométrico).
+O algoritmo original segue a idéia básica do \textit{Simulated Annealing}. Uma solução inicial é gerada procurando violar o menos possível as restrições fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. Os valores das temperaturas inicial e final são definidos na entrada. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta \times T_i, 0 < \beta < 1$ (resfriamento geométrico).
 
 A mudança implementada é referente ao cálculo da vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia (movimento). O segundo passo troca duas aulas de posição na tabela (troca). No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um movimento ou uma troca, com igual probabilidade.
 
@@ -244,40 +254,60 @@ Todos os algoritmos descritos neste trabalho foram implementados na linguagem C,
 
 Não foi levado em consideração nos testes o tempo de execução dos algoritmos, pois no site \cite{ctt} só é comparado a qualidade das respostas.
 
+Testes preliminares para calibragem dos parâmetros do GRASP mostraram que quanto menor o valor de $\alpha$ na montagem da lista restrita dos candidatos (LRC), melhor é a qualidade da solução inicial. Contudo, mesmo com um $\alpha$ pequeno a solução inicial ainda é longe da ótima. Sendo assim, optou-se por um valor de $\alpha = 0.15$. Este valor não é muito alto para gerar soluções iniciais boas, e também não é tão próximo de zero para gerar soluções diversificadas. Na busca local foi colocado número máximo de iterações sem melhora igual a 10000. A geração dos vizinhos foi feita usando \textit{MOVE} com 50\% de \textit{SWAP}. Com relação ao procedimento \textit{Path-Relinking}, testes mostraram que o sentido inverso produzem melhores resultados para o problema. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais. O Pool de soluções elite foi configurado com tamanho 5.
+
 A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada algoritmo. A coluna CTT se refere a melhor solução encontrada na internet \cite{ctt}.
 
-.... Com relação ao procedimento \textit{Path-Relinking}, testes mostraram que o sentido inverso produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
 
+%\begin{table}
+
+%\centering
+%\begin{tabular}{|l|c|c|c|c|c|c|} 
+%\hline
+
+%Instância & AG & SA & GRASP & CTT &  \\ \hline
+
+%comp01 & 15 & 6 & 6 & 5 & \\
+%comp02 & 234 & 116 & 131 & 24 & \\
+%comp03 & 233 & 116 & 141 & 66 & \\
+%comp04 & 137 & 76 & 78 & 35 & \\
+%comp05 & 818 & 429 & 552 & 290 & \\
+%comp06 & 215 & 132 & 123 & 27 & \\
+%comp07 & 205 & 99 & 120 & 6 & \\
+%comp08 & 169 & 84 & 87 & 37 & \\
+%comp09 & 229 & 137 & 164 & 96 & \\
+%comp10 & 183 & 67 & 78 & 4 & \\
+%comp11 & 13 & 0 & 0 & 0 & \\
+%comp12 & 544 & 407 & 517 & 300 & \\
+%comp13 & 206 & 106 & 120 & 59 & \\
+%comp14 & 173 & 90 & 98 & 51 & \\
+%comp15 & 225 & 120 & 138 & 66 & \\
+%comp16 & 198 & 91 & 104 & 18 & \\
+%comp17 & 206 & 122 & 156 & 56 & \\
+%comp18 & 153 & 133 & 115 & 62 & \\
+%comp19 & 207 & 111 & 139 & 57 & \\
+%comp20 & 257 & 130 & 149 & 4 & \\
+%comp21 & 276 & 151 & 188 & 76 & \\
+%\hline
+%\end{tabular}
+%\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
+%\label{tabResultados}
+%\end{table} 
 
 \begin{table}
-
+\tiny
 \centering
-\begin{tabular}{|l|c|c|c|c|c|c|} 
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
 \hline
+% comp01 & comp02	& comp03 & comp04 & comp05 & comp06	& comp07 & comp08 & comp09 & comp10	& comp11 & comp12 & comp13 & comp14	& comp15 & comp16 & comp17 & comp18	& comp19 & comp20 & comp21 \\
 
-Instância & AG & SA & GRASP & CTT &  \\ \hline
+ & 01 & 02	& 03 & 04 & 05 & 06	& 07 & 08 & 09 & 10	& 11 & 12 & 13 & 14	& 15 & 16 & 17 & 18	& 19 & 20 & 21 \\ \hline
+CTT & 5 & 24 & 66 & 35 & 290 & 27 & 6 & 37 & 96 & 4 & 0 & 300 & 59 & 51 & 66 & 18 & 56 & 62 & 57 & 4 & 76 \\ \hline
+AG & 15	& 234 & 233 & 137 & 818 & 215 & 205 & 169 & 229 & 183 & 13 & 544 & 206 & 173 & 225 & 198 & 206 & 153 & 207 & 257 & 276 \\
+SA & 6* &	116* & 116* & 76* & 429* & 132 & 99* & 84* & 137* & 67* & 0* & 407* & 106* & 90* & 120* & 91* & 122* & 133 & 111* & 130* & 151* \\
+GRASP & 6* & 131 & 141 & 78 & 552 & 123* & 120 & 87 & 164 & 78 & 0* & 516 & 120 & 98 & 138 & 104 & 156 & 115* &	139 & 141 & 188 \\
 
-comp01 & 15 & 6 & 6 & 5 & \\
-comp02 & 234 & 116 & 131 & 24 & \\
-comp03 & 233 & 116 & 141 & 66 & \\
-comp04 & 137 & 76 & 78 & 35 & \\
-comp05 & 818 & 429 & 552 & 290 & \\
-comp06 & 215 & 132 & 123 & 27 & \\
-comp07 & 205 & 99 & 120 & 6 & \\
-comp08 & 169 & 84 & 87 & 37 & \\
-comp09 & 229 & 137 & 164 & 96 & \\
-comp10 & 183 & 67 & 78 & 4 & \\
-comp11 & 13 & 0 & 0 & 0 & \\
-comp12 & 544 & 407 & 517 & 300 & \\
-comp13 & 206 & 106 & 120 & 59 & \\
-comp14 & 173 & 90 & 98 & 51 & \\
-comp15 & 225 & 120 & 138 & 66 & \\
-comp16 & 198 & 91 & 104 & 18 & \\
-comp17 & 206 & 122 & 156 & 56 & \\
-comp18 & 153 & 133 & 115 & 62 & \\
-comp19 & 207 & 111 & 139 & 57 & \\
-comp20 & 257 & 130 & 149 & 4 & \\
-comp21 & 276 & 151 & 188 & 76 & \\
+
 \hline
 \end{tabular}
 \caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
@@ -288,7 +318,13 @@ comp21 & 276 & 151 & 188 & 76 & \\
 \section{Conclusões e Trabalhos Futuros}
 \label{sec:conclusao}
 
-As conclusões ....
+Os resultados da tabela \ref{tabResultados} mostaram que o algoritmo genético obteve os piores resultados em todas as instâncias. \textit{Simulated Annealing} e GRASP obtiveram os melhores resultados, sendo o \textit{Simulated Annealing} superior em 17 instâncias, o GRASP superior em 2 instâncias e empate em outras 2 instâncias.
+
+Pode-se notar que para muitas instâncias a melhor resposta encontrada pelos algoritmos ainda está longe das melhores respostas conhecidas. Para contornar este problema será necessário investigar formas diferentes de explorar a vizinhança. Foi notado em todos os algoritmos que em geral é necessário gerar muitos vizinhos para encontrar um com melhor função objetivo, principalmente nas instâncias mais complexas que possuem muitas disciplinas.
+
+Uma proposta é implementar no GRASP uma estrutura de vizinhança similar à que foi implementada no \textit{Simulated Annealing}. O vizinho não seria gerado com duas etapas, mas apenas uma: ou com \textit{MOVE} ou com \textit{SWAP}.
+
+Outra proposta de melhoria no GRASP seria a paralelização do algoritmo. A estrutura do algoritmo permite uma paralelização trivial em que cada nó de processamento executa uma iteração independente. No final os melhores resultados são comparados. Em \cite{grasp_paralelo} podem ser vistas algumas estratégias mais complexas de paralelização do algoritmo.
 
 
 %O SBPO utilizará este ano, novamente, o sistema JEMS para a submissão de trabalhos. A primeira página dos trabalhos publicados será constituída com as informações fornecidas no formulário de submissão de trabalho do JEMS. Por isto, os nomes de \textbf{todos} os autores devem ser cadastrados nesse formulário. Os nomes  não incluídos nesse formulário não aparecerão entre os autores na programação do Simpósio nem nos Anais.

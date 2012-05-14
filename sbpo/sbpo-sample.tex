@@ -6,7 +6,9 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}   
-\usepackage[utf8]{inputenc}  
+\usepackage[utf8]{inputenc}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+
 
 
 \sloppy
@@ -18,7 +20,7 @@
 
 \author{\sbpoauthor{Walace S. Rocha}
                    {Núcleo de Processamento de Dados - Universidade Federal do Espírito Santo}
-                   {Vitóra -- ES -- Brasil}
+                   {Vitória -- ES -- Brasil}
                    {\email{walacesrocha@yahoo.com.br}}
         \sbpoauthor{Maria C. S. Boeres}
                    {Departamento de Informática -- Universidade Federal do Espírito Santo}
@@ -63,9 +65,9 @@ Um dos problemas de grande interesse na área de otimização combinatória é o
 
 A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedure}) \cite{grasp_resende_ribeiro} é uma técnica de destaque no ramo de otimização combinatória. Ela tem sido aplicada em problemas de cobertura de conjuntos \cite{Res98}, satisfabilidade \cite{FesParPitRes06a}, árvore geradora mínima \cite{Souza02agrasp}, entre outros. Contudo, há pouca pesquisa desse algoritmo nos problemas de tabela-horário. Foram encontradas apenas implementações para a modelagem de escolas \cite{Souza:2004} e \cite{Vieira_agrasp}.
 
-Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a terceira formulação do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{path-relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final. Além do GRASP, são implementados um algoritmo genético \cite{Goldberg:1989} e um \textit{Simulated Annealing} \cite{Kirkpatrick13051983}, com proposta de melhorias. Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema.
+Este trabalho implementa um algoritmo GRASP para geração de tabela-horário usando a terceira formulação do ITC-2007. O algoritmo possui uma fase inicial onde é garantido que uma tabela-horário viável será encontrada. Na segunda fase ocorre o melhoramento da tabela-horário através de busca local. Uma terceira fase de intensificação ocorre usando o procedimento \textit{Path-Relinking}. Esse procedimento de três fases se repete algumas iterações, sempre gerando uma nova tabela. A melhor de todas encontradas é a resposta final. Além do GRASP, são implementados um algoritmo genético \cite{Goldberg:1989} e um \textit{Simulated Annealing} \cite{Kirkpatrick13051983}, com proposta de melhorias. Os resultados obtidos são comparados com as melhores soluções publicadas na literatura para este problema.
 
-Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, simulated annealing e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
+Na seção \ref{sec:problema} é apresentada a formulação do problema adotada neste trabalho. Na seção \ref{sec:trabalhos_relacionados} são listadas algumas técnicas que tem sido usadas para resolver o problema de tabela-horário de universidades, tanto na formulação do ITC-2007 como em outras formulações. Na seção \ref{sec:algoritmos} são apresentados três algoritmos implementados para o problema: algoritmo genético, \textit{simulated annealing} e o Grasp. Na seção \ref{sec:resultados} são apresentados os resultados obtidos com as diferentes técnicas. Os resultados são confrontados com as melhores respostas para o problema encontradas na literatura. Por fim, a seção \ref{sec:conclusao} apresenta as conclusões obtidas com o trabalho e lista algumas melhorias futuras para o algoritmo Grasp.
 
 \section{O Problema de Tabela-horário para Universidades (THU)}
 \label{sec:problema}
@@ -92,7 +94,7 @@ Uma solução do THU consiste na alocação das aulas das diciplinas a um conjun
 
 \begin{itemize}
 
-\item Aulas: Todas as aulas das disciplinas deve ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas aulas distintas são alocadas no mesmo período.
+\item Aulas: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas aulas distintas são alocadas no mesmo período.
 
 \item Conflitos: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. 
 
@@ -134,9 +136,9 @@ Na área de programação matemática, bons resultados têm sido obtidos com pro
 
 Alguns resultados relevantes também tem sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} em que se conseguiu empatar ou melhorar as respostas de quase metade das instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programa por restrições pode implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
 
-A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes que produzem bons resultados têm sido encontrados usando Simulated Annealing \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
+A maioria das técnicas de solução deste problema utilizam meta-heurísticas. Ainda não foi identificada uma meta-heurística que seja considerada a melhor.  Algoritmos eficientes que produzem bons resultados têm sido encontrados usando \textit{Simulated Annealing} \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
 
-Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tebela em três etapas, cada uma executando um procedimento de Simulated Annealing independente.
+Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tabela-horário em três etapas, cada uma executando um procedimento de \textit{Simulated Annealing} independente.
 
 Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004} e \cite{Vieira_agrasp}.
 
@@ -145,7 +147,7 @@ Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de u
 \section{Algoritmos para o THU}
 \label{sec:algoritmos}
 
-Como foi apresentado na seção anterior, muitas meta-heurísticas têm sido usadas para resolver o problema de THU. Dentre elas, Algoritmo Genético e Simulated Annealing têm se destacado pela quantidade de propostas que implementam essas técnicas. Dentre estas propostas, foram escolhidas duas consideradas promissoras, com o intuito de estudá-las mais profundamente e implementar melhorias para produzir soluções melhores.
+Como foi apresentado na seção anterior, muitas meta-heurísticas têm sido usadas para resolver o problema de THU. Dentre elas, Algoritmo Genético e \textit{Simulated Annealing} têm se destacado pela quantidade de propostas que implementam essas técnicas. Dentre estas propostas, foram escolhidas duas consideradas promissoras, com o intuito de estudá-las mais profundamente e implementar melhorias para produzir soluções melhores.
 
 Os algoritmos escolhidos e as melhorias implementadas são apresentados nas próximas subseções. Por fim, um novo algoritmo para o problema de THU é apresentado usando a meta-heurística GRASP.
 
@@ -153,25 +155,25 @@ Os algoritmos escolhidos e as melhorias implementadas são apresentados nas pró
 
 O algoritmo genético escolhido para estudo é o proposto em \cite{massoodian2008}. Após a geração de uma população inicial, são realizadas as iterações (gerações) onde são aplicados os procedimentos de seleção, cruzamento e mutação. Ao final de cada geração, uma busca local é feita no melhor indivíduo da população.
 
-A primeira melhoria foi na geração da população inicial. Na versão original, somente uma restrição forte é considerada nesta etapa. No algoritmo modificado tenta-se respeitar todas as restrções fortes. Devido à complexidade das instâncias nem sempre é possível respeitar todas elas, mas esta modificação produziu soluções mais próximas da viabilidade do que o original.
+A primeira melhoria foi na geração da população inicial. Na versão original, somente uma restrição forte é considerada nesta etapa. No algoritmo modificado procura-se respeitar todas as restrições fortes. Devido à complexidade das instâncias nem sempre é possível respeitar todas elas, mas esta modificação produziu soluções mais próximas da viabilidade do que o original.
 
 Uma falha identificada no procedimento de cruzamento original é que, em geral, ele produz filhos com muitas violações das restrições fortes. Para sanar este problema foi implementado um procedimento de reparação do filho gerado. Ele verifica as aulas que estão em horários inviáveis e procura um novo horário em que ela pode ser inserida.
 
 O procedimento de mutação também foi modificado para não permitir uma alteração no indivíduo que produza novas inviabilidades. A modificação proposta fez com que o algoritmo genético encontrasse uma solução viável com menos iterações.
 
-\subsection{Simulated Annealing}
+\subsection{\textit{Simulated Annealing}}
 
-O algoritmo Simulated Annealing escolhido para estudo foi o proposto por \cite{CDGS11b}. Apesar do algoritmo proposto resolver a segunda formulação do ITC-2007, suas idéias principais foram aproveitadas para resolver a terceira formulação, que é o objetivo deste trabalho.
+O algoritmo \textit{Simulated Annealing} escolhido para estudo foi o proposto por \cite{CDGS11b}. Apesar do algoritmo proposto resolver a segunda formulação do ITC-2007, suas idéias principais foram aproveitadas para resolver a terceira formulação, que é o objetivo deste trabalho.
 
-O algoritmo original segue a idéia básica do Simulated Annealing. Uma solução inicial é gerada procurando respeitar ao máximo as violações fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta * T_i, 0 < \beta < 1$ (resfriamento geométrico).
+O algoritmo original segue a idéia básica do \textit{Simulated Annealing}. Uma solução inicial é gerada procurando violar o menos possível as restrições fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. Os valores das temperaturas inicial e final são definidos na entrada. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta * T_i, 0 < \beta < 1$ (resfriamento geométrico).
 
-A mudança implementada foi na forma como é calculada a vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia. O segundo passo troca duas aulas de posição na tabela. No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um movimento ou uma troca, com igual probabilidade.
+A mudança implementada é referente ao cálculo da vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia (movimento). O segundo passo troca duas aulas de posição na tabela (troca). No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um movimento ou uma troca, com igual probabilidade.
 
 Testes computacionais mostraram que esta pequena modificação produziu resultados cerca de $60\%$ melhores que o algoritmo original.
 
 \subsection{GRASP para o THU}
 
-Cada iteração GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de algum algoritmo de busca local. Um número máximo de iterações é estabelecido. A melhor solução encontrada em uma destas iterações é a solução final.
+Cada iteração GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapas: na primeira uma solução inicial é construída enquanto na segunda a solução é melhorada através de um algoritmo de busca local. Um número máximo de iterações é estabelecido. A melhor solução encontrada em uma destas iterações é a solução final.
 
 \subsubsection{Geração da Solução Inicial}
 
@@ -200,20 +202,51 @@ O segundo movimento (\textit{SWAP}) é aplicado com uma certa probabilidade, por
 
 A busca local parte da solução inicial e em cada iteração gera um vizinho da solução atual. É contado o número de iterações sem melhora. Sempre que um vizinho com melhor valor de função objetivo é encontrado, é atualizado como solução atual e a contagem de iterações sem melhora é zerada. O teste de parada da busca local consiste no número de iterações sem melhora, que é um parâmetro do algoritmo. 
 
-\subsection{Path-Relinking}
+\subsection{\textit{Path-Relinking}}
 
-A proposta original do GRASP é considerada sem memória, pelo fato das soluções obtidas nas iterações não serem compartilhadas entre si para produzir melhores soluções. O algoritmo Path-Relinking \cite{Glover96tabusearch}, \cite{pathRelinking} trabalha com duas soluções: uma ótima local e outra elite, tentando melhorar a solução ótima local usando a estrutura da solução elite. Para aplicar o Path-Relinking, o GRASP mantém um conjunto de soluções elite. A cardinalidade deste conjunto é limitada e contém as soluções que foram encontradas com menor valor de função objetivo.
+A proposta original do GRASP é considerada sem memória, pelo fato das soluções obtidas nas iterações não serem compartilhadas entre si para produzir melhores soluções. O algoritmo \textit{Path-Relinking} \cite{Glover96tabusearch}, \cite{pathRelinking} trabalha com duas soluções: uma ótima local e outra elite, tentando melhorar a solução ótima local usando a estrutura da solução elite. Para aplicar o \textit{Path-Relinking}, o GRASP mantém um conjunto de soluções elite. A cardinalidade deste conjunto é limitada e contém as soluções que foram encontradas com menor valor de função objetivo.
 
 Este procedimento constrói um caminho conectando uma solução inicial e uma solução alvo. Esse caminho é feito aplicando movimentos que façam com que a solução inicial fique igual a solução alvo. Durante o percurso melhores soluções podem ser encontradas. Caminhando no sentido direto, a solução inicial é a ótima local e a alvo uma solução elite. No sentido inverso, o caminho é percorrido da solução elite para a ótima local. A solução elite que será usada no procedimento é escolhida aleatoriamente.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\KwData{Instância p, MaxIter, TamPool}
+
+$f^{*} \leftarrow \infty $ \;
+$Pool \leftarrow \phi $ \;
+\For{$i\leftarrow 1$ \KwTo $MaxIter$}{
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	$S \leftarrow BuscaLocal(S) $ \;
+	\If{$ i > TamPool $}{
+		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
+	}
+	\If{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+	Atualiza Pool \;
+}
+\KwResult{Solução $S^{*}$}
+\caption{Algoritmo Grasp}
+\end{algorithm}
+
 
 \section{Resultados Computacionais}
 \label{sec:resultados}
 
-Os algoritmos modificados e o GRASP proposto foram testados usando as mesmas 21 instâncias que foram usadas na competição ITC-2007. Após a competição foi criado um web site para reunir algumas informações relacionadas ao problema. Neste site \cite{ctt}, podem ser obtidas as instâncias usadas na competição, verificar limites inferiores para cada uma delas, gerar novas instâncias além de verificar as melhores soluções encontradas por diferentes pesquisadores para cada instância.
+Os algoritmos modificados e o GRASP proposto foram testados com as mesmas 21 instâncias que foram usadas na competição ITC-2007. Após a competição foi criado um web site para reunir algumas informações relacionadas ao problema. Neste site \cite{ctt}, podem ser obtidas as instâncias usadas na competição, verificar limites inferiores para cada uma delas, gerar novas instâncias além de verificar as melhores soluções encontradas por diferentes pesquisadores para cada instância.
+
+Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em máquina Linux com a distribuição Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memória RAM.
+
+Não foi levado em consideração nos testes o tempo de execução dos algoritmos, pois no site \cite{ctt} só é comparado a qualidade das respostas.
 
 A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada algoritmo. A coluna CTT se refere a melhor solução encontrada na internet \cite{ctt}.
 
-.... Com relação ao procedimento Path-Relinking, testes mostraram que o sentido inverso produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
+.... Com relação ao procedimento \textit{Path-Relinking}, testes mostraram que o sentido inverso produzem melhores resultados para o problema em questão. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais.
 
 
 \begin{table}
@@ -224,30 +257,30 @@ A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada a
 
 Instância & AG & SA & GRASP & CTT &  \\ \hline
 
-comp01 & 15 & 6 & 15 & 5 & \\
-comp02 & 234 & 116 & 260 & 24 & \\
-comp03 & 233 & 116 & 223 & 66 & \\
-comp04 & 137 & 76 & 168 & 35 & \\
-comp05 & 818 & 429 & 707 & 290 & \\
-comp06 & 215 & 132 & 293 & 27 & \\
-comp07 & 205 & 99 & 266 & 6 & \\
-comp08 & 169 & 84 & 186 & 37 & \\
-comp09 & 229 & 137 & 269 & 96 & \\
-comp10 & 183 & 67 & 245 & 4 & \\
-comp11 & 13 & 0 & 9 & 0 & \\
-comp12 & 544 & 407 & 847 & 300 & \\
-comp13 & 206 & 106 & 206 & 59 & \\
-comp14 & 173 & 90 & 191 & 51 & \\
-comp15 & 225 & 120 & 218 & 66 & \\
-comp16 & 198 & 91 & 233 & 18 & \\
-comp17 & 206 & 122 & 271 & 56 & \\
-comp18 & 153 & 133 & 179 & 62 & \\
-comp19 & 207 & 111 & 238 & 57 & \\
-comp20 & 257 & 130 & 356 & 4 & \\
-comp21 & 276 & 151 & 301 & 76 & \\
+comp01 & 15 & 6 & 6 & 5 & \\
+comp02 & 234 & 116 & 131 & 24 & \\
+comp03 & 233 & 116 & 141 & 66 & \\
+comp04 & 137 & 76 & 78 & 35 & \\
+comp05 & 818 & 429 & 552 & 290 & \\
+comp06 & 215 & 132 & 123 & 27 & \\
+comp07 & 205 & 99 & 120 & 6 & \\
+comp08 & 169 & 84 & 87 & 37 & \\
+comp09 & 229 & 137 & 164 & 96 & \\
+comp10 & 183 & 67 & 78 & 4 & \\
+comp11 & 13 & 0 & 0 & 0 & \\
+comp12 & 544 & 407 & 517 & 300 & \\
+comp13 & 206 & 106 & 120 & 59 & \\
+comp14 & 173 & 90 & 98 & 51 & \\
+comp15 & 225 & 120 & 138 & 66 & \\
+comp16 & 198 & 91 & 104 & 18 & \\
+comp17 & 206 & 122 & 156 & 56 & \\
+comp18 & 153 & 133 & 115 & 62 & \\
+comp19 & 207 & 111 & 139 & 57 & \\
+comp20 & 257 & 130 & 149 & 4 & \\
+comp21 & 276 & 151 & 188 & 76 & \\
 \hline
 \end{tabular}
-\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), simulated annealing (SA), Grasp e as melhores soluções disponíveis no site CTT}
+\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
 \label{tabResultados}
 \end{table} 
 

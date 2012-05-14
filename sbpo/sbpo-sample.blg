@@ -1,19 +1,19 @@
 This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: sbpo-sample.aux
-The style file: sbc.bst
+The style file: sbpo.bst
 Database file #1: sbpo-sample.bib
 Warning--I didn't find a database entry for "ref"
 Warning--empty booktitle in Souza:2004
 You've used 29 entries,
-            1939 wiz_defined-function locations,
-            658 strings with 8978 characters,
-and the built_in function-call counts, 11014 in all, are:
+            1943 wiz_defined-function locations,
+            658 strings with 8977 characters,
+and the built_in function-call counts, 11072 in all, are:
 = -- 1077
 > -- 431
 < -- 25
 + -- 165
 - -- 139
-* -- 920
+* -- 978
 := -- 1910
 add.period$ -- 91
 call.type$ -- 29

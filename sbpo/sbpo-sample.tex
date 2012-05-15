@@ -8,7 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}
-\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage[lined,boxed,commentsnumbered,portuguese]{algorithm2e}
 
 
 
@@ -89,7 +89,7 @@ O problema de tabela-horário na formulação ITC-2007 utiliza os seguintes par�
 
 \end{itemize}
 
-Uma solução do THU consiste na alocação das aulas das diciplinas a um conjunto de períodos e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir:
+Uma solução do THU consiste na alocação das aulas das disciplinas a um conjunto de períodos e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir:
 
 \subsection{Restrições Fortes}
 
@@ -125,7 +125,7 @@ Uma solução viável do THU deve atender a todas as restrições fortes. Uma so
 
 \begin{equation}\label{somaiai}
 \begin{split}
-f &= 5 \sum \text{Violações de Dias Mínimos de Trabalho} \\
+f(S) &= 5 \sum \text{Violações de Dias Mínimos de Trabalho} \\
  & + 2 \sum \text{Violações de Aulas Isoladas} \\
  & + \sum \text{Violações de Capacidade de Sala} \\
  & + \sum \text{Violações de Estabilidade de Sala} 
@@ -175,9 +175,9 @@ O procedimento de mutação também foi modificado para não permitir uma altera
 
 O algoritmo \textit{Simulated Annealing} escolhido para estudo foi o proposto por \cite{CDGS11b}. Apesar do algoritmo proposto resolver a segunda formulação do ITC-2007, suas idéias principais foram aproveitadas para resolver a terceira formulação, que é o objetivo deste trabalho.
 
-O algoritmo original segue a idéia básica do \textit{Simulated Annealing}. Uma solução inicial é gerada procurando violar o menos possível as restrições fortes. Em seguida começa o processo de decaimento da temperatura em que a solução inicial vai sendo melhorada até chegar à uma temperatura final. Os valores das temperaturas inicial e final são definidos na entrada. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta \times T_i, 0 < \beta < 1$ (resfriamento geométrico).
+O algoritmo original segue a idéia básica do \textit{Simulated Annealing}. Uma solução inicial é gerada procurando violar o menos possível as restrições fortes. Em seguida começa o processo de redução da temperatura em que a solução inicial vai sendo melhorada até chegar a uma temperatura final. Os valores das temperaturas inicial e final são definidos na entrada. A temperatura é reduzida a cada iteração de acordo com a seguinte relação: $T_{i+1} = \beta \times T_i, 0 < \beta < 1$ (resfriamento geométrico).
 
-A mudança implementada é referente ao cálculo da vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia (movimento). O segundo passo troca duas aulas de posição na tabela (troca). No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um movimento ou uma troca, com igual probabilidade.
+A mudança implementada é referente ao cálculo da vizinhança da solução atual. No algoritmo original o vizinho é calculado com um ou dois passos, chamados de \textit{MOVE} e \textit{SWAP}. O primeiro passo sempre é realizado, enquanto o segundo só ocorre de acordo uma certa probabilidade. O primeiro passo move uma aula para uma posição vazia. O segundo passo troca duas aulas de posição na tabela. No algoritmo modificado só ocorre um passo para determinar o vizinho. Pode ser um \textit{MOVE} ou um \textit{SWAP}, com igual probabilidade.
 
 Testes computacionais mostraram que esta pequena modificação produziu resultados cerca de $60\%$ melhores que o algoritmo original.
 
@@ -193,9 +193,7 @@ O principal objetivo deste procedimento é produzir uma solução viável, ou se
 
 As aulas que ainda estão desalocadas são mantidas numa lista organizada por ordem de dificuldade. Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
 
-Em cada iteração, uma aula desalocada é inserida na tabela. A aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para a alocação. Os custos de todas essas combinações são calculados levando se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição de um elemento à solução ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é aleatória. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução. Em alguns casos, no entanto, não há uma posição viável na solução para inserção. 
-
-Para contornar esta situação foi implementado um procedimento denominado “explosão”. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. Essa estratégia mostrou-se bastante eficaz, tornando possível gerar uma tabela viável para todas as instâncias testadas.
+Em cada iteração, uma aula desalocada é inserida na tabela. A aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para a alocação. Os custos de todas essas combinações são calculados levando-se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição de um elemento à solução ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Com $\alpha=0$, o algoritmo é puramente guloso, enquanto com $\alpha=1$ a construção é aleatória. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução. Em alguns casos, no entanto, não há uma posição viável na solução para inserção. Para contornar esta situação foi implementado um procedimento denominado “explosão”. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. Essa estratégia mostrou-se bastante eficaz, tornando possível gerar uma tabela viável para todas as instâncias testadas.
 
 \subsubsection{Busca Local}
 
@@ -254,9 +252,47 @@ Todos os algoritmos descritos neste trabalho foram implementados na linguagem C,
 
 Não foi levado em consideração nos testes o tempo de execução dos algoritmos, pois no site \cite{ctt} só é comparado a qualidade das respostas.
 
-Testes preliminares para calibragem dos parâmetros do GRASP mostraram que quanto menor o valor de $\alpha$ na montagem da lista restrita dos candidatos (LRC), melhor é a qualidade da solução inicial. Contudo, mesmo com um $\alpha$ pequeno a solução inicial ainda é longe da ótima. Sendo assim, optou-se por um valor de $\alpha = 0.15$. Este valor não é muito alto para gerar soluções iniciais boas, e também não é tão próximo de zero para gerar soluções diversificadas. Na busca local foi colocado número máximo de iterações sem melhora igual a 10000. A geração dos vizinhos foi feita usando \textit{MOVE} com 50\% de \textit{SWAP}. Com relação ao procedimento \textit{Path-Relinking}, testes mostraram que o sentido inverso produzem melhores resultados para o problema. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais. O Pool de soluções elite foi configurado com tamanho 5.
+Testes preliminares para calibragem dos parâmetros do GRASP mostraram que quanto menor o valor de $\alpha$ na montagem da lista restrita dos candidatos (LRC), melhor é a qualidade da solução inicial. Contudo, mesmo com um $\alpha$ pequeno a solução inicial ainda é longe da ótima. Sendo assim, optou-se por um valor de $\alpha = 0.15$. Este valor não é muito alto para gerar soluções iniciais boas, e também não é tão próximo de zero para gerar soluções diversificadas. Na busca local foi definido número máximo de iterações sem melhora igual a 10000. A geração dos vizinhos foi feita usando \textit{MOVE} com 50\% de \textit{SWAP}. Com relação ao procedimento \textit{Path-Relinking}, testes mostraram que o sentido inverso produzem melhores resultados para o problema. \cite{grasp_resende_ribeiro} comenta que, em geral, boas soluções estão mais próximas às soluções elite do que às soluções ótimas locais. O Pool de soluções elite foi configurado com tamanho 5.
 
 A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada algoritmo. A coluna CTT se refere a melhor solução encontrada na internet \cite{ctt}.
+
+\begin{center}
+\begin{table}[htbf]
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Instância & CTT & AG & SA & GRASP \\ \hline
+comp01 & 5 & 15 & \textbf{6} & \textbf{6} \\
+comp02 & 24 & 234 & \textbf{116} & 131 \\
+comp03 & 66 & 233 & \textbf{116} & 141 \\
+comp04 & 35 & 137 & \textbf{76} & 78 \\
+comp05 & 290 & 818 & \textbf{429} & 552 \\
+comp06 & 27 & 215 & 132 & \textbf{123} \\
+comp07 & 6 & 205 & \textbf{99} & 120 \\
+comp08 & 37 & 169 & \textbf{84} & 87 \\
+comp09 & 96 & 229 & \textbf{137} & 164 \\
+comp10 & 4 & 183 & \textbf{67} & 78 \\
+comp11 & 0 & 13 & \textbf{0} & \textbf{0} \\ \hline
+\end{tabular}
+\medskip
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Instância & CTT & AG & SA & GRASP \\ \hline
+comp12 & 300 & 544 & \textbf{407} & 517 \\
+comp13 & 59 & 206 & \textbf{106} & 120 \\
+comp14 & 51 & 173 & \textbf{90} & 98 \\
+comp15 & 66 & 225 & \textbf{120} & 138 \\
+comp16 & 18 & 198 & \textbf{91} & 104 \\
+comp17 & 56 & 206 & \textbf{122} & 156 \\
+comp18 & 62 & 153 & 133 & \textbf{115} \\
+comp19 & 57 & 207 & \textbf{111} & 139 \\
+comp20 & 4 & 257 & \textbf{130} & 149 \\
+comp21 & 76 & 276 & \textbf{151} & 188 \\
+ &  &  &  &   \\ \hline
+\end{tabular}
+\caption{Resultados computacionais - Valor da função objetivo obtida pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
+\label{tabResultados}
+\end{table}
+\end{center}
 
 
 %\begin{table}
@@ -294,37 +330,34 @@ A tabela \ref{tabResultados} lista as melhores soluções encontradas por cada a
 %\label{tabResultados}
 %\end{table} 
 
-\begin{table}
-\tiny
-\centering
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
-\hline
+%\begin{table}
+%\tiny
+%\centering
+%\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
+%\hline
 % comp01 & comp02	& comp03 & comp04 & comp05 & comp06	& comp07 & comp08 & comp09 & comp10	& comp11 & comp12 & comp13 & comp14	& comp15 & comp16 & comp17 & comp18	& comp19 & comp20 & comp21 \\
-
- & 01 & 02	& 03 & 04 & 05 & 06	& 07 & 08 & 09 & 10	& 11 & 12 & 13 & 14	& 15 & 16 & 17 & 18	& 19 & 20 & 21 \\ \hline
-CTT & 5 & 24 & 66 & 35 & 290 & 27 & 6 & 37 & 96 & 4 & 0 & 300 & 59 & 51 & 66 & 18 & 56 & 62 & 57 & 4 & 76 \\ \hline
-AG & 15	& 234 & 233 & 137 & 818 & 215 & 205 & 169 & 229 & 183 & 13 & 544 & 206 & 173 & 225 & 198 & 206 & 153 & 207 & 257 & 276 \\
-SA & 6* &	116* & 116* & 76* & 429* & 132 & 99* & 84* & 137* & 67* & 0* & 407* & 106* & 90* & 120* & 91* & 122* & 133 & 111* & 130* & 151* \\
-GRASP & 6* & 131 & 141 & 78 & 552 & 123* & 120 & 87 & 164 & 78 & 0* & 516 & 120 & 98 & 138 & 104 & 156 & 115* &	139 & 141 & 188 \\
-
-
-\hline
-\end{tabular}
-\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
-\label{tabResultados}
-\end{table} 
+% & 01 & 02	& 03 & 04 & 05 & 06	& 07 & 08 & 09 & 10	& 11 & 12 & 13 & 14	& 15 & 16 & 17 & 18	& 19 & 20 & 21 \\ \hline
+%CTT & 5 & 24 & 66 & 35 & 290 & 27 & 6 & 37 & 96 & 4 & 0 & 300 & 59 & 51 & 66 & 18 & 56 & 62 & 57 & 4 & 76 \\ \hline
+%AG & 15	& 234 & 233 & 137 & 818 & 215 & 205 & 169 & 229 & 183 & 13 & 544 & 206 & 173 & 225 & 198 & 206 & 153 & 207 & 257 & 276 \\
+%SA & 6* &	116* & 116* & 76* & 429* & 132 & 99* & 84* & 137* & 67* & 0* & 407* & 106* & 90* & 120* & 91* & 122* & 133 & 111* & 130* & 151* \\
+%GRASP & 6* & 131 & 141 & 78 & 552 & 123* & 120 & 87 & 164 & 78 & 0* & 516 & 120 & 98 & 138 & 104 & 156 & 115* &	139 & 141 & 188 \\
+%\hline
+%\end{tabular}
+%\caption{Resultados computacionais - Quantidade de penalizações obtidas pelo algoritmo genético (AG), \textit{simulated annealing} (SA), Grasp e as melhores soluções disponíveis no site CTT}
+%\label{tabResultados}
+%\end{table} 
 
 
 \section{Conclusões e Trabalhos Futuros}
 \label{sec:conclusao}
 
-Os resultados da tabela \ref{tabResultados} mostaram que o algoritmo genético obteve os piores resultados em todas as instâncias. \textit{Simulated Annealing} e GRASP obtiveram os melhores resultados, sendo o \textit{Simulated Annealing} superior em 17 instâncias, o GRASP superior em 2 instâncias e empate em outras 2 instâncias.
+Os resultados da tabela \ref{tabResultados} mostaram que \textit{Simulated Annealing} e GRASP obtiveram os melhores resultados, sendo o \textit{Simulated Annealing} superior em 17 instâncias, o GRASP superior em 2 instâncias e empate em outras 2 instâncias. O algoritmo genético obteve os piores resultados em todas as instâncias.
 
-Pode-se notar que para muitas instâncias a melhor resposta encontrada pelos algoritmos ainda está longe das melhores respostas conhecidas. Para contornar este problema será necessário investigar formas diferentes de explorar a vizinhança. Foi notado em todos os algoritmos que em geral é necessário gerar muitos vizinhos para encontrar um com melhor função objetivo, principalmente nas instâncias mais complexas que possuem muitas disciplinas.
+Pode-se notar que para muitas instâncias a melhor resposta encontrada pelos algoritmos ainda está longe das melhores respostas conhecidas. Para contornar este problema será necessário investigar formas diferentes de explorar a vizinhança. Foi possível notar que em todos os algoritmos há a necessidade de gerar muitos vizinhos para encontrar um com melhor valor de função objetivo, principalmente nas instâncias mais complexas que possuem muitas disciplinas.
 
-Uma proposta é implementar no GRASP uma estrutura de vizinhança similar à que foi implementada no \textit{Simulated Annealing}. O vizinho não seria gerado com duas etapas, mas apenas uma: ou com \textit{MOVE} ou com \textit{SWAP}.
+Uma proposta é implementar no GRASP uma estrutura de vizinhança similar à que foi implementada no \textit{Simulated Annealing}. O vizinho não seria gerado com duas etapas, mas apenas uma: ou com \textit{MOVE} ou com \textit{SWAP}, com igual probabilidade.
 
-Outra proposta de melhoria no GRASP seria a paralelização do algoritmo. A estrutura do algoritmo permite uma paralelização trivial em que cada nó de processamento executa uma iteração independente. No final os melhores resultados são comparados. Em \cite{grasp_paralelo} podem ser vistas algumas estratégias mais complexas de paralelização do algoritmo.
+Outra proposta de melhoria no GRASP é a paralelização do algoritmo. A estrutura do algoritmo permite uma paralelização trivial em que cada nó de processamento executa uma iteração independente. No final os melhores resultados são comparados. Em \cite{grasp_paralelo} podem ser vistas algumas estratégias mais complexas de paralelização do algoritmo.
 
 
 %O SBPO utilizará este ano, novamente, o sistema JEMS para a submissão de trabalhos. A primeira página dos trabalhos publicados será constituída com as informações fornecidas no formulário de submissão de trabalho do JEMS. Por isto, os nomes de \textbf{todos} os autores devem ser cadastrados nesse formulário. Os nomes  não incluídos nesse formulário não aparecerão entre os autores na programação do Simpósio nem nos Anais.

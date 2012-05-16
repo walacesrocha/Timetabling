@@ -96,6 +96,10 @@ int main(int argc, char** argv) {
     printf("SWAPS: %d\n", p->nSwaps);
 
     t2 = clock();
+    
+    for(i=0;i<60;i++){
+        printf("%d %d\n", i, getTimeslot(p,i));
+    }
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 

@@ -14,6 +14,7 @@
 
 Individuo *geraVizinho(Problema *p, Individuo *ind);
 Individuo *geraVizinho2(Problema *p, Individuo *ind);
+Individuo *geraVizinho3(Problema *p, Individuo *ind);
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial);
 float funcaoObjetivo(Problema *p, Individuo *ind);
 

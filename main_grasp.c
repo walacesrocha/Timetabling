@@ -97,9 +97,12 @@ int main(int argc, char** argv) {
 
     t2 = clock();
     
-    for(i=0;i<60;i++){
-        printf("%d %d\n", i, getTimeslot(p,i));
+    Disciplina *disc = acessaDisciplina(p, 4);
+    
+    for(i=0;i<disc->nSlotsDisponiveis;i++){
+        printf("%d ", disc->slotsDisponiveis[i]);
     }
+    printf("\n");
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 

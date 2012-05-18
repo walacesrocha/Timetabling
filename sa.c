@@ -106,7 +106,7 @@ Individuo *geraVizinho2(Problema *p, Individuo *ind) {
     }
 
     /*** MOVE EVENT ***/
-    if (((float) rand()) / RAND_MAX < 0.5) {
+    if (((float) rand()) / RAND_MAX < 0.25) {
         p->nMoves++;
 move:
 
@@ -178,6 +178,7 @@ swap:
 
     return novoInd;
 }
+
 
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;

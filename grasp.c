@@ -934,7 +934,11 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            vizinhos[i] = geraVizinho(p, solucaoAtual);
+            if (((float) rand()) / RAND_MAX < 0.9) {
+                vizinhos[i] = geraVizinho3(p, solucaoAtual);
+            } else {
+                vizinhos[i] = geraVizinho2(p, solucaoAtual);
+            }
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
             foVizinhos[i] = somaViolacoesSoft(p, vizinhos[i]);
             if (i == 0) {
@@ -976,7 +980,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1488,8 +1492,8 @@ Individuo *grasp(Problema *p) {
         if (fezPR) {// libera individuo do Path-Relinking
             liberaIndividuo(indPr);
         }
-        
-        printf("Iter:%d,FO=%f\n",i+1,funcaoObjetivo(p, bestInd));
+
+        printf("Iter:%d,FO=%f\n", i + 1, funcaoObjetivo(p, bestInd));
         fflush(stdout);
 
     }

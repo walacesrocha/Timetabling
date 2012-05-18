@@ -74,6 +74,8 @@ int getPeriodo (Problema *p, int pos);
 
 int getDia (Problema *p, int pos);
 
+int getSalaFromPos(Problema *p, int pos);
+
 int salaDiaHorarioParaPos (Problema *p, int sala, int dia, int horario);
 
 Individuo *leIndividuo (Problema *p);

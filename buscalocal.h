@@ -27,6 +27,7 @@ ListaVizinhos *alocaListaVizinhos(int k);
 void desalocaListaVizinhos(ListaVizinhos *listaVizinhos);
 void geraListaVizinhos(Problema *p,Individuo*ind, ListaVizinhos *listaVizinhos);
 
+Individuo *geraVizinho3(Problema *p, Individuo *ind);
 
 
 #endif	/* _BUSCALOCAL_H */

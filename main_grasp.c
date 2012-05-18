@@ -96,6 +96,13 @@ int main(int argc, char** argv) {
     printf("SWAPS: %d\n", p->nSwaps);
 
     t2 = clock();
+    
+    Disciplina *disc = acessaDisciplina(p, 4);
+    
+    for(i=0;i<disc->nSlotsDisponiveis;i++){
+        printf("%d ", disc->slotsDisponiveis[i]);
+    }
+    printf("\n");
 
     //printf("T: %f\n", (float) (t2 - t1) / CLOCKS_PER_SEC);
 

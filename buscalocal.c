@@ -3,6 +3,7 @@
 #include "buscalocal.h"
 #include "fitness.h"
 #include "util.h"
+#include "sa.h"
 
 void trocaTimeslots(Problema *p, Individuo *ind, int t1, int t2) {
     int i, step, aux;
@@ -640,9 +641,11 @@ Individuo *geraVizinho3(Problema *p, Individuo *ind) {
     for (i = 0; i < novoInd->n; i++) {
         novoInd->aula[i] = ind->aula[i];
     }
+    
+    float prob = ((float) rand()) / RAND_MAX;
 
     /*** MOVE EVENT ***/
-    if (((float) rand()) / RAND_MAX < 0.3) {
+    if (prob < 0.3) {
         p->nMoves++;
 timemove:
 
@@ -702,7 +705,7 @@ timemove:
             //printf("voltando move\n");
             goto timemove;
         }
-    } else if (((float) rand()) / RAND_MAX < 0.6) {
+    } else if (prob < 0.6) {
         p->nSwaps++;
         /*** SWAP EVENT ***/
 roommove:
@@ -765,7 +768,7 @@ roommove:
             //printf("voltando move\n");
             goto roommove;
         }
-    } else if (((float) rand()) / RAND_MAX < 0.9) {
+    } else if (prob < 0.9) {
 rooms:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
 
@@ -795,20 +798,23 @@ rooms:
 
         int nTrocas = 0;
         for (i = 0; i < disc->nSlotsDisponiveis; i++) {
-            if (ehAula(p, novoInd->aula[i])) {
-                if (novoInd->aula[i] >= disc->aulaInicial &&
-                        novoInd->aula[i] < disc->aulaInicial + disc->nAulas) {
+            int pos = disc->slotsDisponiveis[i];
+            
+            if (ehAula(p, novoInd->aula[pos])) {
+                if (novoInd->aula[pos] >= disc->aulaInicial &&
+                        novoInd->aula[pos] < disc->aulaInicial + disc->nAulas) {
 
-                    int timeslot = getTimeSlotFromPos(i, p);
+                    int timeslot = getTimeSlotFromPos(pos, p);
 
                     p2 = salaAdequada * (p->nDias * p->nPerDias) + timeslot;
 
-                    //printf("Trocando... %d => [%d,%d]", novoInd->aula[i],i,p2);
+                    printf("Trocando... => [%d,%d] (%d,%d)\n", getTimeSlotFromPos(pos,p),getTimeSlotFromPos(p2,p),pos,p2);
 
-                    troca_par(novoInd, i, p2);
+                    troca_par(novoInd, pos, p2);
 
-                    if (somaViolacoesHardTroca(p, novoInd, i, p2) > 0) {
+                    if (somaViolacoesHardTroca(p, novoInd, pos, p2) > 0) {
                         printf("Oh my...\n");
+                        printf("%f\n",funcaoObjetivo(p,novoInd));
                         exit(1);
                     }
                     nTrocas++;

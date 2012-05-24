@@ -768,7 +768,7 @@ roommove:
             //printf("voltando move\n");
             goto roommove;
         }
-    } else if (prob < 0.9) {
+    } else if (prob < 0.6) {
 rooms:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
 
@@ -807,8 +807,12 @@ rooms:
                     int timeslot = getTimeSlotFromPos(pos, p);
 
                     p2 = salaAdequada * (p->nDias * p->nPerDias) + timeslot;
+                    
+                    printf("%d <-> %d Conf=%d\n", novoInd->aula[pos],novoInd->aula[p2],aulasConflitantes(p,novoInd->aula[pos],novoInd->aula[p2]));
+                    
+                    
 
-                    printf("Trocando... => [%d,%d] (%d,%d)\n", getTimeSlotFromPos(pos,p),getTimeSlotFromPos(p2,p),pos,p2);
+                    printf("Trocando... => [%d,%d] (%d,%d) S=(%d,%d)\n", getTimeSlotFromPos(pos,p),getTimeSlotFromPos(p2,p),pos,p2,getSalaFromPos(p,pos),getSalaFromPos(p,p2));
 
                     troca_par(novoInd, pos, p2);
 

@@ -934,7 +934,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.99) {
+            if (((float) rand()) / RAND_MAX < 0.9999) {
                 vizinhos[i] = geraVizinho3(p, solucaoAtual);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);

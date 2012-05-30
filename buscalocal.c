@@ -641,11 +641,43 @@ Individuo *geraVizinho3(Problema *p, Individuo *ind) {
     for (i = 0; i < novoInd->n; i++) {
         novoInd->aula[i] = ind->aula[i];
     }
-    
+
     float prob = ((float) rand()) / RAND_MAX;
 
-    /*** MOVE EVENT ***/
-    if (prob < 0.3) {
+    if (prob< 0.15) {
+lecture_move:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+        //printf("posicoes sorteadas\n");
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando move\n");
+            goto lecture_move;
+        }
+
+    } else if (prob < 0.3) {
         p->nMoves++;
 timemove:
 
@@ -768,7 +800,7 @@ roommove:
             //printf("voltando move\n");
             goto roommove;
         }
-    } else if (prob < 0.6) {
+    } else if (prob < 0.85) {
 rooms:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
 
@@ -799,7 +831,7 @@ rooms:
         int nTrocas = 0;
         for (i = 0; i < disc->nSlotsDisponiveis; i++) {
             int pos = disc->slotsDisponiveis[i];
-            
+
             if (ehAula(p, novoInd->aula[pos])) {
                 if (novoInd->aula[pos] >= disc->aulaInicial &&
                         novoInd->aula[pos] < disc->aulaInicial + disc->nAulas) {
@@ -807,18 +839,18 @@ rooms:
                     int timeslot = getTimeSlotFromPos(pos, p);
 
                     p2 = salaAdequada * (p->nDias * p->nPerDias) + timeslot;
-                    
-                    printf("%d <-> %d Conf=%d\n", novoInd->aula[pos],novoInd->aula[p2],aulasConflitantes(p,novoInd->aula[pos],novoInd->aula[p2]));
-                    
-                    
 
-                    printf("Trocando... => [%d,%d] (%d,%d) S=(%d,%d)\n", getTimeSlotFromPos(pos,p),getTimeSlotFromPos(p2,p),pos,p2,getSalaFromPos(p,pos),getSalaFromPos(p,p2));
+                    //printf("%d <-> %d Conf=%d\n", novoInd->aula[pos], novoInd->aula[p2], aulasConflitantes(p, novoInd->aula[pos], novoInd->aula[p2]));
+
+
+
+                    //printf("Trocando... => [%d,%d] (%d,%d) S=(%d,%d)\n", getTimeSlotFromPos(pos, p), getTimeSlotFromPos(p2, p), pos, p2, getSalaFromPos(p, pos), getSalaFromPos(p, p2));
 
                     troca_par(novoInd, pos, p2);
 
                     if (somaViolacoesHardTroca(p, novoInd, pos, p2) > 0) {
                         printf("Oh my...\n");
-                        printf("%f\n",funcaoObjetivo(p,novoInd));
+                        printf("%f\n", funcaoObjetivo(p, novoInd));
                         exit(1);
                     }
                     nTrocas++;
@@ -871,6 +903,12 @@ compact:
                 if (!ehAula(p, novoInd->aula[i])) {
                     troca_par(novoInd, i, p1);
 
+                    if (somaViolacoesHardTroca(p, novoInd, p1, i) > 0) {
+                        troca_par(novoInd, i, p1);
+                        //printf("voltando move\n");
+                        continue;
+                    }
+
                     dia = getDia(p, i);
                     horario = getPeriodo(p, i);
 
@@ -878,9 +916,10 @@ compact:
                         // desfaz pq na tirou violação
                         troca_par(novoInd, i, p1);
                     } else {
-                        //somaViolacoesSoft(p, novoInd);
-                        //printf("diminui compact %d %d\n", anterior, novoInd->soft3);
-                        break;
+                        somaViolacoesSoft(p, novoInd);
+                        printf("diminui compact %d %d\n", anterior, novoInd->soft3);
+                        //break;
+                        return novoInd;
                     }
                 }
             }

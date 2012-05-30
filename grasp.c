@@ -934,7 +934,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.5) {
+            if (((float) rand()) / RAND_MAX < 0.99) {
                 vizinhos[i] = geraVizinho3(p, solucaoAtual);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
@@ -1394,6 +1394,65 @@ void atualizaInfoPool(AuxGrasp *auxGrasp) {
     }
 }
 
+/**
+ * Verifica se um individuo identico ja esta presente no pool
+ */
+int jaTemNoPool(AuxGrasp *auxGrasp, Individuo *ind) {
+    int i, j;
+    float fo = ind->fitness;
+
+    printf("FO: %f\n", fo);
+
+    for (i = 0; i < auxGrasp->nElites; i++) {
+        printf("=> %f\n, ", auxGrasp->poolElite[i]->fitness);
+        // se fo eh diferente eles sao diferentes
+        if (auxGrasp->poolElite[i]->fitness != fo) {
+            continue;
+        }
+
+        for (j = 0; j < ind->n; j++) {
+            if (ind->aula[j] != auxGrasp->poolElite[i]->aula[j]) {
+                continue;
+            }
+        }
+
+        // => fo igual e elementos iguais
+        return 1;
+    }
+
+    return 0;
+
+}
+
+/**
+ * Atualiza informações do pool de solucoes elite
+ * @param 
+ * @return 
+ */
+void atualizaPool(AuxGrasp *auxGrasp, Individuo *ind) {
+    int i;
+
+    // nao coloca no pool uma solucao ja existente
+    if (jaTemNoPool(auxGrasp, ind)) {
+        return;
+    }
+
+    if (auxGrasp->nElites < auxGrasp->tPool) {
+        // ha espaco no pool
+        copiaIndividuo2(ind, auxGrasp->poolElite[auxGrasp->nElites]);
+        auxGrasp->nElites++;
+        atualizaInfoPool(auxGrasp);
+    } else {
+        // pool cheio: verifica se nova solucao pode entrar
+
+        if (ind->fitness < auxGrasp->piorSolucao) {
+            copiaIndividuo2(ind, auxGrasp->poolElite[auxGrasp->posicaoPior]);
+            atualizaInfoPool(auxGrasp);
+        }
+    }
+
+}
+
 Individuo *grasp(Problema *p) {
     int i, j, fezPR;
     float fo, foPR, melhor = 9999999;
@@ -1431,7 +1490,7 @@ Individuo *grasp(Problema *p) {
         ind->fitness = fo;
         //printf("F2: %f\n", fo);
 
-        if (i > auxGrasp->tPool && p->buscaLocalGrasp <= 4) {// se pool de elites ja esta cheio
+        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 4) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
@@ -1450,15 +1509,17 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }
 
-        /*printf("Fo=%.0f\n",fo);
+        printf("Fo=%.0f\n",fo);
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");*/
+        printf("]\n");
+        
+        atualizaPool(auxGrasp,bestIter);
 
-        if (auxGrasp->nElites < auxGrasp->tPool) {
+        /*if (auxGrasp->nElites < auxGrasp->tPool) {
             // ha espaco no pool
             copiaIndividuo2(bestIter, auxGrasp->poolElite[auxGrasp->nElites]);
             auxGrasp->nElites++;
@@ -1470,14 +1531,14 @@ Individuo *grasp(Problema *p) {
                 copiaIndividuo2(bestIter, auxGrasp->poolElite[auxGrasp->posicaoPior]);
                 atualizaInfoPool(auxGrasp);
             }
-        }
+        }*/
 
 
-        /*printf("POOL(2): [");
+        printf("POOL(2): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");**/
+        printf("]\n");
 
         //scanf("%d", &j);
 

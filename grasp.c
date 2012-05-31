@@ -980,7 +980,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1401,10 +1401,10 @@ int jaTemNoPool(AuxGrasp *auxGrasp, Individuo *ind) {
     int i, j;
     float fo = ind->fitness;
 
-    printf("FO: %f\n", fo);
+    //printf("FO: %f\n", fo);
 
     for (i = 0; i < auxGrasp->nElites; i++) {
-        printf("=> %f\n, ", auxGrasp->poolElite[i]->fitness);
+        //printf("=> %f\n, ", auxGrasp->poolElite[i]->fitness);
         // se fo eh diferente eles sao diferentes
         if (auxGrasp->poolElite[i]->fitness != fo) {
             continue;
@@ -1509,13 +1509,13 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }
 
-        printf("Fo=%.0f\n",fo);
+        /*printf("Fo=%.0f\n",fo);
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");
+        printf("]\n");*/
         
         atualizaPool(auxGrasp,bestIter);
 
@@ -1534,11 +1534,11 @@ Individuo *grasp(Problema *p) {
         }*/
 
 
-        printf("POOL(2): [");
+        /*printf("POOL(2): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");
+        printf("]\n");*/
 
         //scanf("%d", &j);
 

@@ -684,7 +684,7 @@ Individuo *geraVizinho3(Problema *p, Individuo *ind) {
 
     float prob = ((float) rand()) / RAND_MAX;
 
-    if (prob < 0.2) {
+    if (prob < 0.22) {
 lecture_move:
 
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
@@ -717,7 +717,7 @@ lecture_move:
             goto lecture_move;
         }
 
-    } else if (prob < 0.8) {
+    } else if (prob < 0.44) {
         p->nMoves++;
 timemove:
 
@@ -779,7 +779,7 @@ timemove:
             //printf("voltando move\n");
             goto timemove;
         }
-    } else if (prob < 0.6) {
+    } else if (prob < 0.66) {
         p->nSwaps++;
         /*** SWAP EVENT ***/
 roommove:
@@ -842,7 +842,7 @@ roommove:
             //printf("voltando move\n");
             goto roommove;
         }
-    } else if (prob < 0.8) {
+    } else if (prob < 0.88) {
 rooms:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
 
@@ -959,7 +959,7 @@ compact:
                         troca_par(novoInd, i, p1);
                     } else {
                         somaViolacoesSoft(p, novoInd);
-                        printf("diminui compact %d %d\n", anterior, novoInd->soft3);
+                        //printf("diminui compact %d %d\n", anterior, novoInd->soft3);
                         //break;
                         return novoInd;
                     }

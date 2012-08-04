@@ -1470,6 +1470,9 @@ Individuo *grasp(Problema *p) {
         geraSolucaoInicialGrasp(p, auxGrasp);
         ind = auxGrasp->ind;
         //printf("F1: %f\n", funcaoObjetivo(p, ind));
+        printf("HARD: %f\n", somaViolacoesHard(p, ind));
+        printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
+        if (i==4)exit(0);else continue;
 
         fezPR = 0; // flag: fez Path-Relinking
 
@@ -1509,15 +1512,15 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }
 
-        printf("Fo=%.0f\n",fo);
+        printf("Fo=%.0f\n", fo);
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
         printf("]\n");
-        
-        atualizaPool(auxGrasp,bestIter);
+
+        atualizaPool(auxGrasp, bestIter);
 
         /*if (auxGrasp->nElites < auxGrasp->tPool) {
             // ha espaco no pool

@@ -194,6 +194,9 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     }
 
     foAtual = funcaoObjetivo(p, indInicial);
+    printf("HARD: %f\n",somaViolacoesHard(p,indInicial));
+    printf("SOFT: %f\n",somaViolacoesSoft(p,indInicial));
+    exit(0);
 
     //printf("Implementando\n");
     //printf("%s\n", p->nome);
@@ -275,8 +278,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
-        //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+        printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
+        somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
         t0 *= beta;
     } while (t0 > tMin);
 

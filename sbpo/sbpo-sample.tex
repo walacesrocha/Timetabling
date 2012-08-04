@@ -19,22 +19,22 @@
 % Uncomment next line to hide authors, affiliations and contacts
 %\hideauthors
 
-%{ \author{\sbpoauthor{Walace S. Rocha}
-%                   {Núcleo de Processamento de Dados - Universidade Federal do Espírito Santo}
-%                   {Vitória -- ES -- Brasil}
-%                   {\email{walacesrocha@yahoo.com.br}}
-%        \sbpoauthor{Maria C. S. Boeres}
-%                   {Departamento de Informática -- Universidade Federal do Espírito Santo}
-%                   {Vitória -- ES -- Brasil}
-%                   {\email{boeres@inf.ufes.br}}
-%        \sbpoauthor{Maria C. Rangel}
-%                   {Departamento de Informática -- Universidade Federal do Espírito Santo}
-%                   {Vitória -- ES -- Brasil}
-%                   {\email{crangel@inf.ufes.br}}
-%        \sbpoauthor{Leandro B. Ferreira}
-%                   {Curso de Ciência da Computação -- Universidade Federal do Espírito Santo}
-%                   {Vitória -- ES -- Brasil}
-%                   {\email{leandrobfe@gmail.com}}}
+{ \author{\sbpoauthor{Walace S. Rocha}
+                   {Núcleo de Processamento de Dados - Universidade Federal do Espírito Santo}
+                   {Vitória -- ES -- Brasil}
+                   {\email{walacesrocha@yahoo.com.br}}
+        \sbpoauthor{Maria C. S. Boeres}
+                   {Departamento de Informática -- Universidade Federal do Espírito Santo}
+                   {Vitória -- ES -- Brasil}
+                   {\email{boeres@inf.ufes.br}}
+        \sbpoauthor{Maria C. Rangel}
+                   {Departamento de Informática -- Universidade Federal do Espírito Santo}
+                   {Vitória -- ES -- Brasil}
+                   {\email{crangel@inf.ufes.br}}
+        \sbpoauthor{Leandro B. Ferreira}
+                   {Curso de Ciência da Computação -- Universidade Federal do Espírito Santo}
+                   {Vitória -- ES -- Brasil}
+                   {\email{leandrobfe@gmail.com}}}
 
 \begin{document} 
 
@@ -143,7 +143,7 @@ f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
 \section{Trabalhos Relacionados}
 \label{sec:trabalhos_relacionados}
 
-As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas. Esse problema é classificado como NP-completo \cite{Schaerf95asurvey}.
+As principais técnicas de solução do problema THU recaem basicamente em três grupos: programação matemática, programação em lógica e meta-heurísticas. Por ser um problema complexo, classificado como NP-completo \cite{Schaerf95asurvey}, é inviável computacionalmente buscar a solução ótima. Alguns métodos tem alcançado este objetivo, mas apenas para instâncias pequenas.
 
 Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} pode ser vista outra formulação com algumas relaxações. Com um tempo de execução aproximado de quinze minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição, além de encontrar limites inferiores para as outras instâncias.
 
@@ -191,7 +191,7 @@ Cada iteração GRASP \cite{grasp_resende_ribeiro} possui basicamente duas etapa
 
 A geração da solução inicial do GRASP é um algoritmo construtivo baseado no princípio guloso aleatório. Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
 
-O principal objetivo deste procedimento é produzir uma solução viável, ou seja, sem violações fortes. Com intuito de alcançar este objetivo, é adotada uma estratégia de alocar as aulas mas conflitantes inicialmente. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia.
+O principal objetivo deste procedimento é produzir uma solução viável, ou seja, sem violações fortes. Com intuito de alcançar este objetivo, é adotada uma estratégia de alocar as aulas mais conflitantes inicialmente. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia.
 
 As aulas que ainda estão desalocadas são mantidas numa lista organizada por ordem de dificuldade. Quanto menos horários disponíveis existem para a aula e mais presente ela está em currículos diferentes, mais difícil é encontrar um horário viável.
 
@@ -300,6 +300,9 @@ comp21 & 76 & 276 & \textbf{151} & 188 \\
 \end{table}
 \end{center}
 
+Os resultados da tabela \ref{tabResultados} mostraram que \textit{Simulated Annealing} e GRASP obtiveram os melhores resultados, sendo o \textit{Simulated Annealing} superior em 17 instâncias, o GRASP superior em 2 instâncias e empate em outras 2 instâncias. O algoritmo genético obteve os piores resultados em todas as instâncias.
+
+Um diferencial do \textit{Simulated Annealing} em relação à outras meta-heurísticas é a segunda fase, onde a solução inicial obtida na primeira fase é melhorada \cite{Kirkpatrick13051983}. A vantagem da busca local desta meta-heurística é que ela aceita soluções piores, possibilitando o algoritmo escapar de ótimos locais. Para verificar o efeito da busca local nos algoritmos SA e do GRASP foi feito um teste medindo os valores das soluções iniciais. Verificou-se que a solução inicial do SA é cerca de $470\%$ pior que a do GRASP considerando-se apenas as restrições fracas. O algoritmo GRASP conseguiu gerar soluções iniciais viáveis para todas instâncias, enquanto o SA não conseguiu para nenhuma instância. As soluções iniciais do GRASP também possuem bem menos violações das restrições fracas. Na média, a solução inicial do GRASP possui 916 violações a mais que a melhor solução conhecida, enquanto que a solução inicial do SA possui 5525 violações a mais, já considerando os pesos das violações. Conclui-se assim que a busca local do SA é mais eficaz na redução das violações fortes e fracas.
 
 %\begin{table}
 
@@ -356,8 +359,6 @@ comp21 & 76 & 276 & \textbf{151} & 188 \\
 
 \section{Conclusões e Trabalhos Futuros}
 \label{sec:conclusao}
-
-Os resultados da tabela \ref{tabResultados} mostraram que \textit{Simulated Annealing} e GRASP obtiveram os melhores resultados, sendo o \textit{Simulated Annealing} superior em 17 instâncias, o GRASP superior em 2 instâncias e empate em outras 2 instâncias. O algoritmo genético obteve os piores resultados em todas as instâncias.
 
 Pode-se notar que para muitas instâncias a melhor resposta encontrada pelos algoritmos ainda está longe das melhores respostas conhecidas. Visando a melhoria dos métodos implementados será necessário investigar formas diferentes de explorar a vizinhança. Observamos, nas vizinhanças de todos os algoritmos implementados que em geral é necessário gerar muitos vizinhos para encontrar melhora, principalmente nas instâncias mais complexas que possuem muitas disciplinas.
 

@@ -70,13 +70,6 @@
 \newblock In {\em Interfaces in Computer Science and Operations Research},
   pages 1--75. Kluwer.
 
-\bibitem[Goldberg(1989)]{Goldberg:1989}
-\textbf{Goldberg, D.~E.} (1989).
-\newblock {\em Genetic Algorithms in Search, Optimization and Machine
-  Learning}.
-\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1st
-  edition.
-
 \bibitem[Goltz and Matzke(1999)]{Goltz99universitytimetabling}
 \textbf{Goltz, H.-J. and Matzke, D.} (1999).
 \newblock University timetabling using constraint logic programming.

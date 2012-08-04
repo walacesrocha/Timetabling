@@ -574,6 +574,46 @@ int getTimeSlotVazioParaSala(Problema *p, Individuo *ind, int sala, int timeSlot
 
 }
 
+int getPosVaziaParaSala(Problema *p, Individuo *ind, int sala, int posAtual) {
+    int pLivres[p->nDias * p->nPerDias];
+    int i, j;
+    int totalHorarios;
+    int aula = ind->aula[posAtual];
+
+    Disciplina *disc = acessaDisciplina(p, aula);
+
+    totalHorarios = p->nDias * p->nPerDias;
+    j = 0;
+    for (i = 0; i < disc->nSlotsDisponiveis; i++) {
+        int pos2 = disc->slotsDisponiveis[i];
+
+        if (pos2 == posAtual) continue;
+        
+        if (getSalaFromPos(p, pos2) != sala) {
+            continue;
+        }
+
+        if (!ehAula(p, ind->aula[pos2])) {
+            pLivres[j] = pos2;
+            j++;
+        }
+    }
+
+    /*printf("Livres[");
+    for (i = 0; i < j; i++) {
+        printf("%d ", pLivres[i]);
+    }
+    printf("]\n");*/
+
+    if (j == 0) {
+        // sem timeslot vazio
+        return -1;
+    }
+
+    return pLivres[rand() % j];
+
+}
+
 int getSalaVazioParaTimeSlot(Problema *p, Individuo *ind, int salaExcluida, int timeslot) {
     int sLivres[p->nSalas];
     int i, j, pos;
@@ -644,7 +684,7 @@ Individuo *geraVizinho3(Problema *p, Individuo *ind) {
 
     float prob = ((float) rand()) / RAND_MAX;
 
-    if (prob< 0.15) {
+    if (prob < 0.22) {
 lecture_move:
 
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
@@ -677,7 +717,7 @@ lecture_move:
             goto lecture_move;
         }
 
-    } else if (prob < 0.3) {
+    } else if (prob < 0.44) {
         p->nMoves++;
 timemove:
 
@@ -696,6 +736,8 @@ timemove:
 
         int sala = getSalaFromPos(p, p1);
         int timeSlotVazio = getTimeSlotVazioParaSala(p, novoInd, sala, timeslot);
+        
+        p2 = getPosVaziaParaSala(p,novoInd,sala,p1);
 
         //imprimeIndividuo2(p,novoInd);
         //printf("Sala: %d\n", sala);
@@ -703,11 +745,11 @@ timemove:
         //printf("TVazio: %d\n", timeSlotVazio);
         //scanf("%d\n",&p2);
 
-        if (timeSlotVazio == -1) {
+        if (p2 == -1) {
             goto timemove;
         }
 
-        p2 = sala * (p->nDias * p->nPerDias) + timeSlotVazio;
+        //p2 = sala * (p->nDias * p->nPerDias) + timeSlotVazio;
 
 
 
@@ -737,7 +779,7 @@ timemove:
             //printf("voltando move\n");
             goto timemove;
         }
-    } else if (prob < 0.6) {
+    } else if (prob < 0.66) {
         p->nSwaps++;
         /*** SWAP EVENT ***/
 roommove:
@@ -800,7 +842,7 @@ roommove:
             //printf("voltando move\n");
             goto roommove;
         }
-    } else if (prob < 0.85) {
+    } else if (prob < 0.88) {
 rooms:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
 
@@ -917,7 +959,7 @@ compact:
                         troca_par(novoInd, i, p1);
                     } else {
                         somaViolacoesSoft(p, novoInd);
-                        printf("diminui compact %d %d\n", anterior, novoInd->soft3);
+                        //printf("diminui compact %d %d\n", anterior, novoInd->soft3);
                         //break;
                         return novoInd;
                     }

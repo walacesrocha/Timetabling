@@ -106,7 +106,7 @@ Individuo *geraVizinho2(Problema *p, Individuo *ind) {
     }
 
     /*** MOVE EVENT ***/
-    if (((float) rand()) / RAND_MAX < 0.25) {
+    if (((float) rand()) / RAND_MAX < 0.5) {
         p->nMoves++;
 move:
 

@@ -934,7 +934,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.99) {
+            if (((float) rand()) / RAND_MAX < 0.9999) {
                 vizinhos[i] = geraVizinho3(p, solucaoAtual);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
@@ -980,7 +980,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1401,10 +1401,10 @@ int jaTemNoPool(AuxGrasp *auxGrasp, Individuo *ind) {
     int i, j;
     float fo = ind->fitness;
 
-    printf("FO: %f\n", fo);
+    //printf("FO: %f\n", fo);
 
     for (i = 0; i < auxGrasp->nElites; i++) {
-        printf("=> %f\n, ", auxGrasp->poolElite[i]->fitness);
+        //printf("=> %f\n, ", auxGrasp->poolElite[i]->fitness);
         // se fo eh diferente eles sao diferentes
         if (auxGrasp->poolElite[i]->fitness != fo) {
             continue;
@@ -1512,15 +1512,21 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }
 
-        printf("Fo=%.0f\n", fo);
+        /*printf("Fo=%.0f\n",fo);
+
 
         printf("POOL(1): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
+
         printf("]\n");
 
         atualizaPool(auxGrasp, bestIter);
+
+        printf("]\n");*/
+        
+        atualizaPool(auxGrasp,bestIter);
 
         /*if (auxGrasp->nElites < auxGrasp->tPool) {
             // ha espaco no pool
@@ -1537,11 +1543,11 @@ Individuo *grasp(Problema *p) {
         }*/
 
 
-        printf("POOL(2): [");
+        /*printf("POOL(2): [");
         for (j = 0; j < auxGrasp->nElites; j++) {
             printf("%.0f ", auxGrasp->poolElite[j]->fitness);
         }
-        printf("]\n");
+        printf("]\n");*/
 
         //scanf("%d", &j);
 

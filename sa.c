@@ -28,8 +28,6 @@ move:
         p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
         p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
 
-        //printf("posicoes sorteadas\n");
-
         while (!ehAula(p, novoInd->aula[p1])) {
             p1++;
             if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
@@ -411,7 +409,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
         float fo;
         int nPioras = 0;
         do {
-            vizinho = geraVizinho(p, solucaoAtual);
+            vizinho = geraVizinho2(p, solucaoAtual);
 
             fo = funcaoObjetivo(p, vizinho);
             deltaF = fo - foAtual;

@@ -933,6 +933,31 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     return solucaoAtual;
 }
 
+void perturbaSolucao(Problema *p, Individuo *ind) {
+    int i, k;
+    int p1, p2;
+
+
+    printf("FO: %f\n", funcaoObjetivo(p, ind));
+    k = 0;
+    while (k < 10) {
+        p1 = rand() % p->dimensao;
+        p2 = rand() % p->dimensao;
+
+        troca_par(ind, p1, p2);
+
+        if (somaViolacoesHardTroca(p, ind, p1, p2) > 0) {
+            troca_par(ind, p1, p2);
+            continue;
+        }
+
+        printf("FO: %f\n", funcaoObjetivo(p, ind));
+        k++;
+    }
+
+    printf("FO: %f\n", funcaoObjetivo(p, ind));
+}
+
 Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo **vizinhos;
@@ -941,6 +966,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     float *foVizinhos;
     int i, nVizinhos;
     int melhorVizinho;
+    int nPerturbacoes = 0;
 
     nVizinhos = p->k;
 
@@ -1015,12 +1041,21 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //somaViolacoesSoft(p, solucaoAtual);
 
-        if (iteracoesSemMelhora % 1000 == 0) {
-            printf("I[%d],%d,%d,%d,%d\n", iteracoesSemMelhora,solucaoAtual->soft1, solucaoAtual->soft2,
-                    solucaoAtual->soft3, solucaoAtual->soft4);
+        if (iteracoesSemMelhora % 500 == 0) {
+            printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
+                    solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
         }
 
+
         iteracoesSemMelhora++;
+
+
+        if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
+            printf("perturbando solucao\n");
+            perturbaSolucao(p, solucaoAtual);
+            foAtual = funcaoObjetivo(p, solucaoAtual);
+            nPerturbacoes++;
+        }
 
         //printf("Iter: %d / FO: %f\n", iteracoesSemMelhora, foAtual);
     } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);
@@ -1524,7 +1559,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            p->t0 = 5;
+            p->t0 = 2;
             p->rho = 2000;
             p->beta = 0.995;
             p->aceitaPioraSA = 1;
@@ -1543,6 +1578,17 @@ Individuo *grasp(Problema *p) {
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //printf("\n\n\n", fo);
+
+        p->t0 = 1;
+        p->rho = 2000;
+        p->beta = 0.995;
+        p->aceitaPioraSA = 1;
+        ind = simulatedAnnealing(p, ind);
+        
+        fo = funcaoObjetivo(p, ind);
+        ind->fitness = fo;
+        //printf("----------------------------------\n", fo);
+        printf("F2': %f\n", fo);
 
         p->soft1 += ind->soft1;
         p->soft2 += ind->soft2;

@@ -31,6 +31,39 @@ void imprimeVetor(int *v, int n) {
     printf("\n");
 }
 
+void teste(Problema *p, Individuo *ind) {
+    int p1, p2;
+    int i;
+
+    for (i = 0; i < 15000; i++) {
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+        while (!ehAula(p, ind->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (ehAula(p, ind->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        if (p2 > p1) {
+            printf("[%d,%d]\n", p1, p2);
+        } else {
+            printf("[%d,%d]\n", p2, p1);
+        }
+    }
+
+
+
+}
 
 /*
  * ./main instancia populacao txCrossover txMutacao maxTrocasMutacao
@@ -48,18 +81,26 @@ int main(int argc, char** argv) {
 
     srand(time(0));
 
-    
+
+
+
+
 
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
-    
+
+    ind = geraIndividuoAleatorio(p, 10);
+    teste(p, ind);
+    exit(0);
+
     p->t0 = atof(argv[2]);
     p->rho = atof(argv[3]);
     p->beta = atof(argv[4]);
     p->txSwap = 0.5;
-    
+
     ind = simulatedAnnealing(p, NULL);
+
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
@@ -76,7 +117,7 @@ int main(int argc, char** argv) {
 
     Populacao *populacao = solve(p);
 
-    imprimeResposta(p, populacao->ind[0],stdout);
+    imprimeResposta(p, populacao->ind[0], stdout);
 
     printf("%s\n", argv[1]);
     printf("Fitness Hard: %f\n", fitnessHard(p, populacao->ind[0]));

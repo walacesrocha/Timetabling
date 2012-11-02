@@ -1,4 +1,5 @@
 #include <string.h>
+#include <math.h>
 
 #include "buscalocal.h"
 #include "fitness.h"
@@ -588,7 +589,7 @@ int getPosVaziaParaSala(Problema *p, Individuo *ind, int sala, int posAtual) {
         int pos2 = disc->slotsDisponiveis[i];
 
         if (pos2 == posAtual) continue;
-        
+
         if (getSalaFromPos(p, pos2) != sala) {
             continue;
         }
@@ -736,8 +737,8 @@ timemove:
 
         int sala = getSalaFromPos(p, p1);
         int timeSlotVazio = getTimeSlotVazioParaSala(p, novoInd, sala, timeslot);
-        
-        p2 = getPosVaziaParaSala(p,novoInd,sala,p1);
+
+        p2 = getPosVaziaParaSala(p, novoInd, sala, p1);
 
         //imprimeIndividuo2(p,novoInd);
         //printf("Sala: %d\n", sala);
@@ -890,11 +891,11 @@ rooms:
 
                     troca_par(novoInd, pos, p2);
 
-                    if (somaViolacoesHardTroca(p, novoInd, pos, p2) > 0) {
+                    /*if (somaViolacoesHardTroca(p, novoInd, pos, p2) > 0) {
                         printf("Oh my...\n");
                         printf("%f\n", funcaoObjetivo(p, novoInd));
                         exit(1);
-                    }
+                    }*/
                     nTrocas++;
                 }
             }
@@ -1001,3 +1002,636 @@ compact:
 
     return novoInd;
 }
+
+Individuo *lectureMove(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+lecture_move:
+
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    while (ehAula(p, novoInd->aula[p2])) {
+        p2++;
+        if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p2 = 0;
+        }
+    }
+
+    // faz a troca das posicoes
+    aux = novoInd->aula[p1];
+    novoInd->aula[p1] = novoInd->aula[p2];
+    novoInd->aula[p2] = aux;
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto lecture_move;
+    }
+
+    return novoInd;
+}
+
+Individuo *timeMove(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+timemove:
+
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    //int timeslot = getTimeSlotFromPos(p1, p);
+
+    int sala = getSalaFromPos(p, p1);
+    //int timeSlotVazio = getTimeSlotVazioParaSala(p, novoInd, sala, timeslot);
+
+    p2 = getPosVaziaParaSala(p, novoInd, sala, p1);
+
+    //imprimeIndividuo2(p,novoInd);
+    //printf("Sala: %d\n", sala);
+    //printf("TimeSlot: %d\n", timeslot);
+    //printf("TVazio: %d\n", timeSlotVazio);
+    //scanf("%d\n",&p2);
+
+    if (p2 == -1) {
+        goto timemove;
+    }
+
+    //p2 = sala * (p->nDias * p->nPerDias) + timeSlotVazio;
+
+
+
+    /*if (timeslot == p->nDias * p->nPerDias) {
+        p2 = p1 - timeslot;
+    } else {
+        p2 = p1 + 1;
+    }
+    int tentativas = 0;
+    while (ehAula(p, novoInd->aula[p2])) {
+        p2++;
+        tentativas++;
+        if (getTimeSlotFromPos(p2, p) == 0) {// volta ao inicio do vetor 'aula'
+            p2 = p2 - (p->nDias * p->nPerDias);
+        }
+
+        if (tentativas > p->nDias * p->nPerDias) {
+            goto timemove;
+        }
+    }*/
+
+    // faz a troca das posicoes
+    troca_par(novoInd, p1, p2);
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto timemove;
+    }
+
+    return novoInd;
+}
+
+Individuo *roomMove(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+roommove:
+
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    int timeslot = getTimeSlotFromPos(p1, p);
+
+    int sala = getSalaFromPos(p, p1);
+    int salaVazia = getSalaVazioParaTimeSlot(p, novoInd, sala, timeslot);
+
+    /*imprimeIndividuo2(p, novoInd);
+    printf("Sala: %d\n", sala);
+    printf("TimeSlot: %d\n", timeslot);
+    printf("SalaVazia: %d\n", salaVazia);
+    if (salaVazia == -1) {
+        scanf("%d\n", &p2);
+    }*/
+
+    if (salaVazia == -1) {
+        goto roommove;
+    }
+
+    p2 = salaVazia * (p->nDias * p->nPerDias) + timeslot;
+
+
+
+    /*if (timeslot == p->nDias * p->nPerDias) {
+        p2 = p1 - timeslot;
+    } else {
+        p2 = p1 + 1;
+    }
+    int tentativas = 0;
+    while (ehAula(p, novoInd->aula[p2])) {
+        p2++;
+        tentativas++;
+        if (getTimeSlotFromPos(p2, p) == 0) {// volta ao inicio do vetor 'aula'
+            p2 = p2 - (p->nDias * p->nPerDias);
+        }
+
+        if (tentativas > p->nDias * p->nPerDias) {
+            goto timemove;
+        }
+    }*/
+
+    // faz a troca das posicoes
+    troca_par(novoInd, p1, p2);
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto roommove;
+    }
+
+    return novoInd;
+}
+
+Individuo *rooms(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+rooms:
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    Disciplina *disc = acessaDisciplina(p, novoInd->aula[p1]);
+    int salaAdequada = getSalaAdequada(p, disc);
+
+    /*imprimeIndividuo2(p, novoInd);
+    printf("Disc: %s, [%d, %d]\n", disc->nomeDisciplina, disc->aulaInicial, disc->aulaInicial + disc->nAulas - 1);
+    //printf("TimeSlot: %d\n", timeslot);
+    printf("SalaAdequada: %d\n", salaAdequada);
+    //if (salaVazia == -1) {
+    scanf("%d\n", &p2);
+    //}*/
+
+    if (salaAdequada == -1) {
+        goto rooms;
+    }
+
+    int nTrocas = 0;
+    for (i = 0; i < disc->nSlotsDisponiveis; i++) {
+        int pos = disc->slotsDisponiveis[i];
+
+        if (ehAula(p, novoInd->aula[pos])) {
+            if (novoInd->aula[pos] >= disc->aulaInicial &&
+                    novoInd->aula[pos] < disc->aulaInicial + disc->nAulas) {
+
+                int timeslot = getTimeSlotFromPos(pos, p);
+
+                p2 = salaAdequada * (p->nDias * p->nPerDias) + timeslot;
+
+                //printf("%d <-> %d Conf=%d\n", novoInd->aula[pos], novoInd->aula[p2], aulasConflitantes(p, novoInd->aula[pos], novoInd->aula[p2]));
+
+
+
+                //printf("Trocando... => [%d,%d] (%d,%d) S=(%d,%d)\n", getTimeSlotFromPos(pos, p), getTimeSlotFromPos(p2, p), pos, p2, getSalaFromPos(p, pos), getSalaFromPos(p, p2));
+
+                troca_par(novoInd, pos, p2);
+
+                /*if (somaViolacoesHardTroca(p, novoInd, pos, p2) > 0) {
+                    printf("Oh my...\n");
+                    printf("%f\n", funcaoObjetivo(p, novoInd));
+                    exit(1);
+                }*/
+                nTrocas++;
+            }
+        }
+
+    }
+
+    /*printf("Trocas: %d/%d\n", nTrocas, disc->nAulas);
+    imprimeIndividuo2(p, novoInd);
+    scanf("%d\n", &p2);*/
+
+
+    // faz a troca das posicoes
+    /*troca_par(novoInd, p1, p2);
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto rooms;
+    }*/
+
+    return novoInd;
+}
+
+Individuo *compact(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    int nTentativas = 0;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+compact:
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    Disciplina *disc = acessaDisciplina(p, novoInd->aula[p1]);
+    Curriculo *curr = disc->curriculos[rand() % disc->nCurriculos];
+
+    int dia = getDia(p, p1);
+    int horario = getPeriodo(p, p1);
+
+    somaViolacoesSoft(p, novoInd);
+    int anterior = novoInd->soft3;
+
+
+    if (aulaIsolada(p, novoInd, p1, dia, horario)) {
+
+        for (i = 0; i < disc->nSlotsDisponiveis; i++) {
+            if (!ehAula(p, novoInd->aula[i])) {
+                troca_par(novoInd, i, p1);
+
+                if (somaViolacoesHardTroca(p, novoInd, p1, i) > 0) {
+                    troca_par(novoInd, i, p1);
+                    //printf("voltando move\n");
+                    continue;
+                }
+
+                dia = getDia(p, i);
+                horario = getPeriodo(p, i);
+
+                if (aulaIsolada(p, novoInd, i, dia, horario)) {
+                    // desfaz pq na tirou violação
+                    troca_par(novoInd, i, p1);
+                } else {
+                    somaViolacoesSoft(p, novoInd);
+                    //printf("diminui compact %d %d\n", anterior, novoInd->soft3);
+                    //break;
+                    return novoInd;
+                }
+            }
+        }
+
+        nTentativas++;
+
+        if (nTentativas < 10) {
+            goto compact;
+        }
+
+
+    } else {
+        nTentativas++;
+
+        if (nTentativas < 10) {
+            goto compact;
+        }
+    }
+
+
+    /*printf("Trocas: %d/%d\n", nTrocas, disc->nAulas);
+    imprimeIndividuo2(p, novoInd);
+    scanf("%d\n", &p2);*/
+
+
+    // faz a troca das posicoes
+    /*troca_par(novoInd, p1, p2);
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto rooms;
+    }*/
+
+
+
+    return novoInd;
+}
+
+Individuo *move(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+    /*** MOVE EVENT ***/
+move:
+
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    while (ehAula(p, novoInd->aula[p2])) {
+        p2++;
+        if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p2 = 0;
+        }
+    }
+
+    // faz a troca das posicoes
+    aux = novoInd->aula[p1];
+    novoInd->aula[p1] = novoInd->aula[p2];
+    novoInd->aula[p2] = aux;
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando move\n");
+        goto move;
+    }
+
+    return novoInd;
+}
+
+Individuo *swap(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+swap:
+
+    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, novoInd->aula[p1])) {
+        p1++;
+        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p1 = 0;
+        }
+    }
+
+    while (!ehAula(p, novoInd->aula[p2])) {
+        p2++;
+        if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            p2 = 0;
+        }
+    }
+
+    // faz a troca das posicoes
+    aux = novoInd->aula[p1];
+    novoInd->aula[p1] = novoInd->aula[p2];
+    novoInd->aula[p2] = aux;
+
+    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+        troca_par(novoInd, p1, p2);
+        //printf("voltando swap\n");
+        goto swap;
+    }
+
+    return novoInd;
+}
+
+void embaralhaMovimentos(Movimento *movs, int n) {
+    int i;
+
+    for (i = 0; i < 100; i++) {
+        int p1 = rand() % n;
+        int p2 = rand() % n;
+
+        Movimento aux = movs[p1];
+        movs[p1] = movs[p2];
+        movs[p2] = aux;
+    }
+
+}
+
+void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *iteracoes, int qtMovs) {
+
+    int i;
+    int total;
+
+    printf("I,%d,%d,%d,%d\n", indBase->soft1, indBase->soft2,
+            indBase->soft3, indBase->soft4);
+
+    total = 0;
+
+    for (i = 0; i < qtMovs; i++) {
+        iteracoes[i] = 0;
+        switch (movs[i]) {
+            case MOVE:
+                iteracoes[i] += (indBase->soft1 + indBase->soft2 + indBase->soft3 + indBase->soft4);
+                printf("MOVE: %d\n", iteracoes[i]);
+                break;
+            case SWAP:
+                iteracoes[i] += (indBase->soft1 + indBase->soft2 + indBase->soft3 + indBase->soft4);
+                printf("SWAP: %d\n", iteracoes[i]);
+                break;
+            case LECTURE_MOVE:
+                printf("LECTURE_MOVE: %d\n", iteracoes[i]);
+                break;
+            case TIME_MOVE:
+                iteracoes[i] += (indBase->soft2 + indBase->soft3);
+                printf("TIME_MOVE: %d\n", iteracoes[i]);
+                break;
+            case ROOM_MOVE:
+                iteracoes[i] += (indBase->soft1 + indBase->soft4);
+                printf("ROOM_MOVE: %d\n", iteracoes[i]);
+                break;
+            case ROOMS:
+                iteracoes[i] += (indBase->soft1 + indBase->soft4);
+                printf("ROOMS: %d\n", iteracoes[i]);
+                break;
+            case COMPACT:
+                iteracoes[i] += indBase->soft3;
+                printf("COMPACT: %d\n", iteracoes[i]);
+                break;
+            default:
+                break;
+        }
+
+        total += iteracoes[i];
+    }
+
+    float fator = (float) p->nIterSemMelhoras / total;
+    
+    printf("Iter: %d, Max: %d, Fator: %f\n", total,p->nIterSemMelhoras,fator);
+    
+    for (i = 0; i < qtMovs; i++) {
+        iteracoes[i] = ceil(fator*iteracoes[i]);
+        
+    }
+
+
+
+}
+
+Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
+    Movimento mov;
+    Individuo *solucaoAtual, *aDesalocar;
+    Individuo *vizinho;
+    float foAtual, fo;
+    float deltaF;
+    int i, iteracoes = 0;
+    int haMelhoras;
+    int pMov;
+    Movimento movimentos[7] = {LECTURE_MOVE, TIME_MOVE, ROOM_MOVE,
+        ROOMS, COMPACT,MOVE, SWAP};
+    int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
+    int nMovs = 7;
+
+
+    foAtual = funcaoObjetivo(p, indInicial);
+    solucaoAtual = indInicial;
+
+    embaralhaMovimentos(movimentos, nMovs);
+
+    pMov = 0;
+
+    configuraQtMovsVNS(p,solucaoAtual, movimentos, iteracoesMax, nMovs);
+
+    do {
+
+        haMelhoras = 0;
+        for (pMov = 0; pMov < nMovs; pMov++) {
+            printf("%d\n", iteracoesMax[pMov]);
+            for (i = 0; i < iteracoesMax[pMov]; i++) {
+                
+                switch (movimentos[pMov]) {
+                    case MOVE:
+                        vizinho = move(p, solucaoAtual);
+                        break;
+                    case SWAP:
+                        vizinho = swap(p, solucaoAtual);
+                        break;
+                    case LECTURE_MOVE:
+                        vizinho = lectureMove(p, solucaoAtual);
+                        break;
+                    case TIME_MOVE:
+                        vizinho = timeMove(p, solucaoAtual);
+                        break;
+                    case ROOM_MOVE:
+                        vizinho = roomMove(p, solucaoAtual);
+                        break;
+                    case ROOMS:
+                        vizinho = rooms(p, solucaoAtual);
+                        break;
+                    case COMPACT:
+                        vizinho = compact(p, solucaoAtual);
+                        break;
+                    default:
+                        break;
+
+                }
+
+                fo = funcaoObjetivo(p, vizinho);
+                deltaF = fo - foAtual;
+
+                aDesalocar = 0;
+                if (deltaF <= 0) {// função objetivo decresceu
+                    foAtual = fo;
+                    //printf("Melhorou... %f [%d]\n", foAtual, iteracoes);
+                    aDesalocar = solucaoAtual;
+                    solucaoAtual = vizinho;
+                    //melhorInd = solucaoAtual;
+                    if (deltaF < 0) {
+                        haMelhoras = 1;
+                        iteracoes = 0; // continua buscando
+                    }
+                } else {
+                    aDesalocar = vizinho;
+                }
+
+                //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
+                liberaIndividuo(aDesalocar);
+            }
+        }
+
+        configuraQtMovsVNS(p,solucaoAtual, movimentos, iteracoesMax, nMovs);
+        printf("==> %f\n", foAtual);
+
+
+        /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento
+            if (pMov == nMovs - 1) {
+                pMov = 0; // volta ao inicio
+            } else {
+                pMov++; // proximo movimento
+            }
+            printf("%d %f\n", iteracoes, foAtual);
+            printf("trocou para %d\n", movimentos[pMov]);
+            printf("I,%d,%d,%d,%d\n", solucaoAtual->soft1, solucaoAtual->soft2,
+                    solucaoAtual->soft3, solucaoAtual->soft4);
+        }*/
+    } while (haMelhoras);
+
+    return solucaoAtual;
+}
+

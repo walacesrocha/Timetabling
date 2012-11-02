@@ -58,12 +58,11 @@ int main(int argc, char** argv) {
     FILE *fp;
 
 
-    srand(time(0));
+    srand(0);
 
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
-
 
     p->maxIterGrasp = atoi(argv[2]);
     p->buscaLocalGrasp = atoi(argv[3]);
@@ -88,17 +87,20 @@ int main(int argc, char** argv) {
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     printf("MEDIA: %f\n", p->mediaSolucoes);
-    printf("RoomCapacity: %d\n", ind->soft1);
-    printf("MinWorkDays: %d\n", ind->soft2);
-    printf("CurrCompactness: %d\n", ind->soft3);
-    printf("RoomStability: %d\n", ind->soft4);
+    printf("RoomCapacity: %f\n", p->soft1);
+    printf("MinWorkDays: %f\n", p->soft2);
+    printf("CurrCompactness: %f\n", p->soft3);
+    printf("RoomStability: %f\n", p->soft4);
     printf("MOVES: %d\n", p->nMoves);
     printf("SWAPS: %d\n", p->nSwaps);
 
+    printf("F1 -> F2: %f\n", p->f2 - p->f1);
+    printf("F2 -> F3: %f\n", p->f3 - p->f2);
+
     t2 = clock();
-    
+
     Disciplina *disc = acessaDisciplina(p, 4);
-    
+
     /*for(i=0;i<disc->nSlotsDisponiveis;i++){
         printf("%d ", disc->slotsDisponiveis[i]);
     }
@@ -116,6 +118,25 @@ int main(int argc, char** argv) {
 
     //ind = geraIndividuoAleatorio(p, 100);
     //printf("%f\n", funcaoObjetivo(p, ind));
+
+    /*Movimento movimentos[7] = {MOVE, SWAP, LECTURE_MOVE, TIME_MOVE, ROOM_MOVE,
+        ROOMS, COMPACT};
+    int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
+
+    ind->soft1 = 10;
+    ind->soft2 = 0;
+    ind->soft3 = 5;
+    ind->soft4 = 0;
+
+    configuraQtMovsVNS(p, ind, movimentos, iteracoesMax, 7);
+
+    printf("[");
+    for (i = 0; i < 7; i++) {
+        printf("%d ", iteracoesMax[i]);
+
+    }
+    printf("]\n");*/
+
 
     liberaIndividuo(ind);
 

@@ -21,6 +21,11 @@
 \newblock {\em 4OR: A Quarterly Journal of Operations Research}, 10:43--66.
 \newblock 10.1007/s10288-011-0182-8.
 
+\bibitem[Bello et~al.(2008)]{artigo_geraldo}
+\textbf{Bello, G.~S., Rangel, M.~C., and Boeres, M. C.~S.} (2008).
+\newblock Uma abordagem do problema de programação de grade horária sujeito
+  a restrições utilizando coloração de grafos.
+
 \bibitem[Burke et~al.(2008)]{Burke_abranch-andcut}
 \textbf{Burke, E.~K., Mareček, J., Parkes, A.~J., and Rudová, H.} (2008).
 \newblock A branch-andcut procedure for the udine course timetabling.
@@ -36,6 +41,17 @@
 \textbf{de~Souza, M.~C., Duhamel, C., and Ribeiro, C.~C.} (2002).
 \newblock A grasp heuristic for the capacitated minimum spanning tree problem
   using a memory-based local search strategy.
+
+\bibitem[E.~K.~Burke and F.Weare(2010)]{artigo_burke_newall_weare}
+\textbf{E.~K.~Burke, J. P.~N. and F.Weare, R.} (2010).
+\newblock A memetic algorithm for university exam timetabling.
+
+\bibitem[Edmund K.~Burke and Soghier(2010)]{artigo_burke_qu_soghier}
+\textbf{Edmund K.~Burke, R.~Q. and Soghier, A.} (2010).
+\newblock Adaptive selection of heuristics for improving constructed exam
+  timetables.
+\newblock {\em Proceedings of the 8th International Conference on the Practice
+  and Theory of Automated Timetabling}.
 
 \bibitem[Elloumi et~al.(2008)]{elloumi2008}
 \textbf{Elloumi, A., Kamoun, H., Ferland, J., and Dammak, A.} (2008).
@@ -63,6 +79,16 @@
 \newblock Curriculum-based course timetabling.
 \newblock \url{http://tabu.diegm.uniud.it/ctt/}.
 
+\bibitem[Gerald~Lach(2010)]{artigo_gerald_marco}
+\textbf{Gerald~Lach, M. E.~L.} (2010).
+\newblock Curriculum based course timetabling: new solutions to udine benchmark
+  instances.
+\newblock {\em Springer Science+Business Media}.
+
+\bibitem[Geraldo Ribeiro~Filho(2006)]{artigo_geraldo_luiz}
+\textbf{Geraldo Ribeiro~Filho, L. A. N.~L.} (2006).
+\newblock An integer programming model for the school timetabling problem.
+
 \bibitem[Glover(1996)]{Glover96tabusearch}
 \textbf{Glover, F.} (1996).
 \newblock Tabu search and adaptive memory programing – advances, applications
@@ -79,6 +105,12 @@
 \bibitem[Gueret et~al.(1995)]{Gueret95buildinguniversity}
 \textbf{Gueret, C., Jussien, N., Boizumault, P., and Prins, C.} (1995).
 \newblock Building university timetables using constraint logic programming.
+
+\bibitem[J.J.J. van~den Broek(2010)]{artigo_broek_hurkens}
+\textbf{J.J.J. van~den Broek, C.~H.} (2010).
+\newblock An ip-based heuristic for the post enrolment course timetabling
+  problem of the itc2007.
+\newblock {\em The Author(s) 2010}.
 
 \bibitem[Kanoh and Sakamoto(2008)]{Kanoh:2008:KGA:1460198.1460201}
 \textbf{Kanoh, H. and Sakamoto, Y.} (2008).
@@ -111,6 +143,17 @@
 \textbf{Massoodian, S. and Esteki, A.} (2008).
 \newblock A hybrid genetic algorithm for curriculum based course timetabling.
 \newblock In {\em Proceedings of the 7th PATAT Conference, 2008}.
+
+\bibitem[M.N.M.~Kahar(2010)]{artigo_kahar_kendall}
+\textbf{M.N.M.~Kahar, G.~K.} (2010).
+\newblock The examination timetabling problem at universiti malaysia pahang:
+  Comparison of a constructive heuristic with an existing software solution.
+\newblock {\em European Journal of Operational Research}.
+
+\bibitem[Monfroglio(1996)]{artigo_angelo}
+\textbf{Monfroglio, A.} (1996).
+\newblock Hybrid genetic algorithms for timetabling.
+\newblock {\em International Journal of Intelligent Systems}.
 
 \bibitem[PATAT(2008)]{itc2007}
 \textbf{PATAT} (2008).

@@ -102,6 +102,9 @@ typedef struct problema {
     int trocaefetiva; //testes remover ///////////////
     /*Leandro fim*/
     
+    float soft1,soft2,soft3,soft4;
+    float f1,f2,f3;
+    
 } Problema;
 
 Problema *alocaProblema();

@@ -2,46 +2,49 @@ This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: sbpo-sample.aux
 The style file: sbpo.bst
 Database file #1: sbpo-sample.bib
+Warning--empty journal in artigo_geraldo
+Warning--empty journal in artigo_burke_newall_weare
+Warning--empty journal in artigo_geraldo_luiz
 Warning--empty booktitle in Souza:2004
-You've used 29 entries,
+You've used 37 entries,
             1943 wiz_defined-function locations,
-            656 strings with 8972 characters,
-and the built_in function-call counts, 11289 in all, are:
-= -- 1102
-> -- 437
-< -- 26
-+ -- 167
-- -- 141
-* -- 992
-:= -- 1931
-add.period$ -- 91
-call.type$ -- 29
-change.case$ -- 212
-chr.to.int$ -- 29
-cite$ -- 30
-duplicate$ -- 456
-empty$ -- 784
-format.name$ -- 192
-if$ -- 2225
+            684 strings with 10247 characters,
+and the built_in function-call counts, 13627 in all, are:
+= -- 1317
+> -- 516
+< -- 33
++ -- 199
+- -- 165
+* -- 1185
+:= -- 2365
+add.period$ -- 112
+call.type$ -- 37
+change.case$ -- 264
+chr.to.int$ -- 37
+cite$ -- 41
+duplicate$ -- 560
+empty$ -- 944
+format.name$ -- 228
+if$ -- 2654
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 148
-num.names$ -- 89
-pop$ -- 199
+missing$ -- 32
+newline$ -- 185
+num.names$ -- 113
+pop$ -- 250
 preamble$ -- 1
-purify$ -- 213
+purify$ -- 265
 quote$ -- 0
-skip$ -- 341
+skip$ -- 428
 stack$ -- 0
-substring$ -- 721
-swap$ -- 70
+substring$ -- 825
+swap$ -- 75
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 170
-warning$ -- 1
-while$ -- 87
+type$ -- 218
+warning$ -- 4
+while$ -- 103
 width$ -- 0
-write$ -- 372
-(There was 1 warning)
+write$ -- 462
+(There were 4 warnings)

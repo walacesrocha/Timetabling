@@ -1,6 +1,7 @@
 #include <math.h>
 #include "sa.h"
 #include "fitness.h"
+#include "util.h"
 
 float funcaoObjetivo(Problema *p, Individuo *ind) {
     float vHard = somaViolacoesHard(p, ind);
@@ -21,43 +22,41 @@ Individuo *geraVizinho(Problema *p, Individuo *ind) {
     }
 
     /*** MOVE EVENT ***/
+    if (((float) rand()) / RAND_MAX) {
 move:
 
-    p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
-    p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
 
-    //printf("posicoes sorteadas\n");
+        //printf("posicoes sorteadas\n");
 
-    while (!ehAula(p, novoInd->aula[p1])) {
-        p1++;
-        if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
-            p1 = 0;
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
         }
-    }
 
-    while (ehAula(p, novoInd->aula[p2])) {
-        p2++;
-        if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
-            p2 = 0;
+        while (ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
         }
-    }
 
-    // faz a troca das posicoes
-    aux = novoInd->aula[p1];
-    novoInd->aula[p1] = novoInd->aula[p2];
-    novoInd->aula[p2] = aux;
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
-        troca_par(novoInd, p1, p2);
-        //printf("voltando move\n");
-        goto move;
-    }
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando move\n");
+            goto move;
+        }
 
-
-    /*** SWAP EVENT ***/
-    float prob = ((float) rand()) / RAND_MAX;
-    //printf("Prob: %f\n", prob);
-    if (prob <= p->txSwap) {
+    } else {
+        /*** SWAP EVENT ***/
 
 swap:
 
@@ -104,6 +103,7 @@ Individuo *geraVizinho2(Problema *p, Individuo *ind) {
     for (i = 0; i < novoInd->n; i++) {
         novoInd->aula[i] = ind->aula[i];
     }
+
 
     /*** MOVE EVENT ***/
     if (((float) rand()) / RAND_MAX < 0.5) {
@@ -180,6 +180,178 @@ swap:
 }
 
 
+
+int getPosCruz(Problema *p, int p1, Individuo *ind, int pLivre) {
+
+    int t1 = getTimeSlotFromPos(p1, p);
+    int r1 = getSalaFromPos(p, p1);
+    int r, t, k;
+    int pos[p->nSalas + (p->nDias * p->nPerDias)];
+
+    k = 0;
+    // caminho vertical
+    for (r = 0; r < p->nSalas; r++) {
+        if (r == r1) continue;
+
+        int p2 = r * (p->nDias * p->nPerDias) + t1;
+
+        if (pLivre && !ehAula(p, ind->aula[p2])) {
+            pos[k] = p2;
+            k++;
+        } else if (!pLivre && ehAula(p, ind->aula[p2])) {
+            pos[k] = p2;
+            k++;
+        }
+
+    }
+
+    // caminho horizontal
+    for (t = 0; t < p->nSalas; t++) {
+        if (t == t1) continue;
+        int p2 = r1 * (p->nDias * p->nPerDias) + t;
+
+        if (pLivre && !ehAula(p, ind->aula[p2])) {
+            pos[k] = p2;
+            k++;
+        } else if (!pLivre && ehAula(p, ind->aula[p2])) {
+            pos[k] = p2;
+            k++;
+        }
+
+    }
+
+    //printf("k=%d\n", k);
+    if (k > 0) {
+
+        return pos[rand() % k];
+        int j;
+        int melhorP2;
+        float melhorFo = 99999999;
+        float fo;
+        for (j = 0; j < k; j++) {
+            int p2 = pos[j];
+            int aux = ind->aula[p1];
+            ind->aula[p1] = ind->aula[p2];
+            ind->aula[p2] = aux;
+
+            fo = funcaoObjetivo(p, ind);
+
+            if (fo < melhorFo) {
+                melhorP2 = p2;
+                melhorFo = fo;
+            }
+
+            aux = ind->aula[p1];
+            ind->aula[p1] = ind->aula[p2];
+            ind->aula[p2] = aux;
+
+        }
+
+        return melhorP2;
+    } else {
+        return -1;
+    }
+
+}
+
+Individuo *geraVizinho4(Problema *p, Individuo *ind) {
+    int i, p1, p2, aux;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+    /*** MOVE EVENT ***/
+    if (((float) rand()) / RAND_MAX < 0.5) {
+        p->nMoves++;
+move:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        //printf("posicoes sorteadas\n");
+
+        p2 = getPosCruz(p, p1, novoInd, 1);
+
+        if (p2 == -1) {
+            //printf("aconteceu ...\n");
+            goto move;
+        }
+
+        /*while (ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }*/
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando move\n");
+            goto move;
+        }
+    } else {
+        p->nSwaps++;
+        /*** SWAP EVENT ***/
+swap:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        //printf("posicoes sorteadas\n");
+
+        p2 = getPosCruz(p, p1, novoInd, 0);
+
+        if (p2 == -1) {
+            printf("aconteceu ...\n");
+            goto swap;
+        }
+
+
+        /*while (!ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }*/
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            //printf("voltando swap\n");
+            goto swap;
+        }
+    }
+
+
+    return novoInd;
+}
+
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
@@ -194,9 +366,9 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     }
 
     foAtual = funcaoObjetivo(p, indInicial);
-    printf("HARD: %f\n",somaViolacoesHard(p,indInicial));
-    printf("SOFT: %f\n",somaViolacoesSoft(p,indInicial));
-    exit(0);
+    printf("HARD: %f\n", somaViolacoesHard(p, indInicial));
+    printf("SOFT: %f\n", somaViolacoesSoft(p, indInicial));
+    //exit(0);
 
     //printf("Implementando\n");
     //printf("%s\n", p->nome);
@@ -279,7 +451,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
         } while (iteracoes < N);
 
         printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
-        somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
         t0 *= beta;
     } while (t0 > tMin);
 

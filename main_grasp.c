@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     FILE *fp;
 
 
-    srand(0);
+    srand(time(0));
 
     t1 = clock();
 
@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     p->txSwap = atof(argv[4]);
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
-    p->k = 1;
+    p->k = 10;
 
 
     /*for(i=0;i<p->nDisciplinas;i++){

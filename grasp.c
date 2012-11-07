@@ -941,7 +941,7 @@ void perturbaSolucao(Problema *p, Individuo *ind) {
 
     printf("FO: %f\n", funcaoObjetivo(p, ind));
     k = 0;
-    while (k < 10) {
+    while (k < 5) {
         p1 = rand() % p->dimensao;
         p2 = rand() % p->dimensao;
 
@@ -990,7 +990,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.9999999) {
+            if (((float) rand()) / RAND_MAX < 0.00000000000) {
                 vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual,listaTabu);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
@@ -1011,7 +1011,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //printf(": Melhor: %d\n", melhorVizinho);
 
 
-        imprimePercListaTabu(listaTabu, p->dimensao);
+        //imprimePercListaTabu(listaTabu, p->dimensao);
 
         deltaF = foVizinhos[melhorVizinho] - foAtual;
 
@@ -1056,12 +1056,12 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         iteracoesSemMelhora++;
 
 
-        /*/if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
+        if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
             printf("perturbando solucao\n");
             perturbaSolucao(p, solucaoAtual);
             foAtual = funcaoObjetivo(p, solucaoAtual);
             nPerturbacoes++;
-        }*/
+        }
 
         //printf("Iter: %d / FO: %f\n", iteracoesSemMelhora, foAtual);
     } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);

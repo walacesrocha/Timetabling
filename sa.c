@@ -177,7 +177,107 @@ swap:
     return novoInd;
 }
 
+Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, int *listaTabu) {
+    int i, p1, p2, aux, pTabu;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
 
+
+    /*** MOVE EVENT ***/
+    if (((float) rand()) / RAND_MAX < 0.5) {
+        p->nMoves++;
+move:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+        //printf("posicoes sorteadas\n");
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (p1 == p2 || ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        pTabu = p1 * p->dimensao + p2;
+
+        if (listaTabu[pTabu]) {
+            goto move;
+        }
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            listaTabu[pTabu] = 1;
+            //printf("voltando move\n");
+            goto move;
+        }
+
+        listaTabu[pTabu] = 1;
+    } else {
+        p->nSwaps++;
+        /*** SWAP EVENT ***/
+swap:
+
+        p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+        p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+        //printf("posicoes sorteadas\n");
+
+        while (!ehAula(p, novoInd->aula[p1])) {
+            p1++;
+            if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p1 = 0;
+            }
+        }
+
+        while (p1 == p2 || !ehAula(p, novoInd->aula[p2])) {
+            p2++;
+            if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+                p2 = 0;
+            }
+        }
+
+        pTabu = p1 * p->dimensao + p2;
+
+        if (listaTabu[pTabu]) {
+            goto move;
+        }
+
+        // faz a troca das posicoes
+        aux = novoInd->aula[p1];
+        novoInd->aula[p1] = novoInd->aula[p2];
+        novoInd->aula[p2] = aux;
+
+        if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+            troca_par(novoInd, p1, p2);
+            listaTabu[pTabu] = 1;
+            //printf("voltando swap\n");
+            goto swap;
+        }
+
+        listaTabu[pTabu] = 1;
+    }
+
+
+    return novoInd;
+}
 
 int getPosCruz(Problema *p, int p1, Individuo *ind, int pLivre) {
 

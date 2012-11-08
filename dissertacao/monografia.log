@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  2 NOV 2012 20:17
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  7 NOV 2012 22:29
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -312,9 +312,9 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <20.74> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 49.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 51.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 49.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 51.
  [3
 
 
@@ -332,69 +332,78 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 2.
-)
+ [7
+
+])
 \tf@toc=\write3
 \openout3 = `monografia.toc'.
 
- [7
-
-] (./monografia.lof)
+ [8] (./monografia.lof)
 \tf@lof=\write4
 \openout4 = `monografia.lof'.
 
- [8
+ [9
 
 
 ] (./monografia.lot)
 \tf@lot=\write5
 \openout5 = `monografia.lot'.
 
- [9
 
-]
-Cap\'{\i }tulo 1.
 [10
 
 ]
+Cap\'{\i }tulo 1.
+[11
+
+]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 86.
- [11]
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
+ [12]
 Cap\'{\i }tulo 2.
-[12
+[13
 
-] [13]
+] [14]
 Cap\'{\i }tulo 3.
-[14
+[15
 
-] (./monografia.bbl [15]
+] [16]
+Cap\'{\i }tulo 4.
+[17
+
+] [18]
+Cap\'{\i }tulo 5.
+[19
+
+] (./monografia.bbl [20]
 Underfull \hbox (badness 10000) in paragraph at lines 24--27
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
 
-) [16
+) [21
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 204.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 204.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[17
+[22
 
 ] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 1880 strings out of 94501
- 24719 string characters out of 1176790
- 74489 words of memory out of 1000000
- 4993 multiletter control sequences out of 10000+50000
+ 1882 strings out of 94501
+ 24758 string characters out of 1176790
+ 75489 words of memory out of 1000000
+ 4995 multiletter control sequences out of 10000+50000
  47350 words of font info for 62 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,9n,41p,432b,229s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 30i,9n,41p,425b,229s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (18 pages, 10452 bytes).
+Output written on monografia.dvi (23 pages, 15800 bytes).

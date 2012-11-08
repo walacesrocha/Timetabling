@@ -44,7 +44,9 @@ defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vitória,
 Estado do Espírito Santo, pela banca examinadora constituída pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
 
-\assinatura{Prof. Msc. Sérgio A. A. de Freitas\\ Orientador} \assinatura{Prof. Dr. Flávio Miguel Varejão\\ Universidade Federal do Espírito Santo} \assinatura{Prof. Dr. Raul Henriques Cardoso Lopes\\ Universidade Federal do Espírito Santo}
+\assinatura{Profa. Dr. Maria Claudia Silva Boeres\\ Orientadora}
+\assinatura{Profa. Dr. Maria Cristina Rangel\\ Co-orientadora}
+\assinatura{Prof. Dr. Fulano de Tal\\ Universidade Federal do Espírito Santo}
 \end{folhadeaprovacao}
 \begin{resumo}
 Escreva aqui o texto do seu resumo.
@@ -82,22 +84,26 @@ Neste capítulo são apresentados o objetivo desta monografia e a estrutura
 da mesma.
 \newpage
 
-
-\section{Objetivo deste trabalho}
+\section{Apresentação do problema}
 
 Nos dias de hoje, cada vez mais o assunto Segurança de Informação
 ganha destaque. Isto deve-se à existência de vulnerabilidades nas
 aplicações \cite{Io02}, nos sistemas operacionais, no \emph{hardware}
 de suporte à rede e no \emph{hardware} dos computadores. Estas vulnerabilidades
 
+\section{Motivação para o problema}
 
-\section{Estrutura da monografia}
+\section{Objetivos deste trabalho}
 
-No capítulo~\ref{cap:estado-da-arte} é apresentado o estado da arte
+
+\section{Organização do texto}
+
+
+
+No capítulo~ \ref{cap:estado-da-arte} é apresentado o estado da arte
 na área de segurança de redes ...
 
-
-\chapter{Revisão dos Conceitos de Segurança de Rede\label{cap:estado-da-arte}}
+\chapter{Estado da Arte\label{cap:estado-da-arte}}
 
 \vfill{}
 \begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
@@ -117,6 +123,47 @@ Estar fora deste mundo é como viver no passado. Mas estar conectado
 a maior rede de computadores do mundo, além de suas vantagens, tem
 suas desvantagens e problemas, e o maior problema existente na internet
 é a segurança.
+
+\section{Conceitos e definições}
+\section{Abordagens existentes}
+\section{Trabalhos relacionados}
+
+\chapter{Proposta do trabalho\label{cap:proposta-trabalho}}
+
+\vfill{}
+\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
+transforma.}''\\
+{\small Lavousier}\end{flushright}{\small \par}
+\vfill{}
+
+Neste capítulo é apresentado a proposta do trabalho
+...
+\newpage
+
+\section{Formulação do ITC-2007}
+
+\section{Algoritmo GRASP}
+
+
+\chapter{Resultados Computacionais\label{cap:resultados}}
+
+\vfill{}
+\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
+transforma.}''\\
+{\small Lavousier}\end{flushright}{\small \par}
+\vfill{}
+
+Neste capítulo é apresentado os resultados computacionais
+...
+\newpage
+
+\section{Descrição das instâncias utilizadas}
+
+\section{Detalhes de implementação}
+
+\section{Sintonia da Meta-heurística}
+
+\section{Análise dos resultados}
 
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}

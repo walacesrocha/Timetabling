@@ -87,7 +87,22 @@ Individuo *geraTimetableVazio(Problema *p) {
     return ind;
 }
 
-void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
+void retiraCandidato(AuxGrasp *auxGrasp, int aula) {
+    int i = 0;
+
+    while (auxGrasp->ind->aula[i] != aula) {
+        i++;
+    }
+    printf("%d/%d\n", i, auxGrasp->ind->n);
+
+    for (; i < auxGrasp->nCandidatos - 1; i++) {
+        auxGrasp->candidatos[i] = auxGrasp->candidatos[i + 1];
+    }
+
+    auxGrasp->nCandidatos--;
+}
+
+void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
     int i, j, k;
 
 
@@ -115,6 +130,23 @@ void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp) {
         auxGrasp->vetorPossibilidades[i]->id = i + 1;
     }
     auxGrasp->nrPossibilidades = 0;
+
+    if (indBase != NULL) {
+        int k;
+        printf("Aproveitando solucao anterior\n");
+        for (k = 0; k < p->dimensao; k++) {
+
+            if (ehAula(p, indBase->aula[k])) {
+                if (((float) rand()) / RAND_MAX < p->pAproveitamento) {
+                    auxGrasp->ind->aula[k] = indBase->aula[k];
+
+                    retiraCandidato(auxGrasp, indBase->aula[k]);
+                }
+            }
+        }
+
+
+    }
 
     //return auxGrasp;
 }
@@ -974,7 +1006,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
     vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
     foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
-    
+
     listaTabu = geraListaTabu(p->dimensao);
 
     foAtual = funcaoObjetivo(p, indInicial);
@@ -983,15 +1015,15 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     int iteracoesSemMelhora = 0;
     int iteracoesComMesmoFo = 0;
 
-    printf("I,%d,%d,%d,%d\n", solucaoAtual->soft1, solucaoAtual->soft2,
-            solucaoAtual->soft3, solucaoAtual->soft4);
+    //printf("I,%d,%d,%d,%d\n", solucaoAtual->soft1, solucaoAtual->soft2,
+    //      solucaoAtual->soft3, solucaoAtual->soft4);
 
     do {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
             if (((float) rand()) / RAND_MAX < 0.00000000000) {
-                vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual,listaTabu);
+                vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual, listaTabu);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
             }
@@ -1038,7 +1070,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             /////////////////aDesalocar = vizinho;
         }
 
-        printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
@@ -1047,10 +1079,10 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //somaViolacoesSoft(p, solucaoAtual);
 
-        if (iteracoesSemMelhora % 500 == 0) {
+        /*/if (iteracoesSemMelhora % 500 == 0) {
             printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
                     solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
-        }
+        }*/
 
 
         iteracoesSemMelhora++;
@@ -1177,10 +1209,10 @@ Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
     return solucaoAtual;
 }
 
-void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp) {
+void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
     int aula;
 
-    resetAuxGrasp(p, auxGrasp);
+    resetAuxGrasp(p, auxGrasp, indBase);
 
     /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
         //printf("%d ", auxGrasp->candidatos[i]);
@@ -1544,10 +1576,14 @@ Individuo *grasp(Problema *p) {
     p->f1 = p->f2 = p->f3 = 0;
 
     for (i = 0; i < p->maxIterGrasp; i++) {
-        printf("Iter:%d\n", i + 1);
-        geraSolucaoInicialGrasp(p, auxGrasp);
+        //printf("Iter:%d\n", i + 1);
+        if (i == 0) {
+            geraSolucaoInicialGrasp(p, auxGrasp, NULL);
+        } else {
+            geraSolucaoInicialGrasp(p, auxGrasp, bestInd);
+        }
         ind = auxGrasp->ind;
-        //printf("F1: %f\n", funcaoObjetivo(p, ind));
+        printf("F1: %f\n", funcaoObjetivo(p, ind));
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //if (i==4)exit(0);else continue;
@@ -1567,7 +1603,7 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 2;
-            p->rho = 2000;
+            p->rho = 5000;
             p->beta = 0.995;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
@@ -1586,23 +1622,13 @@ Individuo *grasp(Problema *p) {
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //printf("\n\n\n", fo);
 
-        p->t0 = 1;
-        p->rho = 2000;
-        p->beta = 0.995;
-        p->aceitaPioraSA = 1;
-        ind = simulatedAnnealing(p, ind);
-        
-        fo = funcaoObjetivo(p, ind);
-        ind->fitness = fo;
-        //printf("----------------------------------\n", fo);
-        printf("F2': %f\n", fo);
 
         p->soft1 += ind->soft1;
         p->soft2 += ind->soft2;
         p->soft3 += ind->soft3;
         p->soft4 += ind->soft4;
 
-        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 5) {// se pool de elites ja esta cheio
+        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 0) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
@@ -1610,7 +1636,7 @@ Individuo *grasp(Problema *p) {
         }
 
         if (fezPR) {// se fez Path-Relinking
-            //printf("F3: %f\n", foPR);
+            printf("F3: %f\n", foPR);
             if (foPR < fo) {
                 bestIter = indPr;
                 fo = foPR;

@@ -464,8 +464,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     }
 
     foAtual = funcaoObjetivo(p, indInicial);
-    printf("HARD: %f\n", somaViolacoesHard(p, indInicial));
-    printf("SOFT: %f\n", somaViolacoesSoft(p, indInicial));
+    //printf("HARD: %f\n", somaViolacoesHard(p, indInicial));
+    //printf("SOFT: %f\n", somaViolacoesSoft(p, indInicial));
     //exit(0);
 
     //printf("Implementando\n");

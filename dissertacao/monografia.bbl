@@ -5,6 +5,11 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.52 }
 
+\bibitem[Gotlieb 1962]{gotlieb62}
+\abntrefinfo{Gotlieb}{GOTLIEB}{1962}
+{GOTLIEB, C.~C. The construction of class-teacher time-tables. In:  \emph{IFIP
+  Congress}. [S.l.: s.n.], 1962. p. 73--77.}
+
 \bibitem[{Insecure org} 2002]{Io02}
 \abntrefinfo{{Insecure org}}{{Insecure org}}{2002}
 {{Insecure org}. \emph{The {N}etwork {E}xplotation {T}ool and {S}ecurity

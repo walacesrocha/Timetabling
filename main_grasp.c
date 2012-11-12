@@ -69,6 +69,7 @@ int main(int argc, char** argv) {
     p->txSwap = atof(argv[4]);
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
+    p->pAproveitamento = atof(argv[7]);
     p->k = 10;
 
 

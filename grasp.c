@@ -1604,7 +1604,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 2;
             p->rho = 5000;
-            p->beta = 0.995;
+            p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
         } else {

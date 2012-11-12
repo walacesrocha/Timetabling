@@ -508,6 +508,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
         int iteracoes = 0;
         float fo;
         int nPioras = 0;
+        float totalProb = 0;
         do {
             vizinho = geraVizinho2(p, solucaoAtual);
 
@@ -517,7 +518,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
             //printf("Df=%f\n", deltaF);
 
             aDesalocar = 0;
-            if (deltaF < 0) {// função objetivo decresceu
+            if (deltaF <= 0) {// função objetivo decresceu
                 foAtual = fo;
                 //printf("Melhorou... %f\n", foAtual);
                 aDesalocar = solucaoAtual;
@@ -527,7 +528,11 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
                 // calcula probabilidade de aceitação
                 float prob = pow(M_E, -deltaF / t0);
 
-                if (p->aceitaPioraSA && (float) rand() / RAND_MAX <= prob) {
+                //printf("%f <-> %f\n", prob, exp(-deltaF / t0));
+
+                totalProb += prob;
+
+                if (p->aceitaPioraSA && (((float) rand() / RAND_MAX) <= prob)) {
                     //printf("aceitou piora\n");
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
@@ -548,8 +553,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+        printf("T=%f, Pioras=%d, FO=%f (%f, %f) [%.3f]\n", t0, nPioras, foAtual,
+                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N);
         t0 *= beta;
     } while (t0 > tMin);
 

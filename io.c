@@ -57,6 +57,7 @@ Problema *lerInstancia(char *nomeArquivo) {
 
     // dimensao do problema
     p->dimensao = p->nDias * p->nPerDias * p->nSalas;
+    p->nDiasEperiodos = p->nDias * p->nPerDias;
 
     //printf("Leu disciplinas\n");
 

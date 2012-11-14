@@ -880,7 +880,7 @@ void alocaAula(Problema *p, AuxGrasp* auxGrasp, int aula, int permiteInviabilida
     //printf("np=%d\n", auxGrasp->nrPossibilidades);
     //printf("min=%d, max=%d\n", cMin, cMax);
     i = 0;
-    while (auxGrasp->vetorPossibilidades[i]->custo <= maxC && i < auxGrasp->nrPossibilidades) {
+    while (i < auxGrasp->nrPossibilidades && auxGrasp->vetorPossibilidades[i]->custo <= maxC) {
         i++;
     }
     //printf("8\n");
@@ -1604,7 +1604,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 5;
             p->rho = 5000;
-            p->beta = 0.999;
+            p->beta = 0.9;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
         } else {

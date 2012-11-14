@@ -1580,7 +1580,7 @@ Individuo *grasp(Problema *p) {
         if (i == 0) {
             geraSolucaoInicialGrasp(p, auxGrasp, NULL);
         } else {
-            geraSolucaoInicialGrasp(p, auxGrasp, bestInd);
+            geraSolucaoInicialGrasp(p, auxGrasp, NULL);
         }
         ind = auxGrasp->ind;
         printf("F1: %f\n", funcaoObjetivo(p, ind));
@@ -1602,7 +1602,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            p->t0 = 2;
+            p->t0 = 5;
             p->rho = 5000;
             p->beta = 0.999;
             p->aceitaPioraSA = 1;
@@ -1628,7 +1628,7 @@ Individuo *grasp(Problema *p) {
         p->soft3 += ind->soft3;
         p->soft4 += ind->soft4;
 
-        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 0) {// se pool de elites ja esta cheio
+        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 6) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;

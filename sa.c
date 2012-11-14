@@ -120,7 +120,7 @@ move:
             }
         }
 
-        while (ehAula(p, novoInd->aula[p2])) {
+        while (p1 == p2 || ehAula(p, novoInd->aula[p2])) {
             p2++;
             if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p2 = 0;
@@ -154,7 +154,8 @@ swap:
             }
         }
 
-        while (!ehAula(p, novoInd->aula[p2])) {
+        while (p1 == p2 || !ehAula(p, novoInd->aula[p2]) || 
+                aulasMesmaDisciplina3(p, novoInd->aula[p1],novoInd->aula[p2])) {
             p2++;
             if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p2 = 0;

@@ -5,6 +5,14 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.52 }
 
+\bibitem[Ceschia, Gaspero e Schaerf 2011]{CDGS11b}
+\abntrefinfo{Ceschia, Gaspero e Schaerf}{CESCHIA; GASPERO; SCHAERF}{2011}
+{CESCHIA, S.; GASPERO, L. D.; SCHAERF, A. Design, engineering, and experimental
+  analysis of a simulated annealing approach to the post-enrolment course
+  timetabling problem.
+\emph{Computers \& Operations Research}, v.~39, n.~7, p. 1615--1624, 2011.
+ISSN 0305-0548.}
+
 \bibitem[Gotlieb 1962]{gotlieb62}
 \abntrefinfo{Gotlieb}{GOTLIEB}{1962}
 {GOTLIEB, C.~C. The construction of class-teacher time-tables. In:  \emph{IFIP
@@ -16,6 +24,11 @@
   {S}canner}. 2002.
 URL: http://www.insecure.org/nmap.
 Last Visited: 22/07/2002.}
+
+\bibitem[PATAT 2008]{itc2007}
+\abntrefinfo{PATAT}{PATAT}{2008}
+{PATAT. \emph{International Timetabling Competition}. 2008.
+URL: http://www.cs.qub.ac.uk/itc2007.}
 
 \bibitem[{Saint Corporation} 2002]{SC02}
 \abntrefinfo{{Saint Corporation}}{{Saint Corporation}}{2002}

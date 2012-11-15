@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  10 NOV 2012 12:08
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  15 NOV 2012 16:56
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -359,55 +359,61 @@ Cap\'{\i }tulo 1.
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 83.
- [12]
+ [12] [13]
 Cap\'{\i }tulo 2.
-[13
+[14
 
-] [14]
+] [15]
 Cap\'{\i }tulo 3.
-[15
+[16
 
-] [16]
+] [17]
 Cap\'{\i }tulo 4.
-[17
+[18
 
-]
+] [19]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 163.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 211.
 
- [18]
+ [20]
 Cap\'{\i }tulo 5.
-[19
+[21
 
-] (./monografia.bbl [20]
-Underfull \hbox (badness 10000) in paragraph at lines 29--32
+] (./monografia.bbl [22]
+Underfull \hbox (badness 10000) in paragraph at lines 30--32
+[]\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
+e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--45
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
 
-) [21
+) [23
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 207.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 253.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 207.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 253.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[22
+[24
 
 ] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 1885 strings out of 94501
- 24796 string characters out of 1176790
- 75489 words of memory out of 1000000
- 4998 multiletter control sequences out of 10000+50000
+ 1888 strings out of 94501
+ 24830 string characters out of 1176790
+ 81489 words of memory out of 1000000
+ 5001 multiletter control sequences out of 10000+50000
  47350 words of font info for 62 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,9n,41p,688b,229s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 30i,10n,41p,716b,229s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (23 pages, 16584 bytes).
+Output written on monografia.dvi (25 pages, 25224 bytes).

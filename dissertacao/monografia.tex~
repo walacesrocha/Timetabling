@@ -21,7 +21,7 @@
 \coorientador{Maria Cristina Rangel}
 
 
-\comentario{Monografia apresentada para obtenção do Grau de Bacharel em Ciência
+\comentario{Dissertação apresentada para obtenção do Grau de Bacharel em Ciência
 da Computação pela Universidade Federal do Espírito Santo.}
 
 
@@ -39,7 +39,7 @@ Federal do Espírito Santo}
 \folhaderosto
 
 \begin{folhadeaprovacao}
-Monografia de Projeto Final de Graduação sob o título \textit{``\ABNTtitulodata''},
+Dissertação de Projeto Final de Graduação sob o título \textit{``\ABNTtitulodata''},
 defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vitória,
 Estado do Espírito Santo, pela banca examinadora constituída pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
@@ -76,7 +76,7 @@ Agradeço a ...
 \vfill{}
 \vfill{}
 
-Neste capítulo são apresentados o objetivo desta monografia e a estrutura
+Neste capítulo são apresentados o objetivo desta dissertação e a estrutura
 da mesma.
 \newpage
 
@@ -84,19 +84,25 @@ da mesma.
 
 O problema de tabela-horário consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, por exemplo, quando um aluno não consegue matricular em duas disciplinas porque elas são alocadas no mesmo horário.
 
-Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb63}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados. 
+Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados. 
 
 \section{Motivação para o problema}
 
 \section{Objetivos deste trabalho}
+
+O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, será escolhida uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
+
+Para atingir este objetivo será necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
+
+Deseja-se por fim coletar na literatura resultados obtidos para o problema com diferentes técnicas de solução, a fim de comparar com o algoritmo proposto.
 
 
 \section{Organização do texto}
 
 
 
-No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte
-na área de segurança de redes ...
+No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as principais técnicas de solução do problema. No capítulo \ref{cap:proposta-trabalho} são apresentados a formulação do problema segundo o ITC-2007, o algoritmo GRASP e sua aplicação no problema. No capítulo \ref{cap:resultados} são apresentados detalhes de implementação, instâncias de testes e os resultados obtidos. No capítulo \ref{cap:conclusao} são listadas as conclusões obtidas no trabalho e enumerados alguns trabalhos futuros.
+
 
 \chapter{Estado da Arte\label{cap:estado-da-arte}}
 
@@ -154,13 +160,53 @@ Neste capítulo é apresentado os resultados computacionais
 
 \section{Descrição das instâncias utilizadas}
 
+As instâncias utilizadas foram as mesmas submetidas aos competidores do ITC-2007.
+São 21 instâncias ao todo, com grau de dificuldade variado. A organização garante que existe solução viável para todas as instâncias, fato que foi comprovado nos testes. Mas nada foi informado sobre a quantidade de violações fracas em cada instância. Em \cite{itc2007} podem ser obtidas todas as instâncias.
+
+Na tabela \ref{tab:instancias} são apresentados os dados mais relevantes de cada instância. A quantidade de horários de aula numa semana não varia muito de instância para instância. Já a quantidade de currículos e disciplinas varia bastante e tem relação direta com o tempo de execução do algoritmo e a quantidade de violações fracas.
+
+\begin{table}[!htb]
+\centering
+\caption{Tabela com informações sobre cada instância do ITC-2007}
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+{\bf Instância} & {\bf Currículos} & {\bf Salas} & {\bf Disciplinas} &{\bf Horários por dia}&{\bf Dias}\\\hline
+comp01 & 14 & 6 & 30 & 6 & 5\\ 
+comp02 & 70 & 16 & 82 & 5 & 5\\ 
+comp03 & 68 & 16 & 72 & 5 & 5\\ 
+comp04 & 57 & 18 & 79 & 5 & 5\\ 
+comp05 & 139 & 9 & 54 & 6 & 6\\ 
+comp06 & 70 & 18 & 108 & 5 & 5\\ 
+comp07 & 77 & 20 & 131 & 5 & 5\\ 
+comp08 & 61 & 18 & 86 & 5 & 5\\ 
+comp09 & 75 & 18 & 76 & 5 & 5\\ 
+comp10 & 67 & 18 & 115 & 5 & 5\\ 
+comp11 & 13 & 5 & 30 & 9 & 5\\ 
+comp12 & 150 & 11 & 88 & 6 & 6\\ 
+comp13 & 66 & 19 & 82 & 5 & 5\\ 
+comp14 & 60 & 17 & 85 & 5 & 5\\ 
+comp15 & 68 & 16 & 72 & 5 & 5\\ 
+comp16 & 71 & 20 & 108 & 5 & 5\\ 
+comp17 & 70 & 17 & 99 & 5 & 5\\ 
+comp18 & 52 & 9 & 47 & 6 & 6\\ 
+comp19 & 66 & 16 & 74 & 5 & 5\\ 
+comp20 & 78 & 19 & 121 & 5 & 5\\ 
+comp21 & 78 & 18 & 94 & 5 & 5\\\hline
+\label{tab:instancias}
+\end{tabular}
+\end{table}
+
+
 \section{Detalhes de implementação}
 
 \section{Sintonia da Meta-heurística}
 
-\begin{itemize}
 
-\item Taxa de MOVE/SWAP
+
+Duas estruturas de vizinhança foram usadas neste trabalho para a fase de busca local: \textit{MOVE} e \textit{SWAP}. Em \cite{CDGS11b} essas duas estruturas também são usadas, só que aplicadas de maneira diferente. Na geração do vizinho sempre é usado o \textit{MOVE}. Em alguns casos ocorre \textit{SWAP} juntamente com o \textit{MOVE}. Essa probabilidade de ocorrer o \textit{SWAP} foi parametrizada. Experimentalmente foi escolhido um valor de $40\%$.
+
+Testes mostraram que aplicar \textit{MOVE} e \textit{SWAP} separadamente é mais eficiente. Foi observado que separadamente eles produzem melhores soluções e de forma mais rápida. Cada um ocorre com a mesma probabilidade de $50\% $.
+
+\begin{itemize}
 
 \item Temperatura inicial do SA para busca local
 

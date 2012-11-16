@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  15 NOV 2012 16:56
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  16 NOV 2012 15:41
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -359,7 +359,13 @@ Cap\'{\i }tulo 1.
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 83.
- [12] [13]
+
+Overfull \hbox (3.74834pt too wide) in paragraph at lines 95--96
+[]\T1/ptm/m/n/12 Existe uma ne-ces-si-dade de pro-por al-go-rit-mos cada vez ma
+is efi-ci-en-tes que pro-du-zam tabelas-
+ []
+
+[12] [13]
 Cap\'{\i }tulo 2.
 [14
 
@@ -371,9 +377,14 @@ Cap\'{\i }tulo 3.
 Cap\'{\i }tulo 4.
 [18
 
-] [19]
+]
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 178--203
+[][] 
+ []
+
+[19]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 211.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 221.
 
  [20]
 Cap\'{\i }tulo 5.
@@ -386,7 +397,7 @@ e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--50
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
@@ -395,9 +406,9 @@ ptm/m/n/12 . 2002. URL:
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 253.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 263.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 253.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 263.
 
 Anexo A.
 +-------------------------------------------------------------------+
@@ -408,12 +419,12 @@ Anexo A.
 
 ] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 1888 strings out of 94501
- 24830 string characters out of 1176790
- 81489 words of memory out of 1000000
- 5001 multiletter control sequences out of 10000+50000
+ 1889 strings out of 94501
+ 24848 string characters out of 1176790
+ 84489 words of memory out of 1000000
+ 5002 multiletter control sequences out of 10000+50000
  47350 words of font info for 62 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,10n,41p,716b,229s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 30i,10n,41p,836b,249s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (25 pages, 25224 bytes).
+Output written on monografia.dvi (25 pages, 29220 bytes).

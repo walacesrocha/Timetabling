@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  16 NOV 2012 23:18
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  17 NOV 2012 16:56
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -370,61 +370,157 @@ Cap\'{\i }tulo 2.
 [14
 
 ] [15]
-Cap\'{\i }tulo 3.
-[16
 
-] [17]
-Cap\'{\i }tulo 4.
+LaTeX Warning: Citation `3-phaseSA' on page 16 undefined on input line 152.
+
+
+LaTeX Warning: Citation `sa_hyper_heuristica' on page 16 undefined on input lin
+e 152.
+
+
+LaTeX Warning: Citation `Elmohamed98acomparison' on page 16 undefined on input 
+line 152.
+
+
+LaTeX Warning: Citation `Erben95agenetic' on page 16 undefined on input line 15
+2.
+
+
+LaTeX Warning: Citation `suyanto' on page 16 undefined on input line 152.
+
+
+LaTeX Warning: Citation `Kanoh:2008:KGA:1460198.1460201' on page 16 undefined o
+n input line 152.
+
+
+LaTeX Warning: Citation `elloumi2008' on page 16 undefined on input line 152.
+
+
+LaTeX Warning: Citation `albetar_harmony' on page 16 undefined on input line 15
+2.
+
+[16]
+
+LaTeX Warning: Citation `massoodian2008' on page 17 undefined on input line 154
+.
+
+
+LaTeX Warning: Citation `3-phaseSA' on page 17 undefined on input line 154.
+
+
+LaTeX Warning: Citation `Souza:2004' on page 17 undefined on input line 156.
+
+
+LaTeX Warning: Citation `Vieira_agrasp' on page 17 undefined on input line 156.
+
+
+[17]
+Cap\'{\i }tulo 3.
 [18
 
+] [19]
+Cap\'{\i }tulo 4.
+[20
+
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 179--204
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 200--225
 [][] 
  []
 
-[19]
+[21]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 222.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 243.
 
- [20]
+ [22]
 Cap\'{\i }tulo 5.
-[21
+[23
 
-] (./monografia.bbl [22]
-Underfull \hbox (badness 10000) in paragraph at lines 30--32
+] (./monografia.bbl [24]
+Underfull \hbox (badness 1112) in paragraph at lines 10--16
+[]\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
+ []
+
+
+Underfull \hbox (badness 2277) in paragraph at lines 10--16
+\T1/ptm/m/n/12 ti-me-ta-bling with sat and max-sat. \T1/ptm/m/it/12 An-nals of 
+Ope-ra-ti-ons Re-se-arch\T1/ptm/m/n/12 , Sprin-ger Nether-
+ []
+
+
+Underfull \hbox (badness 1845) in paragraph at lines 10--16
+\T1/ptm/m/n/12 lands, p. 1--21, 2010. ISSN 0254-5330. 10.1007/s10479-012-1081-x
+. Dis-po-ní-vel em:
+ []
+
+[25
+
+]
+Underfull \hbox (badness 1796) in paragraph at lines 93--99
+\T1/ptm/m/n/12 exis-tence of so-lu-ti-ons to the ti-me-ta-ble pro-blem. \T1/ptm
+/m/it/12 Com-mun. ACM\T1/ptm/m/n/12 , ACM, New York,
+ []
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 93--99
+\T1/ptm/m/n/12 NY, USA, v. 17, n. 8, p. 450--453, ago. 1974. ISSN 0001-0782. Di
+s-po-ní-vel em:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--119
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--50
+Underfull \hbox (badness 1221) in paragraph at lines 134--140
+\T1/ptm/m/n/12 ve-lo-ping a so-lu-tion to the fa-culty ti-me-ta-ble pro-blem. \
+T1/ptm/m/it/12 Com-put. J.\T1/ptm/m/n/12 , Ox-ford Uni-ver-sity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--146
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
 
-) [23
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+[]\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
+it/12 Eu-ro-pean Jour-
+ []
+
+
+Underfull \hbox (badness 5374) in paragraph at lines 149--155
+\T1/ptm/m/it/12 nal of Ope-ra-ti-o-nal Re-se-arch\T1/ptm/m/n/12 , v. 19, n. 2, 
+p. 151--162, 1985. Dis-po-ní-vel em:
+ []
+
+) [26]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 285.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 285.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[24
+[27
 
-] (./monografia.aux) ) 
+] (./monografia.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1889 strings out of 94501
- 24848 string characters out of 1176790
+ 1915 strings out of 94501
+ 25297 string characters out of 1176790
  84489 words of memory out of 1000000
- 5002 multiletter control sequences out of 10000+50000
+ 5028 multiletter control sequences out of 10000+50000
  47350 words of font info for 62 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,10n,41p,836b,249s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 30i,10n,41p,1080b,304s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (25 pages, 30588 bytes).
+Output written on monografia.dvi (28 pages, 40964 bytes).

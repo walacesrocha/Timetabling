@@ -125,14 +125,36 @@ O problema de tabela-horário não possui uma formulação única. Como pode ser vist
 
 Apesar das diferentes formulações, os problemas de tabela-horário possuem uma característica em comum: a separação das restrições em dois grupos. São fortes ou fracas.
 
-As restrições fortes são aquelas que não podem ser violadas, como por exemplo, restringir que o aluno só assista uma aula num dado horário ou exigir que num dado horário uma sala só possa ser ocupada por uma aula. Se uma tabela-horário não viola nenhuma restrição forte ela é dita ser uma solução viável. 
+As restrições fortes são aquelas que não podem ser violadas. Elas restringem o conjunto de soluções para impedir certas situações irreais, como por exemplo, alunos assistindo mais de uma aula no mesmo tempo ou uma sala sendo alocada para mais de uma aula no mesmo horário. Se uma tabela-horário não viola nenhuma restrição forte ela é dita ser uma solução viável.
 
 As restrições fracas são aquelas que não interferem na viabilidade da solução, mas refletem certas preferências das instituições. É desejável, por exemplo, que um aluno não tenha aulas isoladas durante o dia ou que aulas da mesma disciplina sejam lecionadas na mesma sala. As restrições fracas podem possuir pesos diferentes.
 
 O objetivo do problema é encontrar uma tabela-horário viável e que minimize a quantidade de violações fracas, portanto, um problema de minimização.
 
 \section{Conceitos e definições}
+
 \section{Abordagens existentes}
+
+As técnicas usadas para resolver o problema de tabela-horário são bastante diversificadas. As mais antigas, as heurísticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma até finalizar a construção da tabela. Conflitos eram resolvidos realizando trocas de aulas.
+
+\cite{Neufeld} propôs uma redução do problema ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}.
+
+\cite{deWerra82} reduziram o problema de tabela-horário ao problema de fluxo de redes. As aulas são representadas pelos vértices. Uma rede é criada para cada horário e o fluxo na rede identifica as aulas que são lecionadas no mesmo horário. Posteriormente, \cite{deWerra85} usou uma idéia similar, mas cada fluxo representa uma classe e os vértices são horários e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
+
+De uns anos para cá as técnicas de solução para o problema têm recaído basicamente em três grupos: programação matemática, programação em lógica e principalmente meta-heurísticas.
+
+Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} pode ser vista outra formulação com algumas relaxações. Com um tempo de execução aproximado de quinze minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Uma grande contribuição destes dois trabalhos é que eles forneceram limites inferiores para a quantidade de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira que trata algumas particularidades das escolas brasileiras de ensino fundamental.
+
+Alguns resultados relevantes também tem sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} em que se conseguiu melhorar quase metade das respostas que eram conhecidas à época para as instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
+
+No ramo da inteligência artificial as meta-heurísticas têm sido bastante utilizadas, abrangendo grande parte dos trabalhos recentes na área. Grande parte do sucesso das meta-heurísticas se deve à estrutura simples do algoritmo e também pelos bons resultados alcançados. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais aplicadas. Há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia.
+
+Algoritmos eficientes que produzem bons resultados têm sido encontrados usando \textit{Simulated Annealing} \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
+
+Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tabela-horário em três etapas, cada uma executando um procedimento de \textit{Simulated Annealing} independente.
+
+Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004} e \cite{Vieira_agrasp}. Além disso propõe melhorias para um algoritmo genético e um \textit{Simulated Annealing} encontrados na literatura e aplicados à mesma formulação do problema.
+
 \section{Trabalhos relacionados}
 
 \chapter{Proposta do trabalho\label{cap:proposta-trabalho}}

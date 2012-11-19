@@ -5,10 +5,70 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.52 }
 
+\bibitem[Achá e Nieuwenhuis 2010]{springerlink:10.1007/s10479-012-1081-x}
+\abntrefinfo{Achá e Nieuwenhuis}{ACHá; NIEUWENHUIS}{2010}
+{ACHá, R. A.; NIEUWENHUIS, R. Curriculum-based course timetabling with sat and
+  maxsat.
+\emph{Annals of Operations Research}, Springer Netherlands, p. 1--21, 2010.
+ISSN 0254-5330.
+10.1007/s10479-012-1081-x.
+Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1007/s10479-012-1081-x$>$.}
+
+\bibitem[Burke et al. 2008]{Burke_abranch-andcut}
+\abntrefinfo{Burke et al.}{BURKE et al.}{2008}
+{BURKE, E.~K. et al. A branch-andcut procedure for the udine course
+  timetabling. In:  \emph{Problem, Proceedings of the 7th PATAT Conference,
+  2008}. [S.l.: s.n.], 2008.}
+
+\bibitem[Ceschia, Gaspero e Schaerf 2011]{CDGS11b}
+\abntrefinfo{Ceschia, Gaspero e Schaerf}{CESCHIA; GASPERO; SCHAERF}{2011}
+{CESCHIA, S.; GASPERO, L. D.; SCHAERF, A. Design, engineering, and experimental
+  analysis of a simulated annealing approach to the post-enrolment course
+  timetabling problem.
+\emph{Computers \& Operations Research}, v.~39, n.~7, p. 1615--1624, 2011.
+ISSN 0305-0548.}
+
+\bibitem[Chahal e Werra 1989]{chahal1989}
+\abntrefinfo{Chahal e Werra}{CHAHAL; WERRA}{1989}
+{CHAHAL, N.; WERRA, D. D. An interactive system for constructing timetables on
+  a pc.
+\emph{European Journal of Operational Research}, Elsevier, v.~40, n.~1, p.
+  32--37, 1989.}
+
+\bibitem[Dinkel, Mote e Venkataramanan 1989]{dinkel1989or}
+\abntrefinfo{Dinkel, Mote e Venkataramanan}{DINKEL; MOTE; VENKATARAMANAN}{1989}
+{DINKEL, J.; MOTE, J.; VENKATARAMANAN, M. Or practice - an efficient decision
+  support system for academic course scheduling.
+\emph{Operations Research}, INFORMS, v.~37, n.~6, p. 853--864, 1989.}
+
+\bibitem[Filho e Lorena 2006]{ribeiro2006integer}
+\abntrefinfo{Filho e Lorena}{FILHO; LORENA}{2006}
+{FILHO, G. R.; LORENA, L. An integer programming model for the school
+  timetabling problem. In:  CITESEER. \emph{XIII CLAIO: Congreso
+  Latino-Iberoamericano de Investigaci{\'o}n Operativa}. [S.l.], 2006.}
+
+\bibitem[Goltz e Matzke 1999]{Goltz99universitytimetabling}
+\abntrefinfo{Goltz e Matzke}{GOLTZ; MATZKE}{1999}
+{GOLTZ, H.-J.; MATZKE, D. University timetabling using constraint logic
+  programming. In:  \emph{PRACTICAL ASPECTS OF DECLARATIVE LANGUAGES}. [S.l.]:
+  Springer-Verlag, 1999. p. 320--334.}
+
 \bibitem[Gotlieb 1962]{gotlieb62}
 \abntrefinfo{Gotlieb}{GOTLIEB}{1962}
 {GOTLIEB, C.~C. The construction of class-teacher time-tables. In:  \emph{IFIP
   Congress}. [S.l.: s.n.], 1962. p. 73--77.}
+
+\bibitem[Gueret et al. 1995]{Gueret95buildinguniversity}
+\abntrefinfo{Gueret et al.}{GUERET et al.}{1995}
+{GUERET, C. et al. \emph{Building University timetables using Constraint Logic
+  Programming}. 1995.}
+
+\bibitem[IBM 2012]{cplex}
+\abntrefinfo{IBM}{IBM}{2012}
+{IBM. \emph{IBM ILOG CPLEX Optimization Studio}. 2012.
+Dispon{\'\i}vel em:
+  $<$http://www-01.ibm.com/software/integration/optimization/cplex-optimizatio%
+n-studio/$>$.}
 
 \bibitem[{Insecure org} 2002]{Io02}
 \abntrefinfo{{Insecure org}}{{Insecure org}}{2002}
@@ -17,6 +77,46 @@
 URL: http://www.insecure.org/nmap.
 Last Visited: 22/07/2002.}
 
+\bibitem[Junginger 1986]{Junginger:1986:TGS}
+\abntrefinfo{Junginger}{JUNGINGER}{1986}
+{JUNGINGER, W. Timetabling in {G}ermany -- {A} survey.
+\emph{Interfaces}, v.~16, n.~4, p. 66--74, 1986.}
+
+\bibitem[Lach e Lubbecke 2010]{lach_lubbecke}
+\abntrefinfo{Lach e Lubbecke}{LACH; LUBBECKE}{2010}
+{LACH, G.; LUBBECKE, M.~E. Curriculum based course timetabling: new solutions
+  to udine benchmark instances.
+\emph{Annals of Operations Research}, 2010.}
+
+\bibitem[Neufeld e Tartar 1974]{Neufeld}
+\abntrefinfo{Neufeld e Tartar}{NEUFELD; TARTAR}{1974}
+{NEUFELD, G.~A.; TARTAR, J. Graph coloring conditions for the existence of
+  solutions to the timetable problem.
+\emph{Commun. ACM}, ACM, New York, NY, USA, v.~17, n.~8, p. 450--453, ago.
+  1974.
+ISSN 0001-0782.
+Dispon{\'\i}vel em: $<$http://doi.acm.org/10.1145/361082.361092$>$.}
+
+\bibitem[Ostermann e Werra 1982]{deWerra82}
+\abntrefinfo{Ostermann e Werra}{OSTERMANN; WERRA}{1982}
+{OSTERMANN, R.; WERRA, D. Some experiments with a timetabling system.
+\emph{Operations-Research-Spektrum}, Springer-Verlag, v.~3, p. 199--204, 1982.
+ISSN 0171-6468.
+Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1007/BF01719788$>$.}
+
+\bibitem[Papoulias 1980]{papoulias}
+\abntrefinfo{Papoulias}{PAPOULIAS}{1980}
+{PAPOULIAS, D.~B. The assignment-to-days problem in a school time-table, a
+  heuristic approach.
+\emph{European Journal of Operational Research}, v.~4, n.~1, p. 31--41, 1980.
+Dispon{\'\i}vel em:
+  $<$http://EconPapers.repec.org/RePEc:eee:ejores:v:4:y:1980:i:1:p:31-41$>$.}
+
+\bibitem[PATAT 2008]{itc2007}
+\abntrefinfo{PATAT}{PATAT}{2008}
+{PATAT. \emph{International Timetabling Competition}. 2008.
+URL: http://www.cs.qub.ac.uk/itc2007.}
+
 \bibitem[{Saint Corporation} 2002]{SC02}
 \abntrefinfo{{Saint Corporation}}{{Saint Corporation}}{2002}
 {{Saint Corporation}. \emph{{S}ecurity {A}dministrator's {In}tegrated {T}ool}.
@@ -24,10 +124,33 @@ Last Visited: 22/07/2002.}
 URL: http://www.saintcorporation.com/index.html.
 Last Visited: 22/07/2002.}
 
+\bibitem[Schaerf 1995]{Schaerf95asurvey}
+\abntrefinfo{Schaerf}{SCHAERF}{1995}
+{SCHAERF, A. A survey of automated timetabling.
+\emph{ARTIFICIAL INTELLIGENCE REVIEW}, v.~13, p. 87--127, 1995.}
+
+\bibitem[Selim 1988]{Selim:1988}
+\abntrefinfo{Selim}{SELIM}{1988}
+{SELIM, S.~M. Split vertices in vertex colouring and their application in
+  developing a solution to the faculty timetable problem.
+\emph{Comput. J.}, Oxford University Press, Oxford, UK, v.~31, n.~1, p. 76--82,
+  fev. 1988.
+ISSN 0010-4620.
+Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1093/comjnl/31.1.76$>$.}
+
 \bibitem[{The Nessus Project} 2002]{NP02}
 \abntrefinfo{{The Nessus Project}}{{The Nessus Project}}{2002}
 {{The Nessus Project}. \emph{The Nessus Project}. 2002.
 URL: http://www.nessus.org.
 Last Visited: 22/07/2002.}
+
+\bibitem[Werra 1985]{deWerra85}
+\abntrefinfo{Werra}{WERRA}{1985}
+{WERRA, D. de. An introduction to timetabling.
+\emph{European Journal of Operational Research}, v.~19, n.~2, p. 151--162,
+  1985.
+Dispon{\'\i}vel em:
+  $<$http://EconPapers.repec.org/RePEc:eee:ejores:v:19:y:1985:i:2:p:151-162$>$%
+.}
 
 \end{thebibliography}

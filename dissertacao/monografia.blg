@@ -3,9 +3,7 @@ The top-level auxiliary file: monografia.aux
 The style file: abnt-alf.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: monografia.bib
-Warning--I didn't find a database entry for "3-phaseSA"
 Warning--I didn't find a database entry for "sa_hyper_heuristica"
-Warning--I didn't find a database entry for "Elmohamed98acomparison"
 Warning--I didn't find a database entry for "Erben95agenetic"
 Warning--I didn't find a database entry for "suyanto"
 Warning--I didn't find a database entry for "Kanoh:2008:KGA:1460198.1460201"
@@ -21,45 +19,45 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 22 entries,
+You've used 25 entries,
             6523 wiz_defined-function locations,
-            1336 strings with 13141 characters,
-and the built_in function-call counts, 17883 in all, are:
-= -- 1463
-> -- 583
-< -- 41
-+ -- 261
-- -- 179
-* -- 1273
-:= -- 2437
-add.period$ -- 93
-call.type$ -- 22
-change.case$ -- 215
-chr.to.int$ -- 52
-cite$ -- 22
-duplicate$ -- 869
-empty$ -- 1350
-format.name$ -- 844
-if$ -- 4240
+            1350 strings with 13526 characters,
+and the built_in function-call counts, 20078 in all, are:
+= -- 1609
+> -- 665
+< -- 45
++ -- 293
+- -- 204
+* -- 1433
+:= -- 2731
+add.period$ -- 103
+call.type$ -- 25
+change.case$ -- 243
+chr.to.int$ -- 58
+cite$ -- 25
+duplicate$ -- 973
+empty$ -- 1532
+format.name$ -- 960
+if$ -- 4761
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 380
-newline$ -- 128
-num.names$ -- 110
-pop$ -- 481
+missing$ -- 430
+newline$ -- 141
+num.names$ -- 125
+pop$ -- 547
 preamble$ -- 1
-purify$ -- 81
+purify$ -- 92
 quote$ -- 0
-skip$ -- 972
+skip$ -- 1096
 stack$ -- 1
-substring$ -- 775
-swap$ -- 437
-text.length$ -- 31
+substring$ -- 858
+swap$ -- 485
+text.length$ -- 34
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 3
+type$ -- 4
 warning$ -- 0
-while$ -- 165
+while$ -- 185
 width$ -- 0
-write$ -- 374
-(There were 11 warnings)
+write$ -- 419
+(There were 9 warnings)

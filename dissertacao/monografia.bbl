@@ -41,6 +41,12 @@ ISSN 0305-0548.}
   support system for academic course scheduling.
 \emph{Operations Research}, INFORMS, v.~37, n.~6, p. 853--864, 1989.}
 
+\bibitem[Elmohamed, Coddington e Fox 1998]{Elmohamed98acomparison}
+\abntrefinfo{Elmohamed, Coddington e Fox}{ELMOHAMED; CODDINGTON; FOX}{1998}
+{ELMOHAMED, M. A.~S.; CODDINGTON, P.; FOX, G. A comparison of annealing
+  techniques for academic course scheduling. In:  \emph{Lecture Notes in
+  Computer Science}. [S.l.: s.n.], 1998.}
+
 \bibitem[Filho e Lorena 2006]{ribeiro2006integer}
 \abntrefinfo{Filho e Lorena}{FILHO; LORENA}{2006}
 {FILHO, G. R.; LORENA, L. An integer programming model for the school
@@ -82,11 +88,22 @@ Last Visited: 22/07/2002.}
 {JUNGINGER, W. Timetabling in {G}ermany -- {A} survey.
 \emph{Interfaces}, v.~16, n.~4, p. 66--74, 1986.}
 
+\bibitem[Kostuch 2006]{3-phaseSA}
+\abntrefinfo{Kostuch}{KOSTUCH}{2006}
+{KOSTUCH, P. \emph{The University Course Timetabling Problem with a 3-phase
+  approach}. 2006.}
+
 \bibitem[Lach e Lubbecke 2010]{lach_lubbecke}
 \abntrefinfo{Lach e Lubbecke}{LACH; LUBBECKE}{2010}
 {LACH, G.; LUBBECKE, M.~E. Curriculum based course timetabling: new solutions
   to udine benchmark instances.
 \emph{Annals of Operations Research}, 2010.}
+
+\bibitem[Lewis 2007]{Lewis2007:survey}
+\abntrefinfo{Lewis}{LEWIS}{2007}
+{LEWIS, R. A survey of metaheuristic-based techniques for university
+  timetabling problems.
+\emph{OR Spectrum}, v.~30, n.~1, p. 167--190, 2007.}
 
 \bibitem[Neufeld e Tartar 1974]{Neufeld}
 \abntrefinfo{Neufeld e Tartar}{NEUFELD; TARTAR}{1974}

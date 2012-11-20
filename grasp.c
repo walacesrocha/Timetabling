@@ -7,6 +7,7 @@
 #include "auxiliar.h"
 #include "buscalocal.h"
 #include "tabu.h"
+#include "gd.h"
 
 /**
  * Compara duas aulas em relação a dificuldade. 
@@ -1607,6 +1608,8 @@ Individuo *grasp(Problema *p) {
             p->beta = 0.9;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
+        } else if (p->buscaLocalGrasp == 7) {
+            ind = greatDeluge(p, ind);
         } else {
             //printf("Tipo de busca local nao foi informada!\n");
             //exit(1);
@@ -1628,7 +1631,7 @@ Individuo *grasp(Problema *p) {
         p->soft3 += ind->soft3;
         p->soft4 += ind->soft4;
 
-        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 6) {// se pool de elites ja esta cheio
+        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;

@@ -16,6 +16,8 @@
       <itemPath>buscalocal.h</itemPath>
       <itemPath>fitness.c</itemPath>
       <itemPath>fitness.h</itemPath>
+      <itemPath>gd.c</itemPath>
+      <itemPath>gd.h</itemPath>
       <itemPath>genetico.c</itemPath>
       <itemPath>genetico.h</itemPath>
       <itemPath>grasp.c</itemPath>

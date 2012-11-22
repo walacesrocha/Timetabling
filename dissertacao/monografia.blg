@@ -3,7 +3,6 @@ The top-level auxiliary file: monografia.aux
 The style file: abnt-alf.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: monografia.bib
-Warning--I didn't find a database entry for "sa_hyper_heuristica"
 Warning--I didn't find a database entry for "Erben95agenetic"
 Warning--I didn't find a database entry for "suyanto"
 Warning--I didn't find a database entry for "Kanoh:2008:KGA:1460198.1460201"
@@ -19,45 +18,45 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 25 entries,
+You've used 26 entries,
             6523 wiz_defined-function locations,
-            1350 strings with 13526 characters,
-and the built_in function-call counts, 20078 in all, are:
-= -- 1609
-> -- 665
-< -- 45
-+ -- 293
-- -- 204
-* -- 1433
-:= -- 2731
-add.period$ -- 103
-call.type$ -- 25
-change.case$ -- 243
-chr.to.int$ -- 58
-cite$ -- 25
-duplicate$ -- 973
-empty$ -- 1532
-format.name$ -- 960
-if$ -- 4761
+            1359 strings with 13854 characters,
+and the built_in function-call counts, 21099 in all, are:
+= -- 1690
+> -- 707
+< -- 48
++ -- 310
+- -- 216
+* -- 1514
+:= -- 2867
+add.period$ -- 109
+call.type$ -- 26
+change.case$ -- 258
+chr.to.int$ -- 62
+cite$ -- 26
+duplicate$ -- 1023
+empty$ -- 1594
+format.name$ -- 1021
+if$ -- 5006
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 430
-newline$ -- 141
-num.names$ -- 125
-pop$ -- 547
+missing$ -- 449
+newline$ -- 149
+num.names$ -- 130
+pop$ -- 566
 preamble$ -- 1
-purify$ -- 92
+purify$ -- 97
 quote$ -- 0
-skip$ -- 1096
+skip$ -- 1144
 stack$ -- 1
-substring$ -- 858
-swap$ -- 485
-text.length$ -- 34
+substring$ -- 900
+swap$ -- 513
+text.length$ -- 36
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 4
 warning$ -- 0
-while$ -- 185
+while$ -- 193
 width$ -- 0
-write$ -- 419
-(There were 9 warnings)
+write$ -- 439
+(There were 8 warnings)

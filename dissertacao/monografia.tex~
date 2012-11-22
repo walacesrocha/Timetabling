@@ -98,6 +98,8 @@ Existe uma necessidade de propor algoritmos cada vez mais eficientes que produza
 
 O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, será escolhida uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
+Explicar aqui que tem 3 formulações do ITC-2007
+
 Para atingir este objetivo será necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
 
 Deseja-se por fim coletar na literatura resultados obtidos para o problema com diferentes técnicas de solução, a fim de comparar com o algoritmo proposto.
@@ -150,6 +152,8 @@ Alguns resultados relevantes também tem sido encontrados com programação em lógi
 As meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização necessitando em geral pouca implementação específica \cite{Lewis2007:survey}. Também pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado esta técnica, tanto pela simplicidade quanto pelos bons resultados alcançados. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais aplicadas. Há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia.
 
 Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa SA para resolver a formulação \textit{track 2} do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram conhecidas respostas melhores que às conhecidas à época.
+
+
 
 Algoritmos eficientes que produzem bons resultados têm sido encontrados usando \textit{Simulated Annealing} \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
 

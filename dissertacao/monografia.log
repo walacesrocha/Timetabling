@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  21 NOV 2012 23:49
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  24 NOV 2012 20:41
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -369,58 +369,40 @@ is efi-ci-en-tes que pro-du-zam tabelas-
 Cap\'{\i }tulo 2.
 [14
 
-] [15] [16]
+]
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 142.
 
-LaTeX Warning: Citation `Erben95agenetic' on page 17 undefined on input line 15
-8.
-
-
-LaTeX Warning: Citation `suyanto' on page 17 undefined on input line 158.
-
-
-LaTeX Warning: Citation `Kanoh:2008:KGA:1460198.1460201' on page 17 undefined o
-n input line 158.
-
-
-LaTeX Warning: Citation `elloumi2008' on page 17 undefined on input line 158.
-
-
-LaTeX Warning: Citation `albetar_harmony' on page 17 undefined on input line 15
-8.
-
-
-LaTeX Warning: Citation `massoodian2008' on page 17 undefined on input line 160
-.
-
-
-LaTeX Warning: Citation `Souza:2004' on page 17 undefined on input line 162.
-
-
-LaTeX Warning: Citation `Vieira_agrasp' on page 17 undefined on input line 162.
-
+ [15] [16]
+Overfull \hbox (18.53398pt too wide) in paragraph at lines 167--168
+\T1/ptm/m/n/12 meta-heurísticas, tanto pela sim-pli-ci-dade quanto pe-los bons 
+re-sul-ta-dos al-can-ça-dos. Meta-heurísticas
+ []
 
 [17]
-Cap\'{\i }tulo 3.
-[18
+Overfull \hbox (58.03914pt too wide) in paragraph at lines 179--180
+\T1/ptm/m/n/12 blema, mas para tabela-horário de es-co-las. Como mos-trada na s
+e-ção an-te-rior, [[]]
+ []
 
-] [19]
+[18]
+Cap\'{\i }tulo 3.
+[19
+
+] [20]
 Cap\'{\i }tulo 4.
-[20
+[21
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 206--231
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 223--248
 [][] 
  []
 
-[21]
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 249.
-
- [22]
+[22] [23]
 Cap\'{\i }tulo 5.
-[23
+[24
 
-] (./monografia.bbl [24]
+] (./monografia.bbl [25]
 Underfull \hbox (badness 1112) in paragraph at lines 10--16
 []\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
  []
@@ -437,75 +419,89 @@ Underfull \hbox (badness 1845) in paragraph at lines 10--16
 . Dis-po-ní-vel em:
  []
 
-[25
+
+Underfull \hbox (badness 2088) in paragraph at lines 19--26
+\T1/ptm/m/n/12 uni-ver-sity course ti-me-ta-bling. \T1/ptm/m/it/12 An-nals of O
+pe-ra-ti-ons Re-se-arch\T1/ptm/m/n/12 , Sprin-ger Nether-lands,
+ []
+
+
+Underfull \hbox (badness 1028) in paragraph at lines 19--26
+\T1/ptm/m/n/12 v. 194, p. 3--31, 2012. ISSN 0254-5330. 10.1007/s10479-010-0769-
+z. Dis-po-ní-vel em:
+ []
+
+[26
 
 ]
-Underfull \hbox (badness 1796) in paragraph at lines 120--126
+Underfull \hbox (badness 1796) in paragraph at lines 146--152
 \T1/ptm/m/n/12 exis-tence of so-lu-ti-ons to the ti-me-ta-ble pro-blem. \T1/ptm
 /m/it/12 Com-mun. ACM\T1/ptm/m/n/12 , ACM, New York,
  []
 
 
-Underfull \hbox (badness 2111) in paragraph at lines 120--126
+Underfull \hbox (badness 2111) in paragraph at lines 146--152
 \T1/ptm/m/n/12 NY, USA, v. 17, n. 8, p. 450--453, ago. 1974. ISSN 0001-0782. Di
 s-po-ní-vel em:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--146
+Underfull \hbox (badness 10000) in paragraph at lines 170--172
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
-
-Underfull \hbox (badness 1221) in paragraph at lines 161--167
+[27]
+Underfull \hbox (badness 1221) in paragraph at lines 196--202
 \T1/ptm/m/n/12 ve-lo-ping a so-lu-tion to the fa-culty ti-me-ta-ble pro-blem. \
 T1/ptm/m/it/12 Com-put. J.\T1/ptm/m/n/12 , Ox-ford Uni-ver-sity
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 1226) in paragraph at lines 205--211
+\T1/ptm/m/n/12 ving school ti-me-ta-bling pro-blems, p. 659--672. ISBN 1-4020-7
+653-3. Dis-po-ní-vel em:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--217
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--182
+Underfull \hbox (badness 10000) in paragraph at lines 225--231
 []\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
 it/12 Eu-ro-pean Jour-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 176--182
+Underfull \hbox (badness 5374) in paragraph at lines 225--231
 \T1/ptm/m/it/12 nal of Ope-ra-ti-o-nal Re-se-arch\T1/ptm/m/n/12 , v. 19, n. 2, 
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
-) [26]
+) [28]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 291.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 308.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 291.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 308.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[27
+[29
 
-] (./monografia.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
  1916 strings out of 94501
- 25315 string characters out of 1176790
+ 25306 string characters out of 1176790
  84489 words of memory out of 1000000
  5029 multiletter control sequences out of 10000+50000
  47350 words of font info for 62 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,10n,41p,1080b,304s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 30i,10n,41p,1282b,340s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (28 pages, 43020 bytes).
+Output written on monografia.dvi (30 pages, 49300 bytes).

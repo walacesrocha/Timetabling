@@ -3,14 +3,6 @@ The top-level auxiliary file: monografia.aux
 The style file: abnt-alf.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: monografia.bib
-Warning--I didn't find a database entry for "Erben95agenetic"
-Warning--I didn't find a database entry for "suyanto"
-Warning--I didn't find a database entry for "Kanoh:2008:KGA:1460198.1460201"
-Warning--I didn't find a database entry for "elloumi2008"
-Warning--I didn't find a database entry for "albetar_harmony"
-Warning--I didn't find a database entry for "massoodian2008"
-Warning--I didn't find a database entry for "Souza:2004"
-Warning--I didn't find a database entry for "Vieira_agrasp"
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 +---------------------------------------------------------+
 | Estilo bibliografico abnt-alf.bst versao 1.52           |
@@ -18,45 +10,44 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 26 entries,
+You've used 33 entries,
             6523 wiz_defined-function locations,
-            1359 strings with 13854 characters,
-and the built_in function-call counts, 21099 in all, are:
-= -- 1690
-> -- 707
-< -- 48
-+ -- 310
-- -- 216
-* -- 1514
-:= -- 2867
-add.period$ -- 109
-call.type$ -- 26
-change.case$ -- 258
-chr.to.int$ -- 62
-cite$ -- 26
-duplicate$ -- 1023
-empty$ -- 1594
-format.name$ -- 1021
-if$ -- 5006
+            1392 strings with 15116 characters,
+and the built_in function-call counts, 27334 in all, are:
+= -- 2164
+> -- 1002
+< -- 56
++ -- 425
+- -- 304
+* -- 2017
+:= -- 3682
+add.period$ -- 140
+call.type$ -- 33
+change.case$ -- 348
+chr.to.int$ -- 75
+cite$ -- 33
+duplicate$ -- 1294
+empty$ -- 2030
+format.name$ -- 1441
+if$ -- 6492
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 449
-newline$ -- 149
-num.names$ -- 130
-pop$ -- 566
+missing$ -- 573
+newline$ -- 185
+num.names$ -- 166
+pop$ -- 739
 preamble$ -- 1
-purify$ -- 97
+purify$ -- 128
 quote$ -- 0
-skip$ -- 1144
+skip$ -- 1455
 stack$ -- 1
-substring$ -- 900
-swap$ -- 513
-text.length$ -- 36
+substring$ -- 1064
+swap$ -- 644
+text.length$ -- 42
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
+type$ -- 7
 warning$ -- 0
-while$ -- 193
+while$ -- 240
 width$ -- 0
-write$ -- 439
-(There were 8 warnings)
+write$ -- 553

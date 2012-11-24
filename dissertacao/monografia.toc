@@ -9,17 +9,17 @@
 \contentsline {chapter}{\numberline {2}Estado da Arte}{14}
 \contentsline {section}{\numberline {2.1}Introdu\c c\~ao}{15}
 \contentsline {section}{\numberline {2.2}Conceitos e defini\c c\~oes}{15}
-\contentsline {section}{\numberline {2.3}Abordagens existentes}{15}
-\contentsline {section}{\numberline {2.4}Trabalhos relacionados}{17}
-\contentsline {chapter}{\numberline {3}Proposta do trabalho}{18}
-\contentsline {section}{\numberline {3.1}Formula\c c\~ao do ITC-2007}{19}
-\contentsline {section}{\numberline {3.2}Algoritmo GRASP}{19}
-\contentsline {chapter}{\numberline {4}Resultados Computacionais}{20}
-\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{21}
-\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{21}
-\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{21}
-\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{22}
-\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{23}
-\contentsline {section}{\numberline {5.1}Conclus\~oes}{24}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{25}
-\contentsline {chapter}{Anexo{} A{} -$\mskip -\thinmuskip $-{} Ferramentas utilizadas}{27}
+\contentsline {section}{\numberline {2.3}Abordagens existentes}{16}
+\contentsline {section}{\numberline {2.4}Trabalhos relacionados}{18}
+\contentsline {chapter}{\numberline {3}Proposta do trabalho}{19}
+\contentsline {section}{\numberline {3.1}Formula\c c\~ao do ITC-2007}{20}
+\contentsline {section}{\numberline {3.2}Algoritmo GRASP}{20}
+\contentsline {chapter}{\numberline {4}Resultados Computacionais}{21}
+\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{22}
+\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{22}
+\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{22}
+\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{23}
+\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{24}
+\contentsline {section}{\numberline {5.1}Conclus\~oes}{25}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{26}
+\contentsline {chapter}{Anexo{} A{} -$\mskip -\thinmuskip $-{} Ferramentas utilizadas}{29}

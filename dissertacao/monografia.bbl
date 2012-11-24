@@ -14,15 +14,15 @@ ISSN 0254-5330.
 10.1007/s10479-012-1081-x.
 Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1007/s10479-012-1081-x$>$.}
 
-\bibitem[Bai et al. 2012]{sa_hyper_heuristica}
-\abntrefinfo{Bai et al.}{BAI et al.}{2012}
-{BAI, R. et al. A simulated annealing hyper-heuristic methodology for flexible
-  decision support.
-\emph{4OR: A Quarterly Journal of Operations Research}, Springer Berlin /
-  Heidelberg, v.~10, p. 43--66, 2012.
-ISSN 1619-4500.
-10.1007/s10288-011-0182-8.
-Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1007/s10288-011-0182-8$>$.}
+\bibitem[Al-Betar e Khader 2012]{albetar_harmony}
+\abntrefinfo{Al-Betar e Khader}{AL-BETAR; KHADER}{2012}
+{AL-BETAR, M.; KHADER, A. A harmony search algorithm for university course
+  timetabling.
+\emph{Annals of Operations Research}, Springer Netherlands, v.~194, p. 3--31,
+  2012.
+ISSN 0254-5330.
+10.1007/s10479-010-0769-z.
+Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1007/s10479-010-0769-z$>$.}
 
 \bibitem[Burke et al. 2008]{Burke_abranch-andcut}
 \abntrefinfo{Burke et al.}{BURKE et al.}{2008}
@@ -51,11 +51,22 @@ ISSN 0305-0548.}
   support system for academic course scheduling.
 \emph{Operations Research}, INFORMS, v.~37, n.~6, p. 853--864, 1989.}
 
+\bibitem[Elloumi et al. 2008]{elloumi2008}
+\abntrefinfo{Elloumi et al.}{ELLOUMI et al.}{2008}
+{ELLOUMI, A. et al. A tabu search procedure for course timetabling at a
+  tunisian university. In:  \emph{Proceedings of the 7th PATAT Conference,
+  2008}. [S.l.: s.n.], 2008.}
+
 \bibitem[Elmohamed, Coddington e Fox 1998]{Elmohamed98acomparison}
 \abntrefinfo{Elmohamed, Coddington e Fox}{ELMOHAMED; CODDINGTON; FOX}{1998}
 {ELMOHAMED, M. A.~S.; CODDINGTON, P.; FOX, G. A comparison of annealing
   techniques for academic course scheduling. In:  \emph{Lecture Notes in
   Computer Science}. [S.l.: s.n.], 1998.}
+
+\bibitem[Erben e Keppler 1995]{Erben95agenetic}
+\abntrefinfo{Erben e Keppler}{ERBEN; KEPPLER}{1995}
+{ERBEN, W.; KEPPLER, J. \emph{A Genetic Algorithm Solving a Weekly
+  Course-Timetabling Problem}. 1995.}
 
 \bibitem[Filho e Lorena 2006]{ribeiro2006integer}
 \abntrefinfo{Filho e Lorena}{FILHO; LORENA}{2006}
@@ -98,6 +109,15 @@ Last Visited: 22/07/2002.}
 {JUNGINGER, W. Timetabling in {G}ermany -- {A} survey.
 \emph{Interfaces}, v.~16, n.~4, p. 66--74, 1986.}
 
+\bibitem[Kanoh e Sakamoto 2008]{Kanoh:2008:KGA}
+\abntrefinfo{Kanoh e Sakamoto}{KANOH; SAKAMOTO}{2008}
+{KANOH, H.; SAKAMOTO, Y. Knowledge-based genetic algorithm for university
+  course timetabling problems.
+\emph{Int. J. Know.-Based Intell. Eng. Syst.}, IOS Press, Amsterdam, The
+  Netherlands, The Netherlands, v.~12, n.~4, p. 283--294, dez. 2008.
+ISSN 1327-2314.
+Dispon{\'\i}vel em: $<$http://dl.acm.org/citation.cfm?id=1460198.1460201$>$.}
+
 \bibitem[Kostuch 2006]{3-phaseSA}
 \abntrefinfo{Kostuch}{KOSTUCH}{2006}
 {KOSTUCH, P. \emph{The University Course Timetabling Problem with a 3-phase
@@ -114,6 +134,12 @@ Last Visited: 22/07/2002.}
 {LEWIS, R. A survey of metaheuristic-based techniques for university
   timetabling problems.
 \emph{OR Spectrum}, v.~30, n.~1, p. 167--190, 2007.}
+
+\bibitem[Massoodian e Esteki 2008]{massoodian2008}
+\abntrefinfo{Massoodian e Esteki}{MASSOODIAN; ESTEKI}{2008}
+{MASSOODIAN, S.; ESTEKI, A. A hybrid genetic algorithm for curriculum based
+  course timetabling. In:  \emph{Proceedings of the 7th PATAT Conference,
+  2008}. [S.l.: s.n.], 2008.}
 
 \bibitem[Neufeld e Tartar 1974]{Neufeld}
 \abntrefinfo{Neufeld e Tartar}{NEUFELD; TARTAR}{1974}
@@ -151,6 +177,15 @@ URL: http://www.cs.qub.ac.uk/itc2007.}
 URL: http://www.saintcorporation.com/index.html.
 Last Visited: 22/07/2002.}
 
+\bibitem[Santos, Ochi e Souza 2005]{Santos:2005:TSH}
+\abntrefinfo{Santos, Ochi e Souza}{SANTOS; OCHI; SOUZA}{2005}
+{SANTOS, H.~G.; OCHI, L.~S.; SOUZA, M.~J. A tabu search heuristic with
+  efficient diversification strategies for the class/teacher timetabling
+  problem.
+\emph{J. Exp. Algorithmics}, ACM, New York, NY, USA, v.~10, dez. 2005.
+ISSN 1084-6654.
+Dispon{\'\i}vel em: $<$http://doi.acm.org/10.1145/1064546.1180621$>$.}
+
 \bibitem[Schaerf 1995]{Schaerf95asurvey}
 \abntrefinfo{Schaerf}{SCHAERF}{1995}
 {SCHAERF, A. A survey of automated timetabling.
@@ -165,11 +200,25 @@ Last Visited: 22/07/2002.}
 ISSN 0010-4620.
 Dispon{\'\i}vel em: $<$http://dx.doi.org/10.1093/comjnl/31.1.76$>$.}
 
+\bibitem[Souza, Maculan e Ochi 2004]{Souza:2004:GSA}
+\abntrefinfo{Souza, Maculan e Ochi}{SOUZA; MACULAN; OCHI}{2004}
+{SOUZA, M. J.~F.; MACULAN, N.; OCHI, L.~S. Metaheuristics. In:  RESENDE, M.
+  G.~C.; SOUSA, J.~P. de; VIANA, A. (Ed.). Norwell, MA, USA: Kluwer Academic
+  Publishers, 2004. cap. A GRASP-tabu search algorithm for solving school
+  timetabling problems, p. 659--672.
+ISBN 1-4020-7653-3.
+Dispon{\'\i}vel em: $<$http://dl.acm.org/citation.cfm?id=982409.982441$>$.}
+
 \bibitem[{The Nessus Project} 2002]{NP02}
 \abntrefinfo{{The Nessus Project}}{{The Nessus Project}}{2002}
 {{The Nessus Project}. \emph{The Nessus Project}. 2002.
 URL: http://www.nessus.org.
 Last Visited: 22/07/2002.}
+
+\bibitem[Vieira, Rafael e Scaraficci 2010]{Vieira_agrasp}
+\abntrefinfo{Vieira, Rafael e Scaraficci}{VIEIRA; RAFAEL; SCARAFICCI}{2010}
+{VIEIRA, A.; RAFAEL, M.; SCARAFICCI, A. \emph{A GRASP Strategy for a More
+  Constrained School Timetabling Problem}. 2010.}
 
 \bibitem[Werra 1985]{deWerra85}
 \abntrefinfo{Werra}{WERRA}{1985}

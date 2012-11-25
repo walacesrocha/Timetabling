@@ -3,6 +3,8 @@
 \documentclass[brazil,ruledheader]{abnt}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
+\usepackage[vlined,boxruled,linesnumbered,portuguese]{algorithm2e}
+
 
 \makeatletter
 \usepackage{babel}
@@ -69,6 +71,8 @@ Agradeço a ...
 
 
 \listoftables
+
+\listofalgorithms
 
 
 \chapter{Introdução\label{cap:introducao}}
@@ -139,16 +143,15 @@ As diversas formulações do problema apresentadas na literatura variam devido à i
 
 \begin{itemize}
 
-\item \textbf{Tabela-horário de Escola} The weekly scheduling for all the classes of a
-school, avoiding teachers meeting two classes at the same time,
-and vice versa;
+\item \textbf{Tabela-horário de Escola} Programação semanal para as turmas da escola, evitando que professores lecionem para duas turmas ao mesmo tempo ou que turmas assistam mais de uma aula no mesmo horário.
 
+\item \textbf{Tabela-horário de Universidade} Programação semanal das aulas das disciplinas universitárias, minimizando a sobreposição de aulas que tenham alunos em comum.
 
-\item \textbf{Tabela-horário de Universidade}
-
-\item \textbf{Tabela-horário de Exames}
+\item \textbf{Tabela-horário de Exames} Programação para aplicação dos exames das disciplinas, evitando sobreposição de exames das disciplinas que tenham alunos em comum, e espalhando os exames para os alunos o máximo possível.
 
 \end{itemize}
+
+A tabela-horário de exames é usada somente nos finais de bimestre, trimestre ou semestre, enquanto as duas primeiras durante todo o período letivo. A diferença principal do problema no âmbito de escolas e universidades é que no segundo não há o conceito de turma, já que cada aluno escolhe o conjunto de disciplinas que irá cursar. Já nas escolas (primárias e secundárias) todos alunos matriculados numa turma cursam as mesmas disciplinas.
 
 \section{Abordagens existentes\label{sec:abordagens}}
 
@@ -195,6 +198,35 @@ Neste capítulo é apresentado a proposta do trabalho
 \section{Formulação do ITC-2007}
 
 \section{Algoritmo GRASP}
+
+
+\begin{algorithm}[H]
+\label{algoGrasp}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Instância p, MaxIter, TamPool}
+\Saida{Solução $S^{*}$}
+
+$f^{*} \leftarrow \infty $ \;
+$Pool \leftarrow \phi $ \;
+\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	$S \leftarrow BuscaLocal(S) $ \;
+	\Se{$ i > TamPool $}{
+		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
+	}
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+	$AtualizaPool(S, Pool)$ \;
+}
+\caption{Algoritmo GRASP}
+\end{algorithm}
 
 
 \chapter{Resultados Computacionais\label{cap:resultados}}

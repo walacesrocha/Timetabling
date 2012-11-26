@@ -3,6 +3,8 @@
 \documentclass[brazil,ruledheader]{abnt}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
+\usepackage[vlined,boxruled,linesnumbered,portuguese]{algorithm2e}
+
 
 \makeatletter
 \usepackage{babel}
@@ -70,6 +72,8 @@ Agradeço a ...
 
 \listoftables
 
+\listofalgorithmes
+
 
 \chapter{Introdução\label{cap:introducao}}
 
@@ -98,7 +102,7 @@ Existe uma necessidade de propor algoritmos cada vez mais eficientes que produza
 
 O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, será escolhida uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
-Explicar aqui que tem 3 formulações do ITC-2007
+Explicar aqui que tem 3 formulações do ITC-2007 ...
 
 Para atingir este objetivo será necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
 
@@ -135,7 +139,21 @@ O objetivo do problema é encontrar uma tabela-horário viável e que minimize a qu
 
 \section{Conceitos e definições}
 
-\section{Abordagens existentes}
+As diversas formulações do problema apresentadas na literatura variam devido à instituição envolvida (escola ou universidade) e também pelo conjunto de restrições que são abordadas. Contudo, todas as formulações podem ser classificadas em uma das três classes principais \cite{Schaerf95asurvey}:
+
+\begin{itemize}
+
+\item \textbf{Tabela-horário de Escola} Programação semanal para as turmas da escola, evitando que professores lecionem para duas turmas ao mesmo tempo ou que turmas assistam mais de uma aula no mesmo horário.
+
+\item \textbf{Tabela-horário de Universidade} Programação semanal das aulas das disciplinas universitárias, minimizando a sobreposição de aulas que tenham alunos em comum.
+
+\item \textbf{Tabela-horário de Exames} Programação para aplicação dos exames das disciplinas, evitando sobreposição de exames das disciplinas que tenham alunos em comum, e espalhando os exames para os alunos o máximo possível.
+
+\end{itemize}
+
+A tabela-horário de exames é usada somente nos finais de bimestre, trimestre ou semestre, enquanto as duas primeiras durante todo o período letivo. A diferença principal do problema no âmbito de escolas e universidades é que no segundo não há o conceito de turma, já que cada aluno escolhe o conjunto de disciplinas que irá cursar. Já nas escolas (primárias e secundárias) todos alunos matriculados numa turma cursam as mesmas disciplinas.
+
+\section{Abordagens existentes\label{sec:abordagens}}
 
 As técnicas usadas para resolver o problema de tabela-horário são bastante diversificadas. As mais antigas, as heurísticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma até finalizar a construção da tabela. Conflitos eram resolvidos realizando trocas de aulas.
 
@@ -145,23 +163,25 @@ As técnicas usadas para resolver o problema de tabela-horário são bastante diver
 
 De uns anos para cá as técnicas de solução para o problema têm recaído basicamente em três grupos: programação matemática, programação em lógica e principalmente meta-heurísticas.
 
-Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} pode ser vista outra formulação com algumas relaxações. Com um tempo de execução aproximado de quinze minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Uma grande contribuição destes dois trabalhos é que eles forneceram limites inferiores para a quantidade de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira que trata algumas particularidades das escolas brasileiras de ensino fundamental.
+Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} pode ser vista outra formulação com algumas relaxações. Com um tempo de execução aproximado de quinze minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Uma grande contribuição destes dois trabalhos é que eles forneceram limites inferiores para a quantidade de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
 
 Alguns resultados relevantes também tem sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} em que se conseguiu melhorar quase metade das respostas que eram conhecidas à época para as instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
 
-As meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização necessitando em geral pouca implementação específica \cite{Lewis2007:survey}. Também pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado esta técnica, tanto pela simplicidade quanto pelos bons resultados alcançados. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais aplicadas. Há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia.
+Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. Meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização necessitando em geral pouca implementação específica \cite{Lewis2007:survey}.  \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais aplicadas. Há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
 
 Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa SA para resolver a formulação \textit{track 2} do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram conhecidas respostas melhores que às conhecidas à época.
 
+Algoritmos Genéticos também foram propostos para o problema. O cromossomo representa a tabela-horário. Cada posição da tabela corresponde a um gene. A partir daí são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicou esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propôs um algoritmo genético híbrido para resolver a formulação do ITC-2007. O algoritmo foi chamado de híbrido porque além de aplicar os operadores genéticos, uma busca local era aplicada nos melhores indivíduos ao final de cada geração.
 
+Um algoritmo mais simples que o genético, mas que também tem sido aplicado é a Busca Tabu. Em \cite{elloumi2008} é apresentado uma algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicou a técnica no âmbito de escolas primárias e obteve respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
 
-Algoritmos eficientes que produzem bons resultados têm sido encontrados usando \textit{Simulated Annealing} \cite{3-phaseSA}, \cite{sa_hyper_heuristica}, \cite{Elmohamed98acomparison}, Algoritmo Genético \cite{Erben95agenetic}, \cite{suyanto}, \cite{Kanoh:2008:KGA:1460198.1460201}, Busca Tabu \cite{elloumi2008}, entre outras mais recentes como a Busca de Harmonia \cite{albetar_harmony}.
-
-Há também algumas técnicas híbridas em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo que constrói a tabela-horário em três etapas, cada uma executando um procedimento de \textit{Simulated Annealing} independente.
-
-Este trabalho propõe um algoritmo GRASP para o problema de tabela-horário de universidades. Há na literatura algumas propostas do GRASP, mas para tabela-horário de escolas \cite{Souza:2004} e \cite{Vieira_agrasp}. Além disso propõe melhorias para um algoritmo genético e um \textit{Simulated Annealing} encontrados na literatura e aplicados à mesma formulação do problema.
+Devido à dificuldade de otimização do problema, alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada uma usando uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida dentro da meta-heurística GRASP para melhorar a fase de busca local desta.
 
 \section{Trabalhos relacionados}
+
+O objetivo deste trabalho é propor um novo algoritmo usando a meta-heurística GRASP para o problema de tabela-horário de universidades. O GRASP já foi implementado no problema, mas para tabela-horário de escolas. Como mostrada na seção anterior, \cite{Souza:2004:GSA} usou o GRASP juntamente com busca Tabu. Outra implementação do GRASP pode ser vista em \cite{Vieira_agrasp}, onde foi implementada a versão básica do algoritmo e uma estratégia de intensificação.
+
+A formulação adotada neste trabalho é a do ITC-2007. Como foi visto na seção \ref{sec:abordagens} muitos trabalhos foram propostos para resolver esta formulação. Mas nenhuma conseguiu obter soluções ótimas para todas as instâncias, o que gera uma motivação para continuar buscando novos resultados. Os melhores resultados encontrados até agora estão em \cite{lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x,CDGS11b}.
 
 \chapter{Proposta do trabalho\label{cap:proposta-trabalho}}
 
@@ -178,6 +198,35 @@ Neste capítulo é apresentado a proposta do trabalho
 \section{Formulação do ITC-2007}
 
 \section{Algoritmo GRASP}
+
+
+\begin{algorithm}[H]
+\label{algoGrasp}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Instância p, MaxIter, TamPool}
+\Saida{Solução $S^{*}$}
+
+$f^{*} \leftarrow \infty $ \;
+$Pool \leftarrow \phi $ \;
+\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	$S \leftarrow BuscaLocal(S) $ \;
+	\Se{$ i > TamPool $}{
+		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
+	}
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+	$AtualizaPool(S, Pool)$ \;
+}
+\caption{Algoritmo GRASP}
+\end{algorithm}
 
 
 \chapter{Resultados Computacionais\label{cap:resultados}}

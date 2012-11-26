@@ -1,0 +1,26 @@
+\select@language {brazil}
+\contentsline {chapter}{Lista de Figuras}{}
+\contentsline {chapter}{Lista de Tabelas}{}
+\contentsline {chapter}{Lista de Algoritmos}{11}
+\contentsline {chapter}{\numberline {1}Introdu\c c\~ao}{12}
+\contentsline {section}{\numberline {1.1}Apresenta\c c\~ao do problema}{13}
+\contentsline {section}{\numberline {1.2}Motiva\c c\~ao para o problema}{13}
+\contentsline {section}{\numberline {1.3}Objetivos deste trabalho}{13}
+\contentsline {section}{\numberline {1.4}Organiza\c c\~ao do texto}{14}
+\contentsline {chapter}{\numberline {2}Estado da Arte}{15}
+\contentsline {section}{\numberline {2.1}Introdu\c c\~ao}{16}
+\contentsline {section}{\numberline {2.2}Conceitos e defini\c c\~oes}{16}
+\contentsline {section}{\numberline {2.3}Abordagens existentes}{17}
+\contentsline {section}{\numberline {2.4}Trabalhos relacionados}{19}
+\contentsline {chapter}{\numberline {3}Proposta do trabalho}{20}
+\contentsline {section}{\numberline {3.1}Formula\c c\~ao do ITC-2007}{21}
+\contentsline {section}{\numberline {3.2}Algoritmo GRASP}{21}
+\contentsline {chapter}{\numberline {4}Resultados Computacionais}{22}
+\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{23}
+\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{23}
+\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{23}
+\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{24}
+\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{25}
+\contentsline {section}{\numberline {5.1}Conclus\~oes}{26}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{27}
+\contentsline {chapter}{Anexo{} A{} -$\mskip -\thinmuskip $-{} Ferramentas utilizadas}{30}

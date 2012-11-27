@@ -4,6 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage[vlined,boxruled,linesnumbered,portuguese]{algorithm2e}
+\usepackage{amssymb,amsmath}
+
 
 
 \makeatletter
@@ -90,8 +92,6 @@ O problema de tabela-horário consiste em alocar um conjunto de aulas em um númer
 
 Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados.
 
-classificação
-
 \section{Motivação para o problema}
 
 O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo. Assim, a solução exata só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
@@ -102,9 +102,11 @@ Existe uma necessidade de propor algoritmos cada vez mais eficientes que produza
 
 O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, será escolhida uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
-Explicar aqui que tem 3 formulações do ITC-2007 ...
-
 Para atingir este objetivo será necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
+
+Vale ressaltar que o ITC-2007 dividiu o campeonato em três \textit{tracks}. Cada \textit{track} possui uma formulação específica e seu próprio conjunto de instâncias. O \textit{track} 1 é uma formulação específica para aplicação de exames finais. Os \textit{tracks} 2 e 3 tratam a alocação semanal das aulas de uma universidade. A diferença básica é que o \textit{track} 2, chamado de \textit{post enrolment} (pós matrícula) trata o problema considerando os dados de matrícula dos alunos, enquanto que no 3 as informações levam em conta os currículos que compõe a universidade.
+
+Será adotado neste trabalho a formulação do \textit{track} 3 por ser considerada, dentre as três, a mais próxima do que acontece na prática nas universidades brasileiras. Esta formulação será explicada em detalhes no capítulo \ref{cap:proposta-trabalho}.
 
 Deseja-se por fim coletar na literatura resultados obtidos para o problema com diferentes técnicas de solução, a fim de comparar com o algoritmo proposto.
 
@@ -198,6 +200,12 @@ Neste capítulo é apresentado a proposta do trabalho
 \section{Formulação do ITC-2007}
 
 \section{Algoritmo GRASP}
+
+Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$. 
+
+As meta-heurísticas são algoritmos gerais que orientam uma forma de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida, mas elas em geral conseguem boas soluções.
+
+A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89}.
 
 
 \begin{algorithm}[H]

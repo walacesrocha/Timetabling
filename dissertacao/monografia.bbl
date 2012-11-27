@@ -68,6 +68,12 @@ ISSN 0305-0548.}
 {ERBEN, W.; KEPPLER, J. \emph{A Genetic Algorithm Solving a Weekly
   Course-Timetabling Problem}. 1995.}
 
+\bibitem[Feo e Resende 1989]{FeoRes89}
+\abntrefinfo{Feo e Resende}{FEO; RESENDE}{1989}
+{FEO, T.; RESENDE, M. A probabilistic heuristic for a computationally difficult
+  set covering problem.
+\emph{Operations Research Letters}, v.~8, p. 67--71, 1989.}
+
 \bibitem[Filho e Lorena 2006]{ribeiro2006integer}
 \abntrefinfo{Filho e Lorena}{FILHO; LORENA}{2006}
 {FILHO, G. R.; LORENA, L. An integer programming model for the school

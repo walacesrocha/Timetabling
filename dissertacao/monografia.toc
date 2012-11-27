@@ -23,4 +23,4 @@
 \contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{25}
 \contentsline {section}{\numberline {5.1}Conclus\~oes}{26}
 \contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{27}
-\contentsline {chapter}{Anexo{} A{} -$\mskip -\thinmuskip $-{} Ferramentas utilizadas}{30}
+\contentsline {chapter}{Anexo{} A{} -$\tmspace -\thinmuskip {.1667em}$-{} Ferramentas utilizadas}{30}

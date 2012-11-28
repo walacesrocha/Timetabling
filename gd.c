@@ -6,6 +6,14 @@
 /*Construction of Course Timetables Based on Great
 Deluge and Tabu Search*/
 
+float maxFloat(float f1, float f2){
+    if (f1 > f2){
+        return f1;
+    }else{
+        return f2;
+    }
+}
+
 Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     Individuo *solGD, *solBestGD, *vizinho;
     float fSolGD, fSolBestGD, fViz, level;
@@ -13,8 +21,8 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     float deltaB;
     int iteracoes, NumOfIteGD;
     int notImprovingCounter, notImprovingCounterLength;
-    float iUpperBoundRate=1.15,iLowerBoundRate=0.9,iCoolRate=0.9999;
-    float iBound;
+    float iUpperBoundRate=1.15,iLowerBoundRate=0.9,iCoolRate=0.999995;
+    float iBound,iNrIdle=0;
 
 
 
@@ -71,6 +79,8 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             liberaIndividuo(solBestGD);
             solBestGD = copiaIndividuo(p, vizinho);
             fSolBestGD = fSolGD = fViz;
+            
+            iNrIdle=0;
 
             notImprovingCounter = 0;
             level = level - deltaB;
@@ -99,7 +109,14 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
         iteracoes++;
         iBound *= iCoolRate;
 
-        printf("[%d]: %f, %f\n", iteracoes, fSolGD, level);
+        if (iBound < (pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD)) {
+            iNrIdle++;
+            printf(" -<[%d]>- \n", iNrIdle);
+            iBound = maxFloat(fSolBestGD + 2.0, pow(iUpperBoundRate, iNrIdle) * fSolBestGD);
+        }
+
+
+        printf("[%d]: %f, %f\n", iteracoes, fSolGD, iBound);
 
         //end do;
     }

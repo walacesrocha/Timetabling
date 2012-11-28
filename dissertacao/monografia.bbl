@@ -74,6 +74,13 @@ ISSN 0305-0548.}
   set covering problem.
 \emph{Operations Research Letters}, v.~8, p. 67--71, 1989.}
 
+\bibitem[Feo, Resende e Smith 1994]{FeoResSmi94}
+\abntrefinfo{Feo, Resende e Smith}{FEO; RESENDE; SMITH}{1994}
+{FEO, T.; RESENDE, M.; SMITH, S. A greedy randomized adaptive search procedure
+  for maximum independent set.
+\emph{Operations Research}, v.~42, p. 860--878, 1994.
+Dispon{\'\i}vel em: $<$http://www.research.att.com/~mgcr/doc/gmis.ps.Z$>$.}
+
 \bibitem[Filho e Lorena 2006]{ribeiro2006integer}
 \abntrefinfo{Filho e Lorena}{FILHO; LORENA}{2006}
 {FILHO, G. R.; LORENA, L. An integer programming model for the school
@@ -141,6 +148,15 @@ Dispon{\'\i}vel em: $<$http://dl.acm.org/citation.cfm?id=1460198.1460201$>$.}
   timetabling problems.
 \emph{OR Spectrum}, v.~30, n.~1, p. 167--190, 2007.}
 
+\bibitem[Li, Pardalos e Resende 1994]{LiParRes94}
+\abntrefinfo{Li, Pardalos e Resende}{LI; PARDALOS; RESENDE}{1994}
+{LI, Y.; PARDALOS, P.; RESENDE, M. A greedy randomized adaptive search
+  procedure for the quadratic assignment problem. In:  PARDALOS, P.; WOLKOWICZ,
+  H. (Ed.). \emph{Quadratic assignment and related problems}. American
+  Mathematical Society, 1994,  ({DIMACS} Series on Discrete Mathematics and
+  Theoretical Computer Science, v.~16). p. 237--261.
+Dispon{\'\i}vel em: $<$http://www.research.att.com/~mgcr/doc/grpqap.ps.Z$>$.}
+
 \bibitem[Massoodian e Esteki 2008]{massoodian2008}
 \abntrefinfo{Massoodian e Esteki}{MASSOODIAN; ESTEKI}{2008}
 {MASSOODIAN, S.; ESTEKI, A. A hybrid genetic algorithm for curriculum based
@@ -175,6 +191,27 @@ Dispon{\'\i}vel em:
 \abntrefinfo{PATAT}{PATAT}{2008}
 {PATAT. \emph{International Timetabling Competition}. 2008.
 URL: http://www.cs.qub.ac.uk/itc2007.}
+
+\bibitem[Resende e Feo 1996]{ResFeo96a}
+\abntrefinfo{Resende e Feo}{RESENDE; FEO}{1996}
+{RESENDE, M.; FEO, T. A {GRASP} for satisfiability. In:  JOHNSON, D.; TRICK, M.
+  (Ed.). \emph{The Second {DIMACS} Implementation Challenge}. American
+  Mathematical Society, 1996,  ({DIMACS} Series on Discrete Mathematics and
+  Theoretical Computer Science, v.~26). p. 499--520.
+Dispon{\'\i}vel em:
+  $<$http://www.research.att.com/~mgcr/doc/grpsat-long.ps.Z$>$.}
+
+\bibitem[Resende e Ribeiro 1997]{ResRib95}
+\abntrefinfo{Resende e Ribeiro}{RESENDE; RIBEIRO}{1997}
+{RESENDE, M.; RIBEIRO, C. A {GRASP} for graph planarization.
+\emph{Networks}, v.~29, p. 173--189, 1997.
+Dispon{\'\i}vel em: $<$http://www.research.att.com/~mgcr/doc/gmpsg.ps.Z$>$.}
+
+\bibitem[Resende e Ribeiro 2003]{ResRib03a}
+\abntrefinfo{Resende e Ribeiro}{RESENDE; RIBEIRO}{2003}
+{RESENDE, M.; RIBEIRO, C. {A GRASP with path-relinking for private virtual
+  circuit routing}.
+\emph{Networks}, v.~41, n.~1, p. 104--114, 2003.}
 
 \bibitem[{Saint Corporation} 2002]{SC02}
 \abntrefinfo{{Saint Corporation}}{{Saint Corporation}}{2002}

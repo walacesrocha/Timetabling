@@ -205,11 +205,38 @@ Um problema de otimização combinatória pode ser definido por um conjunto finito 
 
 As meta-heurísticas são algoritmos gerais que orientam uma forma de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida, mas elas em geral conseguem boas soluções.
 
-A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89}.
+A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. De lá para cá ela já foi aplicada em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
+O algoritmo GRASP é um procedimento multi-iterativo. Cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao fim da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
 
 \begin{algorithm}[H]
 \label{algoGrasp}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{ReparaSolucao}{ReparaSolucao}
+%\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{MaxIter}
+\Saida{Solução $S^{*}$}
+
+$f^{*} \leftarrow \infty $ \;
+\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	\Se{$ S $ é inviável }{
+		$ReparaSolucao(S) $\;
+	}
+	$S \leftarrow BuscaLocal(S) $ \;
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+}
+\caption{Estrutura básica do algoritmo GRASP}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\label{algoBase}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}

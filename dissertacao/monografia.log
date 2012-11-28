@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  27 NOV 2012 00:01
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  27 NOV 2012 23:37
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -507,27 +507,37 @@ Cap\'{\i }tulo 3.
 [20
 
 ]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 221.
+Overfull \hbox (45.01912pt too wide) in paragraph at lines 208--209
+\T1/ptm/m/n/12 na-ri-za-ção de gra-fos [[]], ro-te-a-mento de cir-cui-tos vir-t
+u-ais [[]],
+ []
 
-Overfull \hbox (0.79999pt too wide) detected at line 237
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 222.
+
+Overfull \hbox (0.79999pt too wide) detected at line 235
 |[]|
  []
 
 [21]
+Overfull \hbox (0.79999pt too wide) detected at line 264
+|[]|
+ []
+
+[22]
 Cap\'{\i }tulo 4.
-[22
+[23
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 263--288
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 290--315
 [][] 
  []
 
-[23] [24]
+[24] [25]
 Cap\'{\i }tulo 5.
-[25
+[26
 
-] (./monografia.bbl [26]
+] (./monografia.bbl [27]
 Underfull \hbox (badness 1112) in paragraph at lines 10--16
 []\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
  []
@@ -556,77 +566,88 @@ Underfull \hbox (badness 1028) in paragraph at lines 19--26
 z. Dis-po-ní-vel em:
  []
 
-[27
+[28
 
 ]
-Underfull \hbox (badness 1796) in paragraph at lines 152--158
+Underfull \hbox (badness 1796) in paragraph at lines 168--174
 \T1/ptm/m/n/12 exis-tence of so-lu-ti-ons to the ti-me-ta-ble pro-blem. \T1/ptm
 /m/it/12 Com-mun. ACM\T1/ptm/m/n/12 , ACM, New York,
  []
 
 
-Underfull \hbox (badness 2111) in paragraph at lines 152--158
+Underfull \hbox (badness 2111) in paragraph at lines 168--174
 \T1/ptm/m/n/12 NY, USA, v. 17, n. 8, p. 450--453, ago. 1974. ISSN 0001-0782. Di
 s-po-ní-vel em:
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 176--178
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 192--194
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
-[28]
-Underfull \hbox (badness 1221) in paragraph at lines 202--208
+
+Underfull \hbox (badness 10000) in paragraph at lines 206--209
+[]\T1/ptm/m/n/12 RESENDE, M.; RI-BEIRO, C. A GRASP for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 206--209
+\T1/ptm/m/n/12 graph pla-na-ri-za-tion. \T1/ptm/m/it/12 Networks\T1/ptm/m/n/12 
+, v. 29, p. 173--189, 1997. Dis-po-ní-vel em:
+ []
+
+
+Underfull \hbox (badness 1221) in paragraph at lines 239--245
 \T1/ptm/m/n/12 ve-lo-ping a so-lu-tion to the fa-culty ti-me-ta-ble pro-blem. \
 T1/ptm/m/it/12 Com-put. J.\T1/ptm/m/n/12 , Ox-ford Uni-ver-sity
  []
 
 
-Underfull \hbox (badness 1226) in paragraph at lines 211--217
+Underfull \hbox (badness 1226) in paragraph at lines 248--254
 \T1/ptm/m/n/12 ving school ti-me-ta-bling pro-blems, p. 659--672. ISBN 1-4020-7
 653-3. Dis-po-ní-vel em:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 220--223
+Underfull \hbox (badness 10000) in paragraph at lines 257--260
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--237
+Underfull \hbox (badness 10000) in paragraph at lines 268--274
 []\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
 it/12 Eu-ro-pean Jour-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 231--237
+Underfull \hbox (badness 5374) in paragraph at lines 268--274
 \T1/ptm/m/it/12 nal of Ope-ra-ti-o-nal Re-se-arch\T1/ptm/m/n/12 , v. 19, n. 2, 
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
-) [29]
+[30]) [31]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 348.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 375.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 348.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 375.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[30
+[32
 
 ] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 3806 strings out of 94501
- 47978 string characters out of 1176790
+ 3814 strings out of 94501
+ 48072 string characters out of 1176790
  127968 words of memory out of 1000000
- 6885 multiletter control sequences out of 10000+50000
+ 6893 multiletter control sequences out of 10000+50000
  51086 words of font info for 73 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  30i,16n,41p,1282b,442s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (31 pages, 54544 bytes).
+Output written on monografia.dvi (33 pages, 59132 bytes).

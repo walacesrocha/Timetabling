@@ -1080,10 +1080,10 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //somaViolacoesSoft(p, solucaoAtual);
 
-        /*/if (iteracoesSemMelhora % 500 == 0) {
+        if (iteracoesSemMelhora % 500 == 0) {
             printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
                     solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
-        }*/
+        }
 
 
         iteracoesSemMelhora++;
@@ -1592,6 +1592,8 @@ Individuo *grasp(Problema *p) {
 
         fezPR = 0; // flag: fez Path-Relinking
 
+        ind = buscaLocalGraspHibrida(p, ind);
+
         if (p->buscaLocalGrasp == 1) {
             ind = buscaLocalGraspProfundidade(p, ind);
         } else if (p->buscaLocalGrasp == 2) {
@@ -1605,7 +1607,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 5;
             p->rho = 5000;
-            p->beta = 0.9;
+            p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
         } else if (p->buscaLocalGrasp == 7) {

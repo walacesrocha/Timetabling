@@ -21,7 +21,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     float deltaB;
     int iteracoes, NumOfIteGD;
     int notImprovingCounter, notImprovingCounterLength;
-    float iUpperBoundRate=1.15,iLowerBoundRate=0.9,iCoolRate=0.999995;
+    float iUpperBoundRate=1.15,iLowerBoundRate=0.9,iCoolRate=0.99995;
     float iBound,iNrIdle=0;
 
 
@@ -78,14 +78,19 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
             liberaIndividuo(solBestGD);
             solBestGD = copiaIndividuo(p, vizinho);
+            
+            iBound -= (fSolBestGD-fViz);
             fSolBestGD = fSolGD = fViz;
             
             iNrIdle=0;
+            
 
             notImprovingCounter = 0;
             level = level - deltaB;
             
             printf("Melhorou: %f\n", fViz);
+            
+            //scanf("%d\n",&notImprovingCounter);
         }/*else
         if (f(SolGD*)≤ level)
         SolGD ← SolGD*;
@@ -116,7 +121,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
         }
 
 
-        printf("[%d]: %f, %f\n", iteracoes, fSolGD, iBound);
+        printf("[%d]: %f, %f, [Lower=%f]\n", iteracoes, fSolGD, iBound,pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
 
         //end do;
     }

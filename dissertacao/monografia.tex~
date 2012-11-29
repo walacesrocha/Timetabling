@@ -234,6 +234,40 @@ $f^{*} \leftarrow \infty $ \;
 \caption{Estrutura básica do algoritmo GRASP}
 \end{algorithm}
 
+O método de construção da solução inicial do GRASP é guloso aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins considerando a função objetivo. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
+
+O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial.
+
+\begin{algorithm}[H]
+\label{solInicialGrasp}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{E = {conjunto discreto finito}}
+\Saida{Solução S}
+
+$S \leftarrow \emptyset $ \;
+$C \leftarrow E $ \;
+\Enqto{$|C| > 0$}{
+	$Para todo c \in C computar o valor da função gulosa g(c) $ \;
+	$S Definir LRC(C) \leftarrow \{ \alpha $ \;
+	Selecione aleatoriamente $c^* \in LRC(C) $ \;
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+	$AtualizaPool(S, Pool)$ \;
+}
+\caption{Algoritmo GRASP}
+\end{algorithm}
+
+
+
+diversificação e intensificação
+
+
 
 \begin{algorithm}[H]
 \label{algoBase}

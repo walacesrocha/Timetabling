@@ -15,12 +15,12 @@
 \contentsline {chapter}{\numberline {3}Proposta do trabalho}{20}
 \contentsline {section}{\numberline {3.1}Formula\c c\~ao do ITC-2007}{21}
 \contentsline {section}{\numberline {3.2}Algoritmo GRASP}{21}
-\contentsline {chapter}{\numberline {4}Resultados Computacionais}{23}
-\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{24}
-\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{24}
-\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{24}
-\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{25}
-\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{26}
-\contentsline {section}{\numberline {5.1}Conclus\~oes}{27}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{28}
-\contentsline {chapter}{Anexo{} A{} -$\tmspace -\thinmuskip {.1667em}$-{} Ferramentas utilizadas}{32}
+\contentsline {chapter}{\numberline {4}Resultados Computacionais}{24}
+\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{25}
+\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{25}
+\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{25}
+\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{26}
+\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{27}
+\contentsline {section}{\numberline {5.1}Conclus\~oes}{28}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{29}
+\contentsline {chapter}{Anexo{} A{} -$\tmspace -\thinmuskip {.1667em}$-{} Ferramentas utilizadas}{33}

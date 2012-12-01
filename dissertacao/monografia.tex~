@@ -207,6 +207,8 @@ As meta-heurísticas são algoritmos gerais que orientam uma forma de explorar o c
 
 A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. De lá para cá ela já foi aplicada em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
+\subsection{Estrutura básica}
+
 O algoritmo GRASP é um procedimento multi-iterativo. Cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao fim da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
 
 \begin{algorithm}[H]
@@ -236,7 +238,9 @@ $f^{*} \leftarrow \infty $ \;
 
 O método de construção da solução inicial do GRASP é guloso aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins considerando a função objetivo. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
 
-O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial.
+O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Inicialmente todos os elementos são candidatos a entrar na solução. Cada iteração escolhe um novo elemento para ser incorporado à solução. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente para entrar na solução e é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução.
+
+O parâmetro $\alpha (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução, mas em compensação se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
 
 \begin{algorithm}[H]
 \label{solInicialGrasp}
@@ -245,27 +249,78 @@ O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de constr
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{E = {conjunto discreto finito}}
+\Entrada{E = \{conjunto discreto finito\}}
 \Saida{Solução S}
 
 $S \leftarrow \emptyset $ \;
 $C \leftarrow E $ \;
 \Enqto{$|C| > 0$}{
-	$Para todo c \in C computar o valor da função gulosa g(c) $ \;
-	$S Definir LRC(C) \leftarrow \{ \alpha $ \;
-	Selecione aleatoriamente $c^* \in LRC(C) $ \;
-	\Se{$ f(S) < f^{*} $}{
-		$S^{*} \leftarrow S $ \;
-		$f^{*} \leftarrow f(S) $ \;
-	}
-	$AtualizaPool(S, Pool)$ \;
+	Para todo $c \in C$ computar o valor da função gulosa $g(c) $ \;
+	$c^{min} \leftarrow min\{g(c) | c \in C\}$\;
+	$c^{max} \leftarrow max\{g(c) | c \in C\}$\;
+	$LRC \leftarrow \{ c \in C | g(c) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
+	Escolha aleatoriamente $c^{'} \in LRC $ \;
+	$S \leftarrow S \bigcup \{ c^{'} \} $\;
+	$C \leftarrow C - \{ c^{'} \}$ \;
 }
-\caption{Algoritmo GRASP}
+\caption{Algoritmo guloso aletório para construção da solução inicial do GRASP}
 \end{algorithm}
 
+Para encontrar boas soluções, uma meta-heurística precisa ter duas características importantes: diversificação e intensificação. A primeira se refere à capacidade de explorar bem o espaço de soluções e não ficar preso a mínimos ou máximos locais. A intensificação é necessária para explorar bem uma região de mínimo local, dado que o mínimo global necessariamente também é um mínimo local.
 
+No GRASP a diversificação é feita pela independência das iterações e pela aleatoriedade introduzida na solução inicial. Assim a busca local irá trabalhar em diferentes soluções.
 
-diversificação e intensificação
+A intensificação é feita pela busca local. Nesta fase a solução inicial é melhorada explorando sua vizinhança na busca de soluções melhores. O GRASP não especifica qual a estratégia de busca local deve ser utilizada. Em \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Já em \cite{Souza:2004:GSA} por exemplo, é usado busca Tabu.
+
+\subsection{Hibridização com \textit{Path-Relinking}}
+
+A heurística \textit{Path-Relinking} (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
+
+A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo).
+
+O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
+
+\begin{algorithm}[H]
+\label{path-relinking}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Solução inicial $x_i$, solução alvo $x_a$}
+\Saida{Melhor solução $x^{*}$ no caminho de $x_i$ para $x_a$}
+
+$f^{*} \leftarrow min \{ f(x_i), f(x_a) \} $ \;
+$x^{*} \leftarrow argmin \{ f(x_i), f(x_a) \} $ \;
+$x \leftarrow x_i $ \;
+Compute as diferenças simétricas $\Delta(x,x_a) $ \;
+\Enqto{$\Delta(x,x_a) \neq \emptyset $}{
+	$m^* \leftarrow argmin  \{ f(x \oplus m) : m \in \Delta(x,x_a) \}$ \;
+	$ \Delta(x \oplus m^*,x_a) \leftarrow \Delta(x,x_a) - \{ m^* \}$ \;
+	$ x \leftarrow x \oplus m^* $ \;
+	\Se{$ f(x) < f^* $}{
+		$f^* \leftarrow f(x) $ \;
+		$x^* \leftarrow x $ \;
+	}
+}
+\caption{Algoritmo \textit{Path-Relinking}}
+\end{algorithm}
+
+O \texit{Path-Relinking} pode ser visto com uma estratégia de busca local mais restrita, onde os movimentos aplicados são mais específicos.
+
+De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo quanto na qualidade de solução.
+
+Ainda de acordo com \cite{Resende05graspwith}, existem duas estratégias diferentes de aplicar o PR no GRASP:
+
+\begin{itemize}
+
+\item PR é aplicado entre todos os pares de soluções elite. Pode ser feito periodicamente durante as iterações do GRASP ou no final da execução como uma pós-otimização.
+
+\item PR é aplicado como estratégia de intensificação em cada mínimo local obtido logo após a fase de busca local.
+
+\end{itemize}
+
+As duas estratégias podem ser combinadas.
 
 
 

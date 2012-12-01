@@ -87,6 +87,12 @@ Dispon{\'\i}vel em: $<$http://www.research.att.com/~mgcr/doc/gmis.ps.Z$>$.}
   timetabling problem. In:  CITESEER. \emph{XIII CLAIO: Congreso
   Latino-Iberoamericano de Investigaci{\'o}n Operativa}. [S.l.], 2006.}
 
+\bibitem[Glover 1996]{Glover96tabusearch}
+\abntrefinfo{Glover}{GLOVER}{1996}
+{GLOVER, F. Tabu search and adaptive memory programing - advances, applications
+  and challenges. In:  \emph{Interfaces in Computer Science and Operations
+  Research}. [S.l.]: Kluwer, 1996. p. 1--75.}
+
 \bibitem[Goltz e Matzke 1999]{Goltz99universitytimetabling}
 \abntrefinfo{Goltz e Matzke}{GOLTZ; MATZKE}{1999}
 {GOLTZ, H.-J.; MATZKE, D. University timetabling using constraint logic
@@ -141,6 +147,12 @@ Dispon{\'\i}vel em: $<$http://dl.acm.org/citation.cfm?id=1460198.1460201$>$.}
 {LACH, G.; LUBBECKE, M.~E. Curriculum based course timetabling: new solutions
   to udine benchmark instances.
 \emph{Annals of Operations Research}, 2010.}
+
+\bibitem[Laguna e Martí 1999]{Laguna99graspand}
+\abntrefinfo{Laguna e Martí}{LAGUNA; MARTí}{1999}
+{LAGUNA, M.; MARTí, R. Grasp and path relinking for 2-layer straight line
+  crossing minimization.
+\emph{INFORMS Journal on Computing}, v.~11, p. 44--52, 1999.}
 
 \bibitem[Lewis 2007]{Lewis2007:survey}
 \abntrefinfo{Lewis}{LEWIS}{2007}
@@ -212,6 +224,11 @@ Dispon{\'\i}vel em: $<$http://www.research.att.com/~mgcr/doc/gmpsg.ps.Z$>$.}
 {RESENDE, M.; RIBEIRO, C. {A GRASP with path-relinking for private virtual
   circuit routing}.
 \emph{Networks}, v.~41, n.~1, p. 104--114, 2003.}
+
+\bibitem[Resende e Ribeiro 2005]{Resende05graspwith}
+\abntrefinfo{Resende e Ribeiro}{RESENDE; RIBEIRO}{2005}
+{RESENDE, M. G.~C.; RIBEIRO, C.~C. \emph{GRASP with Path-Relinking: Recent
+  Advances and Applications}. 2005.}
 
 \bibitem[{Saint Corporation} 2002]{SC02}
 \abntrefinfo{{Saint Corporation}}{{Saint Corporation}}{2002}

@@ -15,12 +15,14 @@
 \contentsline {chapter}{\numberline {3}Proposta do trabalho}{20}
 \contentsline {section}{\numberline {3.1}Formula\c c\~ao do ITC-2007}{21}
 \contentsline {section}{\numberline {3.2}Algoritmo GRASP}{21}
-\contentsline {chapter}{\numberline {4}Resultados Computacionais}{24}
-\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{25}
-\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{25}
-\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{25}
-\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{26}
-\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{27}
-\contentsline {section}{\numberline {5.1}Conclus\~oes}{28}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{29}
-\contentsline {chapter}{Anexo{} A{} -$\tmspace -\thinmuskip {.1667em}$-{} Ferramentas utilizadas}{33}
+\contentsline {subsection}{\numberline {3.2.1}Estrutura b\'asica}{21}
+\contentsline {subsection}{\numberline {3.2.2}Hibridiza\c c\~ao com \textit {Path-Relinking}}{24}
+\contentsline {chapter}{\numberline {4}Resultados Computacionais}{27}
+\contentsline {section}{\numberline {4.1}Descri\c c\~ao das inst\^ancias utilizadas}{28}
+\contentsline {section}{\numberline {4.2}Detalhes de implementa\c c\~ao}{28}
+\contentsline {section}{\numberline {4.3}Sintonia da Meta-heur\IeC {\'\i }stica}{28}
+\contentsline {section}{\numberline {4.4}An\'alise dos resultados}{29}
+\contentsline {chapter}{\numberline {5}Conclus\~oes e trabalhos futuros}{30}
+\contentsline {section}{\numberline {5.1}Conclus\~oes}{31}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{32}
+\contentsline {chapter}{Anexo{} A{} -$\tmspace -\thinmuskip {.1667em}$-{} Ferramentas utilizadas}{36}

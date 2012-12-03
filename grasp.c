@@ -1592,7 +1592,15 @@ Individuo *grasp(Problema *p) {
 
         fezPR = 0; // flag: fez Path-Relinking
 
-        ind = buscaLocalGraspHibrida(p, ind);
+        while (1) {
+            ind = buscaLocalGraspHibrida(p, ind);
+            ind  = greatDeluge(p, ind);
+            p->t0 = 1;
+            p->rho = 5000;
+            p->beta = 0.9;
+            p->aceitaPioraSA = 1;
+            ind = simulatedAnnealing(p,ind);
+        }
 
         if (p->buscaLocalGrasp == 1) {
             ind = buscaLocalGraspProfundidade(p, ind);

@@ -1089,12 +1089,12 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         iteracoesSemMelhora++;
 
 
-        if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
+        /*if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
             printf("perturbando solucao\n");
             perturbaSolucao(p, solucaoAtual);
             foAtual = funcaoObjetivo(p, solucaoAtual);
             nPerturbacoes++;
-        }
+        }*/
 
         //printf("Iter: %d / FO: %f\n", iteracoesSemMelhora, foAtual);
     } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);
@@ -1597,7 +1597,7 @@ Individuo *grasp(Problema *p) {
             ind  = greatDeluge(p, ind);
             p->t0 = 1;
             p->rho = 5000;
-            p->beta = 0.9;
+            p->beta = 0.995;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p,ind);
         }

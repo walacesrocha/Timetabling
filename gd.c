@@ -41,7 +41,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     //Set number of iterations, NumOfIteGD;
     iteracoes = 0;
     iBound = iUpperBoundRate*fSolBestGD;
-    NumOfIteGD = 100000;
+    NumOfIteGD = 50000;
 
     //todo Set optimal rate of final solution, Optimalrate;
     OptimalRate = 0; // configurar por instancia

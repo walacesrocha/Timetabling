@@ -1054,7 +1054,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         if (deltaF <= 0) {// função objetivo decresceu
             //scanf("%d\n", &i);
             foAtual = foVizinhos[melhorVizinho];
-            //printf("Melhorou... %f\n", foAtual);
+            printf("LH: %f\n", foAtual);
             aDesalocar = solucaoAtual;
             solucaoAtual = vizinhos[melhorVizinho];
             vizinhos[melhorVizinho] = aDesalocar;
@@ -1593,13 +1593,15 @@ Individuo *grasp(Problema *p) {
         fezPR = 0; // flag: fez Path-Relinking
 
         while (1) {
+            ind = buscaLocalTimeslot(p, ind);
+            ind = buscaLocalGraspVNS(p, ind);
             ind = buscaLocalGraspHibrida(p, ind);
-            ind  = greatDeluge(p, ind);
+            ind = greatDeluge(p, ind);
             p->t0 = 1;
             p->rho = 5000;
             p->beta = 0.995;
             p->aceitaPioraSA = 1;
-            ind = simulatedAnnealing(p,ind);
+            ind = simulatedAnnealing(p, ind);
         }
 
         if (p->buscaLocalGrasp == 1) {

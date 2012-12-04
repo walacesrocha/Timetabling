@@ -41,6 +41,8 @@ Individuo *geraVizinho3(Problema *p, Individuo *ind);
 
 Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial);
 
+Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind);
+
 Individuo *move(Problema *p, Individuo *ind);
 Individuo *swap(Problema *p, Individuo *ind);
 Individuo *lectureMove(Problema *p, Individuo *ind);

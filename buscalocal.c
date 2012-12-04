@@ -436,7 +436,72 @@ Individuo *buscaLocal(Problema *p, Individuo *ind, int fase) {
     return novoInd;
 }
 
-ListaVizinhos *alocaListaVizinhos(int k) {
+Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind) {
+
+    int i, nTimeslots;
+    int s1, s2;
+    int semMelhorias, nTentativas;
+    float fitnessAtual, novoFitness;
+    Individuo *novoInd;
+
+    printf("busca local timeslot\n");
+
+    novoInd = copiaIndividuo(p, ind);
+
+    // quantidade de timeslots
+    nTimeslots = p->nDias * p->nPerDias;
+
+    // fitness atual
+    fitnessAtual = somaViolacoesSoft(p, novoInd);
+
+    // numero de iterações sem melhoria
+    semMelhorias = 0;
+
+    nTentativas = 500;
+    //printf("nTentativas: %d\n\n\n", nTentativas);
+
+    for (i = 0; i < nTimeslots; i++) {
+
+        for (s1 = 0; s1 < p->nSalas; s1++) {
+            for (s2 = s1 + 1; s2 < p->nSalas; s2++) {
+
+
+
+                /*/s2 = rand() % p->nSalas;
+                while (s2 == s1) {
+                    s2 = rand() % p->nSalas;
+                }*/
+
+                int p1 = s1 * nTimeslots + i;
+                int p2 = s2 * nTimeslots + i;
+
+                trocaAulas(novoInd->aula, p1, p2);
+
+                // numero de violacoes
+                novoFitness = somaViolacoesSoft(p, novoInd);
+                if (novoFitness < fitnessAtual) {
+                    //printf("Melhorou: %f -> %f\n", fitnessAtual, novoFitness);
+                    fitnessAtual = novoFitness;
+                    novoInd->fitness = fitnessAtual;
+                    semMelhorias = 0;
+                    printf("TS: %f\n", novoFitness);
+                } else {
+                    //printf("Nao melhorou %f\n", fitnessAtual);
+                    // desfaz troca
+                    trocaAulas(novoInd->aula, p1, p2);
+                    semMelhorias++;
+                }
+
+            }
+        }
+        // vai para proximo timeslot
+
+    }
+
+    return novoInd;
+}
+
+ListaVizinhos * alocaListaVizinhos(int k) {
     ListaVizinhos *listaVizinhos;
 
     listaVizinhos = (ListaVizinhos*) malloc(sizeof (ListaVizinhos));
@@ -447,13 +512,13 @@ ListaVizinhos *alocaListaVizinhos(int k) {
     return listaVizinhos;
 }
 
-void desalocaListaVizinhos(ListaVizinhos *listaVizinhos) {
+void desalocaListaVizinhos(ListaVizinhos * listaVizinhos) {
     free(listaVizinhos->pos1);
     free(listaVizinhos->pos2);
     free(listaVizinhos);
 }
 
-void geraListaVizinhos(Problema *p, Individuo*ind, ListaVizinhos *listaVizinhos) {
+void geraListaVizinhos(Problema *p, Individuo*ind, ListaVizinhos * listaVizinhos) {
     int i, p1, p2, aux;
 
     for (i = 0; i < p->k; i++) {
@@ -646,7 +711,7 @@ int getSalaVazioParaTimeSlot(Problema *p, Individuo *ind, int salaExcluida, int 
     return sLivres[rand() % j];
 }
 
-int getSalaAdequada(Problema *p, Disciplina *disc) {
+int getSalaAdequada(Problema *p, Disciplina * disc) {
     int sLivres[p->nSalas];
     int i, j;
 
@@ -674,7 +739,7 @@ int getSalaAdequada(Problema *p, Disciplina *disc) {
     return sLivres[rand() % j];
 }
 
-Individuo *geraVizinho3(Problema *p, Individuo *ind) {
+Individuo * geraVizinho3(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1003,7 +1068,7 @@ compact:
     return novoInd;
 }
 
-Individuo *lectureMove(Problema *p, Individuo *ind) {
+Individuo * lectureMove(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1047,7 +1112,7 @@ lecture_move:
     return novoInd;
 }
 
-Individuo *timeMove(Problema *p, Individuo *ind) {
+Individuo * timeMove(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1120,7 +1185,7 @@ timemove:
     return novoInd;
 }
 
-Individuo *roomMove(Problema *p, Individuo *ind) {
+Individuo * roomMove(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1193,7 +1258,7 @@ roommove:
     return novoInd;
 }
 
-Individuo *rooms(Problema *p, Individuo *ind) {
+Individuo * rooms(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1277,7 +1342,7 @@ rooms:
     return novoInd;
 }
 
-Individuo *compact(Problema *p, Individuo *ind) {
+Individuo * compact(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     int nTentativas = 0;
     Individuo *novoInd = alocaIndividuo();
@@ -1371,7 +1436,7 @@ compact:
     return novoInd;
 }
 
-Individuo *move(Problema *p, Individuo *ind) {
+Individuo * move(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1416,7 +1481,7 @@ move:
     return novoInd;
 }
 
-Individuo *swap(Problema *p, Individuo *ind) {
+Individuo * swap(Problema *p, Individuo * ind) {
     int i, p1, p2, aux;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
@@ -1522,19 +1587,19 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
     }
 
     float fator = (float) p->nIterSemMelhoras / total;
-    
-    printf("Iter: %d, Max: %d, Fator: %f\n", total,p->nIterSemMelhoras,fator);
-    
+
+    printf("Iter: %d, Max: %d, Fator: %f\n", total, p->nIterSemMelhoras, fator);
+
     for (i = 0; i < qtMovs; i++) {
-        iteracoes[i] = ceil(fator*iteracoes[i]);
-        
+        iteracoes[i] = ceil(fator * iteracoes[i]);
+
     }
 
 
 
 }
 
-Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
+Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     Movimento mov;
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
@@ -1544,7 +1609,7 @@ Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
     int haMelhoras;
     int pMov;
     Movimento movimentos[7] = {LECTURE_MOVE, TIME_MOVE, ROOM_MOVE,
-        ROOMS, COMPACT,MOVE, SWAP};
+        ROOMS, COMPACT, MOVE, SWAP};
     int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
     int nMovs = 7;
 
@@ -1556,15 +1621,15 @@ Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
 
     pMov = 0;
 
-    configuraQtMovsVNS(p,solucaoAtual, movimentos, iteracoesMax, nMovs);
+    configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
 
     do {
 
         haMelhoras = 0;
         for (pMov = 0; pMov < nMovs; pMov++) {
-            printf("%d\n", iteracoesMax[pMov]);
+            //printf("%d\n", iteracoesMax[pMov]);
             for (i = 0; i < iteracoesMax[pMov]; i++) {
-                
+
                 switch (movimentos[pMov]) {
                     case MOVE:
                         vizinho = move(p, solucaoAtual);
@@ -1598,7 +1663,7 @@ Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
                 aDesalocar = 0;
                 if (deltaF <= 0) {// função objetivo decresceu
                     foAtual = fo;
-                    //printf("Melhorou... %f [%d]\n", foAtual, iteracoes);
+                    printf("VNS: %f\n", foAtual, iteracoes);
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
                     //melhorInd = solucaoAtual;
@@ -1615,8 +1680,8 @@ Individuo *buscaLocalGraspVNS(Problema*p, Individuo *indInicial) {
             }
         }
 
-        configuraQtMovsVNS(p,solucaoAtual, movimentos, iteracoesMax, nMovs);
-        printf("==> %f\n", foAtual);
+        configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
+        //printf("==> %f\n", foAtual);
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento

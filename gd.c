@@ -88,7 +88,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             notImprovingCounter = 0;
             level = level - deltaB;
             
-            printf("Melhorou: %f\n", fViz);
+            printf("GD: %f\n", fViz);
             
             //scanf("%d\n",&notImprovingCounter);
         }/*else
@@ -116,12 +116,12 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
         if (iBound < (pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD)) {
             iNrIdle++;
-            printf(" -<[%d]>- \n", iNrIdle);
+            //printf(" -<[%d]>- \n", iNrIdle);
             iBound = maxFloat(fSolBestGD + 2.0, pow(iUpperBoundRate, iNrIdle) * fSolBestGD);
         }
 
 
-        printf("[%d]: %f, %f, [Lower=%f]\n", iteracoes, fSolGD, iBound,pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
+        //printf("[%d]: %f, %f, [Lower=%f]\n", iteracoes, fSolGD, iBound,pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
 
         //end do;
     }

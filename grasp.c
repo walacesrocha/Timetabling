@@ -1592,7 +1592,7 @@ Individuo *grasp(Problema *p) {
 
         fezPR = 0; // flag: fez Path-Relinking
 
-        while (1) {
+        while (0) {
             ind = buscaLocalTimeslot(p, ind);
             ind = buscaLocalGraspVNS(p, ind);
             ind = buscaLocalGraspHibrida(p, ind);
@@ -1718,6 +1718,8 @@ Individuo *grasp(Problema *p) {
         printf("Iter:%d,FO=%f\n", i + 1, funcaoObjetivo(p, bestInd));
         //printf("%f %f %f\n", p->f1, p->f2, p->f3);
         fflush(stdout);
+
+        //if ((double) (clock() - p->inicio) / CLOCKS_PER_SEC > 60)break;
 
     }
 

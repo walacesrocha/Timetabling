@@ -76,7 +76,10 @@ int main(int argc, char** argv) {
     /*for(i=0;i<p->nDisciplinas;i++){
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
+
+    p->inicio = clock();
     ind = grasp(p);
+    p->fim = clock();
 
     /*p->t0 = atof(argv[2]);
     p->rho = atof(argv[3]);
@@ -97,6 +100,7 @@ int main(int argc, char** argv) {
 
     printf("F1 -> F2: %f\n", p->f2 - p->f1);
     printf("F2 -> F3: %f\n", p->f3 - p->f2);
+    printf("TEMPO: %f\n", ((double) (p->fim - p->inicio)) / CLOCKS_PER_SEC);
 
     t2 = clock();
 

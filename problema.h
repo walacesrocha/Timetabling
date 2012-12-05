@@ -21,14 +21,14 @@ typedef struct disciplina {
     char professor[30];
     Curriculo **curriculos; //Leandro
     int nCurriculos; //Leandro
-    
+
     /*cada indisponibilidade eh um timeslot da aula, ou seja coluna da aula*/
     int *indisponibilidades; //Leandro
     int nIndisponibilidades; //Leandro
-    
+
     int *slotsDisponiveis; //Leandro
     int nSlotsDisponiveis; //Leandro
-    
+
     int nAulas;
     int aulaInicial;
     int minDiasAula;
@@ -75,12 +75,12 @@ typedef struct problema {
     int tPopulacao; // tamanho da população
     long int tempoLimite;
     long int tempoMelhorResposta;
-    
+
     float t0; //SA
     float rho; // rho = t0/tmin;
     float beta; // resfriamento
     int aceitaPioraSA;
-    
+
     /* Parametros Grasp*/
     float txSwap;
     int buscaLocalGrasp;
@@ -88,25 +88,27 @@ typedef struct problema {
     int nIterSemMelhoras;
     float threshold;
     int k; // tamanho da lista de vizinhos
-    long nMoves,nSwaps;
-    
+    long nMoves, nSwaps;
+
     float mediaSolucoes;
-    
+
     /*Leandro inicio*/
     int nDiasEperiodos; //dias * períodos
     char **matrizAulaSala; //matriz compatibilidade aula-sala (número de estudantes)
     char **matrizAulaAula; //matriz conflito aula-aula (aulas do mesmo currículo ou com mesmo professor)
     char **matrizAulaIndisponibilidades; //matriz com os dias e horarios disponiveis para cada aula
-    
+
     int trocavazios; //testes remover  //////////////
     int trocaefetiva; //testes remover ///////////////
     /*Leandro fim*/
-    
-    float soft1,soft2,soft3,soft4;
-    float f1,f2,f3;
-    
+
+    float soft1, soft2, soft3, soft4;
+    float f1, f2, f3;
+
+    clock_t inicio, fim;
+
     float pAproveitamento;
-    
+
 } Problema;
 
 Problema *alocaProblema();

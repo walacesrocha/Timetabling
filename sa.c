@@ -521,7 +521,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
             aDesalocar = 0;
             if (deltaF <= 0) {// função objetivo decresceu
                 foAtual = fo;
-                //printf("Melhorou... %f\n", foAtual);
+                //printf("SA: %f [%f]\n", foAtual,t0);
                 aDesalocar = solucaoAtual;
                 solucaoAtual = vizinho;
                 //melhorInd = solucaoAtual;
@@ -554,8 +554,8 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f, Pioras=%d, FO=%f (%f, %f) [%.3f]\n", t0, nPioras, foAtual,
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N);
+        //printf("T=%f, Pioras=%d, FO=%f (%f, %f) [%.3f]\n", t0, nPioras, foAtual,
+                //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N);
         t0 *= beta;
     } while (t0 > tMin);
 

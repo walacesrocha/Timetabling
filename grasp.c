@@ -1054,12 +1054,12 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         if (deltaF <= 0) {// função objetivo decresceu
             //scanf("%d\n", &i);
             foAtual = foVizinhos[melhorVizinho];
-            printf("LH: %f\n", foAtual);
             aDesalocar = solucaoAtual;
             solucaoAtual = vizinhos[melhorVizinho];
             vizinhos[melhorVizinho] = aDesalocar;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
+                //printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 iteracoesComMesmoFo = 0;
                 zeraListaTabu(listaTabu, p->dimensao);
@@ -1081,8 +1081,8 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //somaViolacoesSoft(p, solucaoAtual);
 
         if (iteracoesSemMelhora % 500 == 0) {
-            printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
-                    solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
+            //printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
+            //      solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
         }
 
 
@@ -1563,7 +1563,7 @@ void atualizaPool(AuxGrasp *auxGrasp, Individuo *ind) {
 
 Individuo *grasp(Problema *p) {
     int i, j, fezPR;
-    float fo, foPR, melhor = 9999999;
+    float fo, foIter, foPR, melhor = 9999999;
     Individuo *ind, *bestInd, *indPr, *bestIter;
     AuxGrasp *auxGrasp;
 
@@ -1592,7 +1592,14 @@ Individuo *grasp(Problema *p) {
 
         fezPR = 0; // flag: fez Path-Relinking
 
-        while (0) {
+        foIter = funcaoObjetivo(p, ind);
+        while (1) {
+            float foAnterior;
+
+            fo = funcaoObjetivo(p, ind);
+            foAnterior = fo;
+            printf("FO1: %f\n", fo);
+
             ind = buscaLocalTimeslot(p, ind);
             ind = buscaLocalGraspVNS(p, ind);
             ind = buscaLocalGraspHibrida(p, ind);
@@ -1602,6 +1609,21 @@ Individuo *grasp(Problema *p) {
             p->beta = 0.995;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing(p, ind);
+
+            fo = funcaoObjetivo(p, ind);
+
+            printf("FO2: %f\n", fo);
+
+            if (fo < foIter) {
+                bestIter = copiaIndividuo(p, ind);
+                foIter = fo;
+            }
+            if (fo < foAnterior) {
+                printf("Melhorou: %f --> %f\n", foAnterior, fo);
+            } else {
+                printf("terminando...");
+                break;
+            }
         }
 
         if (p->buscaLocalGrasp == 1) {
@@ -1627,9 +1649,9 @@ Individuo *grasp(Problema *p) {
             //exit(1);
         }
 
-        p->f2 += funcaoObjetivo(p, ind);
+        p->f2 += funcaoObjetivo(p, bestIter);
 
-        fo = funcaoObjetivo(p, ind);
+        fo = funcaoObjetivo(p, bestIter);
         ind->fitness = fo;
         //printf("----------------------------------\n", fo);
         printf("F2: %f\n", fo);
@@ -1644,7 +1666,7 @@ Individuo *grasp(Problema *p) {
         p->soft4 += ind->soft4;
 
         if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
-            indPr = pathRelinking2(p, ind, auxGrasp);
+            indPr = pathRelinking2(p, bestIter, auxGrasp);
             foPR = funcaoObjetivo(p, indPr);
             indPr->fitness = foPR;
             fezPR = 1; // fez Path-Relinking
@@ -1658,9 +1680,9 @@ Individuo *grasp(Problema *p) {
             } else {
                 bestIter = ind;
             }
-        } else {
+        } /*else {
             bestIter = ind;
-        }
+        }*/
 
         p->f3 += funcaoObjetivo(p, bestIter);
 
@@ -1719,7 +1741,7 @@ Individuo *grasp(Problema *p) {
         //printf("%f %f %f\n", p->f1, p->f2, p->f3);
         fflush(stdout);
 
-        //if ((double) (clock() - p->inicio) / CLOCKS_PER_SEC > 60)break;
+        if (esgotouTempoLimite(p))break;
 
     }
 

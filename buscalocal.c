@@ -440,7 +440,7 @@ Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind) {
 
     int i, nTimeslots;
     int s1, s2;
-    int semMelhorias, nTentativas;
+    int melhorou, nTentativas;
     float fitnessAtual, novoFitness;
     Individuo *novoInd;
 
@@ -454,14 +454,12 @@ Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind) {
     // fitness atual
     fitnessAtual = somaViolacoesSoft(p, novoInd);
 
-    // numero de iterações sem melhoria
-    semMelhorias = 0;
-
     nTentativas = 500;
     //printf("nTentativas: %d\n\n\n", nTentativas);
 
-    for (i = 0; i < nTimeslots; i++) {
+    for (i = 0; i < nTimeslots;) {
 
+        melhorou = 0;
         for (s1 = 0; s1 < p->nSalas; s1++) {
             for (s2 = s1 + 1; s2 < p->nSalas; s2++) {
 
@@ -483,18 +481,22 @@ Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind) {
                     //printf("Melhorou: %f -> %f\n", fitnessAtual, novoFitness);
                     fitnessAtual = novoFitness;
                     novoInd->fitness = fitnessAtual;
-                    semMelhorias = 0;
-                    printf("TS: %f\n", novoFitness);
+                    melhorou = 1;
+                    //printf("TS: %f\n", novoFitness);
                 } else {
                     //printf("Nao melhorou %f\n", fitnessAtual);
                     // desfaz troca
                     trocaAulas(novoInd->aula, p1, p2);
-                    semMelhorias++;
                 }
 
             }
         }
-        // vai para proximo timeslot
+
+        if (!melhorou) {
+            // vai para proximo timeslot
+            i++;
+        }
+
 
     }
 
@@ -1544,8 +1546,8 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
     int i;
     int total;
 
-    printf("I,%d,%d,%d,%d\n", indBase->soft1, indBase->soft2,
-            indBase->soft3, indBase->soft4);
+    //printf("I,%d,%d,%d,%d\n", indBase->soft1, indBase->soft2,
+      //      indBase->soft3, indBase->soft4);
 
     total = 0;
 
@@ -1554,30 +1556,30 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
         switch (movs[i]) {
             case MOVE:
                 iteracoes[i] += (indBase->soft1 + indBase->soft2 + indBase->soft3 + indBase->soft4);
-                printf("MOVE: %d\n", iteracoes[i]);
+                //printf("MOVE: %d\n", iteracoes[i]);
                 break;
             case SWAP:
                 iteracoes[i] += (indBase->soft1 + indBase->soft2 + indBase->soft3 + indBase->soft4);
-                printf("SWAP: %d\n", iteracoes[i]);
+                //printf("SWAP: %d\n", iteracoes[i]);
                 break;
             case LECTURE_MOVE:
-                printf("LECTURE_MOVE: %d\n", iteracoes[i]);
+                //printf("LECTURE_MOVE: %d\n", iteracoes[i]);
                 break;
             case TIME_MOVE:
                 iteracoes[i] += (indBase->soft2 + indBase->soft3);
-                printf("TIME_MOVE: %d\n", iteracoes[i]);
+                //printf("TIME_MOVE: %d\n", iteracoes[i]);
                 break;
             case ROOM_MOVE:
                 iteracoes[i] += (indBase->soft1 + indBase->soft4);
-                printf("ROOM_MOVE: %d\n", iteracoes[i]);
+                //printf("ROOM_MOVE: %d\n", iteracoes[i]);
                 break;
             case ROOMS:
                 iteracoes[i] += (indBase->soft1 + indBase->soft4);
-                printf("ROOMS: %d\n", iteracoes[i]);
+                //printf("ROOMS: %d\n", iteracoes[i]);
                 break;
             case COMPACT:
                 iteracoes[i] += indBase->soft3;
-                printf("COMPACT: %d\n", iteracoes[i]);
+                //printf("COMPACT: %d\n", iteracoes[i]);
                 break;
             default:
                 break;
@@ -1588,7 +1590,7 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
 
     float fator = (float) p->nIterSemMelhoras / total;
 
-    printf("Iter: %d, Max: %d, Fator: %f\n", total, p->nIterSemMelhoras, fator);
+    //printf("Iter: %d, Max: %d, Fator: %f\n", total, p->nIterSemMelhoras, fator);
 
     for (i = 0; i < qtMovs; i++) {
         iteracoes[i] = ceil(fator * iteracoes[i]);
@@ -1663,11 +1665,11 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
                 aDesalocar = 0;
                 if (deltaF <= 0) {// função objetivo decresceu
                     foAtual = fo;
-                    printf("VNS: %f\n", foAtual, iteracoes);
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
                     //melhorInd = solucaoAtual;
                     if (deltaF < 0) {
+                        //printf("VNS: %f\n", foAtual);
                         haMelhoras = 1;
                         iteracoes = 0; // continua buscando
                     }

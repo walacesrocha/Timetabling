@@ -41,7 +41,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     //Set number of iterations, NumOfIteGD;
     iteracoes = 0;
     iBound = iUpperBoundRate*fSolBestGD;
-    NumOfIteGD = 50000;
+    NumOfIteGD = 5000;
 
     //todo Set optimal rate of final solution, Optimalrate;
     OptimalRate = 0; // configurar por instancia
@@ -89,7 +89,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             notImprovingCounter = 0;
             level = level - deltaB;
             
-            printf("GD: %f\n", fViz);
+            //printf("GD: %f\n", fViz);
             
             //scanf("%d\n",&notImprovingCounter);
         }/*else
@@ -125,7 +125,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
         }
 
 
-        printf("[%d]: %f, (%f), %f, [Lower=%f]\n", iteracoes, fSolGD, fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
+        //printf("[%d]: %f, (%f), %f, [Lower=%f]\n", iteracoes, fSolGD, fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
 
         //end do;
     }

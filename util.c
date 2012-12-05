@@ -55,3 +55,13 @@ void imprimeMatrizTimetable(Problema *p, Individuo *ind) {
 int getTimeslot(Problema *p, int pos) {
     return pos % (p->nDias * p->nPerDias);
 }
+
+int esgotouTempoLimite(Problema *p) {
+    clock_t agora = clock();
+
+    if ((double) (agora - p->inicio) / CLOCKS_PER_SEC > p->tempoLimite) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

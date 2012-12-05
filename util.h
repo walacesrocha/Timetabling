@@ -19,5 +19,7 @@ float tempoDecorrido(clock_t t1);
 void imprimeMatrizTimetable(Problema *p, Individuo *ind) ;
 int getTimeslot(Problema *p, int pos);
 
+int esgotouTempoLimite(Problema *p);
+
 #endif	/* _UTIL_H */
 

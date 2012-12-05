@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
 
+    p->tempoLimite = 1200;
     p->inicio = clock();
     ind = grasp(p);
     p->fim = clock();
@@ -103,8 +104,6 @@ int main(int argc, char** argv) {
     printf("TEMPO: %f\n", ((double) (p->fim - p->inicio)) / CLOCKS_PER_SEC);
 
     t2 = clock();
-
-    Disciplina *disc = acessaDisciplina(p, 4);
 
     /*for(i=0;i<disc->nSlotsDisponiveis;i++){
         printf("%d ", disc->slotsDisponiveis[i]);

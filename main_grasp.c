@@ -20,8 +20,10 @@
 #include "fitness.h"
 #include "sa.h"
 #include "grasp.h"
+#include "gerador.h"
 
 /*Leandro fim*/
+
 
 void imprimeVetor(int *v, int n) {
     int i;
@@ -58,6 +60,8 @@ int main(int argc, char** argv) {
     FILE *fp;
 
 
+
+
     srand(time(0));
 
     t1 = clock();
@@ -70,7 +74,13 @@ int main(int argc, char** argv) {
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
     p->pAproveitamento = atof(argv[7]);
-    p->k = 10;
+    p->k = 30;
+
+
+    /*Gerador *gerador = getGeradorInicial(p->dimensao);
+    while (1) {
+        incrementaPosGerador(gerador);
+    }*/
 
 
     /*for(i=0;i<p->nDisciplinas;i++){

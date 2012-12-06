@@ -15,6 +15,8 @@ typedef struct individuo{
 	float fitness;
 	int n;	//tamanho do individuo
         int soft1,soft2,soft3,soft4;
+        int posConflitos[50];
+        int nConflitos;
 }Individuo;
 
 

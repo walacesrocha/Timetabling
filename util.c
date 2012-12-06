@@ -65,3 +65,15 @@ int esgotouTempoLimite(Problema *p) {
         return 0;
     }
 }
+
+long getHashCode(Individuo *ind) {
+    int i;
+    long code;
+
+    code = 0;
+    for (i = 0; i < ind->n; i++) {
+        code += (i + 1) * ind->aula[i];
+    }
+
+    return code;
+}

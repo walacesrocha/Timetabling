@@ -21,5 +21,7 @@ int getTimeslot(Problema *p, int pos);
 
 int esgotouTempoLimite(Problema *p);
 
+long getHashCode(Individuo *ind) ;
+
 #endif	/* _UTIL_H */
 

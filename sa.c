@@ -2,6 +2,8 @@
 #include "sa.h"
 #include "fitness.h"
 #include "util.h"
+#include "tabu.h"
+#include "gerador.h"
 
 float funcaoObjetivo(Problema *p, Individuo *ind) {
     float vHard = somaViolacoesHard(p, ind);
@@ -178,8 +180,9 @@ swap:
     return novoInd;
 }
 
-Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, int *listaTabu) {
-    int i, p1, p2, aux, pTabu;
+Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, Tabu *listaTabu) {
+    int i, p1, p2, aux;
+    long code;
     Individuo *novoInd = alocaIndividuo();
     criaIndividuo(novoInd, p);
     //printf("Individuo criado\n");
@@ -212,25 +215,23 @@ move:
             }
         }
 
-        pTabu = p1 * p->dimensao + p2;
 
-        if (listaTabu[pTabu]) {
+        // faz a troca das posicoes
+        troca_par(novoInd, p1, p2);
+        code  = getHashCode(novoInd);
+        if (estaNoTabu(code, listaTabu)){
+            //printf("voltando move (tabu)\n");
             goto move;
         }
 
-        // faz a troca das posicoes
-        aux = novoInd->aula[p1];
-        novoInd->aula[p1] = novoInd->aula[p2];
-        novoInd->aula[p2] = aux;
-
         if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
             troca_par(novoInd, p1, p2);
-            listaTabu[pTabu] = 1;
+            insereTabu(code,listaTabu);
             //printf("voltando move\n");
             goto move;
         }
 
-        listaTabu[pTabu] = 1;
+        insereTabu(code,listaTabu);
     } else {
         p->nSwaps++;
         /*** SWAP EVENT ***/
@@ -255,25 +256,23 @@ swap:
             }
         }
 
-        pTabu = p1 * p->dimensao + p2;
-
-        if (listaTabu[pTabu]) {
-            goto move;
-        }
 
         // faz a troca das posicoes
-        aux = novoInd->aula[p1];
-        novoInd->aula[p1] = novoInd->aula[p2];
-        novoInd->aula[p2] = aux;
+        troca_par(novoInd, p1, p2);
+        code  = getHashCode(novoInd);
+        if (estaNoTabu(code, listaTabu)){
+            //printf("voltando swap (tabu)\n");
+            goto swap;
+        }
 
         if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
             troca_par(novoInd, p1, p2);
-            listaTabu[pTabu] = 1;
+            insereTabu(code,listaTabu);
             //printf("voltando swap\n");
             goto swap;
         }
 
-        listaTabu[pTabu] = 1;
+        insereTabu(code,listaTabu);
     }
 
 
@@ -505,13 +504,14 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     N = 200;
 
     solucaoAtual = indInicial;
+    Gerador *gerador = getGeradorInicial(p->dimensao);
     do {
         int iteracoes = 0;
         float fo;
         int nPioras = 0;
         float totalProb = 0;
         do {
-            vizinho = geraVizinho2(p, solucaoAtual);
+            vizinho = getProxVizinho(p, solucaoAtual,gerador);
 
             fo = funcaoObjetivo(p, vizinho);
             deltaF = fo - foAtual;

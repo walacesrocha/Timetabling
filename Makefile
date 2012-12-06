@@ -1,6 +1,6 @@
 compile: main.c problema.c io.c problema.h io.h individuo.h individuo.c populacao.h populacao.c genetico.h genetico.c fitness.h fitness.c auxiliar.h auxiliar.c stat.c
-	gcc -lm -o sa problema.c io.c individuo.c populacao.c main_sa.c genetico.c util.c agenda.c fitness.c buscalocal.c sa.c auxiliar.c grasp.c tabu.c gd.c
-	gcc -g -O0 -lm -o grasp problema.c io.c individuo.c populacao.c main_grasp.c genetico.c util.c agenda.c fitness.c buscalocal.c sa.c auxiliar.c grasp.c tabu.c gd.c
+	gcc -lm -o sa problema.c io.c individuo.c populacao.c main_sa.c genetico.c util.c agenda.c fitness.c buscalocal.c sa.c auxiliar.c grasp.c tabu.c gd.c gerador.c
+	gcc -g -O0 -lm -o grasp problema.c io.c individuo.c populacao.c main_grasp.c genetico.c util.c agenda.c fitness.c buscalocal.c sa.c auxiliar.c grasp.c tabu.c gd.c gerador.c
 #	gcc -lm -o stat problema.c io.c individuo.c populacao.c stat.c genetico.c util.c agenda.c fitness.c buscalocal.c sa.c auxiliar.c grasp.c
 #
 #  There exist several targets which are by default empty and which can be 

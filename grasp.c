@@ -8,6 +8,7 @@
 #include "buscalocal.h"
 #include "tabu.h"
 #include "gd.h"
+#include "gerador.h"
 
 /**
  * Compara duas aulas em relação a dificuldade. 
@@ -995,20 +996,26 @@ void perturbaSolucao(Problema *p, Individuo *ind) {
 Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo **vizinhos;
+    Gerador **geradores;
     float foAtual;
     float deltaF;
     float *foVizinhos;
     int i, nVizinhos;
     int melhorVizinho;
-    int nPerturbacoes = 0;
-    int *listaTabu;
+    Tabu *listaTabu;
+    long totalElementos = 0;
 
     nVizinhos = p->k;
 
     vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
     foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
 
-    listaTabu = geraListaTabu(p->dimensao);
+    geradores = (Gerador**) malloc(nVizinhos * sizeof (Gerador*));
+    for (i = 0; i < nVizinhos; i++) {
+        geradores[i] = getGeradorInicial(p->dimensao);
+    }
+
+    listaTabu = geraListaTabu(100000);
 
     foAtual = funcaoObjetivo(p, indInicial);
 
@@ -1018,18 +1025,20 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
     //printf("I,%d,%d,%d,%d\n", solucaoAtual->soft1, solucaoAtual->soft2,
     //      solucaoAtual->soft3, solucaoAtual->soft4);
-
     do {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.00000000000) {
-                vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual, listaTabu);
+            if (((float) rand()) / RAND_MAX < 1.00000000000) {
+                //vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual, listaTabu);
+                vizinhos[i] = getProxVizinho(p, solucaoAtual, geradores[i]);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
             }
+            totalElementos += nVizinhos;
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
             foVizinhos[i] = somaViolacoesSoft(p, vizinhos[i]);
+            //getHashCode(vizinhos[i]);
             if (i == 0) {
                 melhorVizinho = 0;
             } else {
@@ -1062,7 +1071,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
                 printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 iteracoesComMesmoFo = 0;
-                zeraListaTabu(listaTabu, p->dimensao);
+                //zeraListaTabu(listaTabu, p->dimensao);
             } else {
                 iteracoesComMesmoFo++;
             }
@@ -1080,9 +1089,18 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
         //somaViolacoesSoft(p, solucaoAtual);
 
-        if (iteracoesSemMelhora % 500 == 0) {
+        if (iteracoesSemMelhora && iteracoesSemMelhora % 5000 == 0) {
             //printf("I[%d],%d,%d,%d,%d === %f\n", iteracoesSemMelhora, solucaoAtual->soft1, solucaoAtual->soft2,
             //      solucaoAtual->soft3, solucaoAtual->soft4, funcaoObjetivo(p, solucaoAtual));
+
+            somaViolacoesSoft(p, solucaoAtual);
+            printf("Conflitos: ");
+            for (i = 0; i < solucaoAtual->nConflitos; i++) {
+                printf("%d ", solucaoAtual->posConflitos[i]);
+            }
+            printf("\n");
+            
+            configuraGeradores(solucaoAtual, geradores, nVizinhos);
         }
 
 
@@ -1101,10 +1119,11 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+    printf("Total gerado: %d\n", totalElementos);
 
     free(vizinhos);
     free(foVizinhos);
-    free(listaTabu);
+    desalocaListaTabu(listaTabu);
 
     return solucaoAtual;
 }
@@ -1593,7 +1612,7 @@ Individuo *grasp(Problema *p) {
         fezPR = 0; // flag: fez Path-Relinking
 
         foIter = funcaoObjetivo(p, ind);
-        while (1) {
+        while (0) {
             float foAnterior;
 
             fo = funcaoObjetivo(p, ind);
@@ -1603,7 +1622,7 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalTimeslot(p, ind);
             ind = buscaLocalGraspVNS(p, ind);
             ind = buscaLocalGraspHibrida(p, ind);
-            //ind = greatDeluge(p, ind);
+            ind = greatDeluge(p, ind);
             p->t0 = 1;
             p->rho = 5000;
             p->beta = 0.995;

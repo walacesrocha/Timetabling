@@ -9,12 +9,13 @@
 #define	_SA_H
 
 #include "individuo.h"
+#include "tabu.h"
 
 
 
 Individuo *geraVizinho(Problema *p, Individuo *ind);
 Individuo *geraVizinho2(Problema *p, Individuo *ind);
-Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, int *listaTabu);
+Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, Tabu *listaTabu);
 Individuo *geraVizinho4(Problema *p, Individuo *ind);
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial);
 float funcaoObjetivo(Problema *p, Individuo *ind);

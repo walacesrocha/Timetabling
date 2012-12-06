@@ -8,9 +8,19 @@
 #ifndef TABU_H
 #define	TABU_H
 
+typedef struct tabu {
+    long *lista;
+    int tamanho;
+    int nElementos;
+    int prox;
+    
+} Tabu;
+
 void zeraListaTabu(int *listaTabu, int n);
 
-int *geraListaTabu(int n);
+Tabu *geraListaTabu(int n);
+
+void desalocaListaTabu(Tabu *listaTabu) ;
 
 void imprimePercListaTabu(int *listaTabu, int n);
 

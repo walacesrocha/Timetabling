@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
 
-    p->tempoLimite = 1200;
+    p->tempoLimite = 120000;
     p->inicio = clock();
     ind = grasp(p);
     p->fim = clock();

@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/util.o \
 	${OBJECTDIR}/auxiliar.o \
 	${OBJECTDIR}/genetico.o \
+	${OBJECTDIR}/gd.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/sa.o \
 	${OBJECTDIR}/buscalocal.o \
@@ -109,6 +110,11 @@ ${OBJECTDIR}/genetico.o: genetico.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/genetico.o genetico.c
+
+${OBJECTDIR}/gd.o: gd.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/gd.o gd.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

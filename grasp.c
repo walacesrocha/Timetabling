@@ -1059,7 +1059,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             vizinhos[melhorVizinho] = aDesalocar;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
-                //printf("LH: %f\n", foAtual);
+                printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 iteracoesComMesmoFo = 0;
                 zeraListaTabu(listaTabu, p->dimensao);
@@ -1603,7 +1603,7 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalTimeslot(p, ind);
             ind = buscaLocalGraspVNS(p, ind);
             ind = buscaLocalGraspHibrida(p, ind);
-            ind = greatDeluge(p, ind);
+            //ind = greatDeluge(p, ind);
             p->t0 = 1;
             p->rho = 5000;
             p->beta = 0.995;

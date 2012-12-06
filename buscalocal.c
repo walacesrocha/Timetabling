@@ -482,7 +482,7 @@ Individuo *buscaLocalTimeslot(Problema *p, Individuo *ind) {
                     fitnessAtual = novoFitness;
                     novoInd->fitness = fitnessAtual;
                     melhorou = 1;
-                    //printf("TS: %f\n", novoFitness);
+                    printf("TS: %f\n", novoFitness);
                 } else {
                     //printf("Nao melhorou %f\n", fitnessAtual);
                     // desfaz troca
@@ -1669,7 +1669,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
                     solucaoAtual = vizinho;
                     //melhorInd = solucaoAtual;
                     if (deltaF < 0) {
-                        //printf("VNS: %f\n", foAtual);
+                        printf("VNS: %f\n", foAtual);
                         haMelhoras = 1;
                         iteracoes = 0; // continua buscando
                     }

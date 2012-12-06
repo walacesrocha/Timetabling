@@ -3,7 +3,9 @@
 \documentclass[brazil,ruledheader]{abnt}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
-\usepackage[vlined,boxruled,linesnumbered,portuguese]{algorithm2e}
+%\usepackage[vlined,boxruled,linesnumbered,portuguese]{algorithm2e}
+\usepackage[ruled,longend,lined,linesnumbered,portuguese]{algorithm2e}
+% Escrita dos algoritmos
 \usepackage{amssymb,amsmath}
 
 
@@ -308,9 +310,7 @@ Compute as diferenças simétricas $\Delta(x,x_a) $ \;
 
 O \textit{Path-Relinking} pode ser visto com uma estratégia de busca local mais restrita, onde os movimentos aplicados são mais específicos.
 
-De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo quanto na qualidade de solução.
-
-Ainda de acordo com \cite{Resende05graspwith}, existem duas estratégias diferentes de aplicar o PR no GRASP:
+De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo quanto na qualidade de solução, e pode ser aplicada de duas formas diferentes:
 
 \begin{itemize}
 
@@ -320,9 +320,44 @@ Ainda de acordo com \cite{Resende05graspwith}, existem duas estratégias diferent
 
 \end{itemize}
 
-As duas estratégias podem ser combinadas.
+O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite. Esse conjunto é limitado e tem tamanho $MaxElite$.
 
+Inicialmente o conjunto elite é vazio. Ao final de cada iteração ele é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. Esse controle de quem entra e sai do conjunto é implementado pelo procedimento $AtualizaPool$.
 
+Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Relinking} entre as soluções do conjunto elite, duas as duas. A melhor solução obtida é a resposta do algoritmo.
+
+\begin{algorithm}[H]
+\label{algoGraspComPathRelinking}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{MaxIter, MaxElite}
+\Saida{Solução $S^{*}$}
+
+$f^{*} \leftarrow \infty $ \;
+$Pool \leftarrow \emptyset $ \;
+\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	$S \leftarrow BuscaLocal(S) $ \;
+	\Se{$ i \geq 2 $}{
+		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
+	}
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
+	}
+	$AtualizaPool(S, Pool)$ \;
+}
+$S^* = PosOtimizacao(Pool)$ \;
+\caption{Algoritmo GRASP}
+\end{algorithm}
+
+\section{GRASP para o ITC-2007}
+
+Implementação no problema
 
 \begin{algorithm}[H]
 \label{algoBase}

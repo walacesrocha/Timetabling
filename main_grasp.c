@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
     p->aceitaPioraSA = atoi(argv[5]);*/
 
     //ind = buscaLocalGraspProfundidade(p, ind);
-    printf("FO: %f\n", funcaoObjetivo(p, ind));
+    printf("FO: %f\n", funcaoObjetivo(p, ind,10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     printf("MEDIA: %f\n", p->mediaSolucoes);

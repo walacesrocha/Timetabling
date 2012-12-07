@@ -35,13 +35,13 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
     //f(SolGD) ← f(Sol);
     //f(SolbestGD)← f(Sol)
-    fSolGD = funcaoObjetivo(p, indInicial);
+    fSolGD = funcaoObjetivo(p, indInicial,10);
     fSolBestGD = fSolGD;
 
     //Set number of iterations, NumOfIteGD;
     iteracoes = 0;
-    iBound = fSolBestGD+5;//iUpperBoundRate+10;//*fSolBestGD;
-    NumOfIteGD = 50000;
+    iBound = fSolBestGD+15;//iUpperBoundRate+10;//*fSolBestGD;
+    NumOfIteGD = 150000;
 
     //todo Set optimal rate of final solution, Optimalrate;
     OptimalRate = 0; // configurar por instancia
@@ -59,13 +59,15 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
     //do while (iteration < NumOfIteGD)
     while (iteracoes < NumOfIteGD) {
+        //printf("[It %d]: SA: %f, Best:(H:%f,S:%f=%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD, 
+          //      somaViolacoesHard(p,solBestGD),somaViolacoesSoft(p,solBestGD),fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
         /*Apply neighbourhood structure Ni where i Î {1,…,K} on SolGD,TempSolGDi;
           Calculate cost function f(TempSolGDi);
           Find the best solution among TempSolGDi where i Î {1,…,K} call new solution SolGD*;*/
 
         vizinho = geraVizinho2(p, solGD);
 
-        fViz = somaViolacoesSoft(p, vizinho);
+        fViz = funcaoObjetivo(p, vizinho,10);
 
         /*if (f(SolGD*) < f(SolbestGD))
          SolGD ← SolGD*;
@@ -82,7 +84,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             
             fSolBestGD = fSolGD = fViz;
             //iBound = fSolBestGD*iUpperBoundRate;
-            iBound = fSolBestGD+2;
+            iBound = fSolBestGD+15;
             
             iNrIdle=0;
             
@@ -90,7 +92,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             notImprovingCounter = 0;
             level = level - deltaB;
             
-            printf("GD: %f\n", fViz);
+            printf("GD: %f (%f)\n", fViz,somaViolacoesHard(p,vizinho));
             
             //scanf("%d\n",&notImprovingCounter);
         }/*else
@@ -126,7 +128,8 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
         }*/
 
 
-        printf("[It %d]: SA: %f, Best:(%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD, fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
+        printf("[It %d]: SA: %f, Best:(H:%f,S:%f=%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD,
+                somaViolacoesHard(p, solBestGD), somaViolacoesSoft(p, solBestGD), fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
 
         //end do;
     }

@@ -1616,7 +1616,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     int nMovs = 7;
 
 
-    foAtual = funcaoObjetivo(p, indInicial);
+    foAtual = funcaoObjetivo(p, indInicial,10000);
     solucaoAtual = indInicial;
 
     embaralhaMovimentos(movimentos, nMovs);
@@ -1659,7 +1659,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
 
                 }
 
-                fo = funcaoObjetivo(p, vizinho);
+                fo = funcaoObjetivo(p, vizinho,10000);
                 deltaF = fo - foAtual;
 
                 aDesalocar = 0;

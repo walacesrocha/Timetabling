@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
 
     ind = simulatedAnnealing(p, NULL);
 
-    printf("FO: %f\n", funcaoObjetivo(p, ind));
+    printf("FO: %f\n", funcaoObjetivo(p, ind,10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     //printf("Violações Hard: %f\n", somaViolacoesHard(p, ind));

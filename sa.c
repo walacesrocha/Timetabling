@@ -120,6 +120,7 @@ move:
             if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p1 = 0;
             }
+            p->trocaNaoEfetiva++;
         }
 
         while (p1 == p2 || ehAula(p, novoInd->aula[p2])) {
@@ -127,6 +128,7 @@ move:
             if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p2 = 0;
             }
+            p->trocaNaoEfetiva++;
         }
 
         // faz a troca das posicoes
@@ -139,6 +141,7 @@ move:
             //printf("voltando move\n");
             goto move;
         }*/
+        p->trocaEfetiva++;
     } else {
         p->nSwaps++;
         /*** SWAP EVENT ***/
@@ -154,6 +157,7 @@ swap:
             if (p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p1 = 0;
             }
+            p->trocaNaoEfetiva++;
         }
 
         while (p1 == p2 || !ehAula(p, novoInd->aula[p2]) ||
@@ -162,6 +166,7 @@ swap:
             if (p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
                 p2 = 0;
             }
+            p->trocaNaoEfetiva++;
         }
 
         // faz a troca das posicoes
@@ -174,6 +179,7 @@ swap:
             //printf("voltando swap\n");
             goto swap;
         }*/
+        p->trocaEfetiva++;
     }
 
 

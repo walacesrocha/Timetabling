@@ -1035,7 +1035,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
                 if (rand() % 2) {
-                 //   vizinhos[i] = geraVizinho2(p, vizinhos[i]);
+                    //   vizinhos[i] = geraVizinho2(p, vizinhos[i]);
                 }
             }
             totalElementos += nVizinhos;
@@ -1659,11 +1659,15 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            p->t0 = 2;
+            p->t0 = 4;
             p->rho = 5000;
-            p->beta = 0.99;
+            p->beta = 0.9;
             p->aceitaPioraSA = 1;
+            p->trocaEfetiva = 0;
+            p->trocaNaoEfetiva = 0;
             ind = simulatedAnnealing(p, ind);
+            printf("Efetiva: %ld\n", p->trocaEfetiva);
+            printf("Nao Efetiva: %ld\n", p->trocaNaoEfetiva);
         } else if (p->buscaLocalGrasp == 7) {
             ind = greatDeluge(p, ind);
         } else {

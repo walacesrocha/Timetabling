@@ -20,6 +20,8 @@
       <itemPath>gd.h</itemPath>
       <itemPath>genetico.c</itemPath>
       <itemPath>genetico.h</itemPath>
+      <itemPath>gerador.c</itemPath>
+      <itemPath>gerador.h</itemPath>
       <itemPath>grasp.c</itemPath>
       <itemPath>grasp.h</itemPath>
       <itemPath>individuo.c</itemPath>
@@ -35,6 +37,8 @@
       <itemPath>problema.h</itemPath>
       <itemPath>sa.c</itemPath>
       <itemPath>sa.h</itemPath>
+      <itemPath>tabu.c</itemPath>
+      <itemPath>tabu.h</itemPath>
       <itemPath>util.c</itemPath>
       <itemPath>util.h</itemPath>
     </logicalFolder>

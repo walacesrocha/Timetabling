@@ -1035,7 +1035,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
                 if (rand() % 2) {
-                 //   vizinhos[i] = geraVizinho2(p, vizinhos[i]);
+                    //   vizinhos[i] = geraVizinho2(p, vizinhos[i]);
                 }
             }
             totalElementos += nVizinhos;

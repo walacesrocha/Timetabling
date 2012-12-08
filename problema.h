@@ -109,6 +109,7 @@ typedef struct problema {
     clock_t inicio, fim;
 
     float pAproveitamento;
+    long trocaEfetiva,trocaNaoEfetiva;
 
     int *posAulas;
     int *posVazias;

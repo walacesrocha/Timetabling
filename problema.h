@@ -110,6 +110,8 @@ typedef struct problema {
 
     float pAproveitamento;
 
+    int *posAulas;
+    int *posVazias;
 } Problema;
 
 Problema *alocaProblema();

@@ -80,15 +80,19 @@ int main(int argc, char** argv) {
     //exit(0);
 
     srand(time(0));
-
-
-
-
-
+    
+    int v1[10] = {1,2,3,4,5,6,7,8,9,10};
+    int v2[10] = {11,12,13,14,15,16,17,18,19,20};
+    
+    
 
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
+    
+    printf("Aulas: %d/%d\n",p->nAulas,p->dimensao);
+    printf("Perc. Vazio:: %f\n",(float)(p->dimensao-p->nAulas)/p->dimensao);
+    exit(0);
 
     ind = geraIndividuoAleatorio(p, 10);
     teste(p, ind);

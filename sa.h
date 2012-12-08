@@ -18,6 +18,7 @@ Individuo *geraVizinho2(Problema *p, Individuo *ind);
 Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, Tabu *listaTabu);
 Individuo *geraVizinho4(Problema *p, Individuo *ind);
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial);
+Individuo *simulatedAnnealingVNS(Problema*p, Individuo *indInicial);
 float funcaoObjetivo(Problema *p, Individuo *ind, float pesoHard);
 
 

@@ -1105,11 +1105,11 @@ lecture_move:
     novoInd->aula[p1] = novoInd->aula[p2];
     novoInd->aula[p2] = aux;
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+    /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
         troca_par(novoInd, p1, p2);
         //printf("voltando move\n");
         goto lecture_move;
-    }
+    }*/
 
     return novoInd;
 }
@@ -1178,11 +1178,11 @@ timemove:
     // faz a troca das posicoes
     troca_par(novoInd, p1, p2);
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+    /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
         troca_par(novoInd, p1, p2);
         //printf("voltando move\n");
         goto timemove;
-    }
+    }*/
 
     return novoInd;
 }
@@ -1251,11 +1251,11 @@ roommove:
     // faz a troca das posicoes
     troca_par(novoInd, p1, p2);
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+    /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
         troca_par(novoInd, p1, p2);
         //printf("voltando move\n");
         goto roommove;
-    }
+    }*/
 
     return novoInd;
 }
@@ -1474,11 +1474,11 @@ move:
     novoInd->aula[p1] = novoInd->aula[p2];
     novoInd->aula[p2] = aux;
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+    /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
         troca_par(novoInd, p1, p2);
         //printf("voltando move\n");
         goto move;
-    }
+    }*/
 
     return novoInd;
 }
@@ -1518,11 +1518,11 @@ swap:
     novoInd->aula[p1] = novoInd->aula[p2];
     novoInd->aula[p2] = aux;
 
-    if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
+    /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
         troca_par(novoInd, p1, p2);
         //printf("voltando swap\n");
         goto swap;
-    }
+    }*/
 
     return novoInd;
 }
@@ -1546,8 +1546,8 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
     int i;
     int total;
 
-    //printf("I,%d,%d,%d,%d\n", indBase->soft1, indBase->soft2,
-      //      indBase->soft3, indBase->soft4);
+    printf("I,%d,%d,%d,%d\n", indBase->soft1, indBase->soft2,
+            indBase->soft3, indBase->soft4);
 
     total = 0;
 
@@ -1614,9 +1614,10 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         ROOMS, COMPACT, MOVE, SWAP};
     int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
     int nMovs = 7;
+    float pesoHard = 1;
 
 
-    foAtual = funcaoObjetivo(p, indInicial,10000);
+    foAtual = funcaoObjetivo(p, indInicial,pesoHard);
     solucaoAtual = indInicial;
 
     embaralhaMovimentos(movimentos, nMovs);
@@ -1659,7 +1660,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
 
                 }
 
-                fo = funcaoObjetivo(p, vizinho,10000);
+                fo = funcaoObjetivo(p, vizinho,pesoHard);
                 deltaF = fo - foAtual;
 
                 aDesalocar = 0;
@@ -1681,9 +1682,12 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
                 liberaIndividuo(aDesalocar);
             }
         }
+        
+        pesoHard += 1;
+        foAtual = funcaoObjetivo(p, solucaoAtual,pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
-        //printf("==> %f\n", foAtual);
+        printf("==> %.2f/%.2f\n", somaViolacoesHard(p,solucaoAtual),somaViolacoesSoft(p,solucaoAtual));
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento

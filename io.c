@@ -111,8 +111,11 @@ Problema *lerInstancia(char *nomeArquivo) {
 
     preencheMatrizAulaIndisponibilidades(p);
     preencheSlotsDisponiveisTodasDisciplinas(p);
-    
+
     p->nMoves = p->nSwaps = 0;
+
+    p->posAulas = (int*) malloc(p->nAulas * sizeof (int));
+    p->posVazias = (int*) malloc((p->dimensao - p->nAulas) * sizeof (int));
 
     return p;
 }

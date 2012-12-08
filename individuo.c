@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "individuo.h"
 //aulas comecam com 1
 
@@ -45,10 +47,11 @@ Individuo *copiaIndividuo(Problema *p, Individuo *origem) {
 
     destino->fitness = origem->fitness;
     destino->n = origem->n;
-    for (i = 0; i < (origem->n); i++) {
+    memcpy(destino->aula, origem->aula, origem->n * sizeof (int));
+    /*for (i = 0; i < (origem->n); i++) {
         destino->aula[i] = origem->aula[i];
 
-    }
+    }*/
     return destino;
 
 }

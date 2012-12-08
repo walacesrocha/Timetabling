@@ -38,10 +38,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/individuo.o \
 	${OBJECTDIR}/main_sa.o \
 	${OBJECTDIR}/fitness.o \
+	${OBJECTDIR}/tabu.o \
 	${OBJECTDIR}/util.o \
 	${OBJECTDIR}/auxiliar.o \
 	${OBJECTDIR}/genetico.o \
 	${OBJECTDIR}/gd.o \
+	${OBJECTDIR}/gerador.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/sa.o \
 	${OBJECTDIR}/buscalocal.o \
@@ -96,6 +98,11 @@ ${OBJECTDIR}/fitness.o: fitness.c
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/fitness.o fitness.c
 
+${OBJECTDIR}/tabu.o: tabu.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/tabu.o tabu.c
+
 ${OBJECTDIR}/util.o: util.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -115,6 +122,11 @@ ${OBJECTDIR}/gd.o: gd.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/gd.o gd.c
+
+${OBJECTDIR}/gerador.o: gerador.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/gerador.o gerador.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

@@ -2,6 +2,7 @@
 #include "sa.h"
 #include "fitness.h"
 #include "util.h"
+#include "buscalocal.h"
 
 /*Construction of Course Timetables Based on Great
 Deluge and Tabu Search*/
@@ -23,6 +24,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
     int notImprovingCounter, notImprovingCounterLength;
     float iUpperBoundRate=1.03,iLowerBoundRate=0.9,iCoolRate=0.999995;
     float iBound,iNrIdle=0;
+    float pesoHard=1;
 
 
 
@@ -35,7 +37,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
     //f(SolGD) ← f(Sol);
     //f(SolbestGD)← f(Sol)
-    fSolGD = funcaoObjetivo(p, indInicial,10);
+    fSolGD = funcaoObjetivo(p, indInicial,1);
     fSolBestGD = fSolGD;
 
     //Set number of iterations, NumOfIteGD;
@@ -65,9 +67,10 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
           Calculate cost function f(TempSolGDi);
           Find the best solution among TempSolGDi where i Î {1,…,K} call new solution SolGD*;*/
 
-        vizinho = geraVizinho2(p, solGD);
+        //vizinho = geraVizinho2(p, solGD);
+        vizinho = buscaLocalGraspVNS(p, solGD);
 
-        fViz = funcaoObjetivo(p, vizinho,10);
+        fViz = funcaoObjetivo(p, vizinho,1);
 
         /*if (f(SolGD*) < f(SolbestGD))
          SolGD ← SolGD*;

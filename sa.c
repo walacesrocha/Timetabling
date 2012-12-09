@@ -187,85 +187,6 @@ swap:
     return novoInd;
 }
 
-Individuo *geraVizinho2Conf(Problema *p, Individuo *ind) {
-    int i, p1, p2, aux;
-    int i1, i2;
-    Individuo *novoInd = alocaIndividuo();
-    novoInd = copiaIndividuo(p, ind); //criaIndividuo(novoInd, p);
-    //printf("Individuo criado\n");
-    //for (i = 0; i < novoInd->n; i++) {
-    //  novoInd->aula[i] = ind->aula[i];
-    //}
-
-
-    /*** MOVE EVENT ***/
-    if (((float) rand()) / RAND_MAX < 0.5) {
-        p->nMoves++;
-move:
-
-        i1 = rand() % p->nAulas;
-        i2 = rand() % (p->dimensao - p->nAulas);
-
-        p1 = p->posAulas[i1]; // posicao que ira apontar um horário de aula
-        p2 = p->posVazias[i2]; // posicao que irá apontar um horario vazio
-        
-        /*if (ehAula(p,novoInd->aula[p1]) && !ehAula(p,novoInd->aula[p2])){
-            printf("OK\n");
-        }else {
-            printf("X\n");
-        }*/
-
-        //printf("posicoes sorteadas\n");
-
-
-        // faz a troca das posicoes
-        aux = novoInd->aula[p1];
-        novoInd->aula[p1] = novoInd->aula[p2];
-        novoInd->aula[p2] = aux;
-
-        p->posAulas[i1] = p2;
-        p->posVazias[i2] = p1;
-
-        /*/if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
-            troca_par(novoInd, p1, p2);
-            //printf("voltando move\n");
-            goto move;
-        }*/
-    } else {
-        p->nSwaps++;
-        /*** SWAP EVENT ***/
-swap:
-
-        i1 = rand() % p->nAulas;
-        i2 = rand() % p->nAulas;
-        p1 = p->posAulas[i1]; // posicao que ira apontar um horário de aula
-        p2 = p->posAulas[i2]; // posicao que irá apontar outro horario de aula
-
-        //printf("posicoes sorteadas\n");
-        
-        /*if (ehAula(p,novoInd->aula[p1]) && ehAula(p,novoInd->aula[p2])){
-            printf("OK\n");
-        }else {
-            printf("X\n");
-        }*/
-                
-
-        // faz a troca das posicoes
-        aux = novoInd->aula[p1];
-        novoInd->aula[p1] = novoInd->aula[p2];
-        novoInd->aula[p2] = aux;
-
-        /*if (somaViolacoesHardTroca(p, novoInd, p1, p2) > 0) {
-            troca_par(novoInd, p1, p2);
-            //printf("voltando swap\n");
-            goto swap;
-        }*/
-    }
-
-
-    return novoInd;
-}
-
 Individuo *geraVizinho2Tabu(Problema *p, Individuo *ind, Tabu *listaTabu) {
     int i, p1, p2, aux;
     long code;
@@ -536,28 +457,6 @@ swap:
     return novoInd;
 }
 
-void configuraPosAulas(Problema *p, Individuo *ind) {
-    int pAula;
-    int pVazia;
-    int i;
-
-    pAula = pVazia = 0;
-    for (i = 0; i < p->dimensao; i++) {
-        if (ehAula(p, ind->aula[i])) {
-            p->posAulas[pAula] = i;
-            pAula++;
-        } else {
-            p->posVazias[pVazia] = i;
-            pVazia++;
-        }
-
-    }
-
-    //printf("Aulas: %d/%d", p->nAulas, pAula);
-    //printf("Vazias: %d/%d", p->dimensao - p->nAulas, pVazia);
-
-}
-
 Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     Individuo *solucaoAtual, *aDesalocar;
     Individuo *vizinho;
@@ -620,14 +519,13 @@ annealing:
     t0 = p->t0;
     foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 
-    configuraPosAulas(p, solucaoAtual);
     do {
         int iteracoes = 0;
         float fo;
         int nPioras = 0;
         float totalProb = 0;
-        do {            
-            vizinho = geraVizinho2Conf(p, solucaoAtual);
+        do {
+            vizinho = geraVizinho2(p, solucaoAtual);
 
             fo = funcaoObjetivo(p, vizinho, pesoHard);
             deltaF = fo - foAtual;
@@ -637,10 +535,9 @@ annealing:
             aDesalocar = 0;
             if (deltaF <= 0) {// função objetivo decresceu
                 foAtual = fo;
-                //printf("SA: %f [%f]\n", foAtual,t0);
+                printf("SA: %f [%f]\n", foAtual, t0);
                 aDesalocar = solucaoAtual;
                 solucaoAtual = vizinho;
-                configuraPosAulas(p, solucaoAtual);
                 //melhorInd = solucaoAtual;
             } else {
                 // calcula probabilidade de aceitação
@@ -654,7 +551,6 @@ annealing:
                     //printf("aceitou piora\n");
                     aDesalocar = solucaoAtual;
                     solucaoAtual = vizinho;
-                    configuraPosAulas(p, solucaoAtual);
                     //printf("aceitou piora\n");
                     foAtual = fo;
                     nPioras++;
@@ -672,8 +568,8 @@ annealing:
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
+        //printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+        //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
 
         pesoHard += 0.01;
@@ -785,6 +681,101 @@ annealing:
         printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
+
+        pesoHard += 0.01;
+        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        if (t0 < 0.01 * p->t0) {
+            //pesoHard *= 1.01;
+            foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        }
+    } while (t0 > tMin);
+
+    /*if (somaViolacoesHard(p, solucaoAtual) > 0) {
+        aumentaPesoHard = 1;
+        goto annealing;
+    }*/
+
+    return solucaoAtual;
+}
+
+Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
+    Individuo *solucaoAtual, *aDesalocar;
+    Individuo *vizinho;
+    float foAtual;
+    float deltaF;
+    long N;
+    Neighbour *movimento;
+
+    float pesoHard = 1;
+
+    foAtual = funcaoObjetivo(p, indInicial, pesoHard);
+
+
+    float t0, tMin, beta;
+
+    t0 = p->t0;
+    tMin = t0 / p->rho;
+    beta = p->beta;
+
+    N = 200;
+
+    solucaoAtual = indInicial;
+    //Gerador *gerador = getGeradorInicial(p->dimensao);
+    t0 = p->t0;
+    foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+    do {
+        int iteracoes = 0;
+        float fo;
+        int nPioras = 0;
+        float totalProb = 0;
+        do {
+
+            if (((float) rand() / RAND_MAX) < 0.5) {
+                movimento = geraSwap(p, solucaoAtual);
+            } else {
+                movimento = geraMove(p, solucaoAtual);
+            }
+
+            deltaF = movimento->deltaHard * pesoHard + movimento->deltaSoft;
+
+            //printf("Df=%f\n", deltaF);
+
+            if (deltaF <= 0) {// função objetivo decresceu
+                foAtual += deltaF;
+                //printf("SA: %f [%f]\n", foAtual,t0);
+                troca_par(solucaoAtual, movimento->p1, movimento->p2);
+                //melhorInd = solucaoAtual;
+            } else {
+                // calcula probabilidade de aceitação
+                float prob = pow(M_E, -deltaF / t0);
+
+                //printf("%f <-> %f\n", prob, exp(-deltaF / t0));
+
+                totalProb += prob;
+
+                if (p->aceitaPioraSA && (((float) rand() / RAND_MAX) <= prob)) {
+                    //printf("aceitou piora\n");
+                    troca_par(solucaoAtual, movimento->p1, movimento->p2);
+                    //printf("aceitou piora\n");
+                    foAtual += deltaF;
+                    nPioras++;
+                }
+
+                //printf("prob=%f\n", prob);
+
+            }
+
+            //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
+            free(movimento);
+
+            iteracoes++;
+        } while (iteracoes < N);
+
+        printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
+        t0 *= beta;
+        
+        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 
         pesoHard += 0.01;
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);

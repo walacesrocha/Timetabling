@@ -62,7 +62,8 @@ int main(int argc, char** argv) {
 
 
 
-    srand(time(0));
+    //srand(time(0));
+    srand(0);
 
     t1 = clock();
 
@@ -75,6 +76,23 @@ int main(int argc, char** argv) {
     p->threshold = atof(argv[6]);
     p->pAproveitamento = atof(argv[7]);
     p->k = 30;
+
+    for (i = 0; i < 10; i++) {
+        ind = geraIndividuoAleatorio(p, 100);
+        Neighbour *mov = geraSwap(p, ind);
+        float f1 = funcaoObjetivo(p, ind, 1);
+        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
+                ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+
+        troca_par(ind, mov->p1, mov->p2);
+
+        float f2 = funcaoObjetivo(p, ind, 1);
+        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
+                ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+
+        printf("F: %f %f, DH=%f, DS=%f\n\n--------------------------------\n", f1, f2, mov->deltaHard, mov->deltaSoft);
+    }
+    exit(0);
 
 
     /*Gerador *gerador = getGeradorInicial(p->dimensao);
@@ -98,7 +116,7 @@ int main(int argc, char** argv) {
     p->aceitaPioraSA = atoi(argv[5]);*/
 
     //ind = buscaLocalGraspProfundidade(p, ind);
-    printf("FO: %f\n", funcaoObjetivo(p, ind,10000));
+    printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     printf("MEDIA: %f\n", p->mediaSolucoes);

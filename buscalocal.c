@@ -1614,10 +1614,8 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         ROOMS, COMPACT, MOVE, SWAP};
     int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
     int nMovs = 7;
-    float pesoHard = 1;
 
-
-    foAtual = funcaoObjetivo(p, indInicial,pesoHard);
+    foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
     solucaoAtual = indInicial;
 
     embaralhaMovimentos(movimentos, nMovs);
@@ -1660,7 +1658,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
 
                 }
 
-                fo = funcaoObjetivo(p, vizinho,pesoHard);
+                fo = funcaoObjetivo(p, vizinho, p->pesoHard);
                 deltaF = fo - foAtual;
 
                 aDesalocar = 0;
@@ -1682,12 +1680,12 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
                 liberaIndividuo(aDesalocar);
             }
         }
-        
-        pesoHard += 1;
-        foAtual = funcaoObjetivo(p, solucaoAtual,pesoHard);
+
+        //p->pesoHard += 1;
+        foAtual = funcaoObjetivo(p, solucaoAtual, p->pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
-        printf("==> %.2f/%.2f\n", somaViolacoesHard(p,solucaoAtual),somaViolacoesSoft(p,solucaoAtual));
+        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento
@@ -1706,3 +1704,411 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     return solucaoAtual;
 }
 
+int temAdjacencia(Problema *p, Individuo *ind, int pos, int aula) {
+    int i;
+    int periodo = getPeriodoFromPos(pos, p);
+    int timeslot = getTimeSlotFromPos(pos, p);
+    int temAdjacente = 0;
+    int qtHorarios = p->nDias * p->nPerDias;
+
+    if (periodo > 0) {// caso nao seja o primeiro periodo...
+        // ... verifica se tem aula do mesmo curriculo no periodo anterior
+
+        for (i = 0; i < p->nSalas; i++) {
+            int pos = timeslot - 1 + qtHorarios * i;
+
+
+            if (ehAula(p, ind->aula[pos])) {
+                if (aulasMesmoCurriculo2(p, aula, ind->aula[pos])) {
+                    temAdjacente = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!temAdjacente && periodo < p->nPerDias - 1) {// caso nao tenha aula antes, 
+        // e nao e o ultimo periodo do dia
+        // ... verifica se tem aula do mesmo curriculo no periodo posterior
+
+        for (i = 0; i < p->nSalas; i++) {
+            int pos = timeslot + 1 + qtHorarios * i;
+
+            if (ehAula(p, ind->aula[pos])) {
+                if (aulasMesmoCurriculo(p, aula, ind->aula[pos])) {
+                    temAdjacente = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    return temAdjacente;
+
+}
+
+void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
+
+    int p1, p2, i;
+    int aula1, aula2;
+    float hard1, hard2;
+    float soft1, soft2;
+    float RC1, MW1, IL1, RS1;
+    float RC2, MW2, IL2, RS2;
+    int *diasOcupados1, totalDiasOcupados1;
+    int *salasOcupadas1, totalSalasOcupadas1;
+    int *diasOcupados2, totalDiasOcupados2;
+    int *salasOcupadas2, totalSalasOcupadas2;
+
+    Sala *s1, *s2;
+    Disciplina *disc1, *disc2;
+
+    p1 = move->p1;
+    p2 = move->p2;
+
+    // violacoes antes da troca
+    hard1 = somaViolacoesHardTroca(p, ind, p1, p2);
+
+    // troca
+    troca_par(ind, p1, p2);
+
+    // violacoes depois da troca
+    hard2 = somaViolacoesHardTroca(p, ind, p1, p2);
+
+    // volta individuo original
+    troca_par(ind, p1, p2);
+
+    // calcula deltaHard
+    move->deltaHard = hard2 - hard1;
+
+
+    ////////////// SOFT //////////////////
+
+    soft1 = soft2 = 0;
+    RC1 = MW1 = IL1 = RS1 = RC2 = MW2 = IL2 = RS2 = 0;
+
+    s1 = p->salas + getSalaFromPos(p, p1);
+    s2 = p->salas + getSalaFromPos(p, p2);
+
+    disc1 = acessaDisciplina(p, ind->aula[p1]);
+    if (ehAula(p, ind->aula[p2])) {
+        disc2 = acessaDisciplina(p, ind->aula[p2]);
+    } else {
+        disc2 = NULL;
+    }
+
+    aula1 = ind->aula[p1];
+    aula2 = ind->aula[p2];
+
+    //printf("Soft1: %.2f -> ", soft1);
+
+
+    /**
+     * Capacidade de sala
+     */
+
+    if (disc1->nAlunos > s1->capacidade) {
+        RC1 += disc1->nAlunos - s1->capacidade;
+    }
+    if (disc2 && disc2->nAlunos > s2->capacidade) {
+        RC1 += disc2->nAlunos - s2->capacidade;
+    }
+
+
+
+
+    // vetor auxiliar para guardar os dias ocupados pela disciplina
+    diasOcupados1 = (int*) malloc(p->nDias * sizeof (int));
+    diasOcupados2 = (int*) malloc(p->nDias * sizeof (int));
+    for (i = 0; i < p->nDias; i++) {
+        diasOcupados1[i] = 0;
+        diasOcupados2[i] = 0;
+    }
+
+    // vetor auxiliar para guardar as salas ocupadas pela disciplina
+    salasOcupadas1 = (int*) malloc(p->nSalas * sizeof (int));
+    salasOcupadas2 = (int*) malloc(p->nSalas * sizeof (int));
+    for (i = 0; i < p->nSalas; i++) {
+        salasOcupadas1[i] = 0;
+        salasOcupadas2[i] = 0;
+    }
+    for (i = 0; i < p->dimensao; i++) {
+
+        if (ehAula(p, ind->aula[i])) {
+            if (aulasMesmaDisciplina3(p, aula1, ind->aula[i])) {
+                // marca o dia como tendo aula
+                diasOcupados1[getDia(p, i)] += 1;
+
+                // marca a sala como ocupada
+                salasOcupadas1[getRoomFromPos(i, p)] += 1;
+            }
+
+            if (disc2 && aulasMesmaDisciplina3(p, aula2, ind->aula[i])) {
+                // marca o dia como tendo aula
+                diasOcupados2[getDia(p, i)] += 1;
+
+                // marca a sala como ocupada
+                salasOcupadas2[getRoomFromPos(i, p)] += 1;
+            }
+        }
+    }
+
+    // conta o total de dias ocupados
+    totalDiasOcupados1 = 0;
+    totalDiasOcupados2 = 0;
+    for (i = 0; i < p->nDias; i++) {
+        if (diasOcupados1[i]) {
+            totalDiasOcupados1++;
+        }
+        if (diasOcupados2[i]) {
+            totalDiasOcupados2++;
+        }
+    }
+
+    // conta o total de salas ocupadas
+    totalSalasOcupadas1 = 0;
+    totalSalasOcupadas2 = 0;
+    for (i = 0; i < p->nSalas; i++) {
+        if (salasOcupadas1[i]) {
+            totalSalasOcupadas1++;
+        }
+        if (salasOcupadas2[i]) {
+            totalSalasOcupadas2++;
+        }
+    }
+
+    /**
+     * Estabilidade de sala
+     */
+    // ROOM_STABILITY
+    RS1 += (totalSalasOcupadas1 - 1);
+    // ROOM_STABILITY
+    if (disc2) {
+        RS1 += (totalSalasOcupadas2 - 1);
+    }
+
+
+    /**
+     * MinWorkingDays
+     */
+    // MIN_WORKING_DAYS
+    if (totalDiasOcupados1 < disc1->minDiasAula) {
+        // penalizacao MIN_WORKING_DAYS
+        MW1 += (disc1->minDiasAula - totalDiasOcupados1)* 5; // peso = 5
+    }
+    // MIN_WORKING_DAYS
+    if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
+        // penalizacao MIN_WORKING_DAYS
+        MW1 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
+    }
+
+
+    /**
+     * Aulas isoladas
+     */
+
+
+    // ISOLATED_LECTURE
+    //alocacao->custo = 0;
+    if (!temAdjacencia(p, ind, p1, aula1)) {
+        IL1 += 2; // penalidade peso 2
+    }
+    if (disc2 && !temAdjacencia(p, ind, p2, aula2)) {
+        IL1 += 2;
+    }
+
+    printf(" RC: %.2f ", RC1);
+    printf(" MW: %.2f ", MW1);
+    printf(" IL: %.2f ", IL1);
+    printf(" RS: %.2f \n", RS1);
+    
+
+    /// calcular soft2
+    /**
+     * Capacidade de sala
+     */
+
+    //printf("Soft2: %.2f -> ", soft2);
+    // Disc1 ==> s2
+    // Disc2 ==> s1
+    if (disc1->nAlunos > s2->capacidade) {
+        RC2 += disc1->nAlunos - s2->capacidade;
+    }
+    if (disc2 && disc2->nAlunos > s1->capacidade) {
+        RC2 += disc2->nAlunos - s1->capacidade;
+    }
+    //printf(" RC%.2f -> ", RC2);
+
+    int dia1 = getDiaFromPos(p1, p);
+    int dia2 = getDiaFromPos(p2, p);
+
+    // vai do dia1 para o dia2
+    diasOcupados1[dia1]--;
+    diasOcupados1[dia2]++;
+
+    if (disc2) {
+        diasOcupados2[dia2]--;
+        diasOcupados2[dia1]++;
+    }
+
+    // vai da sala1 para sala2
+    int sala1 = getSalaFromPos(p, p1);
+    int sala2 = getSalaFromPos(p, p2);
+
+    salasOcupadas1[sala1]--;
+    salasOcupadas1[sala2]++;
+
+    if (disc2) {
+        salasOcupadas2[sala2]--;
+        salasOcupadas2[sala1]++;
+    }
+
+    // conta o total de dias ocupados
+    totalDiasOcupados1 = 0;
+    totalDiasOcupados2 = 0;
+    for (i = 0; i < p->nDias; i++) {
+        if (diasOcupados1[i]) {
+            totalDiasOcupados1++;
+        }
+        if (diasOcupados2[i]) {
+            totalDiasOcupados2++;
+        }
+    }
+
+    // conta o total de salas ocupadas
+    totalSalasOcupadas1 = 0;
+    totalSalasOcupadas2 = 0;
+    for (i = 0; i < p->nSalas; i++) {
+        if (salasOcupadas1[i]) {
+            totalSalasOcupadas1++;
+        }
+        if (salasOcupadas2[i]) {
+            totalSalasOcupadas2++;
+        }
+    }
+
+    /**
+     * Estabilidade de sala
+     */
+    // ROOM_STABILITY
+    RS2 += (totalSalasOcupadas1 - 1);
+    // ROOM_STABILITY
+    if (disc2) {
+        RS2 += (totalSalasOcupadas2 - 1);
+    }
+    //printf(" RS%.2f -> ", RS2);
+
+    /**
+     * MinWorkingDays
+     */
+    // MIN_WORKING_DAYS
+    if (totalDiasOcupados1 < disc1->minDiasAula) {
+        // penalizacao MIN_WORKING_DAYS
+        MW2 += (disc1->minDiasAula - totalDiasOcupados1)* 5; // peso = 5
+    }
+    // MIN_WORKING_DAYS
+    if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
+        // penalizacao MIN_WORKING_DAYS
+        MW2 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
+    }
+
+    //printf(" MW%.2f -> ", MW2);
+
+    // ISOLATED_LECTURE
+    //alocacao->custo = 0;
+    if (!temAdjacencia(p, ind, p2, aula1)) {
+        IL2 += 2; // penalidade peso 2
+    }
+    if (disc2 && !temAdjacencia(p, ind, p1, aula2)) {
+        IL2 += 2;
+    }
+
+    //printf(" IL%.2f \n", IL2);
+    
+    printf(" RC: %.2f ", RC2);
+    printf(" MW: %.2f ", MW2);
+    printf(" IL: %.2f ", IL2);
+    printf(" RS: %.2f \n", RS2);
+
+
+    // calcula deltaSoft
+    soft1 = RC1 + MW1 + IL1 + RS1;
+    soft2 = RC2 + MW2 + IL2 + RS2;
+    move->deltaSoft = soft2 - soft1;
+
+    free(diasOcupados1);
+    free(salasOcupadas1);
+
+    free(diasOcupados2);
+    free(salasOcupadas2);
+
+}
+
+Neighbour *geraSwap(Problema *p, Individuo *ind) {
+    Neighbour *swap;
+
+    swap = (Neighbour*) malloc(sizeof (Neighbour));
+    swap->m = SWAP;
+
+
+    swap->p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    swap->p2 = rand() % p->dimensao; // posicao que irá apontar outro horario de aula
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, ind->aula[swap->p1])) {
+        swap->p1++;
+        if (swap->p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            swap->p1 = 0;
+        }
+    }
+
+    while (swap->p1 == swap->p2 || !ehAula(p, ind->aula[swap->p2]) ||
+            aulasMesmaDisciplina3(p, ind->aula[swap->p1], ind->aula[swap->p2])) {
+        swap->p2++;
+        if (swap->p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            swap->p2 = 0;
+        }
+    }
+
+    avaliaNeighbour(p, ind, swap);
+
+    return swap;
+
+}
+
+Neighbour *geraMove(Problema *p, Individuo *ind) {
+    Neighbour *move;
+
+    move = (Neighbour*) malloc(sizeof (Neighbour));
+    move->m = SWAP;
+
+
+    /*** MOVE EVENT ***/
+
+
+    move->p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    move->p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, ind->aula[move->p1])) {
+        move->p1++;
+        if (move->p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            move->p1 = 0;
+        }
+    }
+
+    while (move->p1 == move->p2 || ehAula(p, ind->aula[move->p2])) {
+        move->p2++;
+        if (move->p2 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            move->p2 = 0;
+        }
+    }
+
+    avaliaNeighbour(p, ind, move);
+
+    return move;
+
+
+}

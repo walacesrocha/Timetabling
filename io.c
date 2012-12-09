@@ -114,9 +114,6 @@ Problema *lerInstancia(char *nomeArquivo) {
 
     p->nMoves = p->nSwaps = 0;
 
-    p->posAulas = (int*) malloc(p->nAulas * sizeof (int));
-    p->posVazias = (int*) malloc((p->dimensao - p->nAulas) * sizeof (int));
-
     return p;
 }
 

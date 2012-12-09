@@ -26,6 +26,14 @@ typedef enum {
     COMPACT
 } Movimento;
 
+typedef struct neighbour {
+    int p1;
+    int p2;
+    float deltaHard;
+    float deltaSoft;
+    Movimento m;
+} Neighbour;
+
 
 
 void buscaLocalHard(Problema *p, Individuo *ind);
@@ -50,6 +58,9 @@ Individuo *timeMove(Problema *p, Individuo *ind);
 Individuo *roomMove(Problema *p, Individuo *ind);
 Individuo *rooms(Problema *p, Individuo *ind);
 Individuo *compact(Problema *p, Individuo *ind);
+
+Neighbour *geraSwap(Problema *p, Individuo *ind);
+Neighbour *geraMove(Problema *p, Individuo *ind);
 
 
 #endif	/* _BUSCALOCAL_H */

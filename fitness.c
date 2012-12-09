@@ -442,11 +442,7 @@ float somaViolacoesSoft(Problema *p, Individuo *a) {
                     soma1 += s1;
                     soma3 += s3;
                     soma4 += s4;
-
-                    if ((s1 > 0 || s3 > 0 || s4 > 0) && a->nConflitos < 50 && ((float) rand() / RAND_MAX < 0.6)) {
-                        a->posConflitos[a->nConflitos] = i;
-                        a->nConflitos++;
-                    }
+                    
                 }
                 i++;
             }

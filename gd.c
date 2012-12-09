@@ -37,13 +37,13 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
     //f(SolGD) ← f(Sol);
     //f(SolbestGD)← f(Sol)
-    fSolGD = funcaoObjetivo(p, indInicial,1);
+    fSolGD = funcaoObjetivo(p, indInicial,pesoHard);
     fSolBestGD = fSolGD;
 
     //Set number of iterations, NumOfIteGD;
     iteracoes = 0;
     iBound = fSolBestGD+15;//iUpperBoundRate+10;//*fSolBestGD;
-    NumOfIteGD = 150000;
+    NumOfIteGD = 50000;
 
     //todo Set optimal rate of final solution, Optimalrate;
     OptimalRate = 0; // configurar por instancia
@@ -67,10 +67,10 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
           Calculate cost function f(TempSolGDi);
           Find the best solution among TempSolGDi where i Î {1,…,K} call new solution SolGD*;*/
 
-        //vizinho = geraVizinho2(p, solGD);
-        vizinho = buscaLocalGraspVNS(p, solGD);
+        vizinho = geraVizinho2(p, solGD);
+        //vizinho = buscaLocalGraspVNS(p, solGD);
 
-        fViz = funcaoObjetivo(p, vizinho,1);
+        fViz = funcaoObjetivo(p, vizinho,pesoHard);
 
         /*if (f(SolGD*) < f(SolbestGD))
          SolGD ← SolGD*;
@@ -87,7 +87,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             
             fSolBestGD = fSolGD = fViz;
             //iBound = fSolBestGD*iUpperBoundRate;
-            iBound = fSolBestGD+15;
+            iBound = fSolBestGD+2*pesoHard;
             
             iNrIdle=0;
             
@@ -95,7 +95,7 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             notImprovingCounter = 0;
             level = level - deltaB;
             
-            printf("GD: %f (%f)\n", fViz,somaViolacoesHard(p,vizinho));
+            printf("GD: %f (%f)\n", fViz,somaViolacoesHard(p,solBestGD));
             
             //scanf("%d\n",&notImprovingCounter);
         }/*else
@@ -129,6 +129,10 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             //printf(" -<[%d]>- \n", iNrIdle);
             iBound = maxFloat(fSolBestGD + 2.0, pow(iUpperBoundRate, iNrIdle) * fSolBestGD);
         }*/
+        
+        if (iteracoes % 1000 == 0){
+            pesoHard += 0.02;
+        }
 
 
         printf("[It %d]: SA: %f, Best:(H:%f,S:%f=%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD,

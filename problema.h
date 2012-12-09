@@ -34,6 +34,7 @@ typedef struct disciplina {
     int aulaInicial;
     int minDiasAula;
     int nAlunos;
+    int pVetor;
 } Disciplina;
 
 /*

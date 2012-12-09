@@ -775,13 +775,13 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
         
-        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 
-        pesoHard += 0.01;
-        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        //pesoHard += 0.01;
+        //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
         if (t0 < 0.01 * p->t0) {
             //pesoHard *= 1.01;
-            foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+            //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
         }
     } while (t0 > tMin);
 

@@ -1791,10 +1791,13 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     s2 = p->salas + getSalaFromPos(p, p2);
 
     disc1 = acessaDisciplina(p, ind->aula[p1]);
+    printf("Disc1: %s\n", disc1->nomeDisciplina);
     if (ehAula(p, ind->aula[p2])) {
         disc2 = acessaDisciplina(p, ind->aula[p2]);
+        printf("Disc2: %s\n", disc2->nomeDisciplina);
     } else {
         disc2 = NULL;
+
     }
 
     aula1 = ind->aula[p1];
@@ -1876,6 +1879,21 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
             totalSalasOcupadas2++;
         }
     }
+    printf("\n");
+    printf("Salas ocupadas1: ");
+    for (i = 0; i < p->nSalas; i++) {
+        printf("%d ", salasOcupadas1[i]);
+
+    }
+    printf("\n");
+    printf("Salas ocupadas2: ");
+    for (i = 0; i < p->nSalas; i++) {
+        printf("%d ", salasOcupadas2[i]);
+
+    }
+    printf("\n");
+    printf("Salas ocupadas1: %d\n", totalSalasOcupadas1);
+    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);
 
     /**
      * Estabilidade de sala
@@ -1921,7 +1939,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     printf(" MW: %.2f ", MW1);
     printf(" IL: %.2f ", IL1);
     printf(" RS: %.2f \n", RS1);
-    
+
 
     /// calcular soft2
     /**
@@ -1986,6 +2004,20 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
             totalSalasOcupadas2++;
         }
     }
+    printf("Salas ocupadas1: ");
+    for (i = 0; i < p->nSalas; i++) {
+        printf("%d ", salasOcupadas1[i]);
+
+    }
+    printf("\n");
+    printf("Salas ocupadas2: ");
+    for (i = 0; i < p->nSalas; i++) {
+        printf("%d ", salasOcupadas2[i]);
+
+    }
+    printf("\n");
+    printf("Salas ocupadas1: %d\n", totalSalasOcupadas1);
+    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);
 
     /**
      * Estabilidade de sala
@@ -2024,7 +2056,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     }
 
     //printf(" IL%.2f \n", IL2);
-    
+
     printf(" RC: %.2f ", RC2);
     printf(" MW: %.2f ", MW2);
     printf(" IL: %.2f ", IL2);

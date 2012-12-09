@@ -10,7 +10,7 @@ Problema *lerInstancia(char *nomeArquivo) {
     Problema *p;
     FILE *f;
     int i, j;
-    int nrAula;
+    int nrAula, pVetor;
 
     // abre arquivo da instancia para leitura dos dados
     f = fopen(nomeArquivo, "r");
@@ -38,6 +38,7 @@ Problema *lerInstancia(char *nomeArquivo) {
     p->disciplinas = alocaDisciplinas(p->nDisciplinas);
 
     nrAula = 0; // contador de aulas
+    pVetor = 0;
     for (i = 0; i < p->nDisciplinas; i++) {
         fscanf(f, "%s %s %d %d %d\n", (p->disciplinas + i)->nomeDisciplina,
                 (p->disciplinas + i)->professor,
@@ -47,6 +48,10 @@ Problema *lerInstancia(char *nomeArquivo) {
 
         // registra o numero da primeira aula da disciplina
         (p->disciplinas + i)->aulaInicial = nrAula + 1;
+
+        // registra o numero da primeira aula da disciplina
+        (p->disciplinas + i)->pVetor = pVetor;
+        pVetor++;
 
         // incrementa o contador de aulas
         nrAula += (p->disciplinas + i)->nAulas;
@@ -105,7 +110,7 @@ Problema *lerInstancia(char *nomeArquivo) {
 
     insereCurriculosNasDisciplinas(p);
     insereIndisponibilidadesNasDisciplinas(p);
-    ordenaDisciplinasPorRestricoes(p);
+    //ordenaDisciplinasPorRestricoes(p);
     preencheMatrizAulaSala(p);
     preencheMatrizAulaAula(p);
 

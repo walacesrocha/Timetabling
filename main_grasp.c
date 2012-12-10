@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
     p->pAproveitamento = atof(argv[7]);
     p->k = 30;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < 5; i++) {
         ind = geraIndividuoAleatorio(p, 100);
         contaAulas(p, ind);
         somaViolacoesHard(p, ind);
@@ -126,24 +126,20 @@ int main(int argc, char** argv) {
         ind->soft1, ind->soft2, ind->soft3, ind->soft4);
         printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
         ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        //imprimeIndividuo3(p, ind);
+        
 
-        //printf("F: %f %f, DH=%f, DS=%f\n\n--------------------------------\n\n\n\n", f1, f2, mov->deltaHard, mov->deltaSoft);
+        printf("F: %f %f, DH=%f, DS=%f\n\n--------------------------------\n\n\n\n", f1, f2, mov->deltaHard, mov->deltaSoft);
 
         printf("--------------------------------\n\n\n\n", f1, f2, mov->deltaHard, mov->deltaSoft);
         /*/for(j=0;j<p->nDisciplinas;j++){
             printf("%s %d\n", (p->disciplinas+j)->nomeDisciplina,(p->disciplinas+j)->nAulas) ;
             
         }*/
-        for (j = 0; j < p->dimensao + 5; j++) {
-            printf("%d ", ind->aula[j]);
-
-        }
-        printf("\n");
-
+        imprimeIndividuo2(p, ind);
+        
     }
 
-    exit(0);
+    //exit(0);
 
 
     /*Gerador *gerador = getGeradorInicial(p->dimensao);

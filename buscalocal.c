@@ -1747,6 +1747,26 @@ int temAdjacencia(Problema *p, Individuo *ind, int pos, int aula) {
 
 }
 
+float checaAulasIsoladas(Problema *p, Individuo *ind, int* timeslots, int nTimeslots) {
+
+    int t, pos,sala;
+    float penalty = 0;
+
+    for (t = 0; t < nTimeslots; t++) {
+        for (sala = 0; sala < p->nSalas; sala++) {
+            pos = timeslots[t] + sala * (p->nDias * p->nPerDias);
+
+            if (ehAula(p, ind->aula[pos])) {
+                if (!temAdjacencia(p, ind, pos, ind->aula[pos])) {
+                    penalty += 2;
+                }
+            }
+        }
+    }
+
+    return penalty;
+}
+
 void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     int p1, p2, i;
@@ -1759,6 +1779,9 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     int *salasOcupadas1, totalSalasOcupadas1;
     int *diasOcupados2, totalDiasOcupados2;
     int *salasOcupadas2, totalSalasOcupadas2;
+    int timeslotsAVerificar[6] = {0, 0, 0, 0, 0, 0};
+    int nTimeslots;
+    int timeslot1, timeslot2;
 
     Sala *s1, *s2;
     Disciplina *disc1, *disc2;
@@ -1925,7 +1948,6 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
      * Aulas isoladas
      */
 
-
     // ISOLATED_LECTURE
     //alocacao->custo = 0;
     if (!temAdjacencia(p, ind, p1, aula1)) {
@@ -1934,6 +1956,33 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     if (disc2 && !temAdjacencia(p, ind, p2, aula2)) {
         IL1 += 2;
     }
+    
+    timeslot1 = getTimeSlotFromPos(p1, p);
+    timeslot2 = getTimeSlotFromPos(p2, p);
+
+    timeslotsAVerificar[0] = timeslot1;
+    timeslotsAVerificar[1] = timeslot2;
+    nTimeslots = 2;
+
+    if (getPeriodo(p, p1) > 0) {
+        timeslotsAVerificar[nTimeslots] = timeslot1 - 1;
+        nTimeslots++;
+    }
+    if (getPeriodo(p, p2) > 0) {
+        timeslotsAVerificar[nTimeslots] = timeslot2 - 1;
+        nTimeslots++;
+    }
+
+    if (getPeriodo(p, p1) < p->nPerDias - 1) {
+        timeslotsAVerificar[nTimeslots] = timeslot1 + 1;
+        nTimeslots++;
+    }
+    if (getPeriodo(p, p2) < p->nPerDias - 1) {
+        timeslotsAVerificar[nTimeslots] = timeslot2 + 1;
+        nTimeslots++;
+    }
+    
+    IL1 = checaAulasIsoladas(p,ind,timeslotsAVerificar,nTimeslots);
 
     printf(" RC: %.2f ", RC1);
     printf(" MW: %.2f ", MW1);
@@ -2054,6 +2103,16 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     if (disc2 && !temAdjacencia(p, ind, p1, aula2)) {
         IL2 += 2;
     }
+
+    troca_par(ind , p1, p2);
+    IL2 = checaAulasIsoladas(p,ind,timeslotsAVerificar,nTimeslots);
+    troca_par(ind , p1, p2);
+    
+    printf("Vou verificar: ");
+    /*for (i=0;i<nTimeslots;i++){
+        printf("%d ", timeslotsAVerificar[i]);
+    }
+    printf("\n");*/
 
     //printf(" IL%.2f \n", IL2);
 

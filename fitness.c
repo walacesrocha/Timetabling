@@ -503,13 +503,19 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
                     diasOcupados[disc->pVetor][dia]++;
 
                     //printf ("sala: %d, dia: %d, horario: %d, soma Instabilidade sala = %d\n", sala, dia, horario, soma4);//////
-                    s1 = estudantesExcedentesAula(p, aula, (p->salas[sala]).capacidade); //restricoes soft 1
-                    s3 = aulaIsolada(p, a, i, dia, horario); //restricuoes soft 3
+                    //s1 = estudantesExcedentesAula(p, aula, (p->salas[sala]).capacidade); //restricoes soft 1
+                    s1 = s3 = 0;
+                    if (disc->nAlunos > (p->salas[sala]).capacidade){
+                        s1 = disc->nAlunos- (p->salas[sala]).capacidade;
+                    }
+                    //s3 = aulaIsolada(p, a, i, dia, horario); //restricuoes soft 3
+                    if (!temAdjacencia(p, a, i, aula)){
+                        s3 = 2;
+                    }
 
                     soma1 += s1;
                     soma3 += s3;
                     //soma4 += s4;
-
                 }
                 i++;
             }

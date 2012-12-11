@@ -92,50 +92,45 @@ int main(int argc, char** argv) {
     p->pAproveitamento = atof(argv[7]);
     p->k = 30;
 
-    for (i = 0; i < 5; i++) {
-        ind = geraIndividuoAleatorio(p, 100);
-        contaAulas(p, ind);
-        somaViolacoesHard(p, ind);
-        contaAulas(p, ind);
-
-        printf("Antes: \n");
-        somaViolacoesSoft2(p, ind);
-        contaAulas(p, ind);
-        Neighbour *mov = geraSwap(p, ind);
-        contaAulas(p, ind);
+    ind = geraIndividuoAleatorio(p, 100);
+    for (i = 0; i < 500; i++) {
+        
+        Neighbour *mov = geraMove(p, ind);
+        
+        imprimeIndividuo3(p,ind);
+        
+        float deltaF = mov->deltaHard + mov->deltaSoft;
+        printf("DeltaF=%f (%.1f + %.1f)\n",deltaF,mov->deltaHard,mov->deltaSoft);
+        
         float f1 = funcaoObjetivo(p, ind, 1);
-        contaAulas(p, ind);
-        //imprimeIndividuo3(p,ind);
-        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
-              ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
-              ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-
-        troca_par(ind, mov->p1, mov->p2);
-        contaAulas(p, ind);
-        printf("POS: (%d,%d)\n", mov->p1, mov->p2);
-
-        printf("Depois: \n");
-        somaViolacoesSoft2(p, ind);
-        contaAulas(p, ind);
-
-
-        float f2 = funcaoObjetivo(p, ind, 1);
-        contaAulas(p, ind);
-        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
-        ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        printf("H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
+        
+        //printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
+        //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+        printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
         ind->soft1, ind->soft2, ind->soft3, ind->soft4);
         
-
-        printf("F: %f %f, DH=%f, DS=%f\n\n--------------------------------\n\n\n\n", f1, f2, mov->deltaHard, mov->deltaSoft);
-
-        printf("--------------------------------\n\n\n\n", f1, f2, mov->deltaHard, mov->deltaSoft);
-        /*/for(j=0;j<p->nDisciplinas;j++){
-            printf("%s %d\n", (p->disciplinas+j)->nomeDisciplina,(p->disciplinas+j)->nAulas) ;
-            
-        }*/
-        imprimeIndividuo2(p, ind);
+        troca_par(ind,mov->p1,mov->p2);
+        printf("POS: (%d, %d)\n",mov->p1,mov->p2);
+        
+        float f2 = funcaoObjetivo(p, ind, 1);
+        
+        //printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
+        //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+        printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
+        ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+        
+        imprimeIndividuo3(p,ind);
+                
+        printf("\n\n___________________________________________________________________________________\n\n");
+        
+        if (f2-f1 != deltaF){
+            printf("[%d] F1/2: %.1f/%.1f D=%.1f\n",i,f1,f2,deltaF);
+            scanf("%d",&j);
+        } else {
+            continue;
+        }
+        
+        
         
     }
 
@@ -165,7 +160,7 @@ int main(int argc, char** argv) {
     //ind = buscaLocalGraspProfundidade(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
-    printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
+    printf("SOFT: %f\n", somaViolacoesSoft2(p, ind));
     printf("MEDIA: %f\n", p->mediaSolucoes);
     printf("RoomCapacity: %f\n", p->soft1);
     printf("MinWorkDays: %f\n", p->soft2);

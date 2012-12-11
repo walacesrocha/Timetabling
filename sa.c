@@ -8,7 +8,7 @@
 
 float funcaoObjetivo(Problema *p, Individuo *ind, float pesoHard) {
     float vHard = somaViolacoesHard(p, ind);
-    float vSoft = somaViolacoesSoft(p, ind);
+    float vSoft = somaViolacoesSoft2(p, ind);
 
     //printf("(%f, %f)\n", vHard, vSoft);
 
@@ -699,14 +699,13 @@ annealing:
 }
 
 Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
-    Individuo *solucaoAtual, *aDesalocar;
-    Individuo *vizinho;
+    Individuo *solucaoAtual;
     float foAtual;
     float deltaF;
     long N;
     Neighbour *movimento;
 
-    float pesoHard = 1;
+    float pesoHard = 10000;
 
     foAtual = funcaoObjetivo(p, indInicial, pesoHard);
 
@@ -772,12 +771,12 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
         } while (iteracoes < N);
 
         printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual), totalProb / N, pesoHard);
+                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
         
-        //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 
-        //pesoHard += 0.01;
+        pesoHard += 0.01;
         //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
         if (t0 < 0.01 * p->t0) {
             //pesoHard *= 1.01;

@@ -1749,7 +1749,7 @@ int temAdjacencia(Problema *p, Individuo *ind, int pos, int aula) {
 
 float checaAulasIsoladas(Problema *p, Individuo *ind, int* timeslots, int nTimeslots) {
 
-    int t, pos,sala;
+    int t, pos, sala;
     float penalty = 0;
 
     for (t = 0; t < nTimeslots; t++) {
@@ -1765,6 +1765,20 @@ float checaAulasIsoladas(Problema *p, Individuo *ind, int* timeslots, int nTimes
     }
 
     return penalty;
+}
+
+int insereTimeslot(int *timeslots, int nTimeslots, int novoTimeslot) {
+    int i;
+    for (i = 0; i < nTimeslots; i++) {
+        if (timeslots[i] == novoTimeslot) {
+            return nTimeslots;
+        }
+    }
+
+    // ainda nao estava
+    timeslots[nTimeslots] = novoTimeslot;
+    return nTimeslots+1;
+
 }
 
 void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
@@ -1814,10 +1828,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     s2 = p->salas + getSalaFromPos(p, p2);
 
     disc1 = acessaDisciplina(p, ind->aula[p1]);
-    printf("Disc1: %s\n", disc1->nomeDisciplina);
+    //printf("Disc1: %s\n", disc1->nomeDisciplina);
     if (ehAula(p, ind->aula[p2])) {
         disc2 = acessaDisciplina(p, ind->aula[p2]);
-        printf("Disc2: %s\n", disc2->nomeDisciplina);
+        //printf("Disc2: %s\n", disc2->nomeDisciplina);
     } else {
         disc2 = NULL;
 
@@ -1902,7 +1916,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
             totalSalasOcupadas2++;
         }
     }
-    printf("\n");
+    /*printf("\n");
     printf("Salas ocupadas1: ");
     for (i = 0; i < p->nSalas; i++) {
         printf("%d ", salasOcupadas1[i]);
@@ -1916,7 +1930,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     }
     printf("\n");
     printf("Salas ocupadas1: %d\n", totalSalasOcupadas1);
-    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);
+    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);*/
 
     /**
      * Estabilidade de sala
@@ -1950,44 +1964,47 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     // ISOLATED_LECTURE
     //alocacao->custo = 0;
-    if (!temAdjacencia(p, ind, p1, aula1)) {
+    /*/if (!temAdjacencia(p, ind, p1, aula1)) {
         IL1 += 2; // penalidade peso 2
     }
     if (disc2 && !temAdjacencia(p, ind, p2, aula2)) {
         IL1 += 2;
-    }
-    
+    }*/
+
     timeslot1 = getTimeSlotFromPos(p1, p);
     timeslot2 = getTimeSlotFromPos(p2, p);
 
-    timeslotsAVerificar[0] = timeslot1;
-    timeslotsAVerificar[1] = timeslot2;
-    nTimeslots = 2;
+    //printf("A inserir: %d e %d\n", timeslot1, timeslot2);
+
+    nTimeslots = 0;
+    nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1);
+    //printf("NT=%d\n", nTimeslots);
+    nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2);
+    //printf("NT=%d\n", nTimeslots);
 
     if (getPeriodo(p, p1) > 0) {
-        timeslotsAVerificar[nTimeslots] = timeslot1 - 1;
-        nTimeslots++;
+        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1 - 1);
     }
+    //printf("NT=%d\n", nTimeslots);
     if (getPeriodo(p, p2) > 0) {
-        timeslotsAVerificar[nTimeslots] = timeslot2 - 1;
-        nTimeslots++;
+        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2 - 1);
     }
-
+    //printf("NT=%d\n", nTimeslots);
     if (getPeriodo(p, p1) < p->nPerDias - 1) {
-        timeslotsAVerificar[nTimeslots] = timeslot1 + 1;
-        nTimeslots++;
+        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1 + 1);
     }
+    //printf("NT=%d\n", nTimeslots);
     if (getPeriodo(p, p2) < p->nPerDias - 1) {
-        timeslotsAVerificar[nTimeslots] = timeslot2 + 1;
-        nTimeslots++;
+        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2 + 1);
     }
-    
-    IL1 = checaAulasIsoladas(p,ind,timeslotsAVerificar,nTimeslots);
+    //printf("NT=%d\n", nTimeslots);
 
-    printf(" RC: %.2f ", RC1);
-    printf(" MW: %.2f ", MW1);
-    printf(" IL: %.2f ", IL1);
-    printf(" RS: %.2f \n", RS1);
+    IL1 = checaAulasIsoladas(p, ind, timeslotsAVerificar, nTimeslots);
+
+    /*/printf(" RC1: %.2f ", RC1);
+    printf(" MW1: %.2f ", MW1);
+    printf(" IL1: %.2f ", IL1);
+    printf(" RS1: %.2f \n", RS1);*/
 
 
     /// calcular soft2
@@ -2053,7 +2070,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
             totalSalasOcupadas2++;
         }
     }
-    printf("Salas ocupadas1: ");
+    /*printf("Salas ocupadas1: ");
     for (i = 0; i < p->nSalas; i++) {
         printf("%d ", salasOcupadas1[i]);
 
@@ -2066,7 +2083,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     }
     printf("\n");
     printf("Salas ocupadas1: %d\n", totalSalasOcupadas1);
-    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);
+    printf("Salas ocupadas2: %d\n", totalSalasOcupadas2);*/
 
     /**
      * Estabilidade de sala
@@ -2097,18 +2114,18 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     // ISOLATED_LECTURE
     //alocacao->custo = 0;
-    if (!temAdjacencia(p, ind, p2, aula1)) {
+    /*if (!temAdjacencia(p, ind, p2, aula1)) {
         IL2 += 2; // penalidade peso 2
     }
     if (disc2 && !temAdjacencia(p, ind, p1, aula2)) {
         IL2 += 2;
-    }
+    }*/
 
-    troca_par(ind , p1, p2);
-    IL2 = checaAulasIsoladas(p,ind,timeslotsAVerificar,nTimeslots);
-    troca_par(ind , p1, p2);
-    
-    printf("Vou verificar: ");
+    troca_par(ind, p1, p2);
+    IL2 = checaAulasIsoladas(p, ind, timeslotsAVerificar, nTimeslots);
+    troca_par(ind, p1, p2);
+
+    //printf("Vou verificar: ");
     /*for (i=0;i<nTimeslots;i++){
         printf("%d ", timeslotsAVerificar[i]);
     }
@@ -2116,10 +2133,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     //printf(" IL%.2f \n", IL2);
 
-    printf(" RC: %.2f ", RC2);
-    printf(" MW: %.2f ", MW2);
-    printf(" IL: %.2f ", IL2);
-    printf(" RS: %.2f \n", RS2);
+    /*printf(" RC2: %.2f ", RC2);
+    printf(" MW2: %.2f ", MW2);
+    printf(" IL2: %.2f ", IL2);
+    printf(" RS2: %.2f \n", RS2);*/
 
 
     // calcula deltaSoft

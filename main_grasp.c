@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
 
 
 
+
     //srand(time(0));
     srand(0);
 
@@ -92,46 +93,72 @@ int main(int argc, char** argv) {
     p->pAproveitamento = atof(argv[7]);
     p->k = 30;
 
+    for (i = 0; i < p->nCurriculos; i++) {
+        printf("Curr: %s (%d) pos=%d\n", (p->curriculos + i)->nomeCurriculo,
+                (p->curriculos + i)->nDisciplinas, (p->curriculos + i)->pVetor);
+    }
+
+    for (j = 0; j < p->nDisciplinas; j++) {
+        printf("Disc: %s (%d): \n", (p->disciplinas + j)->nomeDisciplina,
+                (p->disciplinas + j)->nCurriculos);
+
+        for (i = 0; i < (p->disciplinas + j)->nCurriculos; i++) {
+            Curriculo *c = (p->disciplinas + j)->curriculos[i];
+            printf("\tCur: %s (%d) \n", c->nomeCurriculo, c->pVetor);
+        }
+    }
+
+
     ind = geraIndividuoAleatorio(p, 100);
-    for (i = 0; i < 500; i++) {
-        
-        Neighbour *mov = geraMove(p, ind);
-        
-        imprimeIndividuo3(p,ind);
-        
+
+    imprimeIndividuo3(p,ind);
+    inicializaMatCurrDiasPeriodos(p, ind);
+
+
+    //exit(0);
+    for (i = 0; i < 0; i++) {
+
+        Neighbour *mov = geraSwap(p, ind);
+
+        imprimeIndividuo3(p, ind);
+        imprimeMatCurrDiasPeriodo(p,ind);
+
         float deltaF = mov->deltaHard + mov->deltaSoft;
-        printf("DeltaF=%f (%.1f + %.1f)\n",deltaF,mov->deltaHard,mov->deltaSoft);
-        
+        printf("DeltaF=%f (%.1f + %.1f)\n", deltaF, mov->deltaHard, mov->deltaSoft);
+
         float f1 = funcaoObjetivo(p, ind, 1);
-        
+        float f1Soft = somaViolacoesSoft2(p, ind);
+
         //printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
         //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
         printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
-        ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        
-        troca_par(ind,mov->p1,mov->p2);
-        printf("POS: (%d, %d)\n",mov->p1,mov->p2);
-        
+                ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+
+        troca_par_completo(p, ind, mov->p1, mov->p2);
+        printf("POS: (%d, %d)\n", mov->p1, mov->p2);
+
         float f2 = funcaoObjetivo(p, ind, 1);
-        
+        float f2Soft = somaViolacoesSoft2(p, ind);
+
         //printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
         //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
         printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
-        ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        
-        imprimeIndividuo3(p,ind);
-                
-        printf("\n\n___________________________________________________________________________________\n\n");
-        
-        if (f2-f1 != deltaF){
-            printf("[%d] F1/2: %.1f/%.1f D=%.1f\n",i,f1,f2,deltaF);
-            scanf("%d",&j);
+                ind->soft1, ind->soft2, ind->soft3, ind->soft4);
+
+        imprimeIndividuo3(p, ind);
+        imprimeMatCurrDiasPeriodo(p,ind);
+
+        printf("\n\n%d___________________________________________________________________________________\n\n", i);
+
+        if (f2Soft - f1Soft != mov->deltaSoft) {
+            printf("[%d] F1/2: %.1f/%.1f D=%.1f\n", i, f1Soft, f2Soft, mov->deltaSoft);
+            scanf("%d", &j);
         } else {
             continue;
         }
-        
-        
-        
+
+
+
     }
 
     //exit(0);

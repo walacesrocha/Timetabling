@@ -12,6 +12,7 @@ typedef struct curriculo {
     char nomeCurriculo[30];
     int nDisciplinas;
     char **disciplinas;
+    int pVetor;
 } Curriculo;
 
 /*

@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "individuo.h"
+#include "util.h"
 //aulas comecam com 1
 
 /* Estrutura:
@@ -27,15 +28,62 @@ void troca_par(Individuo *a, int pos1, int pos2) {
     a->aula[pos2] = aux;
 }
 
+void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
+    int i, aux;
+    int dia1, dia2, periodo1, periodo2;
+    Disciplina *disc1, *disc2;
+
+    disc1 = acessaDisciplina(p, a->aula[pos1]);
+    disc2 = acessaDisciplina(p, a->aula[pos2]);
+
+    dia1 = getDiaFromPos(pos1, p);
+    dia2 = getDiaFromPos(pos2, p);
+
+    periodo1 = getPeriodoFromPos(pos1, p);
+    periodo2 = getPeriodoFromPos(pos2, p);
+
+    for (i = 0; i < disc1->nCurriculos; i++) {
+        a->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia1][periodo1]--;
+        a->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia2][periodo2]++;
+    }
+    if (disc2) {
+        for (i = 0; i < disc2->nCurriculos; i++) {
+            a->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia1][periodo1]++;
+            a->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia2][periodo2]--;
+        }
+    }
+
+    aux = a->aula[pos1];
+    a->aula[pos1] = a->aula[pos2];
+    a->aula[pos2] = aux;
+}
+
 Individuo *alocaIndividuo(void) {
     Individuo *ind = (Individuo*) malloc(sizeof (Individuo));
     return ind;
 }
 
 void criaIndividuo(Individuo *a, Problema *p) {
+    int i, j, k;
     a->n = (p->nSalas) * (p->nDias) * (p->nPerDias);
     a->fitness = 0;
     a->aula = (int*) malloc(a->n * sizeof (int));
+
+    a->currDiasPeriodos = (int***) malloc(p->nCurriculos * sizeof (int**));
+    for (i = 0; i < p->nCurriculos; i++) {
+        a->currDiasPeriodos[i] = (int**) malloc(p->nDias * sizeof (int*));
+        for (j = 0; j < p->nDias; j++) {
+            a->currDiasPeriodos[i][j] = (int*) malloc(p->nPerDias * sizeof (int));
+        }
+    }
+
+    for (i = 0; i < p->nCurriculos; i++) {
+        for (j = 0; j < p->nDias; j++) {
+            for (k = 0; k < p->nPerDias; k++) {
+                a->currDiasPeriodos[i][j][k] = 0;
+            }
+        }
+    }
 }
 
 Individuo *copiaIndividuo(Problema *p, Individuo *origem) {
@@ -77,6 +125,49 @@ void inicializaIndividuo(Individuo *a, int numero_total_aulas) {
 
 }
 
+void zeraMatCurrDiasPeriodos(Problema *p, Individuo*ind) {
+    int i, j, periodo;
+
+    for (i = 0; i < p->nCurriculos; i++) {
+        for (j = 0; j < p->nDias; j++) {
+            for (periodo = 0; periodo < p->nPerDias; periodo++) {
+                ind->currDiasPeriodos[i][j][periodo] = 0;
+            }
+        }
+    }
+}
+
+void inicializaMatCurrDiasPeriodos(Problema *p, Individuo*ind) {
+    int i, j, dia, periodo;
+    for (i = 0; i < p->dimensao; i++) {
+
+        if (ehAula(p, ind->aula[i])) {
+            dia = getDiaFromPos(i, p);
+            periodo = getPeriodoFromPos(i, p);
+
+            Disciplina *disc = acessaDisciplina(p, ind->aula[i]);
+            for (j = 0; j < disc->nCurriculos; j++) {
+                ind->currDiasPeriodos[disc->curriculos[j]->pVetor][dia][periodo] += 1;
+            }
+        }
+    }
+
+}
+
+void imprimeMatCurrDiasPeriodo(Problema *p, Individuo *ind) {
+    int i, j, periodo;
+
+    for (i = 0; i < p->nCurriculos; i++) {
+        printf("Curr: %s\n", (p->curriculos + i)->nomeCurriculo);
+        for (j = 0; j < p->nDias; j++) {
+            for (periodo = 0; periodo < p->nPerDias; periodo++) {
+                printf("%d ", ind->currDiasPeriodos[i][j][periodo]);
+            }
+            printf("\n");
+        }
+        printf("----------------------");
+    }
+}
 //retorna 1 se houver troca, ou 0 caso contrario
 //soh realiza troca se pelo menos 1 das posicoes possui aula, e se a troca nao viola restricoes hard
 

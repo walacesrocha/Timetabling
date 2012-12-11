@@ -705,7 +705,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     long N;
     Neighbour *movimento;
 
-    float pesoHard = 10000;
+    float pesoHard = 1;
 
     foAtual = funcaoObjetivo(p, indInicial, pesoHard);
 
@@ -716,7 +716,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     tMin = t0 / p->rho;
     beta = p->beta;
 
-    N = 200;
+    N = 500;
 
     solucaoAtual = indInicial;
     //Gerador *gerador = getGeradorInicial(p->dimensao);
@@ -742,7 +742,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             if (deltaF <= 0) {// função objetivo decresceu
                 foAtual += deltaF;
                 //printf("SA: %f [%f]\n", foAtual,t0);
-                troca_par(solucaoAtual, movimento->p1, movimento->p2);
+                troca_par_completo(p, solucaoAtual, movimento->p1, movimento->p2);
                 //melhorInd = solucaoAtual;
             } else {
                 // calcula probabilidade de aceitação
@@ -754,7 +754,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
                 if (p->aceitaPioraSA && (((float) rand() / RAND_MAX) <= prob)) {
                     //printf("aceitou piora\n");
-                    troca_par(solucaoAtual, movimento->p1, movimento->p2);
+                    troca_par_completo(p,solucaoAtual, movimento->p1, movimento->p2);
                     //printf("aceitou piora\n");
                     foAtual += deltaF;
                     nPioras++;
@@ -770,14 +770,15 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f/%f, Pioras=%d, FO=%f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+                funcaoObjetivo(p,solucaoAtual,pesoHard),
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
         
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 
         pesoHard += 0.01;
-        //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
         if (t0 < 0.01 * p->t0) {
             //pesoHard *= 1.01;
             //foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);

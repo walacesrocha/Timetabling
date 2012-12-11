@@ -88,6 +88,7 @@ Problema *lerInstancia(char *nomeArquivo) {
                 &((p->curriculos + i)->nDisciplinas));
 
         (p->curriculos + i)->disciplinas = alocaVetorDisciplinas((p->curriculos + i)->nDisciplinas);
+        (p->curriculos + i)->pVetor = i;
 
         for (j = 0; j < (p->curriculos + i)->nDisciplinas; j++) {
             fscanf(f, "%s ", (p->curriculos + i)->disciplinas[j]);

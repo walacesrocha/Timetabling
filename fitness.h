@@ -46,5 +46,6 @@ float somaConflitosTeste(Problema *p, Individuo *a);
 float somaIndisponibilidadesTeste(Problema *p, Individuo *a);
 
 int aulaIsolada (Problema *p, Individuo *a, int pos, int dia, int horario);
+int somaAulasIsoladas(Problema *p, Individuo *ind) ;
 
 #endif

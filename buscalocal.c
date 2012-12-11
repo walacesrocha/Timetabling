@@ -1747,24 +1747,44 @@ int temAdjacencia(Problema *p, Individuo *ind, int pos, int aula) {
 
 }
 
-float checaAulasIsoladas(Problema *p, Individuo *ind, int* timeslots, int nTimeslots) {
+float checaAulasIsoladas(Problema *p, Individuo *ind, int*curriculos, int nCurriculos,
+        int* dias, int nDias) {
 
-    int t, pos, sala;
-    float penalty = 0;
+    int c, dia, periodo;
+    int nAulas;
+    float soma = 0;
+    int i, j;
 
-    for (t = 0; t < nTimeslots; t++) {
-        for (sala = 0; sala < p->nSalas; sala++) {
-            pos = timeslots[t] + sala * (p->nDias * p->nPerDias);
+    for (i = 0; i < nCurriculos; i++) {
+        for (j = 0; j < nDias; j++) {
+            c = curriculos[i];
+            dia = dias[j];
+            for (periodo = 0; periodo < p->nPerDias; periodo++) {
 
-            if (ehAula(p, ind->aula[pos])) {
-                if (!temAdjacencia(p, ind, pos, ind->aula[pos])) {
-                    penalty += 2;
+                nAulas = ind->currDiasPeriodos[c][dia][periodo];
+                // se o curriculo tem aula no dia/horario
+                if (ind->currDiasPeriodos[c][dia][periodo]) {
+                    if (periodo == 0) {
+                        if (!ind->currDiasPeriodos[c][dia][periodo + 1]) {
+                            soma += nAulas;
+                        }
+                    } else if (periodo == p->nPerDias - 1) {
+                        if (!ind->currDiasPeriodos[c][dia][periodo - 1]) {
+                            soma += nAulas;
+                        }
+                    } else {
+                        if (!ind->currDiasPeriodos[c][dia][periodo - 1] && !ind->currDiasPeriodos[c][dia][periodo + 1]) {
+                            soma += nAulas;
+                        }
+                    }
                 }
             }
         }
     }
 
-    return penalty;
+    return soma * 2; // peso 2
+
+
 }
 
 int insereTimeslot(int *timeslots, int nTimeslots, int novoTimeslot) {
@@ -1777,7 +1797,7 @@ int insereTimeslot(int *timeslots, int nTimeslots, int novoTimeslot) {
 
     // ainda nao estava
     timeslots[nTimeslots] = novoTimeslot;
-    return nTimeslots+1;
+    return nTimeslots + 1;
 
 }
 
@@ -1793,9 +1813,12 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     int *salasOcupadas1, totalSalasOcupadas1;
     int *diasOcupados2, totalDiasOcupados2;
     int *salasOcupadas2, totalSalasOcupadas2;
-    int timeslotsAVerificar[6] = {0, 0, 0, 0, 0, 0};
-    int nTimeslots;
+    int diasAVerificar[2] = {0, 0};
+    int nDias;
     int timeslot1, timeslot2;
+    int *curriculosAVerificar;
+    int totalMaxCurriculos, nCurriculos;
+    int dia1, dia2;
 
     Sala *s1, *s2;
     Disciplina *disc1, *disc2;
@@ -1971,35 +1994,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
         IL1 += 2;
     }*/
 
-    timeslot1 = getTimeSlotFromPos(p1, p);
-    timeslot2 = getTimeSlotFromPos(p2, p);
 
-    //printf("A inserir: %d e %d\n", timeslot1, timeslot2);
-
-    nTimeslots = 0;
-    nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1);
-    //printf("NT=%d\n", nTimeslots);
-    nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2);
-    //printf("NT=%d\n", nTimeslots);
-
-    if (getPeriodo(p, p1) > 0) {
-        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1 - 1);
-    }
-    //printf("NT=%d\n", nTimeslots);
-    if (getPeriodo(p, p2) > 0) {
-        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2 - 1);
-    }
-    //printf("NT=%d\n", nTimeslots);
-    if (getPeriodo(p, p1) < p->nPerDias - 1) {
-        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot1 + 1);
-    }
-    //printf("NT=%d\n", nTimeslots);
-    if (getPeriodo(p, p2) < p->nPerDias - 1) {
-        nTimeslots = insereTimeslot(timeslotsAVerificar, nTimeslots, timeslot2 + 1);
-    }
-    //printf("NT=%d\n", nTimeslots);
-
-    IL1 = checaAulasIsoladas(p, ind, timeslotsAVerificar, nTimeslots);
 
     /*/printf(" RC1: %.2f ", RC1);
     printf(" MW1: %.2f ", MW1);
@@ -2023,8 +2018,8 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     }
     //printf(" RC%.2f -> ", RC2);
 
-    int dia1 = getDiaFromPos(p1, p);
-    int dia2 = getDiaFromPos(p2, p);
+    dia1 = getDiaFromPos(p1, p);
+    dia2 = getDiaFromPos(p2, p);
 
     // vai do dia1 para o dia2
     diasOcupados1[dia1]--;
@@ -2121,9 +2116,73 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
         IL2 += 2;
     }*/
 
-    troca_par(ind, p1, p2);
-    IL2 = checaAulasIsoladas(p, ind, timeslotsAVerificar, nTimeslots);
-    troca_par(ind, p1, p2);
+    dia1 = getDiaFromPos(p1, p);
+    dia2 = getDiaFromPos(p2, p);
+
+    //printf("A inserir: %d e %d\n", timeslot1, timeslot2);
+
+    diasAVerificar[0] = dia1;
+    if (dia1 != dia2) {
+        diasAVerificar[1] = dia2;
+        nDias = 2;
+    } else {
+        nDias = 1;
+    }
+
+    // lista dos curriculos que foram alterados
+    totalMaxCurriculos = disc1->nCurriculos;
+    if (disc2) {
+        totalMaxCurriculos += disc2->nCurriculos;
+    }
+
+    curriculosAVerificar = (int *) malloc(totalMaxCurriculos * sizeof (int));
+    nCurriculos = 0;
+
+    for (i = 0; i < disc1->nCurriculos; i++) {
+        nCurriculos = insereTimeslot(curriculosAVerificar, nCurriculos, disc1->curriculos[i]->pVetor);
+    }
+
+    if (disc2) {
+        for (i = 0; i < disc2->nCurriculos; i++) {
+            nCurriculos = insereTimeslot(curriculosAVerificar, nCurriculos, disc2->curriculos[i]->pVetor);
+        }
+    }
+
+
+    //printf("NT=%d\n", nTimeslots);
+
+    IL1 = checaAulasIsoladas(p, ind, curriculosAVerificar, nCurriculos, diasAVerificar, nDias);
+
+    int periodo1 = getPeriodoFromPos(p1, p);
+    int periodo2 = getPeriodoFromPos(p2, p);
+    // modifica matriz para contagem
+    for (i = 0; i < disc1->nCurriculos; i++) {
+        ind->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia1][periodo1]--;
+        ind->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia2][periodo2]++;
+    }
+    if (disc2) {
+        for (i = 0; i < disc2->nCurriculos; i++) {
+            ind->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia1][periodo1]++;
+            ind->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia2][periodo2]--;
+        }
+    }
+
+    IL2 = checaAulasIsoladas(p, ind, curriculosAVerificar, nCurriculos, diasAVerificar, nDias);
+
+    // restaura matriz
+    for (i = 0; i < disc1->nCurriculos; i++) {
+        ind->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia1][periodo1]++;
+        ind->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia2][periodo2]--;
+    }
+    if (disc2) {
+        for (i = 0; i < disc2->nCurriculos; i++) {
+            ind->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia1][periodo1]--;
+            ind->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia2][periodo2]++;
+        }
+    }
+
+
+
 
     //printf("Vou verificar: ");
     /*for (i=0;i<nTimeslots;i++){
@@ -2144,11 +2203,14 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     soft2 = RC2 + MW2 + IL2 + RS2;
     move->deltaSoft = soft2 - soft1;
 
+
     free(diasOcupados1);
     free(salasOcupadas1);
 
     free(diasOcupados2);
     free(salasOcupadas2);
+
+    free(curriculosAVerificar);
 
 }
 

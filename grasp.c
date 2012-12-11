@@ -9,6 +9,7 @@
 #include "tabu.h"
 #include "gd.h"
 #include "gerador.h"
+#include "io.h"
 
 /**
  * Compara duas aulas em relação a dificuldade. 
@@ -1010,7 +1011,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
     foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
 
-    
+
 
 
     foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
@@ -1030,7 +1031,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
                 vizinhos[i] = getProxVizinho(p, solucaoAtual, geradores[i]);
             } else {
                 vizinhos[i] = geraVizinho2(p, solucaoAtual);
-                
+
             }
             totalElementos += nVizinhos;
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
@@ -1598,6 +1599,9 @@ Individuo *grasp(Problema *p) {
             geraSolucaoInicialGrasp(p, auxGrasp, NULL);
         }
         ind = auxGrasp->ind;
+        
+        zeraMatCurrDiasPeriodos(p,ind);
+        inicializaMatCurrDiasPeriodos(p, ind);
         printf("F1: %f\n", funcaoObjetivo(p, ind, 10000));
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
@@ -1657,7 +1661,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 5;
             p->rho = 5000;
-            p->beta = 0.999;
+            p->beta = 0.9995;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {
@@ -1666,6 +1670,23 @@ Individuo *grasp(Problema *p) {
             //printf("Tipo de busca local nao foi informada!\n");
             //exit(1);
         }
+
+        imprimeIndividuo3(p, ind);
+        somaViolacoesSoft2(p, ind);
+        int periodo;
+        for (i = 0; i < p->nCurriculos; i++) {
+            printf("Curr: %s\n", (p->curriculos + i)->nomeCurriculo);
+            for (j = 0; j < p->nDias; j++) {
+                for (periodo = 0; periodo < p->nPerDias; periodo++) {
+                    printf("%d ", ind->currDiasPeriodos[i][j][periodo]);
+                }
+                printf("\n");
+            }
+            printf("----------------------");
+        }
+        printf("Aulas isoladas: %d\n", somaAulasIsoladas(p, ind));
+
+        imprimeResposta(p, ind, stdout);
 
         p->f2 += funcaoObjetivo(p, bestIter, 10000);
 
@@ -1676,6 +1697,7 @@ Individuo *grasp(Problema *p) {
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //printf("\n\n\n", fo);
+
 
 
         p->soft1 += ind->soft1;

@@ -1809,16 +1809,17 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     float soft1, soft2;
     float RC1, MW1, IL1, RS1;
     float RC2, MW2, IL2, RS2;
-    int *diasOcupados1, totalDiasOcupados1;
-    int *salasOcupadas1, totalSalasOcupadas1;
-    int *diasOcupados2, totalDiasOcupados2;
-    int *salasOcupadas2, totalSalasOcupadas2;
+    int totalDiasOcupados1;
+    int totalSalasOcupadas1;
+    int totalDiasOcupados2;
+    int totalSalasOcupadas2;
     int diasAVerificar[2] = {0, 0};
     int nDias;
     int timeslot1, timeslot2;
     int *curriculosAVerificar;
     int totalMaxCurriculos, nCurriculos;
     int dia1, dia2;
+    int sala1, sala2;
 
     Sala *s1, *s2;
     Disciplina *disc1, *disc2;
@@ -1877,53 +1878,14 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
         RC1 += disc2->nAlunos - s2->capacidade;
     }
 
-
-
-
-    // vetor auxiliar para guardar os dias ocupados pela disciplina
-    diasOcupados1 = (int*) malloc(p->nDias * sizeof (int));
-    diasOcupados2 = (int*) malloc(p->nDias * sizeof (int));
-    for (i = 0; i < p->nDias; i++) {
-        diasOcupados1[i] = 0;
-        diasOcupados2[i] = 0;
-    }
-
-    // vetor auxiliar para guardar as salas ocupadas pela disciplina
-    salasOcupadas1 = (int*) malloc(p->nSalas * sizeof (int));
-    salasOcupadas2 = (int*) malloc(p->nSalas * sizeof (int));
-    for (i = 0; i < p->nSalas; i++) {
-        salasOcupadas1[i] = 0;
-        salasOcupadas2[i] = 0;
-    }
-    for (i = 0; i < p->dimensao; i++) {
-
-        if (ehAula(p, ind->aula[i])) {
-            if (aulasMesmaDisciplina3(p, aula1, ind->aula[i])) {
-                // marca o dia como tendo aula
-                diasOcupados1[getDia(p, i)] += 1;
-
-                // marca a sala como ocupada
-                salasOcupadas1[getRoomFromPos(i, p)] += 1;
-            }
-
-            if (disc2 && aulasMesmaDisciplina3(p, aula2, ind->aula[i])) {
-                // marca o dia como tendo aula
-                diasOcupados2[getDia(p, i)] += 1;
-
-                // marca a sala como ocupada
-                salasOcupadas2[getRoomFromPos(i, p)] += 1;
-            }
-        }
-    }
-
     // conta o total de dias ocupados
     totalDiasOcupados1 = 0;
     totalDiasOcupados2 = 0;
     for (i = 0; i < p->nDias; i++) {
-        if (diasOcupados1[i]) {
+        if (ind->diasOcupados[disc1->pVetor][i]) {
             totalDiasOcupados1++;
         }
-        if (diasOcupados2[i]) {
+        if (disc2 && ind->diasOcupados[disc2->pVetor][i]) {
             totalDiasOcupados2++;
         }
     }
@@ -1932,10 +1894,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     totalSalasOcupadas1 = 0;
     totalSalasOcupadas2 = 0;
     for (i = 0; i < p->nSalas; i++) {
-        if (salasOcupadas1[i]) {
+        if (ind->salasUsadas[disc1->pVetor][i]) {
             totalSalasOcupadas1++;
         }
-        if (salasOcupadas2[i]) {
+        if (disc2 && ind->salasUsadas[disc2->pVetor][i]) {
             totalSalasOcupadas2++;
         }
     }
@@ -2022,34 +1984,34 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     dia2 = getDiaFromPos(p2, p);
 
     // vai do dia1 para o dia2
-    diasOcupados1[dia1]--;
-    diasOcupados1[dia2]++;
+    ind->diasOcupados[disc1->pVetor][dia1]--;
+    ind->diasOcupados[disc1->pVetor][dia2]++;
 
     if (disc2) {
-        diasOcupados2[dia2]--;
-        diasOcupados2[dia1]++;
+        ind->diasOcupados[disc2->pVetor][dia2]--;
+        ind->diasOcupados[disc2->pVetor][dia1]++;
     }
 
     // vai da sala1 para sala2
-    int sala1 = getSalaFromPos(p, p1);
-    int sala2 = getSalaFromPos(p, p2);
+    sala1 = getSalaFromPos(p, p1);
+    sala2 = getSalaFromPos(p, p2);
 
-    salasOcupadas1[sala1]--;
-    salasOcupadas1[sala2]++;
+    ind->salasUsadas[disc1->pVetor][sala1]--;
+    ind->salasUsadas[disc1->pVetor][sala2]++;
 
     if (disc2) {
-        salasOcupadas2[sala2]--;
-        salasOcupadas2[sala1]++;
+        ind->salasUsadas[disc2->pVetor][sala2]--;
+        ind->salasUsadas[disc2->pVetor][sala1]++;
     }
 
     // conta o total de dias ocupados
     totalDiasOcupados1 = 0;
     totalDiasOcupados2 = 0;
     for (i = 0; i < p->nDias; i++) {
-        if (diasOcupados1[i]) {
+        if (ind->diasOcupados[disc1->pVetor][i]) {
             totalDiasOcupados1++;
         }
-        if (diasOcupados2[i]) {
+        if (disc2 && ind->diasOcupados[disc2->pVetor][i]) {
             totalDiasOcupados2++;
         }
     }
@@ -2058,10 +2020,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     totalSalasOcupadas1 = 0;
     totalSalasOcupadas2 = 0;
     for (i = 0; i < p->nSalas; i++) {
-        if (salasOcupadas1[i]) {
+        if (ind->salasUsadas[disc1->pVetor][i]) {
             totalSalasOcupadas1++;
         }
-        if (salasOcupadas2[i]) {
+        if (disc2 && ind->salasUsadas[disc2->pVetor][i]) {
             totalSalasOcupadas2++;
         }
     }
@@ -2103,6 +2065,25 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
         MW2 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
+    }
+    
+    // restaurando as matrizes originais
+    // vai do dia2 para o dia1
+    ind->diasOcupados[disc1->pVetor][dia1]++;
+    ind->diasOcupados[disc1->pVetor][dia2]--;
+
+    if (disc2) {
+        ind->diasOcupados[disc2->pVetor][dia2]++;
+        ind->diasOcupados[disc2->pVetor][dia1]--;
+    }
+
+    // vai da sala2 para sala1
+    ind->salasUsadas[disc1->pVetor][sala1]++;
+    ind->salasUsadas[disc1->pVetor][sala2]--;
+
+    if (disc2) {
+        ind->salasUsadas[disc2->pVetor][sala2]++;
+        ind->salasUsadas[disc2->pVetor][sala1]--;
     }
 
     //printf(" MW%.2f -> ", MW2);
@@ -2181,9 +2162,6 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
         }
     }
 
-
-
-
     //printf("Vou verificar: ");
     /*for (i=0;i<nTimeslots;i++){
         printf("%d ", timeslotsAVerificar[i]);
@@ -2203,12 +2181,6 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     soft2 = RC2 + MW2 + IL2 + RS2;
     move->deltaSoft = soft2 - soft1;
 
-
-    free(diasOcupados1);
-    free(salasOcupadas1);
-
-    free(diasOcupados2);
-    free(salasOcupadas2);
 
     free(curriculosAVerificar);
 

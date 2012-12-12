@@ -112,13 +112,13 @@ int main(int argc, char** argv) {
     ind = geraIndividuoAleatorio(p, 100);
 
     imprimeIndividuo3(p,ind);
-    inicializaMatCurrDiasPeriodos(p, ind);
+    inicializaMatrizesAuxiliares(p, ind);
 
 
     //exit(0);
     for (i = 0; i < 0; i++) {
 
-        Neighbour *mov = geraSwap(p, ind);
+        Neighbour *mov = geraMove(p, ind);
 
         imprimeIndividuo3(p, ind);
         imprimeMatCurrDiasPeriodo(p,ind);

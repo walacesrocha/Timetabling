@@ -18,6 +18,8 @@ typedef struct individuo {
     int posConflitos[50];
     int nConflitos;
     int ***currDiasPeriodos;
+    int **salasUsadas;
+    int **diasOcupados;
 } Individuo;
 
 
@@ -99,6 +101,6 @@ float somaTodasIndisponibilidadesLocaisTeste(Problema *p, Individuo *ind);
 
 float somaTodasHardLocalTeste(Problema *p, Individuo *ind, float *h1total, float *h3total, float *h4total, float *somaHardLocal);
 
-void inicializaMatCurrDiasPeriodos(Problema *p, Individuo*ind);
+void inicializaMatrizesAuxiliares(Problema *p, Individuo*ind);
 void zeraMatCurrDiasPeriodos(Problema *p, Individuo*ind);
 #endif

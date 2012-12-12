@@ -1601,7 +1601,7 @@ Individuo *grasp(Problema *p) {
         ind = auxGrasp->ind;
         
         zeraMatCurrDiasPeriodos(p,ind);
-        inicializaMatCurrDiasPeriodos(p, ind);
+        inicializaMatrizesAuxiliares(p, ind);
         printf("F1: %f\n", funcaoObjetivo(p, ind, 10000));
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
@@ -1687,10 +1687,12 @@ Individuo *grasp(Problema *p) {
         printf("Aulas isoladas: %d\n", somaAulasIsoladas(p, ind));
 
         imprimeResposta(p, ind, stdout);
+         
+        bestIter = ind;
 
-        p->f2 += funcaoObjetivo(p, bestIter, 10000);
+        p->f2 += funcaoObjetivo(p, ind, 10000);
 
-        fo = funcaoObjetivo(p, bestIter, 10000);
+        fo = funcaoObjetivo(p, ind, 10000);
         ind->fitness = fo;
         //printf("----------------------------------\n", fo);
         printf("F2: %f\n", fo);
@@ -1705,8 +1707,9 @@ Individuo *grasp(Problema *p) {
         p->soft3 += ind->soft3;
         p->soft4 += ind->soft4;
 
-        if (i > 0/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
-            indPr = pathRelinking2(p, bestIter, auxGrasp);
+        if (i > 10000/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
+            indPr = pathRelinking2(p, ind, auxGrasp);
+            inicializaMatrizesAuxiliares(p,indPr);
             foPR = funcaoObjetivo(p, indPr, 10000);
             indPr->fitness = foPR;
             fezPR = 1; // fez Path-Relinking

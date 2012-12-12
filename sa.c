@@ -770,9 +770,9 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
-                funcaoObjetivo(p,solucaoAtual,pesoHard),
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);
+        //printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+          //      funcaoObjetivo(p,solucaoAtual,pesoHard),
+            //    somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);
         t0 *= beta;
         
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);

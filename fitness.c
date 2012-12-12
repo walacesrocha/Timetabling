@@ -507,23 +507,6 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
     int sala, dia, horario, i, nAulasSala, aula, pos;
     int soma1, soma2, soma3, soma4;
     int totalSalas, totalDias;
-    int s1, s2, s3, s4;
-    int **salasUsadas;
-    int **diasOcupados;
-
-    salasUsadas = (int**) malloc(p->nDisciplinas * sizeof (int*));
-    for (i = 0; i < p->nDisciplinas; i++) {
-        salasUsadas[i] = (int*) malloc(p->nSalas * sizeof (int));
-        memset(salasUsadas[i], 0, p->nSalas * sizeof (int));
-    }
-
-    diasOcupados = (int**) malloc(p->nDisciplinas * sizeof (int*));
-    for (i = 0; i < p->nDisciplinas; i++) {
-        diasOcupados[i] = (int*) malloc(p->nDias * sizeof (int));
-        memset(diasOcupados[i], 0, p->nDias * sizeof (int));
-    }
-
-
 
     i = 0;
     pos = 0;
@@ -535,23 +518,13 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
                 if (ehAula(p, aula)) {
                     pos++;
                     Disciplina *disc = acessaDisciplina(p, aula);
-                    salasUsadas[disc->pVetor][sala]++;
-                    diasOcupados[disc->pVetor][dia]++;
 
                     //printf ("sala: %d, dia: %d, horario: %d, soma Instabilidade sala = %d\n", sala, dia, horario, soma4);//////
                     //s1 = estudantesExcedentesAula(p, aula, (p->salas[sala]).capacidade); //restricoes soft 1
-                    s1 = s3 = 0;
                     if (disc->nAlunos > (p->salas[sala]).capacidade) {
-                        s1 = disc->nAlunos - (p->salas[sala]).capacidade;
+                        soma1 += disc->nAlunos - (p->salas[sala]).capacidade;
                     }
-                    //s3 = aulaIsolada(p, a, i, dia, horario); //restricuoes soft 3
-                    if (!temAdjacencia(p, a, i, aula)) {
-                        s3 = 2;
-                    }
-
-                    soma1 += s1;
-                    soma3 += s3;
-                    //soma4 += s4;
+                    
                 }
                 i++;
             }
@@ -564,7 +537,7 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
         totalSalas = 0;
         for (sala = 0; sala < p->nSalas; sala++) {
             //printf("%d ", salasUsadas[i][sala]);
-            if (salasUsadas[i][sala]) {
+            if (a->salasUsadas[i][sala]) {
                 totalSalas++;
             }
             //printf("\n");
@@ -579,7 +552,7 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
         totalDias = 0;
         for (dia = 0; dia < p->nDias; dia++) {
             //printf("%d ", diasOcupados[i][dia]);
-            if (diasOcupados[i][dia]) {
+            if (a->diasOcupados[i][dia]) {
                 totalDias++;
             }
             //printf("\n");
@@ -594,21 +567,6 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
     //zeraMatCurrDiasPeriodos(p, a);
     //inicializaMatCurrDiasPeriodos(p, a);
     soma3 = somaAulasIsoladas(p,a);
-
-    //soma2 += somaViolacoesMinDias(p, vetAgenda); //restricoes soft 2
-    //printf ("Cost of RoomCapacity (soft) : %d\n", soma1); printf ("Cost of MinWorkingDays (soft) : %d\n", soma2); printf ("Cost of Isolated Lectures (soft) : %d\n", soma3); printf ("Cost of Room Stability(soft) : %d\n", soma4);/////
-
-
-    //liberaVetorAgendas(p, vetAgenda);
-
-
-    for (i = 0; i < p->nDisciplinas; i++) {
-        free(salasUsadas[i]);
-        free(diasOcupados[i]);
-    }
-    free(salasUsadas);
-    free(diasOcupados);
-
 
     a->soft1 = soma1;
     a->soft2 = soma2;

@@ -30,7 +30,8 @@ void troca_par(Individuo *a, int pos1, int pos2) {
 
 void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
     int i, aux;
-    int dia1, dia2, periodo1, periodo2;
+    int dia1, dia2, periodo1, periodo2, sala1, sala2;
+    int idx1, idx2;
     Disciplina *disc1, *disc2;
 
     disc1 = acessaDisciplina(p, a->aula[pos1]);
@@ -42,6 +43,14 @@ void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
     periodo1 = getPeriodoFromPos(pos1, p);
     periodo2 = getPeriodoFromPos(pos2, p);
 
+    sala1 = getSalaFromPos(p, pos1);
+    sala2 = getSalaFromPos(p, pos2);
+
+    idx1 = disc1->pVetor;
+    if (disc2) {
+        idx2 = disc2->pVetor;
+    }
+
     for (i = 0; i < disc1->nCurriculos; i++) {
         a->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia1][periodo1]--;
         a->currDiasPeriodos[disc1->curriculos[i]->pVetor][dia2][periodo2]++;
@@ -51,6 +60,20 @@ void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
             a->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia1][periodo1]++;
             a->currDiasPeriodos[disc2->curriculos[i]->pVetor][dia2][periodo2]--;
         }
+    }
+
+    a->salasUsadas[idx1][sala1]--;
+    a->salasUsadas[idx1][sala2]++;
+
+    a->diasOcupados[idx1][dia1]--;
+    a->diasOcupados[idx1][dia2]++;
+
+    if (disc2) {
+        a->salasUsadas[idx2][sala1]++;
+        a->salasUsadas[idx2][sala2]--;
+
+        a->diasOcupados[idx2][dia1]++;
+        a->diasOcupados[idx2][dia2]--;
     }
 
     aux = a->aula[pos1];
@@ -69,6 +92,7 @@ void criaIndividuo(Individuo *a, Problema *p) {
     a->fitness = 0;
     a->aula = (int*) malloc(a->n * sizeof (int));
 
+    // matriz 3-D para armazenar curriculos, dias e periodos
     a->currDiasPeriodos = (int***) malloc(p->nCurriculos * sizeof (int**));
     for (i = 0; i < p->nCurriculos; i++) {
         a->currDiasPeriodos[i] = (int**) malloc(p->nDias * sizeof (int*));
@@ -84,6 +108,22 @@ void criaIndividuo(Individuo *a, Problema *p) {
             }
         }
     }
+
+    // matriz disciplina x sala
+    a->salasUsadas = (int**) malloc(p->nDisciplinas * sizeof (int*));
+    for (i = 0; i < p->nDisciplinas; i++) {
+        a->salasUsadas[i] = (int*) malloc(p->nSalas * sizeof (int));
+        memset(a->salasUsadas[i], 0, p->nSalas * sizeof (int));
+    }
+
+    // matriz disciplina x dia
+    a->diasOcupados = (int**) malloc(p->nDisciplinas * sizeof (int*));
+    for (i = 0; i < p->nDisciplinas; i++) {
+        a->diasOcupados[i] = (int*) malloc(p->nDias * sizeof (int));
+        memset(a->diasOcupados[i], 0, p->nDias * sizeof (int));
+    }
+
+
 }
 
 Individuo *copiaIndividuo(Problema *p, Individuo *origem) {
@@ -137,20 +177,30 @@ void zeraMatCurrDiasPeriodos(Problema *p, Individuo*ind) {
     }
 }
 
-void inicializaMatCurrDiasPeriodos(Problema *p, Individuo*ind) {
-    int i, j, dia, periodo;
+void inicializaMatrizesAuxiliares(Problema *p, Individuo*ind) {
+    int i, j, dia, periodo, sala;
     for (i = 0; i < p->dimensao; i++) {
 
         if (ehAula(p, ind->aula[i])) {
             dia = getDiaFromPos(i, p);
             periodo = getPeriodoFromPos(i, p);
+            sala = getSalaFromPos(p, i);
 
+            // curr X dia X periodo
             Disciplina *disc = acessaDisciplina(p, ind->aula[i]);
             for (j = 0; j < disc->nCurriculos; j++) {
                 ind->currDiasPeriodos[disc->curriculos[j]->pVetor][dia][periodo] += 1;
             }
+
+            // disciplina X dia
+            ind->diasOcupados[disc->pVetor][dia]++;
+
+            // disciplina X sala
+            ind->salasUsadas[disc->pVetor][sala]++;
         }
     }
+
+
 
 }
 

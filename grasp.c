@@ -1405,11 +1405,16 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     int *posicoesTarget;
     float melhorFoGlobal = 999999;
     Individuo *bestGlobal;
+    Neighbour *mov;
+    float deltaF, pesoHard;
+
+    pesoHard = 10000;
 
     bestGlobal = alocaIndividuo();
     criaIndividuo(bestGlobal, p);
     copiaIndividuo2(solucaoAtual, bestGlobal);
 
+    mov = (Neighbour*) malloc(sizeof (Neighbour));
 
 
     // escolhe uma solucao elite
@@ -1420,6 +1425,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     inter = alocaIndividuo();
     criaIndividuo(inter, p);
     copiaIndividuo2(initial, inter);
+    inicializaMatrizesAuxiliares(p, inter);
 
     target = solucaoAtual;
     posicoesTarget = (int*) malloc(p->nAulas * sizeof (int));
@@ -1439,7 +1445,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     printf("\n");
     imprimeIndividuo(solucaoAtual);*/
 
-    float fo = funcaoObjetivo(p, inter, 10000);
+    float fo = funcaoObjetivo(p, inter, pesoHard);
     int move;
 
     do {
@@ -1454,16 +1460,21 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
 
                 if (i != pos) {
                     //printf("Aula %d != (%d,%d)", aula, i, pos);
-                    troca_par(inter, pos, i);
-                    foAux = funcaoObjetivo(p, inter, 10000);
+                    //troca_par(inter, pos, i);
+                    mov->p1 = i;
+                    mov->p2 = pos;
+                    avaliaNeighbour(p, inter, mov);
 
-                    if (foAux < melhorFo) {
-                        melhorFo = foAux;
+                    //foAux = funcaoObjetivo(p, inter, 10000);
+                    deltaF = mov->deltaHard * pesoHard + mov->deltaSoft;
+
+                    if (fo + deltaF < melhorFo) {
+                        melhorFo = fo + deltaF;
                         t1 = i;
                         t2 = pos;
                     }
                     //printf(", FO= %f => %f\n", fo, foAux);
-                    troca_par(inter, pos, i);
+                    //troca_par(inter, pos, i);
 
                     move = 1;
                 } else {
@@ -1475,7 +1486,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
         // realiza a melhor troca
         if (move) {
             //printf("%d <=> %d, fo=%f\n", t1, t2, melhorFo);
-            troca_par(inter, t1, t2);
+            troca_par_completo(p, inter, t1, t2);
             fo = melhorFo;
 
             if (melhorFo < melhorFoGlobal) {
@@ -1492,6 +1503,8 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     //printf("Target: %f\n", funcaoObjetivo(p, target));
 
     free(posicoesTarget);
+    free(mov);
+
     return bestGlobal;
 
 }
@@ -1599,8 +1612,8 @@ Individuo *grasp(Problema *p) {
             geraSolucaoInicialGrasp(p, auxGrasp, NULL);
         }
         ind = auxGrasp->ind;
-        
-        zeraMatCurrDiasPeriodos(p,ind);
+
+        zeraMatCurrDiasPeriodos(p, ind);
         inicializaMatrizesAuxiliares(p, ind);
         printf("F1: %f\n", funcaoObjetivo(p, ind, 10000));
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
@@ -1661,7 +1674,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 6) {
             p->t0 = 5;
             p->rho = 5000;
-            p->beta = 0.9995;
+            p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {
@@ -1671,28 +1684,13 @@ Individuo *grasp(Problema *p) {
             //exit(1);
         }
 
-        imprimeIndividuo3(p, ind);
-        somaViolacoesSoft2(p, ind);
-        int periodo;
-        for (i = 0; i < p->nCurriculos; i++) {
-            printf("Curr: %s\n", (p->curriculos + i)->nomeCurriculo);
-            for (j = 0; j < p->nDias; j++) {
-                for (periodo = 0; periodo < p->nPerDias; periodo++) {
-                    printf("%d ", ind->currDiasPeriodos[i][j][periodo]);
-                }
-                printf("\n");
-            }
-            printf("----------------------");
-        }
-        printf("Aulas isoladas: %d\n", somaAulasIsoladas(p, ind));
-
-        imprimeResposta(p, ind, stdout);
-         
         bestIter = ind;
 
-        p->f2 += funcaoObjetivo(p, ind, 10000);
-
         fo = funcaoObjetivo(p, ind, 10000);
+
+        p->f2 += fo;
+
+
         ind->fitness = fo;
         //printf("----------------------------------\n", fo);
         printf("F2: %f\n", fo);
@@ -1707,9 +1705,9 @@ Individuo *grasp(Problema *p) {
         p->soft3 += ind->soft3;
         p->soft4 += ind->soft4;
 
-        if (i > 10000/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
+        if (i > 1/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
-            inicializaMatrizesAuxiliares(p,indPr);
+            inicializaMatrizesAuxiliares(p, indPr);
             foPR = funcaoObjetivo(p, indPr, 10000);
             indPr->fitness = foPR;
             fezPR = 1; // fez Path-Relinking
@@ -1780,7 +1778,7 @@ Individuo *grasp(Problema *p) {
             liberaIndividuo(indPr);
         }
 
-        printf("Iter:%d,FO=%f\n", i + 1, funcaoObjetivo(p, bestInd, 10000));
+        printf("Iter:%d,FO=%f\n", i + 1, melhor);
         //printf("%f %f %f\n", p->f1, p->f2, p->f3);
         fflush(stdout);
 

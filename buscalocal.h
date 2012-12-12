@@ -61,6 +61,8 @@ Individuo *compact(Problema *p, Individuo *ind);
 
 Neighbour *geraSwap(Problema *p, Individuo *ind);
 Neighbour *geraMove(Problema *p, Individuo *ind);
+Neighbour *geraTimeMove(Problema *p, Individuo *ind);
+Neighbour *geraRoomMove(Problema *p, Individuo *ind);
 
 
 #endif	/* _BUSCALOCAL_H */

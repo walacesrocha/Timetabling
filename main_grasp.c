@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
     p->pAproveitamento = atof(argv[7]);
     p->k = 30;
 
-    for (i = 0; i < p->nCurriculos; i++) {
+    /*for (i = 0; i < p->nCurriculos; i++) {
         printf("Curr: %s (%d) pos=%d\n", (p->curriculos + i)->nomeCurriculo,
                 (p->curriculos + i)->nDisciplinas, (p->curriculos + i)->pVetor);
     }
@@ -106,19 +106,19 @@ int main(int argc, char** argv) {
             Curriculo *c = (p->disciplinas + j)->curriculos[i];
             printf("\tCur: %s (%d) \n", c->nomeCurriculo, c->pVetor);
         }
-    }
+    }*/
 
 
     ind = geraIndividuoAleatorio(p, 100);
 
-    imprimeIndividuo3(p,ind);
-    inicializaMatrizesAuxiliares(p, ind);
+    //imprimeIndividuo3(p,ind);
+    //inicializaMatrizesAuxiliares(p, ind);
 
 
     //exit(0);
     for (i = 0; i < 0; i++) {
 
-        Neighbour *mov = geraMove(p, ind);
+        Neighbour *mov = geraRoomMove(p, ind);
 
         imprimeIndividuo3(p, ind);
         imprimeMatCurrDiasPeriodo(p,ind);
@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
 
-    p->tempoLimite = 120000;
+    p->tempoLimite = 400;
     p->inicio = clock();
     ind = grasp(p);
     p->fim = clock();

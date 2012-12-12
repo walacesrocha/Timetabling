@@ -2066,7 +2066,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
         // penalizacao MIN_WORKING_DAYS
         MW2 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
     }
-    
+
     // restaurando as matrizes originais
     // vai do dia2 para o dia1
     ind->diasOcupados[disc1->pVetor][dia1]++;
@@ -2253,4 +2253,139 @@ Neighbour *geraMove(Problema *p, Individuo *ind) {
     return move;
 
 
+}
+
+int getHorariosVagosSala(Problema*p, Individuo* ind, int *posVazias, int sala) {
+    int nVazias;
+    int i, pos;
+    int qtHorarios;
+
+    qtHorarios = p->nDias * p->nPerDias;
+    nVazias = 0;
+
+    for (i = 0; i < qtHorarios; i++) {
+        pos = i + sala * qtHorarios;
+
+        if (!ehAula(p, ind->aula[pos])) {
+            posVazias[nVazias] = pos;
+            nVazias++;
+        }
+    }
+
+    return nVazias;
+}
+
+int getHorariosVagosTimeslot(Problema*p, Individuo* ind, int *posVazias, int timeslot) {
+    int nVazias;
+    int i, pos;
+    int qtHorarios;
+
+    qtHorarios = p->nDias * p->nPerDias;
+    nVazias = 0;
+
+    for (i = 0; i < p->nSalas; i++) {
+        pos = timeslot + i * qtHorarios;
+
+        if (!ehAula(p, ind->aula[pos])) {
+            posVazias[nVazias] = pos;
+            nVazias++;
+        }
+    }
+
+    return nVazias;
+}
+
+Neighbour *geraTimeMove(Problema *p, Individuo *ind) {
+    Neighbour *move;
+    int *pVazias;
+    int nVazias;
+    int sala;
+
+
+    move = (Neighbour*) malloc(sizeof (Neighbour));
+    move->m = TIME_MOVE;
+
+    pVazias = (int*) malloc((p->nDias * p->nPerDias) * sizeof (int));
+
+
+    /*** TIME_MOVE EVENT ***/
+
+    move->p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    move->p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, ind->aula[move->p1])) {
+        move->p1++;
+        if (move->p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            move->p1 = 0;
+        }
+    }
+
+    sala = getSalaFromPos(p, move->p1);
+
+    nVazias = getHorariosVagosSala(p, ind, pVazias, sala);
+
+    if (nVazias == 0) {
+        return geraTimeMove(p, ind);
+    }
+
+    move->p2 = pVazias[rand() % nVazias];
+
+    avaliaNeighbour(p, ind, move);
+
+    /*printf("TIME_MOVE: (S=%d,T=%d), (S=%d,T=%d)\n", getSalaFromPos(p, move->p1),
+            getTimeSlotFromPos(move->p1, p),
+            getSalaFromPos(p, move->p2),
+            getTimeSlotFromPos(move->p2, p));**/
+
+    return move;
+}
+
+Neighbour *geraRoomMove(Problema *p, Individuo *ind) {
+
+    Neighbour *move;
+    int *pVazias;
+    int nVazias;
+    int timeslot;
+
+
+    move = (Neighbour*) malloc(sizeof (Neighbour));
+    move->m = ROOM_MOVE;
+
+    pVazias = (int*) malloc((p->nSalas) * sizeof (int));
+
+
+    /*** TIME_MOVE EVENT ***/
+
+    move->p1 = rand() % p->dimensao; // posicao que ira apontar um horário de aula
+    move->p2 = rand() % p->dimensao; // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    while (!ehAula(p, ind->aula[move->p1])) {
+        move->p1++;
+        if (move->p1 == p->dimensao) {// volta ao inicio do vetor 'aula'
+            move->p1 = 0;
+        }
+    }
+
+    timeslot = getTimeSlotFromPos(move->p1, p);
+
+    nVazias = getHorariosVagosTimeslot(p, ind, pVazias, timeslot);
+
+    if (nVazias == 0) {
+        return geraRoomMove(p, ind);
+    }
+
+    move->p2 = pVazias[rand() % nVazias];
+
+    avaliaNeighbour(p, ind, move);
+    
+    /*printf("ROOM_MOVE: (S=%d,T=%d), (S=%d,T=%d)\n", getSalaFromPos(p, move->p1),
+            getTimeSlotFromPos(move->p1, p),
+            getSalaFromPos(p, move->p2),
+            getTimeSlotFromPos(move->p2, p));*/
+
+    return move;
 }

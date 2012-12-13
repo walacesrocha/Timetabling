@@ -112,16 +112,23 @@ int main(int argc, char** argv) {
     ind = geraIndividuoAleatorio(p, 100);
 
     //imprimeIndividuo3(p,ind);
-    //inicializaMatrizesAuxiliares(p, ind);
+    inicializaMatrizesAuxiliares(p, ind);
 
 
     //exit(0);
     for (i = 0; i < 0; i++) {
+        somaViolacoesSoft2(p, ind);
 
-        Neighbour *mov = geraRoomMove(p, ind);
+        Neighbour *mov;
+
+        if (1) {
+            mov = geraMinWorkingDaysMove(p, ind);
+        } else {
+            mov = geraMove(p, ind);
+        }
 
         imprimeIndividuo3(p, ind);
-        imprimeMatCurrDiasPeriodo(p,ind);
+        imprimeMatCurrDiasPeriodo(p, ind);
 
         float deltaF = mov->deltaHard + mov->deltaSoft;
         printf("DeltaF=%f (%.1f + %.1f)\n", deltaF, mov->deltaHard, mov->deltaSoft);
@@ -146,7 +153,7 @@ int main(int argc, char** argv) {
                 ind->soft1, ind->soft2, ind->soft3, ind->soft4);
 
         imprimeIndividuo3(p, ind);
-        imprimeMatCurrDiasPeriodo(p,ind);
+        imprimeMatCurrDiasPeriodo(p, ind);
 
         printf("\n\n%d___________________________________________________________________________________\n\n", i);
 

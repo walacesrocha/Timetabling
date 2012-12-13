@@ -23,7 +23,8 @@ typedef enum {
     TIME_MOVE,
     ROOM_MOVE,
     ROOMS,
-    COMPACT
+    COMPACT,
+    MIN_WORKING_DAYS_MOVE
 } Movimento;
 
 typedef struct neighbour {
@@ -63,6 +64,8 @@ Neighbour *geraSwap(Problema *p, Individuo *ind);
 Neighbour *geraMove(Problema *p, Individuo *ind);
 Neighbour *geraTimeMove(Problema *p, Individuo *ind);
 Neighbour *geraRoomMove(Problema *p, Individuo *ind);
+Neighbour *geraMinWorkingDaysMove(Problema *p, Individuo *ind);
+
 
 
 #endif	/* _BUSCALOCAL_H */

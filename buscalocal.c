@@ -2381,11 +2381,169 @@ Neighbour *geraRoomMove(Problema *p, Individuo *ind) {
     move->p2 = pVazias[rand() % nVazias];
 
     avaliaNeighbour(p, ind, move);
-    
+
     /*printf("ROOM_MOVE: (S=%d,T=%d), (S=%d,T=%d)\n", getSalaFromPos(p, move->p1),
             getTimeSlotFromPos(move->p1, p),
             getSalaFromPos(p, move->p2),
             getTimeSlotFromPos(move->p2, p));*/
 
     return move;
+}
+
+int escolheAulaEmDiaEspecifico(Problema *p, Individuo *ind, int *dias, int nDias, Disciplina *disc) {
+
+    int sala, periodo;
+    int i;
+    int pos;
+    int qtHorarios = p->nDias * p->nPerDias;
+    int posicoes[disc->nAulas];
+    int n;
+
+    n = 0;
+    //printf("Posicoes de aula: ");
+    for (sala = 0; sala < p->nSalas; sala++) {
+        for (periodo = 0; periodo < p->nPerDias; periodo++) {
+            for (i = 0; i < nDias; i++) {
+                pos = (dias[i] * p->nPerDias) + periodo + sala*qtHorarios;
+
+                if (ehAula(p, ind->aula[pos])) {
+                    if (acessaDisciplina(p, ind->aula[pos]) == disc) {
+                        posicoes[n] = pos;
+                        //printf("%d ", pos);
+                        n++;
+                    }
+
+                }
+            }
+        }
+    }
+    //printf("\n");
+
+    return posicoes[rand() % n];
+}
+
+int escolheHorarioVagoEmDiaEspecifico(Problema *p, Individuo *ind, int *diasSemAula, int nDiasSemAula) {
+
+    int sala, periodo;
+    int i;
+    int pos;
+    int qtHorarios = p->nDias * p->nPerDias;
+    int posicoes[p->dimensao - p->nAulas];
+    int n;
+
+    n = 0;
+    //printf("Posicoes vagas: ");
+    for (sala = 0; sala < p->nSalas; sala++) {
+        for (periodo = 0; periodo < p->nPerDias; periodo++) {
+            for (i = 0; i < nDiasSemAula; i++) {
+                pos = (diasSemAula[i] * p->nPerDias) + periodo + sala*qtHorarios;
+
+                if (!ehAula(p, ind->aula[pos])) {
+                    posicoes[n] = pos;
+                    //printf("%d ", pos);
+                    n++;
+                }
+            }
+        }
+    }
+    //printf("\n");
+
+    return posicoes[rand() % n];
+}
+
+Neighbour *geraMinWorkingDaysMove(Problema *p, Individuo *ind) {
+    Neighbour *move;
+    int nDisc;
+    int testados;
+    int totalDiasUsados;
+    int dia;
+    int diasComExcesso[p->nDias];
+    int diasSemAula[p->nDias];
+    int nDiasComExcesso;
+    int nDiasSemAula;
+    Disciplina *disc;
+
+    move = (Neighbour*) malloc(sizeof (Neighbour));
+    move->m = MIN_WORKING_DAYS_MOVE;
+
+    nDisc = rand() % p->nDisciplinas;
+    testados = 0;
+
+    // procura disciplina com penalidade MIN_WORKING_DAYS
+    while (1) {
+        totalDiasUsados = 0;
+
+        for (dia = 0; dia < p->nDias; dia++) {
+            if (ind->diasOcupados[nDisc][dia]) {
+                totalDiasUsados++;
+            }
+        }
+
+        if (totalDiasUsados < (p->disciplinas + nDisc)->minDiasAula) {
+            break;
+        }
+
+        // passa para proxima disciplina
+        nDisc++;
+
+        if (nDisc == p->nDisciplinas) {
+            nDisc = 0; // volta ao inicio
+        }
+
+        testados++;
+
+        // nao ha como melhorar: gera movimento qualquer
+        if (testados == p->nDisciplinas) {
+            return geraMove(p, ind);
+        }
+
+    }
+
+    //printf("Disciplina MW: %s\n", (p->disciplinas + nDisc)->nomeDisciplina);
+
+
+    nDiasComExcesso = 0;
+    for (dia = 0; dia < p->nDias; dia++) {
+        if (ind->diasOcupados[nDisc][dia] > 1) {
+            diasComExcesso[nDiasComExcesso] = dia;
+            nDiasComExcesso++;
+        }
+    }
+
+    nDiasSemAula = 0;
+    for (dia = 0; dia < p->nDias; dia++) {
+        if (ind->diasOcupados[nDisc][dia] == 0) {
+            diasSemAula[nDiasSemAula] = dia;
+            nDiasSemAula++;
+        }
+    }
+
+    /*int i;
+    printf("Dias em excesso: ");
+    for (i = 0; i < nDiasComExcesso; i++) {
+        printf("%d ", diasComExcesso[i]);
+    }
+    printf("\n");
+
+
+    printf("Dias sem aula: ");
+    for (i = 0; i < nDiasSemAula; i++) {
+        printf("%d ", diasSemAula[i]);
+    }
+    printf("\n");*/
+
+    /*** MOVE EVENT ***/
+
+
+
+    move->p1 = escolheAulaEmDiaEspecifico(p, ind, diasComExcesso, nDiasComExcesso, (p->disciplinas + nDisc)); // posicao que ira apontar um horário de aula
+    move->p2 = escolheHorarioVagoEmDiaEspecifico(p, ind, diasSemAula, nDiasSemAula); // posicao que irá apontar um horario vazio
+
+    //printf("posicoes sorteadas\n");
+
+    avaliaNeighbour(p, ind, move);
+
+    return move;
+
+
 }

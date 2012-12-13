@@ -735,14 +735,16 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
             pViz = (float) rand() / RAND_MAX;
 
-            if (pViz < 0.25) {
+            if (pViz < 0.2) {
                 movimento = geraSwap(p, solucaoAtual);
-            } else if (pViz < 0.5) {
+            } else if (pViz < 0.4) {
                 movimento = geraMove(p, solucaoAtual);
-            } else if (pViz < 0.75) {
+            } else if (pViz < 0.6) {
                 movimento = geraTimeMove(p, solucaoAtual);
-            } else {
+            } else if (pViz < 0.8) {
                 movimento = geraRoomMove(p, solucaoAtual);
+            } else {
+                movimento = geraMinWorkingDaysMove(p, solucaoAtual);
             }
 
             deltaF = movimento->deltaHard * pesoHard + movimento->deltaSoft;
@@ -780,9 +782,14 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f\n", t0, tMin, nPioras, foAtual,
+        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f RC: %d MW: %d IL: %d RS: %d\n", 
+                t0, tMin, nPioras, foAtual,
                 funcaoObjetivo(p, solucaoAtual, pesoHard),
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);
+                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard,
+                solucaoAtual->soft1,
+                solucaoAtual->soft2,
+                solucaoAtual->soft3,
+                solucaoAtual->soft4);
         t0 *= beta;
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);

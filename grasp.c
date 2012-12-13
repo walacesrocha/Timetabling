@@ -995,95 +995,103 @@ void perturbaSolucao(Problema *p, Individuo *ind) {
 }
 
 Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
-    Individuo *solucaoAtual, *aDesalocar;
-    Individuo **vizinhos;
-    Gerador **geradores;
+    Neighbour **vizinhos;
     float foAtual;
     float deltaF;
-    float *foVizinhos;
     int i, nVizinhos;
     int melhorVizinho;
-    Tabu *listaTabu;
     long totalElementos = 0;
+    float pViz;
 
     nVizinhos = p->k;
 
-    vizinhos = (Individuo**) malloc(nVizinhos * sizeof (Individuo*));
-    foVizinhos = (float*) malloc(nVizinhos * sizeof (float));
-
-
+    vizinhos = (Neighbour**) malloc(nVizinhos * sizeof (Neighbour*));
 
 
     foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
+    printf("FO atual: %f\n", foAtual);
 
-    solucaoAtual = indInicial;
     int iteracoesSemMelhora = 0;
-    int iteracoesComMesmoFo = 0;
 
-    //printf("I,%d,%d,%d,%d\n", solucaoAtual->soft1, solucaoAtual->soft2,
-    //      solucaoAtual->soft3, solucaoAtual->soft4);
+    printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
+            indInicial->soft3, indInicial->soft4);
     do {
 
         //printf("FO Atual: %f\n", foAtual);
         for (i = 0; i < nVizinhos; i++) {
-            if (((float) rand()) / RAND_MAX < 0.00000000000) {
-                //vizinhos[i] = geraVizinho2Tabu(p, solucaoAtual, listaTabu);
-                vizinhos[i] = getProxVizinho(p, solucaoAtual, geradores[i]);
-            } else {
-                vizinhos[i] = geraVizinho2(p, solucaoAtual);
 
+            pViz = (float) rand() / RAND_MAX;
+
+            if (pViz < 0.2) {
+                vizinhos[i] = geraSwap(p, indInicial);
+            } else if (pViz < 0.4) {
+                vizinhos[i] = geraMove(p, indInicial);
+            } else if (pViz < 0.6) {
+                vizinhos[i] = geraTimeMove(p, indInicial);
+            } else if (pViz < 0.8) {
+                vizinhos[i] = geraRoomMove(p, indInicial);
+            } else if (pViz < 0.9) {
+                vizinhos[i] = geraIsolatedLectureMove(p, indInicial);
+            } else {
+                vizinhos[i] = geraMinWorkingDaysMove(p, indInicial);
             }
+
             totalElementos += nVizinhos;
             //foVizinhos[i] = funcaoObjetivo(p, vizinhos[i]);
-            foVizinhos[i] = funcaoObjetivo(p, vizinhos[i], p->pesoHard);
+
             //getHashCode(vizinhos[i]);
             if (i == 0) {
                 melhorVizinho = 0;
             } else {
-                if (foVizinhos[i] < foVizinhos[melhorVizinho]) {
+                if (vizinhos[i]->deltaHard * p->pesoHard + vizinhos[i]->deltaSoft <
+                        vizinhos[melhorVizinho]->deltaHard * p->pesoHard + vizinhos[melhorVizinho]->deltaSoft) {
                     melhorVizinho = i;
                 }
             }
 
-            //printf("%f ", foVizinhos[i]);
+            //printf("\tDeltaSoft[%d]: %f \n", i, vizinhos[i]->deltaSoft);
         }
 
         //printf(": Melhor: %d\n", melhorVizinho);
 
-
         //imprimePercListaTabu(listaTabu, p->dimensao);
 
-        deltaF = foVizinhos[melhorVizinho] - foAtual;
+        deltaF = vizinhos[melhorVizinho]->deltaHard * p->pesoHard + vizinhos[melhorVizinho]->deltaSoft;
 
         //printf("Df=%f\n", deltaF);
 
-        aDesalocar = 0;
+        //exit(0);
+
         if (deltaF <= 0) {// função objetivo decresceu
             //scanf("%d\n", &i);
-            foAtual = foVizinhos[melhorVizinho];
-            aDesalocar = solucaoAtual;
-            solucaoAtual = vizinhos[melhorVizinho];
-            vizinhos[melhorVizinho] = aDesalocar;
+
+            troca_par_completo(p, indInicial, vizinhos[melhorVizinho]->p1, vizinhos[melhorVizinho]->p2);
+
+            /*if (foAtual + deltaF != funcaoObjetivo(p, indInicial, 10000)) {
+                imprimeIndividuo3(p, indInicial);
+                printf("F1: %f\n", foAtual + deltaF);
+                printf("F2: %f\n", funcaoObjetivo(p, indInicial, 10000));
+                exit(0);
+            }*/
+            foAtual += deltaF;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
                 printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
-                iteracoesComMesmoFo = 0;
                 //zeraListaTabu(listaTabu, p->dimensao);
-            } else {
-                iteracoesComMesmoFo++;
             }
 
         } else {
-            /////////////////aDesalocar = vizinho;
+            //printf("Nao melhorou\n");
         }
 
-        //printf("FO(%d,%d): %f\n", iteracoesSemMelhora, iteracoesComMesmoFo, foAtual);
+        //printf("FO(%d): %f\n", iteracoesSemMelhora, foAtual);
 
         //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
         for (i = 0; i < nVizinhos; i++) {
-            liberaIndividuo(vizinhos[i]);
+            free(vizinhos[i]);
         }
+
 
         //somaViolacoesSoft(p, solucaoAtual);
 
@@ -1114,14 +1122,15 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //printf("Iter: %d / FO: %f\n", iteracoesSemMelhora, foAtual);
     } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);
 
+    printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
+            indInicial->soft3, indInicial->soft4);
+
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
 
     free(vizinhos);
-    free(foVizinhos);
-    desalocaListaTabu(listaTabu);
 
-    return solucaoAtual;
+    return indInicial;
 }
 
 Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
@@ -1624,7 +1633,7 @@ Individuo *grasp(Problema *p) {
         fezPR = 0; // flag: fez Path-Relinking
 
         foIter = funcaoObjetivo(p, ind, 10000);
-        p->pesoHard = 1;
+        p->pesoHard = 10000;
         while (0) {
             float foAnterior;
 
@@ -1672,9 +1681,10 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            p->t0 = 5;
+            ind = buscaLocalGraspHibrida(p, ind);
+            p->t0 = 2.5;
             p->rho = 5000;
-            p->beta = 0.999;
+            p->beta = 0.85999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {

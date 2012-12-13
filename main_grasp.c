@@ -91,7 +91,8 @@ int main(int argc, char** argv) {
     p->nIterSemMelhoras = atoi(argv[5]);
     p->threshold = atof(argv[6]);
     p->pAproveitamento = atof(argv[7]);
-    p->k = 30;
+    p->k = 10;
+    p->pesoHard = 10000;
 
     /*for (i = 0; i < p->nCurriculos; i++) {
         printf("Curr: %s (%d) pos=%d\n", (p->curriculos + i)->nomeCurriculo,
@@ -122,7 +123,7 @@ int main(int argc, char** argv) {
         Neighbour *mov;
 
         if (1) {
-            mov = geraMinWorkingDaysMove(p, ind);
+            mov = geraIsolatedLectureMove(p, ind);
         } else {
             mov = geraMove(p, ind);
         }
@@ -165,7 +166,6 @@ int main(int argc, char** argv) {
         }
 
 
-
     }
 
     //exit(0);
@@ -200,12 +200,12 @@ int main(int argc, char** argv) {
     printf("MinWorkDays: %f\n", p->soft2);
     printf("CurrCompactness: %f\n", p->soft3);
     printf("RoomStability: %f\n", p->soft4);
-    printf("MOVES: %d\n", p->nMoves);
-    printf("SWAPS: %d\n", p->nSwaps);
 
     printf("F1 -> F2: %f\n", p->f2 - p->f1);
     printf("F2 -> F3: %f\n", p->f3 - p->f2);
     printf("TEMPO: %f\n", ((double) (p->fim - p->inicio)) / CLOCKS_PER_SEC);
+    
+    printf("\nWARNING: ESCOLHA DO P2 NO MOVE COMPACT\n");
 
     t2 = clock();
 

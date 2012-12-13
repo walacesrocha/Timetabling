@@ -65,6 +65,7 @@ Neighbour *geraMove(Problema *p, Individuo *ind);
 Neighbour *geraTimeMove(Problema *p, Individuo *ind);
 Neighbour *geraRoomMove(Problema *p, Individuo *ind);
 Neighbour *geraMinWorkingDaysMove(Problema *p, Individuo *ind);
+Neighbour *geraIsolatedLectureMove(Problema *p, Individuo *ind);
 
 
 

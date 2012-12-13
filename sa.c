@@ -736,7 +736,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             pViz = (float) rand() / RAND_MAX;
 
             if (pViz < 0.2) {
-                movimento = geraSwap(p, solucaoAtual);
+                movimento = geraIsolatedLectureMove(p, solucaoAtual);
             } else if (pViz < 0.4) {
                 movimento = geraMove(p, solucaoAtual);
             } else if (pViz < 0.6) {
@@ -782,7 +782,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoes++;
         } while (iteracoes < N);
 
-        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f RC: %d MW: %d IL: %d RS: %d\n", 
+        printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] Peso: %f RC: %d MW: %d IL: %d RS: %d\n",
                 t0, tMin, nPioras, foAtual,
                 funcaoObjetivo(p, solucaoAtual, pesoHard),
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard,

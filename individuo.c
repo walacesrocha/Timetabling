@@ -2,6 +2,7 @@
 
 #include "individuo.h"
 #include "util.h"
+#include "fitness.h"
 //aulas comecam com 1
 
 /* Estrutura:
@@ -26,6 +27,10 @@ void troca_par(Individuo *a, int pos1, int pos2) {
     aux = a->aula[pos1];
     a->aula[pos1] = a->aula[pos2];
     a->aula[pos2] = aux;
+}
+
+void checaAulasIsoladasEmCurriculo(Problema *p, Individuo *ind, int c){
+    
 }
 
 void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
@@ -123,6 +128,9 @@ void criaIndividuo(Individuo *a, Problema *p) {
         memset(a->diasOcupados[i], 0, p->nDias * sizeof (int));
     }
 
+    // matriz curriculo x flag (flag=0/1, indica se curriculo tem penalidade IL) 
+    a->curriculosComIL = (int*) malloc(p->nCurriculos * sizeof (int));
+    memset(a->curriculosComIL, 0, p->nCurriculos * sizeof (int));
 
 }
 
@@ -200,7 +208,7 @@ void inicializaMatrizesAuxiliares(Problema *p, Individuo*ind) {
         }
     }
 
-
+    somaAulasIsoladas(p, ind);
 
 }
 

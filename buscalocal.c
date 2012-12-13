@@ -1,5 +1,6 @@
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "buscalocal.h"
 #include "fitness.h"
@@ -1841,6 +1842,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     // calcula deltaHard
     move->deltaHard = hard2 - hard1;
+    
+    if (move->deltaHard > 0){
+        return;
+    }
 
 
     ////////////// SOFT //////////////////
@@ -2546,4 +2551,230 @@ Neighbour *geraMinWorkingDaysMove(Problema *p, Individuo *ind) {
     return move;
 
 
+}
+
+int aulaDoCurriculoEmTimeslot(Problema *p, Individuo *ind, Curriculo *curr, int *timeSlots, int nTimeSlots) {
+
+    int aula;
+    int i, c;
+    int posicoes[p->nSalas * nTimeSlots];
+    int n;
+    int sala;
+    int pos;
+    int qtHorarios;
+
+    qtHorarios = p->nDias * p->nPerDias;
+
+    // procura uma aula para comparacao
+    for (i = 0; i < p->nDisciplinas; i++) {
+        for (c = 0; c < (p->disciplinas + i)->nCurriculos; c++) {
+            if ((p->disciplinas + i)->curriculos[c] == curr) {
+                aula = (p->disciplinas + i)->aulaInicial;
+            }
+        }
+    }
+    //printf("Escolheu aula: %d\n",aula);
+    n = 0;
+
+    //printf("NTimeslots: %d\n",nTimeSlots);
+    for (sala = 0; sala < p->nSalas; sala++) {
+        for (i = 0; i < nTimeSlots; i++) {
+            pos = timeSlots[i] + sala*qtHorarios;
+            //printf("%d ",pos);
+
+            if (ehAula(p, ind->aula[pos]) && aulasMesmoCurriculo2(p, aula, ind->aula[pos])) {
+                posicoes[n] = pos;
+                //printf("X ",pos);
+                n++;
+            }
+        }
+    }
+    //printf("\n");
+
+    return posicoes[rand() % n];
+}
+
+void checaCurriculosIsolados(Problema *p, Individuo *ind) {
+
+    int c, dia, periodo;
+    int nAulas;
+
+    for (c = 0; c < p->nCurriculos; c++) {
+        ind->curriculosComIL[c] = 0;
+        for (dia = 0; dia < p->nDias && !ind->curriculosComIL[c]; dia++) {
+            for (periodo = 0; periodo < p->nPerDias && !ind->curriculosComIL[c]; periodo++) {
+
+                // se o curriculo tem aula no dia/horario
+                if (ind->currDiasPeriodos[c][dia][periodo]) {
+                    if (periodo == 0) {
+                        if (!ind->currDiasPeriodos[c][dia][periodo + 1]) {
+                            ind->curriculosComIL[c] = 1;
+                            break;
+                        }
+                    } else if (periodo == p->nPerDias - 1) {
+                        if (!ind->currDiasPeriodos[c][dia][periodo - 1]) {
+                            ind->curriculosComIL[c] = 1;
+                            break;
+                        }
+                    } else {
+                        if (!ind->currDiasPeriodos[c][dia][periodo - 1] && !ind->currDiasPeriodos[c][dia][periodo + 1]) {
+                            ind->curriculosComIL[c] = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+Neighbour *geraIsolatedLectureMove(Problema *p, Individuo *ind) {
+
+    Neighbour *move;
+    int nCurr;
+    int sala, dia, periodo, pos;
+    int currComIL[p->nCurriculos];
+    int timeSlotComIL[p->nDias * p->nPerDias];
+    int timeSlotPromissor[p->nDias * p->nPerDias];
+    int nCurrComIL;
+    int nTimeSlotComIL;
+    int nTimeSlotPromissor;
+    int i;
+    int melhorP2;
+    float melhorDelta = 999999;
+
+    move = (Neighbour*) malloc(sizeof (Neighbour));
+    move->m = COMPACT;
+
+
+    checaCurriculosIsolados(p, ind);
+    // verifica quais curriculos tem penalização IL
+    nCurrComIL = 0;
+    // procura disciplina com penalidade MIN_WORKING_DAYS
+    //printf("Curriculos X Flag: ");
+    for (i = 0; i < p->nCurriculos; i++) {
+        //printf("%d ",ind->curriculosComIL[i]);
+        if (ind->curriculosComIL[i]) {
+            currComIL[nCurrComIL] = i;
+            nCurrComIL++;
+        }
+    }
+    //printf("\n");
+
+
+
+    // nao tem penalização IL: gera outro movimento
+    if (nCurrComIL == 0) {
+        return geraRoomMove(p, ind);
+    }
+
+    // escolhe um aleatoriamente
+    nCurr = currComIL[rand() % nCurrComIL];
+
+    //printf("Curriculo IL: %s\n", (p->curriculos + nCurr)->nomeCurriculo);
+    //imprimeMatCurrDiasPeriodo(p, ind);
+
+
+    nTimeSlotComIL = 0;
+    nTimeSlotPromissor = 0;
+    for (dia = 0; dia < p->nDias; dia++) {
+        for (periodo = 0; periodo < p->nPerDias; periodo++) {
+
+            if (ind->currDiasPeriodos[nCurr][dia][periodo]) {
+                if (periodo == 0) {
+                    if (!ind->currDiasPeriodos[nCurr][dia][periodo + 1]) {
+                        timeSlotComIL[nTimeSlotComIL] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotComIL++;
+                    }
+                } else if (periodo == p->nPerDias - 1) {
+                    if (!ind->currDiasPeriodos[nCurr][dia][periodo - 1]) {
+                        timeSlotComIL[nTimeSlotComIL] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotComIL++;
+                    }
+                } else {
+                    if (!ind->currDiasPeriodos[nCurr][dia][periodo - 1] && !ind->currDiasPeriodos[nCurr][dia][periodo + 1]) {
+                        timeSlotComIL[nTimeSlotComIL] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotComIL++;
+                    }
+                }
+            }
+
+            if (!ind->currDiasPeriodos[nCurr][dia][periodo]) {
+                if (periodo == 0) {
+                    if (ind->currDiasPeriodos[nCurr][dia][periodo + 1]) {
+                        timeSlotPromissor[nTimeSlotPromissor] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotPromissor++;
+                    }
+                } else if (periodo == p->nPerDias - 1) {
+                    if (ind->currDiasPeriodos[nCurr][dia][periodo - 1]) {
+                        timeSlotPromissor[nTimeSlotPromissor] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotPromissor++;
+                    }
+                } else {
+                    if (ind->currDiasPeriodos[nCurr][dia][periodo - 1] || ind->currDiasPeriodos[nCurr][dia][periodo + 1]) {
+                        timeSlotPromissor[nTimeSlotPromissor] = (dia * p->nPerDias) + periodo;
+                        nTimeSlotPromissor++;
+                    }
+                }
+            }
+        }
+    }
+
+    /*printf("Timeslots com IL: ");
+    for (i = 0; i < nTimeSlotComIL; i++) {
+        printf("%d ", timeSlotComIL[i]);
+    }
+    printf("\n");**/
+
+
+    /*/printf("Timeslots promissor: ");
+    for (i = 0; i < nTimeSlotPromissor; i++) {
+        printf("%d ", timeSlotPromissor[i]);
+    }
+    printf("\n");*/
+
+    move->p1 = aulaDoCurriculoEmTimeslot(p, ind, p->curriculos + nCurr, timeSlotComIL, nTimeSlotComIL);
+
+    //printf("IL escolhido: %d\n", move->p1);
+    //fflush(stdout);
+
+    for (sala = 0; sala < p->nSalas; sala++) {
+        for (i = 0; i < nTimeSlotPromissor; i++) {
+            pos = timeSlotPromissor[i] + sala * (p->nDias * p->nPerDias);
+
+            move->p2 = pos;
+
+            avaliaNeighbour(p, ind, move);
+
+            //printf("%d -> %.0f\n", pos, move->deltaHard + move->deltaSoft);
+
+            if (move->deltaHard + move->deltaSoft < melhorDelta) {
+                melhorP2 = pos;
+                melhorDelta = move->deltaHard + move->deltaSoft;
+            }
+        }
+    }
+
+    move->p2 = melhorP2;
+
+    /*int i;
+    printf("Dias em excesso: ");
+    for (i = 0; i < nDiasComExcesso; i++) {
+        printf("%d ", diasComExcesso[i]);
+    }
+    printf("\n");
+
+
+    printf("Dias sem aula: ");
+    for (i = 0; i < nDiasSemAula; i++) {
+        printf("%d ", diasSemAula[i]);
+    }
+    printf("\n");*/
+
+    //printf("posicoes sorteadas\n");
+
+    avaliaNeighbour(p, ind, move);
+
+    return move;
 }

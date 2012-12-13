@@ -472,9 +472,10 @@ float somaViolacoesSoft(Problema *p, Individuo *a) {
 int somaAulasIsoladas(Problema *p, Individuo *ind) {
     int c, dia, periodo;
     int nAulas;
-    int soma=0;
+    int soma = 0;
 
     for (c = 0; c < p->nCurriculos; c++) {
+        ind->curriculosComIL[c] = 0;
         for (dia = 0; dia < p->nDias; dia++) {
             for (periodo = 0; periodo < p->nPerDias; periodo++) {
 
@@ -484,14 +485,17 @@ int somaAulasIsoladas(Problema *p, Individuo *ind) {
                     if (periodo == 0) {
                         if (!ind->currDiasPeriodos[c][dia][periodo + 1]) {
                             soma += nAulas;
+                            ind->curriculosComIL[c] = 1;
                         }
                     } else if (periodo == p->nPerDias - 1) {
                         if (!ind->currDiasPeriodos[c][dia][periodo - 1]) {
                             soma += nAulas;
+                            ind->curriculosComIL[c] = 1;
                         }
                     } else {
                         if (!ind->currDiasPeriodos[c][dia][periodo - 1] && !ind->currDiasPeriodos[c][dia][periodo + 1]) {
                             soma += nAulas;
+                            ind->curriculosComIL[c] = 1;
                         }
                     }
                 }
@@ -524,7 +528,7 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
                     if (disc->nAlunos > (p->salas[sala]).capacidade) {
                         soma1 += disc->nAlunos - (p->salas[sala]).capacidade;
                     }
-                    
+
                 }
                 i++;
             }
@@ -566,7 +570,7 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
 
     //zeraMatCurrDiasPeriodos(p, a);
     //inicializaMatCurrDiasPeriodos(p, a);
-    soma3 = somaAulasIsoladas(p,a);
+    soma3 = somaAulasIsoladas(p, a);
 
     a->soft1 = soma1;
     a->soft2 = soma2;

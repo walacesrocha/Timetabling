@@ -20,6 +20,7 @@ typedef struct individuo {
     int ***currDiasPeriodos;
     int **salasUsadas;
     int **diasOcupados;
+    int *curriculosComIL;
 } Individuo;
 
 

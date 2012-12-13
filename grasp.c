@@ -1684,7 +1684,7 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalGraspHibrida(p, ind);
             p->t0 = 2.5;
             p->rho = 5000;
-            p->beta = 0.85999;
+            p->beta = 0.99;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {

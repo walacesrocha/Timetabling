@@ -16,20 +16,22 @@ float maxFloat(float f1, float f2){
 }
 
 Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
-    Individuo *solGD, *solBestGD, *vizinho;
-    float fSolGD, fSolBestGD, fViz, level;
+    Individuo *solGD, *solBestGD;
+    float fSolGD, fSolBestGD, fViz;
     float OptimalRate;
     float deltaB;
     int iteracoes, NumOfIteGD;
     int notImprovingCounter, notImprovingCounterLength;
-    float iUpperBoundRate=1.03,iLowerBoundRate=0.9,iCoolRate=0.999995;
+    float iUpperBoundRate=1.05,iLowerBoundRate=0.9,iCoolRate=0.999995;
     float iBound,iNrIdle=0;
-    float pesoHard=1;
+    float pesoHard=p->pesoHard;
+    float pViz,deltaF;
+    Neighbour *mov;
 
 
 
     //SolGD ← Sol;
-    solGD = copiaIndividuo(p, indInicial);
+    solGD = indInicial;
 
 
     // SolbestGD ← Sol
@@ -37,28 +39,24 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
 
     //f(SolGD) ← f(Sol);
     //f(SolbestGD)← f(Sol)
-    fSolGD = funcaoObjetivo(p, indInicial,pesoHard);
+    fSolGD = funcaoObjetivo(p, solGD,pesoHard);
     fSolBestGD = fSolGD;
 
     //Set number of iterations, NumOfIteGD;
     iteracoes = 0;
-    iBound = fSolBestGD+15;//iUpperBoundRate+10;//*fSolBestGD;
-    NumOfIteGD = 50000;
+    iBound = fSolBestGD+5;
+    NumOfIteGD = 15;
 
     //todo Set optimal rate of final solution, Optimalrate;
     OptimalRate = 0; // configurar por instancia
 
 
     //Set initial level: level ← f(SolGD);
-    level = fSolGD;
 
     //Set decreasing rate B = ((f(SolGD)–Optimalrate)/(NumOfIteGD);
     deltaB = (fSolGD - OptimalRate) / NumOfIteGD;
 
-    //Set not_improving_counter ← 0, not_improving_ length_GDA;
-    notImprovingCounter = 0;
-    notImprovingCounterLength = 5; //configurar
-
+    
     //do while (iteration < NumOfIteGD)
     while (iteracoes < NumOfIteGD) {
         //printf("[It %d]: SA: %f, Best:(H:%f,S:%f=%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD, 
@@ -67,58 +65,49 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
           Calculate cost function f(TempSolGDi);
           Find the best solution among TempSolGDi where i Î {1,…,K} call new solution SolGD*;*/
 
-        vizinho = geraVizinho2(p, solGD);
         //vizinho = buscaLocalGraspVNS(p, solGD);
+        
+        pViz = (float) rand() / RAND_MAX;
 
-        fViz = funcaoObjetivo(p, vizinho,pesoHard);
+        if (pViz < 0.2) {
+                mov = geraIsolatedLectureMove(p, indInicial);
+            } else if (pViz < 0.4) {
+                mov = geraMove(p, indInicial);
+            } else if (pViz < 0.6) {
+                mov = geraTimeMove(p, indInicial);
+            } else if (pViz < 0.8) {
+                mov = geraRoomMove(p, indInicial);
+            } else {
+                mov = geraMinWorkingDaysMove(p, indInicial);
+            }
 
-        /*if (f(SolGD*) < f(SolbestGD))
-         SolGD ← SolGD*;
-         SolbestGD ← SolGD*;
-         not_improving_counter ← 0;
-         level = level - B;*/
+            deltaF = mov->deltaHard * pesoHard + mov->deltaSoft;
 
-        if (fViz < fSolBestGD) {
+        if (fSolGD + deltaF < fSolBestGD) {
 
+            troca_par_completo(p, solGD, mov->p1,mov->p2);
             liberaIndividuo(solBestGD);
-            liberaIndividuo(solGD);
-            solBestGD = copiaIndividuo(p, vizinho);
-            solGD = copiaIndividuo(p, vizinho);
+            solBestGD = copiaIndividuo(p, solGD);
             
-            fSolBestGD = fSolGD = fViz;
-            //iBound = fSolBestGD*iUpperBoundRate;
-            iBound = fSolBestGD+2*pesoHard;
+            fSolBestGD = fSolGD + deltaF;
+            iBound += deltaF;//*iUpperBoundRate;
             
             iNrIdle=0;
-            
-
-            notImprovingCounter = 0;
-            level = level - deltaB;
-            
-            printf("GD: %f (%f)\n", fViz,somaViolacoesHard(p,solBestGD));
             
             //scanf("%d\n",&notImprovingCounter);
         }/*else
         if (f(SolGD*)≤ level)
         SolGD ← SolGD*;
         not_improving_counter ← 0;*/
-        else if (fViz <= iBound) {
-            liberaIndividuo(solGD);
-            solGD = copiaIndividuo(p,vizinho);
-            fSolGD = fViz;
-            notImprovingCounter = 0;
+        else if (fSolGD + deltaF <= iBound) {
+
+            troca_par_completo(p, solGD, mov->p1, mov->p2);
+            fSolGD += deltaF;
         }/*else
         not_improving_counter++;
         if (not_improving_counter == not_improving_length_GDA)
         level= level + random(0,3);*/
-        else {
-            notImprovingCounter++;
-            if (notImprovingCounter == notImprovingCounterLength) {
-                level = level + (rand() % 3) + 1;
-            }
-        }
 
-        liberaIndividuo(vizinho);
 
         //Increase iteration by 1;
         iteracoes++;
@@ -129,14 +118,11 @@ Individuo *greatDeluge(Problema*p, Individuo *indInicial) {
             //printf(" -<[%d]>- \n", iNrIdle);
             iBound = maxFloat(fSolBestGD + 2.0, pow(iUpperBoundRate, iNrIdle) * fSolBestGD);
         }*/
-        
-        if (iteracoes % 1000 == 0){
-            pesoHard += 0.02;
-        }
 
 
-        printf("[It %d]: SA: %f, Best:(H:%f,S:%f=%f), Bound: %f, [Lower=%f]\n", iteracoes, fSolGD,
-                somaViolacoesHard(p, solBestGD), somaViolacoesSoft(p, solBestGD), fSolBestGD, iBound, pow(iLowerBoundRate, 1 + iNrIdle) * fSolBestGD);
+
+
+        printf("[It %d]: SA: %f, SB: %f, Bound: %f\n", iteracoes, fSolGD, fSolBestGD, iBound);
 
         //end do;
     }

@@ -113,6 +113,7 @@ typedef struct problema {
     float pAproveitamento;
     long trocaEfetiva,trocaNaoEfetiva;
     float pesoHard;
+    float pesoRC,pesoMW,pesoIL,pesoRS;
 
 } Problema;
 

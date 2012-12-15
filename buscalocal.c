@@ -1783,7 +1783,7 @@ float checaAulasIsoladas(Problema *p, Individuo *ind, int*curriculos, int nCurri
         }
     }
 
-    return soma * 2; // peso 2
+    return soma * p->pesoIL; // peso 2
 
 
 }
@@ -1939,12 +1939,12 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     // MIN_WORKING_DAYS
     if (totalDiasOcupados1 < disc1->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW1 += (disc1->minDiasAula - totalDiasOcupados1)* 5; // peso = 5
+        MW1 += (disc1->minDiasAula - totalDiasOcupados1)* p->pesoMW; // peso = 5
     }
     // MIN_WORKING_DAYS
     if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW1 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
+        MW1 += (disc2->minDiasAula - totalDiasOcupados2)* p->pesoMW; // peso = 5
     }
 
 
@@ -2064,12 +2064,12 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     // MIN_WORKING_DAYS
     if (totalDiasOcupados1 < disc1->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW2 += (disc1->minDiasAula - totalDiasOcupados1)* 5; // peso = 5
+        MW2 += (disc1->minDiasAula - totalDiasOcupados1)* p->pesoMW; // peso = 5
     }
     // MIN_WORKING_DAYS
     if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW2 += (disc2->minDiasAula - totalDiasOcupados2)* 5; // peso = 5
+        MW2 += (disc2->minDiasAula - totalDiasOcupados2)* p->pesoMW; // peso = 5
     }
 
     // restaurando as matrizes originais

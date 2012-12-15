@@ -61,6 +61,10 @@ Problema *alocaProblema() {
     Problema *p = (Problema*) malloc(sizeof (Problema));
     p->nAulas = 0;
     p->aceitaPioraSA = 1;
+    p->pesoRC = 1;
+    p->pesoMW = 5;
+    p->pesoIL = 2;
+    p->pesoRS = 1;
 
     return p;
 }
@@ -180,12 +184,12 @@ void desalocaProblema(Problema *p) {
     }
     free(p->restricoes);
 
-    
+
     /*Leandro inicio*/
-    liberaMatrizAulaSala (p);
-    liberaMatrizAulaAula (p);
-    liberaMatrizAulaIndisponibilidades (p);
-    liberaSlotsDisponiveisTodasDisciplinas (p);
+    liberaMatrizAulaSala(p);
+    liberaMatrizAulaAula(p);
+    liberaMatrizAulaIndisponibilidades(p);
+    liberaSlotsDisponiveisTodasDisciplinas(p);
     /*Leandro fim*/
 
     //printf("desalocando problema...\n");

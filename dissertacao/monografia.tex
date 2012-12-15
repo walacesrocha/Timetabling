@@ -201,6 +201,102 @@ Neste capítulo é apresentado a proposta do trabalho
 
 \section{Formulação do ITC-2007}
 
+Nesta seção será apresentada a formulação do track 3 do ITC-2007, que foi utilizada neste trabalho.
+
+O problema de tabela-horário na formulação ITC-2007 utiliza os seguintes parâmetros:
+
+\begin{itemize}
+
+\item Dias, Horários e Períodos: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de horários de aula, igual para todos os dias, é estabelecido. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
+
+\item Disciplinas e Professores: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionada por um professor e assistida por um dado número de alunos. Um número mínimo de dias é determinado para a distribuição de suas aulas na semana, além de ser possível a existência de períodos indisponíveis para sua atribuição.
+
+\item Salas: Cada sala possui uma capacidade diferente de assentos.
+
+\item Currículo: Um currículo é um grupo de disciplinas que possuem alunos em comum.
+
+\end{itemize}
+
+Uma solução do THU consiste na alocação das aulas das disciplinas a um conjunto de períodos e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir:
+
+\subsection{Restrições Fortes (RFt)}
+
+\begin{itemize}
+
+\item Aulas: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas aulas distintas são alocadas no mesmo período. (RFt1)
+
+\item Conflitos: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
+
+\item Ocupação de Sala: Duas aulas não podem acontecer na mesma sala e no mesmo período. (RFt3)
+
+\item Disponibilidade de Professor: Se um professor é indisponível em um horário, nenhuma disciplina que ele leciona deve ser alocada naquele horário. (RFt4)
+
+\end{itemize}
+
+\subsection{Restrições Fracas (RFc)}
+
+\begin{itemize}
+
+\item Dias Mínimos de Trabalho: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
+
+\item Aulas Isoladas: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
+
+\item Capacidade da Sala: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for dada. Cada aluno excedente contabiliza uma violação. (RFc3)
+
+\item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
+
+\end{itemize}
+
+Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas, peso dois e as demais, peso um.
+
+Uma solução viável do THU deve atender a todas as restrições fortes. Uma solução ótima do THU é viável e minimiza a função objetivo apresentada na equação \ref{funcaoObjetivo}:
+
+\begin{equation}\label{funcaoObjetivo}
+%\begin{split}
+f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
+%\end{split}
+\end{equation}
+
+\noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v + 2|RFc2|_v + |RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
+
+
+\begin{verbatim}
+Name: Toy
+Courses: 4
+Rooms: 3
+Days: 5
+Periods_per_day: 4
+Curricula: 2
+Constraints: 8
+
+COURSES:
+SceCosC Ocra 3 3 30 
+ArcTec Indaco 3 2 42 
+TecCos Rosa 5 4 40 
+Geotec Scarlatti 5 4 18 
+
+ROOMS:
+rA 32 
+rB 50 
+rC 40 
+
+CURRICULA:
+Cur1 3 SceCosC ArcTec TecCos 
+Cur2 2 TecCos Geotec 
+
+UNAVAILABILITY_CONSTRAINTS:
+TecCos 2 0 
+TecCos 2 1 
+TecCos 3 2 
+TecCos 3 3 
+ArcTec 4 0 
+ArcTec 4 1 
+ArcTec 4 2 
+ArcTec 4 3 
+
+END.
+\end{verbatim}
+
 \section{Algoritmo GRASP}
 
 Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$. 
@@ -240,7 +336,7 @@ $f^{*} \leftarrow \infty $ \;
 
 O método de construção da solução inicial do GRASP é guloso aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins considerando a função objetivo. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
 
-O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Inicialmente todos os elementos são candidatos a entrar na solução. Cada iteração escolhe um novo elemento para ser incorporado à solução. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente para entrar na solução e é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução.
+O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Cada iteração escolhe sucessivamente um novo elemento candidato para ser incorporado. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente desta lista. Ao ser acrescentado à solução o elemento é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução e não há mais candidatos.
 
 O parâmetro $\alpha (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução, mas em compensação se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
 
@@ -320,9 +416,9 @@ De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria 
 
 \end{itemize}
 
-O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite. Esse conjunto é limitado e tem tamanho $MaxElite$.
+O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite. Esse procedimento é aplicado somente a partir da segunda iteração dado que na primeira o conjunto elite está vazio. Esse conjunto é limitado e tem tamanho $MaxElite$.
 
-Inicialmente o conjunto elite é vazio. Ao final de cada iteração ele é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. Esse controle de quem entra e sai do conjunto é implementado pelo procedimento $AtualizaPool$.
+Ao final de cada iteração o conjunto elite ele é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. Esse controle de quem entra e sai do conjunto é implementado pelo procedimento $AtualizaPool$.
 
 Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Relinking} entre as soluções do conjunto elite, duas as duas. A melhor solução obtida é a resposta do algoritmo.
 
@@ -337,22 +433,22 @@ Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Re
 \Saida{Solução $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
-$Pool \leftarrow \emptyset $ \;
+$Elite \leftarrow \emptyset $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
 	$S \leftarrow GeraSolucaoInicial() $ \;
 	$S \leftarrow BuscaLocal(S) $ \;
 	\Se{$ i \geq 2 $}{
-		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+		Selecione aleatoriamente $S_{elite} \in Elite $ \;
 		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
 	}
 	\Se{$ f(S) < f^{*} $}{
 		$S^{*} \leftarrow S $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
-	$AtualizaPool(S, Pool)$ \;
+	$AtualizaPool(S, Elite)$ \;
 }
-$S^* = PosOtimizacao(Pool)$ \;
-\caption{Algoritmo GRASP}
+$S^* = PosOtimizacao(Elite)$ \;
+\caption{Algoritmo GRASP com \textit{Path-Relinking} para intensificação e pós-otimização}
 \end{algorithm}
 
 \section{GRASP para o ITC-2007}
@@ -443,6 +539,10 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 
 
 \section{Detalhes de implementação}
+
+representação dos dados
+
+matrizes auxiliares
 
 \section{Sintonia da Meta-heurística}
 

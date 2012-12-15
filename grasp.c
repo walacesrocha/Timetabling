@@ -1434,6 +1434,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     inter = alocaIndividuo();
     criaIndividuo(inter, p);
     copiaIndividuo2(initial, inter);
+    zeraMatCurrDiasPeriodos(p, inter);
     inicializaMatrizesAuxiliares(p, inter);
 
     target = solucaoAtual;
@@ -1681,10 +1682,10 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            ind = buscaLocalGraspHibrida(p, ind);
-            p->t0 = 2.5;
-            p->rho = 5000;
-            p->beta = 0.99;
+            //ind = buscaLocalGraspHibrida(p, ind);
+            p->t0 = 6;
+            p->rho = 500;
+            p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {
@@ -1781,6 +1782,8 @@ Individuo *grasp(Problema *p) {
         if (fo < melhor) {
             melhor = fo;
             copiaIndividuo2(bestIter, bestInd);
+            zeraMatCurrDiasPeriodos(p, bestInd);
+            inicializaMatrizesAuxiliares(p, bestInd);
 
         }
         liberaIndividuo(ind);

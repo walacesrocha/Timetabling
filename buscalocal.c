@@ -1821,6 +1821,8 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     int totalMaxCurriculos, nCurriculos;
     int dia1, dia2;
     int sala1, sala2;
+    
+    move->deltaHard = move->deltaSoft = 0;
 
     Sala *s1, *s2;
     Disciplina *disc1, *disc2;

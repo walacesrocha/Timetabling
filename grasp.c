@@ -93,16 +93,17 @@ Individuo *geraTimetableVazio(Problema *p) {
 void retiraCandidato(AuxGrasp *auxGrasp, int aula) {
     int i = 0;
 
-    while (auxGrasp->ind->aula[i] != aula) {
+    while (auxGrasp->candidatos[i] != aula) {
         i++;
     }
-    printf("%d/%d\n", i, auxGrasp->ind->n);
+    //printf("%d/%d\n", i, auxGrasp->ind->n);
 
     for (; i < auxGrasp->nCandidatos - 1; i++) {
         auxGrasp->candidatos[i] = auxGrasp->candidatos[i + 1];
     }
 
     auxGrasp->nCandidatos--;
+
 }
 
 void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
@@ -143,7 +144,21 @@ void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
                 if (((float) rand()) / RAND_MAX < p->pAproveitamento) {
                     auxGrasp->ind->aula[k] = indBase->aula[k];
 
+                    //printf("Disc: %s (%d)\n", acessaDisciplina(p, indBase->aula[k]), indBase->aula[k]);
+
                     retiraCandidato(auxGrasp, indBase->aula[k]);
+
+                    /*printf("Candidatos: ");
+                    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+                        printf("%d ", auxGrasp->candidatos[i]);
+                    }
+                    printf("\n");
+
+                    printf("Ind Parcial: ");
+                    for (i = 0; i < p->dimensao; i++) {
+                        printf("%d ", auxGrasp->ind->aula[i]);
+                    }
+                    printf("\n");*/
                 }
             }
         }
@@ -1619,7 +1634,7 @@ Individuo *grasp(Problema *p) {
         if (i == 0) {
             geraSolucaoInicialGrasp(p, auxGrasp, NULL);
         } else {
-            geraSolucaoInicialGrasp(p, auxGrasp, NULL);
+            geraSolucaoInicialGrasp(p, auxGrasp, bestInd);
         }
         ind = auxGrasp->ind;
 
@@ -1682,9 +1697,9 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            //ind = buscaLocalGraspHibrida(p, ind);
-            p->t0 = 6;
-            p->rho = 500;
+            ind = buscaLocalGraspHibrida(p, ind);
+            p->t0 = 1;
+            p->rho = 100;
             p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);

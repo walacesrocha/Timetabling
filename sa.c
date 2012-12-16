@@ -735,9 +735,9 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
             pViz = (float) rand() / RAND_MAX;
 
-            if (pViz < 0.4) {
+            if (pViz < 0.5) {
                 movimento = geraSwap(p, solucaoAtual);
-            } else if (pViz < 0.6) {
+            } else if (pViz < 10.6) {
                 movimento = geraMove(p, solucaoAtual);
             } else if (pViz < 0.8) {
                 movimento = geraTimeMove(p, solucaoAtual);

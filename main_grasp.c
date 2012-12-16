@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 
 
     //srand(time(0));
-    srand(0);
+    srand(atoi(argv[8]));
 
     t1 = clock();
 

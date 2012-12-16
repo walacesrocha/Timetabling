@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  15 DEC 2012 13:00
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  15 DEC 2012 17:21
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -507,7 +507,7 @@ Cap\'{\i }tulo 3.
 [20
 
 ] [21]
-Overfull \hbox (18.93867pt too wide) in paragraph at lines 260--261
+Overfull \hbox (18.93867pt too wide) in paragraph at lines 262--263
 \T1/ptm/m/n/12 onde $[][] \OT1/ptmcm/m/n/12 = \OMS/pzccm/m/n/12 j\OML/ptmcm/m/i
 t/12 RFt\OT1/ptmcm/m/n/12 1\OMS/pzccm/m/n/12 j[] \OT1/ptmcm/m/n/12 + \OMS/pzccm
 /m/n/12 j\OML/ptmcm/m/it/12 RFt\OT1/ptmcm/m/n/12 2\OMS/pzccm/m/n/12 j[] \OT1/pt
@@ -520,43 +520,47 @@ T1/ptmcm/m/n/12 4\OMS/pzccm/m/n/12 j[]$\T1/ptm/m/n/12 , $[][] \OT1/ptmcm/m/n/12
  []
 
 [22]
-Overfull \hbox (45.01912pt too wide) in paragraph at lines 306--307
+
+LaTeX Warning: Reference `fig:solucao_toy' on page 23 undefined on input line 3
+07.
+
+[23]
+Overfull \hbox (45.01912pt too wide) in paragraph at lines 315--316
 \T1/ptm/m/n/12 na-ri-za-ção de gra-fos [[]], ro-te-a-mento de cir-cui-tos vir-t
 u-ais [[]],
  []
 
-[23]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 322.
- [24] [25]
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 331.
+[24] [25]
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 373.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 382.
 
-Overfull \hbox (42.3399pt too wide) in paragraph at lines 375--376
+Overfull \hbox (42.3399pt too wide) in paragraph at lines 384--385
 []\T1/ptm/m/n/12 A heu-rís-tica \T1/ptm/m/it/12 Path-Relinking \T1/ptm/m/n/12 (
 re-li-ga-mento de ca-mi-nhos) foi ori-gi-nal-mente pro-posta por [[]]
  []
 
-[26] [27]
-Underfull \hbox (badness 1742) in paragraph at lines 451--451
+[26] [27] [28]
+Underfull \hbox (badness 1742) in paragraph at lines 460--460
 []\T1/ptm/b/n/12 Algoritmo 4: \T1/ptm/m/n/12 Al-go-ritmo GRASP com \T1/ptm/m/it
 /12 Path-Relinking \T1/ptm/m/n/12 para in-ten-si-fi-ca-ção e pós-
  []
 
-[28] [29]
+[29] [30]
 Cap\'{\i }tulo 4.
-[30
+[31
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 510--535
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 519--544
 [][] 
  []
 
-[31] [32]
+[32] [33]
 Cap\'{\i }tulo 5.
-[33
+[34
 
-] (./monografia.bbl [34]
+] (./monografia.bbl [35]
 Underfull \hbox (badness 1112) in paragraph at lines 10--16
 []\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
  []
@@ -585,7 +589,7 @@ Underfull \hbox (badness 1028) in paragraph at lines 19--26
 z. Dis-po-ní-vel em:
  []
 
-[35
+[36
 
 ]
 Underfull \hbox (badness 1796) in paragraph at lines 180--186
@@ -599,7 +603,7 @@ Underfull \hbox (badness 2111) in paragraph at lines 180--186
 s-po-ní-vel em:
  []
 
-[36]
+[37]
 Underfull \hbox (badness 10000) in paragraph at lines 204--206
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
@@ -634,7 +638,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 274--277
 ptm/m/n/12 . 2002. URL:
  []
 
-[37]
+[38]
 Underfull \hbox (badness 10000) in paragraph at lines 285--291
 []\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
 it/12 Eu-ro-pean Jour-
@@ -646,27 +650,31 @@ Underfull \hbox (badness 5374) in paragraph at lines 285--291
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
-) [38]
+) [39]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 599.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 608.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 599.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 608.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[39
+[40
 
-] (./monografia.aux) ) 
+] (./monografia.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3828 strings out of 94501
- 48301 string characters out of 1176790
+ 3829 strings out of 94501
+ 48318 string characters out of 1176790
  127970 words of memory out of 1000000
- 6906 multiletter control sequences out of 10000+50000
+ 6907 multiletter control sequences out of 10000+50000
  56360 words of font info for 77 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  30i,16n,41p,1282b,446s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (40 pages, 80584 bytes).
+Output written on monografia.dvi (41 pages, 81780 bytes).

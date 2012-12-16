@@ -201,35 +201,37 @@ Neste capítulo é apresentado a proposta do trabalho
 
 \section{Formulação do ITC-2007}
 
-Nesta seção será apresentada a formulação do track 3 do ITC-2007, que foi utilizada neste trabalho.
+Nesta seção é apresentada a formulação que foi utilizada neste trabalho, que é o \textit{track} 3 do ITC-2007.
 
-O problema de tabela-horário na formulação ITC-2007 utiliza os seguintes parâmetros:
+O problema de tabela-horário segundo esta formulação utiliza os seguintes parâmetros:
 
 \begin{itemize}
 
-\item Dias, Horários e Períodos: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de horários de aula, igual para todos os dias, é estabelecido. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
+\item \textbf{Dias, Horários e Períodos}: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de horários de aula, igual para todos os dias, é estabelecido. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
 
-\item Disciplinas e Professores: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionada por um professor e assistida por um dado número de alunos. Um número mínimo de dias é determinado para a distribuição de suas aulas na semana, além de ser possível a existência de períodos indisponíveis para sua atribuição.
+\item \textbf{Disciplinas e Professores}: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionada por um professor e assistida por um dado número de alunos. Um número mínimo de dias é determinado para a distribuição de suas aulas na semana e é possível que um professor lecione mais de uma disciplina.
 
-\item Salas: Cada sala possui uma capacidade diferente de assentos.
+\item \textbf{Salas}: Cada sala possui uma capacidade diferente de assentos.
 
-\item Currículo: Um currículo é um grupo de disciplinas que possuem alunos em comum.
+\item \textbf{Currículo}: Um currículo é um grupo de disciplinas que possuem alunos em comum.
+
+\item \textbf{Indisponibilidades} Alguns períodos são indisponíveis para determinadas disciplinas.
 
 \end{itemize}
 
-Uma solução do THU consiste na alocação das aulas das disciplinas a um conjunto de períodos e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir:
+Uma solução consiste na alocação de cada aula em um período e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir.
 
 \subsection{Restrições Fortes (RFt)}
 
 \begin{itemize}
 
-\item Aulas: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada ou se duas aulas distintas são alocadas no mesmo período. (RFt1)
+\item \textbf{Aulas}: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada. (RFt1)
 
-\item Conflitos: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
+\item \textbf{Conflitos}: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
 
-\item Ocupação de Sala: Duas aulas não podem acontecer na mesma sala e no mesmo período. (RFt3)
+\item \textbf{Ocupação de Sala}: Duas aulas não podem ocupar uma sala no mesmo horário. (RFt3)
 
-\item Disponibilidade de Professor: Se um professor é indisponível em um horário, nenhuma disciplina que ele leciona deve ser alocada naquele horário. (RFt4)
+\item \textbf{Disponibilidade}: Uma aula não pode ser alocada num horário em que a disciplina é indisponível. (RFt4)
 
 \end{itemize}
 
@@ -237,19 +239,19 @@ Uma solução do THU consiste na alocação das aulas das disciplinas a um conjunto 
 
 \begin{itemize}
 
-\item Dias Mínimos de Trabalho: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
+\item \textbf{Dias Mínimos de Trabalho}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
 
-\item Aulas Isoladas: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
+\item \textbf{Aulas Isoladas}: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
 
-\item Capacidade da Sala: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for dada. Cada aluno excedente contabiliza uma violação. (RFc3)
+\item \textbf{Capacidade da Sala}: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for dada. Cada aluno excedente contabiliza uma violação. (RFc3)
 
-\item Estabilidade de Sala: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
+\item \textbf{Estabilidade de Sala}: Todas as aulas de uma disciplina devem ser dadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
 
 \end{itemize}
 
 Na contagem total das violações fracas são considerados pesos diferentes para cada tipo de violação. A restrição de dias mínimos possui peso cinco, aulas isoladas, peso dois e as demais, peso um.
 
-Uma solução viável do THU deve atender a todas as restrições fortes. Uma solução ótima do THU é viável e minimiza a função objetivo apresentada na equação \ref{funcaoObjetivo}:
+Uma solução viável deve atender a todas as restrições fortes. Uma solução ótima é viável e minimiza a função objetivo apresentada na equação \ref{funcaoObjetivo}:
 
 \begin{equation}\label{funcaoObjetivo}
 %\begin{split}
@@ -259,7 +261,11 @@ f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
 
 \noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v + 2|RFc2|_v + |RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
 
+A formulação do ITC-2007 é baseada em casos reais da Escola de Engenharia da Universidade de Udine na Itália. Algumas simplificações foram feitas para o campeonato para manter certo grau de generalidade.
 
+Abaixo está ilustrado um arquivo exemplo para uma instância de teste. A primeira parte informa a quantidade de disciplinas, salas, dias, períodos por dia, currículos e indisponibilidades. Na segunda parte são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
+
+%\begin{boxed}
 \begin{verbatim}
 Name: Toy
 Courses: 4
@@ -296,6 +302,9 @@ ArcTec 4 3
 
 END.
 \end{verbatim}
+%\end{boxed}
+
+A figura \ref{fig:solucao_toy} apresenta uma tabela-horário para o exemplo anterior.
 
 \section{Algoritmo GRASP}
 

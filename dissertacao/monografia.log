@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  17 DEC 2012 23:48
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  18 DEC 2012 23:21
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -547,12 +547,16 @@ Underfull \hbox (badness 1742) in paragraph at lines 460--460
 /12 Path-Relinking \T1/ptm/m/n/12 para in-ten-si-fi-ca-ção e pós-
  []
 
-[29] [30] [31] [32] [33]
+[29] [30] [31] [32]
+
+LaTeX Warning: Citation `SA' on page 33 undefined on input line 542.
+
+[33]
 Cap\'{\i }tulo 4.
 [34
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 586--611
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 608--633
 [][] 
  []
 
@@ -652,9 +656,9 @@ p. 151--162, 1985. Dis-po-ní-vel em:
 
 ) [42]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 675.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 697.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 675.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 697.
 
 Anexo A.
 +-------------------------------------------------------------------+
@@ -669,12 +673,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3837 strings out of 94501
- 48463 string characters out of 1176790
+ 3838 strings out of 94501
+ 48467 string characters out of 1176790
  127970 words of memory out of 1000000
- 6915 multiletter control sequences out of 10000+50000
+ 6916 multiletter control sequences out of 10000+50000
  56360 words of font info for 77 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  30i,16n,41p,1282b,446s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (44 pages, 91076 bytes).
+Output written on monografia.dvi (44 pages, 92904 bytes).

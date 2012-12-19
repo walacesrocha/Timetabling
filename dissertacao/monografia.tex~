@@ -526,7 +526,29 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 
 \subsection{Buscal local}
 
-\subsection{}
+O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para realizar esta intensificação é preciso primeiro definir uma forma de explorar a vizinhança da solução.
+
+Foram implementadas duas estruturas de vizinhança:
+
+\begin{itemize}
+\item \textbf{\textit{MOVE}}: Uma aula é movida para uma posição vazia na tabela-horário.
+\item \textbf{\textit{SWAP}}: Duas aulas trocam de posição na tabela-horário.
+\end{itemize}
+
+Como o GRASP não especifica qual algoritmo irá gerar os vizinhos em busca de soluções melhores, várias estratégias podem ser usadas. Uma estratégia bem simples é conhecida como \textit{Hill Climbing}. A partir de uma solução inicial, vizinhos são gerados sucessivamente até se atingir um mínimo local. Quando não se consegue mais gerar soluções melhores o algoritmo retorna a melhor solução encontrada.
+
+Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
+
+Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais.
+
+
+
+
+
+
+Em \cite{CDGS11b} o problema adotado é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através observado nos testes que esta estratégia não se adapta tão bem
+
+\subsection{Path-relinking}
 
 
 

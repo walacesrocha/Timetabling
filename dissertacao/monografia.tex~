@@ -539,7 +539,43 @@ Como o GRASP não especifica qual algoritmo irá gerar os vizinhos em busca de sol
 
 Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
-Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais.
+Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
+
+O algoritmo SA possui três parâmetros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada até chegar a temperatura final. Em cada temperatura, $N$ vizinhos são gerados. Se o vizinho gerado é melhor que a solução atual, esta é atualizada. Se o vizinho for pior ele é aceito com uma probabilidade igual a $P = e^{\Delta f/ T}$. $\Delta f$ é a difença de valor da função objetivo do vizinho e da solução atual e $T$ é a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura menores serão as chances de aceitar o vizinho. O comportamento típico do algoritmo é fazer certa diversificação no início quando a temperatura está alta. À medida em que ela decresce poucas pioras vão sendo aceitas e uma determinada região da busca é intensificada.
+
+O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealing} para o ITC-2007.
+
+\begin{algorithm}[H]
+\label{algoBase}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Solução S , $t_i$, $t_f$, $\beta$}
+\Saida{Solução $S^{*}$}
+
+$T \leftarrow T_i$
+
+$f^{*} \leftarrow \infty $ \;
+$Pool \leftarrow \phi $ \;
+\While{$T > T_f$}{
+	$S' \leftarrow GeraVizinho(S) $ \;
+	\Se{$ f(S') < f(S) $}{
+		$S \leftarrow S' $ \;
+	}
+	\Else{
+		Gere um número aleatório p \;
+		$\Delta f \leftarrow f(S') - f(S) $
+		\Se{$ p < e^{\Delta f / T} $}{
+			$S \leftarrow S' $ \;
+		}
+	}
+}
+\caption{Algoritmo GRASP}
+\end{algorithm}
+
+
 
 
 

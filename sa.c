@@ -709,6 +709,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     long N;
     Neighbour *movimento;
     float pViz;
+    long iteracoesSemMelhora = 0;
 
     float pesoHard = 10000;
 
@@ -758,8 +759,9 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 //printf("SA: %f [%f]\n", foAtual,t0);
                 troca_par_completo(p, solucaoAtual, movimento->p1, movimento->p2);
                 //melhorInd = solucaoAtual;
+                iteracoesSemMelhora = 0;
                 if (foAtual < melhorFo) {
-                    melhorFo = foAtual;
+                    melhorFo = foAtual;                    
                 }
             } else {
                 // calcula probabilidade de aceitação
@@ -785,9 +787,10 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             free(movimento);
 
             N--;
+            iteracoesSemMelhora++;
         } while (N > 0);
 
-        printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
+        /*printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
                 t0, tMin, nPioras, foAtual,
                 funcaoObjetivo(p, solucaoAtual, pesoHard),
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), pesoHard,
@@ -795,7 +798,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 solucaoAtual->soft2,
                 solucaoAtual->soft3,
                 solucaoAtual->soft4,
-                melhorFo);
+                melhorFo);*/
         t0 *= beta;
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
@@ -809,7 +812,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
         if (nReaquecimentos == 3) {
             return solucaoAtual;
         }*/
-    } while (t0 > tMin);
+    } while (t0 > tMin && iteracoesSemMelhora < 10 * p->nIterSemMelhoras);
 
     /*printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] It=%ld UM:%ld: %f F*=%.0f\n", t0, tMin, nPioras, foAtual,
             funcaoObjetivo(p, solucaoAtual, pesoHard),

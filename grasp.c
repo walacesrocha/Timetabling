@@ -1024,12 +1024,12 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
 
     foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
-    printf("FO atual: %f\n", foAtual);
+    //printf("FO atual: %f\n", foAtual);
 
     int iteracoesSemMelhora = 0;
 
-    printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
-            indInicial->soft3, indInicial->soft4);
+    /*printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
+            indInicial->soft3, indInicial->soft4);*/
     do {
 
         //printf("FO Atual: %f\n", foAtual);
@@ -1037,9 +1037,9 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
             pViz = (float) rand() / RAND_MAX;
 
-            if (pViz < 0.2) {
+            if (pViz < 0.5) {
                 vizinhos[i] = geraSwap(p, indInicial);
-            } else if (pViz < 0.4) {
+            } else if (pViz < 0.9999999) {
                 vizinhos[i] = geraMove(p, indInicial);
             } else if (pViz < 0.6) {
                 vizinhos[i] = geraTimeMove(p, indInicial);
@@ -1091,7 +1091,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             foAtual += deltaF;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
-                printf("LH: %f\n", foAtual);
+                //printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 //zeraListaTabu(listaTabu, p->dimensao);
             }
@@ -1137,8 +1137,8 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
         //printf("Iter: %d / FO: %f\n", iteracoesSemMelhora, foAtual);
     } while (iteracoesSemMelhora < p->nIterSemMelhoras); // || iteracoesComMesmoFo < 200);
 
-    printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
-            indInicial->soft3, indInicial->soft4);
+    /*printf("I,%d,%d,%d,%d\n", indInicial->soft1, indInicial->soft2,
+            indInicial->soft3, indInicial->soft4);*/
 
     //printf("T=%f, Pioras=%d, FO=%f (%f, %f)\n", t0, nPioras, foAtual,
     //somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
@@ -1624,6 +1624,8 @@ Individuo *grasp(Problema *p) {
 
     bestInd = alocaIndividuo();
     criaIndividuo(bestInd, p);
+    
+    printf("GRASP\n");
 
     p->mediaSolucoes = 0;
     p->soft1 = p->soft2 = p->soft3 = p->soft4 = 0;
@@ -1698,8 +1700,8 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
             ind = buscaLocalGraspHibrida(p, ind);
-            p->t0 = 1;
-            p->rho = 100;
+            p->t0 = 1.5;
+            p->rho = 150;
             p->beta = 0.999;
             p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);

@@ -589,6 +589,15 @@ Em \cite{CDGS11b} o problema adotado é o \textit{track} 2 do ITC-2007. $60\%$ do
 
 \subsection{Path-relinking}
 
+No algoritmo implementado o \textit{Path-relinking} é aplicado entre a solução obtida na busca local e uma solução do conjunto elite. Como pode ser visto em \cite{Resende05graspwith}, o caminho percorrido entre as duas soluções pode ser feito de diversas maneiras. As duas principais são:
+
+\begin{itemize}
+\item \textbf{Religamento direto}: PR parte da solução pior em direção à melhor.
+\item \textbf{Religamento inverso}: PR é aplicado partindo da melhor solução em direção à pior.
+\end{itemize}
+
+Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} cita que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizandoo religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP implementado aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a alvo.
+
 
 
 

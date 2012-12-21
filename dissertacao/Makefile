@@ -2,6 +2,7 @@ DOC=monografia
 
 all: dvi bib.aux
 	dvipdf $(DOC).dvi
+	cp $(DOC).pdf dissertacao.pdf
 
 dvi: $(DOC).tex
 	latex $(DOC)

@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  20 DEC 2012 00:43
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  21 DEC 2012 00:03
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -552,14 +552,14 @@ Underfull \hbox (badness 1742) in paragraph at lines 460--460
 
 [29] [30] [31] [32]
 
-LaTeX Warning: Reference `algoSA' on page 33 undefined on input line 546.
+LaTeX Warning: Reference `algoSA' on page 33 undefined on input line 548.
 
 [33] [34] [35]
 Cap\'{\i }tulo 4.
 [36
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 644--669
+Overfull \hbox (63.4942pt too wide) in paragraph at lines 647--672
 [][] 
  []
 
@@ -659,9 +659,9 @@ p. 151--162, 1985. Dis-po-ní-vel em:
 
 ) [44]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 733.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 736.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 733.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 736.
 
 Anexo A.
 +-------------------------------------------------------------------+
@@ -685,6 +685,6 @@ Here is how much of TeX's memory you used:
  6917 multiletter control sequences out of 10000+50000
  56360 words of font info for 77 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 30i,19n,41p,1282b,485s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 34i,22n,41p,1282b,534s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (46 pages, 96452 bytes).
+Output written on monografia.dvi (46 pages, 96720 bytes).

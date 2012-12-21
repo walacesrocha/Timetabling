@@ -535,7 +535,9 @@ Foram implementadas duas estruturas de vizinhança:
 \item \textbf{\textit{SWAP}}: Duas aulas trocam de posição na tabela-horário.
 \end{itemize}
 
-Como o GRASP não especifica qual algoritmo irá gerar os vizinhos em busca de soluções melhores, várias estratégias podem ser usadas. Uma estratégia bem simples é conhecida como \textit{Hill Climbing}. A partir de uma solução inicial, vizinhos são gerados sucessivamente até se atingir um mínimo local. Quando não se consegue mais gerar soluções melhores o algoritmo retorna a melhor solução encontrada.
+Como o GRASP não especifica qual algoritmo irá gerar os vizinhos em busca de soluções melhores, várias estratégias podem ser usadas.
+
+A primeira estratégia implementada neste trabalho é uma das mais simples, conhecida como \textit{Hill Climbing}. A partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor função objetivo é encontrado ele passa a ser a solução atual. O algoritmo implementado termina quando se passa $N$ iterações sem melhora na função objetivo.
 
 Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
@@ -552,30 +554,31 @@ O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealin
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{Solução S , $t_i$, $t_f$, $\beta$}
+\Entrada{Solução S , $t_i$, $t_f$, $\beta$, $N$}
 \Saida{Solução $S^{*}$}
 
-$T \leftarrow T_i$
-
-$f^{*} \leftarrow \infty $ \;
-$Pool \leftarrow \phi $ \;
+$T \leftarrow T_i$ \;
+$S^{*} \leftarrow S $ \;
 \While{$T > T_f$}{
-	$S' \leftarrow GeraVizinho(S) $ \;
-	\Se{$ f(S') < f(S) $}{
-		$S \leftarrow S' $ \;
-	}
-	\Else{
-		Gere um número aleatório p \;
-		$\Delta f \leftarrow f(S') - f(S) $
-		\Se{$ p < e^{\Delta f / T} $}{
-			$S \leftarrow S' $ \;
+	\Para{$i \leftarrow 1$ \Ate $N$}{
+		$S' \leftarrow GeraVizinho(S^{*}) $ \;
+		$\Delta f \leftarrow f(S') - f(S) $ \;
+		\Se{$ \Delta f < 0$}{
+			$S^{*} \leftarrow S' $ \;
+		}
+		\Else{
+			Gere um número aleatório $p$ \;
+			\Se{$ p < e^{\Delta f / T} $}{
+				$S^{*} \leftarrow S' $ \;
+			}
 		}
 	}
+	$T \leftarrow T * \beta$
 }
 \caption{Algoritmo GRASP}
 \end{algorithm}
 
-
+A estrutura de vizinhança usada neste trabalho foi primeiro usada por \cite{CDGS11b}, mas para o \textit{track} 2 do ITC-2007. 
 
 
 

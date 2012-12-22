@@ -453,7 +453,7 @@ float somaViolacoesSoft(Problema *p, Individuo *a) {
 
     }
 
-    printf("Soft1: Contados: %d/%d\n", pos, i);
+    //printf("Soft1: Contados: %d/%d\n", pos, i);
 
     soma2 += somaViolacoesMinDias(p, vetAgenda); //restricoes soft 2
     //printf ("Cost of RoomCapacity (soft) : %d\n", soma1); printf ("Cost of MinWorkingDays (soft) : %d\n", soma2); printf ("Cost of Isolated Lectures (soft) : %d\n", soma3); printf ("Cost of Room Stability(soft) : %d\n", soma4);/////

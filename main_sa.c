@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
     int i, j;
     clock_t t1, t2;
-    Individuo *ind;
+    Individuo *ind, *viz;
 
     //testeParametros(argv[1]);
     //exit(0);
@@ -80,18 +80,51 @@ int main(int argc, char** argv) {
     //exit(0);
 
     srand(time(0));
-    
-    int v1[10] = {1,2,3,4,5,6,7,8,9,10};
-    int v2[10] = {11,12,13,14,15,16,17,18,19,20};
-    
-    
+
+    int v1[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int v2[10] = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+
+
+
+
 
     t1 = clock();
 
     Problema *p = lerInstancia(argv[1]);
+
+    ind = geraIndividuoAleatorio(p, 100);
     
-    printf("Aulas: %d/%d\n",p->nAulas,p->dimensao);
-    printf("Perc. Vazio:: %f\n",(float)(p->dimensao-p->nAulas)/p->dimensao);
+    //imprimeIndividuo3(p,ind);
+    /*inicializaMatrizesAuxiliares(p, ind);
+
+
+    //exit(0);
+    Neighbour *mov;
+    for (i = 0; i < 100000; i++) {
+
+        if ((float)rand()/RAND_MAX < 0.5) {
+            mov = geraSwap(p, ind);
+        } else {
+            mov = geraMove(p, ind);
+        }
+
+        troca_par_completo(p, ind, mov->p1, mov->p2);
+        somaViolacoesSoft2(p, ind);
+        
+        free(mov);
+
+    }*/
+
+    //exit(0);
+    for (i = 0; i < 100000; i++) {
+        viz = geraVizinho(p, ind);
+        somaViolacoesSoft(p, viz);
+        liberaIndividuo(viz);
+    }
+    exit(0);
+
+    printf("Aulas: %d/%d\n", p->nAulas, p->dimensao);
+    printf("Perc. Vazio:: %f\n", (float) (p->dimensao - p->nAulas) / p->dimensao);
     exit(0);
 
     ind = geraIndividuoAleatorio(p, 10);
@@ -105,7 +138,7 @@ int main(int argc, char** argv) {
 
     ind = simulatedAnnealing(p, NULL);
 
-    printf("FO: %f\n", funcaoObjetivo(p, ind,10000));
+    printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
     //printf("Violações Hard: %f\n", somaViolacoesHard(p, ind));

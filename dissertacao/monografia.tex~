@@ -548,7 +548,7 @@ O algoritmo SA possui três parâmetros principais: temperatura inicial, final e t
 O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealing} para o ITC-2007.
 
 \begin{algorithm}[H]
-\label{algoBase}
+\label{algoSA}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}
@@ -575,21 +575,23 @@ $S^{*} \leftarrow S $ \;
 	}
 	$T \leftarrow T * \beta$
 }
-\caption{Algoritmo GRASP}
+\caption{\textit{Simulated Annealing} para fase de busca local}
 \end{algorithm}
 
-A estrutura de vizinhança usada neste trabalho foi primeiro usada por \cite{CDGS11b}, mas para o \textit{track} 2 do ITC-2007. 
-
-
-
-
-
-
-Em \cite{CDGS11b} o problema adotado é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através observado nos testes que esta estratégia não se adapta tão bem
+Em \cite{CDGS11b}, a mesma estrutura de vizinhança é utilizada, só que a formulação usada é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem ao \textit{track} 3 do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} faz o algoritmo atingir soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que sobrepondo duas estruturas de vizinhança, uma estrutura pode atrapalhar a melhora obtida pela outra.
 
 \subsection{Path-relinking}
 
+No algoritmo implementado o \textit{Path-relinking} é aplicado entre a solução obtida na busca local e uma solução do conjunto elite. Como pode ser visto em \cite{Resende05graspwith}, o caminho percorrido entre as duas soluções pode ser feito de diversas maneiras. As duas principais são:
 
+\begin{itemize}
+\item \textbf{Religamento direto}: PR parte da solução pior em direção à melhor.
+\item \textbf{Religamento inverso}: PR é aplicado partindo da melhor solução em direção à pior.
+\end{itemize}
+
+Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} cita que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP implementado aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a alvo.
+
+Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na construção inicial fica garantida.
 
 
 \begin{algorithm}[H]
@@ -674,12 +676,57 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 \end{table}
 \end{center}
 
-
 \section{Detalhes de implementação}
 
-representação dos dados
+Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz. As linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas serão representadas com os números 1,2,3,4 e 5. Uma segunda disciplina com 3 aulas será representada na tabela com os números 6,7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
 
-matrizes auxiliares
+Algumas matrizes auxiliares foram utilizadas para extrair algumas informações de forma mais rápida. Algumas delas são estáticas pois dependem apenas das informações presentes no arquivo de entrada. Outras são dinâmicas para refletir o estado atual da tabela-horário que está sendo considerada.
+
+São duas matrizes estáticas. Considere $N$ o número total de aulas na instância e $H$ o total de horários, que é a quantidade de dias multiplicada pela quantidade de períodos de aula em um dia.
+
+A primeira matriz, chamada de $AA$, possui dimensão $N \times N$. Ela é utilizada para descobrir de forma rápida se duas aulas tem conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, faz se a seguinte convenção:
+
+\begin{itemize}
+\item $AA[a_1][a_2] = 2$: as duas aulas são da mesma disciplina;
+\item $AA[a_1][a_2] = 1$: as duas aulas possuem conflitos entre si, seja por estarem num mesmo currículo ou por serem lecionadas pelo mesmo professor; e
+\item $AA[a_1][a_2] = 0$: não há conflitos entre as aulas e elas não pertencem a mesma disciplina;
+\end{itemize}
+
+A segunda matriz estática, chamada de $AI$, possui dimensão $N \times H$. Ela é utilizada para verificar quais horários são disponíveis para as aulas segundo as restrições de indisponibilidade que são informadas no arquivo de entrada. Dois valores são possíveis nesta matriz:
+
+\begin{itemize}
+\item $AI[a][h] = 1$: a aula $a$ é indisponível no horário $h$; e
+\item $AI[a][h] = 0$: a aula $a$ pode ser alocada no horário $h$.
+\end{itemize}
+
+É preciso ressaltar que somente $AI[a][h] = 0$ não garante a possibilidade de $a$ ser alocada no horário $h$. Durante a execução do algoritmo é necessário avaliar a tabela-horário em questão para saber se existe alguma sala desocupada no horário $h$ e se nenhuma aula já alocada no horário é conflitante com $a$.
+
+As matrizes dinâmicas refletem o estado da tabela-horário que está sendo considerada. O objetivo principal destas tabelas é fazer a contagem das violações fracas de forma mais eficiente. Considere $C$ o total de currículos, $DC$ o total de disciplinas, $D$ a quantidade de dias, $P$ a quantidade de períodos de aula num dia e $S$ o total de salas.
+
+A primeira matriz é $DiscDias$ com dimensão $DC \times D$. Para uma dada disciplina $disc$ e um dia $d$, $DiscDias[disc][dia]$ retorna a quantidade de de aulas da disciplina $disc$ no dia $d$. Com esta matriz é possível contar mais rapidamente em quantos dias há aulas de uma certa disciplina, facilitando o cálculo da contagem das violações de dias mínimos de trabalho.
+
+A segunda matriz, $DiscSalas$, tem dimensão $DC \times S$. $DiscSalas[disc][s]$ retorna a quantidade de aulas da disciplina $disc$ na sala $s$ durante a semana. Analogamente esta matriz tem por objetivo verificar quantas salas estão sendo ocupadas pela disciplina, facilitando a contagem das violações referentes à estabilidade de sala.
+
+A terceira matriz, $CurrDiasPeriodos$, é tridimensional com tamanho $C \times D \times P$. $CurrDiasPeriodos[c][d][p]$ retorna a quantidade de aulas do currículo $c$ alocadas no dia $d$ e horário $p$. Ela é usada para verificar se um currículo está com aulas isoladas. Se um currículo $c$ possui alguma aula no dia $d$ e horário $p$, mas $CurrDiasPeriodos[c][d][p-1] = 0$ e $CurrDiasPeriodos[c][d][p+1] = 0$ então o currículo $c$ não tem nenhuma aula nem no período anterior nem no próximo, o que gera uma violação de aulas isoladas.
+
+As matrizes dinâmicas são atualizadas quando um novo vizinho é gerado. Supondo que a aula $a$ da disciplina $disc$ foi movida da posição $(s1, d1, p1)$ para a posição $(s2, d2, p2)$  e que ela pertence aos currículos $C_a$, as seguintes operações serão feitas:
+
+\begin{equation}
+\begin{split}
+DiscDias[disc][d1] = DiscDias[disc][d1] - 1 \\
+DiscDias[disc][d2] = DiscDias[disc][d2] + 1 \\
+DiscSalas[disc][s1] = DiscSalas[disc][s1] - 1 \\
+DiscSalas[disc][s2] = DiscSalas[disc][s2] + 1 \\
+CurrDiasPeriodos[c][d1][p1] = CurrDiasPeriodos[c][d1][p1] - 1, \forall c \in C_a \\
+CurrDiasPeriodos[c][d2][p2] = CurrDiasPeriodos[c][d2][p2] + 1, \forall c \in C_a \\
+\end{split}
+\end{equation}
+
+Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação dos vizinhos. Num primeiro momento, os vizinhos eram gerados e a função objetivo era chamada para avaliar este vizinho. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posições, é mais eficiente verificar o efeito das trocas localmente já que o restante da tabela permanece inalterado. Assim, as funções de geração de vizinhos retornam, além das posições de troca, um $\Delta f$. Se $\Delta f$ é menor que zero, então significa que o vizinho terá uma função objetivo melhor.
+
+Para avaliar a melhora desta modificação foram criados dois programas para gerar uma tabela-horário inicial aleatória, e em seguida gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação era feita levando em consideração toda a tabela. No segundo a avaliação era apenas local. Usando a instância \textit{comp01} como parâmetro, o primeiro executou numa média de $44.996$ segundos, enquanto o segundo em $4.242$ segundos. O \textit{speedup} aproximado foi portanto de $10 \times$. Já usando a instância \textit{comp12} que é uma instância maior, o primeiro executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a $23 \times$.
+
+
 
 \section{Sintonia da Meta-heurística}
 

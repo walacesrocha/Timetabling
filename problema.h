@@ -80,7 +80,7 @@ typedef struct problema {
     long int tempoMelhorResposta;
 
     float t0; //SA
-    float rho; // rho = t0/tmin;
+    float tf; // rho = t0/tmin;
     float beta; // resfriamento
     int aceitaPioraSA;
 
@@ -114,6 +114,8 @@ typedef struct problema {
     long trocaEfetiva,trocaNaoEfetiva;
     float pesoHard;
     float pesoRC,pesoMW,pesoIL,pesoRS;
+    
+    int seed;
 
 } Problema;
 

@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
     exit(0);
 
     p->t0 = atof(argv[2]);
-    p->rho = atof(argv[3]);
+    p->tf = atof(argv[3]);
     p->beta = atof(argv[4]);
     p->txSwap = 0.5;
 

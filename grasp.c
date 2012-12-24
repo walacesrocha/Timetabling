@@ -1652,41 +1652,7 @@ Individuo *grasp(Problema *p) {
 
         foIter = funcaoObjetivo(p, ind, 10000);
         p->pesoHard = 10000;
-        while (0) {
-            float foAnterior;
-
-            fo = funcaoObjetivo(p, ind, p->pesoHard);
-            foAnterior = fo;
-            printf("FO1: %f\n", fo);
-
-            ind = buscaLocalTimeslot(p, ind);
-            ind = buscaLocalGraspVNS(p, ind);
-            ind = buscaLocalGraspHibrida(p, ind);
-            //ind = greatDeluge(p, ind);
-            p->t0 = 1;
-            p->rho = 5000;
-            p->beta = 0.9;
-            p->aceitaPioraSA = 1;
-            ind = simulatedAnnealing(p, ind);
-
-            fo = funcaoObjetivo(p, ind, p->pesoHard);
-
-            printf("FO2: %f\n", fo);
-
-            if (fo < foIter) {
-                bestIter = copiaIndividuo(p, ind);
-                foIter = fo;
-            }
-            if (fo < foAnterior || somaViolacoesHard(p, ind) > 0) {
-                printf("Melhorou: %f --> %f\n", foAnterior, fo);
-                if (somaViolacoesHard(p, ind) > 0 && p->pesoHard < 10000) {
-                    p->pesoHard *= 10;
-                }
-            } else {
-                printf("terminando...");
-                break;
-            }
-        }
+        
 
         if (p->buscaLocalGrasp == 1) {
             ind = buscaLocalGraspProfundidade(p, ind);
@@ -1700,10 +1666,6 @@ Individuo *grasp(Problema *p) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
             ind = buscaLocalGraspHibrida(p, ind);
-            p->t0 = 1.5;
-            p->rho = 150;
-            p->beta = 0.999;
-            p->aceitaPioraSA = 1;
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {
             ind = greatDeluge(p, ind);

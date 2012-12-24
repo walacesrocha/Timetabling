@@ -503,7 +503,7 @@ Individuo *simulatedAnnealing(Problema*p, Individuo *indInicial) {
     float t0, tMin, beta;
 
     t0 = p->t0;
-    tMin = t0 / p->rho;
+    tMin = p->tf;
     beta = p->beta;
 
     N = -(I / (log10(t0 / tMin) / log10(beta)));
@@ -603,7 +603,7 @@ Individuo *simulatedAnnealingVNS(Problema*p, Individuo *indInicial) {
     float t0, tMin, beta;
 
     t0 = p->t0;
-    tMin = t0 / p->rho;
+    tMin = p->tf;
     beta = p->beta;
 
     N = 200;
@@ -719,7 +719,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     double t0, tMin, beta;
 
     t0 = p->t0;
-    tMin = t0 / p->rho;
+    tMin = p->tf;
     beta = p->beta;
 
 

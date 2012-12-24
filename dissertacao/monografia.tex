@@ -7,6 +7,8 @@
 \usepackage[ruled,longend,lined,linesnumbered,portuguese]{algorithm2e}
 % Escrita dos algoritmos
 \usepackage{amssymb,amsmath}
+%\usepackage[dvipdf]{graphicx,color}
+\usepackage{graphicx,color}
 
 
 
@@ -263,7 +265,7 @@ f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
 
 A formulação do ITC-2007 é baseada em casos reais da Escola de Engenharia da Universidade de Udine na Itália. Algumas simplificações foram feitas para o campeonato para manter certo grau de generalidade.
 
-Abaixo está ilustrado um arquivo exemplo para uma instância de teste. A primeira parte informa a quantidade de disciplinas, salas, dias, períodos por dia, currículos e indisponibilidades. Na segunda parte são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
+Abaixo está ilustrado um arquivo exemplo para uma instância de teste, chamada \textit{Toy}. A primeira parte informa a quantidade de disciplinas, salas, dias, períodos por dia, currículos e indisponibilidades. Na segunda parte são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
 
 %\begin{boxed}
 \begin{verbatim}
@@ -274,22 +276,22 @@ Days: 5
 Periods_per_day: 4
 Curricula: 2
 Constraints: 8
-
+ 
 COURSES:
 SceCosC Ocra 3 3 30 
-ArcTec Indaco 3 2 42 
+ArcTec Indaco 3 2 42
 TecCos Rosa 5 4 40 
 Geotec Scarlatti 5 4 18 
-
+ 
 ROOMS:
 rA 32 
 rB 50 
 rC 40 
-
+ 
 CURRICULA:
 Cur1 3 SceCosC ArcTec TecCos 
 Cur2 2 TecCos Geotec 
-
+ 
 UNAVAILABILITY_CONSTRAINTS:
 TecCos 2 0 
 TecCos 2 1 
@@ -302,9 +304,55 @@ ArcTec 4 3
 
 END.
 \end{verbatim}
-%\end{boxed}
 
-A figura \ref{fig:solucao_toy} apresenta uma tabela-horário para o exemplo anterior.
+A resposta para o problema é fornecida informando a sala, o dia e horário de cada aula, como no exemplo abaixo:
+
+\begin{verbatim}
+SceCosC rC 1 2
+SceCosC rC 2 2
+SceCosC rC 3 0
+ArcTec rB 0 2
+ArcTec rB 1 0
+ArcTec rC 4 3
+TecCos rC 0 1
+TecCos rC 1 1
+TecCos rC 2 3
+TecCos rC 4 0
+TecCos rC 4 2
+Geotec rA 0 1
+Geotec rA 1 0
+Geotec rA 1 2
+Geotec rA 1 3
+Geotec rA 4 3
+\end{verbatim}
+
+A tabela \ref{tab:solucao_toy} apresenta uma vizualização desta resposta. Nesta tabela, \textit{SceCosC} é representada por SC, \textit{ArcTec} por AT, \textit{TecCos} por TC e \textit{Geotec} por GT.
+
+\begin{center}
+\begin{table}[!htb]
+\begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
+ & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
+ & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
+rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
+rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+rC &  & TC &  &  &  & TC & SC &  &  &  & SC & TC & SC &  &  &  & TC &  & TC & AT \\ \hline
+\end{tabular}
+\caption{Tabela-horário para a instância \textit{Toy}}
+\label{tab:solucao_toy}
+\end{table}
+\end{center}
+
+As seguintes violações fortes e fracas podem ser observadas na tabela-horário \ref{tab:solucao_toy}:
+
+\begin{itemize}
+\item RFt2 no dia 0, período 1: \textit{GeoTec} e \textit{TecCos} estão em conflito por pertecerem ao mesmo currículo \textit{Cur2}.
+\item RFt4 no dia 4, período 3: \textit{ArcTec} é indisponível neste horário.
+\item RFc1 para a disciplina \textit{GeoTec}: ela é lecionada em 3 dias, mas o mínimo requerido são 4.
+\item RFc2 no dia 4, período 0: Uma aula da disciplina \textit{TecCos} está isolada.
+\item RFc3 no dia 4, período 3: A disciplina \textit{ArcTec} possui 42 alunos mas a capacidade de \textit{rC} é apenas 40.
+\item RFc4 para a disciplina \textit{ArcTec}: está sendo lecionada em duas salas diferentes: \textit{rB} e \textit{rC}.
+\end{itemize}
+
 
 \section{Algoritmo GRASP}
 
@@ -524,7 +572,7 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 \caption{Algoritmo construtivo para geração de tabela-horário inicial}
 \end{algorithm}
 
-\subsection{Buscal local}
+\subsection{Buscal local\label{subsec:abordagens}}
 
 O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para realizar esta intensificação é preciso primeiro definir uma forma de explorar a vizinhança da solução.
 
@@ -565,8 +613,7 @@ $S^{*} \leftarrow S $ \;
 		$\Delta f \leftarrow f(S') - f(S) $ \;
 		\Se{$ \Delta f < 0$}{
 			$S^{*} \leftarrow S' $ \;
-		}
-		\Else{
+		}\Senao{
 			Gere um número aleatório $p$ \;
 			\Se{$ p < e^{\Delta f / T} $}{
 				$S^{*} \leftarrow S' $ \;
@@ -646,8 +693,8 @@ A quantidade de currículos e disciplinas tem grande impacto no tempo de execução
 
 \begin{center}
 \begin{table}[!htb]
-\begin{tabular}{|c|c|c|c|c|c||c|c|}\hline
-{\bf Instância} & {\bf Currículos} & {\bf Salas} & {\bf Disciplinas} &{\bf Horários por dia}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibilidade}\\\hline
+\begin{tabular}{|c|c|c|c|p{1.8cm}|c||c|p{1.8cm}|}\hline
+{\bf Instância} & {\bf Currículos} & {\bf Salas} & {\bf Disciplinas} &{\bf Horários por dia}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibi-lidade}\\\hline
 comp01 & 14 & 6 & 30 & 6 & 5 & 13.2 & 93.1 \\ 
 comp02 & 70 & 16 & 82 & 5 & 5 & 7.97 & 76.9 \\ 
 comp03 & 68 & 16 & 72 & 5 & 5 & 8.17 & 78.4 \\ 
@@ -678,7 +725,23 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 
 \section{Detalhes de implementação}
 
-Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz. As linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas serão representadas com os números 1,2,3,4 e 5. Uma segunda disciplina com 3 aulas será representada na tabela com os números 6,7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
+Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz. As linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas serão representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com 3 aulas será representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
+
+A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horário \ref{tab:solucao_toy} usando a codificação com números inteiros. São 3 aulas para \textit{SecCosC}, 3 para \textit{ArcTec}, 5 para \textit{TecCos} e 5 para \textit{Geotec}, totalizando 16 aulas que estão destacadas em negrito. Todas as demais são horários vazios.
+
+\begin{center}
+\begin{table}[!htb]
+\begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
+ & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
+ & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
+rA & 18 & {\bf 12} & 17 & 19 & {\bf 13} & 20 & {\bf 14} & {\bf 15} & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & {\bf 16} \\ \hline
+rB & 32 & 33 & {\bf 4} & 34 & {\bf 5} & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 \\ \hline
+rC & 50 & {\bf 7} & 51 & 52 & 53 & {\bf 8} & {\bf 1} & 54 & 55 & 56 & {\bf 2} & {\bf 9} & {\bf 3} & 57 & 58 & 59 & {\bf 10} & 60 & {\bf 11} & {\bf 6} \\ \hline
+\end{tabular}
+\caption{Tabela-horário para a instância \textit{Toy} codificando as aulas com números inteiros}
+\label{tab:solucao_toy_codificada}
+\end{table}
+\end{center}
 
 Algumas matrizes auxiliares foram utilizadas para extrair algumas informações de forma mais rápida. Algumas delas são estáticas pois dependem apenas das informações presentes no arquivo de entrada. Outras são dinâmicas para refletir o estado atual da tabela-horário que está sendo considerada.
 
@@ -728,21 +791,71 @@ Para avaliar a melhora desta modificação foram criados dois programas para gerar
 
 
 
-\section{Sintonia da Meta-heurística}
+\section{Escolha dos parâmetros}
 
+O algoritmo GRASP possui dois parâmetros: número máximo de iterações \textit{MaxIter} e o valor $\alpha$ que regula a forma de construção da solução inicial. Como foi implementado \textit{Path-relinking}, um terceiro parâmetro, \textit{MaxElite}, foi adicionado para limitar o tamanho do conjunto de soluções elite.
 
+Quantos mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido limitar a quantidade de iterações em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, não é possível executar essa quantidade de iterações. O número máximo de soluções elite foi fixado em 20.
 
-Duas estruturas de vizinhança foram usadas neste trabalho para a fase de busca local: \textit{MOVE} e \textit{SWAP}. Em \cite{CDGS11b} essas duas estruturas também são usadas, só que aplicadas de maneira diferente. Na geração do vizinho sempre é usado o \textit{MOVE}. Em alguns casos ocorre \textit{SWAP} juntamente com o \textit{MOVE}. Essa probabilidade de ocorrer o \textit{SWAP} foi parametrizada. Experimentalmente foi escolhido um valor de $40\%$.
+O parâmetro $\alpha$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $0.01 < \alpha < 0.5$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais manter uma boa qualidade.
 
-Testes mostraram que aplicar \textit{MOVE} e \textit{SWAP} separadamente é mais eficiente. Foi observado que separadamente eles produzem melhores soluções e de forma mais rápida. Cada um ocorre com a mesma probabilidade de $50\% $.
+Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui um único parâmetro, $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Experimentalmente esse valor permite explorar bem a solução inicial sem se prender muito tempo num mínimo local.
 
-\begin{itemize}
+O algoritmo \textit{Simulated Annealing} já é mais complicado de se calibrar. Foram escolhidos parâmetros que permitissem certa diversificação no início da busca e que fizesse intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes que usar temperaturas altas com uma solução boa acaba piorando muito a solução, e só volta a melhorar quando o resfriamento está bem avançado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo fica com uma temperatura abaixo de 0.01 poucas melhores são conseguidas.
 
-\item Temperatura inicial do SA para busca local
+Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1.5, T_f = 0.005, \beta = 0.999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo foi decidido manter esse valor. Em cada temperatura são gerados $N = 500$ vizinhos.
 
-\end{itemize}
+Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Todas as estrututuras têm igual probabilidade de ocorrer.
 
 \section{Análise dos resultados}
+
+Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em máquina Linux com a distribuição Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memória RAM.
+
+Os organizadores do campeonato forneceram um programa executável para fazer um \textit{benchmark} na máquina de testes dos competidores. O objetivo desse programa é informar um tempo de execução que seria equivalente nas máquinas do campeonato. Rodando esse programa na máquina de teste foi estipulado um tempo de execução de 324 segundos.
+
+Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nas versões apresentadas o único critério era o número máximo de iterações {\it{MaxIter}}.
+
+A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
+
+
+
+\begin{center}
+\begin{table}[htbf]
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Instância & GRASP-HC & GRASP-SA & SA & GRASP \\ \hline
+comp01 & 5 & 15 & \textbf{6} & \textbf{6} \\
+comp02 & 24 & 234 & \textbf{116} & 131 \\
+comp03 & 66 & 233 & \textbf{116} & 141 \\
+comp04 & 35 & 137 & \textbf{76} & 78 \\
+comp05 & 290 & 818 & \textbf{429} & 552 \\
+comp06 & 27 & 215 & 132 & \textbf{123} \\
+comp07 & 6 & 205 & \textbf{99} & 120 \\
+comp08 & 37 & 169 & \textbf{84} & 87 \\
+comp09 & 96 & 229 & \textbf{137} & 164 \\
+comp10 & 4 & 183 & \textbf{67} & 78 \\
+comp11 & 0 & 13 & \textbf{0} & \textbf{0} \\ \hline
+\end{tabular}
+\medskip
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Instância & GRASP-HC & GRASP-SA & SA & GRASP \\ \hline
+comp12 & 300 & 544 & \textbf{407} & 517 \\
+comp13 & 59 & 206 & \textbf{106} & 120 \\
+comp14 & 51 & 173 & \textbf{90} & 98 \\
+comp15 & 66 & 225 & \textbf{120} & 138 \\
+comp16 & 18 & 198 & \textbf{91} & 104 \\
+comp17 & 56 & 206 & \textbf{122} & 156 \\
+comp18 & 62 & 153 & 133 & \textbf{115} \\
+comp19 & 57 & 207 & \textbf{111} & 139 \\
+comp20 & 4 & 257 & \textbf{130} & 149 \\
+comp21 & 76 & 276 & \textbf{151} & 188 \\
+ &  &  &  &   \\ \hline
+\end{tabular}
+\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GRASP-HC, GRASP-SA, etc}
+\label{tab:resultados_gerais}
+\end{table}
+\end{center}
 
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}

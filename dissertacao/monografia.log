@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  22 DEC 2012 18:29
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  24 DEC 2012 20:12
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -304,6 +304,37 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.cfg
+File: graphics.cfg 2005/02/03 v1.3 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen128
+\Gin@req@width=\dimen129
+)
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/graphics/color.cfg
+File: color.cfg 2005/02/03 v1.3 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 125.
+
+(/usr/share/texmf/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
 (/usr/share/texmf/tex/generic/babel/babel.sty
 Package: babel 2004/11/20 v3.8d The Babel package
 
@@ -313,26 +344,26 @@ Language: portuges 2004/02/19 v1.2p Portuguese support from the babel system
 (/usr/share/texmf/tex/generic/babel/babel.def
 File: babel.def 2004/11/20 v3.8d Babel common definitions
 \babel@savecnt=\count115
-\U@D=\dimen128
+\U@D=\dimen130
 )
 \l@brazil = a dialect from \language\l@portuges 
 Package babel Info: Making " an active character on input line 145.
 )) (./monografia.aux)
 \openout1 = `monografia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 18.
 
 (/usr/share/texmf/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -382,50 +413,50 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Redeclaring math symbol \omicron on input line 79.
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 43.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 43
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 45.
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 45
 .
 
 (/usr/share/texmf/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 43
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 45
 .
 
 (/usr/share/texmf/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 43
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 45
 .
 
 (/usr/share/texmf/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 43
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 45
 .
 
 (/usr/share/texmf/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <20.74> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 43.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 45.
  [0
 
 ] [1] [2
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 57.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 59.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 57.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 59.
  [3
 
 
@@ -475,9 +506,9 @@ Cap\'{\i }tulo 1.
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 93.
 
-Overfull \hbox (3.74834pt too wide) in paragraph at lines 101--102
+Overfull \hbox (3.74834pt too wide) in paragraph at lines 103--104
 []\T1/ptm/m/n/12 Existe uma ne-ces-si-dade de pro-por al-go-rit-mos cada vez ma
 is efi-ci-en-tes que pro-du-zam tabelas-
  []
@@ -488,16 +519,16 @@ Cap\'{\i }tulo 2.
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 150.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 152.
 
  [16] [17]
-Overfull \hbox (18.53398pt too wide) in paragraph at lines 174--175
+Overfull \hbox (18.53398pt too wide) in paragraph at lines 176--177
 \T1/ptm/m/n/12 meta-heurísticas, tanto pela sim-pli-ci-dade quanto pe-los bons 
 re-sul-ta-dos al-can-ça-dos. Meta-heurísticas
  []
 
 [18]
-Overfull \hbox (58.03914pt too wide) in paragraph at lines 186--187
+Overfull \hbox (58.03914pt too wide) in paragraph at lines 188--189
 \T1/ptm/m/n/12 blema, mas para tabela-horário de es-co-las. Como mos-trada na s
 e-ção an-te-rior, [[]]
  []
@@ -507,7 +538,7 @@ Cap\'{\i }tulo 3.
 [20
 
 ] [21]
-Overfull \hbox (18.93867pt too wide) in paragraph at lines 262--263
+Overfull \hbox (18.93867pt too wide) in paragraph at lines 264--265
 \T1/ptm/m/n/12 onde $[][] \OT1/ptmcm/m/n/12 = \OMS/pzccm/m/n/12 j\OML/ptmcm/m/i
 t/12 RFt\OT1/ptmcm/m/n/12 1\OMS/pzccm/m/n/12 j[] \OT1/ptmcm/m/n/12 + \OMS/pzccm
 /m/n/12 j\OML/ptmcm/m/it/12 RFt\OT1/ptmcm/m/n/12 2\OMS/pzccm/m/n/12 j[] \OT1/pt
@@ -519,45 +550,55 @@ T1/ptmcm/m/n/12 4\OMS/pzccm/m/n/12 j[]$\T1/ptm/m/n/12 , $[][] \OT1/ptmcm/m/n/12
 /m/n/12 2\OMS/pzccm/m/n/12 j[] \OT1/ptmcm/m/n/12 +
  []
 
-[22]
+[22] [23]
+Overfull \hbox (50.75467pt too wide) in paragraph at lines 333--340
+[][] 
+ []
 
-LaTeX Warning: Reference `fig:solucao_toy' on page 23 undefined on input line 3
-07.
-
-[23]
-Overfull \hbox (45.01912pt too wide) in paragraph at lines 315--316
+[24]
+Overfull \hbox (45.01912pt too wide) in paragraph at lines 363--364
 \T1/ptm/m/n/12 na-ri-za-ção de gra-fos [[]], ro-te-a-mento de cir-cui-tos vir-t
 u-ais [[]],
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 331.
-[24] [25]
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 379.
+[25] [26]
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 382.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 430.
 
-Overfull \hbox (42.3399pt too wide) in paragraph at lines 384--385
+Overfull \hbox (42.3399pt too wide) in paragraph at lines 432--433
 []\T1/ptm/m/n/12 A heu-rís-tica \T1/ptm/m/it/12 Path-Relinking \T1/ptm/m/n/12 (
 re-li-ga-mento de ca-mi-nhos) foi ori-gi-nal-mente pro-posta por [[]]
  []
 
-[26] [27] [28]
-Underfull \hbox (badness 1742) in paragraph at lines 460--460
+[27] [28] [29]
+Underfull \hbox (badness 1742) in paragraph at lines 508--508
 []\T1/ptm/b/n/12 Algoritmo 4: \T1/ptm/m/n/12 Al-go-ritmo GRASP com \T1/ptm/m/it
 /12 Path-Relinking \T1/ptm/m/n/12 para in-ten-si-fi-ca-ção e pós-
  []
 
-[29] [30] [31] [32] [33] [34] [35]
+[30] [31] [32] [33] [34] [35] [36]
 Cap\'{\i }tulo 4.
-[36
+[37
 
 ]
-Overfull \hbox (63.4942pt too wide) in paragraph at lines 649--674
+Underfull \hbox (badness 10000) in paragraph at lines 697--697
+[]\T1/ptm/b/n/12 Horários
+ []
+
+
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 697--697
+[]\T1/ptm/b/n/12 Disponibi-
+ []
+
+[38]
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 734--741
 [][] 
  []
 
-[37] [38]
-Overfull \hbox (71.72919pt too wide) in paragraph at lines 710--711
+[39]
+Overfull \hbox (71.72919pt too wide) in paragraph at lines 773--774
 []\T1/ptm/m/n/12 A ter-ceira ma-triz, $\OML/ptmcm/m/it/12 CurrDiasPeriodos$\T1/
 ptm/m/n/12 , é tri-di-men-si-o-nal com ta-ma-nho $\OML/ptmcm/m/it/12 C \OMS/pzc
 cm/m/n/12 ^^B \OML/ptmcm/m/it/12 D \OMS/pzccm/m/n/12 ^^B \OML/ptmcm/m/it/12 P$\
@@ -566,11 +607,16 @@ cm/m/it/12 c\OT1/ptmcm/m/n/12 ][\OML/ptmcm/m/it/12 d\OT1/ptmcm/m/n/12 ][\OML/pt
 mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
  []
 
-[39] [40] [41]
-Cap\'{\i }tulo 5.
-[42
+[40] [41] [42]
+Overfull \hbox (101.71994pt too wide) in paragraph at lines 824--855
+[][] [] 
+ []
 
-] (./monografia.bbl [43]
+[43] [44]
+Cap\'{\i }tulo 5.
+[45
+
+] (./monografia.bbl [46]
 Underfull \hbox (badness 1112) in paragraph at lines 10--16
 []\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
  []
@@ -599,9 +645,9 @@ Underfull \hbox (badness 1028) in paragraph at lines 19--26
 z. Dis-po-ní-vel em:
  []
 
-[44
+[47
 
-] [45]
+] [48]
 Underfull \hbox (badness 1796) in paragraph at lines 188--194
 \T1/ptm/m/n/12 exis-tence of so-lu-ti-ons to the ti-me-ta-ble pro-blem. \T1/ptm
 /m/it/12 Com-mun. ACM\T1/ptm/m/n/12 , ACM, New York,
@@ -642,7 +688,7 @@ Underfull \hbox (badness 1226) in paragraph at lines 273--279
 653-3. Dis-po-ní-vel em:
  []
 
-[46]
+[49]
 Underfull \hbox (badness 10000) in paragraph at lines 282--285
 []\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
 ptm/m/n/12 . 2002. URL:
@@ -660,31 +706,27 @@ Underfull \hbox (badness 5374) in paragraph at lines 293--299
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
-) [47]
+) [50]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 783.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 783.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
 
 Anexo A.
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[48
+[51
 
-] (./monografia.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 3839 strings out of 94501
- 48475 string characters out of 1176790
- 127970 words of memory out of 1000000
- 6917 multiletter control sequences out of 10000+50000
+ 4299 strings out of 94501
+ 54852 string characters out of 1176790
+ 138515 words of memory out of 1000000
+ 7356 multiletter control sequences out of 10000+50000
  56360 words of font info for 77 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 34i,22n,41p,1282b,534s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 34i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (49 pages, 107032 bytes).
+Output written on monografia.dvi (52 pages, 134440 bytes).

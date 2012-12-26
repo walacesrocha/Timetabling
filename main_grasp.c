@@ -65,12 +65,14 @@ void contaAulas(Problema *p, Individuo *ind) {
 
 void configuraParametros(Problema *p, int argc, char **argv) {
     p->maxIterGrasp = 200;
+    p->threshold = 0.15;
     p->buscaLocalGrasp = 2;
     p->nIterSemMelhoras = 10000;
     p->t0 = 3;
     p->tf = 0.001;
     p->beta = 0.995;
     p->seed = 0;
+    p->tempoLimite = -1;
 
     int i;
 
@@ -85,46 +87,60 @@ void configuraParametros(Problema *p, int argc, char **argv) {
         if (strncmp("bl", argv[i], 2) == 0) {
             if (strncmp(argv[i] + 3, "sa", 2) == 0) {
                 p->buscaLocalGrasp = 6; // SA
+            } else if (strncmp(argv[i] + 3, "vns", 3) == 0) {
+                p->buscaLocalGrasp = 5; // VNS
             }
         }
 
         if (strncmp("n", argv[i], 1) == 0) {
             p->nIterSemMelhoras = atoi(argv[i] + 2);
         }
-        
-        if (strncmp("ti",argv[i],2)==0){
-            p->t0 = atof(argv[i]+3);
+
+        if (strncmp("ti", argv[i], 2) == 0) {
+            p->t0 = atof(argv[i] + 3);
+        }
+
+        if (strncmp("tf", argv[i], 2) == 0) {
+            p->tf = atof(argv[i] + 3);
+        }
+
+        if (strncmp("beta", argv[i], 4) == 0) {
+            p->beta = atof(argv[i] + 5);
         }
         
-        if (strncmp("tf",argv[i],2)==0){
-            p->tf = atof(argv[i]+3);            
+        if (strncmp("alfa", argv[i], 4) == 0) {
+            p->threshold = atof(argv[i] + 5);
         }
         
-        if (strncmp("beta",argv[i],4)==0){
-            p->beta = atof(argv[i]+5);            
+        if (strncmp("time", argv[i], 4) == 0) {
+            p->tempoLimite = atoi(argv[i] + 5);
         }
+        
     }
-    
+
     printf("MaxIter: %d\n", p->maxIterGrasp);
+    printf("Threshold: %f\n", p->threshold);
     printf("Busca local: %d\n", p->buscaLocalGrasp);
     printf("n: %d\n", p->nIterSemMelhoras);
     printf("T0: %f\n", p->t0);
     printf("Tf: %f\n", p->tf);
     printf("Beta: %f\n", p->beta);
     printf("Seed: %d\n", p->seed);
+    printf("Time: %d\n", p->tempoLimite);
 }
 
 /*
  * Parametros:
  *      argv[1]: arquivo de instância
  *      maxItex: maximo de iteracoes
+ *      alfa: valor de threshold da LRC
  *      bl: busca local: hc,sa
  *      n: numero de iteracoes sem melhora
  *      ti: temperatura inicial
  *      tf: temperatura final
  *      beta: taxa de resfriamento
  *      seed: seed de numero aleatorio
- *      
+ *      time: tempo limite
  */
 int main(int argc, char** argv) {
 
@@ -146,16 +162,15 @@ int main(int argc, char** argv) {
     Problema *p = lerInstancia(argv[1]);
 
     configuraParametros(p, argc, argv);
-    exit(0);
 
-    srand(atoi(argv[8]));
+    srand(p->seed);
 
-    p->maxIterGrasp = atoi(argv[2]);
-    p->buscaLocalGrasp = atoi(argv[3]);
-    p->txSwap = atof(argv[4]);
-    p->nIterSemMelhoras = atoi(argv[5]);
-    p->threshold = atof(argv[6]);
-    p->pAproveitamento = atof(argv[7]);
+    //p->maxIterGrasp = atoi(argv[2]);
+    //p->buscaLocalGrasp = atoi(argv[3]);
+    //p->txSwap = atof(argv[4]);
+    //p->nIterSemMelhoras = atoi(argv[5]);
+    //p->threshold = atof(argv[6]);
+    p->pAproveitamento = 0.7;//atof(argv[7]);
     p->k = 10;
     p->pesoHard = 10000;
 
@@ -175,10 +190,10 @@ int main(int argc, char** argv) {
     }*/
 
 
-    ind = geraIndividuoAleatorio(p, 100);
+    //ind = geraIndividuoAleatorio(p, 100);
 
     //imprimeIndividuo3(p,ind);
-    inicializaMatrizesAuxiliares(p, ind);
+    //inicializaMatrizesAuxiliares(p, ind);
 
 
     //exit(0);
@@ -246,7 +261,7 @@ int main(int argc, char** argv) {
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
 
-    p->tempoLimite = 40000;
+    p->tempoLimite = 350;
     p->inicio = clock();
     ind = grasp(p);
     p->fim = clock();

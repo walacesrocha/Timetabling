@@ -59,7 +59,7 @@ int getTimeslot(Problema *p, int pos) {
 int esgotouTempoLimite(Problema *p) {
     clock_t agora = clock();
 
-    if ((double) (agora - p->inicio) / CLOCKS_PER_SEC > p->tempoLimite) {
+    if (p->tempoLimite > 0 && ((double) (agora - p->inicio) / CLOCKS_PER_SEC > p->tempoLimite)) {
         return 1;
     } else {
         return 0;

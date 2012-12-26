@@ -1563,9 +1563,6 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
                 iteracoes[i] += (indBase->soft1 + indBase->soft2 + indBase->soft3 + indBase->soft4);
                 //printf("SWAP: %d\n", iteracoes[i]);
                 break;
-            case LECTURE_MOVE:
-                //printf("LECTURE_MOVE: %d\n", iteracoes[i]);
-                break;
             case TIME_MOVE:
                 iteracoes[i] += (indBase->soft2 + indBase->soft3);
                 //printf("TIME_MOVE: %d\n", iteracoes[i]);
@@ -1574,8 +1571,8 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
                 iteracoes[i] += (indBase->soft1 + indBase->soft4);
                 //printf("ROOM_MOVE: %d\n", iteracoes[i]);
                 break;
-            case ROOMS:
-                iteracoes[i] += (indBase->soft1 + indBase->soft4);
+            case MIN_WORKING_DAYS_MOVE:
+                iteracoes[i] += (indBase->soft2);
                 //printf("ROOMS: %d\n", iteracoes[i]);
                 break;
             case COMPACT:
@@ -1604,17 +1601,16 @@ void configuraQtMovsVNS(Problema*p, Individuo *indBase, Movimento *movs, int *it
 
 Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     Movimento mov;
-    Individuo *solucaoAtual, *aDesalocar;
-    Individuo *vizinho;
+    Individuo *solucaoAtual;
     float foAtual, fo;
     float deltaF;
     int i, iteracoes = 0;
     int haMelhoras;
     int pMov;
-    Movimento movimentos[7] = {LECTURE_MOVE, TIME_MOVE, ROOM_MOVE,
-        ROOMS, COMPACT, MOVE, SWAP};
-    int iteracoesMax[7] = {0, 0, 0, 0, 0, 0, 0};
-    int nMovs = 7;
+    Movimento movimentos[6] = {TIME_MOVE, ROOM_MOVE,MIN_WORKING_DAYS_MOVE, COMPACT, MOVE, SWAP};
+    int iteracoesMax[6] = {0, 0, 0, 0, 0, 0};
+    int nMovs = 6;
+    Neighbour *neighbour;
 
     foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
     solucaoAtual = indInicial;
@@ -1634,51 +1630,44 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
 
                 switch (movimentos[pMov]) {
                     case MOVE:
-                        vizinho = move(p, solucaoAtual);
+                        neighbour = geraMove(p, solucaoAtual);
                         break;
                     case SWAP:
-                        vizinho = swap(p, solucaoAtual);
-                        break;
-                    case LECTURE_MOVE:
-                        vizinho = lectureMove(p, solucaoAtual);
+                        neighbour = geraSwap(p, solucaoAtual);
                         break;
                     case TIME_MOVE:
-                        vizinho = timeMove(p, solucaoAtual);
+                        neighbour = geraTimeMove(p, solucaoAtual);
                         break;
                     case ROOM_MOVE:
-                        vizinho = roomMove(p, solucaoAtual);
+                        neighbour = geraRoomMove(p, solucaoAtual);
                         break;
-                    case ROOMS:
-                        vizinho = rooms(p, solucaoAtual);
+                    case MIN_WORKING_DAYS_MOVE:
+                        neighbour = geraMinWorkingDaysMove(p, solucaoAtual);
                         break;
                     case COMPACT:
-                        vizinho = compact(p, solucaoAtual);
+                        neighbour = geraIsolatedLectureMove(p, solucaoAtual);
                         break;
                     default:
                         break;
 
                 }
 
-                fo = funcaoObjetivo(p, vizinho, p->pesoHard);
-                deltaF = fo - foAtual;
+                deltaF = neighbour->deltaHard*p->pesoHard + neighbour->deltaSoft;
 
-                aDesalocar = 0;
                 if (deltaF <= 0) {// função objetivo decresceu
-                    foAtual = fo;
-                    aDesalocar = solucaoAtual;
-                    solucaoAtual = vizinho;
+                    foAtual += deltaF;
+                    
+                    troca_par_completo(p,solucaoAtual,neighbour->p1,neighbour->p2);
                     //melhorInd = solucaoAtual;
                     if (deltaF < 0) {
                         printf("VNS: %f\n", foAtual);
                         haMelhoras = 1;
                         iteracoes = 0; // continua buscando
                     }
-                } else {
-                    aDesalocar = vizinho;
-                }
+                } 
 
                 //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
-                liberaIndividuo(aDesalocar);
+                free(neighbour);
             }
         }
 
@@ -1686,7 +1675,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         foAtual = funcaoObjetivo(p, solucaoAtual, p->pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
-        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft(p, solucaoAtual));
+        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual));
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento
@@ -2230,7 +2219,7 @@ Neighbour *geraMove(Problema *p, Individuo *ind) {
     Neighbour *move;
 
     move = (Neighbour*) malloc(sizeof (Neighbour));
-    move->m = SWAP;
+    move->m = MOVE;
 
 
     /*** MOVE EVENT ***/

@@ -790,7 +790,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoesSemMelhora++;
         } while (N > 0);
 
-        /*printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
+        printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
                 t0, tMin, nPioras, foAtual,
                 funcaoObjetivo(p, solucaoAtual, pesoHard),
                 somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), pesoHard,
@@ -798,7 +798,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 solucaoAtual->soft2,
                 solucaoAtual->soft3,
                 solucaoAtual->soft4,
-                melhorFo);*/
+                melhorFo);
         t0 *= beta;
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);

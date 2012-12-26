@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  24 DEC 2012 20:12
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  26 DEC 2012 19:35
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -578,27 +578,33 @@ Underfull \hbox (badness 1742) in paragraph at lines 508--508
 /12 Path-Relinking \T1/ptm/m/n/12 para in-ten-si-fi-ca-ção e pós-
  []
 
-[30] [31] [32] [33] [34] [35] [36]
+[30] [31] [32] [33]
+Overfull \hbox (1.2792pt too wide) in paragraph at lines 596--597
+\T1/ptm/m/n/12 de es-ca-par de mí-ni-mos lo-cais. A op-ção ado-tada foi usar \T
+1/ptm/m/it/12 Si-mu-la-ted An-ne-a-ling\T1/ptm/m/n/12 [[]].
+ []
+
+[34] [35] [36]
 Cap\'{\i }tulo 4.
 [37
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 697--697
+Underfull \hbox (badness 10000) in paragraph at lines 701--701
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 697--697
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 701--701
 []\T1/ptm/b/n/12 Disponibi-
  []
 
 [38]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 734--741
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 738--745
 [][] 
  []
 
 [39]
-Overfull \hbox (71.72919pt too wide) in paragraph at lines 773--774
+Overfull \hbox (71.72919pt too wide) in paragraph at lines 777--778
 []\T1/ptm/m/n/12 A ter-ceira ma-triz, $\OML/ptmcm/m/it/12 CurrDiasPeriodos$\T1/
 ptm/m/n/12 , é tri-di-men-si-o-nal com ta-ma-nho $\OML/ptmcm/m/it/12 C \OMS/pzc
 cm/m/n/12 ^^B \OML/ptmcm/m/it/12 D \OMS/pzccm/m/n/12 ^^B \OML/ptmcm/m/it/12 P$\
@@ -608,7 +614,7 @@ mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
  []
 
 [40] [41] [42]
-Overfull \hbox (101.71994pt too wide) in paragraph at lines 824--855
+Overfull \hbox (101.71994pt too wide) in paragraph at lines 828--859
 [][] [] 
  []
 
@@ -647,86 +653,98 @@ z. Dis-po-ní-vel em:
 
 [47
 
-] [48]
-Underfull \hbox (badness 1796) in paragraph at lines 188--194
+]
+Underfull \hbox (badness 1796) in paragraph at lines 181--187
 \T1/ptm/m/n/12 exis-tence of so-lu-ti-ons to the ti-me-ta-ble pro-blem. \T1/ptm
 /m/it/12 Com-mun. ACM\T1/ptm/m/n/12 , ACM, New York,
  []
 
 
-Underfull \hbox (badness 2111) in paragraph at lines 188--194
+Underfull \hbox (badness 2111) in paragraph at lines 181--187
 \T1/ptm/m/n/12 NY, USA, v. 17, n. 8, p. 450--453, ago. 1974. ISSN 0001-0782. Di
 s-po-ní-vel em:
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--214
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 205--207
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--229
+Underfull \hbox (badness 10000) in paragraph at lines 219--222
 []\T1/ptm/m/n/12 RESENDE, M.; RI-BEIRO, C. A GRASP for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--229
+Underfull \hbox (badness 10000) in paragraph at lines 219--222
 \T1/ptm/m/n/12 graph pla-na-ri-za-tion. \T1/ptm/m/it/12 Networks\T1/ptm/m/n/12 
 , v. 29, p. 173--189, 1997. Dis-po-ní-vel em:
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 264--270
+Underfull \hbox (badness 1221) in paragraph at lines 250--256
 \T1/ptm/m/n/12 ve-lo-ping a so-lu-tion to the fa-culty ti-me-ta-ble pro-blem. \
 T1/ptm/m/it/12 Com-put. J.\T1/ptm/m/n/12 , Ox-ford Uni-ver-sity
  []
 
 
-Underfull \hbox (badness 1226) in paragraph at lines 273--279
+Underfull \hbox (badness 1226) in paragraph at lines 259--265
 \T1/ptm/m/n/12 ving school ti-me-ta-bling pro-blems, p. 659--672. ISBN 1-4020-7
 653-3. Dis-po-ní-vel em:
  []
 
 [49]
-Underfull \hbox (badness 10000) in paragraph at lines 282--285
-[]\T1/ptm/m/n/12 The Nes-sus Pro-ject. \T1/ptm/m/it/12 The Nes-sus Pro-ject\T1/
-ptm/m/n/12 . 2002. URL:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 293--299
+Underfull \hbox (badness 10000) in paragraph at lines 273--279
 []\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
 it/12 Eu-ro-pean Jour-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 293--299
+Underfull \hbox (badness 5374) in paragraph at lines 273--279
 \T1/ptm/m/it/12 nal of Ope-ra-ti-o-nal Re-se-arch\T1/ptm/m/n/12 , v. 19, n. 2, 
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
 ) [50]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 900.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 900.
 
 Anexo A.
+
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 902--903
+\T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
+thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
+esrocha/Timetabling\T1/ptm/m/n/12 .
+ []
+
+[51
+
+]
+Overfull \hbox (17.32422pt too wide) in paragraph at lines 938--950
+[][] 
+ []
+
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[51
-
-] (./monografia.aux) ) 
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 955.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 955.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 955.
+[52] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4299 strings out of 94501
- 54852 string characters out of 1176790
+ 4325 strings out of 94501
+ 55274 string characters out of 1176790
  138515 words of memory out of 1000000
- 7356 multiletter control sequences out of 10000+50000
- 56360 words of font info for 77 fonts, out of 500000 for 2000
+ 7382 multiletter control sequences out of 10000+50000
+ 65606 words of font info for 101 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 34i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 35i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (52 pages, 134440 bytes).
+Output written on monografia.dvi (53 pages, 139296 bytes).

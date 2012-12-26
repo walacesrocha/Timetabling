@@ -68,6 +68,7 @@ void configuraParametros(Problema *p, int argc, char **argv) {
     p->threshold = 0.15;
     p->buscaLocalGrasp = 2;
     p->nIterSemMelhoras = 10000;
+    p->k = 10;
     p->t0 = 3;
     p->tf = 0.001;
     p->beta = 0.995;
@@ -94,6 +95,10 @@ void configuraParametros(Problema *p, int argc, char **argv) {
 
         if (strncmp("n", argv[i], 1) == 0) {
             p->nIterSemMelhoras = atoi(argv[i] + 2);
+        }
+        
+        if (strncmp("k", argv[i], 1) == 0) {
+            p->k = atoi(argv[i] + 2);
         }
 
         if (strncmp("ti", argv[i], 2) == 0) {
@@ -122,6 +127,7 @@ void configuraParametros(Problema *p, int argc, char **argv) {
     printf("Threshold: %f\n", p->threshold);
     printf("Busca local: %d\n", p->buscaLocalGrasp);
     printf("n: %d\n", p->nIterSemMelhoras);
+    printf("k: %d\n", p->k);
     printf("T0: %f\n", p->t0);
     printf("Tf: %f\n", p->tf);
     printf("Beta: %f\n", p->beta);
@@ -171,7 +177,6 @@ int main(int argc, char** argv) {
     //p->nIterSemMelhoras = atoi(argv[5]);
     //p->threshold = atof(argv[6]);
     p->pAproveitamento = 0.7;//atof(argv[7]);
-    p->k = 10;
     p->pesoHard = 10000;
 
     /*for (i = 0; i < p->nCurriculos; i++) {

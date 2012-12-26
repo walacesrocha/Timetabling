@@ -1091,7 +1091,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             foAtual += deltaF;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
-                //printf("LH: %f\n", foAtual);
+                printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 //zeraListaTabu(listaTabu, p->dimensao);
             }
@@ -1665,7 +1665,7 @@ Individuo *grasp(Problema *p) {
         } else if (p->buscaLocalGrasp == 5) {
             ind = buscaLocalGraspVNS(p, ind);
         } else if (p->buscaLocalGrasp == 6) {
-            ind = buscaLocalGraspHibrida(p, ind);
+            //ind = buscaLocalGraspHibrida(p, ind);
             ind = simulatedAnnealing2(p, ind);
         } else if (p->buscaLocalGrasp == 7) {
             ind = greatDeluge(p, ind);

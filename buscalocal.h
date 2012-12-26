@@ -19,7 +19,6 @@ typedef struct listaVizinhos {
 typedef enum {
     MOVE,
     SWAP,
-    LECTURE_MOVE,
     TIME_MOVE,
     ROOM_MOVE,
     ROOMS,

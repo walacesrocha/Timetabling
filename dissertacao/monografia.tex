@@ -201,7 +201,7 @@ Neste capítulo é apresentado a proposta do trabalho
 ...
 \newpage
 
-\section{Formulação do ITC-2007}
+\section{Formulação do ITC-2007\label{sec:formulacao}}
 
 Nesta seção é apresentada a formulação que foi utilizada neste trabalho, que é o \textit{track} 3 do ITC-2007.
 
@@ -589,7 +589,11 @@ A primeira estratégia implementada neste trabalho é uma das mais simples, conhec
 
 Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
-Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
+Uma modificação proposta foi fazer a busca em largura, ao invés de em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, já que a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
+
+Foi verificado que esta nova versão consegue explorar melhor o espaço de soluções, conseguindo tabelas-horário melhores com menos tempo de execução.
+
+Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
 
 O algoritmo SA possui três parâmetros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada até chegar a temperatura final. Em cada temperatura, $N$ vizinhos são gerados. Se o vizinho gerado é melhor que a solução atual, esta é atualizada. Se o vizinho for pior ele é aceito com uma probabilidade igual a $P = e^{\Delta f/ T}$. $\Delta f$ é a difença de valor da função objetivo do vizinho e da solução atual e $T$ é a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura menores serão as chances de aceitar o vizinho. O comportamento típico do algoritmo é fazer certa diversificação no início quando a temperatura está alta. À medida em que ela decresce poucas pioras vão sendo aceitas e uma determinada região da busca é intensificada.
 
@@ -893,15 +897,59 @@ Para que serviu este trabalho na sua formação?
 \anexo
 
 
-\chapter{Ferramentas utilizadas}
+\chapter{Código-fonte dos algoritmos}
 
-Foi feita uma análise de algumas ferramentas que são muito usadas
-por atacantes (hackers) para a confecção de ataques. Estas ferramentas
-são muito úteis em vários aspectos, tais como: (1) o levantamento
-de informações sobre o alvo, (2) que tipo de serviços estão disponíveis
-no alvo, (3) quais as possíveis vulnerabilidades do alvo, entre outras
-informações. As ferramentas analisadas foram o \emph{nmap}~\cite{Io02},
-o \emph{nessus}~\cite{NP02}, o \emph{saint}~\cite{SC02}, além
-de alguns comandos de sistemas operacionais (UNIX-Like e Windows-Like)
-usados para rede, tais como o \emph{ping, nslookup e whois}. 
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https:///github.com//walacesrocha//Timetabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+
+O projeto está estruturado na seguinte árvore de diretórios:
+
+\begin{itemize}
+\item \textbf{/}: arquivos .c e .h com implementação dos algoritmos, além do Makefile para auxiliar a compilação.
+\item \textbf{/instancias}: contém as 21 instâncias usadas no ITC-2007.
+\item \textbf{/solucoes}: arquivos com as melhores respostas para cada instância.
+\item \textbf{/validator}: ferramenta fornecida pelo ITC-2007 para validação das respostas. Está implementada em C++.
+\item \textbf{/benchmark\_machine}: ferramenta fornecida pelo ITC-2007 para ajustar o tempo de teste dos algoritmos.
+\end{itemize}
+
+As instâncias oficiais e o validador também podem ser obtidas no site \cite{itc2007}.
+
+Para compilar os códigos fontes basta executar no diretório raiz:
+\begin{verbatim}
+$ make
+\end{verbatim}
+
+Todos os códigos-fonte serão compilados e um executável será criado com o nome \texttt{grasp}. Para executar o programa, o caminho para uma instância deve ser informado:
+
+\begin{verbatim}
+$ ./grasp instancias/comp01.ctt
+\end{verbatim}
+
+O programa possui diversos parâmetros opcionais. Caso não sejam informados serão usados os valores padrão de acordo com a tabela \ref{tab:parametros}. Os parâmetros são informados usando a sintaxe \texttt{parametro=valor}. Exemplo:
+
+\begin{verbatim}
+$ ./grasp instancias/comp01.ctt maxIter=50 alfa=0.20 seed=1
+\end{verbatim}
+
+O Algortimo exibe ao final a quantidade de violações fortes e fracas, além da resposta esperada pelo ITC-2007 no formato apresentado na seção \ref{sec:formulacao}.
+
+\begin{center}
+\begin{table}[!htb]
+\begin{tabular}{|c|c|c|}\hline
+{\bf Parâmetro} & {\bf Descrição} & {\bf Valor padrão} \\ \hline
+maxItex & Número máximo de iteracoes do Grasp & 200 \\ \hline
+ alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
+ bl & Busca local: hc para \textit{Hill Climbing}, sa para \textit{Simulated Annealing} & hc \\ \hline
+ n & Número máximo de iteracoes sem melhora em \textit{Hill Climbing} & 10000 \\ \hline
+ ti & Temperatura inicial no SA & 3 \\ \hline
+ tf & Temperatura final no SA & 0.001 \\ \hline
+ beta & Taxa de resfriamento no SA & 0.995 \\ \hline
+ seed & Seed de geração de números aleatorios & 0 \\ \hline
+ time & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+\hline
+\end{tabular}
+\caption{Parâmetros do GRASP e seus valores padrão}
+\label{tab:parametros}
+\end{table}
+\end{center}
+
 \end{document}

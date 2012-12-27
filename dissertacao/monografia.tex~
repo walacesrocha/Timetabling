@@ -9,6 +9,7 @@
 \usepackage{amssymb,amsmath}
 %\usepackage[dvipdf]{graphicx,color}
 \usepackage{graphicx,color}
+\usepackage{lscape}
 
 
 
@@ -201,7 +202,7 @@ Neste capítulo é apresentado a proposta do trabalho
 ...
 \newpage
 
-\section{Formulação do ITC-2007}
+\section{Formulação do ITC-2007\label{sec:formulacao}}
 
 Nesta seção é apresentada a formulação que foi utilizada neste trabalho, que é o \textit{track} 3 do ITC-2007.
 
@@ -589,7 +590,11 @@ A primeira estratégia implementada neste trabalho é uma das mais simples, conhec
 
 Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
-Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
+Uma modificação proposta foi fazer a busca em largura, ao invés de em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, já que a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
+
+Foi verificado que esta nova versão consegue explorar melhor o espaço de soluções, conseguindo tabelas-horário melhores com menos tempo de execução.
+
+Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
 
 O algoritmo SA possui três parâmetros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada até chegar a temperatura final. Em cada temperatura, $N$ vizinhos são gerados. Se o vizinho gerado é melhor que a solução atual, esta é atualizada. Se o vizinho for pior ele é aceito com uma probabilidade igual a $P = e^{\Delta f/ T}$. $\Delta f$ é a difença de valor da função objetivo do vizinho e da solução atual e $T$ é a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura menores serão as chances de aceitar o vizinho. O comportamento típico do algoritmo é fazer certa diversificação no início quando a temperatura está alta. À medida em que ela decresce poucas pioras vão sendo aceitas e uma determinada região da busca é intensificada.
 
@@ -625,7 +630,7 @@ $S^{*} \leftarrow S $ \;
 \caption{\textit{Simulated Annealing} para fase de busca local}
 \end{algorithm}
 
-Em \cite{CDGS11b}, a mesma estrutura de vizinhança é utilizada, só que a formulação usada é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem ao \textit{track} 3 do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} faz o algoritmo atingir soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que sobrepondo duas estruturas de vizinhança, uma estrutura pode atrapalhar a melhora obtida pela outra.
+Em \cite{CDGS11b}, a mesma estrutura de vizinhança é utilizada, só que a formulação usada é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem ao \textit{track} 3 do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que sobrepondo duas estruturas de vizinhança, uma estrutura pode atrapalhar a melhora obtida pela outra.
 
 \subsection{Path-relinking}
 
@@ -797,9 +802,9 @@ O algoritmo GRASP possui dois parâmetros: número máximo de iterações \textit{Max
 
 Quantos mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido limitar a quantidade de iterações em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, não é possível executar essa quantidade de iterações. O número máximo de soluções elite foi fixado em 20.
 
-O parâmetro $\alpha$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $0.01 < \alpha < 0.5$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais manter uma boa qualidade.
+O parâmetro $\alpha$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $0.01 < \alpha < 0.5$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais e manter uma boa qualidade.
 
-Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui um único parâmetro, $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Experimentalmente esse valor permite explorar bem a solução inicial sem se prender muito tempo num mínimo local.
+Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Experimentalmente esse valor permite explorar bem a solução inicial sem se prender muito tempo num mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Foi verificado que com $k=10$ o algoritmo produz boas soluções e mantém um desempenho parecido com a versão original em que era gerado apenas um vizinho. Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
 
 O algoritmo \textit{Simulated Annealing} já é mais complicado de se calibrar. Foram escolhidos parâmetros que permitissem certa diversificação no início da busca e que fizesse intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes que usar temperaturas altas com uma solução boa acaba piorando muito a solução, e só volta a melhorar quando o resfriamento está bem avançado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo fica com uma temperatura abaixo de 0.01 poucas melhores são conseguidas.
 
@@ -857,6 +862,36 @@ comp21 & 76 & 276 & \textbf{151} & 188 \\
 \end{table}
 \end{center}
 
+\begin{landscape}
+\begin{center}
+\begin{table}[htbf]
+{\small
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & & & & & & Muller & & \\ \hline
+comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112 &	61 &	5 &	97 &	23 &	5 &	114 &	6 \\ 
+comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485 &	1976 &	127 &	393 &	86 &	43 &	295 &	185 \\
+comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433 &	739 &	141 &	314 &	121 &	72 &	229 &	184 \\
+comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405 &	713 &	72 &	283 &	63 &	35 &	199 &	158 \\
+comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096 &	28249 &	10497 &	672 &	851 &	298 &	723 &	421 \\
+comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520 &	3831 &	96 &	464 &	115 &	41 &	278 &	298 \\
+comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643 &	7470 &	103 &	577 &	92 &	14 &	291 &	398 \\
+comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412 &	833 &	75 &	373 &	71 &	39 &	204 &	211 \\
+comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494 &	776 &	159 &	412 &	177 &	103 &	273 &	232 \\
+comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 &	1731 &	81 &	464 &	60 &	9 &	250 &	292 \\
+comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 &	56 &	0 &	99 &	5 &	0 &	26 &	0 \\
+comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 &	1902 &	629 &	770 &	828 &	331 &	818 &	458 \\
+comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460 &	779 &	112 &	408 &	112 &	66 &	214 &	228 \\
+comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393 &	756 &	88 &	487 &	96 &	53 &	239 &	175 \\ \hline
+Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64 &3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 \\ \hline
+\end{tabular}
+}
+\caption{Resultados primeira fase}
+\label{tab:solucoes_itc2007_1}
+\end{table}
+\end{center}
+\end{landscape}
+
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
 
@@ -893,15 +928,60 @@ Para que serviu este trabalho na sua formação?
 \anexo
 
 
-\chapter{Ferramentas utilizadas}
+\chapter{Código-fonte dos algoritmos}
 
-Foi feita uma análise de algumas ferramentas que são muito usadas
-por atacantes (hackers) para a confecção de ataques. Estas ferramentas
-são muito úteis em vários aspectos, tais como: (1) o levantamento
-de informações sobre o alvo, (2) que tipo de serviços estão disponíveis
-no alvo, (3) quais as possíveis vulnerabilidades do alvo, entre outras
-informações. As ferramentas analisadas foram o \emph{nmap}~\cite{Io02},
-o \emph{nessus}~\cite{NP02}, o \emph{saint}~\cite{SC02}, além
-de alguns comandos de sistemas operacionais (UNIX-Like e Windows-Like)
-usados para rede, tais como o \emph{ping, nslookup e whois}. 
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Timetabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+
+O projeto está estruturado na seguinte árvore de diretórios:
+
+\begin{itemize}
+\item \textbf{ /} : arquivos .c e .h com implementação dos algoritmos, além do Makefile para auxiliar a compilação.
+\item \textbf{ /instancias} : contém as 21 instâncias usadas no ITC-2007.
+\item \textbf{ /solucoes} : arquivos com as melhores respostas para cada instância.
+\item \textbf{ /validator} : ferramenta fornecida pelo ITC-2007 para validação das respostas. Está implementada em C++.
+\item \textbf{ /benchmark\_machine} : ferramenta fornecida pelo ITC-2007 para ajustar o tempo de teste dos algoritmos.
+\end{itemize}
+
+As instâncias oficiais e o validador também podem ser obtidas no site \cite{itc2007}.
+
+Para compilar os códigos fontes basta executar no diretório raiz:
+\begin{verbatim}
+$ make
+\end{verbatim}
+
+Todos os códigos-fonte serão compilados e um executável será criado com o nome \texttt{grasp}. Para executar o programa, o caminho para uma instância deve ser informado:
+
+\begin{verbatim}
+$ ./grasp instancias/comp01.ctt
+\end{verbatim}
+
+O programa possui diversos parâmetros opcionais. Caso não sejam informados serão usados os valores padrão de acordo com a tabela \ref{tab:parametros}. Os parâmetros são informados usando a sintaxe \texttt{parametro=valor}. Exemplo:
+
+\begin{verbatim}
+$ ./grasp instancias/comp01.ctt maxIter=50 alfa=0.20 seed=1
+\end{verbatim}
+
+
+O Algortimo exibe ao final a quantidade de violações fortes e fracas, além da resposta formatada no padrão do ITC-2007, que foi exemplificada na seção \ref{sec:formulacao}.
+
+\begin{center}
+\begin{table}[!htb]
+\begin{tabular}{|c|c|c|}\hline
+{\bf Parâmetro} & {\bf Descrição} & {\bf Valor padrão} \\ \hline
+maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
+ alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
+ bl & Busca local: hc para \textit{Hill Climbing}, sa para \textit{Simulated Annealing} & hc \\ \hline
+ n & Número máximo de iteracoes sem melhora em \textit{Hill Climbing} & 10000 \\ \hline
+ k & Quantidade de vizinhos que são gerados por iteração na busca \textit{Hill Climbing} & 10 \\ \hline
+ ti & Temperatura inicial no SA & 3 \\ \hline
+ tf & Temperatura final no SA & 0.001 \\ \hline
+ beta & Taxa de resfriamento no SA & 0.995 \\ \hline
+ seed & Seed de geração de números aleatorios & 0 \\ \hline
+ time & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+\end{tabular}
+\caption{Parâmetros do GRASP e seus valores padrão}
+\label{tab:parametros}
+\end{table}
+\end{center}
+
 \end{document}

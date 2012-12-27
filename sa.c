@@ -736,15 +736,15 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
             pViz = (float) rand() / RAND_MAX;
 
-            if (pViz < 0.5) {
+            if (pViz < 0.005) {
                 movimento = geraSwap(p, solucaoAtual);
-            } else if (pViz < 10.6) {
+            } else if (pViz < 0.01) {
                 movimento = geraMove(p, solucaoAtual);
-            } else if (pViz < 0.8) {
+            } else if (pViz < 0.015) {
                 movimento = geraTimeMove(p, solucaoAtual);
-            } else if (pViz < 1.72) {
+            } else if (pViz < 0.02) {
                 movimento = geraRoomMove(p, solucaoAtual);
-            } else if (pViz < 0.9) {
+            } else if (pViz < 0.025) {
                 movimento = geraMinWorkingDaysMove(p, solucaoAtual);
             } else {
                 movimento = geraIsolatedLectureMove(p, solucaoAtual);
@@ -759,9 +759,9 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 //printf("SA: %f [%f]\n", foAtual,t0);
                 troca_par_completo(p, solucaoAtual, movimento->p1, movimento->p2);
                 //melhorInd = solucaoAtual;
-                iteracoesSemMelhora = 0;
                 if (foAtual < melhorFo) {
                     melhorFo = foAtual;
+                    iteracoesSemMelhora = 0;
                 }
             } else {
                 // calcula probabilidade de aceitação
@@ -800,11 +800,6 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 solucaoAtual->soft4,
                 melhorFo);
         t0 *= beta;
-
-        if (iteracoesSemMelhora && iteracoesSemMelhora % 15000 == 0) {
-            p->pesoMW = 2;
-            p->pesoIL = 5;
-        }
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 

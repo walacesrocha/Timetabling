@@ -800,7 +800,7 @@ Para avaliar a melhora desta modificação foram criados dois programas para gerar
 
 O algoritmo GRASP possui dois parâmetros: número máximo de iterações \textit{MaxIter} e o valor $\alpha$ que regula a forma de construção da solução inicial. Como foi implementado \textit{Path-relinking}, um terceiro parâmetro, \textit{MaxElite}, foi adicionado para limitar o tamanho do conjunto de soluções elite.
 
-Quantos mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido limitar a quantidade de iterações em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, não é possível executar essa quantidade de iterações. O número máximo de soluções elite foi fixado em 20.
+Quanto mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido limitar a quantidade de iterações em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, não é possível executar essa quantidade de iterações. O número máximo de soluções elite foi fixado em 20.
 
 O parâmetro $\alpha$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $0.01 < \alpha < 0.5$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais e manter uma boa qualidade.
 
@@ -822,13 +822,21 @@ Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execu
 
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
 
+Foram testados três versões do algoritmo, variando a busca local:
+
+\begin{itemize}
+\item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$. (Somente um vizinho é gerado por iteração).
+\item {\bf GHC2}: Busca local {\it{Hill Climbing}} com $k=10$. (10 vizinhos são gerados por iteração).
+\item {\bf GSA}: Busca local {\it{Simulated Annealing}}.
+\end{itemize}
+
 
 
 \begin{center}
 \begin{table}[htbf]
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-Instância & GRASP-HC & GRASP-SA & SA & GRASP \\ \hline
+Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
 comp01 & 5 & 15 & \textbf{6} & \textbf{6} \\
 comp02 & 24 & 234 & \textbf{116} & 131 \\
 comp03 & 66 & 233 & \textbf{116} & 141 \\
@@ -844,7 +852,7 @@ comp11 & 0 & 13 & \textbf{0} & \textbf{0} \\ \hline
 \medskip
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-Instância & GRASP-HC & GRASP-SA & SA & GRASP \\ \hline
+Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
 comp12 & 300 & 544 & \textbf{407} & 517 \\
 comp13 & 59 & 206 & \textbf{106} & 120 \\
 comp14 & 51 & 173 & \textbf{90} & 98 \\
@@ -861,6 +869,12 @@ comp21 & 76 & 276 & \textbf{151} & 188 \\
 \label{tab:resultados_gerais}
 \end{table}
 \end{center}
+
+Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. A competição foi dividida em duas fases. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
+
+Os cinco melhores algoritmos foram rodados com mais 7 instâncias "ocultas". A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos 5 melhores estão identificadas.
+
+Em cada tabela foi adicionada uma coluna com os resultados pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
 
 \begin{landscape}
 \begin{center}
@@ -888,6 +902,27 @@ Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,2
 }
 \caption{Resultados primeira fase}
 \label{tab:solucoes_itc2007_1}
+\end{table}
+\end{center}
+
+\begin{center}
+\begin{table}[htbf]
+{\small
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+Instância & Atzuna & Clark & Geiger & Lu & Muller & GSA \\ \hline
+comp15 & & & & & & \\ 
+comp16 & & & & & & \\ 
+comp17 & & & & & & \\ 
+comp18 & & & & & & \\ 
+comp19 & & & & & & \\ 
+comp20 & & & & & & \\ 
+comp21 & & & & & & \\  \hline
+Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14  \\ \hline
+\end{tabular}
+}
+\caption{Resultados da segunda fase}
+\label{tab:solucoes_itc2007_2}
 \end{table}
 \end{center}
 \end{landscape}

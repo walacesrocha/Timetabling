@@ -9,6 +9,7 @@
 \usepackage{amssymb,amsmath}
 %\usepackage[dvipdf]{graphicx,color}
 \usepackage{graphicx,color}
+\usepackage{lscape}
 
 
 
@@ -861,6 +862,36 @@ comp21 & 76 & 276 & \textbf{151} & 188 \\
 \end{table}
 \end{center}
 
+\begin{landscape}
+\begin{center}
+\begin{table}[htbf]
+{\small
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & & & & & & Muller & & \\ \hline
+comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112 &	61 &	5 &	97 &	23 &	5 &	114 &	6 \\ 
+comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485 &	1976 &	127 &	393 &	86 &	43 &	295 &	185 \\
+comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433 &	739 &	141 &	314 &	121 &	72 &	229 &	184 \\
+comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405 &	713 &	72 &	283 &	63 &	35 &	199 &	158 \\
+comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096 &	28249 &	10497 &	672 &	851 &	298 &	723 &	421 \\
+comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520 &	3831 &	96 &	464 &	115 &	41 &	278 &	298 \\
+comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643 &	7470 &	103 &	577 &	92 &	14 &	291 &	398 \\
+comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412 &	833 &	75 &	373 &	71 &	39 &	204 &	211 \\
+comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494 &	776 &	159 &	412 &	177 &	103 &	273 &	232 \\
+comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 &	1731 &	81 &	464 &	60 &	9 &	250 &	292 \\
+comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 &	56 &	0 &	99 &	5 &	0 &	26 &	0 \\
+comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 &	1902 &	629 &	770 &	828 &	331 &	818 &	458 \\
+comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460 &	779 &	112 &	408 &	112 &	66 &	214 &	228 \\
+comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393 &	756 &	88 &	487 &	96 &	53 &	239 &	175 \\ \hline
+Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64 &3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 \\ \hline
+\end{tabular}
+}
+\caption{Resultados primeira fase}
+\label{tab:solucoes_itc2007_1}
+\end{table}
+\end{center}
+\end{landscape}
+
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
 
@@ -941,7 +972,7 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
  alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
  bl & Busca local: hc para \textit{Hill Climbing}, sa para \textit{Simulated Annealing} & hc \\ \hline
  n & Número máximo de iteracoes sem melhora em \textit{Hill Climbing} & 10000 \\ \hline
- k & Quantidade de vizinhos que são gerados por iteração na busca \textit{Hill Climbing} & 10000 \\ \hline
+ k & Quantidade de vizinhos que são gerados por iteração na busca \textit{Hill Climbing} & 10 \\ \hline
  ti & Temperatura inicial no SA & 3 \\ \hline
  tf & Temperatura final no SA & 0.001 \\ \hline
  beta & Taxa de resfriamento no SA & 0.995 \\ \hline

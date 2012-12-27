@@ -761,7 +761,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 //melhorInd = solucaoAtual;
                 iteracoesSemMelhora = 0;
                 if (foAtual < melhorFo) {
-                    melhorFo = foAtual;                    
+                    melhorFo = foAtual;
                 }
             } else {
                 // calcula probabilidade de aceitação
@@ -800,6 +800,11 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
                 solucaoAtual->soft4,
                 melhorFo);
         t0 *= beta;
+
+        if (iteracoesSemMelhora && iteracoesSemMelhora % 15000 == 0) {
+            p->pesoMW = 2;
+            p->pesoIL = 5;
+        }
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
 

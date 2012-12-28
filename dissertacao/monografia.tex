@@ -794,6 +794,15 @@ Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação d
 
 Para avaliar a melhora desta modificação foram criados dois programas para gerar uma tabela-horário inicial aleatória, e em seguida gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação era feita levando em consideração toda a tabela. No segundo a avaliação era apenas local. Usando a instância \textit{comp01} como parâmetro, o primeiro executou numa média de $44.996$ segundos, enquanto o segundo em $4.242$ segundos. O \textit{speedup} aproximado foi portanto de $10 \times$. Já usando a instância \textit{comp12} que é uma instância maior, o primeiro executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a $23 \times$.
 
+Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho.
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[width=14cm]{./Diagrama.eps}
+ \caption{Diagrama de classes das estruturas para modelagem da instância e da tabela-horário}
+   \label{fig:diagramaDeClasses}
+\end{center}
+\end{figure}
 
 
 \section{Escolha dos parâmetros}

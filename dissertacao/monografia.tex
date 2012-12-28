@@ -794,7 +794,9 @@ Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação d
 
 Para avaliar a melhora desta modificação foram criados dois programas para gerar uma tabela-horário inicial aleatória, e em seguida gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação era feita levando em consideração toda a tabela. No segundo a avaliação era apenas local. Usando a instância \textit{comp01} como parâmetro, o primeiro executou numa média de $44.996$ segundos, enquanto o segundo em $4.242$ segundos. O \textit{speedup} aproximado foi portanto de $10 \times$. Já usando a instância \textit{comp12} que é uma instância maior, o primeiro executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a $23 \times$.
 
-Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho.
+Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
+
+A tabela-horário é representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representação da tabela \ref{tab:solucao_toy_codificada}, além de armazenar o valor da função objetivo e as matrizes dinâmicas.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -951,6 +953,14 @@ Neste capítulo é apresentado as conclusões e alguns trabalhos futuros
 
 
 \section{Conclusões}
+
+O algoritmo implementado produziu bons resultados, obtendo resultados competitivos para o ITC-2007. Alguns pontos positivos e negativos podem ser destacados no GRASP. Entre os pontos positivos está o mecanismo de geração da solução inicial que produz soluções viáveis levando-se em consideração os custos das violações fracas. A maioria dos algoritmos na literatura focam apenas na viabilidade da solução, o que acaba produzindo soluções iniciais com alto valor de função objetivo. Outro ponto positivo é facilidade de regular o comportamento do algoritmo. Caso queira ele mais guloso ou mais aleatória basta ajustar um parâmetro.
+
+Um ponto negativo observado é a falta de memória entre as iterações. {\it O Path-relinking} melhorou um pouco este quesito, mas os ganhos não foram tão grandes.
+
+Observando estes pontos conclui-se que o GRASP prioriza mais a diversificação do que a intensificação. Para introduzir mais intensificação, é preciso dar mais tempo de execução à fase de busca local. No caso específico do problema de tabela-horário a intensificação é crucial para alcançar boas respostas.
+
+Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos. 
 
 {\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
 

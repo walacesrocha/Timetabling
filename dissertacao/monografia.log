@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  28 DEC 2012 18:27
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  28 DEC 2012 18:55
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -616,27 +616,27 @@ cm/m/it/12 c\OT1/ptmcm/m/n/12 ][\OML/ptmcm/m/it/12 d\OT1/ptmcm/m/n/12 ][\OML/pt
 mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
  []
 
-[40]
+[40] [41]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [41] [42] [43]
-Overfull \hbox (4.35294pt too wide) in paragraph at lines 846--877
+ <./Diagrama.eps> [42] [43]
+Overfull \hbox (4.35294pt too wide) in paragraph at lines 848--879
 [][] [] 
  []
 
 [44] [45]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 892.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 894.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 892.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 894.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 892.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 894.
 
-Overfull \hbox (87.97658pt too wide) in paragraph at lines 892--912
+Overfull \hbox (87.97658pt too wide) in paragraph at lines 894--914
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 892--912
+Underfull \hbox (badness 10000) in paragraph at lines 894--914
 
  []
 
@@ -733,13 +733,13 @@ p. 151--162, 1985. Dis-po-ní-vel em:
 
 ) [53]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 975.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 985.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 975.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 985.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 977--978
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 987--988
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/Timetabling\T1/ptm/m/n/12 .
@@ -748,7 +748,7 @@ esrocha/Timetabling\T1/ptm/m/n/12 .
 [54
 
 ]
-Overfull \hbox (70.31583pt too wide) in paragraph at lines 1013--1026
+Overfull \hbox (70.31583pt too wide) in paragraph at lines 1023--1036
 [][] 
  []
 
@@ -766,4 +766,4 @@ Here is how much of TeX's memory you used:
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (56 pages, 154088 bytes).
+Output written on monografia.dvi (56 pages, 156712 bytes).

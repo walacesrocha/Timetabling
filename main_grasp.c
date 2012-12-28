@@ -176,7 +176,7 @@ int main(int argc, char** argv) {
     //p->txSwap = atof(argv[4]);
     //p->nIterSemMelhoras = atoi(argv[5]);
     //p->threshold = atof(argv[6]);
-    p->pAproveitamento = 0.7;//atof(argv[7]);
+    p->pAproveitamento = 0.95;//atof(argv[7]);
     p->pesoHard = 10000;
 
     /*for (i = 0; i < p->nCurriculos; i++) {

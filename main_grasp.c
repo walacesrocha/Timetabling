@@ -298,7 +298,7 @@ int main(int argc, char** argv) {
     printf("MinWorkDays: %f\n", p->soft2);
     printf("CurrCompactness: %f\n", p->soft3);
     printf("RoomStability: %f\n", p->soft4);
-
+    printf("%.2f <-> %.2f <-> %.2f\n", p->f1, p->f2, p->f3);
     printf("F1 -> F2: %f\n", p->f2 - p->f1);
     printf("F2 -> F3: %f\n", p->f3 - p->f2);
     printf("TEMPO: %f\n", ((double) (p->fim - p->inicio)) / CLOCKS_PER_SEC);

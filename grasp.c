@@ -1621,7 +1621,7 @@ Individuo *grasp(Problema *p) {
     float fo, foIter, foPR, melhor = 9999999;
     Individuo *ind, *bestInd, *indPr, *bestIter;
     AuxGrasp *auxGrasp;
-    int iteracoesExecutadas=0;
+    int iteracoesExecutadas = 0;
 
     auxGrasp = geraAuxGrasp(p);
 
@@ -1633,6 +1633,8 @@ Individuo *grasp(Problema *p) {
     p->f1 = p->f2 = p->f3 = 0;
 
     for (i = 0; i < p->maxIterGrasp; i++) {
+
+        p->pAproveitamento = (float) rand() / RAND_MAX;
         //printf("Iter:%d\n", i + 1);
         if (i == 0) {
             geraSolucaoInicialGrasp(p, auxGrasp, NULL);
@@ -1689,6 +1691,8 @@ Individuo *grasp(Problema *p) {
         if (p->info) {
             printf("F2: %f\n", fo);
         }
+
+        printf("%.2f: %f\n", p->pAproveitamento, fo);
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //printf("\n\n\n", fo);
@@ -1702,6 +1706,7 @@ Individuo *grasp(Problema *p) {
 
         if (i > 1/*auxGrasp->tPool*/ && p->buscaLocalGrasp <= 7) {// se pool de elites ja esta cheio
             indPr = pathRelinking2(p, ind, auxGrasp);
+            zeraMatCurrDiasPeriodos(p, indPr);
             inicializaMatrizesAuxiliares(p, indPr);
             foPR = funcaoObjetivo(p, indPr, 10000);
             indPr->fitness = foPR;
@@ -1782,7 +1787,7 @@ Individuo *grasp(Problema *p) {
         }
         //printf("%f %f %f\n", p->f1, p->f2, p->f3);
         fflush(stdout);
-        
+
         iteracoesExecutadas++;
 
         if (esgotouTempoLimite(p))break;

@@ -722,7 +722,6 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     tMin = p->tf;
     beta = p->beta;
 
-
     solucaoAtual = indInicial;
     //Gerador *gerador = getGeradorInicial(p->dimensao);
     t0 = p->t0;
@@ -738,9 +737,9 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
             if (pViz < 0.5) {
                 movimento = geraSwap(p, solucaoAtual);
-            } else if (pViz < 10.01) {
+            } else if (pViz < 1.01) {
                 movimento = geraMove(p, solucaoAtual);
-            } else if (pViz < 0.015) {
+            } else if (pViz < 0.999) {
                 movimento = geraTimeMove(p, solucaoAtual);
             } else if (pViz < 0.02) {
                 movimento = geraRoomMove(p, solucaoAtual);

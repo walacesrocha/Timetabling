@@ -503,7 +503,7 @@ int somaAulasIsoladas(Problema *p, Individuo *ind) {
         }
     }
 
-    return soma * p->pesoIL; // peso 2
+    return soma; // peso 2
 
 }
 
@@ -563,7 +563,7 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
         }
         //printf("%s: %d\n",(p->disciplinas+i)->nomeDisciplina,totalDias);
         if (totalDias < (p->disciplinas + i)->minDiasAula) {
-            soma2 += p->pesoMW * ((p->disciplinas + i)->minDiasAula - totalDias);
+            soma2 += ((p->disciplinas + i)->minDiasAula - totalDias);
         }
 
     }
@@ -571,6 +571,11 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
     //zeraMatCurrDiasPeriodos(p, a);
     //inicializaMatCurrDiasPeriodos(p, a);
     soma3 = somaAulasIsoladas(p, a);
+    
+    soma1 *= p->pesoRC;
+    soma2 *= p->pesoMW;
+    soma3 *= p->pesoIL;
+    soma4 *= p->pesoRS;
 
     a->soft1 = soma1;
     a->soft2 = soma2;

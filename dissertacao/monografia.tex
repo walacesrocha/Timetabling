@@ -30,7 +30,7 @@
 \coorientador{Maria Cristina Rangel}
 
 
-\comentario{Dissertação apresentada para obtenção do Grau de Bacharel em Ciência
+\comentario{Dissertação apresentada como requisito parcial para obtenção do Grau de Mestre em Ciência
 da Computação pela Universidade Federal do Espírito Santo.}
 
 
@@ -48,18 +48,20 @@ Federal do Espírito Santo}
 \folhaderosto
 
 \begin{folhadeaprovacao}
-Dissertação de Projeto Final de Graduação sob o título \textit{``\ABNTtitulodata''},
+Dissertação apresentada como requisito parcial para obtenção do Grau de Mestre em Ciência da Computação sob o título \textit{``\ABNTtitulodata''},
 defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vitória,
 Estado do Espírito Santo, pela banca examinadora constituída pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
 
-\assinatura{Profa. Dr. Maria Claudia Silva Boeres\\ Orientadora}
-\assinatura{Profa. Dr. Maria Cristina Rangel\\ Co-orientadora}
+\assinatura{Profa. Dra. Maria Claudia Silva Boeres\\ Orientadora}
+\assinatura{Profa. Dra. Maria Cristina Rangel\\ Co-orientadora}
 \assinatura{Prof. Dr. Fulano de Tal\\ Universidade Federal do Espírito Santo}
 \end{folhadeaprovacao}
+
 \begin{resumo}
-Escreva aqui o texto do seu resumo.
+O problema de tabela-horário é de grande destaque na área de otimização combinatória. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um número limitado de horários e salas, respeitando algumas restrições. As formulações são variadas, o que às vezes dificulta a comparação de trabalhos. Este trabalho trata especificamente de tabela-horário de universidades e é adotada a formulação do campeonato internacional de tabela-horário ITC-2007. O problema é resolvido com a meta-heurística GRASP. {\it Hill Climbing} e {\it Simulated Annealing} são usados como fase de busca local do algoritmo e {\it Path-relinking} é implementado para melhorar a versão básica. Testes foram feitos simulando as mesmas regras do compeonato e os resultados obtidos estão competitivos com os obtidos pelos finalistas do ITC-2007.
 \end{resumo}
+
 \begin{abstract}
 Write here the English version of your {}``Resumo''.
 \end{abstract}
@@ -124,11 +126,11 @@ No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as 
 \chapter{Estado da Arte\label{cap:estado-da-arte}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
-{\small Luís de Camões}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
+%{\small Luís de Camões}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo são apresentados ....
+Neste capítulo são apresentados alguns conceitos básicos e uma revisão bibliográfica.
 \newpage
 
 
@@ -193,13 +195,12 @@ A formulação adotada neste trabalho é a do ITC-2007. Como foi visto na seção \re
 \chapter{Proposta do trabalho\label{cap:proposta-trabalho}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado a proposta do trabalho
-...
+Neste capítulo é apresentado a formulação adotada do problema, a estrutura do algoritmo GRASP e sua aplicação.
+
 \newpage
 
 \section{Formulação do ITC-2007\label{sec:formulacao}}
@@ -605,6 +606,33 @@ Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se 
 
 Uma modificação proposta foi fazer a busca em largura, ao invés de em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, já que a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
 
+\begin{algorithm}[H]
+\label{algoHC}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Solução S , $N$, $k$}
+\Saida{Solução $S^{*}$}
+
+$i \leftarrow 0$ \;
+$S^{*} \leftarrow S $ \;
+\While{$i < N$}{
+	$S' \leftarrow GeraVizinho(S^{*}, k) $ \;
+	$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
+	\Se{$ \Delta f < 0$}{
+		$S^{*} \leftarrow S' $ \;
+		$i = 0 $ \;
+	}
+
+	$i \leftarrow i + 1$ \;
+}
+\caption{\textit{Hill Climbing} com geração de k vizinhos por iteração}
+\end{algorithm}
+
+O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Detalhe para a função de geração de vizinho. Além da solução atual, ela recebe como parâmetro o valor de $k$ que é a quantidade de vizinhos que serão gerados. A função retorna o melhor deles.
+
 Foi verificado que esta nova versão consegue explorar melhor o espaço de soluções, conseguindo tabelas-horário melhores com menos tempo de execução.
 
 Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
@@ -628,7 +656,7 @@ $S^{*} \leftarrow S $ \;
 \While{$T > T_f$}{
 	\Para{$i \leftarrow 1$ \Ate $N$}{
 		$S' \leftarrow GeraVizinho(S^{*}) $ \;
-		$\Delta f \leftarrow f(S') - f(S) $ \;
+		$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
 		\Se{$ \Delta f < 0$}{
 			$S^{*} \leftarrow S' $ \;
 		}\Senao{
@@ -691,13 +719,11 @@ $Pool \leftarrow \phi $ \;
 \chapter{Resultados Computacionais\label{cap:resultados}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado os resultados computacionais
-...
+Neste capítulo são apresentados e analisados os testes computacionais.
 \newpage
 
 \section{Descrição das instâncias utilizadas}
@@ -835,6 +861,8 @@ O algoritmo \textit{Simulated Annealing} já é mais complicado de se calibrar. Fo
 Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1.5, T_f = 0.005, \beta = 0.999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo foi decidido manter esse valor. Em cada temperatura são gerados $N = 500$ vizinhos.
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Todas as estrututuras têm igual probabilidade de ocorrer.
+
+O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar é forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
 \section{Análise dos resultados}
 
@@ -978,9 +1006,8 @@ Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
 Neste capítulo são apresentados as conclusões e alguns trabalhos futuros.

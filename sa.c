@@ -790,15 +790,17 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             iteracoesSemMelhora++;
         } while (N > 0);
 
-        printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
-                t0, tMin, nPioras, foAtual,
-                funcaoObjetivo(p, solucaoAtual, pesoHard),
-                somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), pesoHard,
-                solucaoAtual->soft1,
-                solucaoAtual->soft2,
-                solucaoAtual->soft3,
-                solucaoAtual->soft4,
-                melhorFo);
+        if (p->info) {
+            printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
+                    t0, tMin, nPioras, foAtual,
+                    funcaoObjetivo(p, solucaoAtual, pesoHard),
+                    somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), pesoHard,
+                    solucaoAtual->soft1,
+                    solucaoAtual->soft2,
+                    solucaoAtual->soft3,
+                    solucaoAtual->soft4,
+                    melhorFo);
+        }
         t0 *= beta;
 
         foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
@@ -812,7 +814,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
         if (nReaquecimentos == 3) {
             return solucaoAtual;
         }*/
-    } while (t0 > tMin && iteracoesSemMelhora < 10 * p->nIterSemMelhoras);
+    } while (t0 > tMin);
 
     /*printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] It=%ld UM:%ld: %f F*=%.0f\n", t0, tMin, nPioras, foAtual,
             funcaoObjetivo(p, solucaoAtual, pesoHard),

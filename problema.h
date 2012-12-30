@@ -116,6 +116,7 @@ typedef struct problema {
     float pesoRC,pesoMW,pesoIL,pesoRS;
     
     int seed;
+    int info;
 
 } Problema;
 

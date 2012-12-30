@@ -432,9 +432,22 @@ A intensificação é feita pela busca local. Nesta fase a solução inicial é melhor
 
 A heurística \textit{Path-Relinking} (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
 
-A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo).
+A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. 
 
-O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
+A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso específico de tabela-horário. Nas tabelas fictícias da figura estão alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas estão na mesma posição e 3 em posições diferentes, destacadas com um círculo. No caminho percorrido, a cada nova tabela uma posição é corrigida. Todas as tabelas intermediárias são avaliadas pois podem ter melhor função objetivo.
+
+O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário.
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[width=14cm]{./PR.eps}
+ \caption{Trajetória do {\it Path-relinking} ligando duas tabelas}
+   \label{fig:path-relinking}
+\end{center}
+\end{figure}
+
+
+O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
 \begin{algorithm}[H]
 \label{path-relinking}
@@ -833,7 +846,7 @@ Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execu
 
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
 
-Foram testados três versões do algoritmo, variando a busca local:
+Foram testados três versões do algoritmo, variando a busca local.
 
 \begin{itemize}
 \item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$. (Somente um vizinho é gerado por iteração).
@@ -841,74 +854,97 @@ Foram testados três versões do algoritmo, variando a busca local:
 \item {\bf GSA}: Busca local {\it{Simulated Annealing}}.
 \end{itemize}
 
-
+Os parâmetros específicos de cada busca local são os informados na seção anterior.
 
 \begin{center}
 \begin{table}[htbf]
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
-comp01 & 5 & 15 & \textbf{6} & \textbf{6} \\
-comp02 & 24 & 234 & \textbf{116} & 131 \\
-comp03 & 66 & 233 & \textbf{116} & 141 \\
-comp04 & 35 & 137 & \textbf{76} & 78 \\
-comp05 & 290 & 818 & \textbf{429} & 552 \\
-comp06 & 27 & 215 & 132 & \textbf{123} \\
-comp07 & 6 & 205 & \textbf{99} & 120 \\
-comp08 & 37 & 169 & \textbf{84} & 87 \\
-comp09 & 96 & 229 & \textbf{137} & 164 \\
-comp10 & 4 & 183 & \textbf{67} & 78 \\
-comp11 & 0 & 13 & \textbf{0} & \textbf{0} \\ \hline
+Instância & GHC1 & GHC2 & GSA \\ \hline
+comp01	& 15	& 5	& 5 \\
+comp02	& 260	& 130	& 73 \\
+comp03	& 223	& 125	& 98 \\
+comp04	& 168	& 73	& 48 \\
+comp05	& 707	& 525	& 409 \\
+comp06	& 293	& 116	& 75 \\
+comp07	& 266	& 68	& 36 \\
+comp08	& 186	& 77	& 58 \\
+comp09	& 269	& 144	& 119 \\
+comp10	& 245	& 68	& 41 \\
+comp11	& 9	& 0	& 0 \\ \hline
 \end{tabular}
 \medskip
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
-comp12 & 300 & 544 & \textbf{407} & 517 \\
-comp13 & 59 & 206 & \textbf{106} & 120 \\
-comp14 & 51 & 173 & \textbf{90} & 98 \\
-comp15 & 66 & 225 & \textbf{120} & 138 \\
-comp16 & 18 & 198 & \textbf{91} & 104 \\
-comp17 & 56 & 206 & \textbf{122} & 156 \\
-comp18 & 62 & 153 & 133 & \textbf{115} \\
-comp19 & 57 & 207 & \textbf{111} & 139 \\
-comp20 & 4 & 257 & \textbf{130} & 149 \\
-comp21 & 76 & 276 & \textbf{151} & 188 \\
- &  &  &  &   \\ \hline
+Instância & GHC1 & GHC2 & GSA \\ \hline
+comp12	& 847	& 455	& 375 \\
+comp13	& 206	& 110	& 97 \\
+comp14	& 191	& 91	& 72 \\
+comp15	& 218	& 141	& 101 \\
+comp16	& 233	& 96	& 69 \\
+comp17	& 271	& 127	& 105 \\
+comp18	& 179	& 113	& 102 \\
+comp19	& 238	& 122	& 87 \\
+comp20	& 356	& 106	& 88 \\
+comp21	& 301	& 176	& 136 \\
+ &  &  &   \\ \hline
 \end{tabular}
-\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GRASP-HC, GRASP-SA, etc}
+\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
 \end{table}
 \end{center}
+
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre os três, sendo superior em 19 instâncias e empatando com GHC2 em 2 delas.
 
 Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. A competição foi dividida em duas fases. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
 Os cinco melhores algoritmos foram rodados com mais 7 instâncias "ocultas". A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos 5 melhores estão identificadas.
 
-Em cada tabela foi adicionada uma coluna com os resultados pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
+Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
 
-\begin{landscape}
+%\begin{landscape}
 \begin{center}
 \begin{table}[htbf]
 {\small
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & & & & & & Muller & & \\ \hline
-comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112 &	61 &	5 &	97 &	23 &	5 &	114 &	6 \\ 
-comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485 &	1976 &	127 &	393 &	86 &	43 &	295 &	185 \\
-comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433 &	739 &	141 &	314 &	121 &	72 &	229 &	184 \\
-comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405 &	713 &	72 &	283 &	63 &	35 &	199 &	158 \\
-comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096 &	28249 &	10497 &	672 &	851 &	298 &	723 &	421 \\
-comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520 &	3831 &	96 &	464 &	115 &	41 &	278 &	298 \\
-comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643 &	7470 &	103 &	577 &	92 &	14 &	291 &	398 \\
-comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412 &	833 &	75 &	373 &	71 &	39 &	204 &	211 \\
-comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494 &	776 &	159 &	412 &	177 &	103 &	273 &	232 \\
-comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 &	1731 &	81 &	464 &	60 &	9 &	250 &	292 \\
-comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 &	56 &	0 &	99 &	5 &	0 &	26 &	0 \\
-comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 &	1902 &	629 &	770 &	828 &	331 &	818 &	458 \\
-comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460 &	779 &	112 &	408 &	112 &	66 &	214 &	228 \\
-comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393 &	756 &	88 &	487 &	96 &	53 &	239 &	175 \\ \hline
-Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64 &3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 \\ \hline
+Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & \\ \hline
+comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112  \\ 
+comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485  \\
+comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433  \\
+comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405  \\
+comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096  \\
+comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520  \\
+comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643  \\
+comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412  \\
+comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494  \\
+comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 \\
+comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 \\
+comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 \\
+comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460  \\
+comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393  \\ \hline
+Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64  \\ \hline
+\end{tabular}
+\\
+\medskip
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline
+Instância & & & & & Muller & & & GSA \\ \hline
+comp01 & 61 &	5 &	97 &	23 &	5 &	114 &	6 & 5 \\ 
+comp02 & 1976 &	127 &	393 &	86 &	43 &	295 &	185 & 73 \\
+comp03 & 739 &	141 &	314 &	121 &	72 &	229 &	184 & 98 \\
+comp04 & 713 &	72 &	283 &	63 &	35 &	199 &	158 & 48 \\
+comp05 & 28249 & 10497 &672 &	851 &	298 &	723 &	421 & 409 \\
+comp06 & 3831 &	96 &	464 &	115 &	41 &	278 &	298 & 75 \\
+comp07 & 7470 &	103 &	577 &	92 &	14 &	291 &	398 & 36 \\
+comp08 & 833 &	75 &	373 &	71 &	39 &	204 &	211 & 58 \\
+comp09 & 776 &	159 &	412 &	177 &	103 &	273 &	232 & 119 \\
+comp10 & 1731 &	81 &	464 &	60 &	9 &	250 &	292 & 41 \\
+comp11 & 56 &	0 &	99 &	5 &	0 &	26 &	0 & 0 \\
+comp12 & 1902 &	629 &	770 &	828 &	331 &	818 &	458 & 375 \\
+comp13 & 779 &	112 &	408 &	112 &	66 &	214 &	228 & 97 \\
+comp14 & 756 &	88 &	487 &	96 &	53 &	239 &	175 & 72 \\ \hline
+Média & 3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 & 107,57 \\ \hline
 \end{tabular}
 }
 \caption{Resultados primeira fase}
@@ -922,21 +958,21 @@ Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,2
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
 Instância & Atzuna & Clark & Geiger & Lu & Muller & GSA \\ \hline
-comp15 & & & & & & \\ 
-comp16 & & & & & & \\ 
-comp17 & & & & & & \\ 
-comp18 & & & & & & \\ 
-comp19 & & & & & & \\ 
-comp20 & & & & & & \\ 
-comp21 & & & & & & \\  \hline
-Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14  \\ \hline
+comp15 & 82 & 119 & 128 & 71 & 84 & 101 \\ 
+comp16 & 40 & 84 & 81 & 39 & 34 & 69 \\ 
+comp17 & 102 & 152 & 124 & 91 & 83 & 105 \\ 
+comp18 & 68 & 110 & 116 & 69 & 83 & 102 \\ 
+comp19 & 75 & 111 & 107 & 65 & 62 & 87 \\ 
+comp20 & 61 & 144 & 88 & 47 & 27 & 88 \\ 
+comp21 & 123 & 169 & 174 & 106 & 103 & 136 \\  \hline
+Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 \end{tabular}
 }
 \caption{Resultados da segunda fase}
 \label{tab:solucoes_itc2007_2}
 \end{table}
 \end{center}
-\end{landscape}
+%\end{landscape}
 
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
@@ -947,8 +983,7 @@ transforma.}''\\
 {\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado as conclusões e alguns trabalhos futuros
-...
+Neste capítulo são apresentados as conclusões e alguns trabalhos futuros.
 \newpage
 
 
@@ -960,7 +995,13 @@ Um ponto negativo observado é a falta de memória entre as iterações. {\it O Path
 
 Observando estes pontos conclui-se que o GRASP prioriza mais a diversificação do que a intensificação. Para introduzir mais intensificação, é preciso dar mais tempo de execução à fase de busca local. No caso específico do problema de tabela-horário a intensificação é crucial para alcançar boas respostas.
 
-Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos. 
+Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos.
+
+É importante ressaltar também a relevância que as estruturas de vizinhança tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções.
+
+\section{Trabalhos futuros}
+
+Uma continuação possível para este trabalho é a obtenção de respostas competitivas com as disponíveis no site \cite{ctt}. Este site foi proposto como continuação do ITC-2007 e reúne respostas melhores que as obtidas pelos competidores. No entanto o limite de tempo de execução é descartado e o enfoque é apenas na qualidade das soluções.
 
 {\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
 
@@ -1020,7 +1061,7 @@ O Algortimo exibe ao final a quantidade de violações fortes e fracas, além da re
 
 \begin{center}
 \begin{table}[!htb]
-\begin{tabular}{|c|c|c|}\hline
+\begin{tabular}{|c|p{10cm}|c|}\hline
 {\bf Parâmetro} & {\bf Descrição} & {\bf Valor padrão} \\ \hline
 maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
  alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
@@ -1031,7 +1072,8 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
  tf & Temperatura final no SA & 0.001 \\ \hline
  beta & Taxa de resfriamento no SA & 0.995 \\ \hline
  seed & Seed de geração de números aleatorios & 0 \\ \hline
- time & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+ timeout & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+ info & Flag \texttt{info=1} indica que informações devem ser impressas na tela durante a execução & 0 \\ \hline
 \end{tabular}
 \caption{Parâmetros do GRASP e seus valores padrão}
 \label{tab:parametros}

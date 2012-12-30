@@ -66,6 +66,7 @@ void contaAulas(Problema *p, Individuo *ind) {
 void configuraParametros(Problema *p, int argc, char **argv) {
     p->maxIterGrasp = 200;
     p->threshold = 0.15;
+    p->pAproveitamento = 0;
     p->buscaLocalGrasp = 2;
     p->nIterSemMelhoras = 10000;
     p->k = 10;
@@ -74,6 +75,7 @@ void configuraParametros(Problema *p, int argc, char **argv) {
     p->beta = 0.995;
     p->seed = 0;
     p->tempoLimite = -1;
+    p->info = 0;
 
     int i;
 
@@ -96,12 +98,12 @@ void configuraParametros(Problema *p, int argc, char **argv) {
         if (strncmp("n", argv[i], 1) == 0) {
             p->nIterSemMelhoras = atoi(argv[i] + 2);
         }
-        
+
         if (strncmp("k", argv[i], 1) == 0) {
             p->k = atoi(argv[i] + 2);
         }
 
-        if (strncmp("ti", argv[i], 2) == 0) {
+        if (strncmp("ti=", argv[i], 3) == 0) {
             p->t0 = atof(argv[i] + 3);
         }
 
@@ -112,19 +114,28 @@ void configuraParametros(Problema *p, int argc, char **argv) {
         if (strncmp("beta", argv[i], 4) == 0) {
             p->beta = atof(argv[i] + 5);
         }
-        
+
         if (strncmp("alfa", argv[i], 4) == 0) {
             p->threshold = atof(argv[i] + 5);
         }
-        
-        if (strncmp("time", argv[i], 4) == 0) {
-            p->tempoLimite = atoi(argv[i] + 5);
+
+        if (strncmp("timeout", argv[i], 7) == 0) {
+            p->tempoLimite = atoi(argv[i] + 8);
         }
-        
+
+        if (strncmp("info", argv[i], 4) == 0) {
+            p->info = atoi(argv[i] + 5);
+        }
+
+        if (strncmp("txap", argv[i], 4) == 0) {
+            p->pAproveitamento = atof(argv[i] + 5);
+        }
+
     }
 
     printf("MaxIter: %d\n", p->maxIterGrasp);
     printf("Threshold: %f\n", p->threshold);
+    printf("Tx. Aprov.: %f\n", p->pAproveitamento);
     printf("Busca local: %d\n", p->buscaLocalGrasp);
     printf("n: %d\n", p->nIterSemMelhoras);
     printf("k: %d\n", p->k);
@@ -132,7 +143,8 @@ void configuraParametros(Problema *p, int argc, char **argv) {
     printf("Tf: %f\n", p->tf);
     printf("Beta: %f\n", p->beta);
     printf("Seed: %d\n", p->seed);
-    printf("Time: %d\n", p->tempoLimite);
+    printf("Timeout: %d\n", p->tempoLimite);
+    printf("Info: %d\n", p->info);
 }
 
 /*
@@ -176,7 +188,7 @@ int main(int argc, char** argv) {
     //p->txSwap = atof(argv[4]);
     //p->nIterSemMelhoras = atoi(argv[5]);
     //p->threshold = atof(argv[6]);
-    p->pAproveitamento = 0.95;//atof(argv[7]);
+    //p->pAproveitamento = 0.95;//atof(argv[7]);
     p->pesoHard = 10000;
 
     /*for (i = 0; i < p->nCurriculos; i++) {
@@ -266,7 +278,6 @@ int main(int argc, char** argv) {
         printf("%s\t%d\n",p->disciplinas[i].nomeDisciplina,p->disciplinas[i].nIndisponibilidades);
     }*/
 
-    p->tempoLimite = 350;
     p->inicio = clock();
     ind = grasp(p);
     p->fim = clock();
@@ -277,6 +288,8 @@ int main(int argc, char** argv) {
     p->aceitaPioraSA = atoi(argv[5]);*/
 
     //ind = buscaLocalGraspProfundidade(p, ind);
+    zeraMatCurrDiasPeriodos(p, ind);
+    inicializaMatrizesAuxiliares(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft2(p, ind));
@@ -292,7 +305,7 @@ int main(int argc, char** argv) {
 
     //imprimeResposta(p,ind, stdout);
 
-    printf("\nWARNING: ESCOLHA DO P2 NO MOVE COMPACT\n");
+    //printf("\nWARNING: ESCOLHA DO P2 NO MOVE COMPACT\n");
 
     t2 = clock();
 

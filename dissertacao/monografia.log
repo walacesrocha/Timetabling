@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  30 DEC 2012 15:32
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  31 DEC 2012 00:02
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -594,22 +594,22 @@ Cap\'{\i }tulo 4.
 [38
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 741--741
+Underfull \hbox (badness 10000) in paragraph at lines 745--745
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 741--741
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 745--745
 []\T1/ptm/b/n/12 Disponibi-
  []
 
 [39]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 778--785
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 782--789
 [][] 
  []
 
 [40]
-Overfull \hbox (71.72919pt too wide) in paragraph at lines 817--818
+Overfull \hbox (71.72919pt too wide) in paragraph at lines 821--822
 []\T1/ptm/m/n/12 A ter-ceira ma-triz, $\OML/ptmcm/m/it/12 CurrDiasPeriodos$\T1/
 ptm/m/n/12 , é tri-di-men-si-o-nal com ta-ma-nho $\OML/ptmcm/m/it/12 C \OMS/pzc
 cm/m/n/12 ^^B \OML/ptmcm/m/it/12 D \OMS/pzccm/m/n/12 ^^B \OML/ptmcm/m/it/12 P$\
@@ -621,20 +621,20 @@ mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
 [41] [42]
 File: ./Diagrama.eps Graphic file (type eps)
  <./Diagrama.eps> [43]
-Overfull \hbox (10.38771pt too wide) in paragraph at lines 865--866
+Overfull \hbox (10.38771pt too wide) in paragraph at lines 869--870
 \T1/ptm/m/n/12 forma de li-gar duas so-lu-ções. Tes-tes con-fir-ma-ram que as o
 b-ser-va-ções de [[]]
  []
 
 [44] [45]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 937.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 937.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 937.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 
-Overfull \hbox (29.87001pt too wide) in paragraph at lines 937--978
+Overfull \hbox (29.87001pt too wide) in paragraph at lines 941--982
 [][] 
  []
 
@@ -728,13 +728,13 @@ p. 151--162, 1985. Dis-po-ní-vel em:
 
 ) [54]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1053.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1057.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1053.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1057.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 1055--1056
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 1059--1060
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/Timetabling\T1/ptm/m/n/12 .
@@ -750,11 +750,11 @@ esrocha/Timetabling\T1/ptm/m/n/12 .
 [56] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
  4351 strings out of 94501
- 55671 string characters out of 1176790
+ 55677 string characters out of 1176790
  145672 words of memory out of 1000000
  7402 multiletter control sequences out of 10000+50000
  65606 words of font info for 101 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (57 pages, 163796 bytes).
+Output written on monografia.dvi (57 pages, 164048 bytes).

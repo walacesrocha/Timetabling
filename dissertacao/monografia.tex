@@ -618,7 +618,7 @@ Uma modificação proposta foi fazer a busca em largura, ao invés de em profundida
 
 $i \leftarrow 0$ \;
 $S^{*} \leftarrow S $ \;
-\While{$i < N$}{
+\Enqto{$i < N$}{
 	$S' \leftarrow GeraVizinho(S^{*}, k) $ \;
 	$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
 	\Se{$ \Delta f < 0$}{
@@ -653,7 +653,7 @@ O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealin
 
 $T \leftarrow T_i$ \;
 $S^{*} \leftarrow S $ \;
-\While{$T > T_f$}{
+\Enqto{$T > T_f$}{
 	\Para{$i \leftarrow 1$ \Ate $N$}{
 		$S' \leftarrow GeraVizinho(S^{*}) $ \;
 		$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
@@ -686,33 +686,36 @@ Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de e
 
 Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na construção inicial fica garantida.
 
+A versão completa da implementação do GRASP está representada no algoritmo \ref{algoGraspFinal}. Observe que a fase de busca local é configurável, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}.
+
 
 \begin{algorithm}[H]
-\label{algoBase}
+\label{algoGraspFinal}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{Instância p, MaxIter, TamPool}
+\Entrada{MaxIter, MaxElite}
 \Saida{Solução $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
-$Pool \leftarrow \phi $ \;
+$Elite \leftarrow \emptyset $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
 	$S \leftarrow GeraSolucaoInicial() $ \;
-	$S \leftarrow BuscaLocal(S) $ \;
-	\Se{$ i > TamPool $}{
-		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+	$S \leftarrow BuscaLocal(S) $  \tcp{Hill Climbing ou Simulated Annealing} 
+	\Se{$ i \geq 2 $}{
+		Selecione aleatoriamente $S_{elite} \in Elite $ \;
 		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
 	}
 	\Se{$ f(S) < f^{*} $}{
 		$S^{*} \leftarrow S $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
-	$AtualizaPool(S, Pool)$ \;
+	$AtualizaPool(S, Elite) $ \;
 }
-\caption{Algoritmo GRASP}
+\caption{Algoritmo GRASP para o ITC-2007}
+
 \end{algorithm}
 
 

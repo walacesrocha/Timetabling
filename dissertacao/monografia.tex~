@@ -1031,19 +1031,21 @@ Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algo
 
 \section{Trabalhos futuros}
 
-Uma continuação possível para este trabalho é a obtenção de respostas competitivas com as disponíveis no site \cite{ctt}. Este site foi proposto como continuação do ITC-2007 e reúne respostas melhores que as obtidas pelos competidores. No entanto o limite de tempo de execução é descartado e o enfoque é apenas na qualidade das soluções.
+Foram detectadas algumas possíveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementação de estruturas de vizinhanças mais específicas. \textit{MOVE} e \textit{SWAP} são estruturas genéricas que podem eliminar qualquer tipo de restrição forte ou fraca. As específicas fariam movimentos mais direcionados à redução de alguma violação específica, como por exemplo, espalhar aulas de uma disciplina na semana para dimunir a violação de dias mínimos de trabalho. Um primeiro estudo neste sentido já foi feito, mas os movimentos eram mais complexos de serem gerados prejudicando o tempo de execução. Uma forma mais eficiente deve ser investigada.
 
-{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
+Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de forma muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar quais aulas estão gerando violações e quais não estão. As que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
 
-Qual foi o resultado do seu trabalho? melhora na área, testes positivos ou negativos?
-Você acha que o mecanismo gerado produziu resultados interessantes?
-Quais os problemas que você encontrou na elaboração do projeto?
-E na implementação do protótipo?
-Que conclusão você tirou das ferramentas utilizadas? (heurísticas, prolog, ALE, banco de dados).
-Em que outras áreas você julga que este trabalho seria interessante de ser aplicado?
-Que tipo de continuidade você daria a este trabalho?
-Que tipo de conhecimento foi necessário para este projeto de graduação?
-Para que serviu este trabalho na sua formação?
+%{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
+
+%Qual foi o resultado do seu trabalho? melhora na área, testes positivos ou negativos?
+%Você acha que o mecanismo gerado produziu resultados interessantes?
+%Quais os problemas que você encontrou na elaboração do projeto?
+%E na implementação do protótipo?
+%Que conclusão você tirou das ferramentas utilizadas? (heurísticas, prolog, ALE, banco de dados).
+%Em que outras áreas você julga que este trabalho seria interessante de ser aplicado?
+%Que tipo de continuidade você daria a este trabalho?
+%Que tipo de conhecimento foi necessário para este projeto de graduação?
+%Para que serviu este trabalho na sua formação?
 
 
 \bibliographystyle{abnt-alf}

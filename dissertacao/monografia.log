@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  31 DEC 2012 18:31
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  9 JAN 2013 00:27
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -505,43 +505,36 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
 
 ]
 Cap\'{\i }tulo 1.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 109.
 [12
 
-]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 96.
-
-Overfull \hbox (3.74834pt too wide) in paragraph at lines 106--107
-[]\T1/ptm/m/n/12 Existe uma ne-ces-si-dade de pro-por al-go-rit-mos cada vez ma
-is efi-ci-en-tes que pro-du-zam tabelas-
- []
-
-[13] [14]
+] [13]
 Cap\'{\i }tulo 2.
-[15
+[14
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 155.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 156.
 
- [16] [17]
-Overfull \hbox (18.53398pt too wide) in paragraph at lines 179--180
+ [15] [16]
+Overfull \hbox (18.53398pt too wide) in paragraph at lines 180--181
 \T1/ptm/m/n/12 meta-heurísticas, tanto pela sim-pli-ci-dade quanto pe-los bons 
 re-sul-ta-dos al-can-ça-dos. Meta-heurísticas
  []
 
-[18]
-Overfull \hbox (58.03914pt too wide) in paragraph at lines 191--192
+[17]
+Overfull \hbox (58.03914pt too wide) in paragraph at lines 192--193
 \T1/ptm/m/n/12 blema, mas para tabela-horário de es-co-las. Como mos-trada na s
 e-ção an-te-rior, [[]]
  []
 
-[19]
+[18]
 Cap\'{\i }tulo 3.
-[20
+[19
 
-] [21]
-Overfull \hbox (18.93867pt too wide) in paragraph at lines 266--267
+] [20]
+Overfull \hbox (18.93867pt too wide) in paragraph at lines 267--268
 \T1/ptm/m/n/12 onde $[][] \OT1/ptmcm/m/n/12 = \OMS/pzccm/m/n/12 j\OML/ptmcm/m/i
 t/12 RFt\OT1/ptmcm/m/n/12 1\OMS/pzccm/m/n/12 j[] \OT1/ptmcm/m/n/12 + \OMS/pzccm
 /m/n/12 j\OML/ptmcm/m/it/12 RFt\OT1/ptmcm/m/n/12 2\OMS/pzccm/m/n/12 j[] \OT1/pt
@@ -553,63 +546,63 @@ T1/ptmcm/m/n/12 4\OMS/pzccm/m/n/12 j[]$\T1/ptm/m/n/12 , $[][] \OT1/ptmcm/m/n/12
 /m/n/12 2\OMS/pzccm/m/n/12 j[] \OT1/ptmcm/m/n/12 +
  []
 
-[22] [23]
-Overfull \hbox (50.75467pt too wide) in paragraph at lines 335--342
+[21] [22]
+Overfull \hbox (50.75467pt too wide) in paragraph at lines 336--343
 [][] 
  []
 
-[24]
-Overfull \hbox (45.01912pt too wide) in paragraph at lines 365--366
+[23]
+Overfull \hbox (45.01912pt too wide) in paragraph at lines 366--367
 \T1/ptm/m/n/12 na-ri-za-ção de gra-fos [[]], ro-te-a-mento de cir-cui-tos vir-t
 u-ais [[]],
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 381.
-[25] [26]
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 382.
+[24] [25]
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 432.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 433.
 
-Overfull \hbox (42.3399pt too wide) in paragraph at lines 434--435
+Overfull \hbox (42.3399pt too wide) in paragraph at lines 435--436
 []\T1/ptm/m/n/12 A heu-rís-tica \T1/ptm/m/it/12 Path-Relinking \T1/ptm/m/n/12 (
 re-li-ga-mento de ca-mi-nhos) foi ori-gi-nal-mente pro-posta por [[]]
  []
 
-[27]
+[26]
 File: ./PR.eps Graphic file (type eps)
- <./PR.eps> [28] [29]
-Underfull \hbox (badness 1742) in paragraph at lines 523--523
+ <./PR.eps> [27] [28]
+Underfull \hbox (badness 1742) in paragraph at lines 524--524
 []\T1/ptm/b/n/12 Algoritmo 4: \T1/ptm/m/n/12 Al-go-ritmo GRASP com \T1/ptm/m/it
 /12 Path-Relinking \T1/ptm/m/n/12 para in-ten-si-fi-ca-ção e pós-
  []
 
-[30] [31] [32] [33]
-Overfull \hbox (1.2792pt too wide) in paragraph at lines 638--639
+[29] [30] [31] [32]
+Overfull \hbox (1.2792pt too wide) in paragraph at lines 639--640
 \T1/ptm/m/n/12 de es-ca-par de mí-ni-mos lo-cais. A op-ção ado-tada foi usar \T
 1/ptm/m/it/12 Si-mu-la-ted An-ne-a-ling\T1/ptm/m/n/12 [[]].
  []
 
-[34] [35] [36] [37]
+[33] [34] [35] [36]
 Cap\'{\i }tulo 4.
-[38
+[37
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 744--744
+Underfull \hbox (badness 10000) in paragraph at lines 745--745
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 744--744
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 745--745
 []\T1/ptm/b/n/12 Disponibi-
  []
 
-[39]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 781--788
+[38]
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 782--789
 [][] 
  []
 
-[40]
-Overfull \hbox (71.72919pt too wide) in paragraph at lines 820--821
+[39]
+Overfull \hbox (71.72919pt too wide) in paragraph at lines 821--822
 []\T1/ptm/m/n/12 A ter-ceira ma-triz, $\OML/ptmcm/m/it/12 CurrDiasPeriodos$\T1/
 ptm/m/n/12 , é tri-di-men-si-o-nal com ta-ma-nho $\OML/ptmcm/m/it/12 C \OMS/pzc
 cm/m/n/12 ^^B \OML/ptmcm/m/it/12 D \OMS/pzccm/m/n/12 ^^B \OML/ptmcm/m/it/12 P$\
@@ -618,31 +611,31 @@ cm/m/it/12 c\OT1/ptmcm/m/n/12 ][\OML/ptmcm/m/it/12 d\OT1/ptmcm/m/n/12 ][\OML/pt
 mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
  []
 
-[41] [42]
+[40] [41]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [43]
-Overfull \hbox (10.38771pt too wide) in paragraph at lines 868--869
+ <./Diagrama.eps> [42]
+Overfull \hbox (10.38771pt too wide) in paragraph at lines 869--870
 \T1/ptm/m/n/12 forma de li-gar duas so-lu-ções. Tes-tes con-fir-ma-ram que as o
 b-ser-va-ções de [[]]
  []
 
-[44] [45]
+[43] [44]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 940.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 940.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 940.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 941.
 
-Overfull \hbox (29.87001pt too wide) in paragraph at lines 940--981
+Overfull \hbox (29.87001pt too wide) in paragraph at lines 941--982
 [][] 
  []
 
-[46] [47]
+[45] [46]
 Cap\'{\i }tulo 5.
-[48
+[47
 
-] [49] (./monografia.bbl [50]
+] [48] (./monografia.bbl [49]
 Underfull \hbox (badness 1112) in paragraph at lines 10--16
 []\T1/ptm/m/n/12 ACHá, R. A.; NI-EUWE-NHUIS, R. Curriculum-based course
  []
@@ -671,7 +664,7 @@ Underfull \hbox (badness 1028) in paragraph at lines 19--26
 z. Dis-po-ní-vel em:
  []
 
-[51
+[50
 
 ]
 Underfull \hbox (badness 1796) in paragraph at lines 181--187
@@ -685,7 +678,7 @@ Underfull \hbox (badness 2111) in paragraph at lines 181--187
 s-po-ní-vel em:
  []
 
-[52]
+[51]
 Underfull \hbox (badness 10000) in paragraph at lines 205--207
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
@@ -714,7 +707,7 @@ Underfull \hbox (badness 1226) in paragraph at lines 259--265
 653-3. Dis-po-ní-vel em:
  []
 
-[53]
+[52]
 Underfull \hbox (badness 10000) in paragraph at lines 273--279
 []\T1/ptm/m/n/12 WERRA, D. de. An in-tro-duc-tion to ti-me-ta-bling. \T1/ptm/m/
 it/12 Eu-ro-pean Jour-
@@ -726,28 +719,28 @@ Underfull \hbox (badness 5374) in paragraph at lines 273--279
 p. 151--162, 1985. Dis-po-ní-vel em:
  []
 
-) [54]
+) [53]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1058.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1059.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1058.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1059.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 1060--1061
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 1061--1062
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/Timetabling\T1/ptm/m/n/12 .
  []
 
-[55
+[54
 
 ]
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[56] (./monografia.aux) ) 
+[55] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
  4350 strings out of 94501
  55672 string characters out of 1176790
@@ -757,4 +750,4 @@ Here is how much of TeX's memory you used:
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1282b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (57 pages, 164156 bytes).
+Output written on monografia.dvi (56 pages, 163580 bytes).

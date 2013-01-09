@@ -115,6 +115,8 @@ typedef struct problema {
     float pesoHard;
     float pesoRC,pesoMW,pesoIL,pesoRS;
     
+    long vHard, semEfeito, comMelhora, comPiora;
+    
     int seed;
 
 } Problema;

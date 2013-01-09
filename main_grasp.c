@@ -289,6 +289,7 @@ int main(int argc, char** argv) {
     printf("F1 -> F2: %f\n", p->f2 - p->f1);
     printf("F2 -> F3: %f\n", p->f3 - p->f2);
     printf("TEMPO: %f\n", ((double) (p->fim - p->inicio)) / CLOCKS_PER_SEC);
+    printf("%d, %d, %d, %d\n", p->vHard, p->semEfeito, p->comPiora, p->comMelhora);
 
     //imprimeResposta(p,ind, stdout);
 

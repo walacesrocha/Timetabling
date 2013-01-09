@@ -66,6 +66,7 @@ Problema *alocaProblema() {
     p->pesoIL = 2;
     p->pesoRS = 1;
 
+    p->vHard = p->comMelhora = p->semEfeito = p->comPiora = 0;
     return p;
 }
 

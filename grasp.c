@@ -1009,6 +1009,41 @@ void perturbaSolucao(Problema *p, Individuo *ind) {
     printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
 }
 
+void coletaEstatisticas(Problema *p, Individuo *ind) {
+    int vHard, semEfeito, comMelhora, comPiora;
+    int i, p1, p2, total;
+    float f0, f1;
+    Neighbour *neighbour;
+
+    vHard = semEfeito = comMelhora = comPiora = 0;
+    total = 1000;
+
+    for (i = 0; i < 1000; i++) {
+        if (((float) rand()) / RAND_MAX < 0.5) {
+            neighbour = geraMove(p, ind);
+        } else {
+            neighbour = geraSwap(p, ind);
+        }
+
+        if (neighbour->deltaHard > 0) {
+            vHard++;
+        } else if (neighbour->deltaSoft > 0) {
+            comPiora++;
+        } else if (neighbour->deltaSoft < 0) {
+            comMelhora++;
+        } else {
+            semEfeito++;
+        }
+
+    }
+
+    printf("%d, %d, %d, %d\n", vHard, semEfeito, comPiora, comMelhora);
+    /*printf("=: %f\n", 100*semEfeito/total);
+    printf(">: %f\n", 100*comPiora/total);
+    printf("<: %f\n", 100*comMelhora/total);**/
+
+}
+
 Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     Neighbour **vizinhos;
     float foAtual;
@@ -1017,6 +1052,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     int melhorVizinho;
     long totalElementos = 0;
     float pViz;
+    int count = 0;
 
     nVizinhos = p->k;
 
@@ -1039,7 +1075,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
             if (pViz < 0.5) {
                 vizinhos[i] = geraSwap(p, indInicial);
-            } else if (pViz < 0.9999999) {
+            } else if (pViz < 1.4) {
                 vizinhos[i] = geraMove(p, indInicial);
             } else if (pViz < 0.6) {
                 vizinhos[i] = geraTimeMove(p, indInicial);
@@ -1049,6 +1085,18 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
                 vizinhos[i] = geraIsolatedLectureMove(p, indInicial);
             } else {
                 vizinhos[i] = geraMinWorkingDaysMove(p, indInicial);
+            }
+
+            if (1) {
+                if (vizinhos[i]->deltaHard > 0) {
+                    p->vHard++;
+                } else if (vizinhos[i]->deltaSoft > 0) {
+                    p->comPiora++;
+                } else if (vizinhos[i]->deltaSoft < 0) {
+                    p->comMelhora++;
+                } else {
+                    p->semEfeito++;
+                }
             }
 
             totalElementos += nVizinhos;
@@ -1091,7 +1139,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
             foAtual += deltaF;
             //melhorInd = solucaoAtual;
             if (deltaF < 0) {
-                printf("LH: %f\n", foAtual);
+                //printf("LH: %f\n", foAtual);
                 iteracoesSemMelhora = 0; // continua buscando
                 //zeraListaTabu(listaTabu, p->dimensao);
             }
@@ -1125,7 +1173,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
 
 
         iteracoesSemMelhora++;
-
+        count++;
 
         /*if (iteracoesSemMelhora % 2000 == 0 && nPerturbacoes < 3) {
             printf("perturbando solucao\n");
@@ -1624,7 +1672,7 @@ Individuo *grasp(Problema *p) {
 
     bestInd = alocaIndividuo();
     criaIndividuo(bestInd, p);
-    
+
     printf("GRASP\n");
 
     p->mediaSolucoes = 0;
@@ -1652,7 +1700,7 @@ Individuo *grasp(Problema *p) {
 
         foIter = funcaoObjetivo(p, ind, 10000);
         p->pesoHard = 10000;
-        
+
 
         if (p->buscaLocalGrasp == 1) {
             ind = buscaLocalGraspProfundidade(p, ind);

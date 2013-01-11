@@ -118,6 +118,7 @@ typedef struct problema {
     long vHard, semEfeito, comMelhora, comPiora;
     
     int seed;
+    int info;
 
 } Problema;
 

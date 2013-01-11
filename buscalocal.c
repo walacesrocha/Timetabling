@@ -1607,7 +1607,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     int i, iteracoes = 0;
     int haMelhoras;
     int pMov;
-    Movimento movimentos[6] = {TIME_MOVE, ROOM_MOVE,MIN_WORKING_DAYS_MOVE, COMPACT, MOVE, SWAP};
+    Movimento movimentos[6] = {TIME_MOVE, ROOM_MOVE, MIN_WORKING_DAYS_MOVE, COMPACT, MOVE, SWAP};
     int iteracoesMax[6] = {0, 0, 0, 0, 0, 0};
     int nMovs = 6;
     Neighbour *neighbour;
@@ -1652,19 +1652,19 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
 
                 }
 
-                deltaF = neighbour->deltaHard*p->pesoHard + neighbour->deltaSoft;
+                deltaF = neighbour->deltaHard * p->pesoHard + neighbour->deltaSoft;
 
                 if (deltaF <= 0) {// função objetivo decresceu
                     foAtual += deltaF;
-                    
-                    troca_par_completo(p,solucaoAtual,neighbour->p1,neighbour->p2);
+
+                    troca_par_completo(p, solucaoAtual, neighbour->p1, neighbour->p2);
                     //melhorInd = solucaoAtual;
                     if (deltaF < 0) {
                         printf("VNS: %f\n", foAtual);
                         haMelhoras = 1;
                         iteracoes = 0; // continua buscando
                     }
-                } 
+                }
 
                 //printf("ADesalocar: %p %p %p\n", aDesalocar, solucaoAtual, vizinho);
                 free(neighbour);
@@ -1772,7 +1772,7 @@ float checaAulasIsoladas(Problema *p, Individuo *ind, int*curriculos, int nCurri
         }
     }
 
-    return soma * p->pesoIL; // peso 2
+    return soma; // peso 2
 
 
 }
@@ -1810,11 +1810,10 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     int totalMaxCurriculos, nCurriculos;
     int dia1, dia2;
     int sala1, sala2;
-    
-    move->deltaHard = move->deltaSoft = 0;
-
     Sala *s1, *s2;
     Disciplina *disc1, *disc2;
+
+    move->deltaHard = move->deltaSoft = 0;
 
     p1 = move->p1;
     p2 = move->p2;
@@ -1833,8 +1832,8 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     // calcula deltaHard
     move->deltaHard = hard2 - hard1;
-    
-    if (move->deltaHard > 0){
+
+    if (move->deltaHard > 0) {
         return;
     }
 
@@ -1930,12 +1929,12 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     // MIN_WORKING_DAYS
     if (totalDiasOcupados1 < disc1->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW1 += (disc1->minDiasAula - totalDiasOcupados1)* p->pesoMW; // peso = 5
+        MW1 += (disc1->minDiasAula - totalDiasOcupados1); // peso = 5
     }
     // MIN_WORKING_DAYS
     if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW1 += (disc2->minDiasAula - totalDiasOcupados2)* p->pesoMW; // peso = 5
+        MW1 += (disc2->minDiasAula - totalDiasOcupados2); // peso = 5
     }
 
 
@@ -2055,12 +2054,12 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     // MIN_WORKING_DAYS
     if (totalDiasOcupados1 < disc1->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW2 += (disc1->minDiasAula - totalDiasOcupados1)* p->pesoMW; // peso = 5
+        MW2 += (disc1->minDiasAula - totalDiasOcupados1); // peso = 5
     }
     // MIN_WORKING_DAYS
     if (disc2 && totalDiasOcupados2 < disc2->minDiasAula) {
         // penalizacao MIN_WORKING_DAYS
-        MW2 += (disc2->minDiasAula - totalDiasOcupados2)* p->pesoMW; // peso = 5
+        MW2 += (disc2->minDiasAula - totalDiasOcupados2); // peso = 5
     }
 
     // restaurando as matrizes originais
@@ -2173,8 +2172,9 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
 
     // calcula deltaSoft
-    soft1 = RC1 + MW1 + IL1 + RS1;
-    soft2 = RC2 + MW2 + IL2 + RS2;
+    soft1 = RC1 * p->pesoRC + MW1 * p->pesoMW + IL1 * p->pesoIL + RS1 + p->pesoRS;
+    soft2 =  RC2 * p->pesoRC + MW2 * p->pesoMW + IL2 * p->pesoIL + RS2 + p->pesoRS;
+    
     move->deltaSoft = soft2 - soft1;
 
 

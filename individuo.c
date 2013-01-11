@@ -29,8 +29,8 @@ void troca_par(Individuo *a, int pos1, int pos2) {
     a->aula[pos2] = aux;
 }
 
-void checaAulasIsoladasEmCurriculo(Problema *p, Individuo *ind, int c){
-    
+void checaAulasIsoladasEmCurriculo(Problema *p, Individuo *ind, int c) {
+
 }
 
 void troca_par_completo(Problema *p, Individuo *a, int pos1, int pos2) {
@@ -187,6 +187,20 @@ void zeraMatCurrDiasPeriodos(Problema *p, Individuo*ind) {
 
 void inicializaMatrizesAuxiliares(Problema *p, Individuo*ind) {
     int i, j, dia, periodo, sala;
+
+
+    for (i = 0; i < p->nDisciplinas; i++) {
+        ind->salasUsadas[i] = (int*) malloc(p->nSalas * sizeof (int));
+        memset(ind->salasUsadas[i], 0, p->nSalas * sizeof (int));
+    }
+
+    // matriz disciplina x dia
+
+    for (i = 0; i < p->nDisciplinas; i++) {
+        ind->diasOcupados[i] = (int*) malloc(p->nDias * sizeof (int));
+        memset(ind->diasOcupados[i], 0, p->nDias * sizeof (int));
+    }
+
     for (i = 0; i < p->dimensao; i++) {
 
         if (ehAula(p, ind->aula[i])) {

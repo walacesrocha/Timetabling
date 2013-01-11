@@ -30,7 +30,7 @@
 \coorientador{Maria Cristina Rangel}
 
 
-\comentario{Dissertação apresentada para obtenção do Grau de Bacharel em Ciência
+\comentario{Dissertação apresentada como requisito parcial para obtenção do Grau de Mestre em Ciência
 da Computação pela Universidade Federal do Espírito Santo.}
 
 
@@ -48,18 +48,20 @@ Federal do Espírito Santo}
 \folhaderosto
 
 \begin{folhadeaprovacao}
-Dissertação de Projeto Final de Graduação sob o título \textit{``\ABNTtitulodata''},
+Dissertação apresentada como requisito parcial para obtenção do Grau de Mestre em Ciência da Computação sob o título \textit{``\ABNTtitulodata''},
 defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vitória,
 Estado do Espírito Santo, pela banca examinadora constituída pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
 
-\assinatura{Profa. Dr. Maria Claudia Silva Boeres\\ Orientadora}
-\assinatura{Profa. Dr. Maria Cristina Rangel\\ Co-orientadora}
+\assinatura{Profa. Dra. Maria Claudia Silva Boeres\\ Orientadora}
+\assinatura{Profa. Dra. Maria Cristina Rangel\\ Co-orientadora}
 \assinatura{Prof. Dr. Fulano de Tal\\ Universidade Federal do Espírito Santo}
 \end{folhadeaprovacao}
+
 \begin{resumo}
-Escreva aqui o texto do seu resumo.
+O problema de tabela-horário é de grande destaque na área de otimização combinatória. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um número limitado de horários e salas, respeitando algumas restrições. As formulações são variadas, o que às vezes dificulta a comparação de trabalhos. Apesar das diferenças, ele é classificado em três classes principais: tabela-horário de exames, de escolas e de universidades. Este trabalho trata especificamente de tabela-horário de universidades e é adotada a formulação três do campeonato internacional de tabela-horário ITC-2007. O problema é resolvido com a meta-heurística GRASP. {\it Hill Climbing} e {\it Simulated Annealing} são usados como fase de busca local do algoritmo e {\it Path-relinking} é implementado para melhorar a versão básica. Testes foram feitos simulando as mesmas regras do compeonato e os resultados obtidos estão competitivos com os obtidos pelos finalistas do ITC-2007.
 \end{resumo}
+
 \begin{abstract}
 Write here the English version of your {}``Resumo''.
 \end{abstract}
@@ -84,36 +86,39 @@ Agradeço a ...
 
 \chapter{Introdução\label{cap:introducao}}
 
-\vfill{}
-\vfill{}
+%\vfill{}
+%\vfill{}
 
-Neste capítulo são apresentados o objetivo desta dissertação e a estrutura
-da mesma.
-\newpage
+%Neste capítulo são apresentados o objetivo desta dissertação e a estrutura da mesma.
+%\newpage
 
-\section{Apresentação do problema}
+%\section{Apresentação do problema}
 
-O problema de tabela-horário consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, por exemplo, quando um aluno não consegue matricular em duas disciplinas porque elas são alocadas no mesmo horário.
+O problema de tabela-horário consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, visto que é difícil contemplar todos os anseios das partes envolvidas. 
 
 Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados.
 
-\section{Motivação para o problema}
+%\section{Motivação para o problema}
 
 O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo. Assim, a solução exata só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
 
-Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam tabelas-horário satisfatórias em um tempo viável, independente do tamanho da instância. Devido à complexidade do problema, métodos exaustivos são descartados. Diferentes meta-heurísticas tem sido aplicadas devido ao fato de serem relativamente simples de implementar e produzirem bons resultados. Dentre as meta-heurísticas que já foram aplicadas ao problema, existe um esforço em aplicar melhorias para conseguir melhores resultados. Há algumas meta-heurísticas que ainda não foram exploradas no problema, o que deixa uma incógnita quanto à sua eficiência.
+Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam soluções satisfatórias para o problema em um tempo viável, independente do tamanho da instância. Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}. Dentre as meta-heurísticas que já foram aplicadas, existe um esforço para encontrar melhorias e conseguir melhores resultados.
+
+Algumas meta-heurísticas ainda não foram aplicadas ao problema, mas tem se mostrado eficientes em outros problemas de otimização combinatória. Uma delas é o GRASP, que já foi aplicado no problema quadrático de alocação, satisfabilidade, conjunto independente máximo, entre outros, mas em se tratando de tabela-horário só há trabalhos publicados para o caso de escolas primárias e secundárias. Deseja-se investigar a sua eficiência no caso específico de universidades.
 
 \section{Objetivos deste trabalho}
 
-O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, será escolhida uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
+O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, escolhemos uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
-Para atingir este objetivo será necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
+Para atingir este objetivo foi necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
 
-Vale ressaltar que o ITC-2007 dividiu o campeonato em três \textit{tracks}. Cada \textit{track} possui uma formulação específica e seu próprio conjunto de instâncias. O \textit{track} 1 é uma formulação específica para aplicação de exames finais. Os \textit{tracks} 2 e 3 tratam a alocação semanal das aulas de uma universidade. A diferença básica é que o \textit{track} 2, chamado de \textit{post enrolment} (pós matrícula) trata o problema considerando os dados de matrícula dos alunos, enquanto que no 3 as informações levam em conta os currículos que compõe a universidade.
+Vale ressaltar que o ITC-2007 dividiu o campeonato em três formulações, sendo que os competidores podiam concorrer independentemente em cada uma delas. Cada formulação específica tem seu próprio conjunto de instâncias. A primeira formulação é específica para aplicação de exames finais. As formulações dois e três tratam a alocação semanal das aulas de uma universidade. A diferença básica é que a formulação dois, chamada de \textit{post enrolment} (pós matrícula) trata o problema considerando os dados de matrícula dos alunos, enquanto que na terceira as informações levam em conta os currículos que compõe a universidade.
 
-Será adotado neste trabalho a formulação do \textit{track} 3 por ser considerada, dentre as três, a mais próxima do que acontece na prática nas universidades brasileiras. Esta formulação será explicada em detalhes no capítulo \ref{cap:proposta-trabalho}.
+Adotamos neste trabalho a formulação três por ser considerada, dentre as três, a mais próxima do que acontece na prática nas universidades brasileiras. Esta formulação será explicada em detalhes no capítulo \ref{cap:proposta-trabalho}.
 
 Deseja-se por fim coletar na literatura resultados obtidos para o problema com diferentes técnicas de solução, a fim de comparar com o algoritmo proposto.
+
+Durante o desenvolvimento da pesquisa foi lançada a terceira edição do campeonato, o ITC-2011. Esta edição trouxe uma formulação mais voltada para escolas, conhecida internacionalmente como \textit{high school}. Como um dos nossos objetivos iniciais era resolver o problema para universidades, decidimos continuar trabalhando com o ITC-2007.
 
 
 \section{Organização do texto}
@@ -123,20 +128,20 @@ No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as 
 
 \chapter{Estado da Arte\label{cap:estado-da-arte}}
 
-\vfill{}
-\begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
-{\small Luís de Camões}\end{flushright}{\small \par}
-\vfill{}
+%\vfill{}
+%\begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
+%{\small Luís de Camões}\end{flushright}{\small \par}
+%\vfill{}
 
-Neste capítulo são apresentados ....
-\newpage
+%Neste capítulo são apresentados alguns conceitos básicos e uma revisão bibliográfica.
+%\newpage
 
 
-\section{Introdução}
+%\section{Introdução}
 
-O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a determinada instituição de ensino. Alguns \textit{benchmarks} foram criados, como é o caso do ITC-2007 \cite{itc2007}. A maior contribuição do \textit{benchmark} é fornecer um conjunto de dados para que os diferentes pesquisadores possam comparar suas técnicas de solução.
+O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a cada instituição de ensino. Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames. A maior contribuição do \textit{benchmark} é fornecer um conjunto de dados para que diferentes pesquisadores possam comparar suas técnicas de solução.
 
-Apesar das diferentes formulações, os problemas de tabela-horário possuem uma característica em comum: a separação das restrições em dois grupos. São fortes ou fracas.
+Apesar das diferentes formulações, os problemas de tabela-horário possuem uma característica em comum: a separação das restrições em dois grupos, considerados como restrições fortes e fracas.
 
 As restrições fortes são aquelas que não podem ser violadas. Elas restringem o conjunto de soluções para impedir certas situações irreais, como por exemplo, alunos assistindo mais de uma aula no mesmo tempo ou uma sala sendo alocada para mais de uma aula no mesmo horário. Se uma tabela-horário não viola nenhuma restrição forte ela é dita ser uma solução viável.
 
@@ -193,13 +198,12 @@ A formulação adotada neste trabalho é a do ITC-2007. Como foi visto na seção \re
 \chapter{Proposta do trabalho\label{cap:proposta-trabalho}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado a proposta do trabalho
-...
+Neste capítulo é apresentado a formulação adotada do problema, a estrutura do algoritmo GRASP e sua aplicação.
+
 \newpage
 
 \section{Formulação do ITC-2007\label{sec:formulacao}}
@@ -432,9 +436,22 @@ A intensificação é feita pela busca local. Nesta fase a solução inicial é melhor
 
 A heurística \textit{Path-Relinking} (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
 
-A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo).
+A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. 
 
-O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
+A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso específico de tabela-horário. Nas tabelas fictícias da figura estão alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas estão na mesma posição e 3 em posições diferentes, destacadas com um círculo. No caminho percorrido, a cada nova tabela uma posição é corrigida. Todas as tabelas intermediárias são avaliadas pois podem ter melhor função objetivo.
+
+O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário.
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[width=14cm]{./PR.eps}
+ \caption{Trajetória do {\it Path-relinking} ligando duas tabelas}
+   \label{fig:path-relinking}
+\end{center}
+\end{figure}
+
+
+O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
 \begin{algorithm}[H]
 \label{path-relinking}
@@ -592,6 +609,33 @@ Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se 
 
 Uma modificação proposta foi fazer a busca em largura, ao invés de em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, já que a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
 
+\begin{algorithm}[H]
+\label{algoHC}
+\SetAlgoLined
+\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+\SetKwFunction{BuscaLocal}{BuscaLocal}
+\SetKwFunction{PathRelinking}{PathRelinking}
+\SetKwFunction{AtualizaPool}{AtualizaPool}
+\Entrada{Solução S , $N$, $k$}
+\Saida{Solução $S^{*}$}
+
+$i \leftarrow 0$ \;
+$S^{*} \leftarrow S $ \;
+\Enqto{$i < N$}{
+	$S' \leftarrow GeraVizinho(S^{*}, k) $ \;
+	$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
+	\Se{$ \Delta f < 0$}{
+		$S^{*} \leftarrow S' $ \;
+		$i = 0 $ \;
+	}
+
+	$i \leftarrow i + 1$ \;
+}
+\caption{\textit{Hill Climbing} com geração de k vizinhos por iteração}
+\end{algorithm}
+
+O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Detalhe para a função de geração de vizinho. Além da solução atual, ela recebe como parâmetro o valor de $k$ que é a quantidade de vizinhos que serão gerados. A função retorna o melhor deles.
+
 Foi verificado que esta nova versão consegue explorar melhor o espaço de soluções, conseguindo tabelas-horário melhores com menos tempo de execução.
 
 Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
@@ -612,10 +656,10 @@ O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealin
 
 $T \leftarrow T_i$ \;
 $S^{*} \leftarrow S $ \;
-\While{$T > T_f$}{
+\Enqto{$T > T_f$}{
 	\Para{$i \leftarrow 1$ \Ate $N$}{
 		$S' \leftarrow GeraVizinho(S^{*}) $ \;
-		$\Delta f \leftarrow f(S') - f(S) $ \;
+		$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
 		\Se{$ \Delta f < 0$}{
 			$S^{*} \leftarrow S' $ \;
 		}\Senao{
@@ -645,46 +689,47 @@ Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de e
 
 Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na construção inicial fica garantida.
 
+A versão completa da implementação do GRASP está representada no algoritmo \ref{algoGraspFinal}. Observe que a fase de busca local é configurável, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}.
+
 
 \begin{algorithm}[H]
-\label{algoBase}
+\label{algoGraspFinal}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{Instância p, MaxIter, TamPool}
+\Entrada{MaxIter, MaxElite}
 \Saida{Solução $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
-$Pool \leftarrow \phi $ \;
+$Elite \leftarrow \emptyset $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
 	$S \leftarrow GeraSolucaoInicial() $ \;
-	$S \leftarrow BuscaLocal(S) $ \;
-	\Se{$ i > TamPool $}{
-		Selecione aleatoriamente $S_{elite} \in Pool $ \;
+	$S \leftarrow BuscaLocal(S) $  \tcp{Hill Climbing ou Simulated Annealing} 
+	\Se{$ i \geq 2 $}{
+		Selecione aleatoriamente $S_{elite} \in Elite $ \;
 		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
 	}
 	\Se{$ f(S) < f^{*} $}{
 		$S^{*} \leftarrow S $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
-	$AtualizaPool(S, Pool)$ \;
+	$AtualizaPool(S, Elite) $ \;
 }
-\caption{Algoritmo GRASP}
+\caption{Algoritmo GRASP para o ITC-2007}
+
 \end{algorithm}
 
 
 \chapter{Resultados Computacionais\label{cap:resultados}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado os resultados computacionais
-...
+Neste capítulo são apresentados e analisados os testes computacionais.
 \newpage
 
 \section{Descrição das instâncias utilizadas}
@@ -794,6 +839,17 @@ Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação d
 
 Para avaliar a melhora desta modificação foram criados dois programas para gerar uma tabela-horário inicial aleatória, e em seguida gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação era feita levando em consideração toda a tabela. No segundo a avaliação era apenas local. Usando a instância \textit{comp01} como parâmetro, o primeiro executou numa média de $44.996$ segundos, enquanto o segundo em $4.242$ segundos. O \textit{speedup} aproximado foi portanto de $10 \times$. Já usando a instância \textit{comp12} que é uma instância maior, o primeiro executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a $23 \times$.
 
+Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
+
+A tabela-horário é representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representação da tabela \ref{tab:solucao_toy_codificada}, além de armazenar o valor da função objetivo e as matrizes dinâmicas.
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[width=14cm]{./Diagrama.eps}
+ \caption{Diagrama de classes das estruturas para modelagem da instância e da tabela-horário}
+   \label{fig:diagramaDeClasses}
+\end{center}
+\end{figure}
 
 
 \section{Escolha dos parâmetros}
@@ -812,6 +868,8 @@ Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1.5
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Todas as estrututuras têm igual probabilidade de ocorrer.
 
+O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar é forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
+
 \section{Análise dos resultados}
 
 Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em máquina Linux com a distribuição Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memória RAM.
@@ -822,7 +880,7 @@ Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execu
 
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
 
-Foram testados três versões do algoritmo, variando a busca local:
+Foram testados três versões do algoritmo, variando a busca local.
 
 \begin{itemize}
 \item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$. (Somente um vizinho é gerado por iteração).
@@ -830,74 +888,97 @@ Foram testados três versões do algoritmo, variando a busca local:
 \item {\bf GSA}: Busca local {\it{Simulated Annealing}}.
 \end{itemize}
 
-
+Os parâmetros específicos de cada busca local são os informados na seção anterior.
 
 \begin{center}
 \begin{table}[htbf]
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
-comp01 & 5 & 15 & \textbf{6} & \textbf{6} \\
-comp02 & 24 & 234 & \textbf{116} & 131 \\
-comp03 & 66 & 233 & \textbf{116} & 141 \\
-comp04 & 35 & 137 & \textbf{76} & 78 \\
-comp05 & 290 & 818 & \textbf{429} & 552 \\
-comp06 & 27 & 215 & 132 & \textbf{123} \\
-comp07 & 6 & 205 & \textbf{99} & 120 \\
-comp08 & 37 & 169 & \textbf{84} & 87 \\
-comp09 & 96 & 229 & \textbf{137} & 164 \\
-comp10 & 4 & 183 & \textbf{67} & 78 \\
-comp11 & 0 & 13 & \textbf{0} & \textbf{0} \\ \hline
+Instância & GHC1 & GHC2 & GSA \\ \hline
+comp01	& 15	& 5	& 5 \\
+comp02	& 260	& 130	& 73 \\
+comp03	& 223	& 125	& 98 \\
+comp04	& 168	& 73	& 48 \\
+comp05	& 707	& 525	& 409 \\
+comp06	& 293	& 116	& 75 \\
+comp07	& 266	& 68	& 36 \\
+comp08	& 186	& 77	& 58 \\
+comp09	& 269	& 144	& 119 \\
+comp10	& 245	& 68	& 41 \\
+comp11	& 9	& 0	& 0 \\ \hline
 \end{tabular}
 \medskip
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA & GRASP \\ \hline
-comp12 & 300 & 544 & \textbf{407} & 517 \\
-comp13 & 59 & 206 & \textbf{106} & 120 \\
-comp14 & 51 & 173 & \textbf{90} & 98 \\
-comp15 & 66 & 225 & \textbf{120} & 138 \\
-comp16 & 18 & 198 & \textbf{91} & 104 \\
-comp17 & 56 & 206 & \textbf{122} & 156 \\
-comp18 & 62 & 153 & 133 & \textbf{115} \\
-comp19 & 57 & 207 & \textbf{111} & 139 \\
-comp20 & 4 & 257 & \textbf{130} & 149 \\
-comp21 & 76 & 276 & \textbf{151} & 188 \\
- &  &  &  &   \\ \hline
+Instância & GHC1 & GHC2 & GSA \\ \hline
+comp12	& 847	& 455	& 375 \\
+comp13	& 206	& 110	& 97 \\
+comp14	& 191	& 91	& 72 \\
+comp15	& 218	& 141	& 101 \\
+comp16	& 233	& 96	& 69 \\
+comp17	& 271	& 127	& 105 \\
+comp18	& 179	& 113	& 102 \\
+comp19	& 238	& 122	& 87 \\
+comp20	& 356	& 106	& 88 \\
+comp21	& 301	& 176	& 136 \\
+ &  &  &   \\ \hline
 \end{tabular}
-\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GRASP-HC, GRASP-SA, etc}
+\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
 \end{table}
 \end{center}
+
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre os três, sendo superior em 19 instâncias e empatando com GHC2 em 2 delas.
 
 Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. A competição foi dividida em duas fases. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
 Os cinco melhores algoritmos foram rodados com mais 7 instâncias "ocultas". A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos 5 melhores estão identificadas.
 
-Em cada tabela foi adicionada uma coluna com os resultados pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
+Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
 
-\begin{landscape}
+%\begin{landscape}
 \begin{center}
 \begin{table}[htbf]
 {\small
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & & & & & & Muller & & \\ \hline
-comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112 &	61 &	5 &	97 &	23 &	5 &	114 &	6 \\ 
-comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485 &	1976 &	127 &	393 &	86 &	43 &	295 &	185 \\
-comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433 &	739 &	141 &	314 &	121 &	72 &	229 &	184 \\
-comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405 &	713 &	72 &	283 &	63 &	35 &	199 &	158 \\
-comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096 &	28249 &	10497 &	672 &	851 &	298 &	723 &	421 \\
-comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520 &	3831 &	96 &	464 &	115 &	41 &	278 &	298 \\
-comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643 &	7470 &	103 &	577 &	92 &	14 &	291 &	398 \\
-comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412 &	833 &	75 &	373 &	71 &	39 &	204 &	211 \\
-comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494 &	776 &	159 &	412 &	177 &	103 &	273 &	232 \\
-comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 &	1731 &	81 &	464 &	60 &	9 &	250 &	292 \\
-comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 &	56 &	0 &	99 &	5 &	0 &	26 &	0 \\
-comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 &	1902 &	629 &	770 &	828 &	331 &	818 &	458 \\
-comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460 &	779 &	112 &	408 &	112 &	66 &	214 &	228 \\
-comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393 &	756 &	88 &	487 &	96 &	53 &	239 &	175 \\ \hline
-Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64 &3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 \\ \hline
+Instância & Atzuna &  &  & Clark & & & & Geiger & Lu & \\ \hline
+comp01 & 5 &	30 &	9 &	10 &	18 &	943 &	31 &	5 &	5 &	112  \\ 
+comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	34 &	485  \\
+comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	70 &	433  \\
+comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405  \\
+comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	298 &	1096  \\
+comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520  \\
+comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643  \\
+comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412  \\
+comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	102 &	494  \\
+comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 \\
+comp11 & 0 &	13 &	0 &	1 &	6 &	470 &	8 &	0 &	0 &	104 \\
+comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	320 &	1276 \\
+comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	65 &	460  \\
+comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	52 &	393  \\ \hline
+Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,21 &	523,64  \\ \hline
+\end{tabular}
+\\
+\medskip
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline
+Instância & & & & & Muller & & & GSA \\ \hline
+comp01 & 61 &	5 &	97 &	23 &	5 &	114 &	6 & 5 \\ 
+comp02 & 1976 &	127 &	393 &	86 &	43 &	295 &	185 & 73 \\
+comp03 & 739 &	141 &	314 &	121 &	72 &	229 &	184 & 98 \\
+comp04 & 713 &	72 &	283 &	63 &	35 &	199 &	158 & 48 \\
+comp05 & 28249 & 10497 &672 &	851 &	298 &	723 &	421 & 409 \\
+comp06 & 3831 &	96 &	464 &	115 &	41 &	278 &	298 & 75 \\
+comp07 & 7470 &	103 &	577 &	92 &	14 &	291 &	398 & 36 \\
+comp08 & 833 &	75 &	373 &	71 &	39 &	204 &	211 & 58 \\
+comp09 & 776 &	159 &	412 &	177 &	103 &	273 &	232 & 119 \\
+comp10 & 1731 &	81 &	464 &	60 &	9 &	250 &	292 & 41 \\
+comp11 & 56 &	0 &	99 &	5 &	0 &	26 &	0 & 0 \\
+comp12 & 1902 &	629 &	770 &	828 &	331 &	818 &	458 & 375 \\
+comp13 & 779 &	112 &	408 &	112 &	66 &	214 &	228 & 97 \\
+comp14 & 756 &	88 &	487 &	96 &	53 &	239 &	175 & 72 \\ \hline
+Média & 3562,29 &870,36 &415,21 &192,86 &79,21 &296,64 &231,86 & 107,57 \\ \hline
 \end{tabular}
 }
 \caption{Resultados primeira fase}
@@ -911,49 +992,63 @@ Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	79,2
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
 Instância & Atzuna & Clark & Geiger & Lu & Muller & GSA \\ \hline
-comp15 & & & & & & \\ 
-comp16 & & & & & & \\ 
-comp17 & & & & & & \\ 
-comp18 & & & & & & \\ 
-comp19 & & & & & & \\ 
-comp20 & & & & & & \\ 
-comp21 & & & & & & \\  \hline
-Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14  \\ \hline
+comp15 & 82 & 119 & 128 & 71 & 84 & 101 \\ 
+comp16 & 40 & 84 & 81 & 39 & 34 & 69 \\ 
+comp17 & 102 & 152 & 124 & 91 & 83 & 105 \\ 
+comp18 & 68 & 110 & 116 & 69 & 83 & 102 \\ 
+comp19 & 75 & 111 & 107 & 65 & 62 & 87 \\ 
+comp20 & 61 & 144 & 88 & 47 & 27 & 88 \\ 
+comp21 & 123 & 169 & 174 & 106 & 103 & 136 \\  \hline
+Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 \end{tabular}
 }
 \caption{Resultados da segunda fase}
 \label{tab:solucoes_itc2007_2}
 \end{table}
 \end{center}
-\end{landscape}
+%\end{landscape}
 
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
 
 \vfill{}
-\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se
-transforma.}''\\
-{\small Lavousier}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
+%{\small Lavousier}\end{flushright}{\small \par}
 \vfill{}
 
-Neste capítulo é apresentado as conclusões e alguns trabalhos futuros
-...
+Neste capítulo são apresentados as conclusões e alguns trabalhos futuros.
 \newpage
 
 
 \section{Conclusões}
 
-{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
+O algoritmo implementado produziu bons resultados, obtendo resultados competitivos para o ITC-2007. Alguns pontos positivos e negativos podem ser destacados no GRASP. Entre os pontos positivos está o mecanismo de geração da solução inicial que produz soluções viáveis levando-se em consideração os custos das violações fracas. A maioria dos algoritmos na literatura focam apenas na viabilidade da solução, o que acaba produzindo soluções iniciais com alto valor de função objetivo. Outro ponto positivo é facilidade de regular o comportamento do algoritmo. Caso queira ele mais guloso ou mais aleatória basta ajustar um parâmetro.
 
-Qual foi o resultado do seu trabalho? melhora na área, testes positivos ou negativos?
-Você acha que o mecanismo gerado produziu resultados interessantes?
-Quais os problemas que você encontrou na elaboração do projeto?
-E na implementação do protótipo?
-Que conclusão você tirou das ferramentas utilizadas? (heurísticas, prolog, ALE, banco de dados).
-Em que outras áreas você julga que este trabalho seria interessante de ser aplicado?
-Que tipo de continuidade você daria a este trabalho?
-Que tipo de conhecimento foi necessário para este projeto de graduação?
-Para que serviu este trabalho na sua formação?
+Um ponto negativo observado é a falta de memória entre as iterações. {\it O Path-relinking} melhorou um pouco este quesito, mas os ganhos não foram tão grandes.
+
+Observando estes pontos conclui-se que o GRASP prioriza mais a diversificação do que a intensificação. Para introduzir mais intensificação, é preciso dar mais tempo de execução à fase de busca local. No caso específico do problema de tabela-horário a intensificação é crucial para alcançar boas respostas.
+
+Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos.
+
+É importante ressaltar também a relevância que as estruturas de vizinhança tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções.
+
+\section{Trabalhos futuros}
+
+Foram detectadas algumas possíveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementação de estruturas de vizinhanças mais específicas. \textit{MOVE} e \textit{SWAP} são estruturas genéricas que podem eliminar qualquer tipo de restrição forte ou fraca. As específicas fariam movimentos mais direcionados à redução de alguma violação específica, como por exemplo, espalhar aulas de uma disciplina na semana para dimunir a violação de dias mínimos de trabalho. Um primeiro estudo neste sentido já foi feito, mas os movimentos eram mais complexos de serem gerados prejudicando o tempo de execução. Uma forma mais eficiente deve ser investigada.
+
+Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de forma muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar quais aulas estão gerando violações e quais não estão. As que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
+
+%{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
+
+%Qual foi o resultado do seu trabalho? melhora na área, testes positivos ou negativos?
+%Você acha que o mecanismo gerado produziu resultados interessantes?
+%Quais os problemas que você encontrou na elaboração do projeto?
+%E na implementação do protótipo?
+%Que conclusão você tirou das ferramentas utilizadas? (heurísticas, prolog, ALE, banco de dados).
+%Em que outras áreas você julga que este trabalho seria interessante de ser aplicado?
+%Que tipo de continuidade você daria a este trabalho?
+%Que tipo de conhecimento foi necessário para este projeto de graduação?
+%Para que serviu este trabalho na sua formação?
 
 
 \bibliographystyle{abnt-alf}
@@ -1001,7 +1096,7 @@ O Algortimo exibe ao final a quantidade de violações fortes e fracas, além da re
 
 \begin{center}
 \begin{table}[!htb]
-\begin{tabular}{|c|c|c|}\hline
+\begin{tabular}{|c|p{10cm}|c|}\hline
 {\bf Parâmetro} & {\bf Descrição} & {\bf Valor padrão} \\ \hline
 maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
  alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
@@ -1012,7 +1107,8 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
  tf & Temperatura final no SA & 0.001 \\ \hline
  beta & Taxa de resfriamento no SA & 0.995 \\ \hline
  seed & Seed de geração de números aleatorios & 0 \\ \hline
- time & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+ timeout & Tempo limite de execução. Valor negativo indica tempo ilimitado & -1 \\ \hline
+ info & Flag \texttt{info=1} indica que informações devem ser impressas na tela durante a execução & 0 \\ \hline
 \end{tabular}
 \caption{Parâmetros do GRASP e seus valores padrão}
 \label{tab:parametros}

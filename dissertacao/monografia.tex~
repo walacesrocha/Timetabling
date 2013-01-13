@@ -399,15 +399,15 @@ f(S) &= 22 \\
 
 \section{Algoritmo GRASP}
 
-Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$. 
+Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Resende02greedyrandomized}.
 
-As meta-heurísticas são algoritmos gerais que orientam uma forma de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida, mas elas em geral conseguem boas soluções.
+As meta-heurísticas são algoritmos gerais que orientam uma maneira de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida mas, em geral, as meta-heurísticas alcançam boas soluções viáveis.
 
-A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. De lá para cá ela já foi aplicada em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
+A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. Desde sua proposta inicial, o GRASP já foi aplicado com sucesso em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
 \subsection{Estrutura básica}
 
-O algoritmo GRASP é um procedimento multi-iterativo. Cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao fim da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
+O algoritmo GRASP é um procedimento com iterações independentes, onde cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao final da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
 
 \begin{algorithm}[H]
 \label{algoGrasp}
@@ -438,7 +438,7 @@ O método de construção da solução inicial do GRASP é guloso aleatório e visa pro
 
 O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Cada iteração escolhe sucessivamente um novo elemento candidato para ser incorporado. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente desta lista. Ao ser acrescentado à solução o elemento é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução e não há mais candidatos.
 
-O parâmetro $\alpha (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução, mas em compensação se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
+O parâmetro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução mas, em compensação, se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
 
 \begin{algorithm}[H]
 \label{solInicialGrasp}
@@ -454,29 +454,29 @@ $S \leftarrow \emptyset $ \;
 $C \leftarrow E $ \;
 \Enqto{$|C| > 0$}{
 	Para todo $c \in C$ computar o valor da função gulosa $g(c) $ \;
-	$c^{min} \leftarrow min\{g(c) | c \in C\}$\;
-	$c^{max} \leftarrow max\{g(c) | c \in C\}$\;
-	$LRC \leftarrow \{ c \in C | g(c) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
-	Escolha aleatoriamente $c^{'} \in LRC $ \;
-	$S \leftarrow S \bigcup \{ c^{'} \} $\;
-	$C \leftarrow C - \{ c^{'} \}$ \;
+	$c^{min} \leftarrow min\{g(c) : c \in C\}$\;
+	$c^{max} \leftarrow max\{g(c) : c \in C\}$\;
+	$LRC \leftarrow \{ c \in C : g(c) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
+	Escolha aleatoriamente $c' \in LRC $ \;
+	$S \leftarrow S \bigcup \{ c' \} $\;
+	$C \leftarrow C - \{ c' \}$ \;
 }
 \caption{Algoritmo guloso aletório para construção da solução inicial do GRASP}
 \end{algorithm}
 
-Para encontrar boas soluções, uma meta-heurística precisa ter duas características importantes: diversificação e intensificação. A primeira se refere à capacidade de explorar bem o espaço de soluções e não ficar preso a mínimos ou máximos locais. A intensificação é necessária para explorar bem uma região de mínimo local, dado que o mínimo global necessariamente também é um mínimo local.
+Para encontrar boas soluções, uma meta-heurística precisa ter duas características importantes: diversificação e intensificação. A primeira refere-se à capacidade de explorar bem o espaço de soluções e não ficar preso a mínimos locais (ou máximos locais em problemas de maximização). A intensificação é necessária para explorar bem uma região de mínimo local, dado que o mínimo global necessariamente também é um mínimo local.
 
-No GRASP a diversificação é feita pela independência das iterações e pela aleatoriedade introduzida na solução inicial. Assim a busca local irá trabalhar em diferentes soluções.
+No GRASP a diversificação é feita pela independência das iterações e pela aleatoriedade introduzida na solução inicial, enquanto a intensificação é feita pela busca local. Nesta fase a solução inicial é melhorada explorando sua vizinhança na busca de soluções melhores.
 
-A intensificação é feita pela busca local. Nesta fase a solução inicial é melhorada explorando sua vizinhança na busca de soluções melhores. O GRASP não especifica qual a estratégia de busca local deve ser utilizada. Em \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Já em \cite{Souza:2004:GSA} por exemplo, é usado busca Tabu.
+O GRASP não especifica qual a estratégia de busca local deve ser utilizada. Em \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solução inicial.
 
 \subsection{Hibridização com \textit{Path-Relinking}}
 
-A heurística \textit{Path-Relinking} (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
+A heurística \textit{Path-Relinking} (PR) (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na Busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
 
-A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções, que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. 
+A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. 
 
-A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso específico de tabela-horário. Nas tabelas fictícias da figura estão alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas estão na mesma posição e 3 em posições diferentes, destacadas com um círculo. No caminho percorrido, a cada nova tabela uma posição é corrigida. Todas as tabelas intermediárias são avaliadas pois podem ter melhor função objetivo.
+A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso específico de tabela-horário. Nas tabelas fictícias da figura \ref{fig:path-relinking} estão alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas estão na mesma posição e 3 em posições diferentes, destacadas com um círculo. No caminho percorrido, a cada nova tabela uma posição é corrigida. Todas as tabelas intermediárias são avaliadas pois podem ter melhor função objetivo.
 
 O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário.
 
@@ -489,7 +489,7 @@ O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir pri
 \end{figure}
 
 
-O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). O procedimento inicia computando a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado. Se for o caso, a melhor solução $x^*$ é atualizada. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
+O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). Nas linhas um e dois são inicializadas as variáveis que guardam o melhor valor de função objetivo encontrado e a solução que produziu este valor. Na linha quatro o procedimento computa a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina na linha seis todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado na linha sete. Se for o caso, a melhor solução $x^*$ é atualizada nas linhas nove a onze. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
 \begin{algorithm}[H]
 \label{path-relinking}
@@ -517,9 +517,9 @@ Compute as diferenças simétricas $\Delta(x,x_a) $ \;
 \caption{Algoritmo \textit{Path-Relinking}}
 \end{algorithm}
 
-O \textit{Path-Relinking} pode ser visto com uma estratégia de busca local mais restrita, onde os movimentos aplicados são mais específicos.
+O PR pode ser visto com uma estratégia de busca local mais restrita, onde os movimentos aplicados são mais específicos.
 
-De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo quanto na qualidade de solução, e pode ser aplicada de duas formas diferentes:
+De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma estratégia adicionada ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo computacional quanto na qualidade de solução, podendo ser aplicada de duas formas diferentes:
 
 \begin{itemize}
 
@@ -529,11 +529,11 @@ De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma melhoria 
 
 \end{itemize}
 
-O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite. Esse procedimento é aplicado somente a partir da segunda iteração dado que na primeira o conjunto elite está vazio. Esse conjunto é limitado e tem tamanho $MaxElite$.
+O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite, denominado Elite. Esse procedimento é aplicado somente a partir da segunda iteração dado que na primeira o conjunto elite está vazio. O número de elementos desse conjunto é limitado por $MaxElite$, parâmetro do algoritmo.
 
-Ao final de cada iteração o conjunto elite ele é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. Esse controle de quem entra e sai do conjunto é implementado pelo procedimento $AtualizaPool$.
+Ao final de cada iteração o conjunto elite ele é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. O controle de entrada e saída de soluções no conjunto Elite é feito pelo procedimento $AtualizaElite$.
 
-Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Relinking} entre as soluções do conjunto elite, duas as duas. A melhor solução obtida é a resposta do algoritmo.
+Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Relinking} entre as soluções do conjunto Elite, duas as duas. A melhor solução obtida é a resposta do algoritmo.
 
 \begin{algorithm}[H]
 \label{algoGraspComPathRelinking}
@@ -543,7 +543,7 @@ Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Re
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{MaxIter, MaxElite}
-\Saida{Solução $S^{*}$}
+\Saida{Melhor Solução $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
 $Elite \leftarrow \emptyset $ \;
@@ -558,15 +558,15 @@ $Elite \leftarrow \emptyset $ \;
 		$S^{*} \leftarrow S $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
-	$AtualizaPool(S, Elite)$ \;
+	$AtualizaElite(S, Elite)$ \;
 }
 $S^* = PosOtimizacao(Elite)$ \;
-\caption{Algoritmo GRASP com \textit{Path-Relinking} para intensificação e pós-otimização}
+\caption{GRASP com \textit{Path-Relinking} para intensificação e pós-otimização}
 \end{algorithm}
 
 \section{GRASP para o ITC-2007}
 
-Nesta seção será apresentada a implementação do GRASP para o problema de tabela-horário segundo a formulação 3 do ITC-2007. A implementação ficou com uma estrutura similar ao algoritmo \ref{algoGraspComPathRelinking}, com três fases principais em cada iteração: geração da solução inicial, busca local e \textit{path-relinking}.
+Nesta seção apresentamos a implementação do GRASP para o problema de tabela-horário segundo a formulação 3 do ITC-2007. A implementação ficou com uma estrutura similar ao algoritmo \ref{algoGraspComPathRelinking}, com três fases principais em cada iteração: geração da solução inicial, busca local e \textit{path-relinking}.
 
 \subsection{Geração de tabela-horário inicial}
 
@@ -574,27 +574,27 @@ O objetivo da etapa de construção inicial é produzir uma tabela-horário viável, 
 
 Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
 
-Com intuito de se conseguir uma solução viável, é adotada uma estratégia de alocar as aulas mais conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia. Para medir se uma aula é mais conflitante que outra são contados quantos horários (dentre os desocupados) servem para alocar a aula da disciplina. Esta contagem envolve:
+Com intuito de conseguir uma solução viável, é adotada uma estratégia de alocar as aulas mais conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia. Para medir se uma aula é mais conflitante que outra são contados quantos horários (dentre os desocupados) são adequados para alocar a aula da disciplina. Esta contagem envolve:
 
 \begin{itemize}
 
-\item retirar os horários em o que o professor da disciplina já leciona alguma aula,
-\item retirar os horários em que estão alocadas disciplinas do mesmo currículo, e
+\item retirar os horários em o que o professor da disciplina já leciona alguma aula;
+\item retirar os horários em que estão alocadas disciplinas do mesmo currículo;
 \item retirar os horários que são indisponíveis para a disciplina segundo a restrição de indisponibilidade.
 
 \end{itemize}
 
-Em cada iteração, a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para a alocação. Os custos de todas essas combinações são calculados levando-se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição de um elemento à solução ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Estarão na LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução.
+Em cada iteração, a aula mais difícil é escolhida para ser alocada. Existem diferentes combinações de horários e salas para a alocação. Os custos de todas essas combinações são calculados levando-se em conta as penalizações das restrições fracas. As combinações que possuem horários inviáveis são descartadas. Com base no menor e maior custo de adição de um elemento à solução ($c^{min}$ e $c^{max}$) é construída a lista restrita de candidatos (LRC). Pertencem à LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Uma aula é escolhida aleatoriamente da LRC e acrescentada à solução.
 
-É possível que em alguns casos, ao escolher uma aula para alocar não haja um horário que mantenha a viabilidade da solução. Para contornar esta situação foi implementado um procedimento denominado "explosão". É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. A aula retirada volta para o conjunto de aulas não alocadas.
+É possível que em alguns casos, ao escolher uma aula para alocar, não haja um horário que mantenha a viabilidade da solução. Para contornar esta situação foi implementado um procedimento denominado explosão. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. A aula retirada volta para o conjunto de aulas não alocadas.
 
-A primeira estratégia de explosão foi escolher o horário que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estratégia não foi muito eficaz porque introduziu certa ciclagem no algoritmo, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, já que o horário escolhido era quase sempre o mesmo.
+A primeira estratégia de explosão foi escolher o horário que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estratégia não foi muito eficaz pois favoreceu a formação de ciclagem no algoritmo, isto é, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, já que o horário escolhido era quase sempre o mesmo.
 
-Uma estratégia que foi mais eficaz foi escolher um horário aleatoriamente, ao invés de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratégia se livra melhor do problema de ciclagem.
+Uma estratégia que foi mais eficaz foi escolher um horário aleatoriamente, ao invés de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratégia evita o problema de ciclagem.
 
-O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geração de uma tabela-horário inicial. Ele recebe como parâmetro as aulas das disciplinas para serem alocadas na tabela que inicialmente é vazia. Para facilitar a recuperação da aula mais conflitante é criada uma lista de aulas não alocadas. Esta lista é ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posição da lista é a mais conflitante.
+O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geração de uma tabela-horário inicial. Ele recebe como parâmetro as aulas das disciplinas para serem alocadas na tabela que inicialmente é vazia (linha um). Para facilitar a recuperação da aula mais conflitante é criada uma lista de aulas não alocadas (linha dois). Esta lista é ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posição da lista é a mais conflitante.
 
-A cada iteração a aula mais conflitante que ainda não foi alocada é selecionada. Em seguida é verificado em quais horários pode ser alocada a aula sem gerar inviabilidades. Se não houver horário disponível ocorre a explosão, portanto, pelo menos em um horário poderá ocorrer a alocação. Os horários disponíveis são combinados com todas as salas, e é feita uma avaliação do custo alocar a aula na respectiva sala e horário. Com base nos custos é construída a lista restrita de candidatos. A aula é então inserida na tabela numa posição escolhida aleatoriamente da LRC. A lista de aulas não alocadas é atualizada e ordenada novamente. Essa ordenação é necessária porque a última aula alocada poderá gerar conflitos com as aulas que ainda serão aloacadas. O procedimento termina quando todas aulas estão alocadas.
+A cada passo da construção da solução inicial a aula mais conflitante que ainda não foi alocada é selecionada na linha cinco. Em seguida é verificado em quais horários pode ser alocada a aula sem gerar inviabilidades (linha seis). Esses horários formam o conjunto $H$. Se não houver horário disponível ocorre a explosão (linhas sete a dez), portanto, $H$ terá pelo menos um horário e será possível fazer a alocação. Os horários disponíveis são combinados com todas as salas e é feita uma avaliação do custo alocar a aula na respectiva sala e horário (linha 11). Com base nos custos é construída a lista restrita de candidatos (linhas 12 a 14). A aula é então inserida na tabela numa posição escolhida aleatoriamente da LRC. A lista de aulas não alocadas é atualizada e ordenada novamente (linhas 17 e 18). Essa ordenação é necessária porque a última aula alocada poderá gerar conflitos com as aulas que ainda serão aloacadas. O procedimento termina quando todas aulas estão alocadas.
 
 \begin{algorithm}[H]
 \label{solInicialGrasp-ITC2007}
@@ -611,15 +611,15 @@ $ListaNaoAlocadas \leftarrow GeraListaNaoAlocadas(A) $ \;
 $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 \Enqto{$|ListaNaoAlocadas| > 0$}{
 	$ a \leftarrow ListaNaoAlocadas[0] $ \;
-	$H \leftarrow h | h $ é viável para $ a $ \;
+	$H \leftarrow h \text{ tal que } h $ é viável para $ a $ \;
 	\Se{$ H = \emptyset $}{
 		ExplodeSolucao(T, a) \;
 		$H \leftarrow h | h $ é viável para $ a $ \;
 	}
 	Para todo $ (s, h) \in S \times H, T[s, h] = \emptyset $, computar o custo de alocação $f(a,s,h) $ \;
-	$c^{min} \leftarrow min\{f(a,s,h) | (s, h) \in S \times H\}$\;
-	$c^{max} \leftarrow max\{f(a,s,h) | (s, h) \in S \times H\}$\;
-	$LRC \leftarrow \{ (s,h) \in S \times H | f(a,s,h) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
+	$c^{min} \leftarrow min\{f(a,s,h) : (s, h) \in S \times H\}$\;
+	$c^{max} \leftarrow max\{f(a,s,h) : (s, h) \in S \times H\}$\;
+	$LRC \leftarrow \{ (s,h) \in S \times H : f(a,s,h) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
 	Escolha aleatoriamente $(s',h') \in LRC $ \;
 	$T[s',h'] = a $\;
 	$RetiraAula(ListaNaoAlocadas, a) $ \;

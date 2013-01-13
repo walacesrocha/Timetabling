@@ -135,11 +135,12 @@ No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as 
 
 %Neste capítulo são apresentados alguns conceitos básicos e uma revisão bibliográfica.
 %\newpage
-7693
 
 %\section{Introdução}
 
-O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a cada instituição de ensino. Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames. A maior contribuição do \textit{benchmark} é fornecer um conjunto de dados para que diferentes pesquisadores possam comparar suas técnicas de solução.
+O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a cada instituição de ensino.
+
+Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames. A maior contribuição do \textit{benchmark} é fornecer um conjunto de dados para que diferentes pesquisadores possam comparar suas técnicas de solução.
 
 Apesar das diferentes formulações, os problemas de tabela-horário possuem uma característica em comum: a separação das restrições em dois grupos, considerados como restrições fortes e fracas.
 
@@ -175,46 +176,50 @@ As técnicas usadas para resolver o problema de tabela-horário são bastante diver
 
 Mais recentemente, as técnicas de solução para o problema têm recaído basicamente em três grupos: programação matemática, programação em lógica e, principalmente, meta-heurísticas.
 
-Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} é usado um procedimento conhecido na programação linear como \textit{branch-and-cut}. O problema inicialmente é resolvido sem as restrições de integralidade. Em seguida são usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execução aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Uma grande contribuição destes dois trabalhos é que eles forneceram limites inferiores para a quantidade de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
+Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} é usado um procedimento conhecido na programação linear como \textit{branch-and-cut}. O problema inicialmente é resolvido sem as restrições de integralidade. Em seguida são usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execução aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Esses dois trabalhos citados são de grande importância pois são capazes de fornecer limites inferiores para as quantidades de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
 
-Alguns resultados relevantes também tem sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} em que se conseguiu melhorar quase metade das respostas que eram conhecidas à época para as instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
+Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
 
-Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. Meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização necessitando em geral pouca implementação específica \cite{Lewis2007:survey}.  \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais aplicadas. Há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
+Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. As meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização exigindo, normalmente, pouca implementação específica \cite{Lewis2007:survey}.  \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais utilizadas pelos pesquisadores mas há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
 
-Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa SA para resolver a formulação \textit{track 2} do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram conhecidas respostas melhores que às conhecidas à época.
+Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa \textit{Simulated Annealing} para resolver a formulação dois do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram obtidas respostas melhores que as conhecidas no momento da comparação.
 
-Algoritmos Genéticos também foram propostos para o problema. O cromossomo representa a tabela-horário. Cada posição da tabela corresponde a um gene. A partir daí são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicou esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propôs um algoritmo genético híbrido para resolver a formulação do ITC-2007. O algoritmo foi chamado de híbrido porque além de aplicar os operadores genéticos, uma busca local era aplicada nos melhores indivíduos ao final de cada geração.
+Algoritmos Genéticos também foram propostos para o problema, onde o cromossomo representa a tabela-horário e cada posição da tabela corresponde a um gene. Em seguida são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicou esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propuseram um algoritmo genético híbrido para resolver a formulação do ITC-2007. O algoritmo foi considerado híbrido pois, além de aplicar os operadores genéticos, uma busca local foi utilizada nos melhores indivíduos ao final de cada geração.
 
-Um algoritmo mais simples que o genético, mas que também tem sido aplicado é a Busca Tabu. Em \cite{elloumi2008} é apresentado uma algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicou a técnica no âmbito de escolas primárias e obteve respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
+Além das meta-heurísticas acima citadas, a Busca Tabu também tem sido aplicada com sucesso. Em \cite{elloumi2008} é apresentado uma algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicaram a técnica no âmbito de escolas primárias e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
 
-Devido à dificuldade de otimização do problema, alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada uma usando uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida dentro da meta-heurística GRASP para melhorar a fase de busca local desta.
+Devido à dificuldade de otimização do problema, alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida na meta-heurística GRASP para melhorar a fase de busca local.
 
 \section{Trabalhos relacionados}
 
-O objetivo deste trabalho é propor um novo algoritmo usando a meta-heurística GRASP para o problema de tabela-horário de universidades. O GRASP já foi implementado no problema, mas para tabela-horário de escolas. Como mostrada na seção anterior, \cite{Souza:2004:GSA} usou o GRASP juntamente com busca Tabu. Outra implementação do GRASP pode ser vista em \cite{Vieira_agrasp}, onde foi implementada a versão básica do algoritmo e uma estratégia de intensificação.
+O objetivo deste trabalho é propor um novo algoritmo usando a meta-heurística GRASP para o problema de tabela-horário de universidades. A literatura apresenta o GRASP aplicado ao problema de tabela-horário para escolas, cujos trabalhos são citados a seguir.
 
-A formulação adotada neste trabalho é a do ITC-2007. Como foi visto na seção \ref{sec:abordagens} muitos trabalhos foram propostos para resolver esta formulação. Mas nenhuma conseguiu obter soluções ótimas para todas as instâncias, o que gera uma motivação para continuar buscando novos resultados. Os melhores resultados encontrados até agora estão em \cite{lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x,CDGS11b}.
+Em \cite{Souza:2004:GSA} o GRASP foi utilizado juntamente com a Busca Tabu. Este algoritmo foi testado com dados reais de uma escola brasileira de ensino médio.
+
+Em \cite{Vieira_agrasp} também é abordado o problema no contexto de uma escola brasileira. São implementadas duas versões do GRASP. A primeira possui uma etapa de construção inicial e uma de refinamento da tabela-horário com busca local. Na segunda implementação é adicionada mais uma etapa de refinamento com \textit{Path-relinking}. Essas etapas do GRASP e as estratégias de refinamento serão melhor descritas no capítulo \ref{cap:proposta-trabalho}.
+
+Como foi visto na seção \ref{sec:abordagens}, muitos trabalhos foram propostos para resolver a formulação adotada na competição ITC-2007. Nenhum dos trabalhos conseguiu obter soluções ótimas para todas as instâncias, o que gera uma motivação para continuar buscando novos resultados. Os melhores resultados obtidos até hoje podem ser encontrados em \cite{lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x,CDGS11b}.
 
 \chapter{Proposta do trabalho\label{cap:proposta-trabalho}}
 
-\vfill{}
+%\vfill{}
 %\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
 %{\small Lavousier}\end{flushright}{\small \par}
-\vfill{}
+%\vfill{}
 
-Neste capítulo é apresentado a formulação adotada do problema, a estrutura do algoritmo GRASP e sua aplicação.
+Neste capítulo é apresentado a formulação adotada no problema, a estrutura do algoritmo GRASP e sua aplicação. Lembrando que o ITC-2007 possui três formulações, uma para tabela-horário de exames e duas para tabela-horário de universidades, será descrita a terceira formulação por julgarmos ser a que mais se aproxima do contexto das universidades brasileiras.
 
-\newpage
+%\newpage
 
 \section{Formulação do ITC-2007\label{sec:formulacao}}
 
-Nesta seção é apresentada a formulação que foi utilizada neste trabalho, que é o \textit{track} 3 do ITC-2007.
+%Nesta seção é apresentada a formulação que foi utilizada neste trabalho, que é o \textit{track} 3 do ITC-2007.
 
-O problema de tabela-horário segundo esta formulação utiliza os seguintes parâmetros:
+A formulação três do ITC-2007 é baseada em casos reais da Escola de Engenharia da Universidade de Udine na Itália, mas se aplica em muitas outras universidade européias. Algumas simplificações foram feitas para o campeonato para manter certo grau de generalidade. Ela possui os seguintes parâmetros:
 
 \begin{itemize}
 
-\item \textbf{Dias, Horários e Períodos}: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de horários de aula, igual para todos os dias, é estabelecido. Um período é um par composto de um dia e um horário. O total de períodos é obtido multiplicando a quantidade de dias pela quantidade de horários do dia.
+\item \textbf{Dias, Horários e Períodos}: É dado o número de dias na semana em que há aula (geralmente cinco ou seis). Um número fixo de períodos de aula, igual para todos os dias, é estabelecido. Um horário é um par composto de um dia e um período. O total de horários é obtido multiplicando a quantidade de dias pela quantidade de períodos no dia.
 
 \item \textbf{Disciplinas e Professores}: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em períodos diferentes. É lecionada por um professor e assistida por um dado número de alunos. Um número mínimo de dias é determinado para a distribuição de suas aulas na semana e é possível que um professor lecione mais de uma disciplina.
 
@@ -222,11 +227,11 @@ O problema de tabela-horário segundo esta formulação utiliza os seguintes parâme
 
 \item \textbf{Currículo}: Um currículo é um grupo de disciplinas que possuem alunos em comum.
 
-\item \textbf{Indisponibilidades} Alguns períodos são indisponíveis para determinadas disciplinas.
+\item \textbf{Indisponibilidades}: Alguns períodos são indisponíveis para determinadas disciplinas.
 
 \end{itemize}
 
-Uma solução consiste na alocação de cada aula em um período e uma sala. As restrições do problema, fortes e fracas, são descritas a seguir.
+Uma solução consiste na alocação de cada aula em um horário e uma sala. Em cima dos parâmetros são estabelecidas as restrições fortes e fracas. As fortes devem ser sempre respeitadas. Qualquer violação de uma restrição forte gera uma tabela-horário inviável, que na prática não pode ser utilizada. Por outro lado as restrições fracas devem ser satisfeitas o máximo possível, e quanto menos violações melhor é a tabela-horário. As restrições do problema são descritas a seguir:
 
 \subsection{Restrições Fortes (RFt)}
 
@@ -268,9 +273,7 @@ f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
 
 \noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v + 2|RFc2|_v + |RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
 
-A formulação do ITC-2007 é baseada em casos reais da Escola de Engenharia da Universidade de Udine na Itália. Algumas simplificações foram feitas para o campeonato para manter certo grau de generalidade.
-
-Abaixo está ilustrado um arquivo exemplo para uma instância de teste, chamada \textit{Toy}. A primeira parte informa a quantidade de disciplinas, salas, dias, períodos por dia, currículos e indisponibilidades. Na segunda parte são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
+Abaixo está ilustrado um arquivo exemplo para uma instância de teste, chamada \textit{Toy}. Entendemos que \textit{courses} são disciplinas. A primeira parte informa a quantidade de cada um dos itens a seguir: disciplinas, salas, dias, períodos por dia, currículos e indisponibilidades. Na segunda parte são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
 
 %\begin{boxed}
 \begin{verbatim}
@@ -310,7 +313,7 @@ ArcTec 4 3
 END.
 \end{verbatim}
 
-A resposta para o problema é fornecida informando a sala, o dia e horário de cada aula, como no exemplo abaixo:
+A resposta do problema informa a sala, o dia e período de cada aula, como no exemplo abaixo:
 
 \begin{verbatim}
 SceCosC rC 1 2
@@ -347,16 +350,51 @@ rC &  & TC &  &  &  & TC & SC &  &  &  & SC & TC & SC &  &  &  & TC &  & TC & AT
 \end{table}
 \end{center}
 
-As seguintes violações fortes e fracas podem ser observadas na tabela-horário \ref{tab:solucao_toy}:
+A solução ilustrada na tabela \ref{tab:solucao_toy} é inviável pois restrições fortes são violadas. Podemos observar as seguintes violações:
 
 \begin{itemize}
 \item RFt2 no dia 0, período 1: \textit{GeoTec} e \textit{TecCos} estão em conflito por pertecerem ao mesmo currículo \textit{Cur2}.
 \item RFt4 no dia 4, período 3: \textit{ArcTec} é indisponível neste horário.
+\end{itemize}
+
+Para corrigir estas inviabilidades são feitas duas modificações na tabela. \textit{TecCos} alocada no dia zero é movida do período um para o período zero, enquanto a aula de \textit{ArcTec} alocada no dia quatro é movida para o dia dois e período um. O resultado destas modificações pode ser visto na tabela \ref{tab:solucao_toy_viavel}:
+
+\begin{center}
+\begin{table}[!htb]
+\begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
+ & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
+ & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
+rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
+rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+rC & TC & &  &  &  & TC & SC &  &  & AT & SC & TC & SC &  &  &  & TC &  & TC &  \\ \hline
+\end{tabular}
+\caption{Tabela-horário para a instância \textit{Toy} sem inviabilidades}
+\label{tab:solucao_toy_viavel}
+\end{table}
+\end{center}
+
+A solução ilustrada na tabela \ref{tab:solucao_toy_viavel} é viável, mas apresenta violações das seguintes restrições fracas:
+
+\begin{itemize}
 \item RFc1 para a disciplina \textit{GeoTec}: ela é lecionada em 3 dias, mas o mínimo requerido são 4.
-\item RFc2 no dia 4, período 0: Uma aula da disciplina \textit{TecCos} está isolada.
-\item RFc3 no dia 4, período 3: A disciplina \textit{ArcTec} possui 42 alunos mas a capacidade de \textit{rC} é apenas 40.
+\item RFc2: \textit{SecCosC} no dia 3 e \textit{TecCos} no dia 4 estão isoladas, pois não possuem aulas do mesmo currículo nos períodos adjacentes. 
+\item RFc3 no dia 4, período 3: a disciplina \textit{ArcTec} possui 42 alunos mas a capacidade de \textit{rC} é apenas 40.
 \item RFc4 para a disciplina \textit{ArcTec}: está sendo lecionada em duas salas diferentes: \textit{rB} e \textit{rC}.
 \end{itemize}
+
+Aparentemente a tabela \ref{tab:solucao_toy_viavel} possui somente as violações citadas acima. Mas um detalhe importante é que a contagem de aulas isoladas é feita separadamente por currículo. Observando o dia zero, temos uma aula \textit{TecCos} no período zero, uma aula \textit{GeoTec} no período um e uma aula \textit{ArcTec} no período dois. Quem cursa o currículo \textit{Cur2} assiste a aula \textit{TecCos} no período zero e a aula \textit{GeoTec} no período um, portanto, duas aulas adjacentes. Mas quem cursa o currículo \textit{Cur1} não assiste a disciplina \textit{GeoTec}, logo, alunos deste currículo terão aula no período zero, horário vago no período um e depois outra aula no período dois. Portanto, são duas aulas isoladas.
+
+Com esta observação pode se concluir que a tabela \ref{tab:solucao_toy_viavel} possui sete aulas isoladas. Totalizando todas as penalizações e lembrando que os pesos das restrições RFc1, RFc2, RFc3 e RFc4 são respectivamente cinco, dois, um e um, a função objetivo da solução é contabilizada pela equação \ref{calc_fo}:
+
+\begin{equation}\label{calc_fo}
+\begin{split}
+f(S) &= 5 \times (4-3) + 2 \times 7 + 1 \times (42-40) + 1 \times (2-1) \\
+f(S) &= 5 \times 1 + 2 \times 7 + 1 \times 2 + 1 \times 1 \\
+f(S) &= 5 + 14 + 2 + 1 \\
+f(S) &= 22 \\
+\end{split}
+\end{equation}
+
 
 
 \section{Algoritmo GRASP}

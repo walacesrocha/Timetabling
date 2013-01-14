@@ -630,9 +630,7 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 
 \subsection{Buscal local\label{subsec:abordagens}}
 
-O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para realizar esta intensificação é preciso primeiro definir uma forma de explorar a vizinhança da solução.
-
-Foram implementadas duas estruturas de vizinhança:
+O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para realizar esta intensificação é preciso primeiro definir os movimentos realizados para explorar a vizinhança da solução. Foram implementados dois movimentos que geram estruturas de vizinhanças distintas:
 
 \begin{itemize}
 \item \textbf{\textit{MOVE}}: Uma aula é movida para uma posição vazia na tabela-horário.
@@ -641,11 +639,11 @@ Foram implementadas duas estruturas de vizinhança:
 
 Como o GRASP não especifica qual algoritmo irá gerar os vizinhos em busca de soluções melhores, várias estratégias podem ser usadas.
 
-A primeira estratégia implementada neste trabalho é uma das mais simples, conhecida como \textit{Hill Climbing}. A partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor função objetivo é encontrado ele passa a ser a solução atual. O algoritmo implementado termina quando se passa $N$ iterações sem melhora na função objetivo.
+A primeira estratégia implementada neste trabalho é uma das mais simples, conhecida como \textit{Hill Climbing}. A partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo implementado termina quando se passa uma quantidade $N$ de iterações sem melhora na função objetivo. $N$ é parâmetro do algoritmo e, devido à dificuldade de encontrar vizinhos melhores, seu valor geralmente é alto, em torno de 10000.
 
 Particularmente para o ITC-2007, essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
-Uma modificação proposta foi fazer a busca em largura, ao invés de em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, já que a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
+Uma modificação proposta foi fazer a busca em largura, ao invés da busca em profundidade como é tradicionalmente feita no \textit{Hill Climbing}. Mas a busca em largura é inviável para este problema, pois a quantidade de vizinhos de uma tabela-horário é muito grande. Foi decidido implementar uma versão híbrida. Em cada iteração são gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solução atual. Controlando o valor $k$ adequadamente esta versão consegue resultados superiores com uma eficiência parecida à da busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
 
 \begin{algorithm}[H]
 \label{algoHC}
@@ -655,7 +653,7 @@ Uma modificação proposta foi fazer a busca em largura, ao invés de em profundida
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{Solução S , $N$, $k$}
-\Saida{Solução $S^{*}$}
+\Saida{Melhor Solução $S^{*}$}
 
 $i \leftarrow 0$ \;
 $S^{*} \leftarrow S $ \;
@@ -672,13 +670,13 @@ $S^{*} \leftarrow S $ \;
 \caption{\textit{Hill Climbing} com geração de k vizinhos por iteração}
 \end{algorithm}
 
-O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Detalhe para a função de geração de vizinho. Além da solução atual, ela recebe como parâmetro o valor de $k$ que é a quantidade de vizinhos que serão gerados. A função retorna o melhor deles.
+O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Detalhe para a função de geração de vizinho na linha quatro. Além da solução atual, ela recebe como parâmetro o valor de $k$ que é a quantidade de vizinhos que serão gerados. A função retorna o melhor deles, $S'$. O algoritmo inicializa na linha um o contador de itereções sem melhora. Se o melhor vizinho gerado na linha quatro é melhor que a melhor solução encontrada ($\Delta f < 0$), então este vizinho passa a ser a solução atual e o contador de iterações sem melhora é zerado.
 
 Foi verificado que esta nova versão consegue explorar melhor o espaço de soluções, conseguindo tabelas-horário melhores com menos tempo de execução.
 
-Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing}\cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
+Mas as respostas ainda não estavam satisfatórias para a maioria das instâncias. Foi necessário investir numa estratégia mais rebuscada, que intensifique bem a solução inicial e seja capaz de escapar de mínimos locais. A opção adotada foi usar \textit{Simulated Annealing} \cite{SA}. Essa estratégia de busca é inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
 
-O algoritmo SA possui três parâmetros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada até chegar a temperatura final. Em cada temperatura, $N$ vizinhos são gerados. Se o vizinho gerado é melhor que a solução atual, esta é atualizada. Se o vizinho for pior ele é aceito com uma probabilidade igual a $P = e^{\Delta f/ T}$. $\Delta f$ é a difença de valor da função objetivo do vizinho e da solução atual e $T$ é a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura menores serão as chances de aceitar o vizinho. O comportamento típico do algoritmo é fazer certa diversificação no início quando a temperatura está alta. À medida em que ela decresce poucas pioras vão sendo aceitas e uma determinada região da busca é intensificada.
+O algoritmo \textit{Simulated Annealing} (SA) possui três parâmetros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada até chegar a temperatura final. Em cada temperatura, $N_v$ vizinhos são gerados. Se o vizinho gerado é melhor que a solução atual, esta é atualizada. Se o vizinho for pior, ele é aceito com uma probabilidade igual a $P = e^{\Delta f/ T}$, onde $\Delta f$ é a diferença de valor da função objetivo do vizinho e da solução atual e $T$ é a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura, menores serão as chances de aceitar o vizinho. O comportamento típico do algoritmo é fazer certa diversificação no início quando a temperatura está alta. À medida em que ela decresce poucas pioras vão sendo aceitas e uma determinada região da busca é intensificada.
 
 O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealing} para o ITC-2007.
 
@@ -689,19 +687,19 @@ O algoritmo \ref{algoSA} apresenta o pseudo-código do \textit{Simulated Annealin
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{Solução S , $t_i$, $t_f$, $\beta$, $N$}
+\Entrada{Solução S , $T_i$, $T_f$, $\beta$, $N_v$}
 \Saida{Solução $S^{*}$}
 
 $T \leftarrow T_i$ \;
 $S^{*} \leftarrow S $ \;
 \Enqto{$T > T_f$}{
-	\Para{$i \leftarrow 1$ \Ate $N$}{
+	\Para{$i \leftarrow 1$ \Ate $N_v$}{
 		$S' \leftarrow GeraVizinho(S^{*}) $ \;
 		$\Delta f \leftarrow f(S') - f(S^{*}) $ \;
 		\Se{$ \Delta f < 0$}{
 			$S^{*} \leftarrow S' $ \;
 		}\Senao{
-			Gere um número aleatório $p$ \;
+			Gere um número aleatório $p \in (0, 1]$ \;
 			\Se{$ p < e^{\Delta f / T} $}{
 				$S^{*} \leftarrow S' $ \;
 			}
@@ -712,20 +710,20 @@ $S^{*} \leftarrow S $ \;
 \caption{\textit{Simulated Annealing} para fase de busca local}
 \end{algorithm}
 
-Em \cite{CDGS11b}, a mesma estrutura de vizinhança é utilizada, só que a formulação usada é o \textit{track} 2 do ITC-2007. $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem ao \textit{track} 3 do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que sobrepondo duas estruturas de vizinhança, uma estrutura pode atrapalhar a melhora obtida pela outra.
+Tanto no algoritmo \textit{Hill Climbing} quanto no \textit{Simulated Annealing}, a geração dos vizinhos é feita na mesma proporção: $50\%$ com \textit{MOVE} e $50\%$ com \textit{SWAP}. Em \cite{CDGS11b}, os mesmos movimentos são aplicados, mas a formulação usada é a número dois do ITC-2007. Neste trabalho $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem à formulação 3 do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que sobrepondo duas estruturas de vizinhança, uma estrutura pode interferir a melhora obtida pela outra.
 
 \subsection{Path-relinking}
 
-No algoritmo implementado o \textit{Path-relinking} é aplicado entre a solução obtida na busca local e uma solução do conjunto elite. Como pode ser visto em \cite{Resende05graspwith}, o caminho percorrido entre as duas soluções pode ser feito de diversas maneiras. As duas principais são:
+No algoritmo proposto o \textit{Path-relinking} é aplicado entre a solução obtida na busca local e uma solução do conjunto elite. Como pode ser visto em \cite{Resende05graspwith}, o caminho percorrido entre as duas soluções pode ser feito de diversas maneiras. As duas principais são:
 
 \begin{itemize}
 \item \textbf{Religamento direto}: PR parte da solução pior em direção à melhor.
 \item \textbf{Religamento inverso}: PR é aplicado partindo da melhor solução em direção à pior.
 \end{itemize}
 
-Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} cita que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP implementado aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a alvo.
+Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} cita que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a solução alvo.
 
-Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na construção inicial fica garantida.
+Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
 
 A versão completa da implementação do GRASP está representada no algoritmo \ref{algoGraspFinal}. Observe que a fase de busca local é configurável, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}.
 
@@ -738,7 +736,7 @@ A versão completa da implementação do GRASP está representada no algoritmo \ref{
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{MaxIter, MaxElite}
-\Saida{Solução $S^{*}$}
+\Saida{Melhor Solução $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
 $Elite \leftarrow \emptyset $ \;
@@ -753,7 +751,7 @@ $Elite \leftarrow \emptyset $ \;
 		$S^{*} \leftarrow S $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
-	$AtualizaPool(S, Elite) $ \;
+	$AtualizaElite(S, Elite) $ \;
 }
 \caption{Algoritmo GRASP para o ITC-2007}
 

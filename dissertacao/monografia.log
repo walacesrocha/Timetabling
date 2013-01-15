@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  13 JAN 2013 18:42
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  15 JAN 2013 00:13
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -569,58 +569,49 @@ es me-lho-res. Em [[]]
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 473.
 File: ./PR.eps Graphic file (type eps)
- <./PR.eps> [28] [29] [30] [31] [32] [33] [34]
-Overfull \hbox (1.2792pt too wide) in paragraph at lines 679--680
+ <./PR.eps> [28] [29] [30] [31] [32] [33] [34] [35]
+Overfull \hbox (3.55923pt too wide) in paragraph at lines 677--678
 \T1/ptm/m/n/12 de es-ca-par de mí-ni-mos lo-cais. A op-ção ado-tada foi usar \T
-1/ptm/m/it/12 Si-mu-la-ted An-ne-a-ling\T1/ptm/m/n/12 [[]].
+1/ptm/m/it/12 Si-mu-la-ted An-ne-a-ling \T1/ptm/m/n/12 [[]].
  []
 
-[35] [36] [37] [38]
+[36]
+Overfull \hbox (35.02373pt too wide) in paragraph at lines 713--714
+\T1/ptm/m/n/12 feita na mesma pro-por-ção: $\OT1/ptmcm/m/n/12 50%$ \T1/ptm/m/n/
+12 com \T1/ptm/m/it/12 MOVE \T1/ptm/m/n/12 e $\OT1/ptmcm/m/n/12 50%$ \T1/ptm/m/
+n/12 com \T1/ptm/m/it/12 SWAP\T1/ptm/m/n/12 . Em [[]],
+ []
+
+[37] [38]
 Cap\'{\i }tulo 4.
 [39
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 785--785
+Underfull \hbox (badness 10000) in paragraph at lines 783--783
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 785--785
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 783--783
 []\T1/ptm/b/n/12 Disponibi-
  []
 
 [40]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 822--829
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 820--827
 [][] 
  []
 
-[41]
-Overfull \hbox (71.72919pt too wide) in paragraph at lines 861--862
-[]\T1/ptm/m/n/12 A ter-ceira ma-triz, $\OML/ptmcm/m/it/12 CurrDiasPeriodos$\T1/
-ptm/m/n/12 , é tri-di-men-si-o-nal com ta-ma-nho $\OML/ptmcm/m/it/12 C \OMS/pzc
-cm/m/n/12 ^^B \OML/ptmcm/m/it/12 D \OMS/pzccm/m/n/12 ^^B \OML/ptmcm/m/it/12 P$\
-T1/ptm/m/n/12 . $\OML/ptmcm/m/it/12 CurrDiasPeriodos\OT1/ptmcm/m/n/12 [\OML/ptm
-cm/m/it/12 c\OT1/ptmcm/m/n/12 ][\OML/ptmcm/m/it/12 d\OT1/ptmcm/m/n/12 ][\OML/pt
-mcm/m/it/12 p\OT1/ptmcm/m/n/12 ]$
- []
-
-[42] [43]
+[41] [42]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [44]
-Overfull \hbox (10.38771pt too wide) in paragraph at lines 909--910
-\T1/ptm/m/n/12 forma de li-gar duas so-lu-ções. Tes-tes con-fir-ma-ram que as o
-b-ser-va-ções de [[]]
- []
-
-[45] [46]
+ <./Diagrama.eps> [43] [44] [45] [46]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 981.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 980.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 981.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 980.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 981.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 980.
 
-Overfull \hbox (29.87001pt too wide) in paragraph at lines 981--1022
+Overfull \hbox (29.87001pt too wide) in paragraph at lines 980--1021
 [][] 
  []
 
@@ -714,13 +705,13 @@ p. 151--162, 1985. Dis-po-ní-vel em:
 
 ) [55]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1099.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1098.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1099.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1098.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 1101--1102
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 1100--1101
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/Timetabling\T1/ptm/m/n/12 .
@@ -735,12 +726,12 @@ esrocha/Timetabling\T1/ptm/m/n/12 .
 +-------------------------------------------------------------------+
 [57] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4355 strings out of 94501
- 55778 string characters out of 1176790
- 145672 words of memory out of 1000000
- 7406 multiletter control sequences out of 10000+50000
+ 4350 strings out of 94501
+ 55709 string characters out of 1176790
+ 146672 words of memory out of 1000000
+ 7401 multiletter control sequences out of 10000+50000
  65606 words of font info for 101 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1385b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (58 pages, 173392 bytes).
+Output written on monografia.dvi (58 pages, 176464 bytes).

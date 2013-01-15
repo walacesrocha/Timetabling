@@ -611,10 +611,10 @@ $ListaNaoAlocadas \leftarrow GeraListaNaoAlocadas(A) $ \;
 $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 \Enqto{$|ListaNaoAlocadas| > 0$}{
 	$ a \leftarrow ListaNaoAlocadas[0] $ \;
-	$H \leftarrow h \text{ tal que } h $ é viável para $ a $ \;
+	$H \leftarrow \{ h \text{ tal que } h $ é viável para $ a \}$ \;
 	\Se{$ H = \emptyset $}{
 		ExplodeSolucao(T, a) \;
-		$H \leftarrow h | h $ é viável para $ a $ \;
+		$H \leftarrow \{ h \text{ tal que } h $ é viável para $ a \}$ \;
 	}
 	Para todo $ (s, h) \in S \times H, T[s, h] = \emptyset $, computar o custo de alocação $f(a,s,h) $ \;
 	$c^{min} \leftarrow min\{f(a,s,h) : (s, h) \in S \times H\}$\;
@@ -760,13 +760,13 @@ $Elite \leftarrow \emptyset $ \;
 
 \chapter{Resultados Computacionais\label{cap:resultados}}
 
-\vfill{}
+%\vfill{}
 %\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
 %{\small Lavousier}\end{flushright}{\small \par}
-\vfill{}
+%\vfill{}
 
-Neste capítulo são apresentados e analisados os testes computacionais.
-\newpage
+Neste capítulo são apresentados alguns detalhes de implementação não mencionados no capítulo anterior. Também são descritas as instâncias usadas para testar os algoritmos. É mencionado como foram feitas as escolhas dos parâmetros do GRASP, além dos parâmetros específicos das buscas locais \textit{Hill Climbing} e \textit{Simulated Annealing}. No final do capítulo os resultados obtidos pelos algoritmos são tabulados e comparados com os resultados oficiais do ITC-2007.
+%\newpage
 
 \section{Descrição das instâncias utilizadas}
 
@@ -811,9 +811,9 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 
 \section{Detalhes de implementação}
 
-Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz. As linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas serão representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com 3 aulas será representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
+Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz, onde as linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas são representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com 3 aulas é representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
 
-A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horário \ref{tab:solucao_toy} usando a codificação com números inteiros. São 3 aulas para \textit{SecCosC}, 3 para \textit{ArcTec}, 5 para \textit{TecCos} e 5 para \textit{Geotec}, totalizando 16 aulas que estão destacadas em negrito. Todas as demais são horários vazios.
+A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horário \ref{tab:solucao_toy} usando a codificação com números inteiros. São três aulas para \textit{SecCosC}, três para \textit{ArcTec}, cinco para \textit{TecCos} e cinco para \textit{Geotec}, totalizando 16 aulas que estão destacadas em negrito. Todas as demais são horários vazios.
 
 \begin{center}
 \begin{table}[!htb]
@@ -829,11 +829,11 @@ rC & 50 & {\bf 7} & 51 & 52 & 53 & {\bf 8} & {\bf 1} & 54 & 55 & 56 & {\bf 2} & 
 \end{table}
 \end{center}
 
-Algumas matrizes auxiliares foram utilizadas para extrair algumas informações de forma mais rápida. Algumas delas são estáticas pois dependem apenas das informações presentes no arquivo de entrada. Outras são dinâmicas para refletir o estado atual da tabela-horário que está sendo considerada.
+Algumas matrizes auxiliares foram utilizadas para extrair informações de forma mais rápida. Algumas delas são estáticas pois dependem apenas das informações presentes no arquivo de entrada. Outras são dinâmicas para refletir o estado atual da tabela-horário que está sendo considerada.
 
-São duas matrizes estáticas. Considere $N$ o número total de aulas na instância e $H$ o total de horários, que é a quantidade de dias multiplicada pela quantidade de períodos de aula em um dia.
+Descrevemos, a seguir, as duas matrizes estáticas. Considere $N$ o número total de aulas na instância e $H$ o total de horários, que é a quantidade de dias multiplicada pela quantidade de períodos de aula em um dia.
 
-A primeira matriz, chamada de $AA$, possui dimensão $N \times N$. Ela é utilizada para descobrir de forma rápida se duas aulas tem conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, faz se a seguinte convenção:
+A primeira matriz, chamada de $AA$, possui dimensão $N \times N$. Ela é utilizada para descobrir de forma rápida se duas aulas têm conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, faz se a seguinte convenção:
 
 \begin{itemize}
 \item $AA[a_1][a_2] = 2$: as duas aulas são da mesma disciplina;
@@ -848,17 +848,17 @@ A segunda matriz estática, chamada de $AI$, possui dimensão $N \times H$. Ela é 
 \item $AI[a][h] = 0$: a aula $a$ pode ser alocada no horário $h$.
 \end{itemize}
 
-É preciso ressaltar que somente $AI[a][h] = 0$ não garante a possibilidade de $a$ ser alocada no horário $h$. Durante a execução do algoritmo é necessário avaliar a tabela-horário em questão para saber se existe alguma sala desocupada no horário $h$ e se nenhuma aula já alocada no horário é conflitante com $a$.
+É preciso ressaltar que somente $AI[a][h] = 0$ não garante a possibilidade de $a$ ser alocada no horário $h$. Durante a execução do algoritmo é necessário avaliar a tabela-horário em questão para saber se existe alguma sala desocupada no horário $h$ e/ou se nenhuma aula já alocada no horário é conflitante com $a$.
 
 As matrizes dinâmicas refletem o estado da tabela-horário que está sendo considerada. O objetivo principal destas tabelas é fazer a contagem das violações fracas de forma mais eficiente. Considere $C$ o total de currículos, $DC$ o total de disciplinas, $D$ a quantidade de dias, $P$ a quantidade de períodos de aula num dia e $S$ o total de salas.
 
-A primeira matriz é $DiscDias$ com dimensão $DC \times D$. Para uma dada disciplina $disc$ e um dia $d$, $DiscDias[disc][dia]$ retorna a quantidade de de aulas da disciplina $disc$ no dia $d$. Com esta matriz é possível contar mais rapidamente em quantos dias há aulas de uma certa disciplina, facilitando o cálculo da contagem das violações de dias mínimos de trabalho.
+A primeira matriz é $DiscDias$ com dimensão $DC \times D$. Para uma dada disciplina $disc$ e um dia $d$, $DiscDias[disc][dia]$ retorna a quantidade de aulas da disciplina $disc$ no dia $d$. Com esta matriz é possível contar mais rapidamente em quantos dias há aulas de uma certa disciplina, facilitando o cálculo da contagem das violações de dias mínimos de trabalho.
 
-A segunda matriz, $DiscSalas$, tem dimensão $DC \times S$. $DiscSalas[disc][s]$ retorna a quantidade de aulas da disciplina $disc$ na sala $s$ durante a semana. Analogamente esta matriz tem por objetivo verificar quantas salas estão sendo ocupadas pela disciplina, facilitando a contagem das violações referentes à estabilidade de sala.
+A segunda matriz, $DiscSalas$, tem dimensão $DC \times S$. Para uma dada disciplina $disc$ e uma sala $s$, $DiscSalas[disc][s]$ retorna a quantidade de aulas da disciplina $disc$ na sala $s$ durante a semana. Analogamente esta matriz tem por objetivo verificar quantas salas estão sendo ocupadas pela disciplina, facilitando a contagem das violações referentes à estabilidade de sala.
 
-A terceira matriz, $CurrDiasPeriodos$, é tridimensional com tamanho $C \times D \times P$. $CurrDiasPeriodos[c][d][p]$ retorna a quantidade de aulas do currículo $c$ alocadas no dia $d$ e horário $p$. Ela é usada para verificar se um currículo está com aulas isoladas. Se um currículo $c$ possui alguma aula no dia $d$ e horário $p$, mas $CurrDiasPeriodos[c][d][p-1] = 0$ e $CurrDiasPeriodos[c][d][p+1] = 0$ então o currículo $c$ não tem nenhuma aula nem no período anterior nem no próximo, o que gera uma violação de aulas isoladas.
+A terceira matriz, $CurrDiasPeriodos$, é tridimensional com tamanho $C \times D \times P$. Dados um currículo $c$, um dia $d$ e um período $p$,$CurrDiasPeriodos[c][d][p]$ retorna a quantidade de aulas do currículo $c$ alocadas no dia $d$ e horário $p$. Ela é usada para verificar se um currículo está com aulas isoladas. Se um currículo $c$ possui alguma aula no dia $d$ e horário $p$, mas $CurrDiasPeriodos[c][d][p-1] = 0$ e $CurrDiasPeriodos[c][d][p+1] = 0$ então o currículo $c$ não tem nenhuma aula no período anterior nem no próximo, o que gera uma violação de aulas isoladas.
 
-As matrizes dinâmicas são atualizadas quando um novo vizinho é gerado. Supondo que a aula $a$ da disciplina $disc$ foi movida da posição $(s1, d1, p1)$ para a posição $(s2, d2, p2)$  e que ela pertence aos currículos $C_a$, as seguintes operações serão feitas:
+As matrizes dinâmicas são atualizadas quando um novo vizinho é gerado. Supondo que a aula $a$ da disciplina $disc$ foi movida da posição $(s1, d1, p1)$ para a posição $(s2, d2, p2)$  e que ela pertence ao conjunto de currículos $C_a$ (pode ser mais de um currículo), as seguintes operações serão feitas:
 
 \begin{equation}
 \begin{split}
@@ -871,9 +871,9 @@ CurrDiasPeriodos[c][d2][p2] = CurrDiasPeriodos[c][d2][p2] + 1, \forall c \in C_a
 \end{split}
 \end{equation}
 
-Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação dos vizinhos. Num primeiro momento, os vizinhos eram gerados e a função objetivo era chamada para avaliar este vizinho. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posições, é mais eficiente verificar o efeito das trocas localmente já que o restante da tabela permanece inalterado. Assim, as funções de geração de vizinhos retornam, além das posições de troca, um $\Delta f$. Se $\Delta f$ é menor que zero, então significa que o vizinho terá uma função objetivo melhor.
+Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação dos vizinhos. Num primeiro momento, para avaliar um vizinho gerado, o movimento era aplicado e a função objetivo avaliava toda a tabela-horário. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posições, é mais eficiente verificar o efeito das trocas localmente já que o restante da tabela permanece inalterado. Assim, as funções de geração de vizinhos retornam, além das posições de troca, um $\Delta f$. Se $\Delta f$ é menor que zero, então significa que o vizinho terá uma função objetivo melhor.
 
-Para avaliar a melhora desta modificação foram criados dois programas para gerar uma tabela-horário inicial aleatória, e em seguida gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação era feita levando em consideração toda a tabela. No segundo a avaliação era apenas local. Usando a instância \textit{comp01} como parâmetro, o primeiro executou numa média de $44.996$ segundos, enquanto o segundo em $4.242$ segundos. O \textit{speedup} aproximado foi portanto de $10 \times$. Já usando a instância \textit{comp12} que é uma instância maior, o primeiro executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a $23 \times$.
+Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância maior o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
 
 Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
 
@@ -894,37 +894,38 @@ O algoritmo GRASP possui dois parâmetros: número máximo de iterações \textit{Max
 
 Quanto mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido limitar a quantidade de iterações em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, não é possível executar essa quantidade de iterações. O número máximo de soluções elite foi fixado em 20.
 
-O parâmetro $\alpha$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $0.01 < \alpha < 0.5$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais e manter uma boa qualidade.
+O parâmetro $\alpha \in [0, 1]$ é mais delicado. Se o seu valor for muito próximo de zero, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de um, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $[0.01, 0.5]$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir certa diversificação nas soluções iniciais e manter uma razoável qualidade.
 
-Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Experimentalmente esse valor permite explorar bem a solução inicial sem se prender muito tempo num mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Foi verificado que com $k=10$ o algoritmo produz boas soluções e mantém um desempenho parecido com a versão original em que era gerado apenas um vizinho. Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
+Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Empiricamente esse valor permite explorar bem a solução inicial sem prender muito tempo num mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Através de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluções e mantém um desempenho compatível com a versão original, isto é, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
 
-O algoritmo \textit{Simulated Annealing} já é mais complicado de se calibrar. Foram escolhidos parâmetros que permitissem certa diversificação no início da busca e que fizesse intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes que usar temperaturas altas com uma solução boa acaba piorando muito a solução, e só volta a melhorar quando o resfriamento está bem avançado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo fica com uma temperatura abaixo de 0.01 poucas melhores são conseguidas.
+O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tarefa de calibração mais difícil. Foram escolhidos parâmetros que permitem certa diversificação no início da busca e maior intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma solução inicial de boa qualidade não ajuda muito o processo, pois permite aceitar soluções muito ruins e a melhora só é observada quando o resfriamento está bem adiantado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de 0.01 a busca estabiliza e raramente uma solução melhor é encontrada.
 
-Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1.5, T_f = 0.005, \beta = 0.999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo foi decidido manter esse valor. Em cada temperatura são gerados $N = 500$ vizinhos.
+Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5, T_f = 0,005, \beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Todas as estrututuras têm igual probabilidade de ocorrer.
 
-O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar é forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
+O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
 \section{Análise dos resultados}
 
 Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em máquina Linux com a distribuição Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memória RAM.
 
-Os organizadores do campeonato forneceram um programa executável para fazer um \textit{benchmark} na máquina de testes dos competidores. O objetivo desse programa é informar um tempo de execução que seria equivalente nas máquinas do campeonato. Rodando esse programa na máquina de teste foi estipulado um tempo de execução de 324 segundos.
+Os organizadores do campeonato forneceram um programa executável para fazer um \textit{benchmark} na máquina de testes dos competidores. O objetivo desse programa é informar um tempo de execução que seria equivalente nas máquinas do campeonato. Utilizando esse programa na máquina onde os testes foram realizados, foi estipulado um tempo de execução de 324 segundos.
 
-Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nas versões apresentadas o único critério era o número máximo de iterações {\it{MaxIter}}.
+Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos algoritmos apresentados nesse trabalho, o único critério foi número máximo de iterações {\it{MaxIter}}.
+
+O algoritmo GRASP proposto foi executado para as 21 instâncias do ITC-2007. Para avaliar a eficiência dos tipos de busca local abordadas nesse trabalho, três versões do algoritmo foram testadas:
+
+\begin{itemize}
+\item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$ (Somente um vizinho é gerado por iteração).
+\item {\bf GHC2}: Busca local {\it{Hill Climbing}} com $k=10$ (10 vizinhos são gerados por iteração).
+\item {\bf GSA}: Busca local {\it{Simulated Annealing}}, com $T_i = 1,5, T_f = 0,005, \beta = 0,999, N_v = 500$.
+\end{itemize}
+
+Tanto em GHC1 quanto em GHC2 a quantidade máxima de iterações sem melhora é fixada em $N = 10000$.
 
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
 
-Foram testados três versões do algoritmo, variando a busca local.
-
-\begin{itemize}
-\item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$. (Somente um vizinho é gerado por iteração).
-\item {\bf GHC2}: Busca local {\it{Hill Climbing}} com $k=10$. (10 vizinhos são gerados por iteração).
-\item {\bf GSA}: Busca local {\it{Simulated Annealing}}.
-\end{itemize}
-
-Os parâmetros específicos de cada busca local são os informados na seção anterior.
 
 \begin{center}
 \begin{table}[htbf]
@@ -959,16 +960,16 @@ comp20	& 356	& 106	& 88 \\
 comp21	& 301	& 176	& 136 \\
  &  &  &   \\ \hline
 \end{tabular}
-\caption{Resultados computacionais - Melhores respostas obtidas pelos algoritmos GHC1, GHC2 e GSA}
+\caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
 \end{table}
 \end{center}
 
-Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre os três, sendo superior em 19 instâncias e empatando com GHC2 em 2 delas.
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre s três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}.
 
-Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. A competição foi dividida em duas fases. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
+Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. A competição foi dividida em duas fases descritas a seguir. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
-Os cinco melhores algoritmos foram rodados com mais 7 instâncias "ocultas". A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos 5 melhores estão identificadas.
+Os cinco melhores algoritmos foram executados numa segunda fase com mais 7 instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos 5 melhores estão identificadas.
 
 Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. Pode-se notar que para os 17 competidores iniciais, ele ficou fora dos 5 primeiros apenas para uma instância. A melhor resposta foi obtida para 2 instâncias. Considerando as últimas 7 instâncias, GSA conseguiu ser superior à 2 finalistas.
 

@@ -341,6 +341,20 @@ int getTotalHorariosViaveis(Problema *p, AuxGrasp* auxGrasp, int aula) {
     return cont;
 }
 
+Disciplina* getDisciplinaPorNome(Problema *p, char * nomeDisciplina) {
+    Disciplina *disc;
+    int i, j;
+
+
+    for (j = 0; j < p->nDisciplinas; j++) {
+
+        if (strcmp((p->disciplinas + j)->nomeDisciplina, nomeDisciplina) == 0) {
+            return p->disciplinas+j;
+        }
+    }
+
+}
+
 void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
 
     AlocacaoAula *alocacao;
@@ -348,7 +362,8 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
     Sala *sala;
     int *diasOcupados, totalDiasOcupados;
     int *salasOcupadas, totalSalasOcupadas;
-    int i, qtHorarios, pos;
+    int i, c, qtHorarios, pos;
+    int aulasIsoladas = 0;
 
     //printf("avaliando\n");
 
@@ -430,42 +445,52 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
     int periodo = getPeriodo(p, alocacao->horario);
     int temAdjacente = 0;
 
-    if (periodo > 0) {// caso nao seja o primeiro periodo...
-        // ... verifica se tem aula do mesmo curriculo no periodo anterior
+    for (c = 0; c < disc->nCurriculos; c++) {
 
-        for (i = 0; i < p->nSalas; i++) {
-            pos = alocacao->horario - 1 + qtHorarios * i;
 
-            if (ehAula(p, auxGrasp->ind->aula[pos])) {
-                if (aulasMesmoCurriculo(p, aula, auxGrasp->ind->aula[pos])) {
-                    temAdjacente = 1;
-                    break;
+        char *nomeDiscDoCurriculo = disc->curriculos[c]->disciplinas[0];
+        Disciplina *discDoCurr = getDisciplinaPorNome(p, nomeDiscDoCurriculo);
+        int aulaDoCurriculo = discDoCurr->aulaInicial;
+
+        if (periodo > 0) {// caso nao seja o primeiro periodo...
+            // ... verifica se tem aula do mesmo curriculo no periodo anterior
+
+            for (i = 0; i < p->nSalas; i++) {
+                pos = alocacao->horario - 1 + qtHorarios * i;
+
+                if (ehAula(p, auxGrasp->ind->aula[pos])) {
+                    if (aulasMesmoCurriculo(p, aulaDoCurriculo, auxGrasp->ind->aula[pos])) {
+                        temAdjacente = 1;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    if (!temAdjacente && periodo < p->nPerDias - 1) {// caso nao tenha aula antes, 
-        // e nao e o ultimo periodo do dia
-        // ... verifica se tem aula do mesmo curriculo no periodo posterior
+        if (!temAdjacente && periodo < p->nPerDias - 1) {// caso nao tenha aula antes, 
+            // e nao e o ultimo periodo do dia
+            // ... verifica se tem aula do mesmo curriculo no periodo posterior
 
-        for (i = 0; i < p->nSalas; i++) {
-            pos = alocacao->horario + 1 + qtHorarios * i;
+            for (i = 0; i < p->nSalas; i++) {
+                pos = alocacao->horario + 1 + qtHorarios * i;
 
-            if (ehAula(p, auxGrasp->ind->aula[pos])) {
-                if (aulasMesmoCurriculo(p, aula, auxGrasp->ind->aula[pos])) {
-                    temAdjacente = 1;
-                    break;
+                if (ehAula(p, auxGrasp->ind->aula[pos])) {
+                    if (aulasMesmoCurriculo(p, aulaDoCurriculo, auxGrasp->ind->aula[pos])) {
+                        temAdjacente = 1;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    // ISOLATED_LECTURE
-    //alocacao->custo = 0;
-    if (!temAdjacente) {
-        alocacao->custo += 2; // penalidade peso 2
+        // ISOLATED_LECTURE
+        //alocacao->custo = 0;
+        if (!temAdjacente) {
+            aulasIsoladas += 1;
+        }
     }
+    
+    alocacao->custo += 2*aulasIsoladas; // penalidade peso 2
 
     //printf("MIN=%d, ocupados: %d\n", disc->minDiasAula, totalDiasOcupados);
 

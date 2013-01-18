@@ -94,39 +94,43 @@ Agradeço a ...
 
 %\section{Apresentação do problema}
 
-O problema de tabela-horário consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, visto que é difícil contemplar todos os anseios das partes envolvidas. 
+Os problemas de \textit{scheduling} (alocação, agendamento) tratam a alocação de recursos em determinados horários satisfazendo algumas restrições. Os problemas de tabela-horário são um subconjunto importante desta área e as aplicações são variadas como, por exemplo, elaboração de escala de funcionários e agendamento de partidas para campeonatos esportivos.
 
-Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados.
+No caso específico de tabela-horário de escolas, o problema consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, visto que é difícil contemplar todos os anseios das partes envolvidas. 
+
+Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos cinquenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
 
 %\section{Motivação para o problema}
 
-O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo. Assim, a solução exata só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
+O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Sua dificuldade aumenta à medida em que são adicionadas restrições. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo para a maioria das formulações. Assim, a solução exata só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
 
-Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam soluções satisfatórias para o problema em um tempo viável, independente do tamanho da instância. Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}. Dentre as meta-heurísticas que já foram aplicadas, existe um esforço para encontrar melhorias e conseguir melhores resultados.
+Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam soluções satisfatórias para o problema em um tempo viável, independente do tamanho da instância. Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}. Dentre as meta-heurísticas já aplicadas ao problema, existe um esforço para encontrar melhorias e conseguir melhores resultados.
 
-Algumas meta-heurísticas ainda não foram aplicadas ao problema, mas tem se mostrado eficientes em outros problemas de otimização combinatória. Uma delas é o GRASP, que já foi aplicado no problema quadrático de alocação, satisfabilidade, conjunto independente máximo, entre outros, mas em se tratando de tabela-horário só há trabalhos publicados para o caso de escolas primárias e secundárias. Deseja-se investigar a sua eficiência no caso específico de universidades.
+Algumas meta-heurísticas ainda não foram aplicadas ao problema, mas tem se mostrado eficientes em outros problemas de otimização combinatória. Uma delas é o GRASP, que já foi aplicado no problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, conjunto independente máximo \cite{FeoResSmi94}, entre outros, mas em se tratando de tabela-horário só há trabalhos publicados para o caso de escolas primárias e secundárias. Deseja-se investigar a sua eficiência no caso específico de universidades.
 
 \section{Objetivos deste trabalho}
 
 O objetivo principal deste trabalho é resolver o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, escolhemos uma que tem sido bastante utilizada na área: a que é proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
-Para atingir este objetivo foi necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP para o problema, pretende-se implementar algumas melhorias que já foram propostas na literatura e que visam melhorar a versão básica do algoritmo.
+Para atingir este objetivo foi necessário estudar a formulação do ITC-2007 e propor uma implementação eficiente dos dados. Além de aplicar o GRASP com construção de uma solução inicial e refinamento com busca local, será implementada mais uma etapa de melhoramento com a técnica \textit{Path-Relinking}. Todas estas etapas do algoritmo serão detalhadas na seção \ref{sec:estrutura_grasp}.
 
-Vale ressaltar que o ITC-2007 dividiu o campeonato em três formulações, sendo que os competidores podiam concorrer independentemente em cada uma delas. Cada formulação específica tem seu próprio conjunto de instâncias. A primeira formulação é específica para aplicação de exames finais. As formulações dois e três tratam a alocação semanal das aulas de uma universidade. A diferença básica é que a formulação dois, chamada de \textit{post enrolment} (pós matrícula) trata o problema considerando os dados de matrícula dos alunos, enquanto que na terceira as informações levam em conta os currículos que compõe a universidade.
+O ITC-2007 estimulou um maior debate entre a comunidade que pesquisa tabela-horário e muitas técnicas de resolução tem sido desenvolvidas e/ou aprimoradas graças a este campeonato. Outra grande contribuição é a disponibilização de instâncias bem próximas à realidade das universidades.
+
+Vale ressaltar que o ITC-2007 dividiu o campeonato em três formulações, sendo que os competidores podiam concorrer independentemente em cada uma delas. Cada formulação específica tem seu próprio conjunto de instâncias. A primeira formulação é específica para aplicação de exames finais. As formulações dois e três tratam a alocação semanal das aulas de uma universidade. A diferença básica é que a formulação dois, chamada de \textit{post enrolment} (pós matrícula) trata o problema considerando os dados de matrícula dos alunos, enquanto que na terceira as informações levam em conta os currículos que compõe a universidade. Currículos são definidos com grupos de disciplinas que têm alunos em comum e não devem ser alocadas no mesmo horário.
+
+Na formulação três os conflitos de horários entre as disciplinas são estabelecidos pela composição dos currículos, logo, disciplinas do mesmo currículo não podem ser alocadas no mesmo horário. Por outro lado, na formulação dois os conflitos são estabelecidos pelas matrículas dos alunos. Desta forma, aulas de disciplinas que um mesmo aluno matriculou não podem ser alocadas no mesmo horário.
 
 Adotamos neste trabalho a formulação três por ser considerada, dentre as três, a mais próxima do que acontece na prática nas universidades brasileiras. Esta formulação será explicada em detalhes no capítulo \ref{cap:proposta-trabalho}.
-
-Deseja-se por fim coletar na literatura resultados obtidos para o problema com diferentes técnicas de solução, a fim de comparar com o algoritmo proposto.
 
 Durante o desenvolvimento da pesquisa foi lançada a terceira edição do campeonato, o ITC-2011. Esta edição trouxe uma formulação mais voltada para escolas, conhecida internacionalmente como \textit{high school}. Como um dos nossos objetivos iniciais era resolver o problema para universidades, decidimos continuar trabalhando com o ITC-2007.
 
 
 \section{Organização do texto}
 
-No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as principais técnicas de solução do problema. No capítulo \ref{cap:proposta-trabalho} são apresentados a formulação do problema segundo o ITC-2007, o algoritmo GRASP e sua aplicação no problema. No capítulo \ref{cap:resultados} são apresentados detalhes de implementação, instâncias de testes e os resultados obtidos. No capítulo \ref{cap:conclusao} são listadas as conclusões obtidas no trabalho e enumerados alguns trabalhos futuros.
+No capítulo \ref{cap:estado-da-arte} é apresentada uma revisão bibliográfica listando as principais técnicas de solução do problema. No capítulo \ref{cap:proposta-trabalho} são apresentados a formulação do problema segundo o ITC-2007, o algoritmo GRASP e sua aplicação no problema. No capítulo \ref{cap:resultados} são apresentados detalhes de implementação, instâncias de testes e os resultados obtidos. No capítulo \ref{cap:conclusao} são listadas as conclusões obtidas no trabalho e enumerados alguns trabalhos futuros.
 
 
-\chapter{Estado da Arte\label{cap:estado-da-arte}}
+\chapter{Revisão Bibliográfica\label{cap:estado-da-arte}}
 
 %\vfill{}
 %\begin{flushright}{}``\emph{Navegar é preciso, viver não.}''\\
@@ -138,9 +142,41 @@ No capítulo \ref{cap:estado-da-arte} é apresentado o estado da arte listando as 
 
 %\section{Introdução}
 
+O problema de tabela-horário (\textit{Timetabling}) deriva do problema de escalonamento (\textit{scheduling}) e foi definido por \cite{wren} como a alocação, submetida a restrições, de determinados recursos a eventos colocados em um número limitado de períodos de tempo e locais, de forma a satisfazer tanto quanto possível um conjunto de objetivos estabelecidos.
+
+O problema de tabela-horário pode ser aplicado a diversos tipos de situações, entre os quais inclui-se:
+
+\begin{itemize}
+
+\item Escalas de Trabalhadores (\textit{Employee Timetabling}): trata da alocação de
+trabalhadores de uma empresa às suas tarefas em um conjunto de turnos de
+trabalho dentro de um período fixo de tempo, geralmente semanal,
+respeitando determinadas regras (restrições) pessoais e do trabalho. Em
+\cite{nurse_rostering} e \cite{chiarandini} podem ser vistas abordagens deste problema;
+
+\item Escalas de Condutores de Veículos de Transporte (\textit{Transportation Timetabling}):
+Segundo \cite{laplagnetime} este problema determina a composição de um conjunto de turnos de condutores
+de veículos para a operação de transporte diário, assegurando a cobertura
+requerida e minimizando os custos operacionais;
+
+\item Escalas de Jogos de Competições Esportivas (\textit{Sports Timetabling}): consiste na
+programação de uma tabela de jogos de competições esportivas, satisfazendo
+aos requisitos da competição e minimizando os custos, como, por exemplo, custo de viagens das equipes. \cite{nurmi2010framework, Ribeiro:2012:SBS:2340795.2340799} são exemplos deste tipo de abordagem;
+
+\item Educacional (\textit{Educational Timetabling}): aborda a geração de tabela-horário para
+instituições de ensino, que é o foco do estudo deste trabalho. Dos diversos
+tipos de problemas de tabela-horário, o educacional é um
+dos mais amplamente estudados. Este problema é analisado mais
+detalhadamente a seguir.
+
+\end{itemize}
+
+
+
+
 O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a cada instituição de ensino.
 
-Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames. A maior contribuição do \textit{benchmark} é fornecer um conjunto de dados para que diferentes pesquisadores possam comparar suas técnicas de solução.
+Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames.
 
 Apesar das diferentes formulações, os problemas de tabela-horário possuem uma característica em comum: a separação das restrições em dois grupos, considerados como restrições fortes e fracas.
 
@@ -397,7 +433,7 @@ f(S) &= 22 \\
 
 
 
-\section{Algoritmo GRASP}
+\section{Algoritmo GRASP\label{sec:estrutura_grasp}}
 
 Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Resende02greedyrandomized}.
 
@@ -1171,7 +1207,7 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
 Algumas opções diferentes de representar o algoritmo \ref{algoGraspFinal}:
 
 \begin{algorithm}[H]
-\label{algoGraspFinal}
+\label{algoGraspFinal1}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}
@@ -1202,7 +1238,7 @@ $Elite \leftarrow \emptyset $ \;
 \end{algorithm}
 
 \begin{algorithm}[H]
-\label{algoGraspFinal}
+\label{algoGraspFinal2}
 \SetAlgoLined
 \SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
 \SetKwFunction{BuscaLocal}{BuscaLocal}

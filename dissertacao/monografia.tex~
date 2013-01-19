@@ -171,9 +171,6 @@ detalhadamente a seguir.
 
 \end{itemize}
 
-
-
-
 O problema de tabela-horário não possui uma formulação única. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restrições do problema serem específicas a cada instituição de ensino.
 
 Algumas coleções de instâncias, os \textit{benchmarks}, foram criadas. As disponíveis pelo campeonato ITC (versões 2002, 2007 e 2011) \cite{itc2007} são bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, todos os dois para tabela-horário de exames.
@@ -185,6 +182,22 @@ As restrições fortes são aquelas que não podem ser violadas. Elas restringem o c
 As restrições fracas são aquelas que não interferem na viabilidade da solução, mas refletem certas preferências das instituições. É desejável, por exemplo, que um aluno não tenha aulas isoladas durante o dia ou que aulas da mesma disciplina sejam lecionadas na mesma sala. As restrições fracas podem possuir pesos diferentes para refletir sua importância na qualidade da solução.
 
 O objetivo do problema é encontrar uma tabela-horário viável e que minimize a quantidade de violações fracas, portanto, um problema de minimização.
+
+\section{Restrições abordadas no problema}
+
+As restrições que são impostas ao problema de tabela-horário geralmente se referem a limitação do espaço físico e de horários, preferências de alunos e professores, além de certas exigências das instituições de ensino. As mais comuns nas diferentes formulações são:
+
+\begin{itemize}
+\item Professores não podem lecionar mais de uma aula no mesmo horário;
+\item Alunos não podem assistir mais de uma aula no mesmo horário;
+\item Todas as aulas da disciplina devem ser alocadas na semana;
+\item A capacidade das salas deve ser adequada para os alunos matriculados;
+\item As aulas não devem ser muito espalhadas durante o dia.
+\end{itemize}
+
+Algumas restrições são muito específicas e raramente aparecem na literatura. No trabalho de \cite{ConstantinoEtAl2010}, por exemplo, a tabela-horário limita o deslocamento de alunos entre os prédios do campus da universidade.
+
+Há certa variação na forma como uma mesma restrição é aplicada. Exemplo típico desta situação é a restrição de capacidade das salas. Em \cite{ConstantinoEtAl2010} as disciplinas não podem ser alocadas em salas cuja capacidade seja inferior a quantidade de alunos, portanto, uma restrição forte. Mas na formulação três do ITC-2007 essa mesma restrição é considerada fraca, ocorrendo uma penalização quando a quantidade de assentos é inferior a quantidade de alunos. Existem trabalhos, como em \cite{Shiau:2011:HPS:1860128.1860157}, que esta restrição não é nem considerada.
 
 \section{Conceitos e definições}
 
@@ -202,11 +215,11 @@ As diversas formulações do problema apresentadas na literatura variam devido à i
 
 A tabela-horário de exames é usada somente nos finais de bimestre, trimestre ou semestre, enquanto as duas primeiras são soluções que devem ser usadas durante todo o período letivo. A diferença principal do problema no âmbito de escolas e universidades é que no segundo não há o conceito de turma, já que cada aluno escolhe o conjunto de disciplinas que irá cursar. Já nas escolas (primárias e secundárias) todos alunos matriculados numa turma cursam as mesmas disciplinas.
 
-\section{Abordagens existentes\label{sec:abordagens}}
+\section{Abordagens de solução existentes\label{sec:abordagens}}
 
 As técnicas usadas para resolver o problema de tabela-horário são bastante diversificadas. As mais antigas, as heurísticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma até finalizar a construção da tabela. Conflitos eram resolvidos realizando trocas de aulas.
 
-\cite{Neufeld} propôs uma redução do problema ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. \cite{geraldo_bello} modelaram o problema para escolas usando coloração de grafos e usaram busca Tabu para resolvê-lo.
+\cite{Neufeld} propôs uma redução do problema ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Seguindo esta mesma linha, \cite{Galinier20062547} propuseram o algoritmo \textit{Tabucol} (Busca Tabu para resolver coloração de grafos), que posteriormente também foi usado por \cite{geraldo_bello}.
 
 \cite{deWerra82} reduziram o problema de tabela-horário ao problema de fluxo de redes. As aulas são representadas pelos vértices. Uma rede é criada para cada horário e o fluxo na rede identifica as aulas que são lecionadas no mesmo horário. Posteriormente, \cite{deWerra85} usou uma idéia similar, mas cada fluxo representa uma classe e os vértices são horários e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
 
@@ -214,9 +227,9 @@ Mais recentemente, as técnicas de solução para o problema têm recaído basicament
 
 Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} é usado um procedimento conhecido na programação linear como \textit{branch-and-cut}. O problema inicialmente é resolvido sem as restrições de integralidade. Em seguida são usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execução aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Esses dois trabalhos citados são de grande importância pois são capazes de fornecer limites inferiores para as quantidades de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
 
-Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
+Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
 
-Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. As meta-heurísticas são estruturas gerais de algoritmos que podem ser adaptados para diferentes problemas de otimização exigindo, normalmente, pouca implementação específica \cite{Lewis2007:survey}.  \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais utilizadas pelos pesquisadores mas há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
+Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. Uma meta-heurística é um método heurístico para resolver de forma genérica problemas de otimização. Ela é genérica porque não se atém a detalhes específicos do problema que está sendo tratado, mas apenas especifica como o conjunto de soluções será explorado em busca da melhor solução. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais utilizadas pelos pesquisadores mas há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
 
 Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa \textit{Simulated Annealing} para resolver a formulação dois do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram obtidas respostas melhores que as conhecidas no momento da comparação.
 

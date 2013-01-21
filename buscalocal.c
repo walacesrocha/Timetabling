@@ -1834,7 +1834,7 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
     move->deltaHard = hard2 - hard1;
 
     if (move->deltaHard > 0) {
-        return;
+        //return;
     }
 
 

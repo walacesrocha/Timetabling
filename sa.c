@@ -711,7 +711,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     float pViz;
     long iteracoesSemMelhora = 0;
 
-    float pesoHard = 10000;
+    float pesoHard = 155;
 
     foAtual = funcaoObjetivo(p, indInicial, pesoHard);
 

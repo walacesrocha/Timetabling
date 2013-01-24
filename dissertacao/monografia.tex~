@@ -237,7 +237,7 @@ Algoritmos Genéticos também foram propostos para o problema, onde o cromossomo r
 
 Além das meta-heurísticas acima citadas, a Busca Tabu também tem sido aplicada com sucesso. Em \cite{elloumi2008} é apresentado uma algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicaram a técnica no âmbito de escolas primárias de Minas Gerais e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
 
-As diversas restrições fortes e fracas fazem com que o problema de tabela-horário seja de difícil otimização. Por isso alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida na meta-heurística GRASP para melhorar a fase de busca local. O algoritmo que obteve as melhores respostas para a formulação três do ITC-2007 é descrito em \cite{muller} e possui quatro etapas: geração da solução inicial com coloração de grafos e três buscas locais sucessivas \textit{Hill Climbing}, \textit{Great Deluge} e \textit{Simulated Annealing}.
+As diversas restrições fortes e fracas fazem com que o problema de tabela-horário seja de difícil otimização. Por isso alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente, explorando o que elas têm de melhor. Exemplos deste tipo de implementação podem ser visto em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida na meta-heurística GRASP para melhorar a fase de busca local. O algoritmo que obteve as melhores respostas para a formulação três do ITC-2007 é descrito em \cite{muller} e possui quatro etapas: geração da solução inicial com coloração de grafos e três buscas locais sucessivas \textit{Hill Climbing}, \textit{Great Deluge} e \textit{Simulated Annealing}.
 
 \section{Trabalhos relacionados}
 
@@ -475,11 +475,11 @@ Neste capítulo será apresentado a estrutura geral da meta-heurística GRASP para 
 
 Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Resende02greedyrandomized}.
 
-As meta-heurísticas são algoritmos gerais que orientam uma maneira de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida mas, em geral, as meta-heurísticas alcançam boas soluções viáveis.
+As meta-heurísticas são algoritmos de caráter geral que orientam uma maneira de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida mas, em geral, as meta-heurísticas alcançam boas soluções viáveis.
 
 A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatória, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. Desde sua proposta inicial, o GRASP já foi aplicado com sucesso em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
-\subsection{Estrutura básica}
+%\subsection{Estrutura básica}
 
 O algoritmo GRASP é um procedimento com iterações independentes, onde cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao final da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
 
@@ -508,9 +508,9 @@ $f^{*} \leftarrow \infty $ \;
 \caption{Estrutura básica do algoritmo GRASP}
 \end{algorithm}
 
-O método de construção da solução inicial do GRASP é guloso aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins considerando a função objetivo. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
+O método de construção da solução inicial do GRASP é guloso, aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
 
-O algoritmo \ref{solInicialGrasp} ilustra genericamente o procedimento de construção inicial. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Cada iteração escolhe sucessivamente um novo elemento candidato para ser incorporado. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente desta lista. Ao ser acrescentado à solução o elemento é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução e não há mais candidatos.
+O algoritmo \ref{solInicialGrasp} ilustra o procedimento de construção de uma solução genérica. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Iterativamente um novo elemento candidato é escolhido para ser incorporado à solução. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente desta lista. Ao ser acrescentado à solução o elemento é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução e não há mais candidatos.
 
 O parâmetro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução mas, em compensação, se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
 
@@ -544,15 +544,25 @@ No GRASP a diversificação é feita pela independência das iterações e pela aleato
 
 O GRASP não especifica qual a estratégia de busca local deve ser utilizada. Em \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solução inicial.
 
-\subsection{Hibridização com \textit{Path-Relinking}}
+\section{GRASP + \textit{Path-Relinking}}
 
 A heurística \textit{Path-Relinking} (PR) (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratégia de intensificação na Busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridização tenta resolver uma deficiência do GRASP que é ausência de memorização entre as iterações.
 
-A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade. 
+A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade.
+
+De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado na figura \ref{fig:path-relinking-generico}. A partir de uma solução inicial um caminho é percorrido até a solução alvo, gerando novas soluções intermedárias que podem ser melhores que a inicial e a alvo. Em cada iteração, verifica-se quais atributos estão diferentes na solução inicial e alvo. No exemplo da figura \ref{fig:path-relinking-generico} são quatro diferenças, por isso quatro soluções podem ser geradas a partir da solução inicial. Opta-se por uma delas e continua a busca a partir da escolhida até se chegar na solução alvo.
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[width=12cm]{./PRgenerico.eps}
+ \caption{Explorando soluções com \textit{Path-Relinking}}
+   \label{fig:path-relinking-generico}
+\end{center}
+\end{figure}
 
 A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso específico de tabela-horário. Nas tabelas fictícias da figura \ref{fig:path-relinking} estão alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas estão na mesma posição e 3 em posições diferentes, destacadas com um círculo. No caminho percorrido, a cada nova tabela uma posição é corrigida. Todas as tabelas intermediárias são avaliadas pois podem ter melhor função objetivo.
 
-O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário.
+O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking}, dentre as três aulas que estão em posições divergentes da solução alvo, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -563,7 +573,7 @@ O caminho escolhido não é único. No exemplo da figura, optou-se por corrigir pri
 \end{figure}
 
 
-O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). Nas linhas um e dois são inicializadas as variáveis que guardam o melhor valor de função objetivo encontrado e a solução que produziu este valor. Na linha quatro o procedimento computa a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é retornada pelo algoritmo. Em cada iteração, o procedimento examina na linha seis todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$. O melhor movimento $m^*$ é feito, produzindo a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado na linha sete. Se for o caso, a melhor solução $x^*$ é atualizada nas linhas nove a onze. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
+O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). Nas linhas 1 e 2 são inicializadas as variáveis que guardam o melhor valor de função objetivo encontrado e a solução que produziu este valor. Na linha 4 o procedimento computa a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é a resposta do algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$ (linhas 5 a 13). O melhor movimento $m^*$ produz a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado na linha 7. Se for o caso, a melhor solução $x^*$ é atualizada nas linhas 9 a 11. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
 \begin{algorithm}[H]
 \label{path-relinking}
@@ -593,13 +603,13 @@ Compute as diferenças simétricas $\Delta(x,x_a) $ \;
 
 O PR pode ser visto com uma estratégia de busca local mais restrita, onde os movimentos aplicados são mais específicos.
 
-De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma estratégia adicionada ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo computacional quanto na qualidade de solução, podendo ser aplicada de duas formas diferentes:
+De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma estratégia adicionada ao algoritmo básico do GRASP, proporcionando melhoras tanto no tempo computacional quanto na qualidade de solução. Para aplicar o PR é necessário que o GRASP mantenha um conjunto de soluções elites com as melhores soluções encontradas durante a execução do algoritmo. \cite{Resende05graspwith} também descrevem duas formas de inserir o PR no GRASP:
 
 \begin{itemize}
 
 \item PR é aplicado entre todos os pares de soluções elite. Pode ser feito periodicamente durante as iterações do GRASP ou no final da execução como uma pós-otimização.
 
-\item PR é aplicado como estratégia de intensificação em cada mínimo local obtido logo após a fase de busca local.
+\item PR é aplicado como estratégia de intensificação em cada mínimo local obtido pela busca local.
 
 \end{itemize}
 

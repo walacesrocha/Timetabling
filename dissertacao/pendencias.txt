@@ -1,2 +1,3 @@
+--> cap 2: formulação matemética
 --> cap 3, p. 25: colocar uma referencia mais classica
 --> cap 3, p. 25: não entendi a sugestão. É para "GRASP+Path-Relinking" virar uma seção?

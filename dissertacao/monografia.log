@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  24 JAN 2013 17:25
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  25 JAN 2013 17:28
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -588,93 +588,89 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
 File: ./PRgenerico.eps Graphic file (type eps)
  <./PRgenerico.eps>
 File: ./PR.eps Graphic file (type eps)
- <./PR.eps> [31] [32] [33] [34] [35] [36] [37] [38]
-Overfull \hbox (3.55923pt too wide) in paragraph at lines 761--762
-\T1/ptm/m/n/12 de es-ca-par de mí-ni-mos lo-cais. A op-ção ado-tada foi usar \T
-1/ptm/m/it/12 Si-mu-la-ted An-ne-a-ling \T1/ptm/m/n/12 [[]].
+ <./PR.eps> [31] [32] [33] [34] [35] [36] [37]
+File: ./SolInicial.eps Graphic file (type eps)
+
+<./SolInicial.eps> [38] [39]
+Overfull \hbox (17.00754pt too wide) in paragraph at lines 768--769
+[]\T1/ptm/m/n/12 Particularmente para o ITC-2007, nos tes-tes com-pu-ta-ci-o-na
+is re-a-li-za-dos essa es-tra-té-gia mostrou-
  []
 
-[39]
-Overfull \hbox (35.02373pt too wide) in paragraph at lines 797--798
-\T1/ptm/m/n/12 feita na mesma pro-por-ção: $\OT1/ptmcm/m/n/12 50%$ \T1/ptm/m/n/
-12 com \T1/ptm/m/it/12 MOVE \T1/ptm/m/n/12 e $\OT1/ptmcm/m/n/12 50%$ \T1/ptm/m/
-n/12 com \T1/ptm/m/it/12 SWAP\T1/ptm/m/n/12 . Em [[]],
- []
-
-[40] [41]
+[40] [41] [42] [43] [44]
 Cap\'{\i }tulo 5.
-[42
+[45
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 867--867
+Underfull \hbox (badness 10000) in paragraph at lines 906--906
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 867--867
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 906--906
 []\T1/ptm/b/n/12 Disponibi-
  []
 
-[43]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 904--911
+[46]
+Overfull \hbox (57.4158pt too wide) in paragraph at lines 943--950
 [][] 
  []
 
-[44] [45]
+[47] [48]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [46] [47] [48] [49] [50]
+ <./Diagrama.eps> [49] [50] [51] [52] [53]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1074.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1113.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1074.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1113.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1077.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1116.
 
-Overfull \hbox (26.83672pt too wide) in paragraph at lines 1074--1115
+Overfull \hbox (26.83672pt too wide) in paragraph at lines 1113--1154
 [][] 
  []
 
-[51] [52]
+[54] [55]
 Cap\'{\i }tulo 6.
-[53
+[56
 
-] (./monografia.bbl [54] [55
+] (./monografia.bbl [57] [58
 
-] [56]
+] [59]
 Underfull \hbox (badness 10000) in paragraph at lines 248--250
 []\T1/ptm/m/n/12 PATAT. \T1/ptm/m/it/12 In-ter-na-ti-o-nal Ti-me-ta-bling Com-p
 e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
  []
 
-[57]) [58]
+[60]) [61]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1196.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1235.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1196.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1235.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 1198--1199
+Overfull \hbox (66.33101pt too wide) in paragraph at lines 1237--1238
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/Timetabling\T1/ptm/m/n/12 .
  []
 
-[59
+[62
 
-] [60]
+] [63]
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[61] [62] (./monografia.aux) ) 
+[64] [65] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4396 strings out of 94501
- 56466 string characters out of 1176790
+ 4399 strings out of 94501
+ 56517 string characters out of 1176790
  140672 words of memory out of 1000000
- 7444 multiletter control sequences out of 10000+50000
+ 7446 multiletter control sequences out of 10000+50000
  75110 words of font info for 119 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1430b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (63 pages, 196048 bytes).
+Output written on monografia.dvi (66 pages, 202884 bytes).

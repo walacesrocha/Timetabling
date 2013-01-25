@@ -1325,7 +1325,7 @@ Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
 }
 
 void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
-    int aula;
+    int aula,i;
 
     resetAuxGrasp(p, auxGrasp, indBase);
 
@@ -1340,11 +1340,11 @@ void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase
 
     //printf("==============================================================================\n");
 
-    /*for (i = 0; i < auxGrasp->nCandidatos; i++) {
-        //printf("%d ", auxGrasp->candidatos[i]);
+    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+        printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
-    //printf("\n");*/
+    //printf("\n");
 
 
     while (auxGrasp->nCandidatos > 0) {// enquanto ha candidatos a alocar

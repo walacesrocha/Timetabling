@@ -405,7 +405,8 @@ A tabela \ref{tab:solucao_toy} apresenta uma vizualização desta resposta. Nesta 
 
 \begin{center}
 \begin{table}[!htb]
-\begin{footnotesize}
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -413,7 +414,8 @@ rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
 rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
 rC &  & TC &  &  &  & TC & SC &  &  &  & SC & TC & SC &  &  &  & TC &  & TC & AT \\ \hline
 \end{tabular}
-\end{footnotesize}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy}}
 \label{tab:solucao_toy}
 \end{table}
@@ -430,7 +432,8 @@ Para corrigir estas inviabilidades podemos efetuar duas modificações na tabela. 
 
 \begin{center}
 \begin{table}[!htb]
-\begin{footnotesize}
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -438,7 +441,8 @@ rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
 rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
 rC & TC & &  &  &  & TC & SC &  &  & AT & SC & TC & SC &  &  &  & TC &  & TC &  \\ \hline
 \end{tabular}
-\end{footnotesize}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy} sem inviabilidades}
 \label{tab:solucao_toy_viavel}
 \end{table}
@@ -932,7 +936,7 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 \end{table}
 \end{center}
 
-\section{Detalhes de implementação}
+\section{Detalhes de implementação\label{sec:detalhes-implementacao}}
 
 Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz, onde as linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui 5 aulas semanais, então elas são representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com 3 aulas é representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
 
@@ -940,6 +944,8 @@ A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horá
 
 \begin{center}
 \begin{table}[!htb]
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -947,6 +953,8 @@ rA & 18 & {\bf 12} & 17 & 19 & {\bf 13} & 20 & {\bf 14} & {\bf 15} & 21 & 22 & 2
 rB & 32 & 33 & {\bf 4} & 34 & {\bf 5} & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 \\ \hline
 rC & 50 & {\bf 7} & 51 & 52 & 53 & {\bf 8} & {\bf 1} & 54 & 55 & 56 & {\bf 2} & {\bf 9} & {\bf 3} & 57 & 58 & 59 & {\bf 10} & 60 & {\bf 11} & {\bf 6} \\ \hline
 \end{tabular}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy} codificando as aulas com números inteiros}
 \label{tab:solucao_toy_codificada}
 \end{table}
@@ -956,7 +964,7 @@ Algumas matrizes auxiliares foram utilizadas para extrair informações de forma m
 
 Descrevemos, a seguir, as duas matrizes estáticas. Considere $N$ o número total de aulas na instância e $H$ o total de horários, que é a quantidade de dias multiplicada pela quantidade de períodos de aula em um dia.
 
-A primeira matriz, chamada de $AA$, possui dimensão $N \times N$. Ela é utilizada para descobrir de forma rápida se duas aulas têm conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, faz se a seguinte convenção:
+A primeira matriz, chamada de $AA$, possui dimensão $N \times N$. Ela é utilizada para descobrir de forma rápida se duas aulas têm conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, adota-se a seguinte convenção:
 
 \begin{itemize}
 \item $AA[a_1][a_2] = 2$: as duas aulas são da mesma disciplina;
@@ -996,9 +1004,7 @@ CurrDiasPeriodos[c][d2][p2] = CurrDiasPeriodos[c][d2][p2] + 1, \forall c \in C_a
 
 Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação dos vizinhos. Num primeiro momento, para avaliar um vizinho gerado, o movimento era aplicado e a função objetivo avaliava toda a tabela-horário. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posições, é mais eficiente verificar o efeito das trocas localmente já que o restante da tabela permanece inalterado. Assim, as funções de geração de vizinhos retornam, além das posições de troca, um $\Delta f$. Se $\Delta f$ é menor que zero, então significa que o vizinho terá uma função objetivo melhor.
 
-Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
-
-Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
+Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas de dados usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
 
 A tabela-horário é representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representação da tabela \ref{tab:solucao_toy_codificada}, além de armazenar o valor da função objetivo e as matrizes dinâmicas.
 
@@ -1025,7 +1031,7 @@ O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tare
 
 Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5, T_f = 0,005, \beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
-Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Todas as estrututuras têm igual probabilidade de ocorrer.
+Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos têm igual probabilidade de ocorrer.
 
 O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
@@ -1035,7 +1041,7 @@ Todos os algoritmos descritos neste trabalho foram implementados na linguagem C,
 
 Os organizadores do campeonato forneceram um programa executável para fazer um \textit{benchmark} na máquina de testes dos competidores. O objetivo desse programa é informar um tempo de execução que seria equivalente nas máquinas do campeonato. Utilizando esse programa na máquina onde os testes foram realizados, foi estipulado um tempo de execução de 324 segundos.
 
-Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos algoritmos apresentados nesse trabalho, o único critério foi número máximo de iterações {\it{MaxIter}}.
+Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos apresentados nesse trabalho, o único critério considerado foi número máximo de iterações {\it{MaxIter}}.
 
 O algoritmo GRASP proposto foi executado para as 21 instâncias do ITC-2007. Para avaliar a eficiência dos tipos de busca local abordadas nesse trabalho, três versões do algoritmo foram testadas:
 
@@ -1047,11 +1053,11 @@ O algoritmo GRASP proposto foi executado para as 21 instâncias do ITC-2007. Para
 
 Tanto em GHC1 quanto em GHC2 a quantidade máxima de iterações sem melhora é fixada em $N = 10000$.
 
-A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios.
+A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios. Todas as execuções foram limitadas em 324 segundos.
 
 
-\begin{center}
 \begin{table}[htbf]
+\begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
 Instância & GHC1 & GHC2 & GSA \\ \hline
@@ -1085,16 +1091,17 @@ comp21	& 301	& 176	& 136 \\
 \end{tabular}
 \caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
-\end{table}
 \end{center}
+\end{table}
 
-Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre s três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}.
+
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre as três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}.
 
 Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada instância está destacada em negrito.
 
-A competição foi dividida em duas fases descritas a seguir. A primeira fase durou aproximadamente 6 meses. Os competidores receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
+A competição foi dividida em duas fases descritas a seguir. A primeira fase foi mais geral e durou aproximadamente 6 meses. Todos os competidores registrados receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
-Os cinco melhores algoritmos foram executados numa segunda fase com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos cinco melhores estão identificadas, que na ordem de classificação são:
+Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos cinco melhores estão identificadas, que na ordem de classificação são:
 
 \begin{enumerate}
 \item Tomas Müller (Estados Unidos)
@@ -1104,12 +1111,12 @@ Os cinco melhores algoritmos foram executados numa segunda fase com mais sete in
 \item Michael Clark, Martin Henz e Bruce Love (Cingapura)
 \end{enumerate}
 
-Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a instância \textit{comp05}. As melhores respostas foram obtidas para as instâncias \textit{comp01} e \textit{comp11}. Considerando a média dos resultados das catorze primeiras instâncias, GSA é pior que apenas três competidores. O mesm fato aconteceu para as últimas sete instâncias da segunda fase.
+Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a instância \textit{comp05}. As melhores respostas foram obtidas para as instâncias \textit{comp01} e \textit{comp11}. Considerando a média dos resultados das catorze primeiras instâncias, GSA é pior que apenas três competidores. O mesmo fato aconteceu para as últimas sete instâncias da segunda fase.
 
 %\begin{landscape}
-\begin{center}
 \begin{table}[htbf]
-{\small
+\begin{center}
+\begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
 Instância & Atsuta &  &  & Clark & & & & Geiger & Lu & \\ \hline
@@ -1129,8 +1136,10 @@ comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	{\bf 65} &	460  \\
 comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	{\bf 52} &	393  \\ \hline
 Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	{\bf 79,21} &	523,64  \\ \hline
 \end{tabular}
+\end{footnotesize}
 \\
 \medskip
+\begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
 Instância & & & & & Muller & & & GSA \\ \hline
@@ -1150,14 +1159,16 @@ comp13 & 779 &	112 &	408 &	112 &	66 &	214 &	228 & 97 \\
 comp14 & 756 &	88 &	487 &	96 &	53 &	239 &	175 & 72 \\ \hline
 Média & 3562,29 &870,36 &415,21 &192,86 & {\bf 79,21} &296,64 &231,86 & 107,57 \\ \hline
 \end{tabular}
-}
+\end{footnotesize}
 \caption{Resultados primeira fase}
 \label{tab:solucoes_itc2007_1}
-\end{table}
 \end{center}
+\end{table}
 
-\begin{center}
+
+
 \begin{table}[htbf]
+\begin{center}
 {\small
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -1174,9 +1185,12 @@ Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 }
 \caption{Resultados da segunda fase}
 \label{tab:solucoes_itc2007_2}
-\end{table}
 \end{center}
+\end{table}
+
 %\end{landscape}
+
+Uma das melhorias implementadas no algortimo que foi citada na seção \ref{sec:detalhes-implementacao} é a geração e avaliação dos vizinhos de uma solução. Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
 
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
@@ -1186,7 +1200,7 @@ Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 %{\small Lavousier}\end{flushright}{\small \par}
 %\vfill{}
 
-Neste capítulo são apresentados as conclusões obtidas com desenvolvimento do projeto, destacando alguns pontos positivos e negativos do algoritmo GRASP. Alguns trabalhos futuros também são enumerados.
+Neste capítulo são apresentados as conclusões obtidas com o desenvolvimento do projeto, destacando alguns pontos positivos e negativos do algoritmo GRASP. Alguns trabalhos futuros também são enumerados.
 %\newpage
 
 
@@ -1204,11 +1218,11 @@ Observando estes pontos conclui-se que o GRASP prioriza mais a diversificação qu
 
 Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos.
 
-É importante ressaltar também a relevância que as estruturas de vizinhança tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções.
+É importante ressaltar também a relevância que as vizinhanças tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções.
 
 \section{Trabalhos futuros}
 
-Foram detectadas algumas possíveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementação de estruturas de vizinhanças mais específicas. \textit{MOVE} e \textit{SWAP} são estruturas genéricas que podem eliminar qualquer tipo de restrição forte ou fraca. As específicas fariam movimentos mais direcionados à redução de alguma violação específica, como por exemplo, espalhar aulas de uma disciplina na semana para dimunir a violação de dias mínimos de trabalho. Um primeiro estudo neste sentido já foi feito, mas os movimentos eram mais complexos de serem gerados prejudicando o tempo de execução. Uma forma mais eficiente deve ser investigada.
+Foram detectadas algumas possíveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementação de vizinhanças mais específicas. \textit{MOVE} e \textit{SWAP} são estruturas genéricas que podem eliminar qualquer tipo de restrição forte ou fraca. As específicas fariam movimentos mais direcionados à redução de alguma violação específica, como por exemplo, espalhar aulas de uma disciplina na semana para diminuir a violação de dias mínimos de trabalho. Um primeiro estudo neste sentido já foi feito, mas os movimentos eram mais complexos, prejudicando o tempo de execução. Uma forma mais eficiente deve ser investigada.
 
 Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de forma muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar as aulas que geram violações e as que não geram violações. As aulas que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
 
@@ -1234,7 +1248,7 @@ Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização e
 
 \chapter{Código-fonte dos algoritmos}
 
-Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Timetabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
 O projeto está estruturado na seguinte árvore de diretórios:
 

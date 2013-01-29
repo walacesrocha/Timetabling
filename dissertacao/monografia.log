@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  25 JAN 2013 17:28
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  28 JAN 2013 23:56
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -538,52 +538,38 @@ File: ./InstanciaToy.eps Graphic file (type eps)
 <./InstanciaToy.eps>
 File: ./RespostaToy.eps Graphic file (type eps)
  <./RespostaToy.eps>
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 409.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 409.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 409.
-
-Overfull \hbox (9.7549pt too wide) in paragraph at lines 409--417
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 410.
+ [24]
+Overfull \hbox (2.75475pt too wide) in paragraph at lines 437--446
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 409--417
-
- []
-
-[24]
-Overfull \hbox (24.75476pt too wide) in paragraph at lines 434--442
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 434--442
+Underfull \hbox (badness 10000) in paragraph at lines 437--446
 
  []
 
 [25] [26] [27]
 Cap\'{\i }tulo 4.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 496.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 500.
 [28
 
 ] [29]
-Overfull \hbox (80.3064pt too wide) in paragraph at lines 545--546
+Overfull \hbox (80.3064pt too wide) in paragraph at lines 549--550
 []\T1/ptm/m/n/12 O GRASP não es-pe-ci-fica qual a es-tra-té-gia de busca lo-cal
  deve ser uti-li-zada. Em [[]]
  []
 
 
-Overfull \hbox (41.11977pt too wide) in paragraph at lines 545--546
+Overfull \hbox (41.11977pt too wide) in paragraph at lines 549--550
 \T1/ptm/m/n/12 se ex-plora a vi-zi-nhança en-quanto são en-con-tra-das so-lu-çõ
 es me-lho-res. Em [[]]
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 547.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 551.
 [30]
 File: ./PRgenerico.eps Graphic file (type eps)
  <./PRgenerico.eps>
@@ -592,7 +578,7 @@ File: ./PR.eps Graphic file (type eps)
 File: ./SolInicial.eps Graphic file (type eps)
 
 <./SolInicial.eps> [38] [39]
-Overfull \hbox (17.00754pt too wide) in paragraph at lines 768--769
+Overfull \hbox (17.00754pt too wide) in paragraph at lines 772--773
 []\T1/ptm/m/n/12 Particularmente para o ITC-2007, nos tes-tes com-pu-ta-ci-o-na
 is re-a-li-za-dos essa es-tra-té-gia mostrou-
  []
@@ -602,35 +588,32 @@ Cap\'{\i }tulo 5.
 [45
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 906--906
+Underfull \hbox (badness 10000) in paragraph at lines 910--910
 []\T1/ptm/b/n/12 Horários
  []
 
 
-Overfull \hbox (2.13614pt too wide) in paragraph at lines 906--906
+Overfull \hbox (2.13614pt too wide) in paragraph at lines 910--910
 []\T1/ptm/b/n/12 Disponibi-
  []
 
 [46]
-Overfull \hbox (57.4158pt too wide) in paragraph at lines 943--950
-[][] 
- []
-
-[47] [48]
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 952.
+ [47] [48]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [49] [50] [51] [52] [53]
+ <./Diagrama.eps> [49] [50] [51] [52]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1120.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1120.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1120.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1113.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1173.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1113.
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1116.
-
-Overfull \hbox (26.83672pt too wide) in paragraph at lines 1113--1154
-[][] 
- []
-
-[54] [55]
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1173.
+ [53] [54] [55]
 Cap\'{\i }tulo 6.
 [56
 
@@ -644,16 +627,16 @@ e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
 
 [60]) [61]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1235.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1249.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1235.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1249.
 
 Anexo A.
 
-Overfull \hbox (66.33101pt too wide) in paragraph at lines 1237--1238
+Overfull \hbox (19.32745pt too wide) in paragraph at lines 1251--1252
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
-esrocha/Timetabling\T1/ptm/m/n/12 .
+esrocha/Ti-
  []
 
 [62
@@ -665,12 +648,12 @@ esrocha/Timetabling\T1/ptm/m/n/12 .
 +-------------------------------------------------------------------+
 [64] [65] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4399 strings out of 94501
- 56517 string characters out of 1176790
- 140672 words of memory out of 1000000
- 7446 multiletter control sequences out of 10000+50000
- 75110 words of font info for 119 fonts, out of 500000 for 2000
+ 4409 strings out of 94501
+ 56661 string characters out of 1176790
+ 142672 words of memory out of 1000000
+ 7456 multiletter control sequences out of 10000+50000
+ 78192 words of font info for 127 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1430b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (66 pages, 202884 bytes).
+Output written on monografia.dvi (66 pages, 203336 bytes).

@@ -405,7 +405,8 @@ A tabela \ref{tab:solucao_toy} apresenta uma vizualização desta resposta. Nesta 
 
 \begin{center}
 \begin{table}[!htb]
-\begin{footnotesize}
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -413,7 +414,8 @@ rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
 rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
 rC &  & TC &  &  &  & TC & SC &  &  &  & SC & TC & SC &  &  &  & TC &  & TC & AT \\ \hline
 \end{tabular}
-\end{footnotesize}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy}}
 \label{tab:solucao_toy}
 \end{table}
@@ -430,7 +432,8 @@ Para corrigir estas inviabilidades podemos efetuar duas modificações na tabela. 
 
 \begin{center}
 \begin{table}[!htb]
-\begin{footnotesize}
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -438,7 +441,8 @@ rA &  & GT & & & GT & & GT & GT & & &  & & & & &  &  &  &  & GT \\ \hline
 rB &  &  & AT &  & AT &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
 rC & TC & &  &  &  & TC & SC &  &  & AT & SC & TC & SC &  &  &  & TC &  & TC &  \\ \hline
 \end{tabular}
-\end{footnotesize}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy} sem inviabilidades}
 \label{tab:solucao_toy_viavel}
 \end{table}
@@ -940,7 +944,8 @@ A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horá
 
 \begin{center}
 \begin{table}[!htb]
-\begin{footnotesize}
+%\begin{footnotesize}
+{\fontsize{9}{12} \selectfont
 \begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
  & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
  & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
@@ -948,7 +953,8 @@ rA & 18 & {\bf 12} & 17 & 19 & {\bf 13} & 20 & {\bf 14} & {\bf 15} & 21 & 22 & 2
 rB & 32 & 33 & {\bf 4} & 34 & {\bf 5} & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 \\ \hline
 rC & 50 & {\bf 7} & 51 & 52 & 53 & {\bf 8} & {\bf 1} & 54 & 55 & 56 & {\bf 2} & {\bf 9} & {\bf 3} & 57 & 58 & 59 & {\bf 10} & 60 & {\bf 11} & {\bf 6} \\ \hline
 \end{tabular}
-\end{footnotesize}
+}
+%\end{footnotesize}
 \caption{Tabela-horário para a instância \textit{Toy} codificando as aulas com números inteiros}
 \label{tab:solucao_toy_codificada}
 \end{table}
@@ -1035,7 +1041,7 @@ Todos os algoritmos descritos neste trabalho foram implementados na linguagem C,
 
 Os organizadores do campeonato forneceram um programa executável para fazer um \textit{benchmark} na máquina de testes dos competidores. O objetivo desse programa é informar um tempo de execução que seria equivalente nas máquinas do campeonato. Utilizando esse programa na máquina onde os testes foram realizados, foi estipulado um tempo de execução de 324 segundos.
 
-Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos apresentados nesse trabalho, o único critério foi número máximo de iterações {\it{MaxIter}}.
+Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos apresentados nesse trabalho, o único critério considerado foi número máximo de iterações {\it{MaxIter}}.
 
 O algoritmo GRASP proposto foi executado para as 21 instâncias do ITC-2007. Para avaliar a eficiência dos tipos de busca local abordadas nesse trabalho, três versões do algoritmo foram testadas:
 
@@ -1050,8 +1056,8 @@ Tanto em GHC1 quanto em GHC2 a quantidade máxima de iterações sem melhora é fixa
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, já que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios. Todas as execuções foram limitadas em 324 segundos.
 
 
-\begin{center}
 \begin{table}[htbf]
+\begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
 Instância & GHC1 & GHC2 & GSA \\ \hline
@@ -1085,8 +1091,9 @@ comp21	& 301	& 176	& 136 \\
 \end{tabular}
 \caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
-\end{table}
 \end{center}
+\end{table}
+
 
 Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre as três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}.
 
@@ -1107,8 +1114,8 @@ Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados par
 Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a instância \textit{comp05}. As melhores respostas foram obtidas para as instâncias \textit{comp01} e \textit{comp11}. Considerando a média dos resultados das catorze primeiras instâncias, GSA é pior que apenas três competidores. O mesmo fato aconteceu para as últimas sete instâncias da segunda fase.
 
 %\begin{landscape}
-\begin{center}
 \begin{table}[htbf]
+\begin{center}
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -1155,11 +1162,13 @@ Média & 3562,29 &870,36 &415,21 &192,86 & {\bf 79,21} &296,64 &231,86 & 107,57 \
 \end{footnotesize}
 \caption{Resultados primeira fase}
 \label{tab:solucoes_itc2007_1}
-\end{table}
 \end{center}
+\end{table}
 
-\begin{center}
+
+
 \begin{table}[htbf]
+\begin{center}
 {\small
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -1176,8 +1185,9 @@ Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 }
 \caption{Resultados da segunda fase}
 \label{tab:solucoes_itc2007_2}
-\end{table}
 \end{center}
+\end{table}
+
 %\end{landscape}
 
 Uma das melhorias implementadas no algortimo que foi citada na seção \ref{sec:detalhes-implementacao} é a geração e avaliação dos vizinhos de uma solução. Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
@@ -1238,7 +1248,7 @@ Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização e
 
 \chapter{Código-fonte dos algoritmos}
 
-Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Timetabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
 O projeto está estruturado na seguinte árvore de diretórios:
 

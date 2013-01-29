@@ -55,7 +55,8 @@ professores: \setlength{\ABNTsignthickness}{0.4pt}
 
 \assinatura{Profa. Dra. Maria Claudia Silva Boeres\\ Orientadora}
 \assinatura{Profa. Dra. Maria Cristina Rangel\\ Co-orientadora}
-\assinatura{Prof. Dr. Fulano de Tal\\ Universidade Federal do Espírito Santo}
+\assinatura{Prof. Dr. Flávio Miguel Varejão\\ Universidade Federal do Espírito Santo}
+\assinatura{Prof. Dr. Haroldo Gambini Santos\\ Universidade Federal de Ouro Preto}
 \end{folhadeaprovacao}
 
 \begin{resumo}
@@ -73,7 +74,13 @@ Dedico este trabalho a ...
 
 \chapter*{Agradecimentos}
 
-Agradeço a ...
+Agradeço primeiramente a Deus pela capacidade física e intelectual para realização deste trabalho.
+
+À Iris pela companhia nos momentos bons e ruins.
+
+Também agradeço à Claudia e à Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agradável.
+
+À CAPES pelo apoio financeiro.
 
 \tableofcontents{}\listoffigures
 
@@ -477,7 +484,7 @@ Neste capítulo será apresentado a estrutura geral da meta-heurística GRASP para 
 
 \section{Algoritmo GRASP\label{sec:estrutura_grasp}}
 
-Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Resende02greedyrandomized}.
+Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Glover89}.
 
 As meta-heurísticas são algoritmos de caráter geral que orientam uma maneira de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida mas, em geral, as meta-heurísticas alcançam boas soluções viáveis.
 
@@ -767,7 +774,7 @@ O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para isso
 
 Como o GRASP não especifica qual estratégia de busca local, várias podem ser usadas. Neste trabalho fazemos uso de duas estratégias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}.
 
-No \textit{Hill Climbing}, a partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo termina com $N$ iterações sem melhora da função objetivo, onde $N$ é parâmetro do algoritmo.
+No \textit{Hill Climbing} \cite{Glover89}, a partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo termina com $N$ iterações sem melhora da função objetivo, onde $N$ é parâmetro do algoritmo.
 
 Particularmente para o ITC-2007, nos testes computacionais realizados essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
@@ -1248,7 +1255,7 @@ Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização e
 
 \chapter{Código-fonte dos algoritmos}
 
-Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser obtido no formato \textit{zip} ou através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
 O projeto está estruturado na seguinte árvore de diretórios:
 
@@ -1302,6 +1309,20 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
 \label{tab:parametros}
 \end{table}
 \end{center}
+
+Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.c++} no diretório \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
+
+\begin{verbatim}
+$ g++ validador.cc -o validator
+\end{verbatim}
+
+Para validar uma resposta é necessário passar como parâmetro o arquivo da instância e o arquivo de resposta que deve estar no formato da figura \ref{fig:resposta-toy}. Considerando que o validador, a instância e o arquivo de resposta estão no mesmo diretório, o seguinte comando deve ser usado:
+
+\begin{verbatim}
+$ validator comp01.ctt comp01.sol
+\end{verbatim}
+
+O validador exibe a quantidade de violações fortes e fracas, detalhando onde elas ocorrem na tabela-horário.
 
 \newpage
 

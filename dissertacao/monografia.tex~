@@ -55,25 +55,34 @@ professores: \setlength{\ABNTsignthickness}{0.4pt}
 
 \assinatura{Profa. Dra. Maria Claudia Silva Boeres\\ Orientadora}
 \assinatura{Profa. Dra. Maria Cristina Rangel\\ Co-orientadora}
-\assinatura{Prof. Dr. Fulano de Tal\\ Universidade Federal do Espírito Santo}
+\assinatura{Prof. Dr. Flávio Miguel Varejão\\ Universidade Federal do Espírito Santo}
+\assinatura{Prof. Dr. Haroldo Gambini Santos\\ Universidade Federal de Ouro Preto}
 \end{folhadeaprovacao}
 
 \begin{resumo}
-O problema de tabela-horário é de grande destaque na área de otimização combinatória. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um número limitado de horários e salas, respeitando algumas restrições. As formulações são variadas, o que às vezes dificulta a comparação de trabalhos. Apesar das diferenças, ele é classificado em três classes principais: tabela-horário de exames, de escolas e de universidades. Este trabalho trata especificamente de tabela-horário de universidades e é adotada a formulação três do campeonato internacional de tabela-horário ITC-2007. O problema é resolvido com a meta-heurística GRASP. {\it Hill Climbing} e {\it Simulated Annealing} são usados como fase de busca local do algoritmo e {\it Path-relinking} é implementado para melhorar a versão básica. Testes foram feitos simulando as mesmas regras do compeonato e os resultados obtidos estão competitivos com os obtidos pelos finalistas do ITC-2007.
+O problema de tabela-horário é de grande destaque na área de otimização combinatória. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um número limitado de horários e salas, respeitando algumas restrições. As formulações são variadas, o que às vezes dificulta a comparação de trabalhos. Apesar das diferenças, ele é classificado em três classes principais: tabela-horário de exames, de escolas e de universidades. Este trabalho trata especificamente de tabela-horário de universidades e é adotada a formulação três do campeonato internacional de tabela-horário ITC-2007. O problema é resolvido com a meta-heurística GRASP. {\it Hill Climbing} e {\it Simulated Annealing} são usados como fase de busca local do algoritmo e {\it Path-relinking} é implementado para melhorar a versão básica. Testes foram feitos simulando as mesmas regras do campeonato e os resultados obtidos estão competitivos com os obtidos pelos finalistas do ITC-2007.
 \end{resumo}
 
 \begin{abstract}
-Write here the English version of your {}``Resumo''.
+
+The timetabling problem is of great interest in the combinatorial optimization field. Given a set of disciplines, students, teachers and classrooms, the problem consists in to allocate lectures in a limited number of timeslots and rooms, respecting some restrictions. The formulations are varied, which sometimes makes it difficult to compare to other studies. Despite the differences, it is classified into three main classes: exams timetabling, schools timetabling and universities timetabling. This work specifically treats the universities timetabling and is adopted the third formulation of international timetabling competition - ITC-2007. The problem is solved with the GRASP metaheuristic. Hill Climbing and Simulated Annealing are used as local search phase of the algorithm and Path-relinking is implemented to improve the basic version. Tests were carried out simulating the same competition rules and the results are competitive with those obtained by the ITC-2007 finalists.
 \end{abstract}
 
 \chapter*{Dedicatória}
 
-Dedico este trabalho a ...
-
+Dedico este trabalho a todos familiares, amigos e professores que contribuiram de alguma forma para que sua conclusão fossse possível.
 
 \chapter*{Agradecimentos}
 
-Agradeço a ...
+Agradeço primeiramente a Deus pela capacidade física e intelectual para realização deste trabalho.
+
+À minha esposa Iris por estar sempre ao meu lado me incentivando.
+
+Também agradeço às professoras Claudia e Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agradável. Aos demais professores do Departamento de Informática pela importância na minha formação acadêmica.
+
+%À direção do Núcleo de Processamento de Dados da UFES pelo apoio necessário
+
+À CAPES pelo apoio financeiro.
 
 \tableofcontents{}\listoffigures
 
@@ -477,7 +486,7 @@ Neste capítulo será apresentado a estrutura geral da meta-heurística GRASP para 
 
 \section{Algoritmo GRASP\label{sec:estrutura_grasp}}
 
-Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Resende02greedyrandomized}.
+Um problema de otimização combinatória pode ser definido por um conjunto finito $E = {1,...,n}$, um conjunto de soluções viáveis $F \subseteq 2^E$ e uma função objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema específico. Considerando a versão de minimização, o objetivo consiste em encontrar uma solução ótima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Glover89}.
 
 As meta-heurísticas são algoritmos de caráter geral que orientam uma maneira de explorar o conjunto de soluções para encontrar a solução ótima. A solução ótima não é garantida mas, em geral, as meta-heurísticas alcançam boas soluções viáveis.
 
@@ -767,7 +776,7 @@ O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para isso
 
 Como o GRASP não especifica qual estratégia de busca local, várias podem ser usadas. Neste trabalho fazemos uso de duas estratégias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}.
 
-No \textit{Hill Climbing}, a partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo termina com $N$ iterações sem melhora da função objetivo, onde $N$ é parâmetro do algoritmo.
+No \textit{Hill Climbing} \cite{Glover89}, a partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo termina com $N$ iterações sem melhora da função objetivo, onde $N$ é parâmetro do algoritmo.
 
 Particularmente para o ITC-2007, nos testes computacionais realizados essa estratégia mostrou-se pouco eficiente, se prendendo facilmente em mínimos locais.
 
@@ -1248,7 +1257,7 @@ Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização e
 
 \chapter{Código-fonte dos algoritmos}
 
-Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser baixado como arquivo \textit{zip} ou ser obtido através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser obtido no formato \textit{zip} ou através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
 O projeto está estruturado na seguinte árvore de diretórios:
 
@@ -1302,6 +1311,20 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
 \label{tab:parametros}
 \end{table}
 \end{center}
+
+Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.cc} no diretório \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
+
+\begin{verbatim}
+$ g++ validator.cc -o validator
+\end{verbatim}
+
+Para validar uma resposta é necessário passar como parâmetro o arquivo da instância e o arquivo de resposta que deve estar no formato da figura \ref{fig:resposta-toy}. Considerando que o validador, a instância e o arquivo de resposta estão no mesmo diretório, o seguinte comando deve ser usado:
+
+\begin{verbatim}
+$ ./validator comp01.ctt comp01.sol
+\end{verbatim}
+
+O validador exibe a quantidade de violações fortes e fracas, detalhando onde elas ocorrem na tabela-horário.
 
 \newpage
 

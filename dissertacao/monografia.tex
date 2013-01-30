@@ -64,7 +64,6 @@ O problema de tabela-horário é de grande destaque na área de otimização combinat
 \end{resumo}
 
 \begin{abstract}
-Write here the English version of your {}``Resumo''.
 
 The timetabling problem is of great interest in the combinatorial optimization field. Given a set of disciplines, students, teachers and classrooms, the problem consists in to allocate lectures in a limited number of timeslots and rooms, respecting some restrictions. The formulations are varied, which sometimes makes it difficult to compare to other studies. Despite the differences, it is classified into three main classes: exams timetabling, schools timetabling and universities timetabling. This work specifically treats the universities timetabling and is adopted the third formulation of international timetabling competition - ITC-2007. The problem is solved with the GRASP metaheuristic. Hill Climbing and Simulated Annealing are used as local search phase of the algorithm and Path-relinking is implemented to improve the basic version. Tests were carried out simulating the same competition rules and the results are competitive with those obtained by the ITC-2007 finalists.
 \end{abstract}
@@ -73,14 +72,15 @@ The timetabling problem is of great interest in the combinatorial optimization f
 
 Dedico este trabalho a todos familiares, amigos e professores que contribuiram de alguma forma para que sua conclusão fossse possível.
 
-
 \chapter*{Agradecimentos}
 
 Agradeço primeiramente a Deus pela capacidade física e intelectual para realização deste trabalho.
 
-À Iris pela companhia nos momentos bons e ruins.
+À minha esposa Iris por estar sempre ao meu lado me incentivando.
 
-Também agradeço à Claudia e à Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agradável.
+Também agradeço às professoras Claudia e Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agradável. Aos demais professores do Departamento de Informática pela importância na minha formação acadêmica.
+
+%À direção do Núcleo de Processamento de Dados da UFES pelo apoio necessário
 
 À CAPES pelo apoio financeiro.
 
@@ -1312,16 +1312,16 @@ maxIter & Número máximo de iteracoes do Grasp & 200 \\ \hline
 \end{table}
 \end{center}
 
-Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.c++} no diretório \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
+Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.cc} no diretório \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
 
 \begin{verbatim}
-$ g++ validador.cc -o validator
+$ g++ validator.cc -o validator
 \end{verbatim}
 
 Para validar uma resposta é necessário passar como parâmetro o arquivo da instância e o arquivo de resposta que deve estar no formato da figura \ref{fig:resposta-toy}. Considerando que o validador, a instância e o arquivo de resposta estão no mesmo diretório, o seguinte comando deve ser usado:
 
 \begin{verbatim}
-$ validator comp01.ctt comp01.sol
+$ ./validator comp01.ctt comp01.sol
 \end{verbatim}
 
 O validador exibe a quantidade de violações fortes e fracas, detalhando onde elas ocorrem na tabela-horário.

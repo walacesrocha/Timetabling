@@ -331,7 +331,7 @@ f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
 %\end{split}
 \end{equation}
 
-\noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v + 2|RFc2|_v + |RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
+\noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v +\,2|RFc2|_v\,+\,|RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
 
 A figura \ref{fig:instancia-toy} ilustra um arquivo exemplo para uma instância de teste, chamada \textit{Toy}. Esta instância é bem reduzida e foi fornecida pela organização do ITC-2007 apenas para demonstrar o formato das instâncias oficiais do campeonato. O arquivo é dividido em cinco partes: a primeira informa a quantidade de cada um dos itens a seguir: disciplinas (entendemos que \textit{courses} são disciplinas), salas, dias, períodos por dia, currículos e indisponibilidades; na segunda são detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, número mínimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo após vem a relação dos currículos, com os nomes das disciplinas que compõe cada um deles. Por último são listadas as indisponibilidades das disciplinas, identificando dia e horário em que não podem ser lecionadas.
 
@@ -555,7 +555,7 @@ Para encontrar boas soluções, uma meta-heurística precisa ter duas característic
 
 No GRASP a diversificação é feita pela independência das iterações e pela aleatoriedade introduzida na solução inicial, enquanto a intensificação é feita pela busca local. Nesta fase a solução inicial é melhorada explorando sua vizinhança na busca de soluções melhores.
 
-O GRASP não especifica qual a estratégia de busca local deve ser utilizada. Em \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solução inicial.
+O GRASP não especifica qual a estratégia de busca local deve ser utilizada. No trabalho de \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solução inicial.
 
 \section{GRASP + \textit{Path-Relinking}}
 
@@ -1052,6 +1052,8 @@ Os organizadores do campeonato forneceram um programa executável para fazer um \
 
 Foi necessário adicionar nos algoritmos o critério de parada pelo tempo de execução, pois nos apresentados nesse trabalho, o único critério considerado foi número máximo de iterações {\it{MaxIter}}.
 
+Uma das melhorias implementadas no algortimo que foi citada na seção \ref{sec:detalhes-implementacao} é a geração e avaliação dos vizinhos de uma solução. Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
+
 O algoritmo GRASP proposto foi executado para as 21 instâncias do ITC-2007. Para avaliar a eficiência dos tipos de busca local abordadas nesse trabalho, três versões do algoritmo foram testadas:
 
 \begin{itemize}
@@ -1070,33 +1072,33 @@ A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas par
 \begin{tabular}{|l|c|c|c|}
 \hline
 Instância & GHC1 & GHC2 & GSA \\ \hline
-comp01	& 15	& 5	& 5 \\
-comp02	& 260	& 130	& 73 \\
-comp03	& 223	& 125	& 98 \\
-comp04	& 168	& 73	& 48 \\
-comp05	& 707	& 525	& 409 \\
-comp06	& 293	& 116	& 75 \\
-comp07	& 266	& 68	& 36 \\
-comp08	& 186	& 77	& 58 \\
-comp09	& 269	& 144	& 119 \\
-comp10	& 245	& 68	& 41 \\
-comp11	& 9	& 0	& 0 \\ \hline
+comp01	& 15	& {\bf 5}	& {\bf 5} \\
+comp02	& 260	& 130	& {\bf 73} \\
+comp03	& 223	& 125	& {\bf 98} \\
+comp04	& 168	& 73	& {\bf 48} \\
+comp05	& 707	& 525	& {\bf 409} \\
+comp06	& 293	& 116	& {\bf 75} \\
+comp07	& 266	& 68	& {\bf 36} \\
+comp08	& 186	& 77	& {\bf 58} \\
+comp09	& 269	& 144	& {\bf 119} \\
+comp10	& 245	& 68	& {\bf 41} \\
+comp11	& 9	& {\bf 0}	& {\bf 0} \\ \hline
 \end{tabular}
 \medskip
 \begin{tabular}{|l|c|c|c|}
 \hline
 Instância & GHC1 & GHC2 & GSA \\ \hline
-comp12	& 847	& 455	& 375 \\
-comp13	& 206	& 110	& 97 \\
-comp14	& 191	& 91	& 72 \\
-comp15	& 218	& 141	& 101 \\
-comp16	& 233	& 96	& 69 \\
-comp17	& 271	& 127	& 105 \\
-comp18	& 179	& 113	& 102 \\
-comp19	& 238	& 122	& 87 \\
-comp20	& 356	& 106	& 88 \\
-comp21	& 301	& 176	& 136 \\
- &  &  &   \\ \hline
+comp12	& 847	& 455	& {\bf 375} \\
+comp13	& 206	& 110	& {\bf 97} \\
+comp14	& 191	& 91	& {\bf 72} \\
+comp15	& 218	& 141	& {\bf 101} \\
+comp16	& 233	& 96	& {\bf 69} \\
+comp17	& 271	& 127	& {\bf 105} \\
+comp18	& 179	& 113	& {\bf 102} \\
+comp19	& 238	& 122	& {\bf 87} \\
+comp20	& 356	& 106	& {\bf 88} \\
+comp21	& 301	& 176	& {\bf 136} \\ \hline
+Média & 270,52  & 136,57 & {\bf 104,47}  \\ \hline
 \end{tabular}
 \caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
@@ -1104,13 +1106,13 @@ comp21	& 301	& 176	& 136 \\
 \end{table}
 
 
-Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre as três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}.
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre as três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}. Na média, GSA supera GHC1 em $258\%$ e GHC2 em $30\%$.
 
 Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada instância está destacada em negrito.
 
 A competição foi dividida em duas fases descritas a seguir. A primeira fase foi mais geral e durou aproximadamente 6 meses. Todos os competidores registrados receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
-Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso somente a coluna dos cinco melhores estão identificadas, que na ordem de classificação são:
+Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso estão identificados apenas como C6, C7, ..., C17. Os cinco finalistas na ordem de classificação são:
 
 \begin{enumerate}
 \item Tomas Müller (Estados Unidos)
@@ -1128,7 +1130,7 @@ Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritm
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Instância & Atsuta &  &  & Clark & & & & Geiger & Lu & \\ \hline
+Instância & Atsuta & C6 & C7 & Clark & C8 & C9 & C10 & Geiger & Lu & C11 \\ \hline
 comp01 & {\bf 5} &	30 &	9 &	10 &	18 &	943 &	31 &	{\bf 5} &	{\bf 5} &	112  \\ 
 comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	{\bf 34} &	485  \\
 comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	{\bf 70} &	433  \\
@@ -1151,7 +1153,7 @@ Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	{\bf
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
-Instância & & & & & Muller & & & GSA \\ \hline
+Instância & C12 & C13 & C14 & C15 & Muller & C16 & C17 & GSA \\ \hline
 comp01 & 61 &	{\bf 5} &	97 &	23 &	{\bf 5} &	114 &	6 & {\bf 5} \\ 
 comp02 & 1976 &	127 &	393 &	86 &	43 &	295 &	185 & 73 \\
 comp03 & 739 &	141 &	314 &	121 &	72 &	229 &	184 & 98 \\
@@ -1169,7 +1171,7 @@ comp14 & 756 &	88 &	487 &	96 &	53 &	239 &	175 & 72 \\ \hline
 Média & 3562,29 &870,36 &415,21 &192,86 & {\bf 79,21} &296,64 &231,86 & 107,57 \\ \hline
 \end{tabular}
 \end{footnotesize}
-\caption{Resultados primeira fase}
+\caption{Resultados da primeira fase}
 \label{tab:solucoes_itc2007_1}
 \end{center}
 \end{table}
@@ -1182,14 +1184,14 @@ Média & 3562,29 &870,36 &415,21 &192,86 & {\bf 79,21} &296,64 &231,86 & 107,57 \
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
 Instância & Atsuta & Clark & Geiger & Lu & Muller & GSA \\ \hline
-comp15 & 82 & 119 & 128 & 71 & 84 & 101 \\ 
-comp16 & 40 & 84 & 81 & 39 & 34 & 69 \\ 
-comp17 & 102 & 152 & 124 & 91 & 83 & 105 \\ 
-comp18 & 68 & 110 & 116 & 69 & 83 & 102 \\ 
-comp19 & 75 & 111 & 107 & 65 & 62 & 87 \\ 
-comp20 & 61 & 144 & 88 & 47 & 27 & 88 \\ 
-comp21 & 123 & 169 & 174 & 106 & 103 & 136 \\  \hline
-Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
+comp15 & 82 & 119 & 128 & {\bf 71} & 84 & 101 \\ 
+comp16 & 40 & 84 & 81 & 39 & {\bf 34} & 69 \\ 
+comp17 & 102 & 152 & 124 & 91 & {\bf 83} & 105 \\ 
+comp18 & {\bf 68} & 110 & 116 & 69 & 83 & 102 \\ 
+comp19 & 75 & 111 & 107 & 65 & {\bf 62} & 87 \\ 
+comp20 & 61 & 144 & 88 & 47 & {\bf 27} & 88 \\ 
+comp21 & 123 & 169 & 174 & 106 & {\bf 103} & 136 \\  \hline
+Média & 78,71 &	127 & 116,86 & 69,71 & {\bf 68} & 98,29 \\ \hline
 \end{tabular}
 }
 \caption{Resultados da segunda fase}
@@ -1197,10 +1199,13 @@ Média & 78,71 &	127 & 116,86 & 69,71 & 68 & 98,29 \\ \hline
 \end{center}
 \end{table}
 
+Considerando a média dos resultados de todas as instâncias da primeira fase, GSA teve respostas $26\%$ inferiores aos competidores Muller e Lu (primeiros colocados) e $17\%$ superior ao quinto colocado Clark.
+
+Na segunda fase, GSA foi inferior as respostas de Muller em $44\%$ e superior as respostas de Clark em $29\%$.
+
+Analisando separadamente por instância, podemos ver que os melhores resultados do GSA foram para as instâncias \textit{comp01} e \textit{comp11}, conseguindo empatar com as melhores respostas do campeonato. Por outro lado, \textit{comp05} e \textit{comp12} são as instâncias em que GSA obteve as respostas com valor de função objetivo mais alto. Confrontando estas informações com a tabela \ref{tab:instancias}, vemos que as duas primeiras são instâncias com poucos conflitos e grande disponibilidade, enquanto que as duas últimas possuem grande quantidade de conflitos entre as disciplinas e pouca disponibilidade de horários para as aulas. Essas estatísticas são relevantes porque elas informam o quão difícil é a exploração do espaço de soluções. Situações deste tipo fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados. 
+
 %\end{landscape}
-
-Uma das melhorias implementadas no algortimo que foi citada na seção \ref{sec:detalhes-implementacao} é a geração e avaliação dos vizinhos de uma solução. Com o intuito de medir a eficiência desta modificação descrita foram criados dois programas para gerar uma tabela-horário inicial aleatória e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliação é feita levando em consideração toda a tabela. No segundo a avaliação é apenas local. Usando a instância \textit{comp01} como parâmetro e rodando cada programa três vezes, o primeiro executou as 100000 avaliações em um tempo computacional em torno de $44.996$ segundos na média, enquanto o segundo programa executou em torno de $4.242$ segundos na média. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a instância \textit{comp12}, que é uma instância maior, o primeiro programa executou numa média de $467.603$ segundos, enquanto o segundo em $19.803$ segundos. Nesta instância o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiência foi bem significativo para a instância maior.
-
 
 \chapter{Conclusões e trabalhos futuros\label{cap:conclusao}}
 
@@ -1227,7 +1232,8 @@ Observando estes pontos conclui-se que o GRASP prioriza mais a diversificação qu
 
 Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algoritmos genéricos adaptáveis a diversos problemas de otimização combinatória, um entendimento mais aprofundado do problema abordado deve ser feito para obter bons resultados. No caso do problema de tabela-horário, a eficiência do GRASP foi aumentada introduzindo matrizes auxiliares e avaliações locais na geração de vizinhos.
 
-É importante ressaltar também a relevância que as vizinhanças tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções.
+É importante ressaltar também a relevância que as vizinhanças tem nos problemas de otimização. A geração dos vizinhos deve ser rápida e capaz de explorar bem o espaço de soluções. No caso dos problemas de tabela-horário, além de melhoras na função objetivo, os vizinhos devem satisfazer certas restrições, o que dificulta ainda mais a exploração da vizinhança.
+
 
 \section{Trabalhos futuros}
 

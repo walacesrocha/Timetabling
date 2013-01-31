@@ -215,7 +215,7 @@ int main(int argc, char** argv) {
 
     //exit(0);
     for (i = 0; i < 0; i++) {
-        somaViolacoesSoft2(p, ind);
+        somaViolacoesSoft2(p, ind,0);
 
         Neighbour *mov;
 
@@ -232,22 +232,22 @@ int main(int argc, char** argv) {
         printf("DeltaF=%f (%.1f + %.1f)\n", deltaF, mov->deltaHard, mov->deltaSoft);
 
         float f1 = funcaoObjetivo(p, ind, 1);
-        float f1Soft = somaViolacoesSoft2(p, ind);
+        float f1Soft = somaViolacoesSoft2(p, ind,0);
 
         //printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
         //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
+        printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind,0),
                 ind->soft1, ind->soft2, ind->soft3, ind->soft4);
 
         troca_par_completo(p, ind, mov->p1, mov->p2);
         printf("POS: (%d, %d)\n", mov->p1, mov->p2);
 
         float f2 = funcaoObjetivo(p, ind, 1);
-        float f2Soft = somaViolacoesSoft2(p, ind);
+        float f2Soft = somaViolacoesSoft2(p, ind,0);
 
         //printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
         //ind->soft1, ind->soft2, ind->soft3, ind->soft4);
-        printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind),
+        printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft2(p, ind,0),
                 ind->soft1, ind->soft2, ind->soft3, ind->soft4);
 
         imprimeIndividuo3(p, ind);
@@ -292,7 +292,7 @@ int main(int argc, char** argv) {
     inicializaMatrizesAuxiliares(p, ind);
     printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
-    printf("SOFT: %f\n", somaViolacoesSoft2(p, ind));
+    printf("SOFT: %f\n", somaViolacoesSoft2(p, ind,0));
     printf("MEDIA: %f\n", p->mediaSolucoes);
     printf("RoomCapacity: %f\n", p->soft1);
     printf("MinWorkDays: %f\n", p->soft2);

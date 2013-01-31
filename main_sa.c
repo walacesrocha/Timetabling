@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
         }
 
         troca_par_completo(p, ind, mov->p1, mov->p2);
-        somaViolacoesSoft2(p, ind);
+        somaViolacoesSoft2(p, ind,0);
         
         free(mov);
 

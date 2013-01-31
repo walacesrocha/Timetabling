@@ -1675,7 +1675,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         foAtual = funcaoObjetivo(p, solucaoAtual, p->pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
-        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual));
+        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual,0));
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento

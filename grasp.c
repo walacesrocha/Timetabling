@@ -106,6 +106,18 @@ void retiraCandidato(AuxGrasp *auxGrasp, int aula) {
 
 }
 
+int estaEmConflito(Individuo *ind, int aula) {
+    int i;
+
+    for (i = 0; i < ind->nConflitos; i++) {
+        if (ind->posConflitos[i] == aula) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
     int i, j, k;
 
@@ -135,31 +147,35 @@ void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
     }
     auxGrasp->nrPossibilidades = 0;
 
+
+
     if (indBase != NULL) {
+        somaViolacoesSoft2(p, indBase, 1);
+        printf("Aula em conflitos: %d\n",indBase->nConflitos);
         int k;
-        printf("Aproveitando solucao anterior\n");
+        //printf("Aproveitando solucao anterior\n");
         for (k = 0; k < p->dimensao; k++) {
 
-            if (ehAula(p, indBase->aula[k])) {
-                if (((float) rand()) / RAND_MAX < p->pAproveitamento) {
-                    auxGrasp->ind->aula[k] = indBase->aula[k];
+            if (ehAula(p, indBase->aula[k]) && !estaEmConflito(indBase, indBase->aula[k])) {
+                //if (((float) rand()) / RAND_MAX < 1.1 /* p->pAproveitamento*/) {
+                auxGrasp->ind->aula[k] = indBase->aula[k];
 
-                    //printf("Disc: %s (%d)\n", acessaDisciplina(p, indBase->aula[k]), indBase->aula[k]);
+                //printf("Disc: %s (%d)\n", acessaDisciplina(p, indBase->aula[k]), indBase->aula[k]);
 
-                    retiraCandidato(auxGrasp, indBase->aula[k]);
+                retiraCandidato(auxGrasp, indBase->aula[k]);
 
-                    /*printf("Candidatos: ");
-                    for (i = 0; i < auxGrasp->nCandidatos; i++) {
-                        printf("%d ", auxGrasp->candidatos[i]);
-                    }
-                    printf("\n");
-
-                    printf("Ind Parcial: ");
-                    for (i = 0; i < p->dimensao; i++) {
-                        printf("%d ", auxGrasp->ind->aula[i]);
-                    }
-                    printf("\n");*/
+                /*printf("Candidatos: ");
+                for (i = 0; i < auxGrasp->nCandidatos; i++) {
+                    printf("%d ", auxGrasp->candidatos[i]);
                 }
+                printf("\n");
+
+                printf("Ind Parcial: ");
+                for (i = 0; i < p->dimensao; i++) {
+                    printf("%d ", auxGrasp->ind->aula[i]);
+                }
+                printf("\n");*/
+                //}
             }
         }
 
@@ -349,7 +365,7 @@ Disciplina* getDisciplinaPorNome(Problema *p, char * nomeDisciplina) {
     for (j = 0; j < p->nDisciplinas; j++) {
 
         if (strcmp((p->disciplinas + j)->nomeDisciplina, nomeDisciplina) == 0) {
-            return p->disciplinas+j;
+            return p->disciplinas + j;
         }
     }
 
@@ -489,8 +505,8 @@ void avaliaCustoAlocacao(Problema *p, AuxGrasp *auxGrasp, int aula, int nrP) {
             aulasIsoladas += 1;
         }
     }
-    
-    alocacao->custo += 2*aulasIsoladas; // penalidade peso 2
+
+    alocacao->custo += 2 * aulasIsoladas; // penalidade peso 2
 
     //printf("MIN=%d, ocupados: %d\n", disc->minDiasAula, totalDiasOcupados);
 
@@ -1325,7 +1341,7 @@ Individuo *buscaLocalGraspMista(Problema*p, Individuo *indInicial) {
 }
 
 void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
-    int aula,i;
+    int aula, i;
 
     resetAuxGrasp(p, auxGrasp, indBase);
 
@@ -1341,7 +1357,7 @@ void geraSolucaoInicialGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase
     //printf("==============================================================================\n");
 
     for (i = 0; i < auxGrasp->nCandidatos; i++) {
-        printf("%d ", auxGrasp->candidatos[i]);
+        //printf("%d ", auxGrasp->candidatos[i]);
         //printf("%d\n", comparaAulas(p, auxGrasp, auxGrasp->candidatos[i], 5));
     }
     //printf("\n");
@@ -1765,7 +1781,7 @@ Individuo *grasp(Problema *p) {
             printf("F2: %f\n", fo);
         }
 
-        printf("%.2f: %f\n", p->pAproveitamento, fo);
+        //printf("%.2f: %f\n", p->pAproveitamento, fo);
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //printf("\n\n\n", fo);

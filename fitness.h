@@ -13,7 +13,7 @@ float somaViolacoesHard (Problema *p, Individuo *a);
 
 
 float somaViolacoesSoft (Problema *p, Individuo *a);
-float somaViolacoesSoft2(Problema *p, Individuo *a);
+float somaViolacoesSoft2(Problema *p, Individuo *a, int marcaAulas);
 
 
 float fitness(Problema *p, Individuo *i);

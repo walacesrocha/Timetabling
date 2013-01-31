@@ -507,10 +507,27 @@ int somaAulasIsoladas(Problema *p, Individuo *ind) {
 
 }
 
-float somaViolacoesSoft2(Problema *p, Individuo *a) {
-    int sala, dia, horario, i, nAulasSala, aula, pos;
+void insereAulaEmCOnflitos(Individuo *ind, int aula) {
+    int i;
+    for (i = 0; i < ind->nConflitos; i++) {
+        if (ind->posConflitos[i] == aula) {
+            return;
+        }
+    }
+
+    ind->posConflitos[ind->nConflitos] = aula;
+    ind->nConflitos++;
+
+}
+
+float somaViolacoesSoft2(Problema *p, Individuo *a, int marcaAulas) {
+    int sala, dia, horario, i, j, nAulasSala, aula, pos;
     int soma1, soma2, soma3, soma4;
     int totalSalas, totalDias;
+
+    if (marcaAulas) {
+        a->nConflitos = 0;
+    }
 
     i = 0;
     pos = 0;
@@ -527,6 +544,10 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
                     //s1 = estudantesExcedentesAula(p, aula, (p->salas[sala]).capacidade); //restricoes soft 1
                     if (disc->nAlunos > (p->salas[sala]).capacidade) {
                         soma1 += disc->nAlunos - (p->salas[sala]).capacidade;
+
+                        if (marcaAulas) {
+                            insereAulaEmCOnflitos(a, aula);
+                        }
                     }
 
                 }
@@ -549,6 +570,12 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
         //printf("%s: %d\n",(p->disciplinas+i)->nomeDisciplina,totalSalas);
         soma4 += (totalSalas - 1);
 
+        if (marcaAulas && totalSalas > 1) {
+            for (j = 0; j < (p->disciplinas + i)->nAulas; j++) {
+                insereAulaEmCOnflitos(a, (p->disciplinas + i)->aulaInicial + j);
+            }
+        }
+
     }
 
     soma2 = 0;
@@ -566,12 +593,18 @@ float somaViolacoesSoft2(Problema *p, Individuo *a) {
             soma2 += ((p->disciplinas + i)->minDiasAula - totalDias);
         }
 
+        if (marcaAulas && totalSalas > 1) {
+            for (j = 0; j < (p->disciplinas + i)->nAulas; j++) {
+                insereAulaEmCOnflitos(a, (p->disciplinas + i)->aulaInicial + j);
+            }
+        }
+
     }
 
     //zeraMatCurrDiasPeriodos(p, a);
     //inicializaMatCurrDiasPeriodos(p, a);
     soma3 = somaAulasIsoladas(p, a);
-    
+
     soma1 *= p->pesoRC;
     soma2 *= p->pesoMW;
     soma3 *= p->pesoIL;

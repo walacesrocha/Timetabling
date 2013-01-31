@@ -8,7 +8,7 @@
 
 float funcaoObjetivo(Problema *p, Individuo *ind, float pesoHard) {
     float vHard = somaViolacoesHard(p, ind);
-    float vSoft = somaViolacoesSoft2(p, ind);
+    float vSoft = somaViolacoesSoft2(p, ind,0);
 
     //printf("(%f, %f)\n", vHard, vSoft);
 
@@ -793,7 +793,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
             printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
                     t0, tMin, nPioras, foAtual,
                     funcaoObjetivo(p, solucaoAtual, pesoHard),
-                    somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), pesoHard,
+                    somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual,0), pesoHard,
                     solucaoAtual->soft1,
                     solucaoAtual->soft2,
                     solucaoAtual->soft3,
@@ -817,7 +817,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
     /*printf("T=%f/%f, Pioras=%d, FO=%.1f / %.1f (%f, %f) [%.3f] It=%ld UM:%ld: %f F*=%.0f\n", t0, tMin, nPioras, foAtual,
             funcaoObjetivo(p, solucaoAtual, pesoHard),
-            somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual), totalProb / N, pesoHard);*/
+            somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual,0), totalProb / N, pesoHard);*/
 
     /*if (somaViolacoesHard(p, solucaoAtual) > 0) {
         aumentaPesoHard = 1;

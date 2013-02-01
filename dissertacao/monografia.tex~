@@ -508,14 +508,14 @@ O algoritmo GRASP é um procedimento com iterações independentes, onde cada itera
 
 $f^{*} \leftarrow \infty $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
-	$S \leftarrow GeraSolucaoInicial() $ \;
-	\Se{$ S $ é inviável }{
-		$ReparaSolucao(S) $\;
+	$S_0 \leftarrow GeraSolucaoInicial() $ \;
+	\Se{$ S_0 $ é inviável }{
+		$ReparaSolucao(S_0) $\;
 	}
-	$S \leftarrow BuscaLocal(S) $ \;
-	\Se{$ f(S) < f^{*} $}{
-		$S^{*} \leftarrow S $ \;
-		$f^{*} \leftarrow f(S) $ \;
+	$S_1 \leftarrow BuscaLocal(S_0) $ \;
+	\Se{$ f(S_1) < f^{*} $}{
+		$S^{*} \leftarrow S_1 $ \;
+		$f^{*} \leftarrow f(S_1) $ \;
 	}
 }
 \caption{Estrutura básica do algoritmo GRASP}
@@ -915,8 +915,9 @@ A quantidade de currículos e disciplinas tem grande impacto no tempo de execução
 
 \begin{center}
 \begin{table}[!htb]
-\begin{tabular}{|c|c|c|c|p{1.8cm}|c||c|p{1.8cm}|}\hline
-{\bf Instância} & {\bf Currículos} & {\bf Salas} & {\bf Disciplinas} &{\bf Horários por dia}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibi-lidade}\\\hline
+\begin{tabular}{|c|c|c|c|c|c|c|c|}\hline
+{\bf Instância} & {\bf Currículos} & {\bf Salas} & {\bf Disciplinas} &{\bf Horários}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibi-}\\
+ &  &  &  &{\bf por dia} & & & {\bf lidade} \\\hline
 comp01 & 14 & 6 & 30 & 6 & 5 & 13.2 & 93.1 \\ 
 comp02 & 70 & 16 & 82 & 5 & 5 & 7.97 & 76.9 \\ 
 comp03 & 68 & 16 & 72 & 5 & 5 & 8.17 & 78.4 \\ 
@@ -1038,7 +1039,7 @@ Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill
 
 O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tarefa de calibração mais difícil. Foram escolhidos parâmetros que permitem certa diversificação no início da busca e maior intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma solução inicial de boa qualidade não ajuda muito o processo, pois permite aceitar soluções muito ruins e a melhora só é observada quando o resfriamento está bem adiantado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de $0,01$ a busca estabiliza e raramente uma solução melhor é encontrada.
 
-Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5, T_f = 0,005, \beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
+Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos têm igual probabilidade de ocorrer.
 
@@ -1203,7 +1204,9 @@ Considerando a média dos resultados de todas as instâncias da primeira fase, GSA
 
 Na segunda fase, GSA foi inferior as respostas de Muller em $44\%$ e superior as respostas de Clark em $29\%$.
 
-Analisando separadamente por instância, podemos ver que os melhores resultados do GSA foram para as instâncias \textit{comp01} e \textit{comp11}, conseguindo empatar com as melhores respostas do campeonato. Por outro lado, \textit{comp05} e \textit{comp12} são as instâncias em que GSA obteve as respostas com valor de função objetivo mais alto. Confrontando estas informações com a tabela \ref{tab:instancias}, vemos que as duas primeiras são instâncias com poucos conflitos e grande disponibilidade, enquanto que as duas últimas possuem grande quantidade de conflitos entre as disciplinas e pouca disponibilidade de horários para as aulas. Essas estatísticas são relevantes porque elas informam o quão difícil é a exploração do espaço de soluções. Situações deste tipo fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados. 
+Analisando separadamente por instância, podemos ver que os melhores resultados do GSA foram para as instâncias \textit{comp01} e \textit{comp11}, conseguindo empatar com as melhores respostas do campeonato. Por outro lado, \textit{comp05} e \textit{comp12} são as instâncias em que GSA obteve as respostas com valor de função objetivo mais alto. Confrontando estas informações com a tabela \ref{tab:instancias}, vemos que as duas primeiras são instâncias com maior valor de disponibilidade (superior a $90\%$), enquanto que as duas últimas são as que tem menor valor, próximo a $50\%$. Isto significa que somente metade dos horários são disponíveis para alocar uma aula, sem considerar outros conflitos com as aula já alocadas. Além disso, \textit{comp05} é a instância com maior percentual de conflitos entre as aulas, superior a $20\%$.
+
+Essas estatísticas são relevantes porque elas informam o quão difícil é a exploração do espaço de soluções. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados. 
 
 %\end{landscape}
 
@@ -1263,7 +1266,7 @@ Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização e
 
 \chapter{Código-fonte dos algoritmos}
 
-Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/Ti\-metabling}. O projeto pode ser obtido no formato \textit{zip} ou através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os códigos-fontes, além de arquivos auxiliares necessários para execução do programa podem ser obtidos no repositório \textit{github}, através do link: \textit{https://github.com/walacesrocha/ Timetabling}. O projeto pode ser obtido no formato \textit{zip} ou através do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
 O projeto está estruturado na seguinte árvore de diretórios:
 

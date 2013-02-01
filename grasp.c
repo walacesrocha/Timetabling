@@ -151,31 +151,35 @@ void resetAuxGrasp(Problema *p, AuxGrasp *auxGrasp, Individuo *indBase) {
 
     if (indBase != NULL) {
         somaViolacoesSoft2(p, indBase, 1);
-        printf("Aula em conflitos: %d\n",indBase->nConflitos);
+        printf("Aula em conflitos: %d\n", indBase->nConflitos);
+        for (i = 0; i < indBase->nConflitos; i++) {
+            printf("%d ", indBase->posConflitos[i]);
+        }
+        printf("\n");
         int k;
         //printf("Aproveitando solucao anterior\n");
         for (k = 0; k < p->dimensao; k++) {
 
-            if (ehAula(p, indBase->aula[k]) && !estaEmConflito(indBase, indBase->aula[k])) {
-                //if (((float) rand()) / RAND_MAX < 1.1 /* p->pAproveitamento*/) {
-                auxGrasp->ind->aula[k] = indBase->aula[k];
+            if (ehAula(p, indBase->aula[k])) {
+                if (((float) rand()) / RAND_MAX < p->pAproveitamento) {
+                    auxGrasp->ind->aula[k] = indBase->aula[k];
 
-                //printf("Disc: %s (%d)\n", acessaDisciplina(p, indBase->aula[k]), indBase->aula[k]);
+                    //printf("Disc: %s (%d)\n", acessaDisciplina(p, indBase->aula[k]), indBase->aula[k]);
 
-                retiraCandidato(auxGrasp, indBase->aula[k]);
+                    retiraCandidato(auxGrasp, indBase->aula[k]);
 
-                /*printf("Candidatos: ");
-                for (i = 0; i < auxGrasp->nCandidatos; i++) {
-                    printf("%d ", auxGrasp->candidatos[i]);
+                    /*printf("Candidatos: ");
+                    for (i = 0; i < auxGrasp->nCandidatos; i++) {
+                        printf("%d ", auxGrasp->candidatos[i]);
+                    }
+                    printf("\n");
+
+                    printf("Ind Parcial: ");
+                    for (i = 0; i < p->dimensao; i++) {
+                        printf("%d ", auxGrasp->ind->aula[i]);
+                    }
+                    printf("\n");*/
                 }
-                printf("\n");
-
-                printf("Ind Parcial: ");
-                for (i = 0; i < p->dimensao; i++) {
-                    printf("%d ", auxGrasp->ind->aula[i]);
-                }
-                printf("\n");*/
-                //}
             }
         }
 

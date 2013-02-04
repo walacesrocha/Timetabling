@@ -228,7 +228,7 @@ A tabela-horário de exames é usada somente nos finais de bimestre, trimestre ou 
 
 As técnicas usadas para resolver o problema de tabela-horário são bastante diversificadas. As mais antigas, as heurísticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma até finalizar a construção da tabela. Conflitos eram resolvidos realizando trocas de aulas.
 
-\cite{Neufeld} propôs uma redução do problema ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Numa abordagem semelhante, \cite{Galinier20062547} propuseram o algoritmo \textit{Tabucol} (Busca Tabu para resolver coloração de grafos), que posteriormente também foi usado por \cite{geraldo_bello}.
+\cite{Neufeld} propuseram uma redução do problema ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Numa abordagem semelhante, \cite{Galinier20062547} propuseram o algoritmo \textit{Tabucol} (Busca Tabu para resolver coloração de grafos), que posteriormente também foi usado por \cite{geraldo_bello}.
 
 \cite{deWerra82} reduziram o problema de tabela-horário ao problema de fluxo de redes. As aulas são representadas pelos vértices. Uma rede é criada para cada horário e o fluxo na rede identifica as aulas que são lecionadas no mesmo horário. Posteriormente, \cite{deWerra85} usou uma idéia similar, mas cada fluxo representa uma classe e os vértices são horários e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
 
@@ -236,13 +236,13 @@ Mais recentemente, as técnicas de solução para o problema têm recaído basicament
 
 Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} é usado um procedimento conhecido na programação linear como \textit{branch-and-cut}. O problema inicialmente é resolvido sem as restrições de integralidade. Em seguida são usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execução aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Esses dois trabalhos citados são de grande importância pois são capazes de fornecer limites inferiores para as quantidades de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
 
-Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresenta uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
+Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresentam uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
 
 Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. Uma meta-heurística é um método heurístico para resolver de forma genérica problemas de otimização. Ela é genérica porque não se atém a detalhes específicos do problema que está sendo tratado, mas apenas especifica como o conjunto de soluções será explorado em busca da melhor solução. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais utilizadas pelos pesquisadores mas há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
 
 Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa \textit{Simulated Annealing} para resolver a formulação dois do ITC-2007. Neste trabalho foram obtidas boas respostas para as instâncias, e em alguns casos, foram obtidas respostas melhores que as conhecidas no momento da comparação.
 
-Algoritmos Genéticos também foram propostos para o problema, onde o cromossomo representa a tabela-horário e cada posição da tabela corresponde a um gene. Em seguida são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicou esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propuseram um algoritmo genético híbrido para resolver a formulação do ITC-2007. O algoritmo foi considerado híbrido pois, além de aplicar os operadores genéticos, uma busca local foi utilizada nos melhores indivíduos ao final de cada geração.
+Algoritmos Genéticos também foram propostos para o problema, onde o cromossomo representa a tabela-horário e cada posição da tabela corresponde a um gene. Em seguida são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicaram esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propuseram um algoritmo genético híbrido para resolver a formulação do ITC-2007. O algoritmo foi considerado híbrido pois, além de aplicar os operadores genéticos, uma busca local foi utilizada nos melhores indivíduos ao final de cada geração.
 
 Além das meta-heurísticas acima citadas, a Busca Tabu também tem sido aplicada com sucesso. Em \cite{elloumi2008} é apresentado uma algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicaram a técnica no âmbito de escolas primárias de Minas Gerais e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
 
@@ -858,7 +858,7 @@ No algoritmo proposto o \textit{Path-relinking} é aplicado sobre a solução obtid
 \item \textbf{Religamento inverso}: PR é aplicado partindo da melhor solução em direção à pior.
 \end{itemize}
 
-Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} indica que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a solução alvo.
+Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} indicam que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a solução alvo.
 
 Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
 
@@ -1131,45 +1131,45 @@ Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritm
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Instância & Atsuta & C6 & C7 & Clark & C8 & C9 & C10 & Geiger & Lu & C11 \\ \hline
-comp01 & {\bf 5} &	30 &	9 &	10 &	18 &	943 &	31 &	{\bf 5} &	{\bf 5} &	112  \\ 
-comp02 & 55 &	252 &	154 &	83 &	206 &	128034 &218 &	108 &	{\bf 34} &	485  \\
-comp03 & 91 &	249 &	120 &	106 &	235 &	55403 &	189 &	115 &	{\bf 70} &	433  \\
-comp04 & 38 &	226 &	66 &	59 &	156 &	25333 &	145 &	67 &	38 &	405  \\
-comp05 & 325 &	522 &	750 &	362 &	627 &	79234 &	573 &	408 &	{\bf 298} &	1096  \\
-comp06 & 69 &	302 &	126 &	113 &	236 &	346845 &247 &	94 &	47 &	520  \\
-comp07 & 45 &	353 &	113 &	95 &	229 &	396343 &327 &	56 &	19 &	643  \\
-comp08 & 42 &	224 &	87 &	73 &	163 &	64435 &	163 &	75 &	43 &	412  \\
-comp09 & 109 &	275 &	162 &	130 &	260 &	44943 &	220 &	153 &	{\bf 102} &	494  \\
-comp10 & 32 &	311 &	97 &	67 &	215 &	365453 &262 &	66 &	16 &	498 \\
-comp11 & {\bf 0} &	13 &	{\bf 0} &	1 &	6 &	470 &	8 &	{\bf 0} &	{\bf 0} &	104 \\
-comp12 & 344 &	577 &	510 &	383 &	676 &	204365 &594 &	430 &	{\bf 320} &	1276 \\
-comp13 & 75 &	257 &	89 &	105 &	213 &	56547 &	206 &	101 &	{\bf 65} &	460  \\
-comp14 & 61 &	221 &	114 &	82 &	206 &	84386 &	183 &	88 &	{\bf 52} &	393  \\ \hline
-Média & 92,21 &	272,29 &171,21 &119,21 &246,14 &132338,14 &240,43 &126,14 &	{\bf 79,21} &	523,64  \\ \hline
+Instância &	Muller & Lu & Atzuna & Clark & Geiger & 6º & 7º & 8º & 9º & 10º \\ \hline
+comp01&5&5&5&10&5&9&23&6&31&18 \\
+comp02&43&34&55&83&108&154&86&185&218&206 \\
+comp03&72&70&91&106&115&120&121&184&189&235 \\
+comp04&35&38&38&59&67&66&63&158&145&156 \\
+comp05&298&298&325&362&408&750&851&421&573&627 \\
+comp06&41&47&69&113&94&126&115&298&247&236\\
+comp07&14&19&45&95&56&113&92&398&327&229\\
+comp08&39&43&42&73&75&87&71&211&163&163\\
+comp09&103&102&109&130&153&162&177&232&220&260\\
+comp10&9&16&32&67&66&97&60&292&262&215\\
+comp11&0&0&0&1&0&0&5&0&8&6\\
+comp12&331&320&344&383&430&510&828&458&594&676\\
+comp13&66&65&75&105&101&89&112&228&206&213\\
+comp14&53&52&61&82&88&114&96&175&183&206\\ \hline
+Média&79,21&79,21&92,21&119,21&126,14&171,21&192,86&231,86&240,43&246,14\\ \hline
 \end{tabular}
 \end{footnotesize}
 \\
 \medskip
 \begin{footnotesize}
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c||c|}
 \hline
-Instância & C12 & C13 & C14 & C15 & Muller & C16 & C17 & GSA \\ \hline
-comp01 & 61 &	{\bf 5} &	97 &	23 &	{\bf 5} &	114 &	6 & {\bf 5} \\ 
-comp02 & 1976 &	127 &	393 &	86 &	43 &	295 &	185 & 73 \\
-comp03 & 739 &	141 &	314 &	121 &	72 &	229 &	184 & 98 \\
-comp04 & 713 &	72 &	283 &	63 &	{\bf 35} &	199 &	158 & 48 \\
-comp05 & 28249 & 10497 &672 &	851 &	{\bf 298} &	723 &	421 & 409 \\
-comp06 & 3831 &	96 &	464 &	115 &	{\bf 41} &	278 &	298 & 75 \\
-comp07 & 7470 &	103 &	577 &	92 &	{\bf 14} &	291 &	398 & 36 \\
-comp08 & 833 &	75 &	373 &	71 &	{\bf 39} &	204 &	211 & 58 \\
-comp09 & 776 &	159 &	412 &	177 &	103 &	273 &	232 & 119 \\
-comp10 & 1731 &	81 &	464 &	60 &	{\bf 9} &	250 &	292 & 41 \\
-comp11 & 56 &	{\bf 0} &	99 &	5 &	{\bf 0} &	26 &	{\bf 0} & {\bf 0} \\
-comp12 & 1902 &	629 &	770 &	828 &	331 &	818 &	458 & 375 \\
-comp13 & 779 &	112 &	408 &	112 &	66 &	214 &	228 & 97 \\
-comp14 & 756 &	88 &	487 &	96 &	53 &	239 &	175 & 72 \\ \hline
-Média & 3562,29 &870,36 &415,21 &192,86 & {\bf 79,21} &296,64 &231,86 & 107,57 \\ \hline
+Instância & 11º & 12º & 13º & 14º & 15º & 16º & 17º & GSA \\ \hline
+comp01&30&114&97&112&5&61&943&5 \\
+comp02&252&295&393&485&127&1976&128034&73\\
+comp03&249&229&314&433&141&739&55403&98\\
+comp04&226&199&283&405&72&713&25333&48\\
+comp05&522&723&672&1096&10497&28249&79234&409\\
+comp06&302&278&464&520&96&3831&346845&75\\
+comp07&353&291&577&643&103&7470&396343&36\\
+comp08&224&204&373&412&75&833&64435&58\\
+comp09&275&273&412&494&159&776&44943&119\\
+comp10&311&250&464&498&81&1731&365453&41\\
+comp11&13&26&99&104&0&56&470&0\\
+comp12&577&818&770&1276&629&1902&204365&375\\
+comp13&257&214&408&460&112&779&56547&97\\
+comp14&221&239&487&393&88&756&84386&72\\ \hline
+Média&272,29&296,64&415,21&523,64&870,36&3562,29&132338,14&107,57\\ \hline
 \end{tabular}
 \end{footnotesize}
 \caption{Resultados da primeira fase}

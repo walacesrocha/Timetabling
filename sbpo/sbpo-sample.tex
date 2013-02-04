@@ -388,15 +388,56 @@ Outra proposta de melhoria no GRASP é a paralelização do algoritmo. A estrutu
 
 %As citações no texto devem conter o último sobrenome do autor, seguido, entre parêntesis, do \textbf{ano da publicação}, como por exemplo \cite{knuth:84}, \cite{boulic:91}, e \cite{smith:99}. As referências no final do texto devem estar em ordem alfabética do último sobrenome do primeiro autor.
 
-\begin{itemize}
-
-\item Escolas: \cite{artigo_geraldo}; \cite{artigo_geraldo_luiz}; \cite{artigo_angelo}
-
-\item Universidades: \cite{artigo_gerald_marco}; \cite{artigo_broek_hurkens}
-
-\item Exames: \cite{artigo_burke_newall_weare}; \cite{artigo_burke_qu_soghier}; \cite{artigo_kahar_kendall}
-
-\end{itemize}
+\begin{table}[htbf]
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Instância &	Muller & Lu & Atzuna & Clark & Geiger & 6º & 7º & 8º & 9º & 10º \\ \hline
+comp01&5&5&5&10&5&9&23&6&31&18 \\
+comp02&43&34&55&83&108&154&86&185&218&206 \\
+comp03&72&70&91&106&115&120&121&184&189&235 \\
+comp04&35&38&38&59&67&66&63&158&145&156 \\
+comp05&298&298&325&362&408&750&851&421&573&627 \\
+comp06&41&47&69&113&94&126&115&298&247&236\\
+comp07&14&19&45&95&56&113&92&398&327&229\\
+comp08&39&43&42&73&75&87&71&211&163&163\\
+comp09&103&102&109&130&153&162&177&232&220&260\\
+comp10&9&16&32&67&66&97&60&292&262&215\\
+comp11&0&0&0&1&0&0&5&0&8&6\\
+comp12&331&320&344&383&430&510&828&458&594&676\\
+comp13&66&65&75&105&101&89&112&228&206&213\\
+comp14&53&52&61&82&88&114&96&175&183&206\\ \hline
+Média&79,21&79,21&92,21&119,21&126,14&171,21&192,86&231,86&240,43&246,14\\ \hline
+\end{tabular}
+\end{footnotesize}
+\\
+\medskip
+\begin{footnotesize}
+\begin{tabular}{|l|c|c|c|c|c|c|c||c|}
+\hline
+Instância & 11º & 12º & 13º & 14º & 15º & 16º & 17º & GSA \\ \hline
+comp01&30&114&97&112&5&61&943&5 \\
+comp02&252&295&393&485&127&1976&128034&73\\
+comp03&249&229&314&433&141&739&55403&98\\
+comp04&226&199&283&405&72&713&25333&48\\
+comp05&522&723&672&1096&10497&28249&79234&409\\
+comp06&302&278&464&520&96&3831&346845&75\\
+comp07&353&291&577&643&103&7470&396343&36\\
+comp08&224&204&373&412&75&833&64435&58\\
+comp09&275&273&412&494&159&776&44943&119\\
+comp10&311&250&464&498&81&1731&365453&41\\
+comp11&13&26&99&104&0&56&470&0\\
+comp12&577&818&770&1276&629&1902&204365&375\\
+comp13&257&214&408&460&112&779&56547&97\\
+comp14&221&239&487&393&88&756&84386&72\\ \hline
+Média&272,29&296,64&415,21&523,64&870,36&3562,29&132338,14&107,57\\ \hline
+\end{tabular}
+\end{footnotesize}
+\caption{Resultados da primeira fase}
+\label{tab:solucoes_itc2007_1}
+\end{center}
+\end{table}
 
 \bibliographystyle{sbpo}
 \bibliography{sbpo-sample}

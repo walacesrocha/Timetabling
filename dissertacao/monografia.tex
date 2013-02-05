@@ -53,8 +53,8 @@ defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vitória,
 Estado do Espírito Santo, pela banca examinadora constituída pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
 
-\assinatura{Profa. Dra. Maria Claudia Silva Boeres\\ Orientadora}
-\assinatura{Profa. Dra. Maria Cristina Rangel\\ Co-orientadora}
+\assinatura{Profª Drª Maria Claudia Silva Boeres\\Universidade Federal do Espírito Santo\\ Orientadora}
+\assinatura{Profª Drª Maria Cristina Rangel\\Universidade Federal do Espírito Santo\\ Co-orientadora}
 \assinatura{Prof. Dr. Flávio Miguel Varejão\\ Universidade Federal do Espírito Santo}
 \assinatura{Prof. Dr. Haroldo Gambini Santos\\ Universidade Federal de Ouro Preto}
 \end{folhadeaprovacao}
@@ -508,14 +508,14 @@ O algoritmo GRASP é um procedimento com iterações independentes, onde cada itera
 
 $f^{*} \leftarrow \infty $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
-	$S_0 \leftarrow GeraSolucaoInicial() $ \;
-	\Se{$ S_0 $ é inviável }{
-		$ReparaSolucao(S_0) $\;
+	$S \leftarrow GeraSolucaoInicial() $ \;
+	\Se{$ S $ é inviável }{
+		$ReparaSolucao(S) $\;
 	}
-	$S_1 \leftarrow BuscaLocal(S_0) $ \;
-	\Se{$ f(S_1) < f^{*} $}{
-		$S^{*} \leftarrow S_1 $ \;
-		$f^{*} \leftarrow f(S_1) $ \;
+	$S \leftarrow BuscaLocal(S) $ \;
+	\Se{$ f(S) < f^{*} $}{
+		$S^{*} \leftarrow S $ \;
+		$f^{*} \leftarrow f(S) $ \;
 	}
 }
 \caption{Estrutura básica do algoritmo GRASP}
@@ -1109,11 +1109,11 @@ Média & 270,52  & 136,57 & {\bf 104,47}  \\ \hline
 
 Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA é o melhor dentre as três versões descritas, sendo superior em 19 instâncias e empatando com GHC2 nas instâncias \textit{comp01} e \textit{comp11}. Na média, GSA supera GHC1 em $258\%$ e GHC2 em $30\%$.
 
-Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada instância está destacada em negrito.
+Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. As colunas estão ordenadas pelas médias das respostas obtidas. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada instância está destacada em negrito.
 
 A competição foi dividida em duas fases descritas a seguir. A primeira fase foi mais geral e durou aproximadamente 6 meses. Todos os competidores registrados receberam 7 instâncias inicialmente e mais 7 faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada instância. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
-Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso estão identificados apenas como C6, C7, ..., C17. Os cinco finalistas na ordem de classificação são:
+Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso estão identificados apenas como 6º lugar, 7º lugar e assim por diante. Os cinco finalistas na ordem de classificação são:
 
 \begin{enumerate}
 \item Tomas Müller (Estados Unidos)
@@ -1131,22 +1131,22 @@ Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritm
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Instância &	Muller & Lu & Atzuna & Clark & Geiger & 6º & 7º & 8º & 9º & 10º \\ \hline
-comp01&5&5&5&10&5&9&23&6&31&18 \\
-comp02&43&34&55&83&108&154&86&185&218&206 \\
-comp03&72&70&91&106&115&120&121&184&189&235 \\
-comp04&35&38&38&59&67&66&63&158&145&156 \\
-comp05&298&298&325&362&408&750&851&421&573&627 \\
-comp06&41&47&69&113&94&126&115&298&247&236\\
-comp07&14&19&45&95&56&113&92&398&327&229\\
-comp08&39&43&42&73&75&87&71&211&163&163\\
-comp09&103&102&109&130&153&162&177&232&220&260\\
-comp10&9&16&32&67&66&97&60&292&262&215\\
-comp11&0&0&0&1&0&0&5&0&8&6\\
-comp12&331&320&344&383&430&510&828&458&594&676\\
-comp13&66&65&75&105&101&89&112&228&206&213\\
-comp14&53&52&61&82&88&114&96&175&183&206\\ \hline
-Média&79,21&79,21&92,21&119,21&126,14&171,21&192,86&231,86&240,43&246,14\\ \hline
+Instância & Muller & Lu & Atzuna & Clark & Geiger & 6º & 7º & 8º & 9º & 10º \\ \hline
+comp01 & {\bf 5} & {\bf 5} & {\bf 5} & 10 & {\bf 5} & 9 & 23 & 6 & 31 & 18 \\
+comp02 & 43 & {\bf 34} & 55 & 83 & 108 & 154 & 86 & 185 & 218 & 206 \\
+comp03 & 72 & {\bf 70} & 91 & 106 & 115 & 120 & 121 & 184 & 189 & 235 \\
+comp04 & {\bf 35} & 38 & 38 & 59 & 67 & 66 & 63 & 158 & 145 & 156 \\
+comp05 & {\bf 298} & {\bf 298} & 325 & 362 & 408 & 750 & 851 & 421 & 573 & 627 \\
+comp06 & {\bf 41} & 47 & 69 & 113 & 94 & 126 & 115 & 298 & 247 & 236\\
+comp07 & {\bf 14} & 19 & 45 & 95 & 56 & 113 & 92 & 398 & 327 & 229\\
+comp08 & {\bf 39} & 43 & 42 & 73 & 75 & 87 & 71 & 211 & 163 & 163\\
+comp09 & 103 & {\bf 102} & 109 & 130 & 153 & 162 & 177 & 232 & 220 & 260\\
+comp10 & {\bf 9} & 16 & 32 & 67 & 66 & 97 & 60 & 292 & 262 & 215\\
+comp11 & {\bf 0} & {\bf 0} & {\bf 0} & 1 & {\bf 0} & {\bf 0} & 5 & {\bf 0} & 8 & 6\\
+comp12 & 331 & {\bf 320} & 344 & 383 & 430 & 510 & 828 & 458 & 594 & 676\\
+comp13 & 66 & {\bf 65} & 75 & 105 & 101 & 89 & 112 & 228 & 206 & 213\\
+comp14 & 53 & {\bf 52} & 61 & 82 & 88 & 114 & 96 & 175 & 183 & 206\\ \hline
+Média & {\bf 79,21} & {\bf 79,21} & 92,21 & 119,21 & 126,14 & 171,21 & 192,86 & 231,86 & 240,43 & 246,14\\ \hline
 \end{tabular}
 \end{footnotesize}
 \\
@@ -1155,21 +1155,21 @@ Média&79,21&79,21&92,21&119,21&126,14&171,21&192,86&231,86&240,43&246,14\\ \hlin
 \begin{tabular}{|l|c|c|c|c|c|c|c||c|}
 \hline
 Instância & 11º & 12º & 13º & 14º & 15º & 16º & 17º & GSA \\ \hline
-comp01&30&114&97&112&5&61&943&5 \\
-comp02&252&295&393&485&127&1976&128034&73\\
-comp03&249&229&314&433&141&739&55403&98\\
-comp04&226&199&283&405&72&713&25333&48\\
-comp05&522&723&672&1096&10497&28249&79234&409\\
-comp06&302&278&464&520&96&3831&346845&75\\
-comp07&353&291&577&643&103&7470&396343&36\\
-comp08&224&204&373&412&75&833&64435&58\\
-comp09&275&273&412&494&159&776&44943&119\\
-comp10&311&250&464&498&81&1731&365453&41\\
-comp11&13&26&99&104&0&56&470&0\\
-comp12&577&818&770&1276&629&1902&204365&375\\
-comp13&257&214&408&460&112&779&56547&97\\
-comp14&221&239&487&393&88&756&84386&72\\ \hline
-Média&272,29&296,64&415,21&523,64&870,36&3562,29&132338,14&107,57\\ \hline
+comp01 & 30 & 114 & 97 & 112 & {\bf 5} & 61 & 943 & {\bf 5} \\
+comp02 & 252 & 295 & 393 & 485 & 127 & 1976 & 128034 & 73\\
+comp03 & 249 & 229 & 314 & 433 & 141 & 739 & 55403 & 98\\
+comp04 & 226 & 199 & 283 & 405 & 72 & 713 & 25333 & 48\\
+comp05 & 522 & 723 & 672 & 1096 & 10497 & 28249 & 79234 & 409\\
+comp06 & 302 & 278 & 464 & 520 & 96 & 3831 & 346845 & 75\\
+comp07 & 353 & 291 & 577 & 643 & 103 & 7470 & 396343 & 36\\
+comp08 & 224 & 204 & 373 & 412 & 75 & 833 & 64435 & 58\\
+comp09 & 275 & 273 & 412 & 494 & 159 & 776 & 44943 & 119\\
+comp10 & 311 & 250 & 464 & 498 & 81 & 1731 & 365453 & 41\\
+comp11 & 13 & 26 & 99 & 104 & {\bf 0} & 56 & 470 & {\bf 0} \\
+comp12 & 577 & 818 & 770 & 1276 & 629 & 1902 & 204365 & 375\\
+comp13 & 257 & 214 & 408 & 460 & 112 & 779 & 56547 & 97\\
+comp14 & 221 & 239 & 487 & 393 & 88 & 756 & 84386 & 72\\ \hline
+Média & 272,29 & 296,64 & 415,21 & 523,64 & 870,36 & 3562,29 & 132338,14 & 107,57\\ \hline
 \end{tabular}
 \end{footnotesize}
 \caption{Resultados da primeira fase}
@@ -1182,17 +1182,17 @@ Média&272,29&296,64&415,21&523,64&870,36&3562,29&132338,14&107,57\\ \hline
 \begin{table}[htbf]
 \begin{center}
 {\small
-\begin{tabular}{|l|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c||c|}
 \hline
-Instância & Atsuta & Clark & Geiger & Lu & Muller & GSA \\ \hline
-comp15 & 82 & 119 & 128 & {\bf 71} & 84 & 101 \\ 
-comp16 & 40 & 84 & 81 & 39 & {\bf 34} & 69 \\ 
-comp17 & 102 & 152 & 124 & 91 & {\bf 83} & 105 \\ 
-comp18 & {\bf 68} & 110 & 116 & 69 & 83 & 102 \\ 
-comp19 & 75 & 111 & 107 & 65 & {\bf 62} & 87 \\ 
-comp20 & 61 & 144 & 88 & 47 & {\bf 27} & 88 \\ 
-comp21 & 123 & 169 & 174 & 106 & {\bf 103} & 136 \\  \hline
-Média & 78,71 &	127 & 116,86 & 69,71 & {\bf 68} & 98,29 \\ \hline
+Instância & Muller & Lu & Atsuta & Geiger & Clark & GSA \\ \hline
+comp15 & 84 & {\bf 71} & 82 & 128 & 119 & 101 \\
+comp16 & {\bf 34} & 39 & 40 & 81 & 84 & 69 \\
+comp17 & {\bf 83} & 91 & 102 & 124 & 152 & 105 \\
+comp18 & 83 & 69 & {\bf 68} & 116 & 110 & 102 \\
+comp19 & {\bf 62} & 65 & 75 & 107 & 111 & 87 \\
+comp20 & {\bf 27} & 47 & 61 & 88 & 144 & 88 \\
+comp21 & {\bf 103} & 106 & 123 & 174 & 169 & 136 \\ \hline
+Média & {\bf 68} & 69,71 & 78,71 & 116,86 & 127 & 98,29 \\ \hline
 \end{tabular}
 }
 \caption{Resultados da segunda fase}

@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  31 JAN 2013 23:57
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  5 FEB 2013 00:11
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -581,14 +581,13 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 962.
  [47] [48]
 File: ./Diagrama.eps Graphic file (type eps)
- <./Diagrama.eps> [49] [50] [51] [52]
+ <./Diagrama.eps> [49] [50] [51] [52] [53]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1132.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1132.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1132.
- [53]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1185.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
@@ -636,12 +635,12 @@ ial, basta com-pi-lar o ar-quivo \T1/pcr/m/n/12 validator.cc
 +-------------------------------------------------------------------+
 [64] [65] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4411 strings out of 94501
- 56677 string characters out of 1176790
- 143672 words of memory out of 1000000
- 7458 multiletter control sequences out of 10000+50000
- 79888 words of font info for 128 fonts, out of 500000 for 2000
+ 4414 strings out of 94501
+ 56728 string characters out of 1176790
+ 142672 words of memory out of 1000000
+ 7461 multiletter control sequences out of 10000+50000
+ 81532 words of font info for 129 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1430b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (66 pages, 208204 bytes).
+Output written on monografia.dvi (66 pages, 208880 bytes).

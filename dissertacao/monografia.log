@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  5 FEB 2013 00:11
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  5 FEB 2013 23:26
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -561,18 +561,12 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 560.
  [30]
 File: ./PRgenerico.eps Graphic file (type eps)
- <./PRgenerico.eps>
+ <./PRgenerico.eps> [31]
 File: ./PR.eps Graphic file (type eps)
- <./PR.eps> [31] [32] [33] [34] [35] [36]
+ <./PR.eps> [32] [33] [34] [35] [36]
 [37]
 File: ./SolInicial.eps Graphic file (type eps)
- <./SolInicial.eps> [38] [39]
-Overfull \hbox (17.00754pt too wide) in paragraph at lines 781--782
-[]\T1/ptm/m/n/12 Particularmente para o ITC-2007, nos tes-tes com-pu-ta-ci-o-na
-is re-a-li-za-dos essa es-tra-té-gia mostrou-
- []
-
-[40] [41] [42] [43] [44]
+ <./SolInicial.eps> [38] [39] [40] [41] [42] [43] [44]
 Cap\'{\i }tulo 5.
 [45
 
@@ -635,12 +629,12 @@ ial, basta com-pi-lar o ar-quivo \T1/pcr/m/n/12 validator.cc
 +-------------------------------------------------------------------+
 [64] [65] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4414 strings out of 94501
- 56728 string characters out of 1176790
+ 4415 strings out of 94501
+ 56740 string characters out of 1176790
  142672 words of memory out of 1000000
- 7461 multiletter control sequences out of 10000+50000
+ 7462 multiletter control sequences out of 10000+50000
  81532 words of font info for 129 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 34i,22n,41p,1430b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 34i,22n,41p,1434b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (66 pages, 208880 bytes).
+Output written on monografia.dvi (66 pages, 209328 bytes).

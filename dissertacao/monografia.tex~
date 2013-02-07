@@ -1172,7 +1172,7 @@ comp14 & 221 & 239 & 487 & 393 & 88 & 756 & 84386 & 72\\ \hline
 Média & 272,29 & 296,64 & 415,21 & 523,64 & 870,36 & 3562,29 & 132338,14 & 107,57\\ \hline
 \end{tabular}
 \end{footnotesize}
-\caption{Resultados da primeira fase}
+\caption{Resultados da primeira fase do ITC-2007}
 \label{tab:solucoes_itc2007_1}
 \end{center}
 \end{table}
@@ -1195,7 +1195,7 @@ comp21 & {\bf 103} & 106 & 123 & 174 & 169 & 136 \\ \hline
 Média & {\bf 68} & 69,71 & 78,71 & 116,86 & 127 & 98,29 \\ \hline
 \end{tabular}
 }
-\caption{Resultados da segunda fase}
+\caption{Resultados da segunda fase do ITC-2007}
 \label{tab:solucoes_itc2007_2}
 \end{center}
 \end{table}

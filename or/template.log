@@ -1,29 +1,21 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  8 MAR 2013 17:18
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2012.2.17)  11 MAR 2013 22:30
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
 **template.tex
 (./template.tex
-LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2011-07-01, ngerman-x-2011-07-01, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
-h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
- icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
-iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
- lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
-ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
-ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
-.
+LaTeX2e <2003/12/01>
+Babel <v3.8d> and hyphenation patterns for american, french, german, ngerman, b
+ahasa, basque, bulgarian, catalan, croatian, czech, danish, dutch, esperanto, e
+stonian, finnish, greek, icelandic, irish, italian, latin, magyar, norsk, polis
+h, portuges, romanian, russian, serbian, slovak, slovene, spanish, swedish, tur
+kish, ukrainian, nohyphenation, loaded.
 
 LaTeX Warning: File `example.eps' already exists on the system.
                Not generating it from this source.
 
-(/usr/share/texmf-dist/tex/latex/base/fix-cm.sty
-Package: fix-cm 2006/09/13 v1.1m fixes to LaTeX
+(/usr/share/texmf/tex/latex/base/fix-cm.sty
+Package: fix-cm 2004/02/13 v1.1h fixes to LaTeX
 
-(/usr/share/texmf-dist/tex/latex/base/ts1enc.def
+(/usr/share/texmf/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 )) (./svjour3.cls
 Document Class: svjour3 2007/05/08 v3.2 
@@ -92,33 +84,26 @@ LaTeX Font Info:    Redeclaring math symbol \Omega on input line 157.
 \figgap=\dimen112
 \bibindent=\dimen113
 \@tempcntc=\count104
-) (/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/usr/share/texmf/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texmf/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+(/usr/share/texmf/tex/latex/graphics/graphics.cfg
+File: graphics.cfg 2005/02/03 v1.3 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 80.
 
-(/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
-)
-(/usr/share/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
-)
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
 \Gread@gobject=\count105
 ))
 \Gin@req@height=\dimen114
@@ -143,66 +128,40 @@ LaTeX Font Info:    ... okay on input line 62.
 
 Unknown journal: specify \journalname{<name of your journal>} in preambel
 
-(/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count106
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Miscellaneous (2004.10.26)
+\protectiondepth=\count106
+\scratchcounter=\count107
+\scratchtoks=\toks17
 \scratchdimen=\dimen116
+\scratchskip=\skip43
+\scratchmuskip=\muskip10
 \scratchbox=\box29
-\nofMPsegments=\count107
-\nofMParguments=\count108
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count109
-\MPscratchDim=\dimen117
-\MPnumerator=\count110
-\makeMPintoPDFobject=\count111
-\everyMPtoPDFconversion=\toks18
-) (/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
+\scratchread=\read1
+\scratchwrite=\write3
+\zeropoint=\dimen117
+\onepoint=\dimen118
+\onebasepoint=\dimen119
+\minusone=\count108
+\thousandpoint=\dimen120
+\onerealpoint=\dimen121
+\emptytoks=\toks18
+\nextbox=\box30
+\nextdepth=\dimen122
+\everyline=\toks19
+\!!counta=\count109
+\!!countb=\count110
+\recursecounter=\count111
 )
-(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
+loading : Context Support Macros / PDF (2004.03.26)
+\nofMPsegments=\count112
+\nofMParguments=\count113
+\MPscratchCnt=\count114
+\MPscratchDim=\dimen123
+\MPnumerator=\count115
+\everyMPtoPDFconversion=\toks20
 )
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
-))
-(/usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 SVJour3 warning: Missing \journalname
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 96.
@@ -212,60 +171,48 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 96.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 96.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package epstopdf Info: Source file: <example.eps>
-(epstopdf)                    date: 2013-03-07 10:14:36
-(epstopdf)                    size: 286 bytes
-(epstopdf)             Output file: <example-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-03-07 10:14:42
-(epstopdf)                    size: 2461 bytes
-(epstopdf)             Command: <repstopdf --outfile=example-eps-converted-to.p
-df example.eps>
-(epstopdf)             \includegraphics on input line 134.
-Package epstopdf Info: Output file is already uptodate.
+[1{/usr/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-<example-eps-converted-to.pdf, id=12, 202.7575pt x 202.7575pt>
-File: example-eps-converted-to.pdf Graphic file (type pdf)
+! LaTeX Error: Unknown graphics extension: .eps.
 
-<use example-eps-converted-to.pdf>
-Package pdftex.def Info: example-eps-converted-to.pdf used on input line 134.
-(pdftex.def)             Requested size: 202.757pt x 202.757pt.
-Package epstopdf Info: Source file: <example.eps>
-(epstopdf)                    date: 2013-03-07 10:14:36
-(epstopdf)                    size: 286 bytes
-(epstopdf)             Output file: <example-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-03-07 10:14:42
-(epstopdf)                    size: 2461 bytes
-(epstopdf)             Command: <repstopdf --outfile=example-eps-converted-to.p
-df example.eps>
-(epstopdf)             \includegraphics on input line 144.
-Package epstopdf Info: Output file is already uptodate.
-File: example-eps-converted-to.pdf Graphic file (type pdf)
- <use example-eps-converted-to.pdf>
-Package pdftex.def Info: example-eps-converted-to.pdf used on input line 144.
-(pdftex.def)             Requested size: 253.5pt x 253.50812pt.
- [2 <./example-eps-converted-to.pdf>] [3] (./template.aux) ) 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134   \includegraphics{example.eps}
+                                     
+? q
+OK, entering \batchmode...
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.144 ...aphics[width=0.75\textwidth]{example.eps}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ [2] (./template.aux) ) 
 Here is how much of TeX's memory you used:
- 2162 strings out of 493629
- 31898 string characters out of 3148772
- 82934 words of memory out of 3000000
- 5461 multiletter control sequences out of 15000+200000
- 9480 words of font info for 33 fonts, out of 3000000 for 9000
- 831 hyphenation exceptions out of 8191
- 37i,7n,23p,236b,216s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.
-pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on template.pdf (3 pages, 116180 bytes).
+ 1602 strings out of 94500
+ 22177 string characters out of 1176766
+ 66892 words of memory out of 1000000
+ 4803 multiletter control sequences out of 10000+50000
+ 9480 words of font info for 33 fonts, out of 500000 for 2000
+ 580 hyphenation exceptions out of 1000
+ 25i,7n,20p,224b,203s stack positions out of 1500i,500n,5000p,200000b,5000s
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 37 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 1 words of extra memory for PDF output out of 65536
+</usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/
+share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/blu
+esky/cm/cmti10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx8.pfb></usr/sha
+re/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesk
+y/cm/cmr8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbsy10.pfb></usr/share/
+texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/bluesky/c
+m/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb>
+Output written on template.pdf (2 pages, 61485 bytes).

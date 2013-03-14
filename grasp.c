@@ -1751,6 +1751,15 @@ Individuo *grasp(Problema *p) {
         foIter = funcaoObjetivo(p, ind, 10000);
         p->pesoHard = 10000;
 
+        for (i = 0; i < 1000; i++) {
+            kempeSwap(p, ind);
+            kempeSwap(p, ind);
+            kempeSwap(p, ind);
+            kempeSwap(p, ind);
+            kempeSwap(p, ind);
+        }
+        exit(0);
+
 
         if (p->buscaLocalGrasp == 1) {
             ind = buscaLocalGraspProfundidade(p, ind);

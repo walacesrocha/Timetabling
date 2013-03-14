@@ -1675,7 +1675,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         foAtual = funcaoObjetivo(p, solucaoAtual, p->pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
-        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual,0));
+        printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual, 0));
 
 
         /*if (iteracoes % 2000 == 0) {// troca o tipo de movimento
@@ -2173,8 +2173,8 @@ void avaliaNeighbour(Problema *p, Individuo *ind, Neighbour *move) {
 
     // calcula deltaSoft
     soft1 = RC1 * p->pesoRC + MW1 * p->pesoMW + IL1 * p->pesoIL + RS1 + p->pesoRS;
-    soft2 =  RC2 * p->pesoRC + MW2 * p->pesoMW + IL2 * p->pesoIL + RS2 + p->pesoRS;
-    
+    soft2 = RC2 * p->pesoRC + MW2 * p->pesoMW + IL2 * p->pesoIL + RS2 + p->pesoRS;
+
     move->deltaSoft = soft2 - soft1;
 
 
@@ -2769,3 +2769,122 @@ Neighbour *geraIsolatedLectureMove(Problema *p, Individuo *ind) {
 
     return move;
 }
+
+Individuo *kempeSwap(Problema *p, Individuo * ind) {
+    int i, j, p1, p2, aux;
+    int posCandidatos[p->nSalas];
+    int nCandidatos;
+    int cadeia1[p->nSalas], cadeia2[p->nSalas];
+    int maiorCadeia;
+    int n1, n2;
+    Individuo *novoInd = alocaIndividuo();
+    criaIndividuo(novoInd, p);
+    //printf("Individuo criado\n");
+    for (i = 0; i < novoInd->n; i++) {
+        novoInd->aula[i] = ind->aula[i];
+    }
+
+    int t1, t2;
+
+kempe:
+
+    // escolha de dois timeslots
+    t1 = rand() % p->nDias * p->nPerDias;
+    do {
+        t2 = rand() % p->nDias * p->nPerDias;
+    } while (t1 == t2);
+
+    nCandidatos = 0;
+    for (i = 0; i < p->nSalas; i++) {
+        p1 = i * (p->nDias * p->nPerDias) + t1;
+        if (ehAula(p, novoInd->aula[p1])) {
+            posCandidatos[nCandidatos] = p1;
+            nCandidatos++;
+        }
+    }
+
+    if (nCandidatos == 0) {
+        // tentar outro timesslot
+        goto kempe;
+    }
+
+    n1 = n2 = 0;
+
+    cadeia1[n1] = posCandidatos[rand() % nCandidatos];
+    n1 = 1;
+
+    for (i = 0; i < p->nSalas; i++) {
+        p2 = i * (p->nDias * p->nPerDias) + t2;
+        if (ehAula(p, novoInd->aula[p2]) && aulasConflitantes(p, novoInd->aula[cadeia1[0]], novoInd->aula[p2])) {
+            cadeia2[n2] = p2;
+            n2++;
+        }
+    }
+
+    for (i = 0; i < p->nSalas; i++) {
+        p1 = i * (p->nDias * p->nPerDias) + t1;
+
+        if (p1 == cadeia1[0])continue;
+
+        if (ehAula(p, novoInd->aula[p1])) {
+
+            for (j = 0; j < n2; j++) {
+                if (aulasConflitantes(p, novoInd->aula[p1], novoInd->aula[cadeia2[j]])) {
+                    cadeia1[n1] = p1;
+                    n1++;
+                }
+            }
+
+        }
+    }
+
+    if (n1 != n2) {
+        if (n1 > n2) {
+            maiorCadeia = t1;
+        } else {
+            maiorCadeia = t2;
+        }
+
+        if (n1 > n2) {
+            while (n1 != n2) {
+                for (i = 0; i < p->nSalas && n1 != n2; i++) {
+                    p2 = i * (p->nDias * p->nPerDias) + t2;
+
+                    if (!presente(cadeia2, 0, p->nSalas - 1, p2)) {
+                        cadeia2[n2] = p2;
+                        n2++;
+                    }
+
+                }
+            }
+        } else {
+            while (n1 != n2) {
+                for (i = 0; i < p->nSalas && n1 != n2; i++) {
+                    p1 = i * (p->nDias * p->nPerDias) + t1;
+
+                    if (!presente(cadeia1, 0, p->nSalas - 1, p1)) {
+                        cadeia1[n1] = p1;
+                        n1++;
+                    }
+
+                }
+            }
+        }
+    }
+
+    printf("Cadeia1[%d]: ", n1);
+    for (j = 0; j < n1; j++) {
+        printf("%d ", cadeia1[j]);
+    }
+    printf("\n");
+
+    printf("Cadeia2[%d]: ", n2);
+    for (j = 0; j < n2; j++) {
+        printf("%d ", cadeia2[j]);
+    }
+    printf("\n");
+
+
+    return novoInd;
+}
+

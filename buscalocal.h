@@ -23,7 +23,8 @@ typedef enum {
     ROOM_MOVE,
     ROOMS,
     COMPACT,
-    MIN_WORKING_DAYS_MOVE
+    MIN_WORKING_DAYS_MOVE,
+    KEMPE
 } Movimento;
 
 typedef struct neighbour {
@@ -58,6 +59,7 @@ Individuo *timeMove(Problema *p, Individuo *ind);
 Individuo *roomMove(Problema *p, Individuo *ind);
 Individuo *rooms(Problema *p, Individuo *ind);
 Individuo *compact(Problema *p, Individuo *ind);
+Individuo *kempeSwap(Problema *p, Individuo * ind);
 
 Neighbour *geraSwap(Problema *p, Individuo *ind);
 Neighbour *geraMove(Problema *p, Individuo *ind);

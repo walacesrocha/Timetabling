@@ -2810,7 +2810,7 @@ kempe:
     cadeia1[n1] = posCandidatos[rand() % nCandidatos];
     n1 = 1;
     
-    int aula = novoInd->aula[cadeia1[n1]];
+    int aula = novoInd->aula[cadeia1[0]];
     
     do {
         t2 = rand() % p->nDias * p->nPerDias;

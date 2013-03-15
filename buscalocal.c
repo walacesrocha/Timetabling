@@ -1612,7 +1612,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
     int nMovs = 6;
     Neighbour *neighbour;
 
-    foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
+    foAtual = funcaoObjetivo2(p, indInicial, p->pesoHard);
     solucaoAtual = indInicial;
 
     embaralhaMovimentos(movimentos, nMovs);
@@ -1672,7 +1672,7 @@ Individuo * buscaLocalGraspVNS(Problema*p, Individuo * indInicial) {
         }
 
         //p->pesoHard += 1;
-        foAtual = funcaoObjetivo(p, solucaoAtual, p->pesoHard);
+        foAtual = funcaoObjetivo2(p, solucaoAtual, p->pesoHard);
 
         configuraQtMovsVNS(p, solucaoAtual, movimentos, iteracoesMax, nMovs);
         printf("==> %.2f/%.2f\n", somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual, 0));
@@ -2790,10 +2790,7 @@ kempe:
 
     // escolha de dois timeslots
     t1 = rand() % p->nDias * p->nPerDias;
-    do {
-        t2 = rand() % p->nDias * p->nPerDias;
-    } while (t1 == t2);
-
+    
     nCandidatos = 0;
     for (i = 0; i < p->nSalas; i++) {
         p1 = i * (p->nDias * p->nPerDias) + t1;
@@ -2804,7 +2801,7 @@ kempe:
     }
 
     if (nCandidatos == 0) {
-        // tentar outro timesslot
+        // tentar outro timeslot
         goto kempe;
     }
 
@@ -2812,6 +2809,12 @@ kempe:
 
     cadeia1[n1] = posCandidatos[rand() % nCandidatos];
     n1 = 1;
+    
+    int aula = novoInd->aula[cadeia1[n1]];
+    
+    do {
+        t2 = rand() % p->nDias * p->nPerDias;
+    } while (t1 == t2 && p->matrizAulaIndisponibilidades[aula][t2]);
 
     for (i = 0; i < p->nSalas; i++) {
         p2 = i * (p->nDias * p->nPerDias) + t2;
@@ -2872,6 +2875,7 @@ kempe:
         }
     }
 
+    /*imprimeIndividuo3(p, novoInd);
     printf("Cadeia1[%d]: ", n1);
     for (j = 0; j < n1; j++) {
         printf("%d ", cadeia1[j]);
@@ -2882,7 +2886,16 @@ kempe:
     for (j = 0; j < n2; j++) {
         printf("%d ", cadeia2[j]);
     }
-    printf("\n");
+    printf("\n");**/
+    
+    
+    for(i=0;i<n1;i++){
+        troca_par(novoInd,cadeia1[i],cadeia2[i]);
+        //printf("%.0f => ", funcaoObjetivo(p,novoInd,p->pesoHard));
+    }
+    //printf("\n");
+    
+    //scanf("%d",&i);
 
 
     return novoInd;

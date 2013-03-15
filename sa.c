@@ -6,9 +6,18 @@
 #include "buscalocal.h"
 #include "gerador.h"
 
-float funcaoObjetivo(Problema *p, Individuo *ind, float pesoHard) {
+float funcaoObjetivo2(Problema *p, Individuo *ind, float pesoHard) {
     float vHard = somaViolacoesHard(p, ind);
     float vSoft = somaViolacoesSoft2(p, ind,0);
+
+    //printf("(%f, %f)\n", vHard, vSoft);
+
+    return pesoHard * vHard + vSoft;
+}
+
+float funcaoObjetivo(Problema *p, Individuo *ind, float pesoHard) {
+    float vHard = somaViolacoesHard(p, ind);
+    float vSoft = somaViolacoesSoft(p, ind);
 
     //printf("(%f, %f)\n", vHard, vSoft);
 
@@ -713,7 +722,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
 
     float pesoHard = 155;
 
-    foAtual = funcaoObjetivo(p, indInicial, pesoHard);
+    foAtual = funcaoObjetivo2(p, indInicial, pesoHard);
 
 
     double t0, tMin, beta;
@@ -725,7 +734,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
     solucaoAtual = indInicial;
     //Gerador *gerador = getGeradorInicial(p->dimensao);
     t0 = p->t0;
-    foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+    foAtual = funcaoObjetivo2(p, solucaoAtual, pesoHard);
     melhorFo = foAtual;
     do {
         N = 500;
@@ -792,7 +801,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
         if (p->info) {
             printf("T=%.8f/%.8f, Pioras=%d, FO=%.1f / %.1f (%f, %f) Peso: %f RC: %d MW: %d IL: %d RS: %d F*=%.0f\n",
                     t0, tMin, nPioras, foAtual,
-                    funcaoObjetivo(p, solucaoAtual, pesoHard),
+                    funcaoObjetivo2(p, solucaoAtual, pesoHard),
                     somaViolacoesHard(p, solucaoAtual), somaViolacoesSoft2(p, solucaoAtual,0), pesoHard,
                     solucaoAtual->soft1,
                     solucaoAtual->soft2,
@@ -802,7 +811,7 @@ Individuo *simulatedAnnealing2(Problema*p, Individuo *indInicial) {
         }
         t0 *= beta;
 
-        foAtual = funcaoObjetivo(p, solucaoAtual, pesoHard);
+        foAtual = funcaoObjetivo2(p, solucaoAtual, pesoHard);
 
         /*if (iteracoes - ultimaMelhora > p->nIterSemMelhoras*5 && nReaquecimentos < 3) {
             // reaquece

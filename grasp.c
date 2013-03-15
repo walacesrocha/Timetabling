@@ -983,15 +983,16 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
     float deltaF;
 
     foAtual = funcaoObjetivo(p, indInicial, 10000);
+    printf("Fo atual: %f\n",foAtual);
 
     solucaoAtual = indInicial;
     int iteracoes = 0;
     float fo;
     do {
-        vizinho = geraVizinho2(p, solucaoAtual);
+        vizinho = kempeSwap(p, solucaoAtual);
 
-        //fo = funcaoObjetivo(p, vizinho);
-        fo = somaViolacoesSoft(p, vizinho);
+        fo = funcaoObjetivo(p, vizinho,p->pesoHard);
+        //fo = somaViolacoesSoft(p, vizinho);
         deltaF = fo - foAtual;
 
         //printf("Df=%f\n", deltaF);
@@ -999,7 +1000,7 @@ Individuo *buscaLocalGraspProfundidade(Problema*p, Individuo *indInicial) {
         aDesalocar = 0;
         if (deltaF <= 0) {// função objetivo decresceu
             foAtual = fo;
-            //printf("Melhorou... %f [%d]\n", foAtual, iteracoes);
+            printf("Melhorou... %f [%d]\n", foAtual, iteracoes);
             aDesalocar = solucaoAtual;
             solucaoAtual = vizinho;
             //melhorInd = solucaoAtual;
@@ -1104,7 +1105,7 @@ Individuo *buscaLocalGraspHibrida(Problema*p, Individuo *indInicial) {
     vizinhos = (Neighbour**) malloc(nVizinhos * sizeof (Neighbour*));
 
 
-    foAtual = funcaoObjetivo(p, indInicial, p->pesoHard);
+    foAtual = funcaoObjetivo2(p, indInicial, p->pesoHard);
     //printf("FO atual: %f\n", foAtual);
 
     int iteracoesSemMelhora = 0;
@@ -1565,7 +1566,7 @@ Individuo *pathRelinking2(Problema *p, Individuo *solucaoAtual, AuxGrasp *auxGra
     printf("\n");
     imprimeIndividuo(solucaoAtual);*/
 
-    float fo = funcaoObjetivo(p, inter, pesoHard);
+    float fo = funcaoObjetivo2(p, inter, pesoHard);
     int move;
 
     do {
@@ -1739,26 +1740,17 @@ Individuo *grasp(Problema *p) {
         zeraMatCurrDiasPeriodos(p, ind);
         inicializaMatrizesAuxiliares(p, ind);
         if (p->info) {
-            printf("F1: %f\n", funcaoObjetivo(p, ind, 10000));
+            printf("F1: %f\n", funcaoObjetivo2(p, ind, 10000));
         }
         //printf("HARD: %f\n", somaViolacoesHard(p, ind));
         //printf("SOFT: %f\n", somaViolacoesSoft(p, ind));
         //if (i==4)exit(0);else continue;
-        p->f1 += funcaoObjetivo(p, ind, 10000);
+        p->f1 += funcaoObjetivo2(p, ind, 10000);
 
         fezPR = 0; // flag: fez Path-Relinking
 
-        foIter = funcaoObjetivo(p, ind, 10000);
+        foIter = funcaoObjetivo2(p, ind, 10000);
         p->pesoHard = 10000;
-
-        for (i = 0; i < 1000; i++) {
-            kempeSwap(p, ind);
-            kempeSwap(p, ind);
-            kempeSwap(p, ind);
-            kempeSwap(p, ind);
-            kempeSwap(p, ind);
-        }
-        exit(0);
 
 
         if (p->buscaLocalGrasp == 1) {
@@ -1783,7 +1775,7 @@ Individuo *grasp(Problema *p) {
 
         bestIter = ind;
 
-        fo = funcaoObjetivo(p, ind, 10000);
+        fo = funcaoObjetivo2(p, ind, 10000);
 
         p->f2 += fo;
 
@@ -1810,7 +1802,7 @@ Individuo *grasp(Problema *p) {
             indPr = pathRelinking2(p, ind, auxGrasp);
             zeraMatCurrDiasPeriodos(p, indPr);
             inicializaMatrizesAuxiliares(p, indPr);
-            foPR = funcaoObjetivo(p, indPr, 10000);
+            foPR = funcaoObjetivo2(p, indPr, 10000);
             indPr->fitness = foPR;
             fezPR = 1; // fez Path-Relinking
         }
@@ -1829,7 +1821,7 @@ Individuo *grasp(Problema *p) {
             bestIter = ind;
         }*/
 
-        p->f3 += funcaoObjetivo(p, bestIter, 10000);
+        p->f3 += funcaoObjetivo2(p, bestIter, 10000);
 
         /*printf("Fo=%.0f\n",fo);
 

@@ -92,6 +92,8 @@ void configuraParametros(Problema *p, int argc, char **argv) {
                 p->buscaLocalGrasp = 6; // SA
             } else if (strncmp(argv[i] + 3, "vns", 3) == 0) {
                 p->buscaLocalGrasp = 5; // VNS
+            } else if (strncmp(argv[i] + 3, "pf", 2) == 0) {
+                p->buscaLocalGrasp = 1; // profundidade
             }
         }
 
@@ -231,7 +233,7 @@ int main(int argc, char** argv) {
         float deltaF = mov->deltaHard + mov->deltaSoft;
         printf("DeltaF=%f (%.1f + %.1f)\n", deltaF, mov->deltaHard, mov->deltaSoft);
 
-        float f1 = funcaoObjetivo(p, ind, 1);
+        float f1 = funcaoObjetivo2(p, ind, 1);
         float f1Soft = somaViolacoesSoft2(p, ind,0);
 
         //printf("1) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
@@ -242,7 +244,7 @@ int main(int argc, char** argv) {
         troca_par_completo(p, ind, mov->p1, mov->p2);
         printf("POS: (%d, %d)\n", mov->p1, mov->p2);
 
-        float f2 = funcaoObjetivo(p, ind, 1);
+        float f2 = funcaoObjetivo2(p, ind, 1);
         float f2Soft = somaViolacoesSoft2(p, ind,0);
 
         //printf("2) H=%f, S=%f: %d,%d,%d,%d\n", somaViolacoesHard(p, ind), somaViolacoesSoft(p, ind),
@@ -290,7 +292,7 @@ int main(int argc, char** argv) {
     //ind = buscaLocalGraspProfundidade(p, ind);
     zeraMatCurrDiasPeriodos(p, ind);
     inicializaMatrizesAuxiliares(p, ind);
-    printf("FO: %f\n", funcaoObjetivo(p, ind, 10000));
+    printf("FO: %f\n", funcaoObjetivo2(p, ind, 10000));
     printf("HARD: %f\n", somaViolacoesHard(p, ind));
     printf("SOFT: %f\n", somaViolacoesSoft2(p, ind,0));
     printf("MEDIA: %f\n", p->mediaSolucoes);

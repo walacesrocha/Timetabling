@@ -2790,7 +2790,7 @@ kempe:
 
     // escolha de dois timeslots
     t1 = rand() % p->nDias * p->nPerDias;
-    
+
     nCandidatos = 0;
     for (i = 0; i < p->nSalas; i++) {
         p1 = i * (p->nDias * p->nPerDias) + t1;
@@ -2809,9 +2809,9 @@ kempe:
 
     cadeia1[n1] = posCandidatos[rand() % nCandidatos];
     n1 = 1;
-    
+
     int aula = novoInd->aula[cadeia1[0]];
-    
+
     do {
         t2 = rand() % p->nDias * p->nPerDias;
     } while (t1 == t2 && p->matrizAulaIndisponibilidades[aula][t2]);
@@ -2875,7 +2875,7 @@ kempe:
         }
     }
 
-    /*imprimeIndividuo3(p, novoInd);
+    imprimeIndividuo3(p, novoInd);
     printf("Cadeia1[%d]: ", n1);
     for (j = 0; j < n1; j++) {
         printf("%d ", cadeia1[j]);
@@ -2886,15 +2886,28 @@ kempe:
     for (j = 0; j < n2; j++) {
         printf("%d ", cadeia2[j]);
     }
-    printf("\n");**/
-    
-    
-    for(i=0;i<n1;i++){
-        troca_par(novoInd,cadeia1[i],cadeia2[i]);
+    printf("\n");
+
+
+    for (i = 0; i < n1; i++) {
+        Neighbour *neighbour = (Neighbour*) malloc(sizeof (Neighbour));
+        neighbour->p1 = cadeia1[i];
+        neighbour->p2 = cadeia2[i];
+        if (ehAula(p, novoInd->aula[cadeia1[i]]) && ehAula(p, novoInd->aula[cadeia2[i]])) {
+            avaliaNeighbour(p, novoInd, neighbour);
+            printf("Delta: %.0f\n", neighbour->deltaHard + neighbour->deltaSoft);
+        } else if (ehAula(p, novoInd->aula[cadeia1[i]]) && !ehAula(p, novoInd->aula[cadeia2[i]])) {
+            avaliaNeighbour(p, novoInd, neighbour);
+            printf("Delta: %.0f\n", neighbour->deltaHard + neighbour->deltaSoft);
+        }
+        troca_par(novoInd, cadeia1[i], cadeia2[i]);
         //printf("%.0f => ", funcaoObjetivo(p,novoInd,p->pesoHard));
+
+        free(neighbour);
     }
+    scanf("%d",&i);
     //printf("\n");
-    
+
     //scanf("%d",&i);
 
 

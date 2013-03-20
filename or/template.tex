@@ -125,7 +125,7 @@ No caso específico de tabela-horário de escolas, o problema consiste em alocar u
 
 Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário. Nos últimos sessenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
 
-O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Sua dificuldade aumenta à medida em que são adicionadas restrições. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo para a maioria das formulações. Assim, a solução exata só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
+O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Sua dificuldade aumenta à medida em que são adicionadas restrições. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo para a maioria das formulações. Assim, a solução ótima só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
 
 Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}.
 
@@ -152,31 +152,31 @@ A formulação três do ITC-2007 é baseada em casos reais da Escola de Engenharia d
 
 Uma solução consiste na alocação de cada aula em um horário e uma sala. A partir dos parâmetros são estabelecidas as restrições fortes e fracas. As fortes devem ser sempre respeitadas. Qualquer violação de uma restrição forte gera uma tabela-horário inviável, que na prática não pode ser utilizada. Por outro lado as restrições fracas devem ser satisfeitas o máximo possível, e quanto menos violações, melhor é a tabela-horário. As restrições do problema são descritas a seguir:
 
-\subsection{Restrições Fortes (RFt)}
+\subsection{Hard Constraints (RFt)}
 
 \begin{itemize}
 
-\item \textbf{Aulas}: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada. (RFt1)
+\item \textbf{Lectures}: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada. (RFt1)
 
-\item \textbf{Conflitos}: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
+\item \textbf{Conflicts}: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
 
-\item \textbf{Ocupação de Sala}: Duas aulas não podem ocupar uma sala no mesmo horário. (RFt3)
+\item \textbf{Room Occupation}: Duas aulas não podem ocupar uma sala no mesmo horário. (RFt3)
 
-\item \textbf{Disponibilidade}: Uma aula não pode ser alocada num horário em que a disciplina é indisponível. (RFt4)
+\item \textbf{Availability}: Uma aula não pode ser alocada num horário em que a disciplina é indisponível. (RFt4)
 
 \end{itemize}
 
-\subsection{Restrições Fracas (RFc)}
+\subsection{Soft Constraints (RFc)}
 
 \begin{itemize}
 
-\item \textbf{Dias Mínimos de Trabalho}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
+\item \textbf{Minimum Working Days}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
 
-\item \textbf{Aulas Isoladas}: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
+\item \textbf{Isolated Lectures}: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
 
-\item \textbf{Capacidade da Sala}: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma violação. (RFc3)
+\item \textbf{Room Capacity}: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma violação. (RFc3)
 
-\item \textbf{Estabilidade de Sala}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
+\item \textbf{Room Stability}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
 
 \end{itemize}
 
@@ -247,9 +247,7 @@ Em cada iteração, a aula mais difícil (a que possui menos horários viáveis) é es
 
 É possível que em alguns casos, ao escolher uma aula para alocar, não haja um horário que mantenha a viabilidade da solução. Para contornar esta situação foi implementado um procedimento denominado explosão. É uma estratégia que retira da tabela uma aula alocada anteriormente para abrir espaço para a aula que não está sendo possível alocar. A aula retirada volta para o conjunto de aulas não alocadas.
 
-A primeira estratégia de explosão utilizada consiste em escolher o horário que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estratégia não se mostrou muito eficaz pois favoreceu a formação de ciclagem no algoritmo, isto é, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, já que o horário escolhido era quase sempre o mesmo.
-
-Uma estratégia mais eficaz é a escolha um horário aleatoriamente, ao invés de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratégia evita o problema de ciclagem.
+Para realizar a explosão, é preciso primeiro selecionar um horário que terá uma ou mais aulas retiradas. Foi decidido fazer esta escolha de horário aleatoriamente pois assim se evita problemas de ciclagem, que é o caso em que aulas ficam saindo e voltando para a lista de aulas não alocadas.
 
 O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geração de uma tabela-horário inicial. Ele recebe como parâmetro as aulas das disciplinas a serem alocadas na tabela que inicialmente é vazia (linha 1). Para facilitar a obtenção da aula mais conflitante durante as iterações é criada uma lista de aulas não alocadas (linha 2). Esta lista é ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posição da lista é a mais conflitante.
 
@@ -262,7 +260,7 @@ A cada passo da construção da solução inicial a aula mais conflitante que ainda 
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{OrdenaAulasPorDificuldade}{OrdenaAulasPorDificuldade}
-\Entrada{A = \{conjunto de aulas\}, $\alpha$}
+\Entrada{A = \{conjunto de aulas\}, R = \{rooms set\} $\alpha$}
 \Saida{Tabela-horário T}
 
 $T \leftarrow \emptyset $ \;
@@ -287,27 +285,22 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 \caption{Algoritmo construtivo para geração de tabela-horário inicial}
 \end{algorithm}
 
-O algoritmo \ref{solInicialGrasp} ilustra o procedimento de construção de uma solução genérica. Ele recebe como parâmetro um conjunto de elementos que irão compor a solução. Iterativamente um novo elemento candidato é escolhido para ser incorporado à solução. Essa escolha é gulosa aleatória. Primeiramente todos os candidatos são avaliados por uma função $g(c)$ para medir o custo de adicionar o candidato $c$ à solução parcial $S$. Com base no menor e maior custo são escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos é escolhido aleatoriamente desta lista. Ao ser acrescentado à solução o elemento é retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados à solução e não há mais candidatos.
-
 As soluções produzidas pelo algoritmo \ref{solInicialGrasp-ITC2007} são sempre viáveis porque em cada iteração somente os horários que garantem a viabilidade são usados. No melhor caso o algoritmo termina após $n$ iterações, onde $n$ é a quantidade de aulas a serem alocadas. Quando há explosões, um número maior que $n$ iterações é executado porque aulas voltam para lista das não-alocadas. Experimentalmente foi verificado que também nestes casos o algoritmo converge e produz uma solução viável.
 
 O parâmetro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo será mais guloso ou mais aleatório. Quando $\alpha$ é mais próximo de zero somente os elementos com baixo custo irão entrar na LRC. Este comportamento produz soluções de boa qualidade porém pouco diversificadas. Com $\alpha$ mais próximo de um, elementos com custo mais alto poderão também entrar na LRC. Isto introduz mais aleatoriedade à solução mas, em compensação, se perde em qualidade. O ideal é encontrar um valor intermediário que permita diversificação sem prejudicar muito a qualidade de solução que será passada para a fase seguinte de busca local.
 
+\subsection{Buscal local\label{subsec:abordagens}}
 
 No GRASP a diversificação é feita pela independência das iterações e pela aleatoriedade introduzida na solução inicial, enquanto a intensificação é feita pela busca local. Nesta fase a solução inicial é melhorada explorando sua vizinhança na busca de soluções melhores.
 
 O GRASP não especifica qual a estratégia de busca local deve ser utilizada. No trabalho de \cite{FeoResSmi94} a busca local implementada é conhecida como \textit{Hill Climbing}. É uma estratégia simples em que se explora a vizinhança enquanto são encontradas soluções melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solução inicial.
 
-\subsection{Buscal local\label{subsec:abordagens}}
-
-O objetivo da fase de busca local é melhorar a tabela-horário inicial. Para isso é preciso primeiro definir quais movimentos devem ser realizados para explorar a vizinhança da solução. Foram implementados dois movimentos distintos:
+Neste trabalho fazemos uso de duas estratégias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}. Apresentamos primeiramente os movimentos realizados para explorar a vizinhança da solução:
 
 \begin{itemize}
 \item \textbf{\textit{MOVE}}: Uma aula é movida para uma posição desocupada na tabela-horário.
 \item \textbf{\textit{SWAP}}: Duas aulas trocam de posição na tabela-horário.
 \end{itemize}
-
-Como o GRASP não especifica qual estratégia de busca local, várias podem ser usadas. Neste trabalho fazemos uso de duas estratégias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}.
 
 No \textit{Hill Climbing} \cite{Glover89}, a partir de uma solução inicial, em cada iteração um vizinho é gerado. Quando um vizinho com melhor valor de função objetivo é encontrado, ele passa a ser a solução atual. O algoritmo termina com $N$ iterações sem melhora da função objetivo, onde $N$ é parâmetro do algoritmo.
 
@@ -380,7 +373,7 @@ $S^{*} \leftarrow S $ \;
 \caption{\textit{Simulated Annealing} para fase de busca local}
 \end{algorithm}
 
-Tanto no algoritmo \textit{Hill Climbing} quanto no \textit{Simulated Annealing}, a geração dos vizinhos é feita na mesma proporção de utilização dos movimentos: $50\%$ com \textit{MOVE} e $50\%$ com \textit{SWAP}. Em \cite{CDGS11b}, os mesmos movimentos são aplicados, mas para a segunda formulação do ITC-2007. Neste trabalho $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem à terceira formulação do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que aplicando dois movimentos seguidos, um movimento pode interferir na melhora obtida pelo outro.
+Tanto no algoritmo \textit{Hill Climbing} quanto no \textit{Simulated Annealing}, a geração dos vizinhos é feita na mesma proporção de utilização dos movimentos: $50\%$ com \textit{MOVE} e $50\%$ com \textit{SWAP}. Em \cite{CDGS11b}, os mesmos movimentos são aplicados, mas para a segunda formulação do ITC-2007. Neste trabalho $60\%$ dos vizinhos são gerados com \textit{MOVE}, e os outros $40\%$ são gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado através de testes que esta estratégia não se adapta tão bem à terceira formulação do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluções melhores e de forma mais rápida. Uma possível explicação para este comportamento é que aplicando dois movimentos seguidos, um movimento pode interferir na melhora obtida pelo outro. Além disso, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
 
 \subsection{Path-Relinking}
 
@@ -392,7 +385,7 @@ De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado
 
 \begin{figure}[!htb]
 \begin{center}
-  \includegraphics[width=12cm]{./PRgenerico.eps}
+  \includegraphics[width=10cm]{./PRgenerico.eps}
  \caption{Explorando soluções com \textit{Path-Relinking}}
    \label{fig:path-relinking-generico}
 \end{center}
@@ -451,63 +444,19 @@ De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} é uma estratégi
 
 \end{itemize}
 
-O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratégias embutidas na versão básica do GRASP. O \textit{Path-Relinking} é aplicado entre duas soluções $x$ e $y$: $x$ é um ótimo local obtido na busca local e $y$ é uma solução escolhida aleatoriamente do conjunto de soluções elite, denominado Elite. Esse procedimento é aplicado somente a partir da segunda iteração pois na primeira o conjunto Elite está vazio. O número de elementos desse conjunto é limitado por $MaxElite$, parâmetro do algoritmo.
-
-Ao final de cada iteração o conjunto Elite é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. O controle de entrada e saída de soluções no conjunto Elite é feito pelo procedimento $AtualizaElite$.
-
-Ao final das iterações ocorre a pós-otimização, em que se aplica \textit{Path-Relinking} entre as soluções do conjunto Elite, duas as duas. A melhor solução obtida é a resposta do algoritmo.
-
-\begin{algorithm}[H]
-\label{algoGraspComPathRelinking}
-\SetAlgoLined
-\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
-\SetKwFunction{BuscaLocal}{BuscaLocal}
-\SetKwFunction{PathRelinking}{PathRelinking}
-\SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{MaxIter, MaxElite}
-\Saida{Melhor Solução $S^{*}$}
-
-$f^{*} \leftarrow \infty $ \;
-$Elite \leftarrow \emptyset $ \;
-\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
-	$S \leftarrow GeraSolucaoInicial() $ \;
-	$S \leftarrow BuscaLocal(S) $ \;
-	\Se{$ i \geq 2 $}{
-		Selecione aleatoriamente $S_{elite} \in Elite $ \;
-		$S \leftarrow PathRelinking(S, S_{elite}) $ \;
-	}
-	\Se{$ f(S) < f^{*} $}{
-		$S^{*} \leftarrow S $ \;
-		$f^{*} \leftarrow f(S) $ \;
-	}
-	$AtualizaElite(S, Elite)$ \;
-}
-$S^* = PosOtimizacao(Elite)$ \;
-\caption{GRASP com \textit{Path-Relinking} para intensificação e pós-otimização}
-\end{algorithm}
-
-\section{GRASP + PR para o ITC-2007}
-
-Nesta seção apresentamos a implementação do algoritmo \ref{algoGraspComPathRelinking} adaptado ao problema de tabela-horário modelado pela terceira formulação do ITC-2007 apresentada na seção \ref{sec:formulacao}. A adaptação do algoritmo \ref{algoGraspComPathRelinking} ao problema foi realizada em três etapas principais: geração de solução inicial (linha 4), busca local (linha 5) e \textit{Path-Relinking} (linha 8).
-
-
-
-
-
-\subsection{Path-relinking}
-
 No algoritmo proposto o \textit{Path-relinking} é aplicado sobre a solução obtida na busca local e uma solução do conjunto Elite. De acordo com \cite{Resende05graspwith}, o caminho percorrido entre as duas soluções pode ser feito de diversas maneiras. As duas principais são:
 
 \begin{itemize}
-\item \textbf{Religamento direto}: PR parte da solução pior em direção à melhor.
-\item \textbf{Religamento inverso}: PR é aplicado partindo da melhor solução em direção à pior.
+\item \textbf{Forward}: PR parte da solução pior em direção à melhor.
+\item \textbf{Backward}: PR é aplicado partindo da melhor solução em direção à pior.
 \end{itemize}
 
 Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} indicam que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a solução alvo.
 
-Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
 
 O algoritmo \ref{algoGraspFinal} resume a proposta desse trabalho: GRASP com PR para o problema de tabela-horário de universidades, terceira formulação do ITC-2007. Observe que a fase de busca local é configurável, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}, gerando duas versões diferentes.
+
+Como consequência da introdução do Path-Relinking, um conjunto Elite se faz necessário para armazenar as melhores soluções encontradas nas iterações. Este conjunto é limitado por $MaxElite$ soluções. Ao final de cada iteração o conjunto Elite é atualizado. Todo ótimo local obtido é candidato a entrar no conjunto. Se ele já tem $MaxElite$ soluções, o candidato só irá entrar se for diferente das soluções presentes e melhor que ao menos uma delas. O controle de entrada e saída de soluções no conjunto Elite é feito pelo procedimento $AtualizaElite$.
 
 \begin{algorithm}[H]
 \label{algoGraspFinal}
@@ -523,7 +472,7 @@ $f^{*} \leftarrow \infty $ \;
 $Elite \leftarrow \emptyset $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
 	$S \leftarrow GeraSolucaoInicial() $ \;
-	$S \leftarrow BuscaLocal(S) $  \tcp{Hill Climbing ou Simulated Annealing} 
+	$S \leftarrow BuscaLocal(S) $  \tcp{Hill Climbing or Simulated Annealing} 
 	\Se{$ i \geq 2 $}{
 		Selecione aleatoriamente $S_{elite} \in Elite $ \;
 		$S \leftarrow PathRelinking(S, S_{elite}) $ \;

@@ -1,95 +1,102 @@
-\begin{thebibliography}{19}
-\providecommand{\natexlab}[1]{#1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
   \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
-\providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem[{Ceschia et~al(2011)Ceschia, Di~Gaspero, and Schaerf}]{CDGS11b}
-Ceschia S, Di~Gaspero L, Schaerf A (2011) Design, engineering, and experimental
+\bibitem{CDGS11b}
+Ceschia, S., Di~Gaspero, L., Schaerf, A.: Design, engineering, and experimental
   analysis of a simulated annealing approach to the post-enrolment course
-  timetabling problem. Computers \& Operations Research 39(7):1615--1624
+  timetabling problem.
+\newblock Computers \& Operations Research \textbf{39}(7), 1615--1624 (2011)
 
-\bibitem[{Elloumi et~al(2008)Elloumi, Kamoun, Ferland, and
-  Dammak}]{elloumi2008}
-Elloumi A, Kamoun H, Ferland J, Dammak A (2008) A tabu search procedure for
-  course timetabling at a tunisian university. In: Proceedings of the 7th PATAT
-  Conference, 2008
+\bibitem{elloumi2008}
+Elloumi, A., Kamoun, H., Ferland, J., Dammak, A.: A tabu search procedure for
+  course timetabling at a tunisian university.
+\newblock In: Proceedings of the 7th PATAT Conference, 2008 (2008)
 
-\bibitem[{Erben and Keppler(1995)}]{Erben95agenetic}
-Erben W, Keppler J (1995) A genetic algorithm solving a weekly
-  course-timetabling problem
+\bibitem{Erben95agenetic}
+Erben, W., Keppler, J.: A genetic algorithm solving a weekly course-timetabling
+  problem (1995)
 
-\bibitem[{Feo and Resende(1989)}]{FeoRes89}
-Feo T, Resende M (1989) A probabilistic heuristic for a computationally
-  difficult set covering problem. Operations Research Letters 8
+\bibitem{FeoRes89}
+Feo, T., Resende, M.: A probabilistic heuristic for a computationally difficult
+  set covering problem.
+\newblock Operations Research Letters \textbf{8} (1989)
 
-\bibitem[{Feo et~al(1994)Feo, Resende, and Smith}]{FeoResSmi94}
-Feo T, Resende M, Smith S (1994) A greedy randomized adaptive search procedure
-  for maximum independent set. Operations Research 42:860--878
+\bibitem{FeoResSmi94}
+Feo, T., Resende, M., Smith, S.: A greedy randomized adaptive search procedure
+  for maximum independent set.
+\newblock Operations Research \textbf{42}, 860--878 (1994)
 
-\bibitem[{Glover(1989)}]{Glover89}
-Glover F (1989) Tabu search - part i. INFORMS Journal on Computing
+\bibitem{Glover89}
+Glover, F.: Tabu search - part i.
+\newblock INFORMS Journal on Computing  (1989)
 
-\bibitem[{Glover(1996)}]{Glover96tabusearch}
-Glover F (1996) Tabu search and adaptive memory programing - advances,
-  applications and challenges. In: Interfaces in Computer Science and
-  Operations Research, Kluwer, pp 1--75
+\bibitem{Glover96tabusearch}
+Glover, F.: Tabu search and adaptive memory programing - advances, applications
+  and challenges.
+\newblock In: Interfaces in Computer Science and Operations Research, pp.
+  1--75. Kluwer (1996)
 
-\bibitem[{Gotlieb(1962)}]{gotlieb62}
-Gotlieb CC (1962) The construction of class-teacher time-tables. In: IFIP
-  Congress, pp 73--77
+\bibitem{gotlieb62}
+Gotlieb, C.C.: The construction of class-teacher time-tables.
+\newblock In: IFIP Congress, pp. 73--77 (1962)
 
-\bibitem[{Kirkpatrick(1984)}]{SA}
-Kirkpatrick S (1984) Optimization by simulated annealing: Quantitative studies.
-  Journal of Statistical Physics
+\bibitem{SA}
+Kirkpatrick, S.: Optimization by simulated annealing: Quantitative studies.
+\newblock Journal of Statistical Physics  (1984)
 
-\bibitem[{Laguna and Martí(1999)}]{Laguna99graspand}
-Laguna M, Martí R (1999) Grasp and path relinking for 2-layer straight line
-  crossing minimization. INFORMS Journal on Computing 11:44--52
+\bibitem{Laguna99graspand}
+Laguna, M., Martí, R.: Grasp and path relinking for 2-layer straight line
+  crossing minimization.
+\newblock INFORMS Journal on Computing \textbf{11}, 44--52 (1999)
 
-\bibitem[{Lewis(2007)}]{Lewis2007:survey}
-Lewis R (2007) A survey of metaheuristic-based techniques for university
-  timetabling problems. OR Spectrum
+\bibitem{Lewis2007:survey}
+Lewis, R.: A survey of metaheuristic-based techniques for university
+  timetabling problems.
+\newblock OR Spectrum  (2007)
 
-\bibitem[{Li et~al(1994)Li, Pardalos, and Resende}]{LiParRes94}
-Li Y, Pardalos P, Resende M (1994) A greedy randomized adaptive search
-  procedure for the quadratic assignment problem. In: Quadratic assignment and
-  related problems, {DIMACS} Series on Discrete Mathematics and Theoretical
-  Computer Science, vol~16, American Mathematical Society
+\bibitem{LiParRes94}
+Li, Y., Pardalos, P., Resende, M.: A greedy randomized adaptive search
+  procedure for the quadratic assignment problem.
+\newblock In: Quadratic assignment and related problems, \emph{{DIMACS} Series
+  on Discrete Mathematics and Theoretical Computer Science}, vol.~16. American
+  Mathematical Society (1994)
 
-\bibitem[{PATAT(2008)}]{itc2007}
-PATAT (2008) International timetabling competition. URL:
-  http://www.cs.qub.ac.uk/itc2007
+\bibitem{itc2007}
+PATAT: International timetabling competition.
+\newblock URL: http://www.cs.qub.ac.uk/itc2007 (2008)
 
-\bibitem[{Resende and Feo(1996)}]{ResFeo96a}
-Resende M, Feo T (1996) A {GRASP} for satisfiability. In: Johnson D, Trick M
-  (eds) The Second {DIMACS} Implementation Challenge, {DIMACS} Series on
-  Discrete Mathematics and Theoretical Computer Science, vol~26, American
-  Mathematical Society, pp 499--520
+\bibitem{ResFeo96a}
+Resende, M., Feo, T.: A {GRASP} for satisfiability.
+\newblock In: D.~Johnson, M.~Trick (eds.) The Second {DIMACS} Implementation
+  Challenge, \emph{{DIMACS} Series on Discrete Mathematics and Theoretical
+  Computer Science}, vol.~26, pp. 499--520. American Mathematical Society
+  (1996)
 
-\bibitem[{Resende and Ribeiro(1997)}]{ResRib95}
-Resende M, Ribeiro C (1997) A {GRASP} for graph planarization. Networks
-  29:173--189
+\bibitem{ResRib95}
+Resende, M., Ribeiro, C.: A {GRASP} for graph planarization.
+\newblock Networks \textbf{29}, 173--189 (1997)
 
-\bibitem[{Resende and Ribeiro(2003)}]{ResRib03a}
-Resende M, Ribeiro C (2003) {A GRASP with path-relinking for private virtual
-  circuit routing}. Networks 41(1):104--114
+\bibitem{ResRib03a}
+Resende, M., Ribeiro, C.: {A GRASP with path-relinking for private virtual
+  circuit routing}.
+\newblock Networks \textbf{41}(1), 104--114 (2003)
 
-\bibitem[{Resende and Ribeiro(2005)}]{Resende05graspwith}
-Resende MGC, Ribeiro CC (2005) Grasp with path-relinking: Recent advances and
-  applications
+\bibitem{Resende05graspwith}
+Resende, M.G.C., Ribeiro, C.C.: Grasp with path-relinking: Recent advances and
+  applications (2005)
 
-\bibitem[{Schaerf(1995)}]{Schaerf95asurvey}
-Schaerf A (1995) A survey of automated timetabling. ARTIFICIAL INTELLIGENCE
-  REVIEW 13:87--127
+\bibitem{Schaerf95asurvey}
+Schaerf, A.: A survey of automated timetabling.
+\newblock ARTIFICIAL INTELLIGENCE REVIEW \textbf{13}, 87--127 (1995)
 
-\bibitem[{Souza et~al(2004)Souza, Maculan, and Ochi}]{Souza:2004:GSA}
-Souza MJF, Maculan N, Ochi LS (2004) Metaheuristics. Kluwer Academic
-  Publishers, Norwell, MA, USA, chap A GRASP-tabu search algorithm for solving
-  school timetabling problems, pp 659--672
+\bibitem{Souza:2004:GSA}
+Souza, M.J.F., Maculan, N., Ochi, L.S.: Metaheuristics.
+\newblock chap. A GRASP-tabu search algorithm for solving school timetabling
+  problems, pp. 659--672. Kluwer Academic Publishers, Norwell, MA, USA (2004)
 
 \end{thebibliography}

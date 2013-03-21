@@ -490,10 +490,8 @@ $Elite \leftarrow \emptyset $ \;
 \section{Resultados Computacionais}
 \label{cap:resultados}
 
-\section{Descrição das instâncias utilizadas}
-
 As instâncias utilizadas foram as mesmas submetidas aos competidores do ITC-2007.
-São 21 instâncias ao todo, com grau de dificuldade variado. A organização garante que existe solução viável para todas as instâncias, fato que foi comprovado nos testes. Mas nada foi informado sobre a quantidade de violações fracas em cada instância. Em \cite{itc2007} podem ser obtidas todas as instâncias.
+São 21 instâncias ao todo, com grau de dificuldade variado. A organização garantiu a existência de soluções viáveis para todas as instâncias, fato que foi comprovado nos testes. Mas nada foi informado sobre a quantidade de violações fracas em cada instância. Em \cite{itc2007} podem ser obtidas todas as instâncias.
 
 Na tabela \ref{tab:instancias} são apresentados os dados mais relevantes de cada instância. A quantidade de horários de aula numa semana não varia muito de instância para instância. A coluna conflitos conta a quantidade de pares de aula que não podem ser alocadas no mesmo horário (mesma disciplina, mesmo currículo ou mesmo professor) dividido pelo total de pares distintos de aula. A disponibilidade mede percentualmente a quantidade de horários que são disponíveis para as aulas, levando-se em consideração as restrições de indisponibilidade que são informadas no arquivo de entrada.
 
@@ -532,29 +530,9 @@ comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 \end{table}
 \end{center}
 
-\section{Detalhes de implementação\label{sec:detalhes-implementacao}}
+\subsection{Implementation Details\label{sec:detalhes-implementacao}}
 
-Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz, onde as linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui cinco aulas semanais, então elas são representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com três aulas é representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com números maiores que o total de aulas presentes na instância.
-
-A tabela \ref{tab:solucao_toy_codificada} é a mesma representação da tabela-horário \ref{tab:solucao_toy} usando a codificação com números inteiros. São três aulas para \textit{SecCosC}, três para \textit{ArcTec}, cinco para \textit{TecCos} e cinco para \textit{Geotec}, totalizando 16 aulas que estão destacadas em negrito. Todas as demais são horários desocupados.
-
-\begin{center}
-\begin{table}[!htb]
-%\begin{footnotesize}
-{\fontsize{9}{12} \selectfont
-\begin{tabular}{|c|c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}\hline
- & \multicolumn{4}{|c||}{Dia 0} & \multicolumn{4}{|c||}{Dia 1}& \multicolumn{4}{|c||}{Dia 2}& \multicolumn{4}{|c||}{Dia 3}&  \multicolumn{4}{|c|}{Dia 4}\\ \hline
- & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\ \hline
-rA & 18 & {\bf 12} & 17 & 19 & {\bf 13} & 20 & {\bf 14} & {\bf 15} & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & {\bf 16} \\ \hline
-rB & 32 & 33 & {\bf 4} & 34 & {\bf 5} & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 \\ \hline
-rC & 50 & {\bf 7} & 51 & 52 & 53 & {\bf 8} & {\bf 1} & 54 & 55 & 56 & {\bf 2} & {\bf 9} & {\bf 3} & 57 & 58 & 59 & {\bf 10} & 60 & {\bf 11} & {\bf 6} \\ \hline
-\end{tabular}
-}
-%\end{footnotesize}
-\caption{Tabela-horário para a instância \textit{Toy} codificando as aulas com números inteiros}
-\label{tab:solucao_toy_codificada}
-\end{table}
-\end{center}
+Todas as implementações foram feitas na linguagem C. A tabela-horário é representada com uma matriz, onde as linhas representam as salas e as colunas representam os horários de todos os dias. As aulas são representadas por números inteiros. Cada aula da disciplina é representada por um número diferente. Se a primeira disciplina da instância possui cinco aulas semanais, então elas são representadas com os números 1, 2, 3, 4 e 5. Uma segunda disciplina com três aulas é representada na tabela com os números 6, 7 e 8, e assim por diante. Horários vagos são representados com o número zero.
 
 Algumas matrizes auxiliares foram utilizadas para extrair informações de forma mais rápida. Algumas delas são estáticas pois dependem apenas das informações presentes no arquivo de entrada. Outras são dinâmicas para refletir o estado atual da tabela-horário que está sendo considerada.
 
@@ -600,11 +578,7 @@ CurrDiasPeriodos[c][d2][p2] = CurrDiasPeriodos[c][d2][p2] + 1, \forall c \in C_a
 
 Além das matrizes auxiliares, outro detalhe importante é a geração e avaliação dos vizinhos. Num primeiro momento, para avaliar um vizinho gerado, o movimento era aplicado e a função objetivo avaliava toda a tabela-horário. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posições, é mais eficiente verificar o efeito das trocas localmente já que o restante da tabela permanece inalterado. Assim, as funções de geração de vizinhos retornam, além das posições de troca, um valor $\Delta f$. Se $\Delta f$ é menor que zero, então significa que o vizinho terá um melhor valor de função objetivo.
 
-Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas de dados usadas no trabalho. Todas elas correspondem a um {\it struct} no código-fonte. O {\it struct} \texttt{Problema} contém as informações básicas, como quantidade de dias, períodos e salas, e ainda pendura as listas de currículos, disciplinas, salas e restrições de indisponibilidade. Ela também armazena as matrizes estáticas que não variam durante a execução do algoritmo.
-
-A tabela-horário é representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representação da tabela \ref{tab:solucao_toy_codificada}, além de armazenar o valor da função objetivo e as matrizes dinâmicas.
-
-\section{Escolha dos parâmetros}
+\subsection{Escolha dos parâmetros}
 
 O algoritmo GRASP possui dois parâmetros: número máximo de iterações \textit{MaxIter} e o valor $\alpha$ que regula a forma de construção da solução inicial. Como foi implementado \textit{Path-relinking}, um terceiro parâmetro, \textit{MaxElite}, foi adicionado para limitar o tamanho do conjunto de soluções elite.
 
@@ -622,7 +596,7 @@ Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as busc
 
 O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
-\section{Análise dos resultados}
+\subsection{Análise dos resultados}
 
 Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em máquina Linux com a distribuição Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memória RAM.
 
@@ -693,11 +667,11 @@ A competição foi dividida em duas fases descritas a seguir. A primeira fase foi 
 Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete instâncias chamadas de ocultas por não serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas instâncias. Os resultados da primeira fase foram obtidos sem direitos de publicação dos nomes dos não-finalistas, por isso estão identificados apenas como 6º lugar, 7º lugar e assim por diante. Os cinco finalistas na ordem de classificação são:
 
 \begin{enumerate}
-\item Tomas Müller (Estados Unidos)
-\item Zhipeng Lu e Jin-Kao Hao (França)
-\item Mitsunori Atsuta, Koji Nonobe, e Toshihide Ibaraki (Japão)
-\item Martin Josef Geiger (Alemanha)
-\item Michael Clark, Martin Henz e Bruce Love (Cingapura)
+\item Tomas Müller (United States)
+\item Zhipeng Lu and Jin-Kao Hao (France)
+\item Mitsunori Atsuta, Koji Nonobe, and Toshihide Ibaraki (Japan)
+\item Martin Josef Geiger (Germany)
+\item Michael Clark, Martin Henz and Bruce Love (Singapore)
 \end{enumerate}
 
 Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a instância \textit{comp05}. As melhores respostas foram obtidas para as instâncias \textit{comp01} e \textit{comp11}. Considerando a média dos resultados das 14 primeiras instâncias, GSA é pior que apenas três competidores. O mesmo fato aconteceu para as últimas sete instâncias da segunda fase.
@@ -867,8 +841,8 @@ Text with citations \cite{RefB} and \cite{RefJ}.
 %\end{acknowledgements}
 
 % BibTeX users please use one of
-\bibliographystyle{spbasic}      % basic style, author-year citations
-%\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spbasic}      % basic style, author-year citations
+\bibliographystyle{spmpsci}      % mathematics and physical sciences
 %\bibliographystyle{spphys}       % APS-like style for physics
 \bibliography{monografia}   % name your BibTeX data base
 

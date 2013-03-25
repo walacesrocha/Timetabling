@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  21 MAR 2013 10:59
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  25 MAR 2013 09:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,23 +370,7 @@ Overfull \hbox (7.08278pt too wide) in paragraph at lines 128--129
 S^^Pceis da ^^Sarea de otimiza^^Xc~ao
  []
 
-
-Overfull \hbox (182.23724pt too wide) in paragraph at lines 130--131
-\OT1/cmr/m/n/10 ritmo Gen^^Setico [[]] e Busca Tabu [[]]. 
- []
-
-[2] [3]
-Overfull \hbox (6.22287pt too wide) in paragraph at lines 198--199
-\OT1/cmr/m/n/10 sucesso em v^^Sarios prob-le-mas de otimiza^^Xc~ao como con-jun
-to in-de-pen-dente m^^Saximo
- []
-
-
-Overfull \hbox (20.3618pt too wide) in paragraph at lines 198--199
-\OT1/cmr/m/n/10 [[]], sat-is-fa-bil-i-dade [[]],
- []
-
-[4] [5]
+[2] [3] [4] [5]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 263.
 
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
@@ -400,17 +384,14 @@ Overfull \hbox (0.80608pt too wide) in paragraph at lines 307--308
  facil-mente em m^^S^^Pnimos
  []
 
-[7] [8]
+[7]
+Underfull \vbox (badness 1859) has occurred while \output is active []
+
+ [8]
 Overfull \hbox (0.573pt too wide) in paragraph at lines 376--377
 []\OT1/cmr/m/n/10 Tanto no al-go-ritmo \OT1/cmr/m/it/10 Hill Climb-ing \OT1/cmr
 /m/n/10 quanto no \OT1/cmr/m/it/10 Sim-u-lated An-neal-ing\OT1/cmr/m/n/10 , a g
 era^^Xc~ao
- []
-
-
-Overfull \hbox (52.87128pt too wide) in paragraph at lines 376--377
-\OT1/cmr/m/n/10 com \OT1/cmr/m/it/10 MOVE \OT1/cmr/m/n/10 e $50%$ com \OT1/cmr/
-m/it/10 SWAP\OT1/cmr/m/n/10 . Em [[]],
  []
 
 [9]
@@ -456,24 +437,12 @@ Overfull \hbox (60.33858pt too wide) in paragraph at lines 400--401
 [10 <./PRgenerico-eps-converted-to.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./PR-eps-converted-to.pdf>]
-Overfull \hbox (43.61179pt too wide) in paragraph at lines 447--448
-\OT1/cmr/m/n/10 busca lo-cal e uma solu^^Xc~ao do con-junto Elite. De acordo co
-m [[]],
- []
-
-
-Overfull \hbox (0.1394pt too wide) in paragraph at lines 447--448
-\OT1/cmr/m/n/10 o cam-inho per-cor-rido en-tre as duas solu^^Xc~oes pode ser fe
-ito de di-ver-sas maneiras.
- []
-
-[12] [13]
+ [11 <./PR-eps-converted-to.pdf>] [12] [13]
 Overfull \hbox (47.37843pt too wide) in paragraph at lines 502--528
 [][] 
  []
 
-[14] [15]
+[14]
 Overfull \hbox (10.14383pt too wide) in paragraph at lines 564--565
 \OML/cmm/m/it/10 D \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 P$\OT1/cmr/m/n/10 . Da
 -dos um curr^^S^^Pculo $\OML/cmm/m/it/10 c$\OT1/cmr/m/n/10 , um dia $\OML/cmm/m
@@ -492,7 +461,11 @@ it/10 p$\OT1/cmr/m/n/10 , mas $\OML/cmm/m/it/10 CurrDiasPeriodos\OT1/cmr/m/n/10
 cmm/m/it/10 p \OMS/cmsy/m/n/10 ^^@
  []
 
-[16] [17] [18] [19]
+[15] [16]
+Underfull \vbox (badness 2181) has occurred while \output is active []
+
+ [17]
+[18] [19]
 Overfull \hbox (67.16908pt too wide) in paragraph at lines 683--703
  [] 
  []
@@ -520,34 +493,31 @@ LaTeX Warning: Citation `RefB' on page 22 undefined on input line 791.
 
 LaTeX Warning: Citation `RefJ' on page 22 undefined on input line 791.
 
-(./template.bbl [22]) [23] (./template.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(./template.bbl [22]) [23] (./template.aux) ) 
 Here is how much of TeX's memory you used:
  4368 strings out of 493629
  59224 string characters out of 3148772
- 156757 words of memory out of 3000000
+ 156295 words of memory out of 3000000
  7595 multiletter control sequences out of 15000+200000
  13335 words of font info for 50 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,21n,33p,1192b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></
-usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
-8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on template.pdf (23 pages, 308543 bytes).
+</usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb>
+Output written on template.pdf (23 pages, 307974 bytes).
 PDF statistics:
  153 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams

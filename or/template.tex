@@ -273,12 +273,12 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 		ExplodeSolucao(T, a) \;
 		$H \leftarrow \{ h \text{ tal que } h $ é viável para $ a \}$ \;
 	}
-	Para todo $ (s, h) \in S \times H, T[s, h] = \emptyset $, computar o custo de alocação $f(a,s,h) $ \;
-	$c^{min} \leftarrow min\{f(a,s,h) : (s, h) \in S \times H\}$\;
-	$c^{max} \leftarrow max\{f(a,s,h) : (s, h) \in S \times H\}$\;
-	$LRC \leftarrow \{ (s,h) \in S \times H : f(a,s,h) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
-	Escolha aleatoriamente $(s',h') \in LRC $ \;
-	$T[s',h'] = a $\;
+	Para todo $ (r, h) \in R \times H, T[r, h] = \emptyset $, computar o custo de alocação $f(a,r,h) $ \;
+	$c^{min} \leftarrow min\{f(a,r,h) : (r, h) \in R \times H\}$\;
+	$c^{max} \leftarrow max\{f(a,r,h) : (r, h) \in R \times H\}$\;
+	$LRC \leftarrow \{ (r,h) \in R \times H : f(a,r,h) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
+	Escolha aleatoriamente $(r',h') \in LRC $ \;
+	$T[r',h'] = a $\;
 	$RetiraAula(ListaNaoAlocadas, a) $ \;
 	$OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 }

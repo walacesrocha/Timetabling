@@ -111,7 +111,7 @@ the GRASP metaheuristic. Hill Climbing and Simulated Annealing are used as local
 phase of the algorithm and Path-relinking is implemented to improve the basic version. Tests
 were carried out simulating the same competition rules and the results are competitive with
 those obtained by the ITC-2007 finalists.
-\keywords{Educational timetabling \and GRASP \and Local Search}
+\keywords{Educational timetabling \and GRASP \and Local Search \and Path-Relinking}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
 \end{abstract}
@@ -152,31 +152,31 @@ A formulação três do ITC-2007 é baseada em casos reais da Escola de Engenharia d
 
 Uma solução consiste na alocação de cada aula em um horário e uma sala. A partir dos parâmetros são estabelecidas as restrições fortes e fracas. As fortes devem ser sempre respeitadas. Qualquer violação de uma restrição forte gera uma tabela-horário inviável, que na prática não pode ser utilizada. Por outro lado as restrições fracas devem ser satisfeitas o máximo possível, e quanto menos violações, melhor é a tabela-horário. As restrições do problema são descritas a seguir:
 
-\subsection{Hard Constraints (RFt)}
+\subsection{Hard Constraints}
 
 \begin{itemize}
 
-\item \textbf{Lectures}: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada. (RFt1)
+\item \textbf{Lectures}: Todas as aulas das disciplinas devem ser alocadas e em períodos diferentes. Uma violação ocorre se uma aula não é alocada. 
 
-\item \textbf{Conflicts}: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes. (RFt2)
+\item \textbf{Conflicts}: Aulas de disciplinas do mesmo currículo ou lecionadas pelo mesmo professor devem ser alocadas em períodos diferentes.
 
-\item \textbf{Room Occupation}: Duas aulas não podem ocupar uma sala no mesmo horário. (RFt3)
+\item \textbf{RoomOccupation}: Duas aulas não podem ocupar uma sala no mesmo horário.
 
-\item \textbf{Availability}: Uma aula não pode ser alocada num horário em que a disciplina é indisponível. (RFt4)
+\item \textbf{Availability}: Uma aula não pode ser alocada num horário em que a disciplina é indisponível.
 
 \end{itemize}
 
-\subsection{Soft Constraints (RFc)}
+\subsection{Soft Constraints}
 
 \begin{itemize}
 
-\item \textbf{Minimum Working Days}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação. (RFc1)
+\item \textbf{MinWorkingDays}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mínima de dias. Cada dia abaixo do mínimo é contado como uma violação.
 
-\item \textbf{Isolated Lectures}: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação. (RFc2)
+\item \textbf{IsolatedLectures}: Aulas do mesmo currículo devem ser alocadas em períodos adjacentes. Cada aula isolada é contada como uma violação.
 
-\item \textbf{Room Capacity}: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma violação. (RFc3)
+\item \textbf{RoomCapacity}: O número de alunos da disciplina deve ser menor ou igual ao número de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma violação.
 
-\item \textbf{Room Stability}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta é contada como uma violação. (RFc4)
+\item \textbf{RoomStability}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta é contada como uma violação.
 
 \end{itemize}
 
@@ -185,12 +185,12 @@ Na contagem total das violações fracas são considerados pesos diferentes para ca
 Uma solução viável deve atender a todas as restrições fortes. Uma solução ótima é viável e minimiza a função objetivo apresentada na equação \ref{funcaoObjetivo}:
 
 \begin{equation}\label{funcaoObjetivo}
-%\begin{split}
-f = \text{Violações}_{RFt} + \text{Violações}_{RFc}
-%\end{split}
+\begin{split}
+f = 5|MinWorkingDays|_v +\, 2|IsolatedLectures|_v\,+\\\,|RoomCapacity|_v + |RoomStability|_v
+\end{split}
 \end{equation}
 
-\noindent onde $\text{Violações}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Violações}_{RFc} = 5|RFc1|_v +\,\\2|RFc2|_v\,+\,|RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o número de violações.
+\noindent where $|x|_v$ denotes the total of violations for restriction $x$.
 
 \section{Algoritmo GRASP para o Problema de Tabela-horario}
 \label{sec:grasp}

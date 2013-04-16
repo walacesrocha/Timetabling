@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  4 APR 2013 08:42
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/Cygwin) (format=pdflatex 2012.5.2)  16 APR 2013 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -365,36 +365,39 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 100.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (2.445pt too wide) in paragraph at lines 126--127
+[]\OT1/cmr/m/n/10 Nos ^^Sultimos sessenta anos, come^^Xcando com [8], este prob
+-lema gan-hou grande
+ []
+
+
 Overfull \hbox (7.08278pt too wide) in paragraph at lines 128--129
 []\OT1/cmr/m/n/10 O prob-lema de tabela-hor^^Sario est^^Sa en-tre os mais dif^^
 S^^Pceis da ^^Sarea de otimiza^^Xc~ao
  []
 
-[2]
-Overfull \hbox (12.43329pt too wide) in paragraph at lines 175--176
-[]\OT1/cmr/bx/n/10 IsolatedLectures\OT1/cmr/m/n/10 : Aulas do mesmo curr^^S^^Pc
-ulo de-vem ser alo-cadas em per^^S^^Podos
- []
-
-[3] [4] [5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 263.
+[2] [3] [4] [5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 267.
 
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 263.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 267.
  [6]
-Overfull \hbox (0.80608pt too wide) in paragraph at lines 307--308
+Overfull \hbox (0.80608pt too wide) in paragraph at lines 311--312
 \OT1/cmr/m/n/10 essa es-trat^^Segia mos-trou-se pouco efi-ciente, se pren-dendo
  facil-mente em m^^S^^Pnimos
  []
 
-[7]
-Underfull \vbox (badness 1859) has occurred while \output is active []
+
+Underfull \vbox (badness 2050) has occurred while \output is active []
+
+ [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-Overfull \hbox (0.573pt too wide) in paragraph at lines 376--377
+Overfull \hbox (0.573pt too wide) in paragraph at lines 380--381
 []\OT1/cmr/m/n/10 Tanto no al-go-ritmo \OT1/cmr/m/it/10 Hill Climb-ing \OT1/cmr
 /m/n/10 quanto no \OT1/cmr/m/it/10 Sim-u-lated An-neal-ing\OT1/cmr/m/n/10 , a g
 era^^Xc~ao
@@ -409,14 +412,14 @@ Package epstopdf Info: Source file: <./PRgenericoEN.eps>
 (epstopdf)                    size: 8803 bytes
 (epstopdf)             Command: <repstopdf --outfile=./PRgenericoEN-eps-convert
 ed-to.pdf ./PRgenericoEN.eps>
-(epstopdf)             \includegraphics on input line 388.
+(epstopdf)             \includegraphics on input line 392.
 Package epstopdf Info: Output file is already uptodate.
  <./PRgenericoEN-eps-converted-to.pdf, id=43, 782.925pt x 393.47pt>
 File: ./PRgenericoEN-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./PRgenericoEN-eps-converted-to.pdf>
 Package pdftex.def Info: ./PRgenericoEN-eps-converted-to.pdf used on input line
- 388.
+ 392.
 (pdftex.def)             Requested size: 284.52756pt x 142.99394pt.
 Package epstopdf Info: Source file: <./PREN.eps>
 (epstopdf)                    date: 2013-04-04 08:30:57
@@ -426,28 +429,26 @@ Package epstopdf Info: Source file: <./PREN.eps>
 (epstopdf)                    size: 18686 bytes
 (epstopdf)             Command: <repstopdf --outfile=./PREN-eps-converted-to.pd
 f ./PREN.eps>
-(epstopdf)             \includegraphics on input line 400.
+(epstopdf)             \includegraphics on input line 404.
 Package epstopdf Info: Output file is already uptodate.
 
 <./PREN-eps-converted-to.pdf, id=44, 1154.3125pt x 484.81125pt>
 File: ./PREN-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./PREN-eps-converted-to.pdf>
-Package pdftex.def Info: ./PREN-eps-converted-to.pdf used on input line 400.
+Package pdftex.def Info: ./PREN-eps-converted-to.pdf used on input line 404.
 (pdftex.def)             Requested size: 284.52756pt x 119.50105pt.
  [10 <./PRgenericoEN-eps-converted-to.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11 <./PREN-eps-converted-to.pdf>]
+[11 <./PREN-eps-converted-to.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
-Overfull \hbox (47.37843pt too wide) in paragraph at lines 502--528
+Overfull \hbox (47.37843pt too wide) in paragraph at lines 506--532
 [][] 
  []
 
 [13] [14]
-Overfull \hbox (10.14383pt too wide) in paragraph at lines 564--565
+Overfull \hbox (10.14383pt too wide) in paragraph at lines 568--569
 \OML/cmm/m/it/10 D \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 P$\OT1/cmr/m/n/10 . Da
 -dos um curr^^S^^Pculo $\OML/cmm/m/it/10 c$\OT1/cmr/m/n/10 , um dia $\OML/cmm/m
 /it/10 d$ \OT1/cmr/m/n/10 e um per^^S^^Podo $\OML/cmm/m/it/10 p$\OT1/cmr/m/n/10
@@ -457,7 +458,7 @@ r/m/n/10 ][\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ][\OML/cmm/m/it/10 p\OT1/cmr/m/n/1
  []
 
 
-Overfull \hbox (19.88902pt too wide) in paragraph at lines 564--565
+Overfull \hbox (19.88902pt too wide) in paragraph at lines 568--569
 \OT1/cmr/m/n/10 curr^^S^^Pculo $\OML/cmm/m/it/10 c$ \OT1/cmr/m/n/10 pos-sui al-
 guma aula no dia $\OML/cmm/m/it/10 d$ \OT1/cmr/m/n/10 e hor^^Sario $\OML/cmm/m/
 it/10 p$\OT1/cmr/m/n/10 , mas $\OML/cmm/m/it/10 CurrDiasPeriodos\OT1/cmr/m/n/10
@@ -466,62 +467,59 @@ cmm/m/it/10 p \OMS/cmsy/m/n/10 ^^@
  []
 
 [15] [16] [17] [18]
-Overfull \hbox (67.16908pt too wide) in paragraph at lines 683--703
+Overfull \hbox (67.16908pt too wide) in paragraph at lines 687--707
  [] 
  []
 
 
-Overfull \hbox (11.69513pt too wide) in paragraph at lines 706--726
+Overfull \hbox (11.69513pt too wide) in paragraph at lines 710--730
  [][] 
  []
 
 
-Overfull \hbox (3.4022pt too wide) in paragraph at lines 754--755
+Overfull \hbox (3.4022pt too wide) in paragraph at lines 758--759
 \OT1/cmr/m/n/10 fase, GSA teve re-spostas $26%$ in-fe-ri-ores aos com-peti-dore
 s Muller e Lu (primeiros
  []
 
 [19] [20]
-Overfull \hbox (14.26343pt too wide) in paragraph at lines 776--777
+Overfull \hbox (14.26343pt too wide) in paragraph at lines 780--781
 \OT1/cmr/m/n/10 a efici^encia do GRASP foi au-men-tada in-tro-duzindo ma-trizes
  aux-il-iares e avalia^^Xc~oes
  []
 
 [21]
 
-LaTeX Warning: Citation `RefB' on page 22 undefined on input line 791.
+LaTeX Warning: Citation `RefB' on page 22 undefined on input line 795.
 
 
-LaTeX Warning: Citation `RefJ' on page 22 undefined on input line 791.
+LaTeX Warning: Citation `RefJ' on page 22 undefined on input line 795.
 
-(./template.bbl [22]) [23] (./template.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(./template.bbl [22]) [23] (./template.aux) ) 
 Here is how much of TeX's memory you used:
- 4368 strings out of 493629
- 59244 string characters out of 3148772
- 159294 words of memory out of 3000000
- 7595 multiletter control sequences out of 15000+200000
+ 4369 strings out of 493629
+ 59256 string characters out of 3148772
+ 159306 words of memory out of 3000000
+ 7596 multiletter control sequences out of 15000+200000
  13335 words of font info for 50 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,21n,33p,1192b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></
-usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
-8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on template.pdf (23 pages, 312441 bytes).
+</usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb>
+Output written on template.pdf (23 pages, 312451 bytes).
 PDF statistics:
  153 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams

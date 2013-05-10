@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  7 FEB 2013 09:53
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  10 MAY 2013 10:33
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -622,6 +622,6 @@ Here is how much of TeX's memory you used:
  7460 multiletter control sequences out of 10000+50000
  81532 words of font info for 129 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 34i,22n,41p,1434b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 34i,22n,41p,1435b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (64 pages, 204328 bytes).
+Output written on monografia.dvi (64 pages, 204404 bytes).

@@ -194,49 +194,49 @@ f = 5|MinWorkingDays|_v +\, 2|IsolatedLectures|_v\,+\\\,|RoomCapacity|_v + |Room
 \end{split}
 \end{equation}
 
-\noindent where $|x|_v$ denotes the total of violations for restriction $x$.
+\noindent onde $|x|_v$ representa o total de violações da restrição $x$.
 
 \section{Algoritmo GRASP para o Problema de Tabela-horario}
 \label{sec:grasp}
 
 A meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. Desde sua proposta inicial, o GRASP já foi aplicado com sucesso em vários problemas de otimização como conjunto independente máximo \cite{FeoResSmi94}, problema quadrático de alocação \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarização de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
-O algoritmo GRASP é um procedimento com iterações independentes, onde cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao final da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
+O algoritmo GRASP é um procedimento com iterações independentes, onde cada iteração constrói uma solução inicial e aplica busca local para melhorá-la. A resposta final é a melhor obtida dentre as iterações. A seguir serão detalhadas cada uma destas etapas do algoritmo.
 
-\begin{algorithm}[H]
-\label{algoGrasp}
-\SetAlgoLined
-\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
-\SetKwFunction{BuscaLocal}{BuscaLocal}
-\SetKwFunction{ReparaSolucao}{ReparaSolucao}
+%O algoritmo \ref{algoGrasp} apresenta o pseudo-código genérico do GRASP. Ao final da fase de construção inicial, pode ocorrer de a solução obtida ser inviável. Por isso um passo intermediário é previsto para reparar a solução, tornando-a viável.
+
+%\begin{algorithm}[H]
+%\label{algoGrasp}
+%\SetAlgoLined
+%\SetKwFunction{GeraSolucaoInicial}{GeraSolucaoInicial}
+%\SetKwFunction{BuscaLocal}{BuscaLocal}
+%\SetKwFunction{ReparaSolucao}{ReparaSolucao}
 %\SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{MaxIter}
-\Saida{Solução $S^{*}$}
-
-$f^{*} \leftarrow \infty $ \;
-\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
-	$S \leftarrow GeraSolucaoInicial() $ \;
-	\Se{$ S $ é inviável }{
-		$ReparaSolucao(S) $\;
-	}
-	$S \leftarrow BuscaLocal(S) $ \;
-	\Se{$ f(S) < f^{*} $}{
-		$S^{*} \leftarrow S $ \;
-		$f^{*} \leftarrow f(S) $ \;
-	}
-}
-\caption{Estrutura básica do algoritmo GRASP}
-\end{algorithm}
-
-O método de construção da solução inicial do GRASP é guloso, aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
+%\Entrada{MaxIter}
+%\Saida{Solução $S^{*}$}
+%
+%$f^{*} \leftarrow \infty $ \;
+%\Para{$i\leftarrow 1$ \Ate $MaxIter$}{
+%	$S \leftarrow GeraSolucaoInicial() $ \;
+%	\Se{$ S $ é inviável }{
+%		$ReparaSolucao(S) $\;
+%	}
+%	$S \leftarrow BuscaLocal(S) $ \;
+%	\Se{$ f(S) < f^{*} $}{
+%		$S^{*} \leftarrow S $ \;
+%		$f^{*} \leftarrow f(S) $ \;
+%	}
+%}
+%\caption{Estrutura básica do algoritmo GRASP}
+%\end{algorithm}
 
 \subsection{Geração de tabela-horário inicial}
 
 O objetivo da etapa de construção inicial é produzir uma tabela-horário viável, e se possível, com poucas violações das restrições fracas. O GRASP não exige que a solução inicial seja viável, mas foi decidido implementar desta forma para que nas fases seguintes o algoritmo concentre apenas na eliminação das violações das restrições fracas. A contagem de violações fortes e fracas requer certo esforço computacional. Garantindo que as soluções são viáveis, a etapa de busca local não necessita contar as violações fortes.
 
-Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. A escolha é tanto gulosa (para produzir soluções de boa qualidade) quanto aleatória (para produzir soluções diversificadas).
+O método de construção da solução inicial do GRASP é guloso, aleatório e visa produzir um conjunto diversificado de soluções iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatórios conseguem essa diversificação, mas as soluções em geral são ruins. Por outro lado, algoritmos gulosos tendem a gerar soluções de melhor qualidade, mas eles não conseguem produzir soluções diferentes já que a construção é sempre feita por escolhas gulosas.
 
-Com intuito de obter uma solução viável, é adotada uma estratégia de alocar as aulas mais conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia. Para medir se uma aula é mais conflitante que outra são contados quantos horários disponíveis são adequados para alocar a aula da disciplina. Esta contagem envolve:
+Partindo de uma tabela-horário vazia, as aulas são acrescentadas uma a uma até que todas estejam alocadas. Com intuito de obter uma solução viável, é adotada uma estratégia de alocar as aulas mais conflitantes primeiro. Poucos horários são viáveis para as disciplinas mais conflitantes, portanto, é melhor alocá-las quando a tabela está mais vazia. Para medir se uma aula é mais conflitante que outra são contados quantos horários disponíveis são adequados para alocar a aula da disciplina. Esta contagem envolve:
 
 \begin{itemize}
 
@@ -389,7 +389,7 @@ De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado
 
 \begin{figure}[!htb]
 \begin{center}
-  \includegraphics[width=10cm]{./PRgenericoEN.eps}
+  %\includegraphics[width=10cm]{./PRgenericoEN.eps}
  \caption{Explorando soluções com \textit{Path-Relinking}}
    \label{fig:path-relinking-generico}
 \end{center}
@@ -401,7 +401,7 @@ O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking}, 
 
 \begin{figure}[!htb]
 \begin{center}
- \includegraphics[width=10cm]{./PREN.eps}
+ %\includegraphics[width=10cm]{./PREN.eps}
  \caption{A possible path linking two timetables}
    \label{fig:path-relinking}
 \end{center}

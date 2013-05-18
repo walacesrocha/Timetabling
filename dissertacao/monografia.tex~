@@ -860,7 +860,7 @@ No algoritmo proposto o \textit{Path-relinking} é aplicado sobre a solução obtid
 
 Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execução é o dobro. \cite{Resende05graspwith} indicam que no caso de fazer a opção por somente uma das trajetórias, as melhores soluções geralmente são encontradas utilizando religamento inverso. A explicação para isso é que boas soluções tendem a estar próximas à solução mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solução elite como a inicial e a solução obtida na busca local é a solução alvo.
 
-Tanto no \textit{Path-relinking} quanto na busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
+Durante a busca local, movimentos que introduzem inviabilidades na solução são descartados. Assim a viabilidade da solução obtida na fase de construção inicial fica garantida.
 
 O algoritmo \ref{algoGraspFinal} resume a proposta desse trabalho: GRASP com PR para o problema de tabela-horário de universidades, terceira formulação do ITC-2007. Observe que a fase de busca local é configurável, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}, gerando duas versões diferentes.
 
@@ -1041,6 +1041,8 @@ O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tare
 
 Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
+Uma boa ferramenta que auxilia a calibração de parâmetros de algoritmos como o \textit{Simulated Annealing} é o pacote \textit{irace} da linguagem \textit{R}\cite{irace}. Ele permite explorar de forma mais eficiente as combinações de parâmetros, reduzindo o esforço necessário para esta terefa. Neste trabalho ele só foi usado em testes iniciais do SA sem o GRASP.
+
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos têm igual probabilidade de ocorrer.
 
 O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
@@ -1210,7 +1212,7 @@ Analisando separadamente por instância, podemos ver que os melhores resultados d
 
 Essas estatísticas são relevantes porque informam o quão difícil é a exploração do espaço de soluções. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados.
 
-Em Outras respostas com melhor qualidade para a formulação três do ITC-2007 
+Em \cite{ctt} podem ser vistas respostas melhores que as apresentadas neste trabalho, mas que não seguem a mesma metodologia de testes, principalmente quanto ao tempo de execução. Por isso não foram listados para comparação.
 
 %\end{landscape}
 
@@ -1246,7 +1248,11 @@ Neste trabalho foi possível comprovar que apesar das meta-heurísticas serem algo
 
 Foram detectadas algumas possíveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementação de vizinhanças mais específicas. \textit{MOVE} e \textit{SWAP} são estruturas genéricas que podem eliminar qualquer tipo de restrição forte ou fraca. As específicas fariam movimentos mais direcionados à redução de alguma violação definida, por exemplo, espalhar aulas de uma disciplina na semana para diminuir a violação de dias mínimos de trabalho. Um primeiro estudo neste sentido já foi feito, mas os movimentos eram mais complexos, prejudicando o tempo de execução. Uma forma mais eficiente deve ser investigada.
 
+Uma estrutura de vizinhança genérica promissora é a que utiliza cadeias de \textit{Kempe}, com bons resultados obtidos em \cite{kempe1} e \cite{lu-hao}. A idéia básica dessa vizinhança é realizar um ou mais movimentos (\textit{MOVE} e/ou \textit{SWAP}, quantos forem necessários) que garantam um vizinho viável.
+
 Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de maneira muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar as aulas que geram violações e as que não geram violações. As aulas que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
+
+Não pretende-se investir em testes com novas instâncias, dado que não há certeza na literatura sobre as soluções ótimas das instâncias atuais. Portanto, um esforço ainda pode ser dispensado no conjunto atual disponível.
 
 %{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
 

@@ -563,7 +563,7 @@ A heurística \textit{Path-Relinking} (PR) (religamento de caminhos) foi original
 
 A idéia básica do \textit{Path-Relinking} é traçar um caminho ligando duas soluções que são chamadas de inicial e alvo. Para gerar este caminho, sucessivamente são inseridos atributos da solução alvo na solução inicial para que ela fique a cada iteração mais parecida com a solução alvo. A cada atributo inserido uma solução diferente é obtida. A melhor solução obtida no caminho é a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratégia que procura incorporar atributos de soluções de alta qualidade.
 
-De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado na figura \ref{fig:path-relinking-generico}. A partir de uma solução inicial um caminho é percorrido até a solução alvo, gerando novas soluções intermediárias que podem ser melhores que a inicial e a alvo. Em cada iteração, verifica-se quais atributos estão diferentes na solução inicial e alvo. No exemplo da figura \ref{fig:path-relinking-generico} são quatro diferenças, por isso quatro soluções podem ser geradas a partir da solução inicial. Opta-se por uma delas e continua a busca a partir da escolhida até se chegar na solução alvo.
+De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado na figura \ref{fig:path-relinking-generico}. A partir de uma solução inicial um caminho é percorrido até a solução alvo, gerando novas soluções intermediárias que podem ser melhores que a inicial e a alvo. Em cada iteração, verifica-se quais atributos estão diferentes na solução inicial e alvo. No exemplo da figura \ref{fig:path-relinking-generico} são quatro diferenças, por isso quatro soluções podem ser geradas a partir da solução inicial. Opta-se por uma delas e continua a busca a partir da escolhida até se chegar na solução alvo. A quantidade de iterações necessárias para realizar o percurso é no máximo a quantidade de diferenças entre as duas soluções.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -1041,7 +1041,7 @@ O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tare
 
 Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
-Uma boa ferramenta que auxilia a calibração de parâmetros de algoritmos como o \textit{Simulated Annealing} é o pacote \textit{irace} da linguagem \textit{R}\cite{irace}. Ele permite explorar de forma mais eficiente as combinações de parâmetros, reduzindo o esforço necessário para esta terefa. Neste trabalho ele só foi usado em testes iniciais do SA sem o GRASP.
+Uma boa ferramenta que auxilia a calibração de parâmetros de algoritmos como o \textit{Simulated Annealing} é o pacote \textit{irace} da linguagem \textit{R} \cite{irace}. Ele permite explorar de forma mais eficiente as combinações de parâmetros, reduzindo o esforço necessário para esta terefa. Neste trabalho ele só foi usado em testes iniciais do SA sem o GRASP.
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos têm igual probabilidade de ocorrer.
 

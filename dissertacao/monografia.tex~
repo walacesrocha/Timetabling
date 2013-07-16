@@ -10,18 +10,18 @@
 %\usepackage[dvipdf]{graphicx,color}
 \usepackage{graphicx,color}
 \usepackage{lscape}
-
+\usepackage{babel}
 
 
 \makeatletter
-\usepackage{babel}
+
 \makeatother
 \begin{document}
 
 \autor{Walace de Souza Rocha}
 
 
-\titulo{Algoritmo GRASP para o Problema de Tabela-hor·rio de Universidades}
+\titulo{Algoritmo GRASP para o Problema de Tabela-hor√°rio de Universidades}
 
 
 \orientador{Maria Claudia Silva Boeres}
@@ -30,15 +30,15 @@
 \coorientador{Maria Cristina Rangel}
 
 
-\comentario{DissertaÁ„o apresentada como requisito parcial para obtenÁ„o do Grau de Mestre em CiÍncia
-da ComputaÁ„o pela Universidade Federal do EspÌrito Santo.}
+\comentario{Disserta√ß√£o apresentada como requisito parcial para obten√ß√£o do Grau de Mestre em Ci√™ncia
+da Computa√ß√£o pela Universidade Federal do Esp√≠rito Santo.}
 
 
-\instituicao{Departamento de Inform·tica \par Centro TecnolÛgico\par Universidade
-Federal do EspÌrito Santo}
+\instituicao{Departamento de Inform√°tica \par Centro Tecnol√≥gico\par Universidade
+Federal do Esp√≠rito Santo}
 
 
-\local{VitÛria - ES, Brasil}
+\local{Vit√≥ria - ES, Brasil}
 
 
 \data{28 de Fevereiro de 2013}
@@ -48,19 +48,19 @@ Federal do EspÌrito Santo}
 \folhaderosto
 
 \begin{folhadeaprovacao}
-DissertaÁ„o apresentada como requisito parcial para obtenÁ„o do Grau de Mestre em CiÍncia da ComputaÁ„o sob o tÌtulo \textit{``\ABNTtitulodata''},
-defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em VitÛria,
-Estado do EspÌrito Santo, pela banca examinadora constituÌda pelos
+Disserta√ß√£o apresentada como requisito parcial para obten√ß√£o do Grau de Mestre em Ci√™ncia da Computa√ß√£o sob o t√≠tulo \textit{``\ABNTtitulodata''},
+defendida por \ABNTautordata~e aprovada em \ABNTdatadata, em Vit√≥ria,
+Estado do Esp√≠rito Santo, pela banca examinadora constitu√≠da pelos
 professores: \setlength{\ABNTsignthickness}{0.4pt}
 
-\assinatura{Prof™ Dr™ Maria Claudia Silva Boeres\\Universidade Federal do EspÌrito Santo\\ Orientadora}
-\assinatura{Prof™ Dr™ Maria Cristina Rangel\\Universidade Federal do EspÌrito Santo\\ Co-orientadora}
-\assinatura{Prof. Dr. Fl·vio Miguel Varej„o\\ Universidade Federal do EspÌrito Santo}
+\assinatura{Prof¬™ Dr¬™ Maria Claudia Silva Boeres\\Universidade Federal do Esp√≠rito Santo\\ Orientadora}
+\assinatura{Prof¬™ Dr¬™ Maria Cristina Rangel\\Universidade Federal do Esp√≠rito Santo\\ Co-orientadora}
+\assinatura{Prof. Dr. Fl√°vio Miguel Varej√£o\\ Universidade Federal do Esp√≠rito Santo}
 \assinatura{Prof. Dr. Haroldo Gambini Santos\\ Universidade Federal de Ouro Preto}
 \end{folhadeaprovacao}
 
 \begin{resumo}
-O problema de tabela-hor·rio È de grande destaque na ·rea de otimizaÁ„o combinatÛria. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um n˙mero limitado de hor·rios e salas, respeitando algumas restriÁıes. As formulaÁıes s„o variadas, o que ‡s vezes dificulta a comparaÁ„o de trabalhos. Apesar das diferenÁas, ele È classificado em trÍs classes principais: tabela-hor·rio de exames, de escolas e de universidades. Este trabalho trata especificamente de tabela-hor·rio de universidades e È adotada a formulaÁ„o trÍs do campeonato internacional de tabela-hor·rio ITC-2007. O problema È resolvido com a meta-heurÌstica GRASP. {\it Hill Climbing} e {\it Simulated Annealing} s„o usados como fase de busca local do algoritmo e {\it Path-relinking} È implementado para melhorar a vers„o b·sica. Testes foram feitos simulando as mesmas regras do campeonato e os resultados obtidos est„o competitivos com os obtidos pelos finalistas do ITC-2007.
+O problema de tabela-hor√°rio √© de grande destaque na √°rea de otimiza√ß√£o combinat√≥ria. Dado um conjunto de disciplinas, alunos, professores e salas, o problema consiste em alocar aulas em um n√∫mero limitado de hor√°rios e salas, respeitando algumas restri√ß√µes. As formula√ß√µes s√£o variadas, o que √†s vezes dificulta a compara√ß√£o de trabalhos. Apesar das diferen√ßas, ele √© classificado em tr√™s classes principais: tabela-hor√°rio de exames, de escolas e de universidades. Este trabalho trata especificamente de tabela-hor√°rio de universidades e √© adotada a formula√ß√£o tr√™s do campeonato internacional de tabela-hor√°rio ITC-2007. O problema √© resolvido com a meta-heur√≠stica GRASP. {\it Hill Climbing} e {\it Simulated Annealing} s√£o usados como fase de busca local do algoritmo e {\it Path-relinking} √© implementado para melhorar a vers√£o b√°sica. Testes foram feitos simulando as mesmas regras do campeonato e os resultados obtidos est√£o competitivos com os obtidos pelos finalistas do ITC-2007.
 \end{resumo}
 
 \begin{abstract}
@@ -68,21 +68,21 @@ O problema de tabela-hor·rio È de grande destaque na ·rea de otimizaÁ„o combinat
 The timetabling problem is of great interest in the combinatorial optimization field. Given a set of disciplines, students, teachers and classrooms, the problem consists in to allocate lectures in a limited number of timeslots and rooms, respecting some restrictions. The formulations are varied, which sometimes makes it difficult to compare to other studies. Despite the differences, it is classified into three main classes: exams timetabling, schools timetabling and universities timetabling. This work specifically treats the universities timetabling and is adopted the third formulation of international timetabling competition - ITC-2007. The problem is solved with the GRASP metaheuristic. Hill Climbing and Simulated Annealing are used as local search phase of the algorithm and Path-relinking is implemented to improve the basic version. Tests were carried out simulating the same competition rules and the results are competitive with those obtained by the ITC-2007 finalists.
 \end{abstract}
 
-\chapter*{DedicatÛria}
+\chapter*{Dedicat√≥ria}
 
-Dedico este trabalho a todos familiares, amigos e professores que contribuiram de alguma forma para que sua conclus„o fosse possÌvel.
+Dedico este trabalho a todos familiares, amigos e professores que contribuiram de alguma forma para que sua conclus√£o fosse poss√≠vel.
 
 \chapter*{Agradecimentos}
 
-AgradeÁo primeiramente a Deus pela capacidade fÌsica e intelectual para realizaÁ„o deste trabalho.
+Agrade√ßo primeiramente a Deus pela capacidade f√≠sica e intelectual para realiza√ß√£o deste trabalho.
 
-¿ minha esposa Iris por estar sempre ao meu lado me incentivando.
+√Ä minha esposa Iris por estar sempre ao meu lado me incentivando.
 
-TambÈm agradeÁo ‡s professoras Claudia e Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agrad·vel. Aos demais professores do Departamento de Inform·tica pela import‚ncia na minha formaÁ„o acadÍmica.
+Tamb√©m agrade√ßo √†s professoras Claudia e Cristina pelos ensinamentos nesta jornada e por tornarem o desenvolvimento da pesquisa mais agrad√°vel. Aos demais professores do Departamento de Inform√°tica pela import√¢ncia na minha forma√ß√£o acad√™mica.
 
-%¿ direÁ„o do N˙cleo de Processamento de Dados da UFES pelo apoio necess·rio
+%√Ä dire√ß√£o do N√∫cleo de Processamento de Dados da UFES pelo apoio necess√°rio
 
-¿ CAPES pelo apoio financeiro.
+√Ä CAPES pelo apoio financeiro.
 
 \tableofcontents{}\listoffigures
 
@@ -93,252 +93,252 @@ TambÈm agradeÁo ‡s professoras Claudia e Cristina pelos ensinamentos nesta jorna
 \listofalgorithms
 
 
-\chapter{IntroduÁ„o\label{cap:introducao}}
+\chapter{Introdu√ß√£o\label{cap:introducao}}
 
 %\vfill{}
 %\vfill{}
 
-%Neste capÌtulo s„o apresentados o objetivo desta dissertaÁ„o e a estrutura da mesma.
+%Neste cap√≠tulo s√£o apresentados o objetivo desta disserta√ß√£o e a estrutura da mesma.
 %\newpage
 
-%\section{ApresentaÁ„o do problema}
+%\section{Apresenta√ß√£o do problema}
 
-Os problemas de \textit{scheduling} tratam a alocaÁ„o de recursos em determinados hor·rios satisfazendo algumas restriÁıes. Os problemas de tabela-hor·rio s„o um subconjunto importante desta ·rea e as aplicaÁıes s„o variadas como, por exemplo, elaboraÁ„o de escala de funcion·rios e agendamento de partidas para campeonatos esportivos.
+Os problemas de \textit{scheduling} tratam a aloca√ß√£o de recursos em determinados hor√°rios satisfazendo algumas restri√ß√µes. Os problemas de tabela-hor√°rio s√£o um subconjunto importante desta √°rea e as aplica√ß√µes s√£o variadas como, por exemplo, elabora√ß√£o de escala de funcion√°rios e agendamento de partidas para campeonatos esportivos.
 
-No caso especÌfico de tabela-hor·rio de escolas, o problema consiste em alocar um conjunto de aulas em um n˙mero prÈ-determinado de hor·rios, satisfazendo diversas restriÁıes envolvendo professores, alunos e o espaÁo fÌsico disponÌvel. A soluÁ„o manual deste problema n„o È uma tarefa trivial e as instituiÁıes de ensino precisam resolvÍ-lo anualmente ou semestralmente. Nem sempre a alocaÁ„o manual È satisfatÛria, visto que È difÌcil contemplar todos os anseios das partes envolvidas. 
+No caso espec√≠fico de tabela-hor√°rio de escolas, o problema consiste em alocar um conjunto de aulas em um n√∫mero pr√©-determinado de hor√°rios, satisfazendo diversas restri√ß√µes envolvendo professores, alunos e o espa√ßo f√≠sico dispon√≠vel. A solu√ß√£o manual deste problema n√£o √© uma tarefa trivial e as institui√ß√µes de ensino precisam resolv√™-lo anualmente ou semestralmente. Nem sempre a aloca√ß√£o manual √© satisfat√≥ria, visto que √© dif√≠cil contemplar todos os anseios das partes envolvidas. 
 
-Por esta raz„o, atenÁ„o especial tem sido dada a soluÁ„o autom·tica de tabela-hor·rio. Nos ˙ltimos cinquenta anos, comeÁando com \cite{gotlieb62}, este problema ganhou grande destaque na ·rea de otimizaÁ„o combinatÛria, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
+Por esta raz√£o, aten√ß√£o especial tem sido dada a solu√ß√£o autom√°tica de tabela-hor√°rio. Nos √∫ltimos cinquenta anos, come√ßando com \cite{gotlieb62}, este problema ganhou grande destaque na √°rea de otimiza√ß√£o combinat√≥ria, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
 
-%\section{MotivaÁ„o para o problema}
+%\section{Motiva√ß√£o para o problema}
 
-O problema de tabela-hor·rio est· entre os mais difÌceis da ·rea de otimizaÁ„o combinatÛria. Sua dificuldade aumenta ‡ medida em que s„o adicionadas restriÁıes. Em \cite{Schaerf95asurvey} pode ser visto que ele È classificado como NP-completo para a maioria das formulaÁıes. Assim, a soluÁ„o exata sÛ pode ser garantida para inst‚ncias bem pequenas, que n„o correspondem ‡s inst‚ncias reais da maioria das instituiÁıes de ensino.
+O problema de tabela-hor√°rio est√° entre os mais dif√≠ceis da √°rea de otimiza√ß√£o combinat√≥ria. Sua dificuldade aumenta √† medida em que s√£o adicionadas restri√ß√µes. Em \cite{Schaerf95asurvey} pode ser visto que ele √© classificado como NP-completo para a maioria das formula√ß√µes. Assim, a solu√ß√£o exata s√≥ pode ser garantida para inst√¢ncias bem pequenas, que n√£o correspondem √†s inst√¢ncias reais da maioria das institui√ß√µes de ensino.
 
-Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam soluÁıes satisfatÛrias para o problema em um tempo vi·vel, independente do tamanho da inst‚ncia. Devido ‡ complexidade do problema, mÈtodos exaustivos s„o descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurÌsticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo GenÈtico \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}. Dentre as meta-heurÌsticas j· aplicadas ao problema, existe um esforÁo para encontrar melhorias e conseguir melhores resultados.
+Existe uma necessidade de propor algoritmos cada vez mais eficientes que produzam solu√ß√µes satisfat√≥rias para o problema em um tempo vi√°vel, independente do tamanho da inst√¢ncia. Devido √† complexidade do problema, m√©todos exaustivos s√£o descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heur√≠sticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Gen√©tico \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}. Dentre as meta-heur√≠sticas j√° aplicadas ao problema, existe um esfor√ßo para encontrar melhorias e conseguir melhores resultados.
 
-Algumas meta-heurÌsticas ainda n„o foram aplicadas ao problema, mas tem se mostrado eficientes em outros problemas de otimizaÁ„o combinatÛria. Uma delas È o GRASP, que j· foi aplicado no problema de satisfabilidade \cite{ResFeo96a}, conjunto independente m·ximo \cite{FeoResSmi94}, cobertura de conjuntos \cite{Pessoa2012}, entre outros, mas em se tratando de tabela-hor·rio sÛ h· trabalhos publicados para o caso de escolas prim·rias e secund·rias. Deseja-se investigar a sua eficiÍncia no caso especÌfico de universidades.
+Algumas meta-heur√≠sticas ainda n√£o foram aplicadas ao problema, mas tem se mostrado eficientes em outros problemas de otimiza√ß√£o combinat√≥ria. Uma delas √© o GRASP, que j√° foi aplicado no problema de satisfabilidade \cite{ResFeo96a}, conjunto independente m√°ximo \cite{FeoResSmi94}, cobertura de conjuntos \cite{Pessoa2012}, entre outros, mas em se tratando de tabela-hor√°rio s√≥ h√° trabalhos publicados para o caso de escolas prim√°rias e secund√°rias. Deseja-se investigar a sua efici√™ncia no caso espec√≠fico de universidades.
 
 \section{Objetivos deste trabalho}
 
-O objetivo principal deste trabalho È resolver o problema de tabela-hor·rio de universidades usando a meta-heurÌstica GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulaÁıes para o problema, escolhemos a proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}  pois tem sido bastante utilizada na ·rea. A raz„o principal desta escolha È facilitar a comparaÁ„o dos resultados com outros algoritmos propostos na literatura.
+O objetivo principal deste trabalho √© resolver o problema de tabela-hor√°rio de universidades usando a meta-heur√≠stica GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formula√ß√µes para o problema, escolhemos a proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}  pois tem sido bastante utilizada na √°rea. A raz√£o principal desta escolha √© facilitar a compara√ß√£o dos resultados com outros algoritmos propostos na literatura.
 
-Para atingir este objetivo foi necess·rio estudar a formulaÁ„o do ITC-2007 e propor uma implementaÁ„o eficiente dos dados. AlÈm de aplicar o GRASP com construÁ„o de uma soluÁ„o inicial e refinamento com busca local, ser· implementada mais uma etapa de melhoramento com a tÈcnica \textit{Path-Relinking}. Todas estas etapas do algoritmo ser„o detalhadas na seÁ„o \ref{sec:estrutura_grasp}.
+Para atingir este objetivo foi necess√°rio estudar a formula√ß√£o do ITC-2007 e propor uma implementa√ß√£o eficiente dos dados. Al√©m de aplicar o GRASP com constru√ß√£o de uma solu√ß√£o inicial e refinamento com busca local, ser√° implementada mais uma etapa de melhoramento com a t√©cnica \textit{Path-Relinking}. Todas estas etapas do algoritmo ser√£o detalhadas na se√ß√£o \ref{sec:estrutura_grasp}.
 
-O ITC-2007 estimulou um maior debate entre a comunidade que pesquisa tabela-hor·rio e muitas tÈcnicas de resoluÁ„o tem sido desenvolvidas e/ou aprimoradas graÁas a este campeonato. Outra grande contribuiÁ„o È a disponibilizaÁ„o de inst‚ncias bem prÛximas ‡ realidade das universidades.
+O ITC-2007 estimulou um maior debate entre a comunidade que pesquisa tabela-hor√°rio e muitas t√©cnicas de resolu√ß√£o tem sido desenvolvidas e/ou aprimoradas gra√ßas a este campeonato. Outra grande contribui√ß√£o √© a disponibiliza√ß√£o de inst√¢ncias bem pr√≥ximas √† realidade das universidades.
 
-Vale ressaltar que o ITC-2007 dividiu o campeonato em trÍs formulaÁıes, sendo que os competidores podiam concorrer independentemente em cada uma delas. Cada formulaÁ„o especÌfica tem seu prÛprio conjunto de inst‚ncias. A primeira formulaÁ„o È especÌfica para aplicaÁ„o de exames finais. A segunda  e terceira formulaÁ„o tratam a alocaÁ„o semanal das aulas de uma universidade. A diferenÁa b·sica È que a segunda formulaÁ„o, chamada de \textit{post enrolment} (pÛs matrÌcula) trata o problema considerando os dados de matrÌcula dos alunos, enquanto que na terceira as informaÁıes levam em conta os currÌculos que compıem a universidade. CurrÌculos s„o definidos como grupos de disciplinas que tÍm alunos em comum e n„o devem ser alocadas no mesmo hor·rio.
+Vale ressaltar que o ITC-2007 dividiu o campeonato em tr√™s formula√ß√µes, sendo que os competidores podiam concorrer independentemente em cada uma delas. Cada formula√ß√£o espec√≠fica tem seu pr√≥prio conjunto de inst√¢ncias. A primeira formula√ß√£o √© espec√≠fica para aplica√ß√£o de exames finais. A segunda  e terceira formula√ß√£o tratam a aloca√ß√£o semanal das aulas de uma universidade. A diferen√ßa b√°sica √© que a segunda formula√ß√£o, chamada de \textit{post enrolment} (p√≥s matr√≠cula) trata o problema considerando os dados de matr√≠cula dos alunos, enquanto que na terceira as informa√ß√µes levam em conta os curr√≠culos que comp√µem a universidade. Curr√≠culos s√£o definidos como grupos de disciplinas que t√™m alunos em comum e n√£o devem ser alocadas no mesmo hor√°rio.
 
-Na terceira formulaÁ„o os conflitos de hor·rios entre as disciplinas s„o estabelecidos pela composiÁ„o dos currÌculos, logo, disciplinas do mesmo currÌculo n„o podem ser alocadas no mesmo hor·rio. Por outro lado, na segunda formulaÁ„o os conflitos s„o estabelecidos pelas matrÌculas dos alunos. Desta forma, aulas de disciplinas que um mesmo aluno matriculou n„o podem ser alocadas no mesmo hor·rio.
+Na terceira formula√ß√£o os conflitos de hor√°rios entre as disciplinas s√£o estabelecidos pela composi√ß√£o dos curr√≠culos, logo, disciplinas do mesmo curr√≠culo n√£o podem ser alocadas no mesmo hor√°rio. Por outro lado, na segunda formula√ß√£o os conflitos s√£o estabelecidos pelas matr√≠culas dos alunos. Desta forma, aulas de disciplinas que um mesmo aluno matriculou n√£o podem ser alocadas no mesmo hor√°rio.
 
-Adotamos neste trabalho a terceira formulaÁ„o por ser considerada, dentre as trÍs, a mais prÛxima do que acontece na pr·tica nas universidades brasileiras. Esta formulaÁ„o ser· explicada em detalhes no capÌtulo \ref{cap:proposta-trabalho}.
+Adotamos neste trabalho a terceira formula√ß√£o por ser considerada, dentre as tr√™s, a mais pr√≥xima do que acontece na pr√°tica nas universidades brasileiras. Esta formula√ß√£o ser√° explicada em detalhes no cap√≠tulo \ref{cap:proposta-trabalho}.
 
-Durante o desenvolvimento da pesquisa foi lanÁada a terceira ediÁ„o do campeonato, o ITC-2011. Esta ediÁ„o trouxe uma formulaÁ„o mais voltada para escolas, conhecida internacionalmente como \textit{high school}. Como um dos nossos objetivos iniciais era resolver o problema para universidades, decidimos continuar trabalhando com o ITC-2007.
-
-
-\section{OrganizaÁ„o do texto}
-
-No capÌtulo \ref{cap:estado-da-arte} È apresentada uma revis„o bibliogr·fica listando as principais tÈcnicas de soluÁ„o do problema. No capÌtulo \ref{cap:proposta-trabalho} È apresentada a formulaÁ„o do problema segundo o ITC-2007. O algoritmo GRASP e sua aplicaÁ„o no problema s„o descritos no capÌtulo \ref{cap:grasp}. No capÌtulo \ref{cap:resultados} s„o apresentados detalhes de implementaÁ„o, inst‚ncias de testes e os resultados obtidos. No capÌtulo \ref{cap:conclusao} s„o listadas as conclusıes obtidas no trabalho e enumerados alguns trabalhos futuros.
+Durante o desenvolvimento da pesquisa foi lan√ßada a terceira edi√ß√£o do campeonato, o ITC-2011. Esta edi√ß√£o trouxe uma formula√ß√£o mais voltada para escolas, conhecida internacionalmente como \textit{high school}. Como um dos nossos objetivos iniciais era resolver o problema para universidades, decidimos continuar trabalhando com o ITC-2007.
 
 
-\chapter{Revis„o Bibliogr·fica\label{cap:estado-da-arte}}
+\section{Organiza√ß√£o do texto}
+
+No cap√≠tulo \ref{cap:estado-da-arte} √© apresentada uma revis√£o bibliogr√°fica listando as principais t√©cnicas de solu√ß√£o do problema. No cap√≠tulo \ref{cap:proposta-trabalho} √© apresentada a formula√ß√£o do problema segundo o ITC-2007. O algoritmo GRASP e sua aplica√ß√£o no problema s√£o descritos no cap√≠tulo \ref{cap:grasp}. No cap√≠tulo \ref{cap:resultados} s√£o apresentados detalhes de implementa√ß√£o, inst√¢ncias de testes e os resultados obtidos. No cap√≠tulo \ref{cap:conclusao} s√£o listadas as conclus√µes obtidas no trabalho e enumerados alguns trabalhos futuros.
+
+
+\chapter{Revis√£o Bibliogr√°fica\label{cap:estado-da-arte}}
 
 %\vfill{}
-%\begin{flushright}{}``\emph{Navegar È preciso, viver n„o.}''\\
-%{\small LuÌs de Camıes}\end{flushright}{\small \par}
+%\begin{flushright}{}``\emph{Navegar √© preciso, viver n√£o.}''\\
+%{\small Lu√≠s de Cam√µes}\end{flushright}{\small \par}
 %\vfill{}
 
-%Neste capÌtulo s„o apresentados alguns conceitos b·sicos e uma revis„o bibliogr·fica.
+%Neste cap√≠tulo s√£o apresentados alguns conceitos b√°sicos e uma revis√£o bibliogr√°fica.
 %\newpage
 
-%\section{IntroduÁ„o}
+%\section{Introdu√ß√£o}
 
-O problema de tabela-hor·rio (\textit{Timetabling}) deriva do problema de escalonamento (\textit{scheduling}) e foi definido por \cite{wren} como a alocaÁ„o, submetida a restriÁıes, de determinados recursos a eventos colocados em um n˙mero limitado de perÌodos de tempo e locais, de forma a satisfazer tanto quanto possÌvel um conjunto de objetivos estabelecidos.
+O problema de tabela-hor√°rio (\textit{Timetabling}) deriva do problema de escalonamento (\textit{scheduling}) e foi definido por \cite{wren} como a aloca√ß√£o, submetida a restri√ß√µes, de determinados recursos a eventos colocados em um n√∫mero limitado de per√≠odos de tempo e locais, de forma a satisfazer tanto quanto poss√≠vel um conjunto de objetivos estabelecidos.
 
-O problema de tabela-hor·rio pode ser aplicado a diversos tipos de situaÁıes, entre os quais inclui-se:
+O problema de tabela-hor√°rio pode ser aplicado a diversos tipos de situa√ß√µes, entre os quais inclui-se:
 
 \begin{itemize}
 
-\item Escalas de Trabalhadores (\textit{Employee Timetabling}): trata da alocaÁ„o de
-trabalhadores de uma empresa ‡s suas tarefas em um conjunto de turnos de
-trabalho dentro de um perÌodo fixo de tempo, geralmente semanal,
-respeitando determinadas regras (restriÁıes) pessoais e do trabalho. Em
+\item Escalas de Trabalhadores (\textit{Employee Timetabling}): trata da aloca√ß√£o de
+trabalhadores de uma empresa √†s suas tarefas em um conjunto de turnos de
+trabalho dentro de um per√≠odo fixo de tempo, geralmente semanal,
+respeitando determinadas regras (restri√ß√µes) pessoais e do trabalho. Em
 \cite{nurse_rostering} e \cite{chiarandini} podem ser vistas abordagens deste problema;
 
-\item Escalas de Condutores de VeÌculos de Transporte (\textit{Transportation Timetabling}):
-Segundo \cite{laplagnetime} este problema determina a composiÁ„o de um conjunto de turnos de condutores
-de veÌculos para a operaÁ„o de transporte di·rio, assegurando a cobertura
+\item Escalas de Condutores de Ve√≠culos de Transporte (\textit{Transportation Timetabling}):
+Segundo \cite{laplagnetime} este problema determina a composi√ß√£o de um conjunto de turnos de condutores
+de ve√≠culos para a opera√ß√£o de transporte di√°rio, assegurando a cobertura
 requerida e minimizando os custos operacionais;
 
-\item Escalas de Jogos de CompetiÁıes Esportivas (\textit{Sports Timetabling}): consiste na
-programaÁ„o de uma tabela de jogos de competiÁıes esportivas, satisfazendo
-aos requisitos da competiÁ„o e minimizando os custos, por exemplo, custo de viagens das equipes. \cite{nurmi2010framework, Ribeiro:2012:SBS:2340795.2340799} s„o exemplos deste tipo de abordagem;
+\item Escalas de Jogos de Competi√ß√µes Esportivas (\textit{Sports Timetabling}): consiste na
+programa√ß√£o de uma tabela de jogos de competi√ß√µes esportivas, satisfazendo
+aos requisitos da competi√ß√£o e minimizando os custos, por exemplo, custo de viagens das equipes. \cite{nurmi2010framework, Ribeiro:2012:SBS:2340795.2340799} s√£o exemplos deste tipo de abordagem;
 
-\item Educacional (\textit{Educational Timetabling}): aborda a geraÁ„o de tabela-hor·rio para
-instituiÁıes de ensino, que È o foco do estudo deste trabalho. Dos diversos
-tipos de problemas de tabela-hor·rio, o educacional È um
-dos mais amplamente estudados. Este problema È analisado mais
+\item Educacional (\textit{Educational Timetabling}): aborda a gera√ß√£o de tabela-hor√°rio para
+institui√ß√µes de ensino, que √© o foco do estudo deste trabalho. Dos diversos
+tipos de problemas de tabela-hor√°rio, o educacional √© um
+dos mais amplamente estudados. Este problema √© analisado mais
 detalhadamente a seguir.
 
 \end{itemize}
 
-O problema de tabela-hor·rio n„o possui uma formulaÁ„o ˙nica. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restriÁıes do problema serem especÌficas a cada instituiÁ„o de ensino.
+O problema de tabela-hor√°rio n√£o possui uma formula√ß√£o √∫nica. Como pode ser visto em \cite{Schaerf95asurvey}, ao longo do tempo surgiram diversas modelagens. Essa variedade surgiu pelo fato das restri√ß√µes do problema serem espec√≠ficas a cada institui√ß√£o de ensino.
 
-Algumas coleÁıes de inst‚ncias, os \textit{benchmarks}, foram criadas. As disponÌveis pelo campeonato ITC (versıes 2002, 2007 e 2011) \cite{itc2007} s„o bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, os dois para tabela-hor·rio de exames.
+Algumas cole√ß√µes de inst√¢ncias, os \textit{benchmarks}, foram criadas. As dispon√≠veis pelo campeonato ITC (vers√µes 2002, 2007 e 2011) \cite{itc2007} s√£o bastante utilizadas. Mas existem algumas outras, como o da Universidade de Toronto \cite{toronto_exames} e o da Universidade de Nottingham \cite{Burke96examinationtimetabling}, os dois para tabela-hor√°rio de exames.
 
-Apesar das diferentes formulaÁıes, os problemas de tabela-hor·rio possuem uma caracterÌstica em comum: a separaÁ„o das restriÁıes em dois grupos, considerados como restriÁıes fortes e fracas.
+Apesar das diferentes formula√ß√µes, os problemas de tabela-hor√°rio possuem uma caracter√≠stica em comum: a separa√ß√£o das restri√ß√µes em dois grupos, considerados como restri√ß√µes fortes e fracas.
 
-As restriÁıes fortes s„o aquelas que n„o podem ser violadas. Elas restringem o conjunto de soluÁıes para impedir certas situaÁıes irreais, como por exemplo, alunos assistindo mais de uma aula no mesmo hor·rio ou uma sala sendo alocada para mais de uma aula no mesmo hor·rio. Se uma tabela-hor·rio n„o viola nenhuma restriÁ„o forte ela È dita ser uma soluÁ„o vi·vel.
+As restri√ß√µes fortes s√£o aquelas que n√£o podem ser violadas. Elas restringem o conjunto de solu√ß√µes para impedir certas situa√ß√µes irreais, como por exemplo, alunos assistindo mais de uma aula no mesmo hor√°rio ou uma sala sendo alocada para mais de uma aula no mesmo hor√°rio. Se uma tabela-hor√°rio n√£o viola nenhuma restri√ß√£o forte ela √© dita ser uma solu√ß√£o vi√°vel.
 
-As restriÁıes fracas s„o aquelas que n„o interferem na viabilidade da soluÁ„o, mas refletem certas preferÍncias das instituiÁıes. … desej·vel, por exemplo, que um aluno n„o tenha aulas isoladas durante o dia ou que aulas da mesma disciplina sejam lecionadas na mesma sala. As restriÁıes fracas podem possuir pesos diferentes para refletir sua import‚ncia na qualidade da soluÁ„o.
+As restri√ß√µes fracas s√£o aquelas que n√£o interferem na viabilidade da solu√ß√£o, mas refletem certas prefer√™ncias das institui√ß√µes. √â desej√°vel, por exemplo, que um aluno n√£o tenha aulas isoladas durante o dia ou que aulas da mesma disciplina sejam lecionadas na mesma sala. As restri√ß√µes fracas podem possuir pesos diferentes para refletir sua import√¢ncia na qualidade da solu√ß√£o.
 
-O objetivo do problema È encontrar uma tabela-hor·rio vi·vel e que minimize a quantidade de violaÁıes fracas, portanto, um problema de minimizaÁ„o.
+O objetivo do problema √© encontrar uma tabela-hor√°rio vi√°vel e que minimize a quantidade de viola√ß√µes fracas, portanto, um problema de minimiza√ß√£o.
 
-\section{RestriÁıes abordadas no problema}
+\section{Restri√ß√µes abordadas no problema}
 
-As restriÁıes que s„o impostas ao problema de tabela-hor·rio geralmente se referem a limitaÁ„o do espaÁo fÌsico e de hor·rios, preferÍncias de alunos e professores, alÈm de certas exigÍncias das instituiÁıes de ensino. As mais comuns nas diferentes formulaÁıes s„o:
+As restri√ß√µes que s√£o impostas ao problema de tabela-hor√°rio geralmente se referem a limita√ß√£o do espa√ßo f√≠sico e de hor√°rios, prefer√™ncias de alunos e professores, al√©m de certas exig√™ncias das institui√ß√µes de ensino. As mais comuns nas diferentes formula√ß√µes s√£o:
 
 \begin{itemize}
-\item Professores n„o podem lecionar mais de uma aula no mesmo hor·rio;
-\item Alunos n„o podem assistir mais de uma aula no mesmo hor·rio;
+\item Professores n√£o podem lecionar mais de uma aula no mesmo hor√°rio;
+\item Alunos n√£o podem assistir mais de uma aula no mesmo hor√°rio;
 \item Todas as aulas da disciplina devem ser alocadas na semana;
 \item A capacidade das salas deve ser adequada para os alunos matriculados;
-\item As aulas n„o devem ser muito espalhadas durante o dia.
+\item As aulas n√£o devem ser muito espalhadas durante o dia.
 \end{itemize}
 
-Algumas restriÁıes s„o muito especÌficas e raramente aparecem na literatura. No trabalho de \cite{ConstantinoEtAl2010} a tabela-hor·rio limita o deslocamento de alunos entre os prÈdios do campus da universidade.
+Algumas restri√ß√µes s√£o muito espec√≠ficas e raramente aparecem na literatura. No trabalho de \cite{ConstantinoEtAl2010} a tabela-hor√°rio limita o deslocamento de alunos entre os pr√©dios do campus da universidade.
 
-H· certa variaÁ„o na forma como uma mesma restriÁ„o È aplicada. Exemplo tÌpico desta situaÁ„o È a restriÁ„o de capacidade das salas. Em \cite{ConstantinoEtAl2010} as disciplinas n„o podem ser alocadas em salas cuja capacidade seja inferior a quantidade de alunos, portanto, uma restriÁ„o forte. Mas na terceira formulaÁ„o do ITC-2007 essa mesma restriÁ„o È considerada fraca, ocorrendo uma penalizaÁ„o quando a quantidade de assentos È inferior a quantidade de alunos. Existem trabalhos, como em \cite{Shiau:2011:HPS:1860128.1860157}, que esta restriÁ„o n„o È nem considerada.
+H√° certa varia√ß√£o na forma como uma mesma restri√ß√£o √© aplicada. Exemplo t√≠pico desta situa√ß√£o √© a restri√ß√£o de capacidade das salas. Em \cite{ConstantinoEtAl2010} as disciplinas n√£o podem ser alocadas em salas cuja capacidade seja inferior a quantidade de alunos, portanto, uma restri√ß√£o forte. Mas na terceira formula√ß√£o do ITC-2007 essa mesma restri√ß√£o √© considerada fraca, ocorrendo uma penaliza√ß√£o quando a quantidade de assentos √© inferior a quantidade de alunos. Existem trabalhos, como em \cite{Shiau:2011:HPS:1860128.1860157}, que esta restri√ß√£o n√£o √© nem considerada.
 
-\section{ClassificaÁ„o do problema de tabela-hor·rio educacional}
+\section{Classifica√ß√£o do problema de tabela-hor√°rio educacional}
 
-As diversas formulaÁıes do problema apresentadas na literatura variam devido ‡ instituiÁ„o envolvida (escola ou universidade) e tambÈm pelo conjunto de restriÁıes que s„o abordadas. Contudo, todas as formulaÁıes podem ser classificadas em uma das trÍs classes principais \cite{Schaerf95asurvey}:
+As diversas formula√ß√µes do problema apresentadas na literatura variam devido √† institui√ß√£o envolvida (escola ou universidade) e tamb√©m pelo conjunto de restri√ß√µes que s√£o abordadas. Contudo, todas as formula√ß√µes podem ser classificadas em uma das tr√™s classes principais \cite{Schaerf95asurvey}:
 
 \begin{itemize}
 
-\item \textbf{Tabela-hor·rio de Escola} ProgramaÁ„o semanal para as turmas da escola, evitando que professores lecionem para duas turmas ao mesmo tempo ou que turmas assistam mais de uma aula no mesmo hor·rio.
+\item \textbf{Tabela-hor√°rio de Escola} Programa√ß√£o semanal para as turmas da escola, evitando que professores lecionem para duas turmas ao mesmo tempo ou que turmas assistam mais de uma aula no mesmo hor√°rio.
 
-\item \textbf{Tabela-hor·rio de Universidade} ProgramaÁ„o semanal das aulas das disciplinas universit·rias, minimizando a sobreposiÁ„o de aulas que tenham alunos em comum.
+\item \textbf{Tabela-hor√°rio de Universidade} Programa√ß√£o semanal das aulas das disciplinas universit√°rias, minimizando a sobreposi√ß√£o de aulas que tenham alunos em comum.
 
-\item \textbf{Tabela-hor·rio de Exames} ProgramaÁ„o para aplicaÁ„o dos exames das disciplinas, evitando sobreposiÁ„o de exames das disciplinas que tenham alunos em comum, procurando alocar os dias dos exames dos alunos com o maior intervalo possÌvel. 
+\item \textbf{Tabela-hor√°rio de Exames} Programa√ß√£o para aplica√ß√£o dos exames das disciplinas, evitando sobreposi√ß√£o de exames das disciplinas que tenham alunos em comum, procurando alocar os dias dos exames dos alunos com o maior intervalo poss√≠vel. 
 
 \end{itemize}
 
-A tabela-hor·rio de exames È usada somente nos finais de bimestre, trimestre ou semestre, enquanto as duas primeiras s„o soluÁıes que devem ser usadas durante todo o perÌodo letivo. A diferenÁa principal do problema no ‚mbito de escolas e universidades È que no segundo n„o h· o conceito de turma, j· que cada aluno escolhe o conjunto de disciplinas que ir· cursar. Nas escolas (prim·rias e secund·rias) todos alunos matriculados numa turma cursam as mesmas disciplinas.
+A tabela-hor√°rio de exames √© usada somente nos finais de bimestre, trimestre ou semestre, enquanto as duas primeiras s√£o solu√ß√µes que devem ser usadas durante todo o per√≠odo letivo. A diferen√ßa principal do problema no √¢mbito de escolas e universidades √© que no segundo n√£o h√° o conceito de turma, j√° que cada aluno escolhe o conjunto de disciplinas que ir√° cursar. Nas escolas (prim√°rias e secund√°rias) todos alunos matriculados numa turma cursam as mesmas disciplinas.
 
-\section{Abordagens de soluÁ„o existentes\label{sec:abordagens}}
+\section{Abordagens de solu√ß√£o existentes\label{sec:abordagens}}
 
-As tÈcnicas usadas para resolver o problema de tabela-hor·rio s„o bastante diversificadas. As mais antigas, as heurÌsticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma atÈ finalizar a construÁ„o da tabela. Conflitos eram resolvidos realizando trocas de aulas.
+As t√©cnicas usadas para resolver o problema de tabela-hor√°rio s√£o bastante diversificadas. As mais antigas, as heur√≠sticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma at√© finalizar a constru√ß√£o da tabela. Conflitos eram resolvidos realizando trocas de aulas.
 
-\cite{Neufeld} propuseram uma reduÁ„o do problema ao problema de coloraÁ„o de grafos. As aulas s„o representadas como vÈrtices do grafo. Arestas conectam aulas que n„o podem ser alocadas no mesmo hor·rio. A coloraÁ„o do grafo resultante È ent„o transformada na tabela-hor·rio: cada cor representa um hor·rio de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Numa abordagem semelhante, \cite{Galinier20062547} propuseram o algoritmo \textit{Tabucol} (Busca Tabu para resolver coloraÁ„o de grafos), que posteriormente tambÈm foi usado por \cite{geraldo_bello}.
+\cite{Neufeld} propuseram uma redu√ß√£o do problema ao problema de colora√ß√£o de grafos. As aulas s√£o representadas como v√©rtices do grafo. Arestas conectam aulas que n√£o podem ser alocadas no mesmo hor√°rio. A colora√ß√£o do grafo resultante √© ent√£o transformada na tabela-hor√°rio: cada cor representa um hor√°rio de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Numa abordagem semelhante, \cite{Galinier20062547} propuseram o algoritmo \textit{Tabucol} (Busca Tabu para resolver colora√ß√£o de grafos), que posteriormente tamb√©m foi usado por \cite{geraldo_bello}.
 
-\cite{deWerra82} reduziram o problema de tabela-hor·rio ao problema de fluxo de redes. As aulas s„o representadas pelos vÈrtices. Uma rede È criada para cada hor·rio e o fluxo na rede identifica as aulas que s„o lecionadas no mesmo hor·rio. Posteriormente, \cite{deWerra85} usou uma idÈia similar, mas cada fluxo representa uma classe e os vÈrtices s„o hor·rios e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
+\cite{deWerra82} reduziram o problema de tabela-hor√°rio ao problema de fluxo de redes. As aulas s√£o representadas pelos v√©rtices. Uma rede √© criada para cada hor√°rio e o fluxo na rede identifica as aulas que s√£o lecionadas no mesmo hor√°rio. Posteriormente, \cite{deWerra85} usou uma id√©ia similar, mas cada fluxo representa uma classe e os v√©rtices s√£o hor√°rios e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
 
-Mais recentemente, as tÈcnicas de soluÁ„o para o problema tÍm recaÌdo basicamente em trÍs grupos: programaÁ„o matem·tica, programaÁ„o em lÛgica e, principalmente, meta-heurÌsticas.
+Mais recentemente, as t√©cnicas de solu√ß√£o para o problema t√™m reca√≠do basicamente em tr√™s grupos: programa√ß√£o matem√°tica, programa√ß√£o em l√≥gica e, principalmente, meta-heur√≠sticas.
 
-Na ·rea de programaÁ„o matem·tica, bons resultados tÍm sido obtidos com programaÁ„o inteira. Em \cite{lach_lubbecke} pode ser vista uma formulaÁ„o completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluÁıes com respostas bem prÛximas ‡s melhores obtidas na competiÁ„o ITC-2007. Em \cite{Burke_abranch-andcut} È usado um procedimento conhecido na programaÁ„o linear como \textit{branch-and-cut}. O problema inicialmente È resolvido sem as restriÁıes de integralidade. Em seguida s„o usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execuÁ„o aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a soluÁ„o Ûtima para duas inst‚ncias da competiÁ„o. Esses dois trabalhos citados s„o de grande import‚ncia pois s„o capazes de fornecer limites inferiores para as quantidades de violaÁıes das restriÁıes fracas para cada inst‚ncia do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programaÁ„o inteira mais especÌfica para escolas brasileiras de ensino fundamental.
+Na √°rea de programa√ß√£o matem√°tica, bons resultados t√™m sido obtidos com programa√ß√£o inteira. Em \cite{lach_lubbecke} pode ser vista uma formula√ß√£o completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu solu√ß√µes com respostas bem pr√≥ximas √†s melhores obtidas na competi√ß√£o ITC-2007. Em \cite{Burke_abranch-andcut} √© usado um procedimento conhecido na programa√ß√£o linear como \textit{branch-and-cut}. O problema inicialmente √© resolvido sem as restri√ß√µes de integralidade. Em seguida s√£o usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execu√ß√£o aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solu√ß√£o √≥tima para duas inst√¢ncias da competi√ß√£o. Esses dois trabalhos citados s√£o de grande import√¢ncia pois s√£o capazes de fornecer limites inferiores para as quantidades de viola√ß√µes das restri√ß√µes fracas para cada inst√¢ncia do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programa√ß√£o inteira mais espec√≠fica para escolas brasileiras de ensino fundamental.
 
-Alguns resultados relevantes tambÈm tÍm sido encontrados com programaÁ„o em lÛgica. \cite{springerlink:10.1007/s10479-012-1081-x} apresentam uma formulaÁ„o usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas atÈ ent„o conhecidas para as inst‚ncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulaÁıes diferentes do ITC-2007, mas destacam como programaÁ„o em lÛgica combinada com programaÁ„o por restriÁıes podem implementar modelos bem flexÌveis, em que restriÁıes podem ser adicionadas, modificadas ou excluÌdas com pouca alteraÁ„o de cÛdigo-fonte.
+Alguns resultados relevantes tamb√©m t√™m sido encontrados com programa√ß√£o em l√≥gica. \cite{springerlink:10.1007/s10479-012-1081-x} apresentam uma formula√ß√£o usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas at√© ent√£o conhecidas para as inst√¢ncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formula√ß√µes diferentes do ITC-2007, mas destacam como programa√ß√£o em l√≥gica combinada com programa√ß√£o por restri√ß√µes podem implementar modelos bem flex√≠veis, em que restri√ß√µes podem ser adicionadas, modificadas ou exclu√≠das com pouca altera√ß√£o de c√≥digo-fonte.
 
-Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na ·rea tem usado meta-heurÌsticas, tanto pela simplicidade quanto pelos bons resultados alcanÁados. Uma meta-heurÌstica È um mÈtodo heurÌstico para resolver de forma genÈrica problemas de otimizaÁ„o. Ela È genÈrica porque n„o se atÈm a detalhes especÌficos do problema que est· sendo tratado, mas apenas especifica como o conjunto de soluÁıes ser· explorado em busca da melhor soluÁ„o. \textit{Simulated Annealing}, Algoritmo GenÈtico e Busca Tabu s„o as mais utilizadas pelos pesquisadores mas h· propostas com meta-heurÌsticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
+Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na √°rea tem usado meta-heur√≠sticas, tanto pela simplicidade quanto pelos bons resultados alcan√ßados. Uma meta-heur√≠stica √© um m√©todo heur√≠stico para resolver de forma gen√©rica problemas de otimiza√ß√£o. Ela √© gen√©rica porque n√£o se at√©m a detalhes espec√≠ficos do problema que est√° sendo tratado, mas apenas especifica como o conjunto de solu√ß√µes ser√° explorado em busca da melhor solu√ß√£o. \textit{Simulated Annealing}, Algoritmo Gen√©tico e Busca Tabu s√£o as mais utilizadas pelos pesquisadores mas h√° propostas com meta-heur√≠sticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
 
-Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configuraÁıes possÌveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa soluÁ„o inicial. \cite{CDGS11b} usam \textit{Simulated Annealing} para resolver a segunda formulaÁ„o do ITC-2007. Os autores conseguiram boas respostas para as inst‚ncias, e em alguns casos, foram obtidas soluÁıes melhores que as conhecidas no momento da comparaÁ„o.
+Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configura√ß√µes poss√≠veis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solu√ß√£o inicial. \cite{CDGS11b} usam \textit{Simulated Annealing} para resolver a segunda formula√ß√£o do ITC-2007. Os autores conseguiram boas respostas para as inst√¢ncias, e em alguns casos, foram obtidas solu√ß√µes melhores que as conhecidas no momento da compara√ß√£o.
 
-Algoritmos GenÈticos tambÈm foram propostos para o problema, onde o cromossomo representa a tabela-hor·rio e cada posiÁ„o da tabela corresponde a um gene. Em seguida s„o definidas as operaÁıes genÈticas de seleÁ„o, cruzamento e mutaÁ„o, que visam gerar indivÌduos cada vez melhores. Um indivÌduo com bom valor \textit{fitness} representa uma tabela-hor·rio bem avaliada de acordo com a funÁ„o objetivo associada ao problema. \cite{Erben95agenetic} aplicaram esta tÈcnica para tratar o problema de tabela-hor·rio de universidades com muitas restriÁıes, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, tambÈm para universidades, em que se utiliza uma base de conhecimento para gerar a populaÁ„o inicial. Essa base de conhecimento È formada com informaÁıes de tabelas-hor·rio de anos anteriores. \cite{massoodian2008} propuseram um algoritmo genÈtico hÌbrido para resolver a terceira formulaÁ„o do ITC-2007. O algoritmo foi considerado hÌbrido pois, alÈm de aplicar os operadores genÈticos, uma busca local foi utilizada nos melhores indivÌduos ao final de cada geraÁ„o.
+Algoritmos Gen√©ticos tamb√©m foram propostos para o problema, onde o cromossomo representa a tabela-hor√°rio e cada posi√ß√£o da tabela corresponde a um gene. Em seguida s√£o definidas as opera√ß√µes gen√©ticas de sele√ß√£o, cruzamento e muta√ß√£o, que visam gerar indiv√≠duos cada vez melhores. Um indiv√≠duo com bom valor \textit{fitness} representa uma tabela-hor√°rio bem avaliada de acordo com a fun√ß√£o objetivo associada ao problema. \cite{Erben95agenetic} aplicaram esta t√©cnica para tratar o problema de tabela-hor√°rio de universidades com muitas restri√ß√µes, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, tamb√©m para universidades, em que se utiliza uma base de conhecimento para gerar a popula√ß√£o inicial. Essa base de conhecimento √© formada com informa√ß√µes de tabelas-hor√°rio de anos anteriores. \cite{massoodian2008} propuseram um algoritmo gen√©tico h√≠brido para resolver a terceira formula√ß√£o do ITC-2007. O algoritmo foi considerado h√≠brido pois, al√©m de aplicar os operadores gen√©ticos, uma busca local foi utilizada nos melhores indiv√≠duos ao final de cada gera√ß√£o.
 
-AlÈm das meta-heurÌsticas acima citadas, a Busca Tabu tambÈm tem sido aplicada com sucesso. Em \cite{elloumi2008} È apresentado um algoritmo para resolver o problema de tabela-hor·rio de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicaram a tÈcnica no ‚mbito de escolas prim·rias de Minas Gerais e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu È aplicada como fase de busca local do GRASP, numa implementaÁ„o tambÈm voltada para escolas.
+Al√©m das meta-heur√≠sticas acima citadas, a Busca Tabu tamb√©m tem sido aplicada com sucesso. Em \cite{elloumi2008} √© apresentado um algoritmo para resolver o problema de tabela-hor√°rio de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicaram a t√©cnica no √¢mbito de escolas prim√°rias de Minas Gerais e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu √© aplicada como fase de busca local do GRASP, numa implementa√ß√£o tamb√©m voltada para escolas.
 
-As diversas restriÁıes fortes e fracas fazem com que o problema de tabela-hor·rio seja de difÌcil otimizaÁ„o. Por isso alguns autores tÍm proposto tÈcnicas hÌbridas, em que s„o usadas mais de uma meta-heurÌstica ou aplicadas de forma diferente, explorando o que elas tÍm de melhor. Exemplos deste tipo de implementaÁ„o podem ser vistos em \cite{massoodian2008} em que o algoritmo genÈtico È combinado com um algoritmo de busca local para melhorar a qualidade das soluÁıes. Em \cite{3-phaseSA} h· um algoritmo para o ITC-2002 que constrÛi a tabela-hor·rio em trÍs etapas. Na primeira È usada um algoritmo de coloraÁ„o de grafos para se obter uma soluÁ„o inicial vi·vel. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhanÁa diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu È inserida na meta-heurÌstica GRASP para melhorar a fase de busca local. O algoritmo que obteve as melhores respostas para a terceira formulaÁ„o do ITC-2007 È descrito em \cite{muller} e possui quatro etapas: geraÁ„o da soluÁ„o inicial com coloraÁ„o de grafos e trÍs buscas locais sucessivas \textit{Hill Climbing}, \textit{Great Deluge} e \textit{Simulated Annealing}.
+As diversas restri√ß√µes fortes e fracas fazem com que o problema de tabela-hor√°rio seja de dif√≠cil otimiza√ß√£o. Por isso alguns autores t√™m proposto t√©cnicas h√≠bridas, em que s√£o usadas mais de uma meta-heur√≠stica ou aplicadas de forma diferente, explorando o que elas t√™m de melhor. Exemplos deste tipo de implementa√ß√£o podem ser vistos em \cite{massoodian2008} em que o algoritmo gen√©tico √© combinado com um algoritmo de busca local para melhorar a qualidade das solu√ß√µes. Em \cite{3-phaseSA} h√° um algoritmo para o ITC-2002 que constr√≥i a tabela-hor√°rio em tr√™s etapas. Na primeira √© usada um algoritmo de colora√ß√£o de grafos para se obter uma solu√ß√£o inicial vi√°vel. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhan√ßa diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu √© inserida na meta-heur√≠stica GRASP para melhorar a fase de busca local. O algoritmo que obteve as melhores respostas para a terceira formula√ß√£o do ITC-2007 √© descrito em \cite{muller} e possui quatro etapas: gera√ß√£o da solu√ß√£o inicial com colora√ß√£o de grafos e tr√™s buscas locais sucessivas \textit{Hill Climbing}, \textit{Great Deluge} e \textit{Simulated Annealing}.
 
 \section{Trabalhos relacionados}
 
-Podemos encontrar na literatura algumas propostas do GRASP para o problema de tabela-hor·rio de escolas, cujos trabalhos s„o citados a seguir.
+Podemos encontrar na literatura algumas propostas do GRASP para o problema de tabela-hor√°rio de escolas, cujos trabalhos s√£o citados a seguir.
 
-Em \cite{Souza:2004:GSA} o GRASP foi utilizado juntamente com a Busca Tabu. Uma soluÁ„o inicial È construÌda com um algoritmo parcialmente guloso e melhoras s„o feitas com Busca Tabu. Este algoritmo foi testado com dados reais de uma escola brasileira de ensino mÈdio. Apesar de n„o tratar o problema para universidades, este trabalho inspirou o uso de tÈcnicas mais eficientes na fase de busca local do GRASP.
+Em \cite{Souza:2004:GSA} o GRASP foi utilizado juntamente com a Busca Tabu. Uma solu√ß√£o inicial √© constru√≠da com um algoritmo parcialmente guloso e melhoras s√£o feitas com Busca Tabu. Este algoritmo foi testado com dados reais de uma escola brasileira de ensino m√©dio. Apesar de n√£o tratar o problema para universidades, este trabalho inspirou o uso de t√©cnicas mais eficientes na fase de busca local do GRASP.
 
-Em \cite{Vieira_agrasp} tambÈm È abordado o problema no contexto de uma escola brasileira. S„o implementadas duas versıes do GRASP. A primeira possui uma etapa de construÁ„o inicial e uma de refinamento da tabela-hor·rio com busca local. Na segunda implementaÁ„o È adicionada mais uma etapa de refinamento com \textit{Path-relinking}. Essas etapas do GRASP e as estratÈgias de refinamento ser„o melhor descritas no capÌtulo \ref{cap:proposta-trabalho}. O \textit{Path-relinking} tambÈm foi inserido no nosso trabalho pois ele tenta corrigir uma deficiÍncia do GRASP que È a falta de memorizaÁ„o entre suas iteraÁıes.
+Em \cite{Vieira_agrasp} tamb√©m √© abordado o problema no contexto de uma escola brasileira. S√£o implementadas duas vers√µes do GRASP. A primeira possui uma etapa de constru√ß√£o inicial e uma de refinamento da tabela-hor√°rio com busca local. Na segunda implementa√ß√£o √© adicionada mais uma etapa de refinamento com \textit{Path-relinking}. Essas etapas do GRASP e as estrat√©gias de refinamento ser√£o melhor descritas no cap√≠tulo \ref{cap:proposta-trabalho}. O \textit{Path-relinking} tamb√©m foi inserido no nosso trabalho pois ele tenta corrigir uma defici√™ncia do GRASP que √© a falta de memoriza√ß√£o entre suas itera√ß√µes.
 
-\cite{CDGS11b} propuseram um algoritmo promissor para a segunda formulaÁ„o do ITC-2007 usando \textit{Simulated Annealing}. Apesar de usarem uma formulaÁ„o diferente da que È abordada neste trabalho, podem ser vistas naquele estruturas de vizinhanÁa eficientes e adapt·veis para a terceira formulaÁ„o. AlÈm disso, a fase de busca local do \textit{Simulated Annealing} pode ser aproveitada como fase de busca local do GRASP.
+\cite{CDGS11b} propuseram um algoritmo promissor para a segunda formula√ß√£o do ITC-2007 usando \textit{Simulated Annealing}. Apesar de usarem uma formula√ß√£o diferente da que √© abordada neste trabalho, podem ser vistas naquele estruturas de vizinhan√ßa eficientes e adapt√°veis para a terceira formula√ß√£o. Al√©m disso, a fase de busca local do \textit{Simulated Annealing} pode ser aproveitada como fase de busca local do GRASP.
 
-Como foi visto na seÁ„o \ref{sec:abordagens}, muitos trabalhos foram propostos para resolver a formulaÁ„o adotada na competiÁ„o ITC-2007. Nenhum dos trabalhos conseguiu obter soluÁıes Ûtimas para todas as inst‚ncias, o que gera uma motivaÁ„o para continuar buscando novos resultados. Os melhores resultados obtidos atÈ hoje podem ser encontrados em \cite{muller,lu-hao,lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x}.
+Como foi visto na se√ß√£o \ref{sec:abordagens}, muitos trabalhos foram propostos para resolver a formula√ß√£o adotada na competi√ß√£o ITC-2007. Nenhum dos trabalhos conseguiu obter solu√ß√µes √≥timas para todas as inst√¢ncias, o que gera uma motiva√ß√£o para continuar buscando novos resultados. Os melhores resultados obtidos at√© hoje podem ser encontrados em \cite{muller,lu-hao,lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x}.
 
-\chapter{O problema de tabela-hor·rio para universidades segundo o ITC-2007\label{cap:proposta-trabalho}}
+\chapter{O problema de tabela-hor√°rio para universidades segundo o ITC-2007\label{cap:proposta-trabalho}}
 
 %\vfill{}
 %\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
 %{\small Lavousier}\end{flushright}{\small \par}
 %\vfill{}
 
-Neste capÌtulo È apresentada a formulaÁ„o matem·tica adotada. O ITC-2007 possui trÍs formulaÁıes, uma para tabela-hor·rio de exames e duas para tabela-hor·rio de universidades. Ser· utilizada e descrita neste capÌtulo a terceira formulaÁ„o por julgarmos ser a que mais se aproxima do contexto das universidades brasileiras.
+Neste cap√≠tulo √© apresentada a formula√ß√£o matem√°tica adotada. O ITC-2007 possui tr√™s formula√ß√µes, uma para tabela-hor√°rio de exames e duas para tabela-hor√°rio de universidades. Ser√° utilizada e descrita neste cap√≠tulo a terceira formula√ß√£o por julgarmos ser a que mais se aproxima do contexto das universidades brasileiras.
 
 %\newpage
 
-\section{FormulaÁ„o trÍs do ITC-2007\label{sec:formulacao}}
+\section{Formula√ß√£o tr√™s do ITC-2007\label{sec:formulacao}}
 
-%Nesta seÁ„o È apresentada a formulaÁ„o que foi utilizada neste trabalho, que È o \textit{track} 3 do ITC-2007.
+%Nesta se√ß√£o √© apresentada a formula√ß√£o que foi utilizada neste trabalho, que √© o \textit{track} 3 do ITC-2007.
 
-A formulaÁ„o trÍs do ITC-2007 È baseada em casos reais da Escola de Engenharia da Universidade de Udine na It·lia, mas se aplica em muitas outras universidade europÈias. Algumas simplificaÁıes foram feitas para o campeonato para manter certo grau de generalidade. Ela possui os seguintes par‚metros:
+A formula√ß√£o tr√™s do ITC-2007 √© baseada em casos reais da Escola de Engenharia da Universidade de Udine na It√°lia, mas se aplica em muitas outras universidade europ√©ias. Algumas simplifica√ß√µes foram feitas para o campeonato para manter certo grau de generalidade. Ela possui os seguintes par√¢metros:
 
 \begin{itemize}
 
-\item \textbf{Dias, Hor·rios e PerÌodos}: … dado o n˙mero de dias na semana em que h· aula (geralmente cinco ou seis). Um n˙mero fixo de perÌodos de aula, igual para todos os dias, È estabelecido. Um hor·rio È um par composto de um dia e um perÌodo. O total de hor·rios È obtido multiplicando a quantidade de dias pela quantidade de perÌodos no dia.
+\item \textbf{Dias, Hor√°rios e Per√≠odos}: √â dado o n√∫mero de dias na semana em que h√° aula (geralmente cinco ou seis). Um n√∫mero fixo de per√≠odos de aula, igual para todos os dias, √© estabelecido. Um hor√°rio √© um par composto de um dia e um per√≠odo. O total de hor√°rios √© obtido multiplicando a quantidade de dias pela quantidade de per√≠odos no dia.
 
-\item \textbf{Disciplinas e Professores}: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em perÌodos diferentes. … lecionada por um professor e assistida por um dado n˙mero de alunos. Um n˙mero mÌnimo de dias È determinado para a distribuiÁ„o de suas aulas na semana e È possÌvel que um professor lecione mais de uma disciplina.
+\item \textbf{Disciplinas e Professores}: Cada disciplina possui uma quantidade de aulas semanais que devem ser alocadas em per√≠odos diferentes. √â lecionada por um professor e assistida por um dado n√∫mero de alunos. Um n√∫mero m√≠nimo de dias √© determinado para a distribui√ß√£o de suas aulas na semana e √© poss√≠vel que um professor lecione mais de uma disciplina.
 
 \item \textbf{Salas}: Cada sala possui uma capacidade diferente de assentos.
 
-\item \textbf{CurrÌculo}: Um currÌculo È um grupo de disciplinas que possuem alunos em comum.
+\item \textbf{Curr√≠culo}: Um curr√≠culo √© um grupo de disciplinas que possuem alunos em comum.
 
-\item \textbf{Indisponibilidades}: Alguns perÌodos s„o indisponÌveis para determinadas disciplinas.
+\item \textbf{Indisponibilidades}: Alguns per√≠odos s√£o indispon√≠veis para determinadas disciplinas.
 
 \end{itemize}
 
-Uma soluÁ„o consiste na alocaÁ„o de cada aula em um hor·rio e uma sala. A partir dos par‚metros s„o estabelecidas as restriÁıes fortes e fracas. As fortes devem ser sempre respeitadas. Qualquer violaÁ„o de uma restriÁ„o forte gera uma tabela-hor·rio invi·vel, que na pr·tica n„o pode ser utilizada. Por outro lado as restriÁıes fracas devem ser satisfeitas o m·ximo possÌvel, e quanto menos violaÁıes, melhor È a tabela-hor·rio. As restriÁıes do problema s„o descritas a seguir:
+Uma solu√ß√£o consiste na aloca√ß√£o de cada aula em um hor√°rio e uma sala. A partir dos par√¢metros s√£o estabelecidas as restri√ß√µes fortes e fracas. As fortes devem ser sempre respeitadas. Qualquer viola√ß√£o de uma restri√ß√£o forte gera uma tabela-hor√°rio invi√°vel, que na pr√°tica n√£o pode ser utilizada. Por outro lado as restri√ß√µes fracas devem ser satisfeitas o m√°ximo poss√≠vel, e quanto menos viola√ß√µes, melhor √© a tabela-hor√°rio. As restri√ß√µes do problema s√£o descritas a seguir:
 
-\subsection{RestriÁıes Fortes (RFt)}
+\subsection{Restri√ß√µes Fortes (RFt)}
 
 \begin{itemize}
 
-\item \textbf{Aulas}: Todas as aulas das disciplinas devem ser alocadas e em perÌodos diferentes. Uma violaÁ„o ocorre se uma aula n„o È alocada. (RFt1)
+\item \textbf{Aulas}: Todas as aulas das disciplinas devem ser alocadas e em per√≠odos diferentes. Uma viola√ß√£o ocorre se uma aula n√£o √© alocada. (RFt1)
 
-\item \textbf{Conflitos}: Aulas de disciplinas do mesmo currÌculo ou lecionadas pelo mesmo professor devem ser alocadas em perÌodos diferentes. (RFt2)
+\item \textbf{Conflitos}: Aulas de disciplinas do mesmo curr√≠culo ou lecionadas pelo mesmo professor devem ser alocadas em per√≠odos diferentes. (RFt2)
 
-\item \textbf{OcupaÁ„o de Sala}: Duas aulas n„o podem ocupar uma sala no mesmo hor·rio. (RFt3)
+\item \textbf{Ocupa√ß√£o de Sala}: Duas aulas n√£o podem ocupar uma sala no mesmo hor√°rio. (RFt3)
 
-\item \textbf{Disponibilidade}: Uma aula n„o pode ser alocada num hor·rio em que a disciplina È indisponÌvel. (RFt4)
+\item \textbf{Disponibilidade}: Uma aula n√£o pode ser alocada num hor√°rio em que a disciplina √© indispon√≠vel. (RFt4)
 
 \end{itemize}
 
-\subsection{RestriÁıes Fracas (RFc)}
+\subsection{Restri√ß√µes Fracas (RFc)}
 
 \begin{itemize}
 
-\item \textbf{Dias MÌnimos de Trabalho}: As aulas de cada disciplina devem ser espalhadas por uma quantidade mÌnima de dias. Cada dia abaixo do mÌnimo È contado como uma violaÁ„o. (RFc1)
+\item \textbf{Dias M√≠nimos de Trabalho}: As aulas de cada disciplina devem ser espalhadas por uma quantidade m√≠nima de dias. Cada dia abaixo do m√≠nimo √© contado como uma viola√ß√£o. (RFc1)
 
-\item \textbf{Aulas Isoladas}: Aulas do mesmo currÌculo devem ser alocadas em perÌodos adjacentes. Cada aula isolada È contada como uma violaÁ„o. (RFc2)
+\item \textbf{Aulas Isoladas}: Aulas do mesmo curr√≠culo devem ser alocadas em per√≠odos adjacentes. Cada aula isolada √© contada como uma viola√ß√£o. (RFc2)
 
-\item \textbf{Capacidade da Sala}: O n˙mero de alunos da disciplina deve ser menor ou igual ao n˙mero de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma violaÁ„o. (RFc3)
+\item \textbf{Capacidade da Sala}: O n√∫mero de alunos da disciplina deve ser menor ou igual ao n√∫mero de assentos da sala em que a aula for alocada. Cada aluno excedente contabiliza uma viola√ß√£o. (RFc3)
 
-\item \textbf{Estabilidade de Sala}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta È contada como uma violaÁ„o. (RFc4)
+\item \textbf{Estabilidade de Sala}: Todas as aulas de uma disciplina devem ser alocadas na mesma sala. Cada sala distinta √© contada como uma viola√ß√£o. (RFc4)
 
 \end{itemize}
 
-Na contagem total das violaÁıes fracas s„o considerados pesos diferentes para cada tipo de violaÁ„o. A restriÁ„o de dias mÌnimos possui peso 5 (cinco), aulas isoladas, peso 2 (dois) e as demais, peso 1 (um).
+Na contagem total das viola√ß√µes fracas s√£o considerados pesos diferentes para cada tipo de viola√ß√£o. A restri√ß√£o de dias m√≠nimos possui peso 5 (cinco), aulas isoladas, peso 2 (dois) e as demais, peso 1 (um).
 
-Uma soluÁ„o vi·vel deve atender a todas as restriÁıes fortes. Uma soluÁ„o Ûtima È vi·vel e minimiza a funÁ„o objetivo apresentada na equaÁ„o \ref{funcaoObjetivo}:
+Uma solu√ß√£o vi√°vel deve atender a todas as restri√ß√µes fortes. Uma solu√ß√£o √≥tima √© vi√°vel e minimiza a fun√ß√£o objetivo apresentada na equa√ß√£o \ref{funcaoObjetivo}:
 
 \begin{equation}\label{funcaoObjetivo}
 %\begin{split}
-f = \text{ViolaÁıes}_{RFt} + \text{ViolaÁıes}_{RFc}
+f = \text{Viola√ß√µes}_{RFt} + \text{Viola√ß√µes}_{RFc}
 %\end{split}
 \end{equation}
 
-\noindent onde $\text{ViolaÁıes}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{ViolaÁıes}_{RFc} = 5|RFc1|_v +\,\\2|RFc2|_v\,+\,|RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o n˙mero de violaÁıes.
+\noindent onde $\text{Viola√ß√µes}_{RFt} = |RFt1|_v + |RFt2|_v + |RFt3|_v + |RFt4|_v$, $\text{Viola√ß√µes}_{RFc} = 5|RFc1|_v +\,\\2|RFc2|_v\,+\,|RFc3|_v + |RFc4|_v$ e $|.|_v$ representa o n√∫mero de viola√ß√µes.
 
-A figura \ref{fig:instancia-toy} ilustra um arquivo exemplo para uma inst‚ncia de teste chamada \textit{Toy}. Esta inst‚ncia È bem reduzida e foi fornecida pela organizaÁ„o do ITC-2007 apenas para demonstrar o formato das inst‚ncias oficiais do campeonato. O arquivo È dividido em cinco partes: a primeira informa a quantidade de cada um dos itens a seguir: disciplinas [entendemos que \textit{courses} s„o disciplinas], salas, dias, perÌodos por dia, currÌculos e indisponibilidades; na segunda s„o detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, n˙mero mÌnimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo apÛs vem a relaÁ„o dos currÌculos com os nomes das disciplinas que compıe cada um deles. Por ˙ltimo s„o listadas as indisponibilidades das disciplinas, identificando dia e hor·rio em que n„o podem ser lecionadas.
+A figura \ref{fig:instancia-toy} ilustra um arquivo exemplo para uma inst√¢ncia de teste chamada \textit{Toy}. Esta inst√¢ncia √© bem reduzida e foi fornecida pela organiza√ß√£o do ITC-2007 apenas para demonstrar o formato das inst√¢ncias oficiais do campeonato. O arquivo √© dividido em cinco partes: a primeira informa a quantidade de cada um dos itens a seguir: disciplinas [entendemos que \textit{courses} s√£o disciplinas], salas, dias, per√≠odos por dia, curr√≠culos e indisponibilidades; na segunda s√£o detalhados dados das disciplinas: nome do professor, quantidade de aulas na semana, n√∫mero m√≠nimo de dias de aula e quantidade de alunos. A terceira parte lista as salas e suas respectivas capacidades. Logo ap√≥s vem a rela√ß√£o dos curr√≠culos com os nomes das disciplinas que comp√µe cada um deles. Por √∫ltimo s√£o listadas as indisponibilidades das disciplinas, identificando dia e hor√°rio em que n√£o podem ser lecionadas.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=12cm]{./InstanciaToy.eps}
- \caption{Arquivo com dados da inst‚ncia {\it Toy} no formato do ITC-2007}
+ \caption{Arquivo com dados da inst√¢ncia {\it Toy} no formato do ITC-2007}
    \label{fig:instancia-toy}
 \end{center}
 \end{figure}
@@ -381,12 +381,12 @@ A figura \ref{fig:instancia-toy} ilustra um arquivo exemplo para uma inst‚ncia d
 %END.
 %\end{verbatim}
 
-A figura \ref{fig:resposta-toy} mostra um exemplo de resposta. Informa a sala, o dia e perÌodo de cada aula.
+A figura \ref{fig:resposta-toy} mostra um exemplo de resposta. Informa a sala, o dia e per√≠odo de cada aula.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=12cm]{./RespostaToy.eps}
- \caption{Arquivo de resposta para a inst‚ncia {\it Toy}}
+ \caption{Arquivo de resposta para a inst√¢ncia {\it Toy}}
    \label{fig:resposta-toy}
 \end{center}
 \end{figure}
@@ -410,7 +410,7 @@ A figura \ref{fig:resposta-toy} mostra um exemplo de resposta. Informa a sala, o
 %Geotec rA 4 3
 %\end{verbatim}
 
-A tabela \ref{tab:solucao_toy} apresenta uma visualizaÁ„o desta resposta. Nesta tabela, os nomes de disciplinas  \textit{SceCosC}, \textit{ArcTec}, \textit{TecCos} e \textit{Geotec} apresentados na Figura \ref{fig:resposta-toy} s„o respectivamente representados por SC, AT, TC e GT.
+A tabela \ref{tab:solucao_toy} apresenta uma visualiza√ß√£o desta resposta. Nesta tabela, os nomes de disciplinas  \textit{SceCosC}, \textit{ArcTec}, \textit{TecCos} e \textit{Geotec} apresentados na Figura \ref{fig:resposta-toy} s√£o respectivamente representados por SC, AT, TC e GT.
 
 \begin{center}
 \begin{table}[!htb]
@@ -425,19 +425,19 @@ rC &  & TC &  &  &  & TC & SC &  &  &  & SC & TC & SC &  &  &  & TC &  & TC & AT
 \end{tabular}
 }
 %\end{footnotesize}
-\caption{Tabela-hor·rio para a inst‚ncia \textit{Toy}}
+\caption{Tabela-hor√°rio para a inst√¢ncia \textit{Toy}}
 \label{tab:solucao_toy}
 \end{table}
 \end{center}
 
-A soluÁ„o ilustrada na tabela \ref{tab:solucao_toy} È invi·vel pois restriÁıes fortes s„o violadas:
+A solu√ß√£o ilustrada na tabela \ref{tab:solucao_toy} √© invi√°vel pois restri√ß√µes fortes s√£o violadas:
 
 \begin{itemize}
-\item RFt2 no dia 0, perÌodo 1: GT e TC est„o em conflito por pertencerem ao mesmo currÌculo \textit{Cur2}.
-\item RFt4 no dia 4, perÌodo 3: AT È indisponÌvel neste hor·rio.
+\item RFt2 no dia 0, per√≠odo 1: GT e TC est√£o em conflito por pertencerem ao mesmo curr√≠culo \textit{Cur2}.
+\item RFt4 no dia 4, per√≠odo 3: AT √© indispon√≠vel neste hor√°rio.
 \end{itemize}
 
-Para corrigir estas inviabilidades podemos efetuar duas modificaÁıes na tabela. TC alocada no dia 0 È movida do perÌodo 1 para o perÌodo 0, enquanto a aula de AT alocada no dia 4 È movida para o dia 2 e perÌodo 1. O resultado destas modificaÁıes pode ser visto na tabela \ref{tab:solucao_toy_viavel}:
+Para corrigir estas inviabilidades podemos efetuar duas modifica√ß√µes na tabela. TC alocada no dia 0 √© movida do per√≠odo 1 para o per√≠odo 0, enquanto a aula de AT alocada no dia 4 √© movida para o dia 2 e per√≠odo 1. O resultado destas modifica√ß√µes pode ser visto na tabela \ref{tab:solucao_toy_viavel}:
 
 \begin{center}
 \begin{table}[!htb]
@@ -452,23 +452,23 @@ rC & TC & &  &  &  & TC & SC &  &  & AT & SC & TC & SC &  &  &  & TC &  & TC &  
 \end{tabular}
 }
 %\end{footnotesize}
-\caption{Tabela-hor·rio para a inst‚ncia \textit{Toy} sem inviabilidades}
+\caption{Tabela-hor√°rio para a inst√¢ncia \textit{Toy} sem inviabilidades}
 \label{tab:solucao_toy_viavel}
 \end{table}
 \end{center}
 
-A soluÁ„o ilustrada na tabela \ref{tab:solucao_toy_viavel} È vi·vel, mas apresenta violaÁıes das seguintes restriÁıes fracas:
+A solu√ß√£o ilustrada na tabela \ref{tab:solucao_toy_viavel} √© vi√°vel, mas apresenta viola√ß√µes das seguintes restri√ß√µes fracas:
 
 \begin{itemize}
-\item RFc1 para a disciplina GT: ela È lecionada em 3 dias, mas o mÌnimo requerido È 4.
-\item RFc2: SC no dia 3 e TC no dia 4 est„o isoladas, pois n„o possuem aulas do mesmo currÌculo nos perÌodos adjacentes. 
-\item RFc3 no dia 4, perÌodo 3: a disciplina AT possui 42 alunos mas a capacidade de \textit{rC} È apenas 40.
-\item RFc4 para a disciplina AT: est· sendo lecionada em duas salas diferentes: \textit{rB} e \textit{rC}.
+\item RFc1 para a disciplina GT: ela √© lecionada em 3 dias, mas o m√≠nimo requerido √© 4.
+\item RFc2: SC no dia 3 e TC no dia 4 est√£o isoladas, pois n√£o possuem aulas do mesmo curr√≠culo nos per√≠odos adjacentes. 
+\item RFc3 no dia 4, per√≠odo 3: a disciplina AT possui 42 alunos mas a capacidade de \textit{rC} √© apenas 40.
+\item RFc4 para a disciplina AT: est√° sendo lecionada em duas salas diferentes: \textit{rB} e \textit{rC}.
 \end{itemize}
 
-Aparentemente a tabela \ref{tab:solucao_toy_viavel} possui somente as violaÁıes citadas acima. Mas um detalhe importante È que a contagem de aulas isoladas È feita separadamente por currÌculo. Observando o dia 0, temos uma aula TC no perÌodo 0, uma aula GT no perÌodo 1 e uma aula AT no perÌodo 2. Quem cursa o currÌculo \textit{Cur2} assiste a aula TC no perÌodo 0 e a aula GT no perÌodo 1, portanto, duas aulas adjacentes. Mas quem cursa o currÌculo \textit{Cur1} n„o assiste a disciplina GT, logo, alunos deste currÌculo ter„o aula no perÌodo 0, hor·rio vago no perÌodo 1 e depois outra aula no perÌodo 2. Portanto, s„o duas aulas isoladas.
+Aparentemente a tabela \ref{tab:solucao_toy_viavel} possui somente as viola√ß√µes citadas acima. Mas um detalhe importante √© que a contagem de aulas isoladas √© feita separadamente por curr√≠culo. Observando o dia 0, temos uma aula TC no per√≠odo 0, uma aula GT no per√≠odo 1 e uma aula AT no per√≠odo 2. Quem cursa o curr√≠culo \textit{Cur2} assiste a aula TC no per√≠odo 0 e a aula GT no per√≠odo 1, portanto, duas aulas adjacentes. Mas quem cursa o curr√≠culo \textit{Cur1} n√£o assiste a disciplina GT, logo, alunos deste curr√≠culo ter√£o aula no per√≠odo 0, hor√°rio vago no per√≠odo 1 e depois outra aula no per√≠odo 2. Portanto, s√£o duas aulas isoladas.
 
-Com esta observaÁ„o pode se concluir que a tabela \ref{tab:solucao_toy_viavel} possui sete aulas isoladas. Totalizando todas as penalizaÁıes e lembrando que os pesos das restriÁıes RFc1, RFc2, RFc3 e RFc4 s„o respectivamente 5, 2, 1 e 1, a funÁ„o objetivo da soluÁ„o È contabilizada pela equaÁ„o \ref{calc_fo}:
+Com esta observa√ß√£o pode se concluir que a tabela \ref{tab:solucao_toy_viavel} possui sete aulas isoladas. Totalizando todas as penaliza√ß√µes e lembrando que os pesos das restri√ß√µes RFc1, RFc2, RFc3 e RFc4 s√£o respectivamente 5, 2, 1 e 1, a fun√ß√£o objetivo da solu√ß√£o √© contabilizada pela equa√ß√£o \ref{calc_fo}:
 
 \begin{equation}\label{calc_fo}
 \begin{split}
@@ -480,21 +480,21 @@ f(S) &= 22 \\
 \end{split}
 \end{equation}
 
-\chapter{Algoritmo GRASP para o problema de tabela-hor·rio de universidades\label{cap:grasp}}
+\chapter{Algoritmo GRASP para o problema de tabela-hor√°rio de universidades\label{cap:grasp}}
 
-Neste capÌtulo ser· apresentado a estrutura geral da meta-heurÌstica GRASP para problemas de otimizaÁ„o combinatÛria, alÈm da hibridizaÁ„o do algoritmo com \textit{Path-Relinking}. Em seguida ser· descrito como ele foi aplicado no problema que est· sendo abordado.
+Neste cap√≠tulo ser√° apresentado a estrutura geral da meta-heur√≠stica GRASP para problemas de otimiza√ß√£o combinat√≥ria, al√©m da hibridiza√ß√£o do algoritmo com \textit{Path-Relinking}. Em seguida ser√° descrito como ele foi aplicado no problema que est√° sendo abordado.
 
 \section{Algoritmo GRASP\label{sec:estrutura_grasp}}
 
-Um problema de otimizaÁ„o combinatÛria pode ser definido por um conjunto finito $E = \{1,...,n\}$, um conjunto de soluÁıes vi·veis $F \subseteq 2^E$ e uma funÁ„o objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema especÌfico. Considerando a vers„o de minimizaÁ„o, o objetivo consiste em encontrar uma soluÁ„o Ûtima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Glover89}.
+Um problema de otimiza√ß√£o combinat√≥ria pode ser definido por um conjunto finito $E = \{1,...,n\}$, um conjunto de solu√ß√µes vi√°veis $F \subseteq 2^E$ e uma fun√ß√£o objetivo $f : 2^E \rightarrow \mathbb{R}$, todos definidos para cada problema espec√≠fico. Considerando a vers√£o de minimiza√ß√£o, o objetivo consiste em encontrar uma solu√ß√£o √≥tima $S^* \in F$ tal que $f(S^*) \leq f(S), \forall S \in F$ \cite{Glover89}.
 
-As meta-heurÌsticas s„o algoritmos de car·ter geral que orientam uma maneira de explorar o conjunto de soluÁıes para encontrar a soluÁ„o Ûtima. A soluÁ„o Ûtima n„o È garantida mas, em geral, as meta-heurÌsticas alcanÁam boas soluÁıes vi·veis.
+As meta-heur√≠sticas s√£o algoritmos de car√°ter geral que orientam uma maneira de explorar o conjunto de solu√ß√µes para encontrar a solu√ß√£o √≥tima. A solu√ß√£o √≥tima n√£o √© garantida mas, em geral, as meta-heur√≠sticas alcan√ßam boas solu√ß√µes vi√°veis.
 
-A meta-heurÌstica GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleatÛria, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. Desde sua proposta inicial, o GRASP j· foi aplicado com sucesso em v·rios problemas de otimizaÁ„o como conjunto independente m·ximo \cite{FeoResSmi94}, problema quadr·tico de alocaÁ„o \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planarizaÁ„o de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
+A meta-heur√≠stica GRASP (\textit{Greedy Randomized Adaptive Search Procedures} - Procedimentos de busca aleat√≥ria, adaptativa e gulosa) foi introduzida por \cite{FeoRes89} para tratar o problema de cobertura de conjuntos. Desde sua proposta inicial, o GRASP j√° foi aplicado com sucesso em v√°rios problemas de otimiza√ß√£o como conjunto independente m√°ximo \cite{FeoResSmi94}, problema quadr√°tico de aloca√ß√£o \cite{LiParRes94}, satisfabilidade \cite{ResFeo96a}, planariza√ß√£o de grafos \cite{ResRib95}, roteamento de circuitos virtuais \cite{ResRib03a}, entre outros.
 
-%\subsection{Estrutura b·sica}
+%\subsection{Estrutura b√°sica}
 
-O algoritmo GRASP È um procedimento com iteraÁıes independentes, onde cada iteraÁ„o constrÛi uma soluÁ„o inicial e aplica busca local para melhor·-la. A resposta final È a melhor obtida dentre as iteraÁıes. O algoritmo \ref{algoGrasp} apresenta o pseudo-cÛdigo genÈrico do GRASP. Ao final da fase de construÁ„o inicial, pode ocorrer de a soluÁ„o obtida ser invi·vel. Por isso um passo intermedi·rio È previsto para reparar a soluÁ„o, tornando-a vi·vel.
+O algoritmo GRASP √© um procedimento com itera√ß√µes independentes, onde cada itera√ß√£o constr√≥i uma solu√ß√£o inicial e aplica busca local para melhor√°-la. A resposta final √© a melhor obtida dentre as itera√ß√µes. O algoritmo \ref{algoGrasp} apresenta o pseudo-c√≥digo gen√©rico do GRASP. Ao final da fase de constru√ß√£o inicial, pode ocorrer de a solu√ß√£o obtida ser invi√°vel. Por isso um passo intermedi√°rio √© previsto para reparar a solu√ß√£o, tornando-a vi√°vel.
 
 \begin{algorithm}[H]
 \label{algoGrasp}
@@ -504,12 +504,12 @@ O algoritmo GRASP È um procedimento com iteraÁıes independentes, onde cada itera
 \SetKwFunction{ReparaSolucao}{ReparaSolucao}
 %\SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{MaxIter}
-\Saida{SoluÁ„o $S^{*}$}
+\Saida{Solu√ß√£o $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
 \Para{$i\leftarrow 1$ \Ate $MaxIter$}{
 	$S \leftarrow GeraSolucaoInicial() $ \;
-	\Se{$ S $ È invi·vel }{
+	\Se{$ S $ √© invi√°vel }{
 		$ReparaSolucao(S) $\;
 	}
 	$S \leftarrow BuscaLocal(S) $ \;
@@ -518,14 +518,14 @@ $f^{*} \leftarrow \infty $ \;
 		$f^{*} \leftarrow f(S) $ \;
 	}
 }
-\caption{Estrutura b·sica do algoritmo GRASP}
+\caption{Estrutura b√°sica do algoritmo GRASP}
 \end{algorithm}
 
-O mÈtodo de construÁ„o da soluÁ„o inicial do GRASP È guloso, aleatÛrio e visa produzir um conjunto diversificado de soluÁıes iniciais de boa qualidade para a busca local. Algoritmos totalmente aleatÛrios conseguem essa diversificaÁ„o, mas as soluÁıes em geral s„o ruins. Por outro lado, algoritmos gulosos tendem a gerar soluÁıes de melhor qualidade, mas eles n„o conseguem produzir soluÁıes diferentes j· que a construÁ„o È sempre feita por escolhas gulosas.
+O m√©todo de constru√ß√£o da solu√ß√£o inicial do GRASP √© guloso, aleat√≥rio e visa produzir um conjunto diversificado de solu√ß√µes iniciais de boa qualidade para a busca local. Algoritmos totalmente aleat√≥rios conseguem essa diversifica√ß√£o, mas as solu√ß√µes em geral s√£o ruins. Por outro lado, algoritmos gulosos tendem a gerar solu√ß√µes de melhor qualidade, mas eles n√£o conseguem produzir solu√ß√µes diferentes j√° que a constru√ß√£o √© sempre feita por escolhas gulosas.
 
-O algoritmo \ref{solInicialGrasp} ilustra o procedimento de construÁ„o de uma soluÁ„o genÈrica. Ele recebe como par‚metro um conjunto de elementos que ir„o compor a soluÁ„o. Iterativamente um novo elemento candidato È escolhido para ser incorporado ‡ soluÁ„o. Essa escolha È gulosa aleatÛria. Primeiramente todos os candidatos s„o avaliados por uma funÁ„o $g(c)$ para medir o custo de adicionar o candidato $c$ ‡ soluÁ„o parcial $S$. Com base no menor e maior custo s„o escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos È escolhido aleatoriamente desta lista. Ao ser acrescentado ‡ soluÁ„o o elemento È retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados ‡ soluÁ„o e n„o h· mais candidatos.
+O algoritmo \ref{solInicialGrasp} ilustra o procedimento de constru√ß√£o de uma solu√ß√£o gen√©rica. Ele recebe como par√¢metro um conjunto de elementos que ir√£o compor a solu√ß√£o. Iterativamente um novo elemento candidato √© escolhido para ser incorporado √† solu√ß√£o. Essa escolha √© gulosa aleat√≥ria. Primeiramente todos os candidatos s√£o avaliados por uma fun√ß√£o $g(c)$ para medir o custo de adicionar o candidato $c$ √† solu√ß√£o parcial $S$. Com base no menor e maior custo s√£o escolhidos os candidatos mais bem avaliados para compor a lista restrita de candidatos - LRC. Um dos candidatos √© escolhido aleatoriamente desta lista. Ao ser acrescentado √† solu√ß√£o o elemento √© retirado do conjunto de candidatos. O procedimento termina quando todos os elementos foram incorporados √† solu√ß√£o e n√£o h√° mais candidatos.
 
-O par‚metro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo ser· mais guloso ou mais aleatÛrio. Quando $\alpha$ È mais prÛximo de zero somente os elementos com baixo custo ir„o entrar na LRC. Este comportamento produz soluÁıes de boa qualidade porÈm pouco diversificadas. Com $\alpha$ mais prÛximo de um, elementos com custo mais alto poder„o tambÈm entrar na LRC. Isto introduz mais aleatoriedade ‡ soluÁ„o mas, em compensaÁ„o, se perde em qualidade. O ideal È encontrar um valor intermedi·rio que permita diversificaÁ„o sem prejudicar muito a qualidade de soluÁ„o que ser· passada para a fase seguinte de busca local.
+O par√¢metro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo ser√° mais guloso ou mais aleat√≥rio. Quando $\alpha$ √© mais pr√≥ximo de zero somente os elementos com baixo custo ir√£o entrar na LRC. Este comportamento produz solu√ß√µes de boa qualidade por√©m pouco diversificadas. Com $\alpha$ mais pr√≥ximo de um, elementos com custo mais alto poder√£o tamb√©m entrar na LRC. Isto introduz mais aleatoriedade √† solu√ß√£o mas, em compensa√ß√£o, se perde em qualidade. O ideal √© encontrar um valor intermedi√°rio que permita diversifica√ß√£o sem prejudicar muito a qualidade de solu√ß√£o que ser√° passada para a fase seguinte de busca local.
 
 \begin{algorithm}[H]
 \label{solInicialGrasp}
@@ -535,12 +535,12 @@ O par‚metro $\alpha\, (0 \leq \alpha \leq 1)$ regula se o algoritmo ser· mais gu
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{E = \{conjunto discreto finito\}}
-\Saida{SoluÁ„o S}
+\Saida{Solu√ß√£o S}
 
 $S \leftarrow \emptyset $ \;
 $C \leftarrow E $ \;
 \Enqto{$|C| > 0$}{
-	Para todo $c \in C$ computar o valor da funÁ„o gulosa $g(c) $ \;
+	Para todo $c \in C$ computar o valor da fun√ß√£o gulosa $g(c) $ \;
 	$c^{min} \leftarrow min\{g(c) : c \in C\}$\;
 	$c^{max} \leftarrow max\{g(c) : c \in C\}$\;
 	$LRC \leftarrow \{ c \in C : g(c) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
@@ -548,45 +548,46 @@ $C \leftarrow E $ \;
 	$S \leftarrow S \bigcup \{ c' \} $\;
 	$C \leftarrow C - \{ c' \}$ \;
 }
-\caption{Algoritmo guloso aletÛrio para construÁ„o da soluÁ„o inicial do GRASP}
+\caption{Algoritmo guloso alet√≥rio para constru√ß√£o da solu√ß√£o inicial do GRASP}
 \end{algorithm}
 
-Para encontrar boas soluÁıes, uma meta-heurÌstica precisa ter duas caracterÌsticas importantes: diversificaÁ„o e intensificaÁ„o. A primeira refere-se ‡ capacidade de explorar bem o espaÁo de soluÁıes e n„o ficar preso a mÌnimos locais (ou m·ximos locais em problemas de maximizaÁ„o). A intensificaÁ„o È necess·ria para explorar bem uma regi„o de mÌnimo local, dado que o mÌnimo global necessariamente tambÈm È um mÌnimo local.
+Para encontrar boas solu√ß√µes, uma meta-heur√≠stica precisa ter duas caracter√≠sticas importantes: diversifica√ß√£o e intensifica√ß√£o. A primeira refere-se √† capacidade de explorar bem o espa√ßo de solu√ß√µes e n√£o ficar preso a m√≠nimos locais (ou m√°ximos locais em problemas de maximiza√ß√£o). A intensifica√ß√£o √© necess√°ria para explorar bem uma regi√£o de m√≠nimo local, dado que o m√≠nimo global necessariamente tamb√©m √© um m√≠nimo local.
 
-No GRASP a diversificaÁ„o È feita pela independÍncia das iteraÁıes e pela aleatoriedade introduzida na soluÁ„o inicial, enquanto a intensificaÁ„o È feita pela busca local. Nesta fase a soluÁ„o inicial È melhorada explorando sua vizinhanÁa na busca de soluÁıes melhores.
+No GRASP a diversifica√ß√£o √© feita pela independ√™ncia das itera√ß√µes e pela aleatoriedade introduzida na solu√ß√£o inicial, enquanto a intensifica√ß√£o √© feita pela busca local. Nesta fase a solu√ß√£o inicial √© melhorada explorando sua vizinhan√ßa na busca de solu√ß√µes melhores.
 
-O GRASP n„o especifica qual a estratÈgia de busca local deve ser utilizada. No trabalho de \cite{FeoResSmi94} a busca local implementada È conhecida como \textit{Hill Climbing}. … uma estratÈgia simples em que se explora a vizinhanÁa enquanto s„o encontradas soluÁıes melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da soluÁ„o inicial.
+O GRASP n√£o especifica qual a estrat√©gia de busca local deve ser utilizada. No trabalho de \cite{FeoResSmi94} a busca local implementada √© conhecida como \textit{Hill Climbing}. √â uma estrat√©gia simples em que se explora a vizinhan√ßa enquanto s√£o encontradas solu√ß√µes melhores. Em \cite{Souza:2004:GSA} por exemplo, os autores utilizaram a Busca Tabu para compor a fase de melhoramento da solu√ß√£o inicial.
 
 \section{GRASP + \textit{Path-Relinking}}
 
-A heurÌstica \textit{Path-Relinking} (PR) (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estratÈgia de intensificaÁ„o na Busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridizaÁ„o tenta resolver uma deficiÍncia do GRASP que È ausÍncia de memorizaÁ„o entre as iteraÁıes.
+A heur√≠stica \textit{Path-Relinking} (PR) (religamento de caminhos) foi originalmente proposta por \cite{Glover96tabusearch} como uma estrat√©gia de intensifica√ß√£o na Busca Tabu. A primeira proposta de uso do \textit{Path-Relinking} no GRASP foi feita por \cite{Laguna99graspand}. Essa hibridiza√ß√£o tenta resolver uma defici√™ncia do GRASP que √© aus√™ncia de memoriza√ß√£o entre as itera√ß√µes.
 
-A idÈia b·sica do \textit{Path-Relinking} È traÁar um caminho ligando duas soluÁıes que s„o chamadas de inicial e alvo. Para gerar este caminho, sucessivamente s„o inseridos atributos da soluÁ„o alvo na soluÁ„o inicial para que ela fique a cada iteraÁ„o mais parecida com a soluÁ„o alvo. A cada atributo inserido uma soluÁ„o diferente È obtida. A melhor soluÁ„o obtida no caminho È a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estratÈgia que procura incorporar atributos de soluÁıes de alta qualidade.
+A id√©ia b√°sica do \textit{Path-Relinking} √© tra√ßar um caminho ligando duas solu√ß√µes que s√£o chamadas de inicial e alvo. Para gerar este caminho, sucessivamente s√£o inseridos atributos da solu√ß√£o alvo na solu√ß√£o inicial para que ela fique a cada itera√ß√£o mais parecida com a solu√ß√£o alvo. A cada atributo inserido uma solu√ß√£o diferente √© obtida. A melhor solu√ß√£o obtida no caminho √© a resposta do algoritmo. Desta forma, o religamento de caminhos pode ser visto como uma estrat√©gia que procura incorporar atributos de solu√ß√µes de alta qualidade.
 
-De forma genÈrica, o caminho percorrido pelo \textit{Path-Relinking} È ilustrado na figura \ref{fig:path-relinking-generico}. A partir de uma soluÁ„o inicial um caminho È percorrido atÈ a soluÁ„o alvo, gerando novas soluÁıes intermedi·rias que podem ser melhores que a inicial e a alvo. Em cada iteraÁ„o, verifica-se quais atributos est„o diferentes na soluÁ„o inicial e alvo. No exemplo da figura \ref{fig:path-relinking-generico} s„o quatro diferenÁas, por isso quatro soluÁıes podem ser geradas a partir da soluÁ„o inicial. Opta-se por uma delas e continua a busca a partir da escolhida atÈ se chegar na soluÁ„o alvo. A quantidade de iteraÁıes necess·rias para realizar o percurso È no m·ximo a quantidade de diferenÁas entre as duas soluÁıes.
+De forma gen√©rica, o caminho percorrido pelo \textit{Path-Relinking} √© ilustrado na figura \ref{fig:path-relinking-generico}. A partir de uma solu√ß√£o inicial um caminho √© percorrido at√© a solu√ß√£o alvo, gerando novas solu√ß√µes intermedi√°rias que podem ser melhores que a inicial e a alvo. Em cada itera√ß√£o, verifica-se quais atributos est√£o diferentes na solu√ß√£o inicial e alvo. No exemplo da figura \ref{fig:path-relinking-generico} s√£o quatro diferen√ßas, por isso quatro solu√ß√µes podem ser geradas a partir da solu√ß√£o inicial. Opta-se por uma delas e continua a busca a partir da escolhida at√© se chegar na solu√ß√£o alvo. A quantidade de itera√ß√µes necess√°rias para realizar o percurso √© no m√°ximo a quantidade de diferen√ßas entre as duas solu√ß√µes.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=12cm]{./PRgenerico.eps}
- \caption{Explorando soluÁıes com \textit{Path-Relinking}}
+ \caption{Explorando solu√ß√µes com \textit{Path-Relinking}}
    \label{fig:path-relinking-generico}
 \end{center}
 \end{figure}
 
-A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso especÌfico de tabela-hor·rio. Nas tabelas fictÌcias da figura \ref{fig:path-relinking} est„o alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas est„o na mesma posiÁ„o e 3 em posiÁıes diferentes, destacadas com um cÌrculo. No caminho percorrido, a cada nova tabela uma posiÁ„o È corrigida. Todas as tabelas intermedi·rias s„o avaliadas pois podem ter melhor funÁ„o objetivo.
+A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso espec√≠fico de tabela-hor√°rio. Nas tabelas fict√≠cias da figura \ref{fig:path-relinking} est√£o alocadas 7 aulas. Comparando as tabelas inicial e alvo percebe-se que 4 aulas est√£o na mesma posi√ß√£o e 3 em posi√ß√µes diferentes, destacadas com um c√≠rculo. No caminho percorrido, a cada nova tabela uma posi√ß√£o √© corrigida. Todas as tabelas intermedi√°rias s√£o avaliadas pois podem ter melhor fun√ß√£o objetivo.
 
-O caminho escolhido n„o È ˙nico. No exemplo da figura \ref{fig:path-relinking}, dentre as trÍs aulas que est„o em posiÁıes divergentes da soluÁ„o alvo, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas tambÈm poderia ter comeÁado por outra aula. Em geral, È mais comum escolher o passo que ir· produzir a melhor tabela-hor·rio (estratÈgia gulosa), mas pode ser introduzida aleatoriedade nesta escolha, assim como È feito na construÁ„o da soluÁ„o inicial.
+O caminho escolhido n√£o √© √∫nico. No exemplo da figura \ref{fig:path-relinking}, dentre as tr√™s aulas que est√£o em posi√ß√µes divergentes da solu√ß√£o alvo, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas tamb√©m poderia ter come√ßado por outra aula. Em geral, √© mais comum escolher o passo que ir√° produzir a melhor tabela-hor√°rio (estrat√©gia gulosa), mas pode ser introduzida aleatoriedade nesta escolha, assim como √© feito na constru√ß√£o da solu√ß√£o inicial.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=14cm]{./PR.eps}
- \caption{TrajetÛria do {\it Path-relinking} ligando duas tabelas}
+ \caption{Trajet√≥ria do {\it Path-relinking} ligando duas tabelas}
    \label{fig:path-relinking}
 \end{center}
 \end{figure}
 
+A quantidade de itera√ß√µes necess√°rias para percorrer o caminho √© no m√°ximo a quantidade de diferen√ßas entre as solu√ß√µes inicial e alvo. Isso acontece porque cada itera√ß√£o corrige uma diferen√ßa sem acrescentar outra, dado que o procedimento n√£o altera as aulas que j√° est√£o em suas posi√ß√µes corretas na tabela-hor√°rio.
 
-O pseudo-cÛdigo do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluÁıes $x_i$ (inicial) e $x_a$ (alvo). Nas linhas 1 e 2 s„o inicializadas as vari·veis que guardam o melhor valor de funÁ„o objetivo encontrado e a soluÁ„o que produziu este valor. Na linha 4 o procedimento computa a diferenÁa simÈtrica $\Delta(x_i,x_a)$ entre as duas soluÁıes, isto È, o conjunto mÌnimo de movimentos necess·rios para alcanÁar $x_a$ a partir de $x_i$. Um caminho de soluÁıes È gerado ligando $x_i$ e $x_a$. A melhor soluÁ„o $x^*$ no caminho È a resposta do algoritmo. Em cada iteraÁ„o, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da soluÁ„o corrente $x$ e seleciona aquele que resulta no custo de soluÁ„o menor, isto È, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ È a soluÁ„o resultante da aplicaÁ„o do movimento $m$ ‡ soluÁ„o $x$ (linhas 5 a 13). O melhor movimento $m^*$ produz a soluÁ„o $x \oplus m^*$. O conjunto de movimentos possÌveis È atualizado na linha 7. Se for o caso, a melhor soluÁ„o $x^*$ È atualizada nas linhas 9 a 11. O procedimento termina quando $x_a$ È alcanÁada, ou seja, $\Delta(x, x_a) = \emptyset$.
+O pseudo-c√≥digo do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de solu√ß√µes $x_i$ (inicial) e $x_a$ (alvo). Nas linhas 1 e 2 s√£o inicializadas as vari√°veis que guardam o melhor valor de fun√ß√£o objetivo encontrado e a solu√ß√£o que produziu este valor. Na linha 4 o procedimento computa a diferen√ßa sim√©trica $\Delta(x_i,x_a)$ entre as duas solu√ß√µes, isto √©, o conjunto m√≠nimo de movimentos necess√°rios para alcan√ßar $x_a$ a partir de $x_i$. Um caminho de solu√ß√µes √© gerado ligando $x_i$ e $x_a$. A melhor solu√ß√£o $x^*$ no caminho √© a resposta do algoritmo. Em cada itera√ß√£o, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solu√ß√£o corrente $x$ e seleciona aquele que resulta no custo de solu√ß√£o menor, isto √©, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ √© a solu√ß√£o resultante da aplica√ß√£o do movimento $m$ √† solu√ß√£o $x$ (linhas 5 a 13). O melhor movimento $m^*$ produz a solu√ß√£o $x \oplus m^*$. O conjunto de movimentos poss√≠veis √© atualizado na linha 7. Se for o caso, a melhor solu√ß√£o $x^*$ √© atualizada nas linhas 9 a 11. O procedimento termina quando $x_a$ √© alcan√ßada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
 \begin{algorithm}[H]
 \label{path-relinking}
@@ -595,13 +596,13 @@ O pseudo-cÛdigo do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par d
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{SoluÁ„o inicial $x_i$, soluÁ„o alvo $x_a$}
-\Saida{Melhor soluÁ„o $x^{*}$ no caminho de $x_i$ para $x_a$}
+\Entrada{Solu√ß√£o inicial $x_i$, solu√ß√£o alvo $x_a$}
+\Saida{Melhor solu√ß√£o $x^{*}$ no caminho de $x_i$ para $x_a$}
 
 $f^{*} \leftarrow min \{ f(x_i), f(x_a) \} $ \;
 $x^{*} \leftarrow argmin \{ f(x_i), f(x_a) \} $ \;
 $x \leftarrow x_i $ \;
-Compute as diferenÁas simÈtricas $\Delta(x,x_a) $ \;
+Compute as diferen√ßas sim√©tricas $\Delta(x,x_a) $ \;
 \Enqto{$\Delta(x,x_a) \neq \emptyset $}{
 	$m^* \leftarrow argmin  \{ f(x \oplus m) : m \in \Delta(x,x_a) \}$ \;
 	$ \Delta(x \oplus m^*,x_a) \leftarrow \Delta(x,x_a) - \{ m^* \}$ \;
@@ -614,23 +615,23 @@ Compute as diferenÁas simÈtricas $\Delta(x,x_a) $ \;
 \caption{Algoritmo \textit{Path-Relinking}}
 \end{algorithm}
 
-O PR pode ser visto com uma estratÈgia de busca local mais restrita, onde os movimentos aplicados s„o mais especÌficos.
+O PR pode ser visto com uma estrat√©gia de busca local mais restrita, onde os movimentos aplicados s√£o mais espec√≠ficos.
 
-De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} È uma estratÈgia adicionada ao algoritmo b·sico do GRASP, proporcionando melhoras tanto no tempo computacional quanto na qualidade de soluÁ„o. Para aplicar o PR È necess·rio que o GRASP mantenha um conjunto de soluÁıes elites com as melhores soluÁıes encontradas durante a execuÁ„o do algoritmo. \cite{Resende05graspwith} tambÈm descrevem duas formas de inserir o PR no GRASP:
+De acordo com \cite{Resende05graspwith}, \textit{Path-Relinking} √© uma estrat√©gia adicionada ao algoritmo b√°sico do GRASP, proporcionando melhoras tanto no tempo computacional quanto na qualidade de solu√ß√£o. Para aplicar o PR √© necess√°rio que o GRASP mantenha um conjunto de solu√ß√µes elites com as melhores solu√ß√µes encontradas durante a execu√ß√£o do algoritmo. \cite{Resende05graspwith} tamb√©m descrevem duas formas de inserir o PR no GRASP:
 
 \begin{itemize}
 
-\item PR È aplicado entre todos os pares de soluÁıes elite. Pode ser feito periodicamente durante as iteraÁıes do GRASP ou no final da execuÁ„o como uma pÛs-otimizaÁ„o.
+\item PR √© aplicado entre todos os pares de solu√ß√µes elite. Pode ser feito periodicamente durante as itera√ß√µes do GRASP ou no final da execu√ß√£o como uma p√≥s-otimiza√ß√£o.
 
-\item PR È aplicado como estratÈgia de intensificaÁ„o em cada mÌnimo local obtido pela busca local.
+\item PR √© aplicado como estrat√©gia de intensifica√ß√£o em cada m√≠nimo local obtido pela busca local.
 
 \end{itemize}
 
-O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estratÈgias embutidas na vers„o b·sica do GRASP. O \textit{Path-Relinking} È aplicado entre duas soluÁıes $x$ e $y$: $x$ È um Ûtimo local obtido na busca local e $y$ È uma soluÁ„o escolhida aleatoriamente do conjunto de soluÁıes elite, denominado Elite. Esse procedimento È aplicado somente a partir da segunda iteraÁ„o pois na primeira o conjunto Elite est· vazio. O n˙mero de elementos desse conjunto È limitado por $MaxElite$, par‚metro do algoritmo.
+O algoritmo \ref{algoGraspComPathRelinking} ilustra as duas estrat√©gias embutidas na vers√£o b√°sica do GRASP. O \textit{Path-Relinking} √© aplicado entre duas solu√ß√µes $x$ e $y$: $x$ √© um √≥timo local obtido na busca local e $y$ √© uma solu√ß√£o escolhida aleatoriamente do conjunto de solu√ß√µes elite, denominado Elite. Esse procedimento √© aplicado somente a partir da segunda itera√ß√£o pois na primeira o conjunto Elite est√° vazio. O n√∫mero de elementos desse conjunto √© limitado por $MaxElite$, par√¢metro do algoritmo.
 
-Ao final de cada iteraÁ„o o conjunto Elite È atualizado. Todo Ûtimo local obtido È candidato a entrar no conjunto. Se ele j· tem $MaxElite$ soluÁıes, o candidato sÛ ir· entrar se for diferente das soluÁıes presentes e melhor que ao menos uma delas. O controle de entrada e saÌda de soluÁıes no conjunto Elite È feito pelo procedimento $AtualizaElite$.
+Ao final de cada itera√ß√£o o conjunto Elite √© atualizado. Todo √≥timo local obtido √© candidato a entrar no conjunto. Se ele j√° tem $MaxElite$ solu√ß√µes, o candidato s√≥ ir√° entrar se for diferente das solu√ß√µes presentes e melhor que ao menos uma delas. O controle de entrada e sa√≠da de solu√ß√µes no conjunto Elite √© feito pelo procedimento $AtualizaElite$.
 
-Ao final das iteraÁıes ocorre a pÛs-otimizaÁ„o, em que se aplica \textit{Path-Relinking} entre as soluÁıes do conjunto Elite, duas as duas. A melhor soluÁ„o obtida È a resposta do algoritmo.
+Ao final das itera√ß√µes ocorre a p√≥s-otimiza√ß√£o, em que se aplica \textit{Path-Relinking} entre as solu√ß√µes do conjunto Elite, duas as duas. A melhor solu√ß√£o obtida √© a resposta do algoritmo.
 
 \begin{algorithm}[H]
 \label{algoGraspComPathRelinking}
@@ -640,7 +641,7 @@ Ao final das iteraÁıes ocorre a pÛs-otimizaÁ„o, em que se aplica \textit{Path-Re
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{MaxIter, MaxElite}
-\Saida{Melhor SoluÁ„o $S^{*}$}
+\Saida{Melhor Solu√ß√£o $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
 $Elite \leftarrow \emptyset $ \;
@@ -658,41 +659,41 @@ $Elite \leftarrow \emptyset $ \;
 	$AtualizaElite(S, Elite)$ \;
 }
 $S^* = PosOtimizacao(Elite)$ \;
-\caption{GRASP com \textit{Path-Relinking} para intensificaÁ„o e pÛs-otimizaÁ„o}
+\caption{GRASP com \textit{Path-Relinking} para intensifica√ß√£o e p√≥s-otimiza√ß√£o}
 \end{algorithm}
 
 \section{GRASP + PR para o ITC-2007}
 
-Nesta seÁ„o apresentamos a implementaÁ„o do algoritmo \ref{algoGraspComPathRelinking} adaptado ao problema de tabela-hor·rio modelado pela terceira formulaÁ„o do ITC-2007 apresentada na seÁ„o \ref{sec:formulacao}. A adaptaÁ„o do algoritmo \ref{algoGraspComPathRelinking} ao problema foi realizada em trÍs etapas principais: geraÁ„o de soluÁ„o inicial (linha 4), busca local (linha 5) e \textit{Path-Relinking} (linha 8).
+Nesta se√ß√£o apresentamos a implementa√ß√£o do algoritmo \ref{algoGraspComPathRelinking} adaptado ao problema de tabela-hor√°rio modelado pela terceira formula√ß√£o do ITC-2007 apresentada na se√ß√£o \ref{sec:formulacao}. A adapta√ß√£o do algoritmo \ref{algoGraspComPathRelinking} ao problema foi realizada em tr√™s etapas principais: gera√ß√£o de solu√ß√£o inicial (linha 4), busca local (linha 5) e \textit{Path-Relinking} (linha 8).
 
-\subsection{GeraÁ„o de tabela-hor·rio inicial}
+\subsection{Gera√ß√£o de tabela-hor√°rio inicial}
 
-O objetivo da etapa de construÁ„o inicial È produzir uma tabela-hor·rio vi·vel, e se possÌvel, com poucas violaÁıes das restriÁıes fracas. O GRASP n„o exige que a soluÁ„o inicial seja vi·vel, mas foi decidido implementar desta forma para que nas fases seguintes o algoritmo se concentre apenas na eliminaÁ„o das violaÁıes das restriÁıes fracas. A contagem de violaÁıes fortes e fracas requer certo esforÁo computacional. Garantindo que as soluÁıes s„o vi·veis, a etapa de busca local n„o necessita contar as violaÁıes fortes.
+O objetivo da etapa de constru√ß√£o inicial √© produzir uma tabela-hor√°rio vi√°vel, e se poss√≠vel, com poucas viola√ß√µes das restri√ß√µes fracas. O GRASP n√£o exige que a solu√ß√£o inicial seja vi√°vel, mas foi decidido implementar desta forma para que nas fases seguintes o algoritmo se concentre apenas na elimina√ß√£o das viola√ß√µes das restri√ß√µes fracas. A contagem de viola√ß√µes fortes e fracas requer certo esfor√ßo computacional. Garantindo que as solu√ß√µes s√£o vi√°veis, a etapa de busca local n√£o necessita contar as viola√ß√µes fortes.
 
-Partindo de uma tabela-hor·rio vazia, as aulas s„o acrescentadas uma a uma atÈ que todas estejam alocadas. A escolha È tanto gulosa (para produzir soluÁıes de boa qualidade) quanto aleatÛria (para produzir soluÁıes diversificadas).
+Partindo de uma tabela-hor√°rio vazia, as aulas s√£o acrescentadas uma a uma at√© que todas estejam alocadas. A escolha √© tanto gulosa (para produzir solu√ß√µes de boa qualidade) quanto aleat√≥ria (para produzir solu√ß√µes diversificadas).
 
-Com intuito de obter uma soluÁ„o vi·vel, È adotada uma estratÈgia de alocar as aulas mais conflitantes primeiro. Poucos hor·rios s„o vi·veis para as disciplinas mais conflitantes, portanto, È melhor aloc·-las quando a tabela est· mais vazia. Para medir se uma aula È mais conflitante que outra s„o contados quantos hor·rios disponÌveis s„o adequados para alocar a aula da disciplina. Esta contagem envolve:
+Com intuito de obter uma solu√ß√£o vi√°vel, √© adotada uma estrat√©gia de alocar as aulas mais conflitantes primeiro. Poucos hor√°rios s√£o vi√°veis para as disciplinas mais conflitantes, portanto, √© melhor aloc√°-las quando a tabela est√° mais vazia. Para medir se uma aula √© mais conflitante que outra s√£o contados quantos hor√°rios dispon√≠veis s√£o adequados para alocar a aula da disciplina. Esta contagem envolve:
 
 \begin{itemize}
 
-\item contar a quantidade de hor·rios disponÌveis (desocupados)
-\item retirar os hor·rios em o que o professor da disciplina j· leciona alguma aula;
-\item retirar os hor·rios em que est„o alocadas disciplinas do mesmo currÌculo;
-\item retirar os hor·rios que s„o indisponÌveis para a disciplina segundo a restriÁ„o de indisponibilidade.
+\item contar a quantidade de hor√°rios dispon√≠veis (desocupados)
+\item retirar os hor√°rios em o que o professor da disciplina j√° leciona alguma aula;
+\item retirar os hor√°rios em que est√£o alocadas disciplinas do mesmo curr√≠culo;
+\item retirar os hor√°rios que s√£o indispon√≠veis para a disciplina segundo a restri√ß√£o de indisponibilidade.
 
 \end{itemize}
 
-Em cada iteraÁ„o, a aula mais difÌcil (a que possui menos hor·rios vi·veis) È escolhida para ser alocada. Existem diferentes combinaÁıes de hor·rios e salas para a alocaÁ„o. Os custos de todas essas combinaÁıes s„o calculados levando-se em conta as penalizaÁıes das restriÁıes fracas. As combinaÁıes que possuem hor·rios invi·veis s„o descartadas. Com base no menor e maior custo de adiÁ„o de um elemento ‡ soluÁ„o ($c^{min}$ e $c^{max}$) È construÌda a lista restrita de candidatos (LRC). Pertencem ‡ LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Uma aula È escolhida aleatoriamente da LRC e acrescentada ‡ soluÁ„o.
+Em cada itera√ß√£o, a aula mais dif√≠cil (a que possui menos hor√°rios vi√°veis) √© escolhida para ser alocada. Existem diferentes combina√ß√µes de hor√°rios e salas para a aloca√ß√£o. Os custos de todas essas combina√ß√µes s√£o calculados levando-se em conta as penaliza√ß√µes das restri√ß√µes fracas. As combina√ß√µes que possuem hor√°rios invi√°veis s√£o descartadas. Com base no menor e maior custo de adi√ß√£o de um elemento √† solu√ß√£o ($c^{min}$ e $c^{max}$) √© constru√≠da a lista restrita de candidatos (LRC). Pertencem √† LRC as aulas cujos custos estejam no intervalo \begin{math} [c^{min}, c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Uma aula √© escolhida aleatoriamente da LRC e acrescentada √† solu√ß√£o.
 
-… possÌvel que em alguns casos, ao escolher uma aula para alocar, n„o haja um hor·rio que mantenha a viabilidade da soluÁ„o. Para contornar esta situaÁ„o foi implementado um procedimento denominado explos„o. … uma estratÈgia que retira da tabela uma aula alocada anteriormente para abrir espaÁo para a aula que n„o est· sendo possÌvel alocar. A aula retirada volta para o conjunto de aulas n„o alocadas.
+√â poss√≠vel que em alguns casos, ao escolher uma aula para alocar, n√£o haja um hor√°rio que mantenha a viabilidade da solu√ß√£o. Para contornar esta situa√ß√£o foi implementado um procedimento denominado explos√£o. √â uma estrat√©gia que retira da tabela uma aula alocada anteriormente para abrir espa√ßo para a aula que n√£o est√° sendo poss√≠vel alocar. A aula retirada volta para o conjunto de aulas n√£o alocadas.
 
-A primeira estratÈgia de explos„o utilizada consiste em escolher o hor·rio que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estratÈgia n„o se mostrou muito eficaz pois favoreceu a formaÁ„o de ciclagem no algoritmo, isto È, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, j· que o hor·rio escolhido era quase sempre o mesmo.
+A primeira estrat√©gia de explos√£o utilizada consiste em escolher o hor√°rio que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estrat√©gia n√£o se mostrou muito eficaz pois favoreceu a forma√ß√£o de ciclagem no algoritmo, isto √©, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, j√° que o hor√°rio escolhido era quase sempre o mesmo.
 
-Uma estratÈgia mais eficaz È a escolha de um hor·rio (dentre os vi·veis) aleatoriamente, ao invÈs de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratÈgia evita o problema de ciclagem.
+Uma estrat√©gia mais eficaz √© a escolha de um hor√°rio (dentre os vi√°veis) aleatoriamente, ao inv√©s de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estrat√©gia evita o problema de ciclagem.
 
-O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geraÁ„o de uma tabela-hor·rio inicial. Ele recebe como par‚metro as aulas das disciplinas a serem alocadas na tabela que inicialmente È vazia (linha 1). Para facilitar a obtenÁ„o da aula mais conflitante durante as iteraÁıes È criada uma lista de aulas n„o alocadas (linha 2). Esta lista È ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posiÁ„o da lista È a mais conflitante.
+O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de gera√ß√£o de uma tabela-hor√°rio inicial. Ele recebe como par√¢metro as aulas das disciplinas a serem alocadas na tabela que inicialmente √© vazia (linha 1). Para facilitar a obten√ß√£o da aula mais conflitante durante as itera√ß√µes √© criada uma lista de aulas n√£o alocadas (linha 2). Esta lista √© ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posi√ß√£o da lista √© a mais conflitante.
 
-A cada passo da construÁ„o da soluÁ„o inicial a aula mais conflitante que ainda n„o foi alocada È selecionada na linha 5. Em seguida È verificado em quais hor·rios pode ser alocada a aula sem gerar inviabilidades (linha 6). Esses hor·rios formam o conjunto $H$. Se n„o houver hor·rio disponÌvel ocorre a explos„o (linhas 7 a 10), portanto, $H$ ter· pelo menos um hor·rio e ser· possÌvel fazer a alocaÁ„o. Os hor·rios disponÌveis s„o combinados com todas as salas e È feita uma avaliaÁ„o do custo de alocaÁ„o da aula na respectiva sala e hor·rio (linha 11). Com base nos custos È construÌda a lista restrita de candidatos (linhas 12 a 14). A aula È ent„o inserida na tabela numa posiÁ„o escolhida aleatoriamente da LRC. A lista de aulas n„o alocadas È atualizada e ordenada novamente (linhas 17 e 18). Essa ordenaÁ„o È necess·ria porque a ˙ltima aula alocada poder· gerar conflitos com as aulas que ainda ser„o alocadas. O procedimento termina quando todas aulas est„o inseridas na tabela-hor·rio.
+A cada passo da constru√ß√£o da solu√ß√£o inicial a aula mais conflitante que ainda n√£o foi alocada √© selecionada na linha 5. Em seguida √© verificado em quais hor√°rios pode ser alocada a aula sem gerar inviabilidades (linha 6). Esses hor√°rios formam o conjunto $H$. Se n√£o houver hor√°rio dispon√≠vel ocorre a explos√£o (linhas 7 a 10), portanto, $H$ ter√° pelo menos um hor√°rio e ser√° poss√≠vel fazer a aloca√ß√£o. Os hor√°rios dispon√≠veis s√£o combinados com todas as salas e √© feita uma avalia√ß√£o do custo de aloca√ß√£o da aula na respectiva sala e hor√°rio (linha 11). Com base nos custos √© constru√≠da a lista restrita de candidatos (linhas 12 a 14). A aula √© ent√£o inserida na tabela numa posi√ß√£o escolhida aleatoriamente da LRC. A lista de aulas n√£o alocadas √© atualizada e ordenada novamente (linhas 17 e 18). Essa ordena√ß√£o √© necess√°ria porque a √∫ltima aula alocada poder√° gerar conflitos com as aulas que ainda ser√£o alocadas. O procedimento termina quando todas aulas est√£o inseridas na tabela-hor√°rio.
 
 \begin{algorithm}[H]
 \label{solInicialGrasp-ITC2007}
@@ -702,19 +703,19 @@ A cada passo da construÁ„o da soluÁ„o inicial a aula mais conflitante que ainda 
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{OrdenaAulasPorDificuldade}{OrdenaAulasPorDificuldade}
 \Entrada{A = \{conjunto de aulas\}, S = \{conjunto de salas\}, $\alpha$}
-\Saida{Tabela-hor·rio T}
+\Saida{Tabela-hor√°rio T}
 
 $T \leftarrow \emptyset $ \;
 $ListaNaoAlocadas \leftarrow GeraListaNaoAlocadas(A) $ \;
 $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 \Enqto{$|ListaNaoAlocadas| > 0$}{
 	$ a \leftarrow ListaNaoAlocadas[0] $ \;
-	$H \leftarrow \{ h \text{ tal que } h $ È vi·vel para $ a \}$ \;
+	$H \leftarrow \{ h \text{ tal que } h $ √© vi√°vel para $ a \}$ \;
 	\Se{$ H = \emptyset $}{
 		ExplodeSolucao(T, a) \;
-		$H \leftarrow \{ h \text{ tal que } h $ È vi·vel para $ a \}$ \;
+		$H \leftarrow \{ h \text{ tal que } h $ √© vi√°vel para $ a \}$ \;
 	}
-	Para todo $ (s, h) \in S \times H, T[s, h] = \emptyset $, computar o custo de alocaÁ„o $f(a,s,h) $ \;
+	Para todo $ (s, h) \in S \times H, T[s, h] = \emptyset $, computar o custo de aloca√ß√£o $f(a,s,h) $ \;
 	$c^{min} \leftarrow min\{f(a,s,h) : (s, h) \in S \times H\}$\;
 	$c^{max} \leftarrow max\{f(a,s,h) : (s, h) \in S \times H\}$\;
 	$LRC \leftarrow \{ (s,h) \in S \times H : f(a,s,h) \leq c^{min} + \alpha(c^{max} - c^{min}) \} $ \;
@@ -723,64 +724,64 @@ $OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 	$RetiraAula(ListaNaoAlocadas, a) $ \;
 	$OrdenaAulasPorConflitos(ListaNaoAlocadas) $ \;
 }
-\caption{Algoritmo construtivo para geraÁ„o de tabela-hor·rio inicial}
+\caption{Algoritmo construtivo para gera√ß√£o de tabela-hor√°rio inicial}
 \end{algorithm}
 
-A figura \ref{fig:solucao-inicial} ilustra uma iteraÁ„o do algoritmo \ref{solInicialGrasp-ITC2007} aplicado na inst‚ncia \textit{Toy}, que foi descrita na seÁ„o \ref{sec:formulacao}. A inst‚ncia foi simplificada para facilitar a ilustraÁ„o. S„o apenas trÍs dias de aula, cada um com dois hor·rios. As disciplinas \textit{SceCosC}, \textit{ArcTec}, \textit{TecCos} e \textit{GeoTec} possuem respectivamente 1, 1, 2 e 2 aulas semanais. Vamos supor tambÈm que as duas aulas de \textit{GeoTec} devem acontecer em dois dias diferentes.
+A figura \ref{fig:solucao-inicial} ilustra uma itera√ß√£o do algoritmo \ref{solInicialGrasp-ITC2007} aplicado na inst√¢ncia \textit{Toy}, que foi descrita na se√ß√£o \ref{sec:formulacao}. A inst√¢ncia foi simplificada para facilitar a ilustra√ß√£o. S√£o apenas tr√™s dias de aula, cada um com dois hor√°rios. As disciplinas \textit{SceCosC}, \textit{ArcTec}, \textit{TecCos} e \textit{GeoTec} possuem respectivamente 1, 1, 2 e 2 aulas semanais. Vamos supor tamb√©m que as duas aulas de \textit{GeoTec} devem acontecer em dois dias diferentes.
 
-Na ilustraÁ„o da figura \ref{fig:solucao-inicial} quatro aulas j· foram alocadas e a prÛxima È uma aula da disciplina \textit{GeoTec} (GT), pois È a primeira da lista de n„o-alocadas. O primeiro passo È verificar se h· posiÁıes vi·veis para inserir a aula. Os hor·rios $h0$ e $h1$ s„o descartados pois neles h· aulas conflitantes da disciplina \textit{TecCos} por serem do mesmo currÌculo. O hor·rio $h3$ tambÈm È descartado pois j· possui uma aula de GT. O conjunto de hor·rios vi·veis È portanto $H = \{h2, h4, h5 \}$. A aula GT pode ser alocada em qualquer um dos hor·rios pertencentes a $H$, pois a viabilidade da tabela fica mantida, uma vez que os hor·rios invi·veis foram descartados.
+Na ilustra√ß√£o da figura \ref{fig:solucao-inicial} quatro aulas j√° foram alocadas e a pr√≥xima √© uma aula da disciplina \textit{GeoTec} (GT), pois √© a primeira da lista de n√£o-alocadas. O primeiro passo √© verificar se h√° posi√ß√µes vi√°veis para inserir a aula. Os hor√°rios $h0$ e $h1$ s√£o descartados pois neles h√° aulas conflitantes da disciplina \textit{TecCos} por serem do mesmo curr√≠culo. O hor√°rio $h3$ tamb√©m √© descartado pois j√° possui uma aula de GT. O conjunto de hor√°rios vi√°veis √© portanto $H = \{h2, h4, h5 \}$. A aula GT pode ser alocada em qualquer um dos hor√°rios pertencentes a $H$, pois a viabilidade da tabela fica mantida, uma vez que os hor√°rios invi√°veis foram descartados.
 
- Todas as salas que estiverem desocupadas nestes hor·rios s„o avaliadas para montar a lista restrita de candidatos. Os custos de cada posiÁ„o s„o calculados levando em consideraÁ„o as penalizaÁıes das restriÁıes fracas. Exemplificando duas opÁıes:
+ Todas as salas que estiverem desocupadas nestes hor√°rios s√£o avaliadas para montar a lista restrita de candidatos. Os custos de cada posi√ß√£o s√£o calculados levando em considera√ß√£o as penaliza√ß√µes das restri√ß√µes fracas. Exemplificando duas op√ß√µes:
 
 \begin{itemize}
 
 \item (rA, h2):
 	\begin{itemize}
-	\item Capacidade de Sala: N„o h· penalizaÁ„o, pois rA possui 32 assentos e GT 18 alunos.
-	\item Estabilidade de Sala: H· penalizaÁ„o, pois uma aula de GT j· est· alocada em rC. Assim GT passaria a ter aulas em duas salas diferentes, logo, penalizaÁ„o de 1 unidade.
-	\item Aulas Isoladas: N„o h· penalizaÁ„o, pois em $h3$ h· uma aula do mesmo currÌculo.
-	\item Dias MÌnimos de Trabalho: H· penalizaÁ„o, pois GT teria aula em apenas um dia, enquanto o mÌnimo requerido s„o dois. PenalizaÁ„o de 1 unidade com peso 5.
+	\item Capacidade de Sala: N√£o h√° penaliza√ß√£o, pois rA possui 32 assentos e GT 18 alunos.
+	\item Estabilidade de Sala: H√° penaliza√ß√£o, pois uma aula de GT j√° est√° alocada em rC. Assim GT passaria a ter aulas em duas salas diferentes, logo, penaliza√ß√£o de 1 unidade.
+	\item Aulas Isoladas: N√£o h√° penaliza√ß√£o, pois em $h3$ h√° uma aula do mesmo curr√≠culo.
+	\item Dias M√≠nimos de Trabalho: H√° penaliza√ß√£o, pois GT teria aula em apenas um dia, enquanto o m√≠nimo requerido s√£o dois. Penaliza√ß√£o de 1 unidade com peso 5.
 	\item Custo Total: 6.
 	\end{itemize}
 
 \item (rC, h5):
 	\begin{itemize}
-	\item Capacidade de Sala: N„o h· penalizaÁ„o, pois rC possui 40 assentos e GT 18 alunos.
-	\item Estabilidade de Sala: N„o h· penalizaÁ„o, pois GT continuaria usando apenas uma sala.
-	\item Aulas Isoladas: H· penalizaÁ„o, pois n„o h· uma aula do mesmo currÌculo em perÌodos adjacentes do mesmo dia. PenalizaÁ„o de 1 unidade com peso 2.
-	\item Dias MÌnimos de Trabalho: N„o h· penalizaÁ„o, pois GT teria aulas em dois dias diferentes.
+	\item Capacidade de Sala: N√£o h√° penaliza√ß√£o, pois rC possui 40 assentos e GT 18 alunos.
+	\item Estabilidade de Sala: N√£o h√° penaliza√ß√£o, pois GT continuaria usando apenas uma sala.
+	\item Aulas Isoladas: H√° penaliza√ß√£o, pois n√£o h√° uma aula do mesmo curr√≠culo em per√≠odos adjacentes do mesmo dia. Penaliza√ß√£o de 1 unidade com peso 2.
+	\item Dias M√≠nimos de Trabalho: N√£o h√° penaliza√ß√£o, pois GT teria aulas em dois dias diferentes.
 	\item Custo Total: 2.
 	\end{itemize}
 \end{itemize}
 
-Avaliando todas as combinaÁıes de sala e hor·rios disponÌveis, temos o menor custo $c^{min} = 2$ e o m·ximo $c^{max} = 6$. As combinaÁıes que ir„o para a lista restrita de candidatos s„o as que tem custo no intervalo \begin{math} [c^{min}; c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Usando $\alpha=0.15$, teremos um intervalo \begin{math} [2;\, 2+0,15(6 - 2)]\end{math}, ou \begin{math} [2;\,2,6]\end{math}. Somente as combinaÁıes que tem custo neste intervalo s„o ($rC,h4$) e ($rC,h5$). Escolhendo aleatoriamente a segunda, GT ser· alocada na sala $rC$ e hor·rio $h5$. Consequentemente, GT sai da lista de aulas n„o-alocadas restando apenas SC.
+Avaliando todas as combina√ß√µes de sala e hor√°rios dispon√≠veis, temos o menor custo $c^{min} = 2$ e o m√°ximo $c^{max} = 6$. As combina√ß√µes que ir√£o para a lista restrita de candidatos s√£o as que tem custo no intervalo \begin{math} [c^{min}; c^{min}+\alpha(c^{max} - c^{min})]\end{math}. Usando $\alpha=0.15$, teremos um intervalo \begin{math} [2;\, 2+0,15(6 - 2)]\end{math}, ou \begin{math} [2;\,2,6]\end{math}. Somente as combina√ß√µes que tem custo neste intervalo s√£o ($rC,h4$) e ($rC,h5$). Escolhendo aleatoriamente a segunda, GT ser√° alocada na sala $rC$ e hor√°rio $h5$. Consequentemente, GT sai da lista de aulas n√£o-alocadas restando apenas SC.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=15cm]{./SolInicial.eps}
- \caption[Etapa de construÁ„o de uma soluÁ„o inicial]{Etapa de construÁ„o de uma soluÁ„o inicial. ¿ direita as etapas de uma iteraÁ„o e ‡ esquerda o antes e depois da tabela-hor·rio.}
+ \caption[Etapa de constru√ß√£o de uma solu√ß√£o inicial]{Etapa de constru√ß√£o de uma solu√ß√£o inicial. √Ä direita as etapas de uma itera√ß√£o e √† esquerda o antes e depois da tabela-hor√°rio.}
    \label{fig:solucao-inicial}
 \end{center}
 \end{figure}
 
-As soluÁıes produzidas pelo algoritmo \ref{solInicialGrasp-ITC2007} s„o sempre vi·veis porque em cada iteraÁ„o somente os hor·rios que garantem a viabilidade s„o usados. No melhor caso o algoritmo termina apÛs $n$ iteraÁıes, onde $n$ È a quantidade de aulas a serem alocadas. Quando h· explosıes, um n˙mero maior que $n$ iteraÁıes È executado porque aulas voltam para lista das n„o-alocadas. Experimentalmente foi verificado que tambÈm nestes casos o algoritmo converge e produz uma soluÁ„o vi·vel.
+As solu√ß√µes produzidas pelo algoritmo \ref{solInicialGrasp-ITC2007} s√£o sempre vi√°veis porque em cada itera√ß√£o somente os hor√°rios que garantem a viabilidade s√£o usados. No melhor caso o algoritmo termina ap√≥s $n$ itera√ß√µes, onde $n$ √© a quantidade de aulas a serem alocadas. Quando h√° explos√µes, um n√∫mero maior que $n$ itera√ß√µes √© executado porque aulas voltam para lista das n√£o-alocadas. Experimentalmente foi verificado que tamb√©m nestes casos o algoritmo converge e produz uma solu√ß√£o vi√°vel.
 
 \subsection{Buscal local\label{subsec:abordagens}}
 
-O objetivo da fase de busca local È melhorar a tabela-hor·rio inicial. Para isso È preciso primeiro definir quais movimentos devem ser realizados para explorar a vizinhanÁa da soluÁ„o. Foram implementados dois movimentos distintos:
+O objetivo da fase de busca local √© melhorar a tabela-hor√°rio inicial. Para isso √© preciso primeiro definir quais movimentos devem ser realizados para explorar a vizinhan√ßa da solu√ß√£o. Foram implementados dois movimentos distintos:
 
 \begin{itemize}
-\item \textbf{\textit{MOVE}}: Uma aula È movida para uma posiÁ„o desocupada na tabela-hor·rio.
-\item \textbf{\textit{SWAP}}: Duas aulas trocam de posiÁ„o na tabela-hor·rio.
+\item \textbf{\textit{MOVE}}: Uma aula √© movida para uma posi√ß√£o desocupada na tabela-hor√°rio.
+\item \textbf{\textit{SWAP}}: Duas aulas trocam de posi√ß√£o na tabela-hor√°rio.
 \end{itemize}
 
-Como o GRASP n„o especifica qual estratÈgia de busca local, v·rias podem ser usadas. Neste trabalho fazemos uso de duas estratÈgias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}.
+Como o GRASP n√£o especifica qual estrat√©gia de busca local, v√°rias podem ser usadas. Neste trabalho fazemos uso de duas estrat√©gias: a primeira, mais simples, do tipo \textit{Hill Climbing} e a segunda, \textit{Simulated Annealing}.
 
-No \textit{Hill Climbing} \cite{Glover89}, a partir de uma soluÁ„o inicial, em cada iteraÁ„o um vizinho È gerado. Quando um vizinho com melhor valor de funÁ„o objetivo È encontrado, ele passa a ser a soluÁ„o atual. O algoritmo termina com $N$ iteraÁıes sem melhora da funÁ„o objetivo, onde $N$ È par‚metro do algoritmo.
+No \textit{Hill Climbing} \cite{Glover89}, a partir de uma solu√ß√£o inicial, em cada itera√ß√£o um vizinho √© gerado. Quando um vizinho com melhor valor de fun√ß√£o objetivo √© encontrado, ele passa a ser a solu√ß√£o atual. O algoritmo termina com $N$ itera√ß√µes sem melhora da fun√ß√£o objetivo, onde $N$ √© par√¢metro do algoritmo.
 
-Particularmente para o ITC-2007, nos testes computacionais realizados, essa estratÈgia mos\-trou-se pouco eficiente, se prendendo facilmente em mÌnimos locais.
+Particularmente para o ITC-2007, nos testes computacionais realizados, essa estrat√©gia mos\-trou-se pouco eficiente, se prendendo facilmente em m√≠nimos locais.
 
-Uma modificaÁ„o proposta foi trocar a busca em profundidade, tradicional no \textit{Hill Climbing}, por busca em largura. No entanto, a busca em largura È invi·vel para este problema, pois a quantidade de vizinhos de uma tabela-hor·rio È muito grande. Assim, implementamos uma vers„o hÌbrida: em cada iteraÁ„o s„o gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a soluÁ„o atual. Controlando o valor $k$ adequadamente esta vers„o consegue resultados superiores com uma eficiÍncia compatÌvel ‡ busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
+Uma modifica√ß√£o proposta foi trocar a busca em profundidade, tradicional no \textit{Hill Climbing}, por busca em largura. No entanto, a busca em largura √© invi√°vel para este problema, pois a quantidade de vizinhos de uma tabela-hor√°rio √© muito grande. Assim, implementamos uma vers√£o h√≠brida: em cada itera√ß√£o s√£o gerados $k$ vizinhos e, caso haja melhora, o melhor deles passa a ser a solu√ß√£o atual. Controlando o valor $k$ adequadamente esta vers√£o consegue resultados superiores com uma efici√™ncia compat√≠vel √† busca em profundidade. Fazendo $k=1$, tem-se o algoritmo \textit{Hill Climbing} original.
 
 \begin{algorithm}[H]
 \label{algoHC}
@@ -789,8 +790,8 @@ Uma modificaÁ„o proposta foi trocar a busca em profundidade, tradicional no \tex
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{SoluÁ„o S , $N$, $k$}
-\Saida{Melhor SoluÁ„o $S^{*}$}
+\Entrada{Solu√ß√£o S , $N$, $k$}
+\Saida{Melhor Solu√ß√£o $S^{*}$}
 
 $i \leftarrow 0$ \;
 $S^{*} \leftarrow S $ \;
@@ -804,18 +805,18 @@ $S^{*} \leftarrow S $ \;
 
 	$i \leftarrow i + 1$ \;
 }
-\caption{\textit{Hill Climbing} com geraÁ„o de k vizinhos por iteraÁ„o}
+\caption{\textit{Hill Climbing} com gera√ß√£o de k vizinhos por itera√ß√£o}
 \end{algorithm}
 
-O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Destaque para a funÁ„o de geraÁ„o de vizinho na linha 4. AlÈm da soluÁ„o atual, ela recebe como par‚metro o valor de $k$ que È a quantidade de vizinhos que ser„o gerados. A funÁ„o retorna o melhor deles, $S'$. O algoritmo inicializa na linha um o contador de iteraÁıes sem melhora. Se o melhor vizinho gerado na linha 4 È melhor que a melhor soluÁ„o encontrada ($\Delta f < 0$), ent„o este vizinho passa a ser a soluÁ„o atual e o contador de iteraÁıes sem melhora È zerado.
+O algoritmo \ref{algoHC} mostra o algoritmo {\it Hill Climbing} modificado. Destaque para a fun√ß√£o de gera√ß√£o de vizinho na linha 4. Al√©m da solu√ß√£o atual, ela recebe como par√¢metro o valor de $k$ que √© a quantidade de vizinhos que ser√£o gerados. A fun√ß√£o retorna o melhor deles, $S'$. O algoritmo inicializa na linha um o contador de itera√ß√µes sem melhora. Se o melhor vizinho gerado na linha 4 √© melhor que a melhor solu√ß√£o encontrada ($\Delta f < 0$), ent√£o este vizinho passa a ser a solu√ß√£o atual e o contador de itera√ß√µes sem melhora √© zerado.
 
-Foi verificado que esta nova vers„o consegue explorar melhor o espaÁo de soluÁıes, conseguindo tabelas-hor·rio melhores com menos tempo de execuÁ„o.
+Foi verificado que esta nova vers√£o consegue explorar melhor o espa√ßo de solu√ß√µes, conseguindo tabelas-hor√°rio melhores com menos tempo de execu√ß√£o.
 
-Mas levando-se em conta os resultados conhecidos na literatura, as respostas n„o estavam satisfatÛrias para a maioria das inst‚ncias. Foi necess·rio investir numa estratÈgia mais rebuscada, que intensifique bem a soluÁ„o inicial e seja capaz de escapar de mÌnimos locais. A opÁ„o adotada foi usar \textit{Simulated Annealing} \cite{SA}. Essa estratÈgia de busca È inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
+Mas levando-se em conta os resultados conhecidos na literatura, as respostas n√£o estavam satisfat√≥rias para a maioria das inst√¢ncias. Foi necess√°rio investir numa estrat√©gia mais rebuscada, que intensifique bem a solu√ß√£o inicial e seja capaz de escapar de m√≠nimos locais. A op√ß√£o adotada foi usar \textit{Simulated Annealing} \cite{SA}. Essa estrat√©gia de busca √© inspirada num processo de metalurgia que aquece um material e resfria de modo controlado visando diminuir seus defeitos.
 
-O algoritmo \textit{Simulated Annealing} (SA) possui trÍs par‚metros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada atÈ chegar a temperatura final. Em cada temperatura, $N_v$ vizinhos s„o gerados. Se o vizinho gerado È melhor que a soluÁ„o atual, esta È atualizada. Se o vizinho for pior, ele È aceito com uma probabilidade igual a $P = e^{-\Delta f/ T}$, onde $\Delta f$ È a diferenÁa de valor da funÁ„o objetivo do vizinho e da soluÁ„o atual e $T$ È a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura, menores ser„o as chances de aceitar o vizinho. O comportamento tÌpico do algoritmo È aceitar grande diversificaÁ„o no inÌcio, quando a temperatura est· alta. ¿ medida que ela decresce, poucas pioras v„o sendo aceitas e uma determinada regi„o da busca È intensificada.
+O algoritmo \textit{Simulated Annealing} (SA) possui tr√™s par√¢metros principais: temperatura inicial, final e taxa de resfriamento. O algoritmo parte de uma temperatura inicial que vai sendo resfriada at√© chegar a temperatura final. Em cada temperatura, $N_v$ vizinhos s√£o gerados. Se o vizinho gerado √© melhor que a solu√ß√£o atual, esta √© atualizada. Se o vizinho for pior, ele √© aceito com uma probabilidade igual a $P = e^{-\Delta f/ T}$, onde $\Delta f$ √© a diferen√ßa de valor da fun√ß√£o objetivo do vizinho e da solu√ß√£o atual e $T$ √© a temperatura atual. Quanto maior for $\Delta f$ e menor a temperatura, menores ser√£o as chances de aceitar o vizinho. O comportamento t√≠pico do algoritmo √© aceitar grande diversifica√ß√£o no in√≠cio, quando a temperatura est√° alta. √Ä medida que ela decresce, poucas pioras v√£o sendo aceitas e uma determinada regi√£o da busca √© intensificada.
 
-O algoritmo \ref{algoSA} apresenta o pseudo-cÛdigo do \textit{Simulated Annealing} para o ITC-2007.
+O algoritmo \ref{algoSA} apresenta o pseudo-c√≥digo do \textit{Simulated Annealing} para o ITC-2007.
 
 \begin{algorithm}[H]
 \label{algoSA}
@@ -824,8 +825,8 @@ O algoritmo \ref{algoSA} apresenta o pseudo-cÛdigo do \textit{Simulated Annealin
 \SetKwFunction{BuscaLocal}{BuscaLocal}
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
-\Entrada{SoluÁ„o S , $T_i$, $T_f$, $\beta$, $N_v$}
-\Saida{SoluÁ„o $S^{*}$}
+\Entrada{Solu√ß√£o S , $T_i$, $T_f$, $\beta$, $N_v$}
+\Saida{Solu√ß√£o $S^{*}$}
 
 $T \leftarrow T_i$ \;
 $S^{*} \leftarrow S $ \;
@@ -836,7 +837,7 @@ $S^{*} \leftarrow S $ \;
 		\Se{$ \Delta f < 0$}{
 			$S^{*} \leftarrow S' $ \;
 		}\Senao{
-			Gere um n˙mero aleatÛrio $p \in (0, 1]$ \;
+			Gere um n√∫mero aleat√≥rio $p \in (0, 1]$ \;
 			\Se{$ p < e^{-\Delta f / T} $}{
 				$S^{*} \leftarrow S' $ \;
 			}
@@ -847,22 +848,22 @@ $S^{*} \leftarrow S $ \;
 \caption{\textit{Simulated Annealing} para fase de busca local}
 \end{algorithm}
 
-Tanto no algoritmo \textit{Hill Climbing} quanto no \textit{Simulated Annealing}, a geraÁ„o dos vizinhos È feita na mesma proporÁ„o de utilizaÁ„o dos movimentos: $50\%$ com \textit{MOVE} e $50\%$ com \textit{SWAP}. Em \cite{CDGS11b}, os mesmos movimentos s„o aplicados, mas para a segunda formulaÁ„o do ITC-2007. Neste trabalho $60\%$ dos vizinhos s„o gerados com \textit{MOVE}, e os outros $40\%$ s„o gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado atravÈs de testes que esta estratÈgia n„o se adapta t„o bem ‡ terceira formulaÁ„o do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge soluÁıes melhores e de forma mais r·pida. Uma possÌvel explicaÁ„o para este comportamento È que aplicando dois movimentos seguidos, um movimento pode interferir na melhora obtida pelo outro.
+Tanto no algoritmo \textit{Hill Climbing} quanto no \textit{Simulated Annealing}, a gera√ß√£o dos vizinhos √© feita na mesma propor√ß√£o de utiliza√ß√£o dos movimentos: $50\%$ com \textit{MOVE} e $50\%$ com \textit{SWAP}. Em \cite{CDGS11b}, os mesmos movimentos s√£o aplicados, mas para a segunda formula√ß√£o do ITC-2007. Neste trabalho $60\%$ dos vizinhos s√£o gerados com \textit{MOVE}, e os outros $40\%$ s√£o gerados com \textit{MOVE} seguido de um \textit{SWAP}. Foi verificado atrav√©s de testes que esta estrat√©gia n√£o se adapta t√£o bem √† terceira formula√ß√£o do campeonato. Gerando $50\%$ dos vizinhos com \textit{MOVE} e os outros $50\%$ somente com \textit{SWAP} o algoritmo atinge solu√ß√µes melhores e de forma mais r√°pida. Uma poss√≠vel explica√ß√£o para este comportamento √© que aplicando dois movimentos seguidos, um movimento pode interferir na melhora obtida pelo outro.
 
 \subsection{Path-relinking}
 
-No algoritmo proposto o \textit{Path-relinking} È aplicado sobre a soluÁ„o obtida na busca local e uma soluÁ„o do conjunto Elite. De acordo com \cite{Resende05graspwith}, o caminho percorrido entre as duas soluÁıes pode ser feito de diversas maneiras. As duas principais s„o:
+No algoritmo proposto o \textit{Path-relinking} √© aplicado sobre a solu√ß√£o obtida na busca local e uma solu√ß√£o do conjunto Elite. De acordo com \cite{Resende05graspwith}, o caminho percorrido entre as duas solu√ß√µes pode ser feito de diversas maneiras. As duas principais s√£o:
 
 \begin{itemize}
-\item \textbf{Religamento direto}: PR parte da soluÁ„o pior em direÁ„o ‡ melhor.
-\item \textbf{Religamento inverso}: PR È aplicado partindo da melhor soluÁ„o em direÁ„o ‡ pior.
+\item \textbf{Religamento direto}: PR parte da solu√ß√£o pior em dire√ß√£o √† melhor.
+\item \textbf{Religamento inverso}: PR √© aplicado partindo da melhor solu√ß√£o em dire√ß√£o √† pior.
 \end{itemize}
 
-Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execuÁ„o È o dobro. \cite{Resende05graspwith} indicam que no caso de fazer a opÁ„o por somente uma das trajetÛrias, as melhores soluÁıes geralmente s„o encontradas utilizando religamento inverso. A explicaÁ„o para isso È que boas soluÁıes tendem a estar prÛximas ‡ soluÁ„o mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma soluÁ„o elite como a inicial e a soluÁ„o obtida na busca local È a soluÁ„o alvo.
+Pode se optar por construir os dois caminhos, com a desvantagem que o tempo de execu√ß√£o √© o dobro. \cite{Resende05graspwith} indicam que no caso de fazer a op√ß√£o por somente uma das trajet√≥rias, as melhores solu√ß√µes geralmente s√£o encontradas utilizando religamento inverso. A explica√ß√£o para isso √© que boas solu√ß√µes tendem a estar pr√≥ximas √† solu√ß√£o mais promissora. Sendo assim, o GRASP proposto neste trabalho aplica \textit{Path-relinking} usando uma solu√ß√£o elite como a inicial e a solu√ß√£o obtida na busca local √© a solu√ß√£o alvo.
 
-Durante a busca local, movimentos que introduzem inviabilidades na soluÁ„o s„o descartados. Assim a viabilidade da soluÁ„o obtida na fase de construÁ„o inicial fica garantida.
+Durante a busca local, movimentos que introduzem inviabilidades na solu√ß√£o s√£o descartados. Assim a viabilidade da solu√ß√£o obtida na fase de constru√ß√£o inicial fica garantida.
 
-O algoritmo \ref{algoGraspFinal} resume a proposta desse trabalho: GRASP com PR para o problema de tabela-hor·rio de universidades, terceira formulaÁ„o do ITC-2007. Observe que a fase de busca local È configur·vel, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}, gerando duas versıes diferentes.
+O algoritmo \ref{algoGraspFinal} resume a proposta desse trabalho: GRASP com PR para o problema de tabela-hor√°rio de universidades, terceira formula√ß√£o do ITC-2007. Observe que a fase de busca local √© configur√°vel, podendo ser {\it Hill Climbing} ou {\it Simulated Annealing}, gerando duas vers√µes diferentes.
 
 \begin{algorithm}[H]
 \label{algoGraspFinal}
@@ -872,7 +873,7 @@ O algoritmo \ref{algoGraspFinal} resume a proposta desse trabalho: GRASP com PR 
 \SetKwFunction{PathRelinking}{PathRelinking}
 \SetKwFunction{AtualizaPool}{AtualizaPool}
 \Entrada{MaxIter, MaxElite}
-\Saida{Melhor SoluÁ„o $S^{*}$}
+\Saida{Melhor Solu√ß√£o $S^{*}$}
 
 $f^{*} \leftarrow \infty $ \;
 $Elite \leftarrow \emptyset $ \;
@@ -901,22 +902,22 @@ $Elite \leftarrow \emptyset $ \;
 %{\small Lavousier}\end{flushright}{\small \par}
 %\vfill{}
 
-Neste capÌtulo s„o apresentados alguns detalhes de implementaÁ„o n„o mencionados no capÌtulo anterior. TambÈm s„o descritas as inst‚ncias usadas para testar os algoritmos e mencionado como foram feitas as escolhas dos par‚metros do GRASP, alÈm dos par‚metros especÌficos das buscas locais \textit{Hill Climbing} e \textit{Simulated Annealing}. No final do capÌtulo os resultados obtidos pelos algoritmos s„o tabulados e comparados com os resultados oficiais do ITC-2007.
+Neste cap√≠tulo s√£o apresentados alguns detalhes de implementa√ß√£o n√£o mencionados no cap√≠tulo anterior. Tamb√©m s√£o descritas as inst√¢ncias usadas para testar os algoritmos e mencionado como foram feitas as escolhas dos par√¢metros do GRASP, al√©m dos par√¢metros espec√≠ficos das buscas locais \textit{Hill Climbing} e \textit{Simulated Annealing}. No final do cap√≠tulo os resultados obtidos pelos algoritmos s√£o tabulados e comparados com os resultados oficiais do ITC-2007.
 %\newpage
 
-\section{DescriÁ„o das inst‚ncias utilizadas}
+\section{Descri√ß√£o das inst√¢ncias utilizadas}
 
-As inst‚ncias utilizadas foram as mesmas submetidas aos competidores do ITC-2007.
-S„o 21 inst‚ncias ao todo, com grau de dificuldade variado. A organizaÁ„o garante que existe soluÁ„o vi·vel para todas as inst‚ncias, fato que foi comprovado nos testes. Mas nada foi informado sobre a quantidade de violaÁıes fracas em cada inst‚ncia. Em \cite{itc2007} podem ser obtidas todas as inst‚ncias.
+As inst√¢ncias utilizadas foram as mesmas submetidas aos competidores do ITC-2007.
+S√£o 21 inst√¢ncias ao todo, com grau de dificuldade variado. A organiza√ß√£o garante que existe solu√ß√£o vi√°vel para todas as inst√¢ncias, fato que foi comprovado nos testes. Mas nada foi informado sobre a quantidade de viola√ß√µes fracas em cada inst√¢ncia. Em \cite{itc2007} podem ser obtidas todas as inst√¢ncias.
 
-Na tabela \ref{tab:instancias} s„o apresentados os dados mais relevantes de cada inst‚ncia. A quantidade de hor·rios de aula numa semana n„o varia muito de inst‚ncia para inst‚ncia. A coluna conflitos conta a quantidade de pares de aula que n„o podem ser alocadas no mesmo hor·rio (mesma disciplina, mesmo currÌculo ou mesmo professor) dividido pelo total de pares distintos de aula. A disponibilidade mede percentualmente a quantidade de hor·rios que s„o disponÌveis para as aulas, levando-se em consideraÁ„o as restriÁıes de indisponibilidade que s„o informadas no arquivo de entrada.
+Na tabela \ref{tab:instancias} s√£o apresentados os dados mais relevantes de cada inst√¢ncia. A quantidade de hor√°rios de aula numa semana n√£o varia muito de inst√¢ncia para inst√¢ncia. A coluna conflitos conta a quantidade de pares de aula que n√£o podem ser alocadas no mesmo hor√°rio (mesma disciplina, mesmo curr√≠culo ou mesmo professor) dividido pelo total de pares distintos de aula. A disponibilidade mede percentualmente a quantidade de hor√°rios que s√£o dispon√≠veis para as aulas, levando-se em considera√ß√£o as restri√ß√µes de indisponibilidade que s√£o informadas no arquivo de entrada.
 
-A quantidade de currÌculos e disciplinas tem grande impacto no tempo de execuÁ„o do algoritmo, pois s„o mais aulas para fazer a contagem total de violaÁıes. A quantidade de conflitos e disponibilidade influencia na dificuldade de encontrar uma soluÁ„o vi·vel, pois quanto mais conflitos e menos disponibilidade, menos hor·rios existir„o para alocar aula sem violar as restriÁıes fortes. AlÈm de dificultar a viabilidade no momento de geraÁ„o da soluÁ„o inicial, os conflitos e as disponibilidades dificultam a exploraÁ„o da vizinhanÁa na busca local, dado que muitas trocas acabam sendo descartadas por introduzirem violaÁıes das restriÁıes fortes.
+A quantidade de curr√≠culos e disciplinas tem grande impacto no tempo de execu√ß√£o do algoritmo, pois s√£o mais aulas para fazer a contagem total de viola√ß√µes. A quantidade de conflitos e disponibilidade influencia na dificuldade de encontrar uma solu√ß√£o vi√°vel, pois quanto mais conflitos e menos disponibilidade, menos hor√°rios existir√£o para alocar aula sem violar as restri√ß√µes fortes. Al√©m de dificultar a viabilidade no momento de gera√ß√£o da solu√ß√£o inicial, os conflitos e as disponibilidades dificultam a explora√ß√£o da vizinhan√ßa na busca local, dado que muitas trocas acabam sendo descartadas por introduzirem viola√ß√µes das restri√ß√µes fortes.
 
 \begin{center}
 \begin{table}[!htb]
 \begin{tabular}{|c|c|c|c|c|c|c|c|}\hline
-{\bf Inst‚ncia} & {\bf CurrÌculos} & {\bf Salas} & {\bf Disciplinas} &{\bf Hor·rios}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibi-}\\
+{\bf Inst√¢ncia} & {\bf Curr√≠culos} & {\bf Salas} & {\bf Disciplinas} &{\bf Hor√°rios}&{\bf Dias}&{\bf Conflitos} & {\bf Disponibi-}\\
  &  &  &  &{\bf por dia} & & & {\bf lidade} \\\hline
 comp01 & 14 & 6 & 30 & 6 & 5 & 13.2 & 93.1 \\ 
 comp02 & 70 & 16 & 82 & 5 & 5 & 7.97 & 76.9 \\ 
@@ -941,16 +942,16 @@ comp20 & 78 & 19 & 121 & 5 & 5 & 5.06 & 78.7 \\
 comp21 & 78 & 18 & 94 & 5 & 5 & 6.09 & 82.4 \\
 \hline
 \end{tabular}
-\caption{Tabela com informaÁıes sobre cada inst‚ncia do ITC-2007}
+\caption{Tabela com informa√ß√µes sobre cada inst√¢ncia do ITC-2007}
 \label{tab:instancias}
 \end{table}
 \end{center}
 
-\section{Detalhes de implementaÁ„o\label{sec:detalhes-implementacao}}
+\section{Detalhes de implementa√ß√£o\label{sec:detalhes-implementacao}}
 
-Todas as implementaÁıes foram feitas na linguagem C. A tabela-hor·rio È representada com uma matriz, onde as linhas representam as salas e as colunas representam os hor·rios de todos os dias. As aulas s„o representadas por n˙meros inteiros. Cada aula da disciplina È representada por um n˙mero diferente. Se a primeira disciplina da inst‚ncia possui cinco aulas semanais, ent„o elas s„o representadas com os n˙meros 1, 2, 3, 4 e 5. Uma segunda disciplina com trÍs aulas È representada na tabela com os n˙meros 6, 7 e 8, e assim por diante. Hor·rios vagos s„o representados com o valor $-1$.
+Todas as implementa√ß√µes foram feitas na linguagem C. A tabela-hor√°rio √© representada com uma matriz, onde as linhas representam as salas e as colunas representam os hor√°rios de todos os dias. As aulas s√£o representadas por n√∫meros inteiros. Cada aula da disciplina √© representada por um n√∫mero diferente. Se a primeira disciplina da inst√¢ncia possui cinco aulas semanais, ent√£o elas s√£o representadas com os n√∫meros 1, 2, 3, 4 e 5. Uma segunda disciplina com tr√™s aulas √© representada na tabela com os n√∫meros 6, 7 e 8, e assim por diante. Hor√°rios vagos s√£o representados com o valor $-1$.
 
-A tabela \ref{tab:solucao_toy_codificada} È a mesma representaÁ„o da tabela-hor·rio \ref{tab:solucao_toy} usando a codificaÁ„o com n˙meros inteiros. S„o trÍs aulas para \textit{SecCosC}, trÍs para \textit{ArcTec}, cinco para \textit{TecCos} e cinco para \textit{Geotec}, totalizando 16 aulas que est„o destacadas em negrito. Todas as demais s„o hor·rios desocupados.
+A tabela \ref{tab:solucao_toy_codificada} √© a mesma representa√ß√£o da tabela-hor√°rio \ref{tab:solucao_toy} usando a codifica√ß√£o com n√∫meros inteiros. S√£o tr√™s aulas para \textit{SecCosC}, tr√™s para \textit{ArcTec}, cinco para \textit{TecCos} e cinco para \textit{Geotec}, totalizando 16 aulas que est√£o destacadas em negrito. Todas as demais s√£o hor√°rios desocupados.
 
 \begin{center}
 \begin{table}[!htb]
@@ -965,41 +966,41 @@ rC & -1 & {\bf 7} & -1 & -1 & -1 & {\bf 8} & {\bf 1} & -1 & -1 & -1 & {\bf 2} & 
 \end{tabular}
 }
 %\end{footnotesize}
-\caption{Tabela-hor·rio para a inst‚ncia \textit{Toy} codificando as aulas com n˙meros inteiros}
+\caption{Tabela-hor√°rio para a inst√¢ncia \textit{Toy} codificando as aulas com n√∫meros inteiros}
 \label{tab:solucao_toy_codificada}
 \end{table}
 \end{center}
 
-Algumas matrizes auxiliares foram utilizadas para extrair informaÁıes de forma mais r·pida. Algumas delas s„o est·ticas pois dependem apenas das informaÁıes presentes no arquivo de entrada. Outras s„o din‚micas para refletir o estado atual da tabela-hor·rio que est· sendo considerada.
+Algumas matrizes auxiliares foram utilizadas para extrair informa√ß√µes de forma mais r√°pida. Algumas delas s√£o est√°ticas pois dependem apenas das informa√ß√µes presentes no arquivo de entrada. Outras s√£o din√¢micas para refletir o estado atual da tabela-hor√°rio que est√° sendo considerada.
 
-Descrevemos, a seguir, as duas matrizes est·ticas. Considere $N$ o n˙mero total de aulas na inst‚ncia e $H$ o total de hor·rios, que È a quantidade de dias multiplicada pela quantidade de perÌodos de aula em um dia.
+Descrevemos, a seguir, as duas matrizes est√°ticas. Considere $N$ o n√∫mero total de aulas na inst√¢ncia e $H$ o total de hor√°rios, que √© a quantidade de dias multiplicada pela quantidade de per√≠odos de aula em um dia.
 
-A primeira matriz, chamada de $AA$, possui dimens„o $N \times N$. Ela È utilizada para descobrir de forma r·pida se duas aulas tÍm conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, adota-se a seguinte convenÁ„o:
-
-\begin{itemize}
-\item $AA[a_1][a_2] = 2$: as duas aulas s„o da mesma disciplina;
-\item $AA[a_1][a_2] = 1$: as duas aulas possuem conflitos entre si, seja por estarem num mesmo currÌculo ou por serem lecionadas pelo mesmo professor;
-\item $AA[a_1][a_2] = 0$: n„o h· conflitos entre as aulas e elas n„o pertencem a mesma disciplina.
-\end{itemize}
-
-A segunda matriz est·tica, chamada de $AI$, possui dimens„o $N \times H$. Ela È utilizada para verificar quais hor·rios s„o disponÌveis para as aulas segundo as restriÁıes de indisponibilidade que s„o informadas no arquivo de entrada. Dois valores s„o possÌveis nesta matriz:
+A primeira matriz, chamada de $AA$, possui dimens√£o $N \times N$. Ela √© utilizada para descobrir de forma r√°pida se duas aulas t√™m conflito entre si, ou se pertencem a mesma disciplina. Dadas duas aulas $a_1$ e $a_2$, adota-se a seguinte conven√ß√£o:
 
 \begin{itemize}
-\item $AI[a][h] = 1$: a aula $a$ È indisponÌvel no hor·rio $h$;
-\item $AI[a][h] = 0$: a aula $a$ pode ser alocada no hor·rio $h$.
+\item $AA[a_1][a_2] = 2$: as duas aulas s√£o da mesma disciplina;
+\item $AA[a_1][a_2] = 1$: as duas aulas possuem conflitos entre si, seja por estarem num mesmo curr√≠culo ou por serem lecionadas pelo mesmo professor;
+\item $AA[a_1][a_2] = 0$: n√£o h√° conflitos entre as aulas e elas n√£o pertencem a mesma disciplina.
 \end{itemize}
 
-… preciso ressaltar que somente $AI[a][h] = 0$ n„o garante a possibilidade de $a$ ser alocada no hor·rio $h$. Durante a execuÁ„o do algoritmo È necess·rio avaliar a tabela-hor·rio em quest„o para saber se existe alguma sala desocupada no hor·rio $h$ e/ou se nenhuma aula j· alocada no hor·rio È conflitante com $a$.
+A segunda matriz est√°tica, chamada de $AI$, possui dimens√£o $N \times H$. Ela √© utilizada para verificar quais hor√°rios s√£o dispon√≠veis para as aulas segundo as restri√ß√µes de indisponibilidade que s√£o informadas no arquivo de entrada. Dois valores s√£o poss√≠veis nesta matriz:
 
-As matrizes din‚micas refletem o estado da tabela-hor·rio que est· sendo considerada. O objetivo principal destas tabelas È fazer a contagem das violaÁıes fracas de forma mais eficiente. Considere $C$ o total de currÌculos, $DC$ o total de disciplinas, $D$ a quantidade de dias, $P$ a quantidade de perÌodos de aula em um dia e $S$ o total de salas.
+\begin{itemize}
+\item $AI[a][h] = 1$: a aula $a$ √© indispon√≠vel no hor√°rio $h$;
+\item $AI[a][h] = 0$: a aula $a$ pode ser alocada no hor√°rio $h$.
+\end{itemize}
 
-A primeira matriz È $DiscDias$ com dimens„o $DC \times D$. Para uma dada disciplina $disc$ e um dia $d$, $DiscDias[disc][dia]$ retorna a quantidade de aulas da disciplina $disc$ no dia $d$. Com esta matriz È possÌvel contar mais rapidamente em quantos dias h· aulas de uma certa disciplina, facilitando o c·lculo da contagem das violaÁıes de dias mÌnimos de trabalho.
+√â preciso ressaltar que somente $AI[a][h] = 0$ n√£o garante a possibilidade de $a$ ser alocada no hor√°rio $h$. Durante a execu√ß√£o do algoritmo √© necess√°rio avaliar a tabela-hor√°rio em quest√£o para saber se existe alguma sala desocupada no hor√°rio $h$ e/ou se nenhuma aula j√° alocada no hor√°rio √© conflitante com $a$.
 
-A segunda matriz, $DiscSalas$, tem dimens„o $DC \times S$. Para uma dada disciplina $disc$ e uma sala $s$, $DiscSalas[disc][s]$ retorna a quantidade de aulas da disciplina $disc$ na sala $s$ durante a semana. Analogamente esta matriz tem por objetivo verificar quantas salas est„o sendo ocupadas pela disciplina, facilitando a contagem das violaÁıes referentes ‡ estabilidade de sala.
+As matrizes din√¢micas refletem o estado da tabela-hor√°rio que est√° sendo considerada. O objetivo principal destas tabelas √© fazer a contagem das viola√ß√µes fracas de forma mais eficiente. Considere $C$ o total de curr√≠culos, $DC$ o total de disciplinas, $D$ a quantidade de dias, $P$ a quantidade de per√≠odos de aula em um dia e $S$ o total de salas.
 
-A terceira matriz, $CurrDiasPeriodos$, È tridimensional com tamanho $C \times D \times P$. Dados um currÌculo $c$, um dia $d$ e um perÌodo $p$, $CurrDiasPeriodos[c][d][p]$ retorna a quantidade de aulas do currÌculo $c$ alocadas no dia $d$ e hor·rio $p$. Esta matriz È usada para verificar se um currÌculo est· com aulas isoladas. Se um currÌculo $c$ possui alguma aula no dia $d$ e hor·rio $p$, mas $CurrDiasPeriodos[c][d][p-1] = 0$ e $CurrDiasPeriodos[c][d][p+1] = 0$ ent„o o currÌculo $c$ n„o tem nenhuma aula no perÌodo anterior nem no prÛximo, o que gera uma violaÁ„o de aulas isoladas.
+A primeira matriz √© $DiscDias$ com dimens√£o $DC \times D$. Para uma dada disciplina $disc$ e um dia $d$, $DiscDias[disc][dia]$ retorna a quantidade de aulas da disciplina $disc$ no dia $d$. Com esta matriz √© poss√≠vel contar mais rapidamente em quantos dias h√° aulas de uma certa disciplina, facilitando o c√°lculo da contagem das viola√ß√µes de dias m√≠nimos de trabalho.
 
-As matrizes din‚micas s„o atualizadas quando um novo vizinho È gerado. Supondo que a aula $a$ da disciplina $disc$ foi movida da posiÁ„o $(s1, d1, p1)$ para a posiÁ„o $(s2, d2, p2)$  e que $disc$ pertence ao conjunto de currÌculos $C_a$ (pode ser mais de um currÌculo), as seguintes operaÁıes ser„o feitas:
+A segunda matriz, $DiscSalas$, tem dimens√£o $DC \times S$. Para uma dada disciplina $disc$ e uma sala $s$, $DiscSalas[disc][s]$ retorna a quantidade de aulas da disciplina $disc$ na sala $s$ durante a semana. Analogamente esta matriz tem por objetivo verificar quantas salas est√£o sendo ocupadas pela disciplina, facilitando a contagem das viola√ß√µes referentes √† estabilidade de sala.
+
+A terceira matriz, $CurrDiasPeriodos$, √© tridimensional com tamanho $C \times D \times P$. Dados um curr√≠culo $c$, um dia $d$ e um per√≠odo $p$, $CurrDiasPeriodos[c][d][p]$ retorna a quantidade de aulas do curr√≠culo $c$ alocadas no dia $d$ e hor√°rio $p$. Esta matriz √© usada para verificar se um curr√≠culo est√° com aulas isoladas. Se um curr√≠culo $c$ possui alguma aula no dia $d$ e hor√°rio $p$, mas $CurrDiasPeriodos[c][d][p-1] = 0$ e $CurrDiasPeriodos[c][d][p+1] = 0$ ent√£o o curr√≠culo $c$ n√£o tem nenhuma aula no per√≠odo anterior nem no pr√≥ximo, o que gera uma viola√ß√£o de aulas isoladas.
+
+As matrizes din√¢micas s√£o atualizadas quando um novo vizinho √© gerado. Supondo que a aula $a$ da disciplina $disc$ foi movida da posi√ß√£o $(s1, d1, p1)$ para a posi√ß√£o $(s2, d2, p2)$  e que $disc$ pertence ao conjunto de curr√≠culos $C_a$ (pode ser mais de um curr√≠culo), as seguintes opera√ß√µes ser√£o feitas:
 
 \begin{equation}
 \begin{split}
@@ -1012,71 +1013,71 @@ CurrDiasPeriodos[c][d2][p2] = CurrDiasPeriodos[c][d2][p2] + 1, \forall c \in C_a
 \end{split}
 \end{equation}
 
-AlÈm das matrizes auxiliares, outro detalhe importante È a geraÁ„o e avaliaÁ„o dos vizinhos. Num primeiro momento, para avaliar um vizinho gerado, o movimento era aplicado e a funÁ„o objetivo avaliava toda a tabela-hor·rio. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posiÁıes, È mais eficiente verificar o efeito das trocas localmente j· que o restante da tabela permanece inalterado. Assim, as funÁıes de geraÁ„o de vizinhos retornam, alÈm das posiÁıes de troca, um valor $\Delta f$. Se $\Delta f$ È menor que zero, ent„o significa que o vizinho ter· um melhor valor de funÁ„o objetivo.
+Al√©m das matrizes auxiliares, outro detalhe importante √© a gera√ß√£o e avalia√ß√£o dos vizinhos. Num primeiro momento, para avaliar um vizinho gerado, o movimento era aplicado e a fun√ß√£o objetivo avaliava toda a tabela-hor√°rio. Dado que \textit{MOVE} e \textit{SWAP} alteram apenas duas posi√ß√µes, √© mais eficiente verificar o efeito das trocas localmente j√° que o restante da tabela permanece inalterado. Assim, as fun√ß√µes de gera√ß√£o de vizinhos retornam, al√©m das posi√ß√µes de troca, um valor $\Delta f$. Se $\Delta f$ √© menor que zero, ent√£o significa que o vizinho ter√° um melhor valor de fun√ß√£o objetivo.
 
-Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas de dados usadas no trabalho. Todas elas correspondem a um {\it struct} no cÛdigo-fonte. O {\it struct} \texttt{Problema} contÈm as informaÁıes b·sicas, como quantidade de dias, perÌodos e salas, e ainda pendura as listas de currÌculos, disciplinas, salas e restriÁıes de indisponibilidade. Ela tambÈm armazena as matrizes est·ticas que n„o variam durante a execuÁ„o do algoritmo.
+Na figura \ref{fig:diagramaDeClasses} podem ser vistas as estruturas de dados usadas no trabalho. Todas elas correspondem a um {\it struct} no c√≥digo-fonte. O {\it struct} \texttt{Problema} cont√©m as informa√ß√µes b√°sicas, como quantidade de dias, per√≠odos e salas, e ainda pendura as listas de curr√≠culos, disciplinas, salas e restri√ß√µes de indisponibilidade. Ela tamb√©m armazena as matrizes est√°ticas que n√£o variam durante a execu√ß√£o do algoritmo.
 
-A tabela-hor·rio È representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representaÁ„o da tabela \ref{tab:solucao_toy_codificada}, alÈm de armazenar o valor da funÁ„o objetivo e as matrizes din‚micas.
+A tabela-hor√°rio √© representada pelo {\it struct} \texttt{Tabela}. Ela possui uma matriz que segue a representa√ß√£o da tabela \ref{tab:solucao_toy_codificada}, al√©m de armazenar o valor da fun√ß√£o objetivo e as matrizes din√¢micas.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=14cm]{./Diagrama.eps}
- \caption{Diagrama de classes das estruturas para modelagem da inst‚ncia e da tabela-hor·rio}
+ \caption{Diagrama de classes das estruturas para modelagem da inst√¢ncia e da tabela-hor√°rio}
    \label{fig:diagramaDeClasses}
 \end{center}
 \end{figure}
 
 
-\section{Escolha dos par‚metros}
+\section{Escolha dos par√¢metros}
 
-O algoritmo GRASP possui dois par‚metros: n˙mero m·ximo de iteraÁıes \textit{MaxIter} e o valor $\alpha$ que regula a forma de construÁ„o da soluÁ„o inicial. Como foi implementado \textit{Path-relinking}, um terceiro par‚metro, \textit{MaxElite}, foi adicionado para limitar o tamanho do conjunto de soluÁıes elite.
+O algoritmo GRASP possui dois par√¢metros: n√∫mero m√°ximo de itera√ß√µes \textit{MaxIter} e o valor $\alpha$ que regula a forma de constru√ß√£o da solu√ß√£o inicial. Como foi implementado \textit{Path-relinking}, um terceiro par√¢metro, \textit{MaxElite}, foi adicionado para limitar o tamanho do conjunto de solu√ß√µes elite.
 
-Quanto mais iteraÁıes, mais soluÁıes o algoritmo pode explorar. Foi escolhido limitar a quantidade de iteraÁıes em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, n„o È possÌvel executar essa quantidade de iteraÁıes. O n˙mero m·ximo de soluÁıes elite foi fixado em 20.
+Quanto mais itera√ß√µes, mais solu√ß√µes o algoritmo pode explorar. Foi escolhido limitar a quantidade de itera√ß√µes em 200. Mas como o campeonato exige que o algoritmo execute em aproximadamente 10 minutos, n√£o √© poss√≠vel executar essa quantidade de itera√ß√µes. O n√∫mero m√°ximo de solu√ß√µes elite foi fixado em 20.
 
-O par‚metro $\alpha \in [0, 1]$ È mais delicado. Se o seu valor for muito prÛximo de 0, o algoritmo de construÁ„o inicial tem comportamento mais guloso, produzindo soluÁıes de boa qualidade porÈm pouco diversificadas. Se $\alpha$ È mais prÛximo de 1, as soluÁıes s„o mais diversificadas mas com a desvantagem que elas tem um valor alto de funÁ„o objetivo. Foram testados diversos valores no intervalo $[0.01, 0.5]$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da soluÁ„o, mas ainda longe do que È possÌvel alcanÁar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir alguma diversificaÁ„o nas soluÁıes iniciais e manter uma qualidade razo·vel.
+O par√¢metro $\alpha \in [0, 1]$ √© mais delicado. Se o seu valor for muito pr√≥ximo de 0, o algoritmo de constru√ß√£o inicial tem comportamento mais guloso, produzindo solu√ß√µes de boa qualidade por√©m pouco diversificadas. Se $\alpha$ √© mais pr√≥ximo de 1, as solu√ß√µes s√£o mais diversificadas mas com a desvantagem que elas tem um valor alto de fun√ß√£o objetivo. Foram testados diversos valores no intervalo $[0.01, 0.5]$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solu√ß√£o, mas ainda longe do que √© poss√≠vel alcan√ßar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir alguma diversifica√ß√£o nas solu√ß√µes iniciais e manter uma qualidade razo√°vel.
 
-Os demais par‚metros s„o especÌficos das buscas locais. O algoritmo \textit{Hill Climbing} possui o par‚metro $N$, que limita a quantidade m·xima de iteraÁıes sem melhora na funÁ„o objetivo. Um valor grande de $N$ permite maior exploraÁ„o dos vizinhos, mas consome maior tempo de execuÁ„o. Como a idÈia do GRASP È explorar soluÁıes diferentes, $N$ foi fixado em 10000. Empiricamente esse valor permite explorar bem a soluÁ„o inicial sem perder muito tempo em um mÌnimo local. Um segundo par‚metro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que ser„o gerados por iteraÁ„o. AtravÈs de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluÁıes e mantÈm um desempenho compatÌvel com a vers„o original, isto È, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e n„o h· ganho justific·vel na qualidade das soluÁıes.
+Os demais par√¢metros s√£o espec√≠ficos das buscas locais. O algoritmo \textit{Hill Climbing} possui o par√¢metro $N$, que limita a quantidade m√°xima de itera√ß√µes sem melhora na fun√ß√£o objetivo. Um valor grande de $N$ permite maior explora√ß√£o dos vizinhos, mas consome maior tempo de execu√ß√£o. Como a id√©ia do GRASP √© explorar solu√ß√µes diferentes, $N$ foi fixado em 10000, a partir de testes preliminares. Empiricamente esse valor permite explorar bem a solu√ß√£o inicial sem perder muito tempo em um m√≠nimo local. Um segundo par√¢metro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que ser√£o gerados por itera√ß√£o. Atrav√©s de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas solu√ß√µes e mant√©m um desempenho compat√≠vel com a vers√£o original, isto √©, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e n√£o h√° ganho justific√°vel na qualidade das solu√ß√µes.
 
-O algoritmo \textit{Simulated Annealing} possui mais par‚metros, tornando a tarefa de calibraÁ„o mais difÌcil. Foram escolhidos par‚metros que permitem um certo grau de diversificaÁ„o no inÌcio da busca e maior intensificaÁ„o no final do processo. Como o algoritmo de soluÁ„o inicial j· fornece uma resposta com qualidade razo·vel, a temperatura inicial n„o precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma soluÁ„o inicial de boa qualidade n„o ajuda muito o processo, pois permite aceitar soluÁıes muito ruins e a melhora È observada apenas quando o resfriamento est· bem adiantado. Foi observado tambÈm que, particularmente para as inst‚ncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de $0,01$ a busca estabiliza e raramente uma soluÁ„o melhor È encontrada.
+O algoritmo \textit{Simulated Annealing} possui mais par√¢metros, tornando a tarefa de calibra√ß√£o mais dif√≠cil. Foram escolhidos par√¢metros que permitem um certo grau de diversifica√ß√£o no in√≠cio da busca e maior intensifica√ß√£o no final do processo. Como o algoritmo de solu√ß√£o inicial j√° fornece uma resposta com qualidade razo√°vel, a temperatura inicial n√£o precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma solu√ß√£o inicial de boa qualidade n√£o ajuda muito o processo, pois permite aceitar solu√ß√µes muito ruins e a melhora √© observada apenas quando o resfriamento est√° bem adiantado. Foi observado tamb√©m que, particularmente para as inst√¢ncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de $0,01$ a busca estabiliza e raramente uma solu√ß√£o melhor √© encontrada.
 
-Com base nestas observaÁıes foram escolhidos os seguintes par‚metros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaÁo de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura s„o gerados $N_v = 500$ vizinhos.
+Com base nestas observa√ß√µes foram escolhidos os seguintes par√¢metros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espa√ßo de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura s√£o gerados $N_v = 500$ vizinhos.
 
-Uma boa ferramenta que auxilia a calibraÁ„o de par‚metros de algoritmos como o \textit{Simulated Annealing} È o pacote \textit{irace} da linguagem \textit{R} \cite{irace}. Ele permite explorar de forma mais eficiente as combinaÁıes de par‚metros, reduzindo o esforÁo necess·rio para esta terefa. Neste trabalho ele sÛ foi usado em testes iniciais do SA sem o GRASP.
+Uma boa ferramenta que auxilia a calibra√ß√£o de par√¢metros de algoritmos como o \textit{Simulated Annealing} √© o pacote \textit{irace} da linguagem \textit{R} \cite{irace}. Ele permite explorar de forma mais eficiente as combina√ß√µes de par√¢metros, reduzindo o esfor√ßo necess√°rio para esta terefa. Neste trabalho ele s√≥ foi usado em testes iniciais do SA sem o GRASP.
 
-Como explicado na subseÁ„o \ref{subsec:abordagens}, os vizinhos em todas as buscas locais s„o gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos tÍm igual probabilidade de ocorrer.
+Como explicado na subse√ß√£o \ref{subsec:abordagens}, os vizinhos em todas as buscas locais s√£o gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos t√™m igual probabilidade de ocorrer.
 
-O algoritmo {\it Path-relinking} implementado n„o possui par‚metros. A ˙nica decis„o a tomar est· relacionada a forma de ligar duas soluÁıes. Testes confirmaram que as observaÁıes de \cite{Resende05graspwith} se aplicam ao problema em quest„o, e o religamento inverso È superior ao direto. Sendo assim, o algoritmo parte de uma soluÁ„o elite em direÁ„o a uma soluÁ„o Ûtima local.
+O algoritmo {\it Path-relinking} implementado n√£o possui par√¢metros. A √∫nica decis√£o a tomar est√° relacionada a forma de ligar duas solu√ß√µes. Testes confirmaram que as observa√ß√µes de \cite{Resende05graspwith} se aplicam ao problema em quest√£o, e o religamento inverso √© superior ao direto. Sendo assim, o algoritmo parte de uma solu√ß√£o elite em dire√ß√£o a uma solu√ß√£o √≥tima local.
 
-Todas estas escolhas de par‚metros foram feitas usando trÍs ou quatro inst‚ncias que representassem bem o universo de 21 inst‚ncias, procurando observar o comportamento dos algoritmos com inst‚ncias f·ceis, intermedi·rias e difÌceis.
+Todas estas escolhas de par√¢metros foram feitas usando um subconjunto das 21 inst√¢ncias, procurando observar o comportamento dos algoritmos com exemplares classificados, quanto ao n√∫mero de conflitos, em f√°ceis, intermedi√°rios e dif√≠ceis. As inst√¢ncias escolhidas foram respectivamente \textit{comp01}, \textit{comp17} e \textit{comp05}.
 
-\section{An·lise dos resultados}
+\section{An√°lise dos resultados}
 
-Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em m·quina Linux com a distribuiÁ„o Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de memÛria RAM.
+Todos os algoritmos descritos neste trabalho foram implementados na linguagem C, compilados com GCC 4.1.2 e testados em m√°quina Linux com a distribui√ß√£o Fedora Core 8, com processador Intel quad-core 2.4 GHz e 2 Gb de mem√≥ria RAM.
 
-Os organizadores do campeonato forneceram um programa execut·vel para fazer um \textit{benchmark} na m·quina de testes dos competidores. O objetivo desse programa È informar um tempo de execuÁ„o que seria equivalente nas m·quinas do campeonato. Utilizando esse programa na m·quina onde os testes foram realizados, foi estipulado um tempo de execuÁ„o de 324 segundos.
+Os organizadores do campeonato forneceram um programa execut√°vel para fazer um \textit{benchmark} na m√°quina de testes dos competidores. O objetivo desse programa √© informar um tempo de execu√ß√£o que seria equivalente nas m√°quinas do campeonato. Utilizando esse programa na m√°quina onde os testes foram realizados, foi estipulado um tempo de execu√ß√£o de 324 segundos.
 
-Foi necess·rio adicionar nos algoritmos o critÈrio de parada pelo tempo de execuÁ„o, pois nos algoritmos apresentados nesse trabalho, o ˙nico critÈrio considerado foi n˙mero m·ximo de iteraÁıes {\it{MaxIter}}.
+Foi necess√°rio adicionar nos algoritmos o crit√©rio de parada pelo tempo de execu√ß√£o, pois nos algoritmos apresentados nesse trabalho, o √∫nico crit√©rio considerado foi n√∫mero m√°ximo de itera√ß√µes {\it{MaxIter}}.
 
-Uma das melhorias implementadas no algortimo, que foi citada na seÁ„o \ref{sec:detalhes-implementacao}, È a geraÁ„o e avaliaÁ„o dos vizinhos de uma soluÁ„o. Com o intuito de medir a eficiÍncia desta modificaÁ„o descrita foram criados dois programas para gerar uma tabela-hor·rio inicial aleatÛria e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avaliaÁ„o È feita levando em consideraÁ„o toda a tabela. No segundo a avaliaÁ„o È apenas local. Usando a inst‚ncia \textit{comp01} como par‚metro e executando cada programa trÍs vezes, o primeiro executou as 100000 avaliaÁıes em um tempo computacional em torno de $44.996$ segundos na mÈdia, enquanto o segundo programa executou em torno de $4.242$ segundos na mÈdia. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a inst‚ncia \textit{comp12}, que È uma inst‚ncia maior, o primeiro programa executou em torno de $467.603$ segundos na mÈdia, enquanto o segundo em $19.803$ segundos. Nesta inst‚ncia o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de eficiÍncia foi bem significativo para a inst‚ncia maior.
+Uma das melhorias implementadas no algortimo, que foi citada na se√ß√£o \ref{sec:detalhes-implementacao}, √© a gera√ß√£o e avalia√ß√£o dos vizinhos de uma solu√ß√£o. Com o intuito de medir a efici√™ncia desta modifica√ß√£o descrita foram criados dois programas para gerar uma tabela-hor√°rio inicial aleat√≥ria e, em seguida, gerar e avaliar 100000 vizinhos desta tabela. No primeiro programa a avalia√ß√£o √© feita levando em considera√ß√£o toda a tabela. No segundo a avalia√ß√£o √© apenas local. Usando a inst√¢ncia \textit{comp01} como par√¢metro e executando cada programa tr√™s vezes, o primeiro executou as 100000 avalia√ß√µes em um tempo computacional em torno de $44.996$ segundos na m√©dia, enquanto o segundo programa executou em torno de $4.242$ segundos na m√©dia. O \textit{speedup} aproximado foi portanto de 10 vezes. Utilizando a inst√¢ncia \textit{comp12}, que √© uma inst√¢ncia maior, o primeiro programa executou em torno de $467.603$ segundos na m√©dia, enquanto o segundo em $19.803$ segundos. Nesta inst√¢ncia o \textit{speedup} foi superior a 23 vezes. Observem que o ganho de efici√™ncia foi bem significativo para a inst√¢ncia maior.
 
-O algoritmo GRASP proposto foi executado para as 21 inst‚ncias do ITC-2007. Para avaliar a eficiÍncia dos tipos de busca local abordadas nesse trabalho, trÍs versıes do algoritmo foram testadas:
+O algoritmo GRASP proposto foi executado para as 21 inst√¢ncias do ITC-2007. Para avaliar a efici√™ncia dos tipos de busca local abordadas nesse trabalho, tr√™s vers√µes do algoritmo foram testadas:
 
 \begin{itemize}
-\item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$ (Somente um vizinho È gerado por iteraÁ„o).
-\item {\bf GHC2}: Busca local {\it{Hill Climbing}} com $k=10$ (10 vizinhos s„o gerados por iteraÁ„o).
+\item {\bf GHC1}: Busca local {\it{Hill Climbing}} com $k=1$ (Somente um vizinho √© gerado por itera√ß√£o).
+\item {\bf GHC2}: Busca local {\it{Hill Climbing}} com $k=10$ (10 vizinhos s√£o gerados por itera√ß√£o).
 \item {\bf GSA}: Busca local {\it{Simulated Annealing}}, com $T_i = 1,5, T_f = 0,005, \beta = 0,999, N_v = 500$.
 \end{itemize}
 
-Tanto em GHC1 quanto em GHC2 a quantidade m·xima de iteraÁıes sem melhora È fixada em $N = 10000$.
+Tanto em GHC1 quanto em GHC2 a quantidade m√°xima de itera√ß√µes sem melhora √© fixada em $N = 10000$.
 
-A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada inst‚ncia do ITC-2007. Os valores informados se referem apenas ‡s violaÁıes das restriÁıes fracas, dado que todas as soluÁıes s„o vi·veis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geraÁ„o de n˙meros aleatÛrios. Todas as execuÁıes foram limitadas em 324 segundos.
+A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada inst√¢ncia do ITC-2007. Os valores informados se referem apenas √†s viola√ß√µes das restri√ß√µes fracas, dado que todas as solu√ß√µes s√£o vi√°veis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para gera√ß√£o de n√∫meros aleat√≥rios. Todas as execu√ß√µes foram limitadas em 324 segundos.
 
 
 \begin{table}[htbf]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
-Inst‚ncia & GHC1 & GHC2 & GSA \\ \hline
+Inst√¢ncia & GHC1 & GHC2 & GSA \\ \hline
 comp01	& 15	& {\bf 5}	& {\bf 5} \\
 comp02	& 260	& 130	& {\bf 73} \\
 comp03	& 223	& 125	& {\bf 98} \\
@@ -1092,7 +1093,7 @@ comp11	& 9	& {\bf 0}	& {\bf 0} \\ \hline
 \medskip
 \begin{tabular}{|l|c|c|c|}
 \hline
-Inst‚ncia & GHC1 & GHC2 & GSA \\ \hline
+Inst√¢ncia & GHC1 & GHC2 & GSA \\ \hline
 comp12	& 847	& 455	& {\bf 375} \\
 comp13	& 206	& 110	& {\bf 97} \\
 comp14	& 191	& 91	& {\bf 72} \\
@@ -1103,31 +1104,31 @@ comp18	& 179	& 113	& {\bf 102} \\
 comp19	& 238	& 122	& {\bf 87} \\
 comp20	& 356	& 106	& {\bf 88} \\
 comp21	& 301	& 176	& {\bf 136} \\ \hline
-MÈdia & 270,52  & 136,57 & {\bf 104,47}  \\ \hline
+M√©dia & 270,52  & 136,57 & {\bf 104,47}  \\ \hline
 \end{tabular}
-\caption{Melhores respostas obtidas pelas trÍs versıes do algoritmo: GHC1, GHC2 e GSA}
+\caption{Melhores respostas obtidas pelas tr√™s vers√µes do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
 \end{center}
 \end{table}
 
 
-Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA È o melhor dentre as trÍs versıes descritas, sendo superior em 19 inst‚ncias e empatando com GHC2 nas inst‚ncias \textit{comp01} e \textit{comp11}. Na mÈdia, GSA supera GHC1 em $258\%$ e GHC2 em $30\%$.
+Na tabela \ref{tab:resultados_gerais} pode ser observado que o algoritmo GSA √© o melhor dentre as tr√™s vers√µes descritas, sendo superior em 19 inst√¢ncias e empatando com GHC2 nas inst√¢ncias \textit{comp01} e \textit{comp11}. Na m√©dia, GSA supera GHC1 em $258\%$ e GHC2 em $30\%$.
 
-Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. As colunas est„o ordenadas pelas mÈdias das respostas obtidas. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada inst‚ncia est· destacada em negrito.
+Nas tabelas \ref{tab:solucoes_itc2007_1} e \ref{tab:solucoes_itc2007_2} podem ser vistos os resultados obtidos pelos competidores. As colunas est√£o ordenadas pelas m√©dias das respostas obtidas. Em cada tabela foi adicionada uma coluna com os resultados obtidos pelo melhor algoritmo implementado neste trabalho, o GSA. A melhor resposta de cada inst√¢ncia est√° destacada em negrito.
 
-A competiÁ„o foi dividida em duas fases descritas a seguir. A primeira fase foi mais geral e durou aproximadamente 6 meses. Todos os competidores registrados receberam sete inst‚ncias inicialmente e mais sete faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada inst‚ncia. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
+A competi√ß√£o foi dividida em duas fases descritas a seguir. A primeira fase foi mais geral e durou aproximadamente 6 meses. Todos os competidores registrados receberam sete inst√¢ncias inicialmente e mais sete faltando duas semanas para o encerramento da fase. Eles submeteram os algoritmos e as melhores respostas encontradas para cada inst√¢ncia. A tabela \ref{tab:solucoes_itc2007_1} lista os resultados desta primeira fase.
 
-Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete inst‚ncias chamadas de ocultas por n„o serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas inst‚ncias. Os resultados da primeira fase foram obtidos sem direitos de publicaÁ„o dos nomes dos n„o-finalistas, por isso est„o identificados apenas como 6∫ lugar, 7∫ lugar e assim por diante. Os cinco finalistas na ordem de classificaÁ„o s„o:
+Os cinco melhores algoritmos da fase inicial (finalistas) foram selecionados para a segunda fase. Nesta segunda etapa os organizadores executaram os cinco melhores algoritmos com mais sete inst√¢ncias chamadas de ocultas por n√£o serem conhecidas previamente pelos competidores. A tabela \ref{tab:solucoes_itc2007_2} lista os resultados dos finalistas com estas inst√¢ncias. Os resultados da primeira fase foram obtidos sem direitos de publica√ß√£o dos nomes dos n√£o-finalistas, por isso est√£o identificados apenas como 6¬∫ lugar, 7¬∫ lugar e assim por diante. Os cinco finalistas na ordem de classifica√ß√£o s√£o:
 
 \begin{enumerate}
-\item Tomas M¸ller (Estados Unidos)
-\item Zhipeng Lu e Jin-Kao Hao (FranÁa)
-\item Mitsunori Atsuta, Koji Nonobe, e Toshihide Ibaraki (Jap„o)
+\item Tomas M√ºller (Estados Unidos)
+\item Zhipeng Lu e Jin-Kao Hao (Fran√ßa)
+\item Mitsunori Atsuta, Koji Nonobe, e Toshihide Ibaraki (Jap√£o)
 \item Martin Josef Geiger (Alemanha)
 \item Michael Clark, Martin Henz e Bruce Love (Cingapura)
 \end{enumerate}
 
-Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a inst‚ncia \textit{comp05}. As melhores respostas foram obtidas para as inst‚ncias \textit{comp01} e \textit{comp11}. Considerando a mÈdia dos resultados das 14 primeiras inst‚ncias, GSA È pior que apenas trÍs competidores. O mesmo fato aconteceu para as ˙ltimas sete inst‚ncias da segunda fase.
+Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritmo GSA foi um sexto lugar com a inst√¢ncia \textit{comp05}. As melhores respostas foram obtidas para as inst√¢ncias \textit{comp01} e \textit{comp11}. Considerando a m√©dia dos resultados das 14 primeiras inst√¢ncias, GSA √© pior que apenas tr√™s competidores. O mesmo fato aconteceu para as √∫ltimas sete inst√¢ncias da segunda fase.
 
 %\begin{landscape}
 \begin{table}[htbf]
@@ -1135,7 +1136,7 @@ Pode-se notar que para os 17 competidores iniciais, o pior resultado do algoritm
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Inst‚ncia & Muller & Lu & Atzuna & Clark & Geiger & 6∫ & 7∫ & 8∫ & 9∫ & 10∫ \\ \hline
+Inst√¢ncia & Muller & Lu & Atzuna & Clark & Geiger & 6¬∫ & 7¬∫ & 8¬∫ & 9¬∫ & 10¬∫ \\ \hline
 comp01 & {\bf 5} & {\bf 5} & {\bf 5} & 10 & {\bf 5} & 9 & 23 & 6 & 31 & 18 \\
 comp02 & 43 & {\bf 34} & 55 & 83 & 108 & 154 & 86 & 185 & 218 & 206 \\
 comp03 & 72 & {\bf 70} & 91 & 106 & 115 & 120 & 121 & 184 & 189 & 235 \\
@@ -1150,7 +1151,7 @@ comp11 & {\bf 0} & {\bf 0} & {\bf 0} & 1 & {\bf 0} & {\bf 0} & 5 & {\bf 0} & 8 &
 comp12 & 331 & {\bf 320} & 344 & 383 & 430 & 510 & 828 & 458 & 594 & 676\\
 comp13 & 66 & {\bf 65} & 75 & 105 & 101 & 89 & 112 & 228 & 206 & 213\\
 comp14 & 53 & {\bf 52} & 61 & 82 & 88 & 114 & 96 & 175 & 183 & 206\\ \hline
-MÈdia & {\bf 79,21} & {\bf 79,21} & 92,21 & 119,21 & 126,14 & 171,21 & 192,86 & 231,86 & 240,43 & 246,14\\ \hline
+M√©dia & {\bf 79,21} & {\bf 79,21} & 92,21 & 119,21 & 126,14 & 171,21 & 192,86 & 231,86 & 240,43 & 246,14\\ \hline
 \end{tabular}
 \end{footnotesize}
 \\
@@ -1158,7 +1159,7 @@ MÈdia & {\bf 79,21} & {\bf 79,21} & 92,21 & 119,21 & 126,14 & 171,21 & 192,86 & 
 \begin{footnotesize}
 \begin{tabular}{|l|c|c|c|c|c|c|c||c|}
 \hline
-Inst‚ncia & 11∫ & 12∫ & 13∫ & 14∫ & 15∫ & 16∫ & 17∫ & GSA \\ \hline
+Inst√¢ncia & 11¬∫ & 12¬∫ & 13¬∫ & 14¬∫ & 15¬∫ & 16¬∫ & 17¬∫ & GSA \\ \hline
 comp01 & 30 & 114 & 97 & 112 & {\bf 5} & 61 & 943 & {\bf 5} \\
 comp02 & 252 & 295 & 393 & 485 & 127 & 1976 & 128034 & 73\\
 comp03 & 249 & 229 & 314 & 433 & 141 & 739 & 55403 & 98\\
@@ -1173,7 +1174,7 @@ comp11 & 13 & 26 & 99 & 104 & {\bf 0} & 56 & 470 & {\bf 0} \\
 comp12 & 577 & 818 & 770 & 1276 & 629 & 1902 & 204365 & 375\\
 comp13 & 257 & 214 & 408 & 460 & 112 & 779 & 56547 & 97\\
 comp14 & 221 & 239 & 487 & 393 & 88 & 756 & 84386 & 72\\ \hline
-MÈdia & 272,29 & 296,64 & 415,21 & 523,64 & 870,36 & 3562,29 & 132338,14 & 107,57\\ \hline
+M√©dia & 272,29 & 296,64 & 415,21 & 523,64 & 870,36 & 3562,29 & 132338,14 & 107,57\\ \hline
 \end{tabular}
 \end{footnotesize}
 \caption{Resultados da primeira fase do ITC-2007}
@@ -1188,7 +1189,7 @@ MÈdia & 272,29 & 296,64 & 415,21 & 523,64 & 870,36 & 3562,29 & 132338,14 & 107,5
 {\small
 \begin{tabular}{|l|c|c|c|c|c||c|}
 \hline
-Inst‚ncia & Muller & Lu & Atsuta & Geiger & Clark & GSA \\ \hline
+Inst√¢ncia & Muller & Lu & Atsuta & Geiger & Clark & GSA \\ \hline
 comp15 & 84 & {\bf 71} & 82 & 128 & 119 & 101 \\
 comp16 & {\bf 34} & 39 & 40 & 81 & 84 & 69 \\
 comp17 & {\bf 83} & 91 & 102 & 124 & 152 & 105 \\
@@ -1196,7 +1197,7 @@ comp18 & 83 & 69 & {\bf 68} & 116 & 110 & 102 \\
 comp19 & {\bf 62} & 65 & 75 & 107 & 111 & 87 \\
 comp20 & {\bf 27} & 47 & 61 & 88 & 144 & 88 \\
 comp21 & {\bf 103} & 106 & 123 & 174 & 169 & 136 \\ \hline
-MÈdia & {\bf 68} & 69,71 & 78,71 & 116,86 & 127 & 98,29 \\ \hline
+M√©dia & {\bf 68} & 69,71 & 78,71 & 116,86 & 127 & 98,29 \\ \hline
 \end{tabular}
 }
 \caption{Resultados da segunda fase do ITC-2007}
@@ -1204,67 +1205,67 @@ MÈdia & {\bf 68} & 69,71 & 78,71 & 116,86 & 127 & 98,29 \\ \hline
 \end{center}
 \end{table}
 
-Considerando a mÈdia dos resultados de todas as inst‚ncias da primeira fase, GSA teve respostas $26\%$ inferiores aos competidores Muller e Lu (primeiros colocados) e $17\%$ superior ao quinto colocado Clark.
+Considerando a m√©dia dos resultados de todas as inst√¢ncias da primeira fase, GSA teve respostas $26\%$ inferiores aos competidores Muller e Lu (primeiros colocados) e $17\%$ superior ao quinto colocado Clark.
 
-Na segunda fase, GSA foi inferior as respostas de Muller em $44\%$ e superior as respostas de Clark em $29\%$, e em mÈdia se posiciona em quarto lugar.
+Na segunda fase, GSA foi inferior as respostas de Muller em $44\%$ e superior as respostas de Clark em $29\%$, e em m√©dia se posiciona em quarto lugar.
 
-Analisando separadamente por inst‚ncia, podemos ver que os melhores resultados do GSA foram para as inst‚ncias \textit{comp01} e \textit{comp11}, conseguindo empatar com as melhores respostas do campeonato. Por outro lado, \textit{comp05} e \textit{comp12} s„o as inst‚ncias em que GSA obteve as respostas com valor de funÁ„o objetivo mais alto. Confrontando estas informaÁıes com a tabela \ref{tab:instancias}, vemos que as duas primeiras s„o inst‚ncias com maior valor de disponibilidade (superior a $90\%$), enquanto que as duas ˙ltimas s„o as que tem menor valor, prÛximo a $50\%$. Isto significa que somente metade dos hor·rios s„o disponÌveis para alocar uma aula, sem considerar outros conflitos com as aulas j· alocadas. AlÈm disso, \textit{comp05} È a inst‚ncia com maior percentual de conflitos entre as aulas, superior a $20\%$.
+Analisando separadamente por inst√¢ncia, podemos ver que os melhores resultados do GSA foram para as inst√¢ncias \textit{comp01} e \textit{comp11}, conseguindo empatar com as melhores respostas do campeonato. Por outro lado, \textit{comp05} e \textit{comp12} s√£o as inst√¢ncias em que GSA obteve as respostas com valor de fun√ß√£o objetivo mais alto. Confrontando estas informa√ß√µes com a tabela \ref{tab:instancias}, vemos que as duas primeiras s√£o inst√¢ncias com maior valor de disponibilidade (superior a $90\%$), enquanto que as duas √∫ltimas s√£o as que tem menor valor, pr√≥ximo a $50\%$. Isto significa que somente metade dos hor√°rios s√£o dispon√≠veis para alocar uma aula, sem considerar outros conflitos com as aulas j√° alocadas. Al√©m disso, \textit{comp05} √© a inst√¢ncia com maior percentual de conflitos entre as aulas, superior a $20\%$.
 
-Essas estatÌsticas s„o relevantes porque informam o qu„o difÌcil È a exploraÁ„o do espaÁo de soluÁıes. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria invi·veis, logo, acabam sendo descartados.
+Essas estat√≠sticas s√£o relevantes porque informam o qu√£o dif√≠cil √© a explora√ß√£o do espa√ßo de solu√ß√µes. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria invi√°veis, logo, acabam sendo descartados.
 
-Em \cite{ctt} podem ser vistas respostas melhores que as apresentadas neste trabalho, mas que n„o seguem a mesma metodologia de testes, principalmente quanto ao tempo de execuÁ„o. Por isso n„o foram listados para comparaÁ„o.
+Em \cite{ctt} podem ser vistas respostas melhores que as apresentadas neste trabalho, mas que n√£o seguem a mesma metodologia de testes, principalmente quanto ao tempo de execu√ß√£o. Por isso n√£o foram listados para compara√ß√£o.
 
 %\end{landscape}
 
-\chapter{Conclusıes e trabalhos futuros\label{cap:conclusao}}
+\chapter{Conclus√µes e trabalhos futuros\label{cap:conclusao}}
 
 %\vfill{}
 %\begin{flushright}{}``\emph{Nada se cria, nada se perde, tudo se transforma.}''\\
 %{\small Lavousier}\end{flushright}{\small \par}
 %\vfill{}
 
-Neste capÌtulo s„o apresentados as conclusıes obtidas com o desenvolvimento do projeto, destacando alguns pontos positivos e negativos do algoritmo GRASP. Alguns trabalhos futuros tambÈm s„o enumerados.
+Neste cap√≠tulo s√£o apresentados as conclus√µes obtidas com o desenvolvimento do projeto, destacando alguns pontos positivos e negativos do algoritmo GRASP. Alguns trabalhos futuros tamb√©m s√£o enumerados.
 %\newpage
 
 
-\section{Conclusıes}
+\section{Conclus√µes}
 
-Esta dissertaÁ„o tratou o problema de tabela-hor·rio para universidades usando a terceira formulaÁ„o do campeonato internacional de tabela-hor·rio ITC-2007. Foi utilizado a meta-heurÌstica GRASP, que atÈ ent„o sÛ havia sido aplicada para tabela-hor·rio de escolas. TrÍs algoritmos foram propostos para realizar a etapa de busca local da meta-heurÌstica: \textit{Hill Climbing} gerando um vizinho por iteraÁ„o e o mesmo algoritmo gerando $k$ vizinhos por iteraÁ„o, alÈm de uma terceira vers„o com \textit{Simulated Annealing}. O GRASP aplicado com estas buscas locais geraram respectivamente trÍs versıes: GHC1, GHC2 e GSA.
+Esta disserta√ß√£o tratou o problema de tabela-hor√°rio para universidades usando a terceira formula√ß√£o do campeonato internacional de tabela-hor√°rio ITC-2007. Foi utilizado a meta-heur√≠stica GRASP, que at√© ent√£o s√≥ havia sido aplicada para tabela-hor√°rio de escolas. Tr√™s algoritmos foram propostos para realizar a etapa de busca local da meta-heur√≠stica: \textit{Hill Climbing} gerando um vizinho por itera√ß√£o e o mesmo algoritmo gerando $k$ vizinhos por itera√ß√£o, al√©m de uma terceira vers√£o com \textit{Simulated Annealing}. O GRASP aplicado com estas buscas locais geraram respectivamente tr√™s vers√µes: GHC1, GHC2 e GSA.
 
-As trÍs versıes foram testadas com as mesmas 21 inst‚ncias utilizadas no campeonato. Foi possÌvel empatar com a melhores respostas dos competidores para as inst‚ncias \textit{comp01} e \textit{comp11}. No pior caso, com a inst‚ncia \textit{comp05}, foi alcanÁado um sexto lugar dentre 17 competidores.
+As tr√™s vers√µes foram testadas com as mesmas 21 inst√¢ncias utilizadas no campeonato. Foi poss√≠vel empatar com a melhores respostas dos competidores para as inst√¢ncias \textit{comp01} e \textit{comp11}. No pior caso, com a inst√¢ncia \textit{comp05}, foi alcan√ßado um sexto lugar dentre 17 competidores.
 
-O algoritmo GRASP (GSA) implementado produziu bons resultados, obtendo resultados competitivos para o ITC-2007. Alguns pontos positivos e negativos podem ser destacados no GRASP. Entre os pontos positivos est· o mecanismo de geraÁ„o da soluÁ„o inicial que produz soluÁıes vi·veis levando-se em consideraÁ„o os custos das violaÁıes fracas. A maioria dos algoritmos na literatura focam apenas na viabilidade da soluÁ„o, o que acaba produzindo soluÁıes iniciais com alto valor de funÁ„o objetivo. Outro ponto positivo È a facilidade de ajustar o comportamento do algoritmo, isto È, mais guloso ou mais aleatÛrio, basta regular o par‚metro $\alpha$ da fase de construÁ„o da soluÁ„o inicial.
+O algoritmo GRASP (GSA) implementado produziu bons resultados, obtendo resultados competitivos para o ITC-2007. Alguns pontos positivos e negativos podem ser destacados no GRASP. Entre os pontos positivos est√° o mecanismo de gera√ß√£o da solu√ß√£o inicial que produz solu√ß√µes vi√°veis levando-se em considera√ß√£o os custos das viola√ß√µes fracas. A maioria dos algoritmos na literatura focam apenas na viabilidade da solu√ß√£o, o que acaba produzindo solu√ß√µes iniciais com alto valor de fun√ß√£o objetivo. Outro ponto positivo √© a facilidade de ajustar o comportamento do algoritmo, isto √©, mais guloso ou mais aleat√≥rio, basta regular o par√¢metro $\alpha$ da fase de constru√ß√£o da solu√ß√£o inicial.
 
-Um ponto negativo observado È a falta de memÛria entre as iteraÁıes. {\it O Path-relinking} melhorou um pouco este quesito, mas os ganhos n„o foram relevantes.
+Um ponto negativo observado √© a falta de mem√≥ria entre as itera√ß√µes. {\it O Path-relinking} melhorou um pouco este quesito, mas os ganhos n√£o foram relevantes.
 
-Observando estes pontos conclui-se que o GRASP prioriza mais a diversificaÁ„o que a intensificaÁ„o. Para introduzir mais intensificaÁ„o, È preciso dar mais tempo de execuÁ„o ‡ fase de busca local. No caso especÌfico do problema de tabela-hor·rio a intensificaÁ„o È crucial para alcanÁar boas respostas.
+Observando estes pontos conclui-se que o GRASP prioriza mais a diversifica√ß√£o que a intensifica√ß√£o. Para introduzir mais intensifica√ß√£o, √© preciso dar mais tempo de execu√ß√£o √† fase de busca local. No caso espec√≠fico do problema de tabela-hor√°rio a intensifica√ß√£o √© crucial para alcan√ßar boas respostas.
 
-Neste trabalho foi possÌvel comprovar que apesar das meta-heurÌsticas serem algoritmos genÈricos adapt·veis a diversos problemas de otimizaÁ„o combinatÛria, um entendimento mais aprofundado do problema abordado È importante para obter bons resultados. No caso do problema de tabela-hor·rio, a eficiÍncia do GRASP foi aumentada introduzindo matrizes auxiliares e avaliaÁıes locais na geraÁ„o de vizinhos.
+Neste trabalho foi poss√≠vel comprovar que apesar das meta-heur√≠sticas serem algoritmos gen√©ricos adapt√°veis a diversos problemas de otimiza√ß√£o combinat√≥ria, um entendimento mais aprofundado do problema abordado √© importante para obter bons resultados. No caso do problema de tabela-hor√°rio, a efici√™ncia do GRASP foi aumentada introduzindo matrizes auxiliares e avalia√ß√µes locais na gera√ß√£o de vizinhos.
 
-… importante ressaltar tambÈm a relev‚ncia das vizinhanÁas nos problemas de otimizaÁ„o. A geraÁ„o dos vizinhos deve ser r·pida e capaz de explorar bem o espaÁo de soluÁıes. No caso dos problemas de tabela-hor·rio, alÈm de melhoras na funÁ„o objetivo, os vizinhos devem satisfazer certas restriÁıes, o que dificulta ainda mais a exploraÁ„o da vizinhanÁa.
+√â importante ressaltar tamb√©m a relev√¢ncia das vizinhan√ßas nos problemas de otimiza√ß√£o. A gera√ß√£o dos vizinhos deve ser r√°pida e capaz de explorar bem o espa√ßo de solu√ß√µes. No caso dos problemas de tabela-hor√°rio, al√©m de melhoras na fun√ß√£o objetivo, os vizinhos devem satisfazer certas restri√ß√µes, o que dificulta ainda mais a explora√ß√£o da vizinhan√ßa.
 
 
 \section{Trabalhos futuros}
 
-Foram detectadas algumas possÌveis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementaÁ„o de vizinhanÁas mais especÌficas. \textit{MOVE} e \textit{SWAP} s„o estruturas genÈricas que podem eliminar qualquer tipo de restriÁ„o forte ou fraca. As especÌficas fariam movimentos mais direcionados ‡ reduÁ„o de alguma violaÁ„o definida, por exemplo, espalhar aulas de uma disciplina na semana para diminuir a violaÁ„o de dias mÌnimos de trabalho. Um primeiro estudo neste sentido j· foi feito, mas os movimentos eram mais complexos, prejudicando o tempo de execuÁ„o. Uma forma mais eficiente deve ser investigada.
+Foram detectadas algumas poss√≠veis melhorias que podem ser investigadas futuramente. A primeira delas seria a implementa√ß√£o de vizinhan√ßas mais espec√≠ficas. \textit{MOVE} e \textit{SWAP} s√£o estruturas gen√©ricas que podem eliminar qualquer tipo de restri√ß√£o forte ou fraca. As espec√≠ficas fariam movimentos mais direcionados √† redu√ß√£o de alguma viola√ß√£o definida, por exemplo, espalhar aulas de uma disciplina na semana para diminuir a viola√ß√£o de dias m√≠nimos de trabalho. Um primeiro estudo neste sentido j√° foi feito, mas os movimentos eram mais complexos, prejudicando o tempo de execu√ß√£o. Uma forma mais eficiente deve ser investigada.
 
-Uma estrutura de vizinhanÁa genÈrica promissora È a que utiliza cadeias de \textit{Kempe}, com bons resultados obtidos em \cite{kempe1} e \cite{lu-hao}. A idÈia b·sica dessa vizinhanÁa È realizar um ou mais movimentos (\textit{MOVE} e/ou \textit{SWAP}, quantos forem necess·rios) que garantam um vizinho vi·vel.
+Uma estrutura de vizinhan√ßa gen√©rica promissora √© a que utiliza cadeias de \textit{Kempe}, com bons resultados obtidos em \cite{kempe1} e \cite{lu-hao}. A id√©ia b√°sica dessa vizinhan√ßa √© realizar um ou mais movimentos (\textit{MOVE} e/ou \textit{SWAP}, quantos forem necess√°rios) que garantam um vizinho vi√°vel.
 
-Uma segunda modificaÁ„o que pode ser feita no GRASP È o aumento de memorizaÁ„o entre as iteraÁıes. {\it Path-relinking} faz isso, mas de maneira muito restrita. Uma forma que est· sendo investigada È fazer com que a geraÁ„o da soluÁ„o inicial aproveite a estrutura da soluÁ„o da iteraÁ„o anterior. No caso de tabela-hor·rio, algumas aulas seriam prÈ-alocadas levando em consideraÁ„o a posiÁ„o em que estavam na soluÁ„o anterior. Neste caso seria interessante verificar as aulas que geram violaÁıes e as que n„o geram violaÁıes. As aulas que n„o estivessem gerando violaÁıes poderiam ser mantidas na mesma posiÁ„o na tabela da iteraÁ„o seguinte.
+Uma segunda modifica√ß√£o que pode ser feita no GRASP √© o aumento de memoriza√ß√£o entre as itera√ß√µes. {\it Path-relinking} faz isso, mas de maneira muito restrita. Uma forma que est√° sendo investigada √© fazer com que a gera√ß√£o da solu√ß√£o inicial aproveite a estrutura da solu√ß√£o da itera√ß√£o anterior. No caso de tabela-hor√°rio, algumas aulas seriam pr√©-alocadas levando em considera√ß√£o a posi√ß√£o em que estavam na solu√ß√£o anterior. Neste caso seria interessante verificar as aulas que geram viola√ß√µes e as que n√£o geram viola√ß√µes. As aulas que n√£o estivessem gerando viola√ß√µes poderiam ser mantidas na mesma posi√ß√£o na tabela da itera√ß√£o seguinte.
 
-N„o pretende-se investir em testes com novas inst‚ncias, dado que n„o h· certeza na literatura sobre as soluÁıes Ûtimas das inst‚ncias atuais. Portanto, um esforÁo ainda pode ser dispensado no conjunto atual disponÌvel.
+Pretende-se continuar a investir em testes computacionais com o mesmo conjunto de inst√¢ncias do ITC-2007, uma vez que v√°rias delas ainda n√£o possuem √≥timo conhecido.
 
-%{\bf Alguns itens interessantes para a conclus„o de um projeto de graduaÁ„o}
+%{\bf Alguns itens interessantes para a conclus√£o de um projeto de gradua√ß√£o}
 
-%Qual foi o resultado do seu trabalho? melhora na ·rea, testes positivos ou negativos?
-%VocÍ acha que o mecanismo gerado produziu resultados interessantes?
-%Quais os problemas que vocÍ encontrou na elaboraÁ„o do projeto?
-%E na implementaÁ„o do protÛtipo?
-%Que conclus„o vocÍ tirou das ferramentas utilizadas? (heurÌsticas, prolog, ALE, banco de dados).
-%Em que outras ·reas vocÍ julga que este trabalho seria interessante de ser aplicado?
-%Que tipo de continuidade vocÍ daria a este trabalho?
-%Que tipo de conhecimento foi necess·rio para este projeto de graduaÁ„o?
-%Para que serviu este trabalho na sua formaÁ„o?
+%Qual foi o resultado do seu trabalho? melhora na √°rea, testes positivos ou negativos?
+%Voc√™ acha que o mecanismo gerado produziu resultados interessantes?
+%Quais os problemas que voc√™ encontrou na elabora√ß√£o do projeto?
+%E na implementa√ß√£o do prot√≥tipo?
+%Que conclus√£o voc√™ tirou das ferramentas utilizadas? (heur√≠sticas, prolog, ALE, banco de dados).
+%Em que outras √°reas voc√™ julga que este trabalho seria interessante de ser aplicado?
+%Que tipo de continuidade voc√™ daria a este trabalho?
+%Que tipo de conhecimento foi necess√°rio para este projeto de gradua√ß√£o?
+%Para que serviu este trabalho na sua forma√ß√£o?
 
 
 \bibliographystyle{abnt-alf}
@@ -1274,76 +1275,77 @@ N„o pretende-se investir em testes com novas inst‚ncias, dado que n„o h· certeza
 \anexo
 
 
-\chapter{CÛdigo-fonte dos algoritmos}
+\chapter{C√≥digo-fonte dos algoritmos}
 
-Todos os cÛdigos-fontes, alÈm de arquivos auxiliares necess·rios para execuÁ„o do programa podem ser obtidos no repositÛrio \textit{github}, atravÈs do link: \textit{https://github.com/walacesrocha/ Timetabling}. O projeto pode ser obtido no formato \textit{zip} ou atravÈs do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
+Todos os c√≥digos-fontes, al√©m de arquivos auxiliares necess√°rios para execu√ß√£o do programa podem ser obtidos no reposit√≥rio \textit{github}, atrav√©s do link: \textit{https://github.com/walacesrocha/ Timetabling}. O projeto pode ser obtido no formato \textit{zip} ou atrav√©s do comando \texttt{git clone git://github.com/walacesrocha/Timetabling.git}.
 
-O projeto est· estruturado na seguinte ·rvore de diretÛrios:
+O projeto est√° estruturado na seguinte √°rvore de diret√≥rios:
 
 \begin{itemize}
-\item \textbf{ /} : arquivos .c e .h com implementaÁ„o dos algoritmos, alÈm do Makefile para auxiliar a compilaÁ„o.
-\item \textbf{ /instancias} : contÈm as 21 inst‚ncias usadas no ITC-2007.
-\item \textbf{ /solucoes} : arquivos com as melhores respostas para cada inst‚ncia.
-\item \textbf{ /validator} : ferramenta fornecida pelo ITC-2007 para validaÁ„o das respostas. Est· implementada em C++.
+\item \textbf{ /} : arquivos .c e .h com implementa√ß√£o dos algoritmos, al√©m do Makefile para auxiliar a compila√ß√£o.
+\item \textbf{ /instancias} : cont√©m as 21 inst√¢ncias usadas no ITC-2007.
+\item \textbf{ /solucoes} : arquivos com as melhores respostas para cada inst√¢ncia.
+\item \textbf{ /validator} : ferramenta fornecida pelo ITC-2007 para valida√ß√£o das respostas. Est√° implementada em C++.
 \item \textbf{ /benchmark\_machine} : ferramenta fornecida pelo ITC-2007 para ajustar o tempo de teste dos algoritmos.
 \end{itemize}
 
-As inst‚ncias oficiais e o validador tambÈm podem ser obtidas no site \cite{itc2007}.
+As inst√¢ncias oficiais e o validador tamb√©m podem ser obtidas no site \cite{itc2007}.
 
-Para compilar os cÛdigos fontes basta executar no diretÛrio raiz:
+Para compilar os c√≥digos fontes basta executar no diret√≥rio raiz:
 \begin{verbatim}
 $ make
 \end{verbatim}
 
-Todos os cÛdigos-fonte ser„o compilados e um execut·vel ser· criado com o nome \texttt{grasp}. Para executar o programa, o caminho para uma inst‚ncia deve ser informado:
+Todos os c√≥digos-fonte ser√£o compilados e um execut√°vel ser√° criado com o nome \texttt{grasp}. Para executar o programa, o caminho para uma inst√¢ncia deve ser informado:
 
 \begin{verbatim}
 $ ./grasp instancias/comp01.ctt
 \end{verbatim}
 
-O programa possui diversos par‚metros opcionais. Caso n„o sejam informados ser„o usados os valores padr„o de acordo com a tabela \ref{tab:parametros}. Os par‚metros s„o informados usando a sintaxe \texttt{parametro=valor}. Exemplo:
+O programa possui diversos par√¢metros opcionais. Caso n√£o sejam informados ser√£o usados os valores padr√£o de acordo com a tabela \ref{tab:parametros}. Os par√¢metros s√£o informados usando a sintaxe \texttt{parametro=valor}. Exemplo:
 
 \begin{verbatim}
 $ ./grasp instancias/comp01.ctt maxIter=50 alfa=0.20 seed=1
 \end{verbatim}
 
 
-O Algortimo exibe ao final a quantidade de violaÁıes fortes e fracas, alÈm da resposta formatada no padr„o do ITC-2007, que foi exemplificada na seÁ„o \ref{sec:formulacao}.
+O Algortimo exibe ao final a quantidade de viola√ß√µes fortes e fracas, al√©m da resposta formatada no padr√£o do ITC-2007, que foi exemplificada na se√ß√£o \ref{sec:formulacao}.
 
 \begin{center}
 \begin{table}[!htb]
 \begin{tabular}{|c|p{10cm}|c|}\hline
-{\bf Par‚metro} & {\bf DescriÁ„o} & {\bf Valor padr„o} \\ \hline
-maxIter & N˙mero m·ximo de iteracoes do Grasp & 200 \\ \hline
+{\bf Par√¢metro} & {\bf Descri√ß√£o} & {\bf Valor padr√£o} \\ \hline
+maxIter & N√∫mero m√°ximo de iteracoes do Grasp & 200 \\ \hline
  alfa & Valor de \textit{threshold} da LRC & 0.15 \\ \hline
  bl & Busca local: hc para \textit{Hill Climbing}, sa para \textit{Simulated Annealing} & hc \\ \hline
- n & N˙mero m·ximo de iteracoes sem melhora em \textit{Hill Climbing} & 10000 \\ \hline
- k & Quantidade de vizinhos que s„o gerados por iteraÁ„o na busca \textit{Hill Climbing} & 10 \\ \hline
+ n & N√∫mero m√°ximo de iteracoes sem melhora em \textit{Hill Climbing} & 10000 \\ \hline
+ k & Quantidade de vizinhos que s√£o gerados por itera√ß√£o na busca \textit{Hill Climbing} & 10 \\ \hline
  ti & Temperatura inicial no SA & 3 \\ \hline
  tf & Temperatura final no SA & 0.001 \\ \hline
  beta & Taxa de resfriamento no SA & 0.995 \\ \hline
- seed & Seed de geraÁ„o de n˙meros aleatorios & 0 \\ \hline
- timeout & Tempo limite de execuÁ„o. Valor negativo indica tempo ilimitado & -1 \\ \hline
- info & Flag \texttt{info=1} indica que informaÁıes devem ser impressas na tela durante a execuÁ„o & 0 \\ \hline
+ seed & Seed de gera√ß√£o de n√∫meros aleatorios & 0 \\ \hline
+ timeout & Tempo limite de execu√ß√£o. Valor negativo indica tempo ilimitado & -1 \\ \hline
+ info & Flag \texttt{info=1} indica que informa√ß√µes devem ser impressas na tela durante a execu√ß√£o & 0 \\ \hline
 \end{tabular}
-\caption{Par‚metros do GRASP e seus valores padr„o}
+\caption{Par√¢metros do GRASP e seus valores padr√£o}
 \label{tab:parametros}
 \end{table}
 \end{center}
 
-Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.cc} no diretÛrio \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
+Se desejar validar as respostas com o validador oficial, basta compilar o arquivo \texttt{validator.cc} no diret√≥rio \texttt{validator}. Isso pode ser feito, por exemplo, com o compilador G++:
 
 \begin{verbatim}
 $ g++ validator.cc -o validator
 \end{verbatim}
 
-Para validar uma resposta È necess·rio passar como par‚metro o arquivo da inst‚ncia e o arquivo de resposta que deve estar no formato da figura \ref{fig:resposta-toy}. Considerando que o validador, a inst‚ncia e o arquivo de resposta est„o no mesmo diretÛrio, o seguinte comando deve ser usado:
+Para validar uma resposta √© necess√°rio passar como par√¢metro o arquivo da inst√¢ncia e o arquivo de resposta que deve estar no formato da figura \ref{fig:resposta-toy}. Considerando que o validador, a inst√¢ncia e o arquivo de resposta est√£o no mesmo diret√≥rio, o seguinte comando deve ser usado:
 
 \begin{verbatim}
 $ ./validator comp01.ctt comp01.sol
 \end{verbatim}
 
-O validador exibe a quantidade de violaÁıes fortes e fracas, detalhando onde elas ocorrem na tabela-hor·rio.
+O validador exibe a quantidade de viola√ß√µes fortes e fracas, detalhando onde elas ocorrem na tabela-hor√°rio.
 
 
 \end{document}
+

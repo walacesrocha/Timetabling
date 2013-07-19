@@ -13,8 +13,8 @@
 \usepackage{babel}
 
 
-\makeatletter
 
+\makeatletter
 \makeatother
 \begin{document}
 
@@ -42,9 +42,7 @@ Federal do Espírito Santo}
 
 
 \data{28 de Fevereiro de 2013}
-
 \capa
-
 \folhaderosto
 
 \begin{folhadeaprovacao}
@@ -585,7 +583,6 @@ O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking
 \end{center}
 \end{figure}
 
-A quantidade de iterações necessárias para percorrer o caminho é no máximo a quantidade de diferenças entre as soluções inicial e alvo. Isso acontece porque cada iteração corrige uma diferença sem acrescentar outra, dado que o procedimento não altera as aulas que já estão em suas posições corretas na tabela-horário.
 
 O pseudo-código do algoritmo \ref{path-relinking} ilustra o PR aplicado ao par de soluções $x_i$ (inicial) e $x_a$ (alvo). Nas linhas 1 e 2 são inicializadas as variáveis que guardam o melhor valor de função objetivo encontrado e a solução que produziu este valor. Na linha 4 o procedimento computa a diferença simétrica $\Delta(x_i,x_a)$ entre as duas soluções, isto é, o conjunto mínimo de movimentos necessários para alcançar $x_a$ a partir de $x_i$. Um caminho de soluções é gerado ligando $x_i$ e $x_a$. A melhor solução $x^*$ no caminho é a resposta do algoritmo. Em cada iteração, o procedimento examina todos os movimentos $m \in \Delta(x, x_a)$ a partir da solução corrente $x$ e seleciona aquele que resulta no custo de solução menor, isto é, aquele que minimiza $f(x \oplus m)$, onde $x \oplus m$ é a solução resultante da aplicação do movimento $m$ à solução $x$ (linhas 5 a 13). O melhor movimento $m^*$ produz a solução $x \oplus m^*$. O conjunto de movimentos possíveis é atualizado na linha 7. Se for o caso, a melhor solução $x^*$ é atualizada nas linhas 9 a 11. O procedimento termina quando $x_a$ é alcançada, ou seja, $\Delta(x, x_a) = \emptyset$.
 
@@ -1036,7 +1033,7 @@ Quanto mais iterações, mais soluções o algoritmo pode explorar. Foi escolhid
 
 O parâmetro $\alpha \in [0, 1]$ é mais delicado. Se o seu valor for muito próximo de 0, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de 1, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $[0.01, 0.5]$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir alguma diversificação nas soluções iniciais e manter uma qualidade razoável.
 
-Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000, a partir de testes preliminares. Empiricamente esse valor permite explorar bem a solução inicial sem perder muito tempo em um mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Através de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluções e mantém um desempenho compatível com a versão original, isto é, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
+Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Empiricamente esse valor permite explorar bem a solução inicial sem perder muito tempo em um mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Através de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluções e mantém um desempenho compatível com a versão original, isto é, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
 
 O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tarefa de calibração mais difícil. Foram escolhidos parâmetros que permitem um certo grau de diversificação no início da busca e maior intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma solução inicial de boa qualidade não ajuda muito o processo, pois permite aceitar soluções muito ruins e a melhora é observada apenas quando o resfriamento está bem adiantado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de $0,01$ a busca estabiliza e raramente uma solução melhor é encontrada.
 
@@ -1048,7 +1045,7 @@ Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as bu
 
 O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
-Todas estas escolhas de parâmetros foram feitas usando um subconjunto das 21 instâncias, procurando observar o comportamento dos algoritmos com exemplares classificados, quanto ao número de conflitos, em fáceis, intermediários e difíceis. As instâncias escolhidas foram respectivamente \textit{comp01}, \textit{comp17} e \textit{comp05}.
+Todas estas escolhas de parâmetros foram feitas usando três ou quatro instâncias que representassem bem o universo de 21 instâncias, procurando observar o comportamento dos algoritmos com instâncias fáceis, intermediárias e difíceis.
 
 \section{Análise dos resultados}
 
@@ -1253,7 +1250,7 @@ Uma estrutura de vizinhança genérica promissora é a que utiliza cadeias de \t
 
 Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de maneira muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar as aulas que geram violações e as que não geram violações. As aulas que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
 
-Pretende-se continuar a investir em testes computacionais com o mesmo conjunto de instâncias do ITC-2007, uma vez que várias delas ainda não possuem ótimo conhecido.
+Não pretende-se investir em testes com novas instâncias, dado que não há certeza na literatura sobre as soluções ótimas das instâncias atuais. Portanto, um esforço ainda pode ser dispensado no conjunto atual disponível.
 
 %{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
 
@@ -1348,4 +1345,3 @@ O validador exibe a quantidade de violações fortes e fracas, detalhando onde e
 
 
 \end{document}
-

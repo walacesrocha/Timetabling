@@ -575,6 +575,8 @@ A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso 
 
 O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking}, dentre as três aulas que estão em posições divergentes da solução alvo, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário (estratégia gulosa), mas pode ser introduzida aleatoriedade nesta escolha, assim como é feito na construção da solução inicial.
 
+Pode ser observado também que uma troca feita pelo PR nunca altera uma aula que já está na posição correta. Se uma aula está sendo movida da posição $p_1$ para a posição $p_2$, então pode-se concluir que a aula (ou horário vago) na posição $p_2$ também está na posição incorreta. Cada movimento corrige pelo menos uma diferença entre as tabelas inicial e alvo. Logo, pode ser afirmado que o algoritmo converge para a solução alvo em no máximo $n$ iterações onde $n$ é quantidade de diferenças entre as tabelas.
+
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[width=14cm]{./PR.eps}
@@ -687,6 +689,8 @@ Em cada iteração, a aula mais difícil (a que possui menos horários viáveis) é es
 A primeira estratégia de explosão utilizada consiste em escolher o horário que possui menos disciplinas conflitantes e retirar todas elas da tabela. Essa estratégia não se mostrou muito eficaz pois favoreceu a formação de ciclagem no algoritmo, isto é, retirando uma aula e alocando outra, mas posteriormente fazendo o inverso, já que o horário escolhido era quase sempre o mesmo.
 
 Uma estratégia mais eficaz é a escolha de um horário (dentre os viáveis) aleatoriamente, ao invés de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratégia evita o problema de ciclagem.
+
+Em comparação com as fases seguintes do algoritmo, o tempo de processamento não é prejudicado pela inclusão da estratégia de explosão. Testes mostraram que é possível gerar rapidamente soluções viáveis para todas instâncias testadas.
 
 O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geração de uma tabela-horário inicial. Ele recebe como parâmetro as aulas das disciplinas a serem alocadas na tabela que inicialmente é vazia (linha 1). Para facilitar a obtenção da aula mais conflitante durante as iterações é criada uma lista de aulas não alocadas (linha 2). Esta lista é ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posição da lista é a mais conflitante.
 
@@ -1033,19 +1037,19 @@ Quanto mais iterações, mais soluções o algoritmo pode explorar. Foi escolhido li
 
 O parâmetro $\alpha \in [0, 1]$ é mais delicado. Se o seu valor for muito próximo de 0, o algoritmo de construção inicial tem comportamento mais guloso, produzindo soluções de boa qualidade porém pouco diversificadas. Se $\alpha$ é mais próximo de 1, as soluções são mais diversificadas mas com a desvantagem que elas tem um valor alto de função objetivo. Foram testados diversos valores no intervalo $[0.01, 0.5]$. Foi comprovado que quanto menor o valor de $\alpha$, melhor a qualidade da solução, mas ainda longe do que é possível alcançar com a busca local. Foi decidido usar $\alpha = 0.15$, por produzir alguma diversificação nas soluções iniciais e manter uma qualidade razoável.
 
-Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000. Empiricamente esse valor permite explorar bem a solução inicial sem perder muito tempo em um mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Através de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluções e mantém um desempenho compatível com a versão original, isto é, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
+Os demais parâmetros são específicos das buscas locais. O algoritmo \textit{Hill Climbing} possui o parâmetro $N$, que limita a quantidade máxima de iterações sem melhora na função objetivo. Um valor grande de $N$ permite maior exploração dos vizinhos, mas consome maior tempo de execução. Como a idéia do GRASP é explorar soluções diferentes, $N$ foi fixado em 10000, a partir de testes preliminares. Empiricamente esse valor permite explorar bem a solução inicial sem perder muito tempo em um mínimo local. Um segundo parâmetro introduzido no algoritmo foi $k$, que fornece a quantidade de vizinhos que serão gerados por iteração. Através de testes preliminares, verificamos que com valor de $k=10$, o algoritmo produz boas soluções e mantém um desempenho compatível com a versão original, isto é, $k=1$ (apenas um vizinho). Valores maiores de $k$ tornam o algoritmo lento e não há ganho justificável na qualidade das soluções.
 
 O algoritmo \textit{Simulated Annealing} possui mais parâmetros, tornando a tarefa de calibração mais difícil. Foram escolhidos parâmetros que permitem um certo grau de diversificação no início da busca e maior intensificação no final do processo. Como o algoritmo de solução inicial já fornece uma resposta com qualidade razoável, a temperatura inicial não precisa ser muito alta. Foi observado nos testes preliminares que fixar temperaturas altas com uma solução inicial de boa qualidade não ajuda muito o processo, pois permite aceitar soluções muito ruins e a melhora é observada apenas quando o resfriamento está bem adiantado. Foi observado também que, particularmente para as instâncias do ITC-2007, quando o algoritmo atinge uma temperatura abaixo de $0,01$ a busca estabiliza e raramente uma solução melhor é encontrada.
 
 Com base nestas observações foram escolhidos os seguintes parâmetros: $T_i = 1,5$, $T_f = 0,005$, $\beta = 0,999$. Um valor de $\beta$ um pouco maior poderia ser utilizado para fazer um resfriamento mais lento e explorar mais o espaço de busca, mas devido ao limitante de tempo estipulado pelo ITC-2007, o valor de $\beta$ foi fixado em $0,999$. Em cada temperatura são gerados $N_v = 500$ vizinhos.
 
-Uma boa ferramenta que auxilia a calibração de parâmetros de algoritmos como o \textit{Simulated Annealing} é o pacote \textit{irace} da linguagem \textit{R} \cite{irace}. Ele permite explorar de forma mais eficiente as combinações de parâmetros, reduzindo o esforço necessário para esta terefa. Neste trabalho ele só foi usado em testes iniciais do SA sem o GRASP.
+Uma boa ferramenta que auxilia a calibração de parâmetros de algoritmos como o \textit{Simulated Annealing} é o pacote \textit{race} da linguagem \textit{R} \cite{race}. Ele permite explorar de forma mais eficiente as combinações de parâmetros, reduzindo o esforço necessário para esta terefa. Neste trabalho ele só foi usado em testes iniciais do SA sem o GRASP.
 
 Como explicado na subseção \ref{subsec:abordagens}, os vizinhos em todas as buscas locais são gerados somente com \textit{MOVE} ou somente com \textit{SWAP}. Os dois movimentos têm igual probabilidade de ocorrer.
 
 O algoritmo {\it Path-relinking} implementado não possui parâmetros. A única decisão a tomar está relacionada a forma de ligar duas soluções. Testes confirmaram que as observações de \cite{Resende05graspwith} se aplicam ao problema em questão, e o religamento inverso é superior ao direto. Sendo assim, o algoritmo parte de uma solução elite em direção a uma solução ótima local.
 
-Todas estas escolhas de parâmetros foram feitas usando três ou quatro instâncias que representassem bem o universo de 21 instâncias, procurando observar o comportamento dos algoritmos com instâncias fáceis, intermediárias e difíceis.
+Todas estas escolhas de parâmetros foram feitas usando um subconjunto das 21 instâncias, procurando observar o comportamento dos algoritmos com exemplares classificados, quanto ao número de conflitos, em fáceis, intermediários e difíceis. As instâncias escolhidas foram respectivamente \textit{comp01}, \textit{comp17} e \textit{comp05}.
 
 \section{Análise dos resultados}
 
@@ -1069,39 +1073,40 @@ Tanto em GHC1 quanto em GHC2 a quantidade máxima de iterações sem melhora é fixa
 
 A tabela \ref{tab:resultados_gerais} lista as melhores respostas encontradas para cada instância do ITC-2007. Os valores informados se referem apenas às violações das restrições fracas, dado que todas as soluções são viáveis. Assim como foi feito no ITC-2007, cada algoritmo foi executado 10 vezes com diferentes \textit{seeds} para geração de números aleatórios. Todas as execuções foram limitadas em 324 segundos.
 
+Além das três versões implementadas, a tabela \ref{tab:resultados_gerais} também apresenta os resultados de uma implementação de \textit{Simulated Annealing} (SA) proposto em \cite{CDGS11b} e adaptada para a formulação utilizada neste trabalho. A execução do SA não foi restritiva quanto ao tempo de processamento e usou os seguintes valores de parâmetros: $\beta = 0,995, N_v = 200$ e temperaturas iniciais e finais variando por instância. Na média a temperatura inicial foi $20$ e a final $0,001$. 
 
 \begin{table}[htbf]
 \begin{center}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA \\ \hline
-comp01	& 15	& {\bf 5}	& {\bf 5} \\
-comp02	& 260	& 130	& {\bf 73} \\
-comp03	& 223	& 125	& {\bf 98} \\
-comp04	& 168	& 73	& {\bf 48} \\
-comp05	& 707	& 525	& {\bf 409} \\
-comp06	& 293	& 116	& {\bf 75} \\
-comp07	& 266	& 68	& {\bf 36} \\
-comp08	& 186	& 77	& {\bf 58} \\
-comp09	& 269	& 144	& {\bf 119} \\
-comp10	& 245	& 68	& {\bf 41} \\
-comp11	& 9	& {\bf 0}	& {\bf 0} \\ \hline
+Instância & SA & GHC1 & GHC2 & GSA \\ \hline
+comp01	& 6	& 15	& {\bf 5}	& {\bf 5} \\
+comp02	& 116	& 260	& 130	& {\bf 73} \\
+comp03	& 116	& 223	& 125	& {\bf 98} \\
+comp04	& 76	& 168	& 73	& {\bf 48} \\
+comp05	& 429	& 707	& 525	& {\bf 409} \\
+comp06	& 132	& 293	& 116	& {\bf 75} \\
+comp07	& 99	& 266	& 68	& {\bf 36} \\
+comp08	& 84	& 186	& 77	& {\bf 58} \\
+comp09	& 137	& 269	& 144	& {\bf 119} \\
+comp10	& 67	& 245	& 68	& {\bf 41} \\
+comp11	& {\bf 0}& 9	& {\bf 0}	& {\bf 0} \\ \hline
 \end{tabular}
 \medskip
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
-Instância & GHC1 & GHC2 & GSA \\ \hline
-comp12	& 847	& 455	& {\bf 375} \\
-comp13	& 206	& 110	& {\bf 97} \\
-comp14	& 191	& 91	& {\bf 72} \\
-comp15	& 218	& 141	& {\bf 101} \\
-comp16	& 233	& 96	& {\bf 69} \\
-comp17	& 271	& 127	& {\bf 105} \\
-comp18	& 179	& 113	& {\bf 102} \\
-comp19	& 238	& 122	& {\bf 87} \\
-comp20	& 356	& 106	& {\bf 88} \\
-comp21	& 301	& 176	& {\bf 136} \\ \hline
-Média & 270,52  & 136,57 & {\bf 104,47}  \\ \hline
+Instância & SA & GHC1 & GHC2 & GSA \\ \hline
+comp12	& 407	& 847	& 455	& {\bf 375} \\
+comp13	& 106	& 206	& 110	& {\bf 97} \\
+comp14	& 90	& 191	& 91	& {\bf 72} \\
+comp15	& 120	& 218	& 141	& {\bf 101} \\
+comp16	& 91	& 233	& 96	& {\bf 69} \\
+comp17	& 122	& 271	& 127	& {\bf 105} \\
+comp18	& 133	& 179	& 113	& {\bf 102} \\
+comp19	& 111	& 238	& 122	& {\bf 87} \\
+comp20	& 130	& 356	& 106	& {\bf 88} \\
+comp21	& 151	& 301	& 176	& {\bf 136} \\ \hline
+Média & 129,62	& 270,52  & 136,57 & {\bf 104,47}  \\ \hline
 \end{tabular}
 \caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
 \label{tab:resultados_gerais}
@@ -1250,7 +1255,7 @@ Uma estrutura de vizinhança genérica promissora é a que utiliza cadeias de \text
 
 Uma segunda modificação que pode ser feita no GRASP é o aumento de memorização entre as iterações. {\it Path-relinking} faz isso, mas de maneira muito restrita. Uma forma que está sendo investigada é fazer com que a geração da solução inicial aproveite a estrutura da solução da iteração anterior. No caso de tabela-horário, algumas aulas seriam pré-alocadas levando em consideração a posição em que estavam na solução anterior. Neste caso seria interessante verificar as aulas que geram violações e as que não geram violações. As aulas que não estivessem gerando violações poderiam ser mantidas na mesma posição na tabela da iteração seguinte.
 
-Não pretende-se investir em testes com novas instâncias, dado que não há certeza na literatura sobre as soluções ótimas das instâncias atuais. Portanto, um esforço ainda pode ser dispensado no conjunto atual disponível.
+Pretende-se continuar a investir em testes computacionais com o mesmo conjunto de instâncias do ITC-2007, uma vez que várias delas ainda não possuem ótimo conhecido.
 
 %{\bf Alguns itens interessantes para a conclusão de um projeto de graduação}
 

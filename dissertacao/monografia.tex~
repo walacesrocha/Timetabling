@@ -575,7 +575,7 @@ A figura \ref{fig:path-relinking} ilustra o \textit{Path-Relinking} para o caso 
 
 O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking}, dentre as três aulas que estão em posições divergentes da solução alvo, optou-se por corrigir primeiro a aula da disciplina \texttt{AT}. Mas também poderia ter começado por outra aula. Em geral, é mais comum escolher o passo que irá produzir a melhor tabela-horário (estratégia gulosa), mas pode ser introduzida aleatoriedade nesta escolha, assim como é feito na construção da solução inicial.
 
-Pode ser observado também que uma troca feita pelo PR nunca altera uma aula que já está na posição correta. Se uma aula está sendo movida da posição $p_1$ para a posição $p_2$, então pode-se concluir que a aula (ou horário vago) na posição $p_2$ também está na posição incorreta. Cada movimento corrige pelo menos uma diferença entre as tabelas inicial e alvo.
+Pode ser observado também que uma troca feita pelo PR nunca altera uma aula que já está na posição correta. Se uma aula está sendo movida da posição $p_1$ para a posição $p_2$, então pode-se concluir que a aula (ou horário vago) na posição $p_2$ também está na posição incorreta. Cada movimento corrige pelo menos uma diferença entre as tabelas inicial e alvo. Logo, pode ser afirmado que o algoritmo converge para a solução alvo em no máximo $n$ iterações onde $n$ é quantidade de diferenças entre as tabelas.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -690,7 +690,7 @@ A primeira estratégia de explosão utilizada consiste em escolher o horário que p
 
 Uma estratégia mais eficaz é a escolha de um horário (dentre os viáveis) aleatoriamente, ao invés de selecionar aquele com menos aulas conflitantes. Testes mostraram que essa estratégia evita o problema de ciclagem.
 
-Em comparação com as fases seguintes do algoritmo, o tempo de processamento não é prejudicado pela inclusão da estratégia de explosão. Testes mostraram que é possível gerar rapidamente soluções viáveis para todas instâncias testadas.
+Em comparação com as fases seguintes do algoritmo, o tempo de processamento não é prejudicado pela inclusão da estratégia de explosão. Testes mostraram que é possível gerar rapidamente soluções viáveis para todas instâncias.
 
 O algoritmo \ref{solInicialGrasp-ITC2007} ilustra o procedimento de geração de uma tabela-horário inicial. Ele recebe como parâmetro as aulas das disciplinas a serem alocadas na tabela que inicialmente é vazia (linha 1). Para facilitar a obtenção da aula mais conflitante durante as iterações é criada uma lista de aulas não alocadas (linha 2). Esta lista é ordenada de forma decrescente pela quantidade de conflitos, portanto a aula na primeira posição da lista é a mais conflitante.
 
@@ -1108,7 +1108,7 @@ comp20	& 130	& 356	& 106	& {\bf 88} \\
 comp21	& 151	& 301	& 176	& {\bf 136} \\ \hline
 Média & 129,62	& 270,52  & 136,57 & {\bf 104,47}  \\ \hline
 \end{tabular}
-\caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA}
+\caption{Melhores respostas obtidas pelas três versões do algoritmo: GHC1, GHC2 e GSA. Resultado de teste preliminar com \textit{Simulated Annealing} (SA)}
 \label{tab:resultados_gerais}
 \end{center}
 \end{table}
@@ -1215,7 +1215,40 @@ Analisando separadamente por instância, podemos ver que os melhores resultados d
 
 Essas estatísticas são relevantes porque informam o quão difícil é a exploração do espaço de soluções. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados.
 
-Em \cite{ctt} podem ser vistas respostas melhores que as apresentadas neste trabalho, mas que não seguem a mesma metodologia de testes, principalmente quanto ao tempo de execução. Por isso não foram listados para comparação.
+A tabela \ref{tab:resultados_literatura} lista as melhores respostas encontradas na literatura para o problema abordado. Esses trabalhos não seguem a mesma metodologia de testes, principalmente quanto ao tempo de execução, mas servem para avaliar a qualidade das respostas atuais e permite visualizar quais instâncias merecem maior investigação.
+
+\begin{table}[htbf]
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Instância & \cite{muller} & \cite{lu-hao} & \cite{lach_lubbecke} & \cite{springerlink:10.1007/s10479-012-1081-x} \\ \hline
+comp01 & {\bf 5} & 5 & 13 & 5 \\
+comp02 & 51 & 55 & 43 & 24 \\
+comp03 & 84 & 71 & 76 & 111 \\
+comp04 & 37 & 43 & 38 & 35 \\
+comp05 & 330 & 309 & 314 & 1343 \\
+comp06 & 48 & 53 & 41 & 27 \\
+comp07 & 20 & 28 & 19 & 6 \\
+comp08 & 41 & 49 & 43 & 37 \\
+comp09 & 109 & 105 & 102 & 171 \\
+comp10 & 16 & 21 & 14 & 4 \\
+comp11 & 0 & 0 & 0 & 0 \\
+comp12 & 333 & 343 & 405 & 977 \\
+comp13 & 66 & 73 & 68 & 59 \\
+comp14 & 59 & 57 & 54 & 51 \\
+comp15 & 84 & 71 & - & 111 \\
+comp16 & 34 & 39 & - & 18 \\
+comp17 & 83 & 91 & - & 56 \\
+comp18 & 83 & 69 & - & 83 \\
+comp19 & 62 & 65 & - & 57 \\
+comp20 & 27 & 47 & - & 4 \\
+comp21 & 103 & 106 & - & 86 \\ \hline
+\end{tabular}
+\caption{Melhores respostas obtidas na literatura}
+\label{tab:resultados_literatura}
+\end{center}
+\end{table}
+
 
 %\end{landscape}
 

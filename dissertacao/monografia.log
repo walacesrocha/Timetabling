@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  2 AUG 2013 00:41
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2012.9.5)  9 AUG 2013 00:33
 entering extended mode
 **\AtBeginDocument{\RequirePackage{pslatex}} \def\PSLATEXTMP{\futurelet\PSLATEX
 TMP\PSLATEXTMPB} \def\PSLATEXTMPB{\ifx\PSLATEXTMP\nonstopmode\else\input\fi} \P
@@ -576,12 +576,8 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1192.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1195.
- [53]
-Overfull \hbox (47.84091pt too wide) in paragraph at lines 1222--1247
- [] 
- []
-
-[54] [55]
+ [53] [54]
+[55]
 Cap\'{\i }tulo 6.
 [56
 
@@ -595,13 +591,13 @@ e-ti-tion\T1/ptm/m/n/12 . 2008. URL:
 
 [61]) [62]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1313.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1314.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1313.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1314.
 
 Anexo A.
 
-Overfull \hbox (5.98361pt too wide) in paragraph at lines 1315--1316
+Overfull \hbox (5.98361pt too wide) in paragraph at lines 1316--1317
 \T1/ptm/m/n/12 grama po-dem ser ob-ti-dos no re-po-si-tó-rio \T1/ptm/m/it/12 gi
 thub\T1/ptm/m/n/12 , atra-vés do link: \T1/ptm/m/it/12 https://github.com/walac
 esrocha/
@@ -610,7 +606,7 @@ esrocha/
 [63
 
 ]
-Overfull \hbox (15.01663pt too wide) in paragraph at lines 1370--1371
+Overfull \hbox (15.01663pt too wide) in paragraph at lines 1371--1372
 []\T1/ptm/m/n/12 Se de-se-jar va-li-dar as res-pos-tas com o va-li-da-dor ofi-c
 ial, basta com-pi-lar o ar-quivo \T1/pcr/m/n/12 validator.cc
  []
@@ -621,12 +617,12 @@ ial, basta com-pi-lar o ar-quivo \T1/pcr/m/n/12 validator.cc
 +-------------------------------------------------------------------+
 [64] (./monografia.aux) ) 
 Here is how much of TeX's memory you used:
- 4417 strings out of 94501
- 56752 string characters out of 1176790
+ 4416 strings out of 94501
+ 56747 string characters out of 1176790
  147674 words of memory out of 1000000
- 7464 multiletter control sequences out of 10000+50000
+ 7463 multiletter control sequences out of 10000+50000
  81532 words of font info for 129 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  34i,22n,41p,1435b,541s stack positions out of 1500i,500n,5000p,200000b,5000s
 
-Output written on monografia.dvi (65 pages, 213092 bytes).
+Output written on monografia.dvi (65 pages, 213156 bytes).

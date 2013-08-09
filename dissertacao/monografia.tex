@@ -1215,36 +1215,37 @@ Analisando separadamente por instância, podemos ver que os melhores resultados d
 
 Essas estatísticas são relevantes porque informam o quão difícil é a exploração do espaço de soluções. Uma alta taxa de conflitos e pouca disponibilidade fazem com que os vizinhos gerados nas buscas locais sejam na maioria inviáveis, logo, acabam sendo descartados.
 
-A tabela \ref{tab:resultados_literatura} lista as melhores respostas encontradas na literatura para o problema abordado. Esses trabalhos não seguem a mesma metodologia de testes, principalmente quanto ao tempo de execução, mas servem para avaliar a qualidade das respostas atuais e permite visualizar quais instâncias merecem maior investigação.
+A tabela \ref{tab:resultados_literatura} lista as melhores respostas encontradas na literatura para o problema abordado. Esses trabalhos não seguem a mesma metodologia de testes, principalmente quanto ao tempo de execução, mas servem para avaliar a qualidade das respostas atuais e permite visualizar quais instâncias merecem maior investigação. No trabalho de \cite{lach_lubbecke} foram usadas apenas as catorze primeiras instâncias.
 
 \begin{table}[htbf]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-Instância & \cite{muller} & \cite{lu-hao} & \cite{lach_lubbecke} & \cite{springerlink:10.1007/s10479-012-1081-x} \\ \hline
-comp01 & {\bf 5} & 5 & 13 & 5 \\
-comp02 & 51 & 55 & 43 & 24 \\
-comp03 & 84 & 71 & 76 & 111 \\
-comp04 & 37 & 43 & 38 & 35 \\
-comp05 & 330 & 309 & 314 & 1343 \\
-comp06 & 48 & 53 & 41 & 27 \\
-comp07 & 20 & 28 & 19 & 6 \\
-comp08 & 41 & 49 & 43 & 37 \\
-comp09 & 109 & 105 & 102 & 171 \\
-comp10 & 16 & 21 & 14 & 4 \\
-comp11 & 0 & 0 & 0 & 0 \\
-comp12 & 333 & 343 & 405 & 977 \\
-comp13 & 66 & 73 & 68 & 59 \\
-comp14 & 59 & 57 & 54 & 51 \\
-comp15 & 84 & 71 & - & 111 \\
-comp16 & 34 & 39 & - & 18 \\
-comp17 & 83 & 91 & - & 56 \\
-comp18 & 83 & 69 & - & 83 \\
-comp19 & 62 & 65 & - & 57 \\
-comp20 & 27 & 47 & - & 4 \\
-comp21 & 103 & 106 & - & 86 \\ \hline
+Instância & $[Muller\,2009]$ & $[Lu\,et\,al.\,2008]$ & $[Lach\,et\,al.\, 2010]$ & $[Acha\,et\,al.\,2010]$ \\ \hline
+%Instância & \cite{muller} & \cite{lu-hao} & \cite{lach_lubbecke} & \cite{springerlink:10.1007/s10479-012-1081-x} \\ \hline
+comp01 & {\bf 5} & {\bf 5} & 13 & {\bf 5} \\
+comp02 & 51 & 55 & 43 & {\bf 24} \\
+comp03 & 84 & {\bf 71} & 76 & 111 \\
+comp04 & 37 & 43 & 38 & {\bf 35} \\
+comp05 & 330 & {\bf 309} & 314 & 1343 \\
+comp06 & 48 & 53 & 41 & {\bf 27} \\
+comp07 & 20 & 28 & 19 & {\bf 6} \\
+comp08 & 41 & 49 & 43 & {\bf 37} \\
+comp09 & 109 & 105 & {\bf 102} & 171 \\
+comp10 & 16 & 21 & 14 & {\bf 4} \\
+comp11 & {\bf 0} & {\bf 0} & {\bf 0} & {\bf 0} \\
+comp12 & {\bf 333} & 343 & 405 & 977 \\
+comp13 & 66 & 73 & 68 & {\bf 59} \\
+comp14 & 59 & 57 & 54 & {\bf 51} \\
+comp15 & 84 & {\bf 71} & - & 111 \\
+comp16 & 34 & 39 & - & {\bf 18} \\
+comp17 & 83 & 91 & - & {\bf 56} \\
+comp18 & 83 & {\bf 69} & - & 83 \\
+comp19 & 62 & 65 & - & {\bf 57} \\
+comp20 & 27 & 47 & - & {\bf 4} \\
+comp21 & 103 & 106 & - & {\bf 86} \\ \hline
 \end{tabular}
-\caption{Melhores respostas obtidas na literatura}
+\caption{Melhores respostas obtidas na literatura para as instâncias do ITC-2007}
 \label{tab:resultados_literatura}
 \end{center}
 \end{table}

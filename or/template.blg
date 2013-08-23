@@ -1,50 +1,49 @@
-This is BibTeX, Version 0.99d (TeX Live 2011/Cygwin)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: template.aux
 The style file: spmpsci.bst
 Database file #1: monografia.bib
 Warning--I didn't find a database entry for "RefB"
 Warning--I didn't find a database entry for "RefJ"
 Warning--empty booktitle in Souza:2004:GSA
-You've used 19 entries,
+You've used 25 entries,
             2946 wiz_defined-function locations,
-            728 strings with 7501 characters,
-and the built_in function-call counts, 12668 in all, are:
-= -- 1451
-> -- 230
+            757 strings with 8535 characters,
+and the built_in function-call counts, 14905 in all, are:
+= -- 1613
+> -- 312
 < -- 7
-+ -- 159
-- -- 76
-* -- 537
-:= -- 1267
-add.period$ -- 21
-call.type$ -- 19
-change.case$ -- 104
++ -- 195
+- -- 104
+* -- 648
+:= -- 1583
+add.period$ -- 27
+call.type$ -- 25
+change.case$ -- 140
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 1426
-empty$ -- 889
-format.name$ -- 89
-if$ -- 2660
+cite$ -- 26
+duplicate$ -- 1646
+empty$ -- 1106
+format.name$ -- 122
+if$ -- 3130
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 171
-newline$ -- 82
-num.names$ -- 40
-pop$ -- 585
+int.to.str$ -- 25
+missing$ -- 219
+newline$ -- 105
+num.names$ -- 52
+pop$ -- 702
 preamble$ -- 1
-purify$ -- 75
+purify$ -- 101
 quote$ -- 0
-skip$ -- 696
+skip$ -- 755
 stack$ -- 0
-substring$ -- 567
-swap$ -- 1113
+substring$ -- 599
+swap$ -- 1203
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 76
+type$ -- 100
 warning$ -- 1
-while$ -- 71
-width$ -- 21
-write$ -- 188
+while$ -- 83
+width$ -- 27
+write$ -- 241
 (There were 3 warnings)

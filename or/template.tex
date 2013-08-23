@@ -73,9 +73,9 @@ grestore
 
 %\titlerunning{Short form of title}        % if too long for running head
 
-\author{Walace Rocha         \and
-        Maria Boeres \and
-		Maria Rangel %etc.
+\author{Walace de Souza Rocha         \and
+        Maria Claudia Silva Boeres \and
+		Maria Cristina Rangel %etc.
 }
 
 %\authorrunning{Short form of author list} % if too long for running head
@@ -130,6 +130,17 @@ O problema de tabela-horário está entre os mais difíceis da área de otimização c
 Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}.
 
 Este trabalho trata o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, escolhemos a terceira formulação proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
+
+\section{Trabalhos Relacionados}
+\label{sec:trabalhos-relacionados}
+
+As aplicações do GRASP para o problema de tabela-horário encontradas na literatura são para o caso específico de escolas. Em \cite{Souza:2004:GSA} o GRASP foi utilizado juntamente com a Busca Tabu. Uma solução inicial é construída com um algoritmo parcialmente guloso e melhoras são feitas com Busca Tabu. Este algoritmo foi testado com dados reais de uma escola brasileira de ensino médio. Apesar de não tratar o problema para universidades, este trabalho inspirou o uso de técnicas mais eficientes na fase de busca local do GRASP.
+
+Em \cite{Vieira_agrasp} também é abordado o problema no contexto de uma escola brasileira. São implementadas duas versões do GRASP. A primeira possui uma etapa de construção inicial e uma de refinamento da tabela-horário com busca local. Na segunda implementação é adicionada mais uma etapa de refinamento com \textit{Path-relinking}. Esta técnica também foi inserida no nosso trabalho pois ela tenta corrigir uma deficiência do GRASP que é a falta de memorização entre suas iterações.
+
+Em \cite{CDGS11b} é proposto um algoritmo promissor para a segunda formulação do ITC-2007 usando \textit{Simulated Annealing}. Apesar de usarem uma formulação diferente da que é abordada neste trabalho, podem ser vistas naquele estruturas de vizinhança eficientes e adaptáveis para a terceira formulação. Além disso, a fase de busca local do \textit{Simulated Annealing} pode ser aproveitada como fase de busca local do GRASP.
+
+Outros trabalhos foram propostos para resolver a terceira formulação adotada na competição ITC-2007. Nenhum dos trabalhos conseguiu obter soluções ótimas para todas as instâncias, o que gera uma motivação para continuar buscando novos resultados. Os melhores resultados obtidos até hoje podem ser encontrados em \cite{muller,lu-hao,lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x}.
 
 \section{Problem Formulation}
 \label{sec:formulacao}
@@ -389,7 +400,7 @@ De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado
 
 \begin{figure}[!htb]
 \begin{center}
-  %\includegraphics[width=10cm]{./PRgenericoEN.eps}
+  \includegraphics*[width=10cm]{./PRgenericoEN.eps}
  \caption{Explorando soluções com \textit{Path-Relinking}}
    \label{fig:path-relinking-generico}
 \end{center}

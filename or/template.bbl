@@ -6,6 +6,16 @@
   \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 
+\bibitem{springerlink:10.1007/s10479-012-1081-x}
+Asín~Achá, R., Nieuwenhuis, R.: Curriculum-based course timetabling with sat
+  and maxsat.
+\newblock Annals of Operations Research  (2010)
+
+\bibitem{Burke_abranch-andcut}
+Burke, E.K., Marecek, J., Parkes, A.J., Rudová, H.: A branch-andcut procedure
+  for the udine course timetabling.
+\newblock In: Problem, Proceedings of the 7th PATAT Conference, 2008 (2008)
+
 \bibitem{CDGS11b}
 Ceschia, S., Di~Gaspero, L., Schaerf, A.: Design, engineering, and experimental
   analysis of a simulated annealing approach to the post-enrolment course
@@ -49,6 +59,11 @@ Gotlieb, C.C.: The construction of class-teacher time-tables.
 Kirkpatrick, S.: Optimization by simulated annealing: Quantitative studies.
 \newblock Journal of Statistical Physics  (1984)
 
+\bibitem{lach_lubbecke}
+Lach, G., Lubbecke, M.E.: Curriculum based course timetabling: new solutions to
+  udine benchmark instances.
+\newblock Annals of Operations Research  (2010)
+
 \bibitem{Laguna99graspand}
 Laguna, M., Martí, R.: Grasp and path relinking for 2-layer straight line
   crossing minimization.
@@ -65,6 +80,16 @@ Li, Y., Pardalos, P., Resende, M.: A greedy randomized adaptive search
 \newblock In: Quadratic assignment and related problems, \emph{{DIMACS} Series
   on Discrete Mathematics and Theoretical Computer Science}, vol.~16. American
   Mathematical Society (1994)
+
+\bibitem{lu-hao}
+Lü, Z., Hao, J.K.: Solving the course timetabling problem with a hybrid
+  heuristic algorithm.
+\newblock In: Artificial Intelligence: Methodology, Systems, and Applications.
+  Springer Berlin Heidelberg (2008)
+
+\bibitem{muller}
+Müller, T.: Itc2007 solver description: a hybrid approach.
+\newblock Annals of Operations Research  (2009)
 
 \bibitem{itc2007}
 PATAT: International timetabling competition.
@@ -98,5 +123,9 @@ Schaerf, A.: A survey of automated timetabling.
 Souza, M.J.F., Maculan, N., Ochi, L.S.: Metaheuristics.
 \newblock chap. A GRASP-tabu search algorithm for solving school timetabling
   problems, pp. 659--672. Kluwer Academic Publishers, Norwell, MA, USA (2004)
+
+\bibitem{Vieira_agrasp}
+Vieira, A., Rafael, M., Scaraficci, A.: A grasp strategy for a more constrained
+  school timetabling problem (2010)
 
 \end{thebibliography}

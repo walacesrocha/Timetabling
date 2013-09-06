@@ -1,60 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% This is a general template file for the LaTeX package SVJour3
-% for Springer journals.          Springer Heidelberg 2010/09/16
-%
-% Copy it to a new file with a new name and use it as the basis
-% for your article. Delete % signs as needed.
-%
-% This template includes a few options for different layouts and
-% content for various journals. Please consult a previous issue of
-% your journal as needed.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% First comes an example EPS file -- just ignore it and
-% proceed on the \documentclass line
-% your LaTeX will extract the file if required
-\begin{filecontents*}{example.eps}
-%!PS-Adobe-3.0 EPSF-3.0
-%%BoundingBox: 19 19 221 221
-%%CreationDate: Mon Sep 29 1997
-%%Creator: programmed by hand (JK)
-%%EndComments
-gsave
-newpath
-  20 20 moveto
-  20 220 lineto
-  220 220 lineto
-  220 20 lineto
-closepath
-2 setlinewidth
-gsave
-  .4 setgray fill
-grestore
-stroke
-grestore
-\end{filecontents*}
 %
 \RequirePackage{fix-cm}
 %
 %\documentclass{svjour3}                     % onecolumn (standard format)
 %\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
-\documentclass[smallextended]{svjour3}       % onecolumn (second format)
+%\documentclass{svjour3}       % onecolumn (second format)
+\documentclass{article}       % onecolumn (second format)
 %\documentclass[twocolumn]{svjour3}          % twocolumn
 %
-\smartqed  % flush right qed marks, e.g. at end of proof
+%\smartqed  % flush right qed marks, e.g. at end of proof
 %
-\usepackage{graphicx}
+%\usepackage{graphicx}
 %
 % \usepackage{mathptmx}      % use Times fonts if available on your TeX system
 %
 % insert here the call for the packages your document requires
 %\usepackage{latexsym}
 \usepackage{amssymb,amsmath}
+\usepackage{epsfig}
+%\usepackage{epstopdf}
 \usepackage{graphicx,color}
+\usepackage{lscape}
 \usepackage[ruled,longend,lined,linesnumbered,portuguese]{algorithm2e}
 \usepackage[latin1]{inputenc}
+%\usepackage{epstopdf}
 % etc.
 %
 % please place your own definitions here and don't use \def but
@@ -80,18 +48,18 @@ grestore
 
 %\authorrunning{Short form of author list} % if too long for running head
 
-\institute{W. Rocha \at
-              first address \\
-              Tel.: +55-27-40092255\\
-              \email{walacesrocha@yahoo.com.br}           %  \\
+%\institute{W. Rocha \at
+%              first address \\
+%              Tel.: +55-27-40092255\\
+%              \email{walacesrocha@yahoo.com.br}           %  \\
 %             \emph{Present address:} of F. Author  %  if needed
-           \and
-           M. Boeres \at
-              second address
-			\and
-			M. Rangel \at
-			third address
-}
+%           \and
+%           M. Boeres \at
+%              second address
+%			\and
+%			M. Rangel \at
+%			third address
+%}
 
 \date{Received: date / Accepted: date}
 % The correct dates will be entered by the editor
@@ -111,7 +79,7 @@ the GRASP metaheuristic. Hill Climbing and Simulated Annealing are used as local
 phase of the algorithm and Path-relinking is implemented to improve the basic version. Tests
 were carried out simulating the same competition rules and the results are competitive with
 those obtained by the ITC-2007 finalists.
-\keywords{Educational timetabling \and GRASP \and Local Search \and Path-Relinking}
+%\keywords{Educational timetabling \and GRASP \and Local Search \and Path-Relinking}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
 \end{abstract}
@@ -121,26 +89,43 @@ those obtained by the ITC-2007 finalists.
 
 Os problemas de \textit{scheduling} tratam a alocação de recursos em determinados horários satisfazendo algumas restrições. Os problemas de tabela-horário são um subconjunto importante desta área e as aplicações são variadas como, por exemplo, elaboração de escala de funcionários e agendamento de partidas para campeonatos esportivos.
 
-No caso específico de tabela-horário de escolas, o problema consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, visto que é difícil contemplar todos os anseios das partes envolvidas.  Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário.
+No caso específico de tabela-horário educacional, o problema consiste em alocar um conjunto de aulas em um número pré-determinado de horários, satisfazendo diversas restrições envolvendo professores, alunos e o espaço físico disponível. Ele se divide em três classes pricipais: tabela-horário de escolas, de universidades e de exames. Este último se destina a programação de exames finais que geralmente são aplicados em uma ou duas semanas nos finais de semestres. A diferença principal entre os dois primeiros é que na escola existem turmas que fazem as mesmas disciplinas, enquanto na universidade as matrículas de cada aluno nas disciplinas são independentes.
 
-Nos últimos sessenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
+A solução manual deste problema não é uma tarefa trivial e as instituições de ensino precisam resolvê-lo anualmente ou semestralmente. Nem sempre a alocação manual é satisfatória, visto que é difícil contemplar todos os anseios das partes envolvidas.  Por esta razão, atenção especial tem sido dada a solução automática de tabela-horário.
 
 O problema de tabela-horário está entre os mais difíceis da área de otimização combinatória. Sua dificuldade aumenta à medida em que são adicionadas restrições. Em \cite{Schaerf95asurvey} pode ser visto que ele é classificado como NP-completo para a maioria das formulações. Assim, a solução ótima só pode ser garantida para instâncias bem pequenas, que não correspondem às instâncias reais da maioria das instituições de ensino.
 
 Devido à complexidade do problema, métodos exaustivos são descartados. Por serem relativamente simples de implementar e produzirem bons resultados, diferentes meta-heurísticas tem sido aplicadas, com destaque para \textit{Simulated Annealing} \cite{CDGS11b}, Algoritmo Genético \cite{Erben95agenetic} e Busca Tabu \cite{elloumi2008}.
+
+Nos últimos sessenta anos, começando com \cite{gotlieb62}, este problema ganhou grande destaque na área de otimização combinatória, tendo diversos trabalhos publicados \cite{Schaerf95asurvey,Lewis2007:survey}.
 
 Este trabalho trata o problema de tabela-horário de universidades usando a meta-heurística GRASP (\textit{Greedy Randomized Adaptive Search Procedures}). Pelo fato de existirem diversas formulações para o problema, escolhemos a terceira formulação proposta no ITC-2007 (\textit{International Timetabling Competition - 2007}) \cite{itc2007}. A razão principal desta escolha é facilitar a comparação dos resultados com outros algoritmos propostos na literatura.
 
 \section{Trabalhos Relacionados}
 \label{sec:trabalhos-relacionados}
 
-As aplicações do GRASP para o problema de tabela-horário encontradas na literatura são para o caso específico de escolas. Em \cite{Souza:2004:GSA} o GRASP foi utilizado juntamente com a Busca Tabu. Uma solução inicial é construída com um algoritmo parcialmente guloso e melhoras são feitas com Busca Tabu. Este algoritmo foi testado com dados reais de uma escola brasileira de ensino médio. Apesar de não tratar o problema para universidades, este trabalho inspirou o uso de técnicas mais eficientes na fase de busca local do GRASP.
+As técnicas usadas para resolver o problema de tabela-horário são bastante diversificadas. As mais antigas, as heurísticas construtivas \cite{Junginger:1986:TGS,papoulias}, foram baseadas no modo humano de resolver o problema: as aulas eram alocadas uma a uma até finalizar a construção da tabela. Conflitos eram resolvidos realizando trocas de aulas.
 
-Em \cite{Vieira_agrasp} também é abordado o problema no contexto de uma escola brasileira. São implementadas duas versões do GRASP. A primeira possui uma etapa de construção inicial e uma de refinamento da tabela-horário com busca local. Na segunda implementação é adicionada mais uma etapa de refinamento com \textit{Path-relinking}. Esta técnica também foi inserida no nosso trabalho pois ela tenta corrigir uma deficiência do GRASP que é a falta de memorização entre suas iterações.
+Em \cite{Neufeld} há uma proposta de redução ao problema de coloração de grafos. As aulas são representadas como vértices do grafo. Arestas conectam aulas que não podem ser alocadas no mesmo horário. A coloração do grafo resultante é então transformada na tabela-horário: cada cor representa um horário de aula. Propostas similares a esta foram aplicadas em \cite{deWerra85,Selim:1988}. Numa abordagem semelhante, \cite{Galinier20062547} propos o algoritmo \textit{Tabucol} (Busca Tabu para resolver coloração de grafos), que posteriormente também foi usado por \cite{geraldo_bello}.
 
-Em \cite{CDGS11b} é proposto um algoritmo promissor para a segunda formulação do ITC-2007 usando \textit{Simulated Annealing}. Apesar de usarem uma formulação diferente da que é abordada neste trabalho, podem ser vistas naquele estruturas de vizinhança eficientes e adaptáveis para a terceira formulação. Além disso, a fase de busca local do \textit{Simulated Annealing} pode ser aproveitada como fase de busca local do GRASP.
+\cite{deWerra82} reduziu o problema de tabela-horário ao problema de fluxo de redes. As aulas são representadas pelos vértices. Uma rede é criada para cada horário e o fluxo na rede identifica as aulas que são lecionadas no mesmo horário. Posteriormente, \cite{deWerra85} usou uma idéia similar, mas cada fluxo representa uma classe e os vértices são horários e professores. Outras abordagens com fluxo de redes foram usadas em \cite{dinkel1989or,chahal1989}.
 
-Outros trabalhos foram propostos para resolver a terceira formulação adotada na competição ITC-2007. Nenhum dos trabalhos conseguiu obter soluções ótimas para todas as instâncias, o que gera uma motivação para continuar buscando novos resultados. Os melhores resultados obtidos até hoje podem ser encontrados em \cite{muller,lu-hao,lach_lubbecke,Burke_abranch-andcut,springerlink:10.1007/s10479-012-1081-x}.
+Mais recentemente, as técnicas de solução para o problema têm recaído basicamente em três grupos: programação matemática, programação em lógica e, principalmente, meta-heurísticas.
+
+Na área de programação matemática, bons resultados têm sido obtidos com programação inteira. Em \cite{lach_lubbecke} pode ser vista uma formulação completa do problema. Ela foi executada com CPLEX9 \cite{cplex} e conseguiu soluções com respostas bem próximas às melhores obtidas na competição ITC-2007. Em \cite{Burke_abranch-andcut} é usado um procedimento conhecido na programação linear como \textit{branch-and-cut}. O problema inicialmente é resolvido sem as restrições de integralidade. Em seguida são usados planos de corte para se obter uma resposta com valores inteiros. Com um tempo de execução aproximado de 15 minutos no CPLEX10, esse algoritmo conseguiu encontrar a solução ótima para duas instâncias da competição. Esses dois trabalhos citados são de grande importância pois são capazes de fornecer limites inferiores para as quantidades de violações das restrições fracas para cada instância do ITC-2007. Em \cite{ribeiro2006integer} pode ser vista uma modelagem em programação inteira mais específica para escolas brasileiras de ensino fundamental.
+
+Alguns resultados relevantes também têm sido encontrados com programação em lógica. \cite{springerlink:10.1007/s10479-012-1081-x} apresentam uma formulação usando \textit{MaxSAT} que conseguiu melhorar quase metade das respostas até então conhecidas para as instâncias do ITC-2007. Os trabalhos de \cite{Gueret95buildinguniversity} e \cite{Goltz99universitytimetabling} adotam formulações diferentes do ITC-2007, mas destacam como programação em lógica combinada com programação por restrições podem implementar modelos bem flexíveis, em que restrições podem ser adicionadas, modificadas ou excluídas com pouca alteração de código-fonte.
+
+Pode ser visto em \cite{Lewis2007:survey} que grande parte dos trabalhos recentes na área tem usado meta-heurísticas, tanto pela simplicidade quanto pelos bons resultados alcançados. Uma meta-heurística é um método heurístico para resolver de forma genérica problemas de otimização. Ela é genérica porque não se atém a detalhes específicos do problema que está sendo tratado, mas apenas especifica como o conjunto de soluções será explorado em busca da melhor solução. \textit{Simulated Annealing}, Algoritmo Genético e Busca Tabu são as mais utilizadas pelos pesquisadores mas há propostas com meta-heurísticas menos conhecidas, como a Busca de Harmonia \cite{albetar_harmony}.
+
+Em \cite{Elmohamed98acomparison} foram investigadas diversas abordagens do \textit{Simulated Annealing}. Dentre as configurações possíveis, os melhores resultados foram obtidos com resfriamento adaptativo, reaquecimento e um algoritmo baseado em regras para gerar uma boa solução inicial. \cite{CDGS11b} usa \textit{Simulated Annealing} para resolver a segunda formulação do ITC-2007. Os autores conseguiram boas respostas para as instâncias, e em alguns casos, foram obtidas soluções melhores que as conhecidas no momento da comparação.
+
+Algoritmos Genéticos também foram propostos para o problema, onde o cromossomo representa a tabela-horário e cada posição da tabela corresponde a um gene. Em seguida são definidas as operações genéticas de seleção, cruzamento e mutação, que visam gerar indivíduos cada vez melhores. Um indivíduo com bom valor \textit{fitness} representa uma tabela-horário bem avaliada de acordo com a função objetivo associada ao problema. \cite{Erben95agenetic} aplicou esta técnica para tratar o problema de tabela-horário de universidades com muitas restrições, obtendo resultados promissores. Em \cite{Kanoh:2008:KGA} pode ser visto uma abordagem, também para universidades, em que se utiliza uma base de conhecimento para gerar a população inicial. Essa base de conhecimento é formada com informações de tabelas-horário de anos anteriores. \cite{massoodian2008} propos um algoritmo genético híbrido para resolver a terceira formulação do ITC-2007. O algoritmo foi considerado híbrido pois, além de aplicar os operadores genéticos, uma busca local foi utilizada nos melhores indivíduos ao final de cada geração.
+
+Além das meta-heurísticas acima citadas, a Busca Tabu também tem sido aplicada com sucesso. Em \cite{elloumi2008} é apresentado um algoritmo para resolver o problema de tabela-horário de uma universidade tunisiana. \cite{Santos:2005:TSH} aplicou a técnica no âmbito de escolas primárias de Minas Gerais e obtiveram respostas melhores que outros algoritmos propostos com Busca Tabu. Em \cite{Souza:2004:GSA} a Busca Tabu é aplicada como fase de busca local do GRASP, numa implementação também voltada para escolas.
+
+As diversas restrições fortes e fracas fazem com que o problema de tabela-horário seja de difícil otimização. Por isso alguns autores têm proposto técnicas híbridas, em que são usadas mais de uma meta-heurística ou aplicadas de forma diferente, explorando o que elas têm de melhor. Exemplos deste tipo de implementação podem ser vistos em \cite{massoodian2008} em que o algoritmo genético é combinado com um algoritmo de busca local para melhorar a qualidade das soluções. Em \cite{3-phaseSA} há um algoritmo para o ITC-2002 que constrói a tabela-horário em três etapas. Na primeira é usada um algoritmo de coloração de grafos para se obter uma solução inicial viável. Na segunda e terceira etapas aplica-se \textit{Simulated Annealing}, mas cada etapa fazendo uso de uma estrutura de vizinhança diferente. Como dito anteriormente, em \cite{Souza:2004:GSA} a Busca Tabu é inserida na meta-heurística GRASP para melhorar a fase de busca local. O algoritmo que obteve as melhores respostas para a terceira formulação do ITC-2007 é descrito em \cite{muller} e possui quatro etapas: geração da solução inicial com coloração de grafos e três buscas locais sucessivas \textit{Hill Climbing}, \textit{Great Deluge} e \textit{Simulated Annealing}.
+
 
 \section{Problem Formulation}
 \label{sec:formulacao}
@@ -400,7 +385,7 @@ De forma genérica, o caminho percorrido pelo \textit{Path-Relinking} é ilustrado
 
 \begin{figure}[!htb]
 \begin{center}
-  \includegraphics*[width=10cm]{./PRgenericoEN.eps}
+  \includegraphics[width=10cm]{./PRgenericoEN.eps}
  \caption{Explorando soluções com \textit{Path-Relinking}}
    \label{fig:path-relinking-generico}
 \end{center}
@@ -412,7 +397,7 @@ O caminho escolhido não é único. No exemplo da figura \ref{fig:path-relinking}, 
 
 \begin{figure}[!htb]
 \begin{center}
- %\includegraphics[width=10cm]{./PREN.eps}
+ \includegraphics[width=10cm]{./PREN.eps}
  \caption{A possible path linking two timetables}
    \label{fig:path-relinking}
 \end{center}
@@ -859,7 +844,7 @@ Text with citations \cite{RefB} and \cite{RefJ}.
 %\bibliographystyle{spbasic}      % basic style, author-year citations
 \bibliographystyle{spmpsci}      % mathematics and physical sciences
 %\bibliographystyle{spphys}       % APS-like style for physics
-\bibliography{monografia}   % name your BibTeX data base
+\bibliography{template}   % name your BibTeX data base
 
 % Non-BibTeX users please use
 %\begin{thebibliography}{}

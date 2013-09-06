@@ -6,10 +6,21 @@
   \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 
+\bibitem{albetar_harmony}
+Al-Betar, M., Khader, A.: A harmony search algorithm for university course
+  timetabling.
+\newblock Annals of Operations Research  (2012)
+
 \bibitem{springerlink:10.1007/s10479-012-1081-x}
 Asín~Achá, R., Nieuwenhuis, R.: Curriculum-based course timetabling with sat
   and maxsat.
 \newblock Annals of Operations Research  (2010)
+
+\bibitem{geraldo_bello}
+Bello, G.S., Rangel, M.C., Boeres, M.C.S.: Uma abordagem do problema de
+  programação de grade horária sujeito a restrições utilizando coloração de
+  grafos.
+\newblock XL SBPO  (2008)
 
 \bibitem{Burke_abranch-andcut}
 Burke, E.K., Marecek, J., Parkes, A.J., Rudová, H.: A branch-andcut procedure
@@ -22,10 +33,26 @@ Ceschia, S., Di~Gaspero, L., Schaerf, A.: Design, engineering, and experimental
   timetabling problem.
 \newblock Computers \& Operations Research \textbf{39}(7), 1615--1624 (2011)
 
+\bibitem{chahal1989}
+Chahal, N., De~Werra, D.: An interactive system for constructing timetables on
+  a pc.
+\newblock European Journal of Operational Research \textbf{40}(1), 32--37
+  (1989)
+
+\bibitem{dinkel1989or}
+Dinkel, J., Mote, J., Venkataramanan, M.: Or practice - an efficient decision
+  support system for academic course scheduling.
+\newblock Operations Research \textbf{37}(6), 853--864 (1989)
+
 \bibitem{elloumi2008}
 Elloumi, A., Kamoun, H., Ferland, J., Dammak, A.: A tabu search procedure for
   course timetabling at a tunisian university.
 \newblock In: Proceedings of the 7th PATAT Conference, 2008 (2008)
+
+\bibitem{Elmohamed98acomparison}
+Elmohamed, M.A.S., Coddington, P., Fox, G.: A comparison of annealing
+  techniques for academic course scheduling.
+\newblock In: Lecture Notes in Computer Science (1998)
 
 \bibitem{Erben95agenetic}
 Erben, W., Keppler, J.: A genetic algorithm solving a weekly course-timetabling
@@ -41,6 +68,10 @@ Feo, T., Resende, M., Smith, S.: A greedy randomized adaptive search procedure
   for maximum independent set.
 \newblock Operations Research \textbf{42}, 860--878 (1994)
 
+\bibitem{Galinier20062547}
+Galinier, P., Hertz, A.: A survey of local search methods for graph coloring.
+\newblock Computers and Operations Research  (2006)
+
 \bibitem{Glover89}
 Glover, F.: Tabu search - part i.
 \newblock INFORMS Journal on Computing  (1989)
@@ -51,13 +82,42 @@ Glover, F.: Tabu search and adaptive memory programing - advances, applications
 \newblock In: Interfaces in Computer Science and Operations Research, pp.
   1--75. Kluwer (1996)
 
+\bibitem{Goltz99universitytimetabling}
+Goltz, H.J., Matzke, D.: University timetabling using constraint logic
+  programming.
+\newblock In: Practical Aspects of Declarative Languages, pp. 320--334.
+  Springer-Verlag (1999)
+
 \bibitem{gotlieb62}
 Gotlieb, C.C.: The construction of class-teacher time-tables.
 \newblock In: IFIP Congress, pp. 73--77 (1962)
 
+\bibitem{Gueret95buildinguniversity}
+Gueret, C., Jussien, N., Boizumault, P., Prins, C.: Building university
+  timetables using constraint logic programming (1995)
+
+\bibitem{cplex}
+IBM: Ibm ilog cplex optimization studio (2012).
+\newblock
+  \urlprefix\url{http://www-01.ibm.com/software/integration/optimization/cplex%
+-optimization-studio/}
+
+\bibitem{Junginger:1986:TGS}
+Junginger, W.: Timetabling in {G}ermany -- {A} survey.
+\newblock Interfaces \textbf{16}(4), 66--74 (1986)
+
+\bibitem{Kanoh:2008:KGA}
+Kanoh, H., Sakamoto, Y.: Knowledge-based genetic algorithm for university
+  course timetabling problems.
+\newblock Int. J. Know.-Based Intell. Eng. Syst.  (2008)
+
 \bibitem{SA}
 Kirkpatrick, S.: Optimization by simulated annealing: Quantitative studies.
 \newblock Journal of Statistical Physics  (1984)
+
+\bibitem{3-phaseSA}
+Kostuch, P.: The university course timetabling problem with a 3-phase approach
+  (2006)
 
 \bibitem{lach_lubbecke}
 Lach, G., Lubbecke, M.E.: Curriculum based course timetabling: new solutions to
@@ -81,15 +141,28 @@ Li, Y., Pardalos, P., Resende, M.: A greedy randomized adaptive search
   on Discrete Mathematics and Theoretical Computer Science}, vol.~16. American
   Mathematical Society (1994)
 
-\bibitem{lu-hao}
-Lü, Z., Hao, J.K.: Solving the course timetabling problem with a hybrid
-  heuristic algorithm.
-\newblock In: Artificial Intelligence: Methodology, Systems, and Applications.
-  Springer Berlin Heidelberg (2008)
+\bibitem{massoodian2008}
+Massoodian, S., Esteki, A.: A hybrid genetic algorithm for curriculum based
+  course timetabling.
+\newblock In: Proceedings of the 7th PATAT Conference, 2008 (2008)
 
 \bibitem{muller}
 Müller, T.: Itc2007 solver description: a hybrid approach.
 \newblock Annals of Operations Research  (2009)
+
+\bibitem{Neufeld}
+Neufeld, G.A., Tartar, J.: Graph coloring conditions for the existence of
+  solutions to the timetable problem.
+\newblock Commun. ACM  (1974)
+
+\bibitem{deWerra82}
+Ostermann, R., Werra, D.: Some experiments with a timetabling system.
+\newblock Operations-Research-Spektrum  (1982)
+
+\bibitem{papoulias}
+Papoulias, D.B.: The assignment-to-days problem in a school time-table, a
+  heuristic approach.
+\newblock European Journal of Operational Research \textbf{4}(1), 31--41 (1980)
 
 \bibitem{itc2007}
 PATAT: International timetabling competition.
@@ -115,17 +188,33 @@ Resende, M., Ribeiro, C.: {A GRASP with path-relinking for private virtual
 Resende, M.G.C., Ribeiro, C.C.: Grasp with path-relinking: Recent advances and
   applications (2005)
 
+\bibitem{ribeiro2006integer}
+Ribeiro~Filho, G., Lorena, L.: An integer programming model for the school
+  timetabling problem.
+\newblock In: XIII CLAIO: Congreso Latino-Iberoamericano de Investigaci{\'o}n
+  Operativa. Citeseer (2006)
+
+\bibitem{Santos:2005:TSH}
+Santos, H.G., Ochi, L.S., Souza, M.J.: A tabu search heuristic with efficient
+  diversification strategies for the class/teacher timetabling problem.
+\newblock J. Exp. Algorithmics  (2005)
+
 \bibitem{Schaerf95asurvey}
 Schaerf, A.: A survey of automated timetabling.
 \newblock ARTIFICIAL INTELLIGENCE REVIEW \textbf{13}, 87--127 (1995)
+
+\bibitem{Selim:1988}
+Selim, S.M.: Split vertices in vertex colouring and their application in
+  developing a solution to the faculty timetable problem.
+\newblock Comput. J. pp. 76--82 (1988)
 
 \bibitem{Souza:2004:GSA}
 Souza, M.J.F., Maculan, N., Ochi, L.S.: Metaheuristics.
 \newblock chap. A GRASP-tabu search algorithm for solving school timetabling
   problems, pp. 659--672. Kluwer Academic Publishers, Norwell, MA, USA (2004)
 
-\bibitem{Vieira_agrasp}
-Vieira, A., Rafael, M., Scaraficci, A.: A grasp strategy for a more constrained
-  school timetabling problem (2010)
+\bibitem{deWerra85}
+de~Werra, D.: An introduction to timetabling.
+\newblock European Journal of Operational Research  (1985)
 
 \end{thebibliography}
